@@ -399,15 +399,55 @@ namespace InfinityPlus1.Files
         protected TextLocationKeyHeader header;
 
         /// <summary>This protected member contains the entries of the String References, indexed by the String Reference number</summary>
-        protected TextLocationKeyStringReference[] stringReferences;
+        protected TextLocationKeyStringReferenceCollection stringReferences;
+
+        /// <summary>This protected member indicates whether or not to store strings in memory when the TLK file is read. This is used mostly to retain the ability to use low levels of RAM.</summary>
+        protected Boolean storeStringsInMemory;
         #endregion
 
         #region Public Properties
-        public 
+        /// <summary>This public property contains the header information of the TLK file</summary>
+        public TextLocationKeyHeader Header
+        {
+            get { return header; }
+            set { header = value; }
+        }
+
+        /// <summary>This public property contains the entries of the String References, indexed by the String Reference number</summary>
+        public TextLocationKeyStringReferenceCollection StringReferences
+        {
+            get { return stringReferences; }
+            set { stringReferences = value; }
+        }
+        #endregion
+
+        #region Constructor(s)
+        /// <summary>Default constructor</summary>
+        public TextLocationKey()
+        {
+            stringReferences = null;
+            storeStringsInMemory = true;
+        }
+
+        /// <summary>Constructor setting storeStringsInMemory</summary>
+        /// <param name="StoreInMemory">Boolean indicating whether or not to store strings in memory when TLK file is read</param>
+        public TextLocationKey(Boolean StoreInMemory)
+        {
+            stringReferences = null;
+            storeStringsInMemory = StoreInMemory;
+        }
         #endregion
 
         #region Public Methods
-        public void Read
+        /// <summary>Reads the TLK file using a specified file path</summary>
+        /// <param name="FilePath">String describing the path to the file.</param>
+        public void ReadFile(String FilePath)
+        {
+            //use a "using" block to dispose of the stream
+            using(Stream fileStream = ReusableIO.OpenFile(FilePath))
+            {
+            }
+        }
         #endregion
     }
 }
