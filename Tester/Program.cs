@@ -5,11 +5,12 @@ namespace InfinityPlus1.Tester
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main(String[] args)
         {
-            TextLocationKeyStringReferenceEntryTest tester = new TextLocationKeyStringReferenceEntryTest();
+            TextLocationKeyTest tester = new TextLocationKeyTest();
             tester.Test();
 
+            Console.Write("Press [Enter] to exit.");
             Console.ReadLine();
         }
     }
