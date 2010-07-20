@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -240,6 +241,13 @@ namespace InfinityPlus1.Files
             set { pitchVariance = value; }
         }
 
+        /// <summary>This public property gets and sets the offset to the string</summary>
+        public Int32 StringOffset
+        {
+            get { return stringOffset; }
+            set { stringOffset = value; }
+        }
+
         /// <summary>This public property gets and sets the length of the string being referenced</summary>
         public Int32 StringLength
         {
@@ -339,7 +347,7 @@ namespace InfinityPlus1.Files
         /// <param name="Input">Stream to read from</param>
         /// <param name="StringDataOffset">Offset to the strt of the string data</param>
         /// <param name="CultureReference">String representing the source culture</param>
-        private void ReadStringReferenced(Stream Input, Int32 StringDataOffset, String CultureReference)
+        public void ReadStringReferenced(Stream Input, Int32 StringDataOffset, String CultureReference)
         {
             //seek if necessary
             Int64 absoluteOffset = StringDataOffset + stringOffset;
@@ -368,6 +376,12 @@ namespace InfinityPlus1.Files
         {
             get { return stringReferences[Index];}
             set { stringReferences[Index] = value; }
+        }
+
+        /// <summary>This public property gets the length of the array of string references</summary>
+        public Int32 Length
+        {
+            get { return stringReferences.Length; }
         }
         #endregion
 
@@ -446,6 +460,30 @@ namespace InfinityPlus1.Files
             //use a "using" block to dispose of the stream
             using(Stream fileStream = ReusableIO.OpenFile(FilePath))
             {
+                header.ReadHeader(fileStream);      //read the header
+
+                //seek if able
+                ReusableIO.SeekIfAble(fileStream, 0x12, SeekOrigin.Begin);  //18 bytes?
+                
+                //read the strref blocks
+                for (Int32 i = 0; i < header.StringReferenceCount; ++i)
+                {
+                    TextLocationKeyStringReference strref = new TextLocationKeyStringReference();
+                    strref.ReadStringReferenceEntry(fileStream, header.CultureReference);
+                    stringReferences.Add(strref);
+                }
+                
+                //read the strref strings
+                if (this.storeStringsInMemory)
+                {
+                    for (Int32 i = 0; i < stringReferences.Length; ++i)
+                    {
+                        ReusableIO.SeekIfAble(fileStream, stringReferences[i].StringOffset, SeekOrigin.Begin);
+                        TextLocationKeyStringReference strref = stringReferences[i];                                        //copy
+                        strref.ReadStringReferenced(fileStream, header.StringsReferenceOffset, header.CultureReference);    //read
+                        stringReferences[i] = strref;                                                                       //assign
+                    }
+                }
             }
         }
         #endregion

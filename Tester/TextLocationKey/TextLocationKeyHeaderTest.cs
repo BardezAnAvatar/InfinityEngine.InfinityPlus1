@@ -5,7 +5,7 @@ using InfinityPlus1.Files;
 namespace InfinityPlus1.Tester.TextLocationKey
 {
     /// <summary>This class tests the usable methods in the InfinityPlus1.Files.TextLocationKeyHeader class</summary>
-    public class TextLocationKeyHeaderTest : Tester
+    public class TextLocationKeyHeaderTest : ITester
     {
         protected TextLocationKeyHeader header;
 
