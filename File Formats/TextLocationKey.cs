@@ -351,8 +351,7 @@ namespace InfinityPlus1.Files
         {
             //seek if necessary
             Int64 absoluteOffset = StringDataOffset + stringOffset;
-            if (Input.Position != absoluteOffset)
-                Input.Seek(absoluteOffset, SeekOrigin.Begin);
+            ReusableIO.SeekIfAble(Input, absoluteOffset, SeekOrigin.Begin);
 
             Byte[] buffer = ReusableIO.BinaryRead(Input, stringLength);
             StringReferenced = ReusableIO.ReadStringFromByteArray(ref buffer, 0, CultureReference, stringLength);
@@ -465,16 +464,16 @@ namespace InfinityPlus1.Files
         #region Public Methods
         /// <summary>Reads the TLK file using a specified file path</summary>
         /// <param name="FilePath">String describing the path to the file.</param>
-        public void ReadFile(String FilePath)
+        public void ReadFile()
         {
             //use a "using" block to dispose of the stream
-            using(Stream fileStream = ReusableIO.OpenFile(FilePath))
+            using (Stream fileStream = ReusableIO.OpenFile(tlkFilePath))
             {
                 header.ReadHeader(fileStream);      //read the header
 
                 //seek if able
                 ReusableIO.SeekIfAble(fileStream, 0x12, SeekOrigin.Begin);  //18 bytes?
-                
+
                 //read the strref blocks
                 for (Int32 i = 0; i < header.StringReferenceCount; ++i)
                 {
@@ -482,7 +481,7 @@ namespace InfinityPlus1.Files
                     strref.ReadStringReferenceEntry(fileStream, header.CultureReference);
                     stringReferences.Add(strref);
                 }
-                
+
                 //read the strref strings
                 if (this.storeStringsInMemory)
                 {
@@ -495,6 +494,13 @@ namespace InfinityPlus1.Files
                     }
                 }
             }
+        }
+        /// <summary>Reads the TLK file, assigning the tlk file path to the specified file path</summary>
+        /// <param name="FilePath">String describing the path to the TLK file.</param>
+        public void ReadFile(String FilePath)
+        {
+            tlkFilePath = FilePath;
+            ReadFile();
         }
 
         /// <summary>This public method gets the String referenced at the index described</summary>
@@ -536,6 +542,21 @@ namespace InfinityPlus1.Files
             TextLocationKeyStringReference strref = new TextLocationKeyStringReference();
             strref.StringReferenced = StrRef;
             StringReferences.Add(strref);
+        }
+        #endregion
+
+        #region Protected Methods
+        protected void ReadStringReferenceFromTLK(Int32 StringReferenceIndex)
+        {
+            if (StringReferenceIndex < stringReferences.Length)
+            {
+                //use a "using" block to dispose of the stream
+                using (Stream fileStream = ReusableIO.OpenFile(tlkFilePath))
+                {
+                    TextLocationKeyStringReference strref = stringReferences[StringReferenceIndex];
+                    strref.ReadStringReferenced(fileStream, header.StringsReferenceOffset, header.CultureReference);    //read
+                }
+            }
         }
         #endregion
     }
