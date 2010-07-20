@@ -417,6 +417,9 @@ namespace InfinityPlus1.Files
 
         /// <summary>This protected member indicates whether or not to store strings in memory when the TLK file is read. This is used mostly to retain the ability to use low levels of RAM.</summary>
         protected Boolean storeStringsInMemory;
+
+        /// <summary>This protected member stores the path of the TLK file</summary>
+        protected String tlkFilePath;
         #endregion
 
         #region Public Properties
@@ -432,6 +435,13 @@ namespace InfinityPlus1.Files
         {
             get { return stringReferences; }
             set { stringReferences = value; }
+        }
+
+        /// <summary>This protected member stores the path of the TLK file</summary>
+        public String TlkPath
+        {
+            get { return tlkFilePath; }
+            set { tlkFilePath = value; }
         }
         #endregion
 
@@ -485,6 +495,47 @@ namespace InfinityPlus1.Files
                     }
                 }
             }
+        }
+
+        /// <summary>This public method gets the String referenced at the index described</summary>
+        /// <param name="Index">Int32 indexer</param>
+        /// <returns>String contained at Index, can be null</returns>
+        public String StringReferenceGetAt(Int32 Index)
+        {
+            String retVal = null;
+
+            if (Index < stringReferences.Length)
+                retVal = stringReferences[Index].StringReferenced;
+
+            return retVal;
+        }
+
+        /// <summary>This public method sets the String referenced at the index described</summary>
+        /// <param name="Index">Int32 indexer</param>
+        /// <param name="StrRef">String to be contained at Index</param>
+        /// <returns>Boolean indicating the success of the assignment</returns>
+        public Boolean StringReferenceSetAt(Int32 Index, String StrRef)
+        {
+            Boolean retVal = false;
+
+            if (Index < stringReferences.Length)
+            {
+                TextLocationKeyStringReference strref = stringReferences[Index];
+                strref.StringReferenced = StrRef;
+                stringReferences[Index] = strref;
+                retVal = true;
+            }
+
+            return retVal;
+        }
+
+        /// <summary>This public method adds a String Reference to the collection</summary>
+        /// <param name="StrRef">String to add</param>
+        public void StringReferenceAdd(String StrRef)
+        {
+            TextLocationKeyStringReference strref = new TextLocationKeyStringReference();
+            strref.StringReferenced = StrRef;
+            StringReferences.Add(strref);
         }
         #endregion
     }
