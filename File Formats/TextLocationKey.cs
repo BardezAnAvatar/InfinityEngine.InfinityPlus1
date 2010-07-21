@@ -359,126 +359,14 @@ namespace InfinityPlus1.Files
         #endregion
     }
 
-    /// <summary>This class represents a collection of String References</summary>
-    public class TextLocationKeyStringReferenceCollection
-    {
-        #region Protected Members
-        /// <summary>An array of stringReference objects</summary>
-        protected ArrayList stringReferences;
-        #endregion
-
-        #region Public Properties
-        /// <summary>
-        ///     This publoc property gets and sets the Boolean indicates whether or not to store strings in memory when the TLK file is read.
-        ///     This is used mostly to retain the ability to use low levels of RAM.
-        /// </summary>
-        public Boolean StoreStringsInMemory
-        {
-            get { return storeStringsInMemory; }
-            set { storeStringsInMemory = value; }
-        }
-
-        /// <summary>This protected member stores the path of the TLK file</summary>
-        public String TlkPath
-        {
-            get { return tlkFilePath; }
-            set { tlkFilePath = value; }
-        }
-
-        /// <summary>This public Property returns the string reference at the index indicated.</summary>
-        /// <param name="Index">Int32 representing the place in the array at which to get or set the string reference</param>
-        /// <returns>A TextLocationKeyStringReference string reference object</returns>
-        public TextLocationKeyStringReference this[Int32 Index]
-        {
-            get
-            {
-                TextLocationKeyStringReference strref = (TextLocationKeyStringReference)(stringReferences[Index]);
-                if (strref.StringReferenced == null)
-                {
-                    using (Stream fileStream = ReusableIO.OpenFile(tlkFilePath))
-                    {
-                        strref.ReadStringReferenced(fileStream, header.StringsReferenceOffset, header.CultureReference);    //read
-                    }
-                }
-                return strref;
-            }
-            set { stringReferences[Index] = value; }
-        }
-
-        /// <summary>This public property gets the length of the array of string references</summary>
-        public Int32 Length
-        {
-            get { return stringReferences.Count; }
-        }
-        #endregion
-
-        #region Constructor(s)
-        /// <summary>Default constructor</summary>
-        public TextLocationKeyStringReferenceCollection()
-        {
-            stringReferences = new ArrayList();
-        }
-
-        /// <summary>Store strings in memory constructor</summary>
-        /// <param name="StoreStrings">Boolean indicating hether or not to store strings in memory</param>
-        public TextLocationKeyStringReferenceCollection(Boolean StoreStrings)
-        {
-            stringReferences = new ArrayList();
-            storeStringsInMemory = StoreStrings;
-        }
-
-        /// <summary>Store strings in memory constructor</summary>
-        /// <param name="StoreStrings">Boolean indicating hether or not to store strings in memory</param>
-        /// <param name="FilePath">String representing the path to a TLK file</param>
-        public TextLocationKeyStringReferenceCollection(Boolean StoreStrings, String FilePath)
-        {
-            stringReferences = new ArrayList();
-            storeStringsInMemory = StoreStrings;
-            tlkFilePath = FilePath;
-        }
-        #endregion
-
-        #region Public Properties
-        /// <summary>Adds a String Regerence to the TLK file</summary>
-        /// <param name="StringReference">String reference to add to the TLK file</param>
-        public void Add(TextLocationKeyStringReference StringReference)
-        {
-            stringReferences.Add(StringReference);
-        }
-        #endregion
-
-        #region Public Methods
-        /// <summary>Enumerates through all the TextLocationKeyStringReference objects and generates their strings in one collection.</summary>
-        /// <returns>A String representation of the entire collection of TextLocationKeyStringReference objects</returns>
-        public override String ToString()
-        {
-            StringBuilder builder = new StringBuilder();
-            builder.Append("Store Strings in memory:    ");
-            builder.Append(this.storeStringsInMemory);
-            builder.Append("\nPath to TLK file:           ");
-            builder.Append(this.tlkFilePath);
-
-            //String references
-            for(Int32 index = 0; index < stringReferences.Count; ++index)
-            {
-                builder.Append("String Reference Index:    ");
-                builder.Append(index);
-                builder.Append(stringReferences[index].ToString());
-            }
-
-            return builder.ToString();
-        }
-        #endregion
-    }
-
     public class TextLocationKey
     {
         #region Protected Members
         /// <summary>This protected member contains the header information of the TLK file</summary>
         protected TextLocationKeyHeader header;
 
-        /// <summary>This protected member contains the entries of the String References, indexed by the String Reference number</summary>
-        protected TextLocationKeyStringReferenceCollection stringReferences;
+        /// <summary>An array of stringReference objects</summary>
+        protected ArrayList stringReferences;
 
         /// <summary>This protected member indicates whether or not to store strings in memory when the TLK file is read. This is used mostly to retain the ability to use low levels of RAM.</summary>
         protected Boolean storeStringsInMemory;
@@ -495,11 +383,22 @@ namespace InfinityPlus1.Files
             set { header = value; }
         }
 
-        /// <summary>This public property contains the entries of the String References, indexed by the String Reference number</summary>
-        public TextLocationKeyStringReferenceCollection StringReferences
+        /// <summary>This public Property returns the string reference at the index indicated.</summary>
+        /// <param name="Index">Int32 representing the place in the array at which to get or set the string reference</param>
+        /// <returns>A TextLocationKeyStringReference string reference object</returns>
+        public TextLocationKeyStringReference this[Int32 Index]
         {
-            get { return stringReferences; }
-            set { stringReferences = value; }
+            get
+            {
+                TextLocationKeyStringReference strref = (TextLocationKeyStringReference)(stringReferences[Index]);
+                if (strref.StringReferenced == null)
+                {
+                    ReadStringReferenceFromTLK(Index);
+                    strref = (TextLocationKeyStringReference)(stringReferences[Index]); // re-read
+                }
+                return strref;
+            }
+            set { stringReferences[Index] = value; }
         }
 
         /// <summary>This protected member stores the path of the TLK file</summary>
@@ -508,13 +407,19 @@ namespace InfinityPlus1.Files
             get { return tlkFilePath; }
             set { tlkFilePath = value; }
         }
+
+        /// <summary>This public property gets the length of the array of string references</summary>
+        public Int32 Length
+        {
+            get { return stringReferences.Count; }
+        }
         #endregion
 
         #region Constructor(s)
         /// <summary>Default constructor</summary>
         public TextLocationKey()
         {
-            stringReferences = new TextLocationKeyStringReferenceCollection();
+            stringReferences = new ArrayList();
             storeStringsInMemory = true;
         }
 
@@ -522,8 +427,18 @@ namespace InfinityPlus1.Files
         /// <param name="StoreInMemory">Boolean indicating whether or not to store strings in memory when TLK file is read</param>
         public TextLocationKey(Boolean StoreInMemory)
         {
-            stringReferences = new TextLocationKeyStringReferenceCollection();
+            stringReferences = new ArrayList();
             storeStringsInMemory = StoreInMemory;
+        }
+
+        /// <summary>Constructor setting storeStringsInMemory</summary>
+        /// <param name="StoreInMemory">Boolean indicating whether or not to store strings in memory when TLK file is read</param>
+        /// <param name="FilePath">String representing the path to a TLK file</param>
+        public TextLocationKey(Boolean StoreInMemory, String FilePath)
+        {
+            stringReferences = new ArrayList();
+            storeStringsInMemory = StoreInMemory;
+            tlkFilePath = FilePath;
         }
         #endregion
 
@@ -538,7 +453,8 @@ namespace InfinityPlus1.Files
                 header.ReadHeader(fileStream);      //read the header
 
                 //seek if able
-                ReusableIO.SeekIfAble(fileStream, 0x12, SeekOrigin.Begin);  //18 bytes?
+                //per the IESDP: This section is hardcoded to start at byte 18 from the beginning of the file. The string offsets are relative to the strings section.
+                ReusableIO.SeekIfAble(fileStream, 0x12, SeekOrigin.Begin);
 
                 //read the strref blocks
                 for (Int32 i = 0; i < header.StringReferenceCount; ++i)
@@ -551,16 +467,16 @@ namespace InfinityPlus1.Files
                 //read the strref strings
                 if (this.storeStringsInMemory)
                 {
-                    for (Int32 i = 0; i < stringReferences.Length; ++i)
+                    for (Int32 i = 0; i < stringReferences.Count; ++i)
                     {
-                        ReusableIO.SeekIfAble(fileStream, stringReferences[i].StringOffset, SeekOrigin.Begin);
-                        TextLocationKeyStringReference strref = stringReferences[i];                                        //copy
-                        strref.ReadStringReferenced(fileStream, header.StringsReferenceOffset, header.CultureReference);    //read
-                        stringReferences[i] = strref;                                                                       //assign
+                        TextLocationKeyStringReference strref = (TextLocationKeyStringReference)stringReferences[i];            //copy
+                        strref.ReadStringReferenced(fileStream, header.StringsReferenceOffset, header.CultureReference);        //read
+                        stringReferences[i] = strref;                                                                           //assign
                     }
                 }
             }
         }
+
         /// <summary>Reads the TLK file, assigning the tlk file path to the specified file path</summary>
         /// <param name="FilePath">String describing the path to the TLK file.</param>
         public void ReadFile(String FilePath)
@@ -569,52 +485,13 @@ namespace InfinityPlus1.Files
             ReadFile();
         }
 
-        /// <summary>This public method gets the String referenced at the index described</summary>
-        /// <param name="Index">Int32 indexer</param>
-        /// <returns>String contained at Index, can be null</returns>
-        public String StringReferenceGetAt(Int32 Index)
+        /// <summary>Adds a String Regerence to the TLK file</summary>
+        /// <param name="StringReference">String reference to add to the TLK file</param>
+        /// <returns>an Int32 representing the newly added index</returns>
+        public Int32 Add(TextLocationKeyStringReference StringReference)
         {
-            String retVal = null;
-
-            if (Index < stringReferences.Length)
-            {
-                retVal = stringReferences[Index].StringReferenced;
-                if (retVal == null)
-                {
-                    ReadStringReferenceFromTLK(Index);
-                    retVal = stringReferences[Index].StringReferenced;      //re-read the string
-                }
-            }
-
-            return retVal;
-        }
-
-        /// <summary>This public method sets the String referenced at the index described</summary>
-        /// <param name="Index">Int32 indexer</param>
-        /// <param name="StrRef">String to be contained at Index</param>
-        /// <returns>Boolean indicating the success of the assignment</returns>
-        public Boolean StringReferenceSetAt(Int32 Index, String StrRef)
-        {
-            Boolean retVal = false;
-
-            if (Index < stringReferences.Length)
-            {
-                TextLocationKeyStringReference strref = stringReferences[Index];
-                strref.StringReferenced = StrRef;
-                stringReferences[Index] = strref;
-                retVal = true;
-            }
-
-            return retVal;
-        }
-
-        /// <summary>This public method adds a String Reference to the collection</summary>
-        /// <param name="StrRef">String to add</param>
-        public void StringReferenceAdd(String StrRef)
-        {
-            TextLocationKeyStringReference strref = new TextLocationKeyStringReference();
-            strref.StringReferenced = StrRef;
-            StringReferences.Add(strref);
+            stringReferences.Add(StringReference);
+            return stringReferences.Count - 1;
         }
 
         /// <summary>This method will write the entire friggin' TLK file to a String builder and return it</summary>
@@ -629,7 +506,15 @@ namespace InfinityPlus1.Files
             builder.Append("\nTLK Header:\n\n");
             builder.Append(this.header.ToString());
             builder.Append("\n\nString References:\n\n");
-            builder.Append(this.stringReferences.ToString());
+
+            //String references
+            for (Int32 index = 0; index < stringReferences.Count; ++index)
+            {
+                builder.Append("String Reference Index:    ");
+                builder.Append(index);
+                builder.Append("\n\t");
+                builder.Append(((TextLocationKeyStringReference)(stringReferences[index])).ToString());
+            }
 
             return builder.ToString();
         }
@@ -649,8 +534,16 @@ namespace InfinityPlus1.Files
 
             if (LongDefinition)
             {
-                builder.Append("\n\nString References:\n\n");
-                builder.Append(this.stringReferences.ToString());
+                builder.Append("\n\nString References:");
+
+                //String references
+                for (Int32 index = 0; index < stringReferences.Count; ++index)
+                {
+                    builder.Append("\n\n\tString Reference Index:    ");
+                    builder.Append(index);
+                    builder.Append("\n\t");
+                    builder.Append(((TextLocationKeyStringReference)(stringReferences[index])).ToString());
+                }
             }
 
             return builder.ToString();
@@ -662,13 +555,14 @@ namespace InfinityPlus1.Files
         /// <param name="StringReferenceIndex">Integer representing the stringreference index that needs to be read.</param>
         protected void ReadStringReferenceFromTLK(Int32 StringReferenceIndex)
         {
-            if (StringReferenceIndex < stringReferences.Length)
+            if (StringReferenceIndex < stringReferences.Count)
             {
                 //use a "using" block to dispose of the stream
                 using (Stream fileStream = ReusableIO.OpenFile(tlkFilePath))
                 {
-                    TextLocationKeyStringReference strref = stringReferences[StringReferenceIndex];
+                    TextLocationKeyStringReference strref = (TextLocationKeyStringReference)(stringReferences[StringReferenceIndex]);
                     strref.ReadStringReferenced(fileStream, header.StringsReferenceOffset, header.CultureReference);    //read
+                    stringReferences[StringReferenceIndex] = strref;        //re-assign
                 }
             }
         }
