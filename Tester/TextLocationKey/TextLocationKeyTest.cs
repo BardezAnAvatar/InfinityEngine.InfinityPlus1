@@ -30,13 +30,34 @@ namespace InfinityPlus1.Tester.TextLocationKey
         /// <param name="filePath">String describing the location of a TLK file</param>
         public void Test(String filePath)
         {
-            Console.WriteLine("Initializing at " + DateTime.Now.TimeOfDay.ToString() + ":");
+            Console.WriteLine("Testing full read:\n");
+
+            //Console.WriteLine("Initializing at " + DateTime.Now.TimeOfDay.ToString() + ":");        //timestamp
             tlkFile = new Files.TextLocationKey();
             tlkFile.TlkPath = filePath;
-            Console.WriteLine("     Reading at " + DateTime.Now.TimeOfDay.ToString() + ":");
+            //Console.WriteLine("     Reading at " + DateTime.Now.TimeOfDay.ToString() + ":");        //timestamp
             tlkFile.ReadFile();
 
-            //Console.Write(tlkFile.ToString()); that will take far too long...
+            //Console.Write(tlkFile.ToString());        //printing the entire dialog.tlk...that will take far too long.
+            Console.Write(tlkFile.ToString(false));
+
+            Console.WriteLine("String Reference #12345:");
+            Console.Write(tlkFile[12345].ToString());
+
+
+            Console.WriteLine("Testing ad hoc read:\n");
+
+            //Console.WriteLine("Initializing at " + DateTime.Now.TimeOfDay.ToString() + ":");        //timestamp
+            tlkFile = new Files.TextLocationKey(false);
+            tlkFile.TlkPath = filePath;
+            //Console.WriteLine("     Reading at " + DateTime.Now.TimeOfDay.ToString() + ":");        //timestamp
+            tlkFile.ReadFile();
+
+            //Console.Write(tlkFile.ToString());        //printing the entire dialog.tlk...that will take far too long.
+            Console.Write(tlkFile.ToString(false));
+
+            Console.WriteLine("String Reference #25641:");
+            Console.Write(tlkFile[25641].ToString());
         }
     }
 }
