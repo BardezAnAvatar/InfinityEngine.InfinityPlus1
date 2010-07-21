@@ -363,6 +363,8 @@ namespace InfinityPlus1.Files
     public class TextLocationKeyStringReferenceCollection
     {
         #region Protected Members
+        /// <summary>An array of stringReference objects</summary>
+        protected ArrayList stringReferences;
         #endregion
 
         #region Public Properties
