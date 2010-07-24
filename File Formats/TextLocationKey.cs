@@ -145,6 +145,33 @@ namespace InfinityPlus1.Files
             stringsOffset = ReusableIO.ReadInt32FromArray(ref buffer, 0xE);
         }
 
+        /// <summary>This public method writes the header to an output stream</summary>
+        /// <param name="Output">Stream object w=into which to write to</param>
+        public void Write(Stream Output)
+        {
+            Byte[] writeBytes;
+
+            //signature
+            writeBytes = ReusableIO.WriteStringToDataField(this.signature, 4);
+            Output.Write(writeBytes, 0, writeBytes.Length);
+
+            //version
+            writeBytes = ReusableIO.WriteStringToDataField(this.version, 4);
+            Output.Write(writeBytes, 0, writeBytes.Length);
+
+            //Language ID
+            writeBytes = BitConverter.GetBytes(this.languageID);
+            Output.Write(writeBytes, 0, writeBytes.Length);
+
+            //stringRefCount
+            writeBytes = BitConverter.GetBytes(this.stringRefCount);
+            Output.Write(writeBytes, 0, writeBytes.Length);
+
+            //String data offset
+            writeBytes = BitConverter.GetBytes(this.stringsOffset);
+            Output.Write(writeBytes, 0, writeBytes.Length);
+        }
+
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>
         /// <returns>A String containing the member data line by line</returns>
         public override string ToString()
@@ -308,6 +335,51 @@ namespace InfinityPlus1.Files
             stringLength = ReusableIO.ReadInt32FromArray(ref buffer, 0x16);
         }
 
+        /// <summary>This private method reads the referenced string from the file</summary>
+        /// <param name="Input">Stream to read from</param>
+        /// <param name="StringDataOffset">Offset to the strt of the string data</param>
+        /// <param name="CultureReference">String representing the source culture</param>
+        public void ReadStringReferenced(Stream Input, Int32 StringDataOffset, String CultureReference)
+        {
+            //seek if necessary
+            Int64 absoluteOffset = StringDataOffset + stringOffset;
+            ReusableIO.SeekIfAble(Input, absoluteOffset, SeekOrigin.Begin);
+
+            Byte[] buffer = ReusableIO.BinaryRead(Input, stringLength);
+            StringReferenced = ReusableIO.ReadStringFromByteArray(ref buffer, 0, CultureReference, stringLength);
+        }
+
+        /// <summary>This public method writes the String reference entry to an output stream</summary>
+        /// <param name="Output">Stream object w=into which to write to</param>
+        public void Write(Stream Output)
+        {
+            Byte[] writeBytes;
+
+            //Flags
+            writeBytes = BitConverter.GetBytes(this.strRefFlags);
+            Output.Write(writeBytes, 0, writeBytes.Length);
+
+            //Sound resref
+            writeBytes = ReusableIO.WriteStringToDataField(this.soundResRef.ResRef, 8);
+            Output.Write(writeBytes, 0, writeBytes.Length);
+
+            //Volume variance
+            writeBytes = BitConverter.GetBytes(this.volumeVariance);
+            Output.Write(writeBytes, 0, writeBytes.Length);
+
+            //Pitch variance
+            writeBytes = BitConverter.GetBytes(this.pitchVariance);
+            Output.Write(writeBytes, 0, writeBytes.Length);
+
+            //String data offset
+            writeBytes = BitConverter.GetBytes(this.stringOffset);
+            Output.Write(writeBytes, 0, writeBytes.Length);
+
+            //String data Length
+            writeBytes = BitConverter.GetBytes(this.stringLength);
+            Output.Write(writeBytes, 0, writeBytes.Length);
+        }
+
         /// <summary>This public member overrides the default ToString() method</summary>
         /// <returns>A string containing the values and descriptions of all values in this struct</returns>
         public override String ToString()
@@ -341,20 +413,6 @@ namespace InfinityPlus1.Files
             builder.Append("\n\n");
 
             return builder.ToString();
-        }
-
-        /// <summary>This private method reads the referenced string from the file</summary>
-        /// <param name="Input">Stream to read from</param>
-        /// <param name="StringDataOffset">Offset to the strt of the string data</param>
-        /// <param name="CultureReference">String representing the source culture</param>
-        public void ReadStringReferenced(Stream Input, Int32 StringDataOffset, String CultureReference)
-        {
-            //seek if necessary
-            Int64 absoluteOffset = StringDataOffset + stringOffset;
-            ReusableIO.SeekIfAble(Input, absoluteOffset, SeekOrigin.Begin);
-
-            Byte[] buffer = ReusableIO.BinaryRead(Input, stringLength);
-            StringReferenced = ReusableIO.ReadStringFromByteArray(ref buffer, 0, CultureReference, stringLength);
         }
         #endregion
     }
@@ -412,6 +470,16 @@ namespace InfinityPlus1.Files
         public Int32 Length
         {
             get { return stringReferences.Count; }
+        }
+
+        /// <summary>
+        ///     This public property gets and sets the Boolean value indicating whether or not to store strings in memory when the TLK file is read.
+        ///     This is used mostly to retain the ability to use low levels of RAM.
+        /// </summary>
+        public Boolean StoreStringsInMemory
+        {
+            get { return storeStringsInMemory; }
+            set { storeStringsInMemory = value; }
         }
         #endregion
 
@@ -485,6 +553,52 @@ namespace InfinityPlus1.Files
             ReadFile();
         }
 
+        /// <summary>Writes the TLK file, assigning the tlk file path to the specified file path</summary>
+        /// <param name="FilePath">String describing the path to the TLK file to be written</param>
+        public void WriteFile(String FilePath)
+        {
+            tlkFilePath = FilePath;
+            WriteFile();
+        }
+
+        public void WriteFile()
+        {
+            //clone the file
+            TextLocationKey clone = this.Clone();
+            MemoryStream buffer = new MemoryStream();
+
+            this.header.StringReferenceCount = this.stringReferences.Count;
+            this.header.StringsReferenceOffset = 18 + (26 * stringReferences.Count);
+            
+            //update the string
+            for (Int32 i = 0; i < stringReferences.Count; ++i)
+            {
+                Int32 bufferStartPos = Convert.ToInt32(buffer.Position);                    //current position
+                TextLocationKeyStringReference strref = (TextLocationKeyStringReference)(this.stringReferences[i]);     //copy the object
+                strref.StringOffset = bufferStartPos;
+                ReusableIO.WriteStringToStream(strref.StringReferenced, buffer, header.CultureReference);
+                strref.StringLength = Convert.ToInt32(buffer.Position) - bufferStartPos;    //new length
+                this[i] = strref;
+            }
+
+            using(FileStream fileStream = ReusableIO.OpenFile(tlkFilePath, FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                //write header to file
+                header.Write(fileStream);
+
+                //write string reference entries
+                for (Int32 i = 0; i < this.stringReferences.Count; ++i)
+                    ((TextLocationKeyStringReference)(this.stringReferences[i])).Write(fileStream);
+
+                //seek to write
+                ReusableIO.SeekIfAble(fileStream, header.StringsReferenceOffset, SeekOrigin.Begin);
+
+                //write string data
+                Byte[] bufferBytes = buffer.ToArray();
+                fileStream.Write(bufferBytes, 0, bufferBytes.Length);
+            }
+        }
+
         /// <summary>Adds a String Regerence to the TLK file</summary>
         /// <param name="StringReference">String reference to add to the TLK file</param>
         /// <returns>an Int32 representing the newly added index</returns>
@@ -494,6 +608,21 @@ namespace InfinityPlus1.Files
             return stringReferences.Count - 1;
         }
 
+        /// <summary>This public method copies all relevant data and returns it in an identical, separate instance of a TextLocationKey object</summary>
+        /// <returns>aA TextLocationKey clone object</returns>
+        public TextLocationKey Clone()
+        {
+            TextLocationKey retval = new TextLocationKey();
+            retval.header = header;
+            retval.storeStringsInMemory = storeStringsInMemory;
+            retval.tlkFilePath = tlkFilePath;
+            retval.stringReferences = this.stringReferences.Clone() as ArrayList;
+
+            return retval;
+        }
+        #endregion
+
+        #region Overridden Methods
         /// <summary>This method will write the entire friggin' TLK file to a String builder and return it</summary>
         /// <returns>A string containing textual representations of internal variables, then the header, then all String ref objects</returns>
         public override String ToString()
