@@ -1,0 +1,16 @@
+The basic design for file formats is as follows:
+
+1) Each file will read from a stream
+2) (nearly) each file has a signature and a version, so
+	a) There will be a base peek at Signature and/or version to determine the type
+	c) once a header is read, the format can read from the point in the stream after the format.
+3) each file format will have an internal data structure and a disk data structure
+4) A factory model will be in place for all base formats (BIFF, item, 2DA, etc.)
+	a) Each factory will be able to take in an internal type and export it to disk, given a version
+	b) Each factory will be able to take in a stream, read the disk version andconvert it to an internal version
+	c) Factories (such as BIFF, MOS, BAM, CRE and 2DA) will be able to take in a stream, identify the version, decrypt it or convert it to the larger version, and return an internal type
+5) A dispatcher will be able to take in a strema and determine which facotry it should go to
+6) Some sort of resource cache will be in place
+	a) long term resources (such as GUI, rules, characters, "GAM", etc.) will stay in long-term memory
+		* This includes "SAV" and "GAM" resources to edit in-memory
+	b) mid-term resources (Such as areas, CREs, other CRE items) will be in mid-term cache

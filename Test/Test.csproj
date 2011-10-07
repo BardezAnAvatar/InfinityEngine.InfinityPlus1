@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E79833DB-B2D2-4781-B0FC-79E85DA95BE5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bardez.Projects.InfinityPlus1.Test</RootNamespace>
+    <AssemblyName>InfinityPlus1.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BiowareIndexFileFormat\Biff1\Biff1ArchiveTest.cs" />
+    <Compile Include="BiowareIndexFileFormat\Biff1\Biff1HeaderTest.cs" />
+    <Compile Include="BiowareIndexFileFormat\Biff1\Biff1ResourceEntryTest.cs" />
+    <Compile Include="BiowareIndexFileFormat\Biff1\Biff1TilesetEntryTest.cs" />
+    <Compile Include="ChitinKey\ChitinKey1BifEntry.cs" />
+    <Compile Include="ChitinKey\ChitinKey1HeaderTest.cs" />
+    <Compile Include="ChitinKey\ChitinKey1ResourceEntryTest.cs" />
+    <Compile Include="ChitinKey\ChitinKey1Test.cs" />
+    <Compile Include="Creature\Creature 2.2 Test.cs" />
+    <Compile Include="Creature\Creature 9 Test.cs" />
+    <Compile Include="Creature\Creature 1.2 Test.cs" />
+    <Compile Include="Creature\Creature 1 Test.cs" />
+    <Compile Include="Creature\Creature Header 9 Test.cs" />
+    <Compile Include="Creature\Creature Header 1.2 Test.cs" />
+    <Compile Include="Creature\Creature Header 1 Test.cs" />
+    <Compile Include="Effect\Effect 2 Test.cs" />
+    <Compile Include="Item\Item 2 Test.cs" />
+    <Compile Include="Item\Item 1_1 Test.cs" />
+    <Compile Include="Item\Item 1 Test.cs" />
+    <Compile Include="Item\Item Ability Effect Test.cs" />
+    <Compile Include="Item\Item Ability Test.cs" />
+    <Compile Include="Item\Item Header 2 Test.cs" />
+    <Compile Include="Item\Item Header 1_1 Test.cs" />
+    <Compile Include="Item\Item Header 1 Test.cs" />
+    <Compile Include="ITester.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Spell\Spell 2 Test.cs" />
+    <Compile Include="Spell\Spell 1 Test.cs" />
+    <Compile Include="Spell\Spell Ability Test.cs" />
+    <Compile Include="Spell\Spell 2 Header Test.cs" />
+    <Compile Include="Spell\Spell 1 Header Test.cs" />
+    <Compile Include="TextLocationKey\TextLocationKeyHeaderTest.cs" />
+    <Compile Include="TextLocationKey\TextLocationKeyStringReferenceEntryTest.cs" />
+    <Compile Include="TextLocationKey\TextLocationKeyTest.cs" />
+    <Compile Include="TwoDimensionalArray\TwoDinensionalArray1Test.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Configuration Handler\Configuration Handler.csproj">
+      <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
+      <Name>Configuration Handler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\File Formats\File Formats.csproj">
+      <Project>{F2085177-9356-43EE-9744-85AA2FFCACEE}</Project>
+      <Name>File Formats</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
