@@ -1,27 +1,25 @@
 ﻿using System;
 using System.IO;
-using InfinityPlus1.Files;
 
-namespace InfinityPlus1.Tester.TextLocationKey
+using Bardez.Projects.Configuration;
+using Bardez.Projects.InfinityPlus1.Files.Infinity.TextLocationKey;
+using Bardez.Projects.InfinityPlus1.Test;
+
+namespace Bardez.Projects.InfinityPlus1.Test.TextLocationKey
 {
     /// <summary>This class tests the usable methods in the InfinityPlus1.Files.TextLocationKeyStringReference class</summary>
     public class TextLocationKeyStringReferenceEntryTest : ITester
     {
         protected TextLocationKeyStringReference entry;
 
+        public TextLocationKeyStringReference StringReference
+        {
+            get { return this.entry; }
+        }
+
         public void Test()
         {
-            String path;
-            //path = @"D:\Games\Forgotten Realms\Planescape - Torment\Dialog.tlk";
-            //path = @"D:\Games\Forgotten Realms\Planescape - Torment\dialogF.tlk";
-            //path = @"D:\Games\Forgotten Realms\Baldurs Gate Trilogy\dialog.tlk";
-            //path = @"D:\Games\Forgotten Realms\tlk-files\tosc.fr.dialog\dialogF.tlk";
-            //path = @"D:\Games\Forgotten Realms\tlk-files\tosc.fr.dialog\dialog.tlk";
-            //path = @"D:\Games\Forgotten Realms\tlk-files\bg.de.dialog\dialogF.tlk";
-            //path = @"D:\Games\Forgotten Realms\tlk-files\bg.de.dialog\dialog.tlk";
-
-            path = @"D:\Games\Icewind Dale\dialog.tlk";
-
+            String path = ConfigurationHandler.GetSettingValue("Test.Tlk1.Tlk1Path");
             Test(path);
         }
 
@@ -40,11 +38,6 @@ namespace InfinityPlus1.Tester.TextLocationKey
             entry.ReadStringReferenceFull(Source, headerTester.Header.StringsReferenceOffset, headerTester.Header.CultureReference);
 
             Console.Write(entry.ToString());
-        }
-
-        public TextLocationKeyStringReference StringReference
-        {
-            get { return entry; }
         }
     }
 }

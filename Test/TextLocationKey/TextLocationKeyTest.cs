@@ -1,28 +1,21 @@
 ﻿using System;
 using System.Text;
-using InfinityPlus1.Files;
 
-namespace InfinityPlus1.Tester.TextLocationKey
+using Bardez.Projects.Configuration;
+using Bardez.Projects.InfinityPlus1.Files.Infinity.TextLocationKey;
+using Bardez.Projects.InfinityPlus1.Test;
+
+namespace Bardez.Projects.InfinityPlus1.Test.TextLocationKey
 {
     public class TextLocationKeyTest : ITester
     {
         /// <summary>Testing object</summary>
-        protected Files.TextLocationKey tlkFile;
+        protected Files.Infinity.TextLocationKey.TextLocationKey tlkFile;
 
         /// <summary>ITester Interface method</summary>
         public void Test()
         {
-            String path;
-            //path = @"D:\Games\Forgotten Realms\Planescape - Torment\Dialog.tlk";
-            //path = @"D:\Games\Forgotten Realms\Planescape - Torment\dialogF.tlk";
-            //path = @"D:\Games\Forgotten Realms\Baldurs Gate Trilogy\dialog.tlk";
-            //path = @"D:\Games\Forgotten Realms\tlk-files\tosc.fr.dialog\dialogF.tlk";
-            //path = @"D:\Games\Forgotten Realms\tlk-files\tosc.fr.dialog\dialog.tlk";
-            //path = @"D:\Games\Forgotten Realms\tlk-files\bg.de.dialog\dialogF.tlk";
-            //path = @"D:\Games\Forgotten Realms\tlk-files\bg.de.dialog\dialog.tlk";
-
-            path = @"D:\Games\Icewind Dale\dialog.tlk";
-
+            String path = ConfigurationHandler.GetSettingValue("Test.Tlk1.Tlk1Path");
             Test(path);
         }
 
@@ -33,7 +26,7 @@ namespace InfinityPlus1.Tester.TextLocationKey
             Console.WriteLine("Testing ad hoc read:\n");
 
             //Console.WriteLine("Initializing at " + DateTime.Now.TimeOfDay.ToString() + ":");        //timestamp
-            tlkFile = new Files.TextLocationKey(false);
+            tlkFile = new Files.Infinity.TextLocationKey.TextLocationKey(false);
             tlkFile.TlkPath = filePath;
             //Console.WriteLine("     Reading at " + DateTime.Now.TimeOfDay.ToString() + ":");        //timestamp
             tlkFile.ReadFile();
@@ -55,7 +48,7 @@ namespace InfinityPlus1.Tester.TextLocationKey
             Console.WriteLine("\n\n\nTesting full read:\n");
 
             //Console.WriteLine("Initializing at " + DateTime.Now.TimeOfDay.ToString() + ":");        //timestamp
-            tlkFile = new Files.TextLocationKey();
+            tlkFile = new Files.Infinity.TextLocationKey.TextLocationKey();
             tlkFile.TlkPath = filePath;
             //Console.WriteLine("     Reading at " + DateTime.Now.TimeOfDay.ToString() + ":");        //timestamp
             tlkFile.ReadFile();

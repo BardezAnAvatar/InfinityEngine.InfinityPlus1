@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace InfinityPlus1.Tester
+namespace Bardez.Projects.InfinityPlus1.Test
 {
     /// <summary>This interface defines all necessary test functions</summary>
     public interface ITester

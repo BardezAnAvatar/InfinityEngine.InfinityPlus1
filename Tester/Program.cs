@@ -1,13 +1,25 @@
 ﻿using System;
-using InfinityPlus1.Tester.TextLocationKey;
 
-namespace InfinityPlus1.Tester
+using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Test.BiowareIndexFileFormat.Biff1;
+using Bardez.Projects.InfinityPlus1.Test.ChitinKey;
+using Bardez.Projects.InfinityPlus1.Test.Creature;
+using Bardez.Projects.InfinityPlus1.Test.Effect;
+using Bardez.Projects.InfinityPlus1.Test.Item;
+using Bardez.Projects.InfinityPlus1.Test.Spell;
+using Bardez.Projects.InfinityPlus1.Test.TextLocationKey;
+using Bardez.Projects.InfinityPlus1.Test.TwoDimensionalArray;
+
+namespace Bardez.Projects.InfinityPlus1.Tester
 {
-    class Program
+    /// <summary>Main program class/entry point object.</summary>
+    internal class Program
     {
-        static void Main(String[] args)
+        /// <summary>Driving main method application entry point</summary>
+        /// <param name="args">String Array of application arguments</param>
+        internal static void Main(String[] args)
         {
-            TextLocationKeyTest tester = new TextLocationKeyTest();
+            ITester tester = new Creature2_2Test();
             tester.Test();
 
             Console.Write("Press [Enter] to exit.");

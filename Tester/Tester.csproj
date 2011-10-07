@@ -8,15 +8,20 @@
     <ProjectGuid>{9BD4922B-BEC0-4140-8600-35571A479EB2}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>InfinityPlus1.Tester</RootNamespace>
+    <RootNamespace>Bardez.Projects.InfinityPlus1.Tester</RootNamespace>
     <AssemblyName>InfinityPlus1.Tester</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -43,17 +48,23 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ITester.cs" />
-    <Compile Include="TextLocationKey\TextLocationKeyTest.cs" />
-    <Compile Include="TextLocationKey\TextLocationKeyHeaderTest.cs" />
-    <Compile Include="TextLocationKey\TextLocationKeyStringReferenceEntryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\File Formats\File Formats.csproj">
       <Project>{F2085177-9356-43EE-9744-85AA2FFCACEE}</Project>
       <Name>File Formats</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Test\Test.csproj">
+      <Project>{E79833DB-B2D2-4781-B0FC-79E85DA95BE5}</Project>
+      <Name>Test</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
