@@ -21,6 +21,33 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{FF993C95
 	EndProjectSection
 EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://bardezserver:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = File\u0020Formats\\File\u0020Formats.csproj
+		SccProjectName1 = File\u0020Formats
+		SccLocalPath1 = File\u0020Formats
+		SccProjectUniqueName2 = Tester\\Tester.csproj
+		SccProjectName2 = Tester
+		SccLocalPath2 = Tester
+		SccProjectUniqueName3 = ReusableCode\\ReusableCode.csproj
+		SccProjectName3 = ReusableCode
+		SccLocalPath3 = ReusableCode
+		SccProjectUniqueName4 = Image\u0020Formats\\Image\u0020Formats.vcxproj
+		SccProjectName4 = Image\u0020Formats
+		SccLocalPath4 = Image\u0020Formats
+		SccProjectUniqueName5 = Test\\Test.csproj
+		SccProjectName5 = Test
+		SccLocalPath5 = Test
+		SccProjectUniqueName6 = Utility\\Utility.csproj
+		SccProjectName6 = Utility
+		SccLocalPath6 = Utility
+		SccProjectUniqueName7 = Configuration\u0020Handler\\Configuration\u0020Handler.csproj
+		SccProjectName7 = Configuration\u0020Handler
+		SccLocalPath7 = Configuration\u0020Handler
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
