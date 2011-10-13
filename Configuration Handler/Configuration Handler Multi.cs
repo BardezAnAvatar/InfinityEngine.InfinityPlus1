@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
+using System.IO;
 using System.Web.Configuration;
+using System.Xml;
 
 namespace Bardez.Projects.Configuration
 {
@@ -38,16 +40,26 @@ namespace Bardez.Projects.Configuration
     ///     machine.config, web.config, DLWEB12.config, reg.hasbro.com.config
     ///     
     ///     This way, machine.config values are loaded, generic web settings are, then any overriding server settings, followed by domain-testing-level settings.
+    ///     
+    ///     Design decision:
+    ///         Moving to impersonation classes for elements.
+    ///         To work properly, KeyValueConfigurationElement and (probably) ConnectionStringSettings
+    ///             need to be added to a collection to initialize their properties, and doing so
+    ///             will alter the first such member in the collection if multiple present, but initializes the value.
+    ///         
+    ///         I'm not going to need the ConfigurationElement properties, all I care about is a string value.
+    ///         So, impersonate the structs so that code changes are not that necessary. THAT way, I ca add in properties from the base classes
+    ///         if they are needed later down the road
     /// </remarks>
-    [Obsolete("Built-in sections do not return multiple values for a given key.", true)]
+    //[Obsolete("Built-in sections do not return multiple values for a given key.", true)]
     public static class ConfigurationHandlerMulti
     {
         #region Members
         /// <summary>Dictionary of KeyValueConfigurationElement objects</summary>
-        private static Dictionary<String, List<KeyValueConfigurationElement>> AppSettings;
+        private static Dictionary<String, List<KeyValueConfigurationElementImpersonator>> AppSettings;
 
         /// <summary>Dictionary of ConnectionStringSetting objects</summary>
-        private static Dictionary<String, List<ConnectionStringSettings>> ConnectionStrings;
+        private static Dictionary<String, List<ConnectionStringSettingsImpersonator>> ConnectionStrings;
 
         /// <summary>Boolean indicating whether or not the Configuration Handler is initialized</summary>
         private static Boolean isNotInitialized = true;
@@ -57,8 +69,8 @@ namespace Bardez.Projects.Configuration
         /// <summary>Initializes the configuration handler static class</summary>
         private static void Initialize()
         {
-            AppSettings = new Dictionary<String, List<KeyValueConfigurationElement>>();
-            ConnectionStrings = new Dictionary<String, List<ConnectionStringSettings>>();
+            AppSettings = new Dictionary<String, List<KeyValueConfigurationElementImpersonator>>();
+            ConnectionStrings = new Dictionary<String, List<ConnectionStringSettingsImpersonator>>();
 
             try
             {
@@ -84,8 +96,8 @@ namespace Bardez.Projects.Configuration
             }
             catch   //try to just load off of configuration manager
             {
-                AppSettings = new Dictionary<String, List<KeyValueConfigurationElement>>();
-                ConnectionStrings = new Dictionary<String, List<ConnectionStringSettings>>();
+                AppSettings = new Dictionary<String, List<KeyValueConfigurationElementImpersonator>>();
+                ConnectionStrings = new Dictionary<String, List<ConnectionStringSettingsImpersonator>>();
                 CopyKeys(ConfigurationManager.AppSettings, ConfigurationManager.ConnectionStrings, AppSettings, ConnectionStrings);
             }
 
@@ -95,26 +107,26 @@ namespace Bardez.Projects.Configuration
         #endregion
 
         #region Get configuration values
-        /// <summary>Getshe latest configuration element read that is associated with the key</summary>
+        /// <summary>Gets the latest configuration element read that is associated with the key</summary>
         /// <param name="key">String to look up</param>
         /// <returns>The latest read configuration element associated with the key</returns>
-        public static KeyValueConfigurationElement GetSetting(String key)
+        public static KeyValueConfigurationElementImpersonator GetSetting(String key)
         {
             if (isNotInitialized || AppSettings == null)
                 Initialize();
 
-            KeyValueConfigurationElement result = null;
+            KeyValueConfigurationElementImpersonator result = null;
             
             if (AppSettings.ContainsKey(key))
             {
-                List<KeyValueConfigurationElement> settings = AppSettings[key];
+                List<KeyValueConfigurationElementImpersonator> settings = AppSettings[key];
                 result = settings[settings.Count - 1];
             }
 
             return result;
         }
 
-        /// <summary>Gets the most recet String value associated with a key from merged config files</summary>
+        /// <summary>Gets the most recent String value associated with a key from merged config files</summary>
         /// <param name="key">String to look up</param>
         /// <returns>The latest read string associated with the key</returns>
         public static String GetSettingValue(String key)
@@ -126,7 +138,7 @@ namespace Bardez.Projects.Configuration
 
             if (AppSettings.ContainsKey(key))
             {
-                List<KeyValueConfigurationElement> settings = AppSettings[key];
+                List<KeyValueConfigurationElementImpersonator> settings = AppSettings[key];
                 result = settings[settings.Count - 1].Value;
             }
             else
@@ -147,10 +159,10 @@ namespace Bardez.Projects.Configuration
 
             if (AppSettings.ContainsKey(key))
             {
-                List<KeyValueConfigurationElement> settings = AppSettings[key];
+                List<KeyValueConfigurationElementImpersonator> settings = AppSettings[key];
                 result = new List<String>();
 
-                foreach (KeyValueConfigurationElement element in settings)
+                foreach (KeyValueConfigurationElementImpersonator element in settings)
                     result.Add(element.Value);
             }
             else
@@ -191,7 +203,7 @@ namespace Bardez.Projects.Configuration
 
             if (ConnectionStrings.ContainsKey(key))
             {
-                List<ConnectionStringSettings> settings = ConnectionStrings[key];
+                List<ConnectionStringSettingsImpersonator> settings = ConnectionStrings[key];
                 result = settings[settings.Count - 1].ConnectionString;
             }
 
@@ -210,10 +222,10 @@ namespace Bardez.Projects.Configuration
 
             if (ConnectionStrings.ContainsKey(key))
             {
-                List<ConnectionStringSettings> settings = ConnectionStrings[key];
+                List<ConnectionStringSettingsImpersonator> settings = ConnectionStrings[key];
                 result = new List<String>();
 
-                foreach (ConnectionStringSettings element in settings)
+                foreach (ConnectionStringSettingsImpersonator element in settings)
                     result.Add(element.ConnectionString);
             }
 
@@ -259,33 +271,33 @@ namespace Bardez.Projects.Configuration
         private static void CopyKeys
                 (
                     System.Configuration.Configuration Config,
-                    Dictionary<String, List<KeyValueConfigurationElement>> ApplicationSettings,
-                    Dictionary<String, List<ConnectionStringSettings>> ConnStrings
+                    Dictionary<String, List<KeyValueConfigurationElementImpersonator>> ApplicationSettings,
+                    Dictionary<String, List<ConnectionStringSettingsImpersonator>> ConnStrings
                 )
         {
             //temp lists
-            Dictionary<String, List<KeyValueConfigurationElement>> tempSettings = new Dictionary<String, List<KeyValueConfigurationElement>>();
-            Dictionary<String, List<ConnectionStringSettings>> tempConnStrings = new Dictionary<String, List<ConnectionStringSettings>>();
+            Dictionary<String, List<KeyValueConfigurationElementImpersonator>> tempSettings = new Dictionary<String, List<KeyValueConfigurationElementImpersonator>>();
+            Dictionary<String, List<ConnectionStringSettingsImpersonator>> tempConnStrings = new Dictionary<String, List<ConnectionStringSettingsImpersonator>>();
 
             //read all the settings
             foreach (KeyValueConfigurationElement pair in Config.AppSettings.Settings)
             {
                 if (!tempSettings.ContainsKey(pair.Key))
-                    tempSettings[pair.Key] = new List<KeyValueConfigurationElement>();
+                    tempSettings[pair.Key] = new List<KeyValueConfigurationElementImpersonator>();
 
-                tempSettings[pair.Key].Add(pair);
+                tempSettings[pair.Key].Add(new KeyValueConfigurationElementImpersonator(pair));
             }
 
             //merge all the settings
             CopySettings(tempSettings, ApplicationSettings);
 
             //read all the connection strings
-            foreach (ConnectionStringSettings key in Config.ConnectionStrings.ConnectionStrings)
+            foreach (ConnectionStringSettings connStr in Config.ConnectionStrings.ConnectionStrings)
             {
-                if (!tempConnStrings.ContainsKey(key.Name))
-                    tempConnStrings[key.Name] = new List<ConnectionStringSettings>();
+                if (!tempConnStrings.ContainsKey(connStr.Name))
+                    tempConnStrings[connStr.Name] = new List<ConnectionStringSettingsImpersonator>();
 
-                tempConnStrings[key.Name].Add(key);
+                tempConnStrings[connStr.Name].Add(new ConnectionStringSettingsImpersonator(connStr));
             }
 
             //merge all the connection strings
@@ -300,11 +312,12 @@ namespace Bardez.Projects.Configuration
         /// <param name="ConnectionStringsDict">ConnectionString Dictionary to copy to</param>
         private static void CopyKeys
             (NameValueCollection ApplicationSettings, ConnectionStringSettingsCollection ConnStrings,
-                Dictionary<String, List<KeyValueConfigurationElement>> SettingsDict, Dictionary<String, List<ConnectionStringSettings>> ConnectionStringsDict)
+                Dictionary<String, List<KeyValueConfigurationElementImpersonator>> SettingsDict,
+                Dictionary<String, List<ConnectionStringSettingsImpersonator>> ConnectionStringsDict)
         {
             //temp lists
-            Dictionary<String, List<KeyValueConfigurationElement>> tempSettings = new Dictionary<String, List<KeyValueConfigurationElement>>();
-            Dictionary<String, List<ConnectionStringSettings>> tempConnStrings = new Dictionary<String, List<ConnectionStringSettings>>();
+            Dictionary<String, List<KeyValueConfigurationElementImpersonator>> tempSettings = new Dictionary<String, List<KeyValueConfigurationElementImpersonator>>();
+            Dictionary<String, List<ConnectionStringSettingsImpersonator>> tempConnStrings = new Dictionary<String, List<ConnectionStringSettingsImpersonator>>();
 
             //read all the settings
             foreach (String key in ApplicationSettings.Keys)
@@ -314,9 +327,9 @@ namespace Bardez.Projects.Configuration
                 foreach (String value in values)
                 {
                     if (!tempSettings.ContainsKey(key))
-                        tempSettings[key] = new List<KeyValueConfigurationElement>();
+                        tempSettings[key] = new List<KeyValueConfigurationElementImpersonator>();
 
-                    tempSettings[key].Add(new KeyValueConfigurationElement(key, value));
+                    tempSettings[key].Add(new KeyValueConfigurationElementImpersonator(key, value));
                 }
             }
 
@@ -325,22 +338,63 @@ namespace Bardez.Projects.Configuration
 
 
             //read all the connection strings
-            foreach (ConnectionStringSettings key in ConnStrings)
+            foreach (ConnectionStringSettings connString in ConnStrings)
             {
-                if (!tempConnStrings.ContainsKey(key.Name))
-                    tempConnStrings[key.Name] = new List<ConnectionStringSettings>();
+                if (!tempConnStrings.ContainsKey(connString.Name))
+                    tempConnStrings[connString.Name] = new List<ConnectionStringSettingsImpersonator>();
 
-                tempConnStrings[key.Name].Add(key);
+                tempConnStrings[connString.Name].Add(new ConnectionStringSettingsImpersonator(connString));
             }
 
             //merge all the connection strings
             CopyConnectionStrings(tempConnStrings, ConnectionStringsDict);
         }
 
+        /// <summary>Copies keys opened from a config file opened as an XmlDocument</summary>
+        /// <param name="configuration">Config file opened as an XML document</param>
+        /// <param name="settingsDict">App Settings Dictionary to copy to</param>
+        /// <param name="connectionStringsDict">ConnectionString Dictionary to copy to</param>
+        private static void CopyKeys(XmlDocument configuration,
+                Dictionary<String, List<KeyValueConfigurationElementImpersonator>> settingsDict,
+                Dictionary<String, List<ConnectionStringSettingsImpersonator>> connectionStringsDict)
+        {
+            if (configuration != null)
+            {
+                NameValueCollection settings = new NameValueCollection();
+                ConnectionStringSettingsCollection connStrs = new ConnectionStringSettingsCollection();
+            
+                XmlNodeList appSettings = configuration.SelectNodes("/configuration/appSettings/add");
+                foreach (XmlNode node in appSettings)
+                {
+                    try
+                    {
+                        settings.Add(node.Attributes["key"].InnerText, node.Attributes["value"].InnerText);
+                    }
+                    catch {}
+                }
+
+                XmlNodeList connexionStrs = configuration.SelectNodes("/configuration/connectionStrings/add");
+                foreach (XmlNode node in connexionStrs)
+                {
+                    try
+                    {
+                        XmlAttribute provider = node.Attributes["providerName"];
+                        String providerName = node.Attributes["providerName"] == null ? null : node.Attributes["providerName"].InnerText;
+                        connStrs.Add(new ConnectionStringSettings(node.Attributes["name"].InnerText, node.Attributes["connectionString"].InnerText, providerName));
+                    }
+                    catch {}
+                }
+
+                //percolate down
+                CopyKeys(settings, connStrs, settingsDict, connectionStringsDict);
+            }
+        }
+
         /// <summary>Copies configuration elements from the source into the destination, merging or setting as appropriate</summary>
         /// <param name="source">KeyValueConfigurationElement source</param>
         /// <param name="destination">KeyValueConfigurationElement depository</param>
-        private static void CopySettings(Dictionary<String, List<KeyValueConfigurationElement>> source, Dictionary<String, List<KeyValueConfigurationElement>> destination)
+        private static void CopySettings(Dictionary<String, List<KeyValueConfigurationElementImpersonator>> source,
+            Dictionary<String, List<KeyValueConfigurationElementImpersonator>> destination)
         {
             //merge all the settings
             foreach (String key in source.Keys)
@@ -355,7 +409,9 @@ namespace Bardez.Projects.Configuration
         /// <summary>Copies configuration elements from the source into the destination, merging or setting as appropriate</summary>
         /// <param name="source">ConnectionStringSettings source</param>
         /// <param name="destination">ConnectionStringSettings depository</param>
-        private static void CopyConnectionStrings(Dictionary<String, List<ConnectionStringSettings>> source, Dictionary<String, List<ConnectionStringSettings>> destination)
+        private static void CopyConnectionStrings(Dictionary<String,
+            List<ConnectionStringSettingsImpersonator>> source,
+            Dictionary<String, List<ConnectionStringSettingsImpersonator>> destination)
         {
             //merge all the settings
             foreach (String key in source.Keys)
@@ -414,24 +470,32 @@ namespace Bardez.Projects.Configuration
         /// <summary>Finds and loads a [Web or App].config file</summary>
         private static void LoadAppConfig()
         {
-            System.Configuration.Configuration configuration;
-
+            String path = GetAssemblyPath();
+            System.Configuration.Configuration configuration = null;
             if (System.Web.HttpContext.Current != null)
             {
-                String path = GetAssemblyPath();
-
                 path = path + "\\web.config";
                 if (System.IO.File.Exists(path))
                 {
                     String webPath = System.IO.Path.GetDirectoryName(System.Web.HttpContext.Current.Request.FilePath).Replace('\\', '/');
                     configuration = WebConfigurationManager.OpenWebConfiguration(webPath);
-                    CopyKeys(configuration, AppSettings, ConnectionStrings);
                 }
             }
             else
-            {
                 configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                CopyKeys(configuration, AppSettings, ConnectionStrings);
+
+            //have configuration, now look for loading document
+            if (configuration != null)
+            {
+                path = configuration.FilePath;
+
+                XmlDocument doc = null;
+                if (File.Exists(path))
+                {
+                    doc = new XmlDocument();
+                    doc.Load(path);
+                }
+                CopyKeys(doc, AppSettings, ConnectionStrings);
             }
         }
         #endregion

@@ -48,19 +48,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect2
         }
 
         #region IO method implemetations
-        /// <summary>This public method reads file format from the output stream. Reads the whole structure.</summary>
-        /// <param name="input">Input stream to read from</param>
-        public override void Read(Stream input)
-        {
-            //read signature
-            Byte[] buffer = ReusableIO.BinaryRead(input, 8);   //header buffer
-
-            this.signature = ReusableIO.ReadStringFromByteArray(buffer, 0, Constants.CultureCodeEnglish, 4);
-            this.version = ReusableIO.ReadStringFromByteArray(buffer, 4, Constants.CultureCodeEnglish, 4);
-
-            this.ReadBody(input);
-        }
-
         /// <summary>This public method reads file format data structure from the output stream, after the signature has already been read.</summary>
         /// <param name="input">Input stream to read from</param>
         public override void ReadBody(Stream input)

@@ -43,6 +43,11 @@
     <Compile Include="BiowareIndexFileFormat\Biff1\Biff1HeaderTest.cs" />
     <Compile Include="BiowareIndexFileFormat\Biff1\Biff1ResourceEntryTest.cs" />
     <Compile Include="BiowareIndexFileFormat\Biff1\Biff1TilesetEntryTest.cs" />
+    <Compile Include="Character\Character 1 Test.cs" />
+    <Compile Include="Character\Character 2.2 Test.cs" />
+    <Compile Include="Character\Character 9 Test.cs" />
+    <Compile Include="Character\Biography 1 Test.cs" />
+    <Compile Include="Character\Biography 2 Test.cs" />
     <Compile Include="ChitinKey\ChitinKey1BifEntry.cs" />
     <Compile Include="ChitinKey\ChitinKey1HeaderTest.cs" />
     <Compile Include="ChitinKey\ChitinKey1ResourceEntryTest.cs" />
@@ -70,6 +75,9 @@
     <Compile Include="Spell\Spell Ability Test.cs" />
     <Compile Include="Spell\Spell 2 Header Test.cs" />
     <Compile Include="Spell\Spell 1 Header Test.cs" />
+    <Compile Include="Store\Store 1.1 Test.cs" />
+    <Compile Include="Store\Store 9 Test.cs" />
+    <Compile Include="Store\Store 1 Test.cs" />
     <Compile Include="TextLocationKey\TextLocationKeyHeaderTest.cs" />
     <Compile Include="TextLocationKey\TextLocationKeyStringReferenceEntryTest.cs" />
     <Compile Include="TextLocationKey\TextLocationKeyTest.cs" />

@@ -9,14 +9,14 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Globals
         protected String source;
 
         /// <summary>source string being stored</summary>
-        protected String Source
+        public String Source
         {
             get { return this.source; }
             set { this.source = value; }
         }
 
         /// <summary>ZString string being stored</summary>
-        protected String Value
+        public String Value
         {
             get { return GetZString(this.source); }
             set { this.source = GetZString(value); }

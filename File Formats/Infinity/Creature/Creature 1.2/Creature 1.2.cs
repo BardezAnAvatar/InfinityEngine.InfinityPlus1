@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
+using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Effect;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
@@ -187,7 +188,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
                 Int32 spellMemorizationSlotsSize = this.spellMemorization.Count * Creature2ESpellMemorization.StructSize;
                 Int32 preparedSpellsSize = this.preparedSpells.Count * Creature2EMemorizedSpells.StructSize;
                 Int32 effectsSize = this.effects.Count * this.EffectSize;
-                Int32 itemsSize = this.items.Count * CreatureItem.StructSize;
+                Int32 itemsSize = this.items.Count * ItemInstance.StructSize;
                 Int32 itemSlotsSize = 4 /* trailing two selected indexes */ + (this.itemSlots.Count * 2 /* sizeof(UInt16) */);
 
                 //reset offsets
@@ -209,7 +210,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
             Int32 spellMemorizationSlotsSize = this.spellMemorization.Count * Creature2ESpellMemorization.StructSize;
             Int32 preparedSpellsSize = this.preparedSpells.Count * Creature2EMemorizedSpells.StructSize;
             Int32 effectsSize = this.effects.Count * this.EffectSize;
-            Int32 itemsSize = this.items.Count * CreatureItem.StructSize;
+            Int32 itemsSize = this.items.Count * ItemInstance.StructSize;
             Int32 itemSlotsSize = 4 /* trailing two selected indexes */ + (this.itemSlots.Count * 2 /* sizeof(UInt16) */);
             //this.Header.SizeOverlays already computed/set
 
@@ -217,10 +218,13 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
 
             //technically, any of these 6 can follow the header in any order. Check for any overlaps.
             if (
-                this.Header.OffsetOverlays < this.HeaderSize
-                || this.header.OffsetKnownSpells < this.HeaderSize || this.header.OffsetSpellMemorization < this.HeaderSize
-                || this.header.OffsetMemorizedSpells < this.HeaderSize || this.header.OffsetEffects < this.HeaderSize
-                || this.header.OffsetItems < this.HeaderSize || this.header.OffsetItemSlots < this.HeaderSize)
+                IntExtension.Between(this.header.OffsetKnownSpells, knownSpellsSize, 0, this.HeaderSize)
+                || IntExtension.Between(this.header.OffsetSpellMemorization, spellMemorizationSlotsSize, 0, this.HeaderSize)
+                || IntExtension.Between(this.header.OffsetMemorizedSpells, preparedSpellsSize, 0, this.HeaderSize)
+                || IntExtension.Between(this.header.OffsetEffects, effectsSize, 0, this.HeaderSize)
+                || IntExtension.Between(this.header.OffsetItems, itemsSize, 0, this.HeaderSize)
+                || IntExtension.Between(this.header.OffsetItemSlots, itemSlotsSize, 0, this.HeaderSize)
+                )
                 overlaps = true;
 
             // It's 11:44 PM and I still can't think of any better way of doing this shite than writing out all combinations, copy/paste, and then excluding the self.

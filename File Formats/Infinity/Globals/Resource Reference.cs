@@ -20,7 +20,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Globals
             set { this.resRef = value; }
         }
 
-        /// <summary>This public property gets or sets the NLL-terminated representation of the resource reference string</summary>
+        /// <summary>This public property gets or sets the NULL-terminated representation of the resource reference string</summary>
         public String ZResRef
         {
             get { return ZString.GetZString(this.resRef); }

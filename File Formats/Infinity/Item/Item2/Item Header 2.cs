@@ -296,7 +296,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Item2
             builder.Append("\n\tCount of item Equipped Effects:         ");
             builder.Append(this.countEquippedEffects);
             builder.Append("\n\tReserved Data:                          ");
-            builder.Append(StringFormat.ReservedToStringHex(this.reserved));
+            builder.Append(StringFormat.ByteArrayToHexString(this.reserved));
 
             builder.Append("\n\n");
 

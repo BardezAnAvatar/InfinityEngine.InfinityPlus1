@@ -475,7 +475,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1
             builder.Append("\n\tTracking:                                   ");
             builder.Append(this.tracking);
             builder.Append("\n\tReserved non-weapon proficiencies:          ");
-            builder.Append(StringFormat.ReservedToStringHex(this.reservedNonweaponProficiencies));
+            builder.Append(StringFormat.ByteArrayToHexString(this.reservedNonweaponProficiencies));
         }
         #endregion
     }

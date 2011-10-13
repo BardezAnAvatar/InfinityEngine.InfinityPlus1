@@ -648,7 +648,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect2
             builder.Append("\n\tMagic type (description):                       ");
             builder.Append(this.magicType.GetDescription());
             builder.Append("\n\tTrailing unknown 60 Bytes:");
-            builder.Append(StringFormat.ReservedToStringHex(this.unknown3));
+            builder.Append(StringFormat.ByteArrayToHexString(this.unknown3));
             builder.Append("\n\n");
 
             return builder.ToString();

@@ -2,6 +2,9 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
+using Bardez.Projects.ReusableCode;
+
 namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Base
 {
     public abstract class InfinityFormat : IInfinityFormat
@@ -35,9 +38,18 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Base
         public abstract void Initialize();
 
         #region Abstract IO methods
-        /// <summary>This public method reads file format data structure from the output stream. Reads the whole data structure.</summary>
+        /// <summary>This public method reads file format from the output stream. Reads the whole structure.</summary>
         /// <param name="input">Input stream to read from</param>
-        public abstract void Read(Stream input);
+        public virtual void Read(Stream input)
+        {
+            //read signature
+            Byte[] buffer = ReusableIO.BinaryRead(input, 8);   //header buffer
+
+            this.signature = ReusableIO.ReadStringFromByteArray(buffer, 0, Constants.CultureCodeEnglish, 4);
+            this.version = ReusableIO.ReadStringFromByteArray(buffer, 4, Constants.CultureCodeEnglish, 4);
+
+            this.ReadBody(input);
+        }
 
         /// <summary>This public method reads file format from the output stream.</summary>
         /// <param name="input">Input stream to read from</param>

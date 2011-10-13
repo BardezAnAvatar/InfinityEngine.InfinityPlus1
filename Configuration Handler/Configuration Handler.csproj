@@ -61,11 +61,15 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bogus KeyValueConfigurationElement.cs" />
+    <Compile Include="Configuration Handler Multi.cs" />
     <Compile Include="Configuration Handler.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Bogus ConnectionStringConfigurationElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

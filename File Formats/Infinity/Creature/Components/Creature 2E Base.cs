@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
+using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Effect;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect1;
@@ -35,7 +36,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature
         protected List<EffectWrapper> effects;
 
         /// <summary>List of items the creature has in its inventory</summary>
-        protected List<CreatureItem> items;
+        protected List<ItemInstance> items;
 
         /// <summary>The item slots of available to the creature</summary>
         protected GenericOrderedDictionary<String, Int16> itemSlots;
@@ -80,7 +81,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature
         }
 
         /// <summary>List of items the creature has in its inventory</summary>
-        public List<CreatureItem> Items
+        public List<ItemInstance> Items
         {
             get { return this.items; }
             set { this.items = value; }
@@ -136,7 +137,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature
             this.spellMemorization = new List<Creature2ESpellMemorization>();
             this.preparedSpells = new List<Creature2EMemorizedSpells>();
             this.effects = new List<EffectWrapper>();
-            this.items = new List<CreatureItem>();
+            this.items = new List<ItemInstance>();
             this.InitializeItemSlots();
         }
 
@@ -264,7 +265,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature
             //read prepared spells
             for (Int32 i = 0; i < this.header.CountItems; ++i)
             {
-                CreatureItem item = new CreatureItem();
+                ItemInstance item = new ItemInstance();
                 item.Read(input);
                 this.items.Add(item);
             }
@@ -358,7 +359,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature
                 output.Seek(this.header.OffsetItems, SeekOrigin.Begin);
 
             //write overlay memorization
-            foreach (CreatureItem item in this.items)
+            foreach (ItemInstance item in this.items)
                 item.Write(output);
         }
 
@@ -484,7 +485,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature
                 Int32 spellMemorizationSlotsSize = this.spellMemorization.Count * Creature2ESpellMemorization.StructSize;
                 Int32 preparedSpellsSize = this.preparedSpells.Count * Creature2EMemorizedSpells.StructSize;
                 Int32 effectsSize = this.effects.Count * this.EffectSize;
-                Int32 itemsSize = this.items.Count * CreatureItem.StructSize;
+                Int32 itemsSize = this.items.Count * ItemInstance.StructSize;
                 Int32 itemSlotsSize = 4 /* trailing two selected indexes */ + (this.itemSlots.Count * 2 /* sizeof(UInt16) */);
 
                 //reset offsets
@@ -506,15 +507,20 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature
             Int32 spellMemorizationSlotsSize = this.spellMemorization.Count * Creature2ESpellMemorization.StructSize;
             Int32 preparedSpellsSize = this.preparedSpells.Count * Creature2EMemorizedSpells.StructSize;
             Int32 effectsSize = this.effects.Count * this.EffectSize;
-            Int32 itemsSize = this.items.Count * CreatureItem.StructSize;
+            Int32 itemsSize = this.items.Count * ItemInstance.StructSize;
             Int32 itemSlotsSize = 4 /* trailing two selected indexes */ + (this.itemSlots.Count * 2 /* sizeof(UInt16) */);
 
             Boolean overlaps = false;
 
             //technically, any of these 6 can follow the header in any order. Check for any overlaps.
-            if (this.header.OffsetKnownSpells < this.HeaderSize || this.header.OffsetSpellMemorization < this.HeaderSize
-                || this.header.OffsetMemorizedSpells < this.HeaderSize || this.header.OffsetEffects < this.HeaderSize
-                || this.header.OffsetItems < this.HeaderSize || this.header.OffsetItemSlots < this.HeaderSize)
+            if (
+                IntExtension.Between(this.header.OffsetKnownSpells, knownSpellsSize, 0, this.HeaderSize)
+                || IntExtension.Between(this.header.OffsetSpellMemorization, spellMemorizationSlotsSize, 0, this.HeaderSize)
+                || IntExtension.Between(this.header.OffsetMemorizedSpells, preparedSpellsSize, 0, this.HeaderSize)
+                || IntExtension.Between(this.header.OffsetEffects, effectsSize, 0, this.HeaderSize)
+                || IntExtension.Between(this.header.OffsetItems, itemsSize, 0, this.HeaderSize)
+                || IntExtension.Between(this.header.OffsetItemSlots, itemSlotsSize, 0, this.HeaderSize)
+                )
                 overlaps = true;
 
             // It's 10:45 PM and I can't think of any better way of doing this shite than writing out all combinations, copy/paste, and then excluding the self.

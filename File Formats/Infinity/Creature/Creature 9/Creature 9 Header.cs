@@ -701,7 +701,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature9
             builder.Append("\n\tTracking:                                   ");
             builder.Append(this.tracking);
             builder.Append("\n\tReserved non-weapon proficiencies:          ");
-            builder.Append(StringFormat.ReservedToStringHex(this.reservedNonweaponProficiencies));
+            builder.Append(StringFormat.ByteArrayToHexString(this.reservedNonweaponProficiencies));
         }
 
         /// <summary>Generates a String representing the added Icewind Dale values area of the creature data structure</summary>
@@ -741,7 +741,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature9
             builder.Append("\n\tSaved Orientation:                          ");
             builder.Append(this.savedOrientation);
             builder.Append("\n\tUnknown #3 (Byte array):                    ");
-            builder.Append(StringFormat.ReservedToStringHex(this.unknown3));
+            builder.Append(StringFormat.ByteArrayToHexString(this.unknown3));
         }
         #endregion
     }

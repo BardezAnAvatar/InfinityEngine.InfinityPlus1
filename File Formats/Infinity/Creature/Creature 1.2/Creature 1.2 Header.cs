@@ -1186,7 +1186,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
             builder.Append("\n\tTracking:                                   ");
             builder.Append(this.tracking);
             builder.Append("\n\tReserved non-weapon proficiencies:          ");
-            builder.Append(StringFormat.ReservedToStringHex(this.reservedNonweaponProficiencies));
+            builder.Append(StringFormat.ByteArrayToHexString(this.reservedNonweaponProficiencies));
         }
 
         /// <summary>This method appends the kit variable(s) to the output StringBuilder</summary>
@@ -1234,13 +1234,13 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
         protected void ToStringPlanescapeAdditions(StringBuilder builder)
         {
             builder.Append("\n\tUnknown #1 (Byte array):                    ");
-            builder.Append(StringFormat.ReservedToStringHex(this.unknown1));
+            builder.Append(StringFormat.ByteArrayToHexString(this.unknown1));
             builder.Append("\n\tZombie disguise:                            ");
             builder.Append(this.zombieDisguise);
             builder.Append("\n\tZombie disguise (description):              ");
             builder.Append(this.zombieDisguise == -1 ? "True" : this.zombieDisguise == 0 ? "False" : "Unknown");
             builder.Append("\n\tUnknown #2 (Byte array):                    ");
-            builder.Append(StringFormat.ReservedToStringHex(this.unknown2));
+            builder.Append(StringFormat.ByteArrayToHexString(this.unknown2));
             builder.Append("\n\tOverlays offset:                            ");
             builder.Append(this.offsetOverlays);
             builder.Append("\n\tOverlays size:                              ");
@@ -1305,7 +1305,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
             builder.Append("\n\tColor #7:                                   ");
             builder.Append(this.color7);
             builder.Append("\n\tUnknown #3 (Byte array):                    ");
-            builder.Append(StringFormat.ReservedToStringHex(this.unknown3));
+            builder.Append(StringFormat.ByteArrayToHexString(this.unknown3));
             builder.Append("\n\tColor placement #1:                         ");
             builder.Append(this.colorPlacement1);
             builder.Append("\n\tColor placement #2:                         ");
@@ -1321,7 +1321,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
             builder.Append("\n\tColor placement #7:                         ");
             builder.Append(this.colorPlacement7);
             builder.Append("\n\tUnknown #4 (Byte array):                    ");
-            builder.Append(StringFormat.ReservedToStringHex(this.unknown4));
+            builder.Append(StringFormat.ByteArrayToHexString(this.unknown4));
             builder.Append("\n\tUnknown #5:                                 ");
             builder.Append(this.unknown5);
             builder.Append("\n\tUnknown #6:                                 ");

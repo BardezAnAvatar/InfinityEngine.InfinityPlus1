@@ -42,6 +42,15 @@
     <Compile Include="Infinity\BiowareIndexFileFormat\Biff1\Biff1FileEntry.cs" />
     <Compile Include="Infinity\BiowareIndexFileFormat\Biff1\Biff1ResourceEntry.cs" />
     <Compile Include="Infinity\BiowareIndexFileFormat\Biff1\Biff1TilesetEntry.cs" />
+    <Compile Include="Infinity\Character\Biography\Biography 1.cs" />
+    <Compile Include="Infinity\Character\Biography\Biography 2.cs" />
+    <Compile Include="Infinity\Character\Enums\User Interface Button.cs" />
+    <Compile Include="Infinity\Character\Header\Character 1 Header.cs" />
+    <Compile Include="Infinity\Character\Header\Character 2.2 Header.cs" />
+    <Compile Include="Infinity\Character\Header\Character Header Base.cs" />
+    <Compile Include="Infinity\Character\Version\Character 1.cs" />
+    <Compile Include="Infinity\Character\Version\Character 9.cs" />
+    <Compile Include="Infinity\Character\Version\Character 2.2.cs" />
     <Compile Include="Infinity\ChitinKey\ChitinKey1.cs" />
     <Compile Include="Infinity\ChitinKey\Key Resource Entry.cs" />
     <Compile Include="Infinity\ChitinKey\Key BIF Entry.cs" />
@@ -76,10 +85,10 @@
     <Compile Include="Infinity\Creature\Creature 9\Creature 9 Header.cs" />
     <Compile Include="Infinity\Creature\Components\Creature 2E Base.cs" />
     <Compile Include="Infinity\Creature\Creature Header.cs" />
-    <Compile Include="Infinity\Creature\Components\Creature Item.cs" />
+    <Compile Include="Infinity\Common\ItmSpl\Item Instance.cs" />
     <Compile Include="Infinity\Creature\Enums\Attribute Flags.cs" />
     <Compile Include="Infinity\Creature\Enums\Creature 2E Known Spell Type.cs" />
-    <Compile Include="Infinity\Creature\Enums\Item Instance Flags.cs" />
+    <Compile Include="Infinity\Common\Enums\Item Instance Flags.cs" />
     <Compile Include="Infinity\Creature\Enums\Kit D20.cs" />
     <Compile Include="Infinity\Creature\Enums\D20 Feats 2.cs" />
     <Compile Include="Infinity\Creature\Enums\Creature D20 Flags.cs" />
@@ -131,6 +140,18 @@
     <Compile Include="Infinity\Item\Item2\Item Header 2.cs" />
     <Compile Include="Infinity\Item\Item1\Item Header 1.cs" />
     <Compile Include="Infinity\Item\Item Header.cs" />
+    <Compile Include="Infinity\Store\Components\Available Spell.cs" />
+    <Compile Include="Infinity\Store\Components\Available Drink.cs" />
+    <Compile Include="Infinity\Store\Components\Available Item.cs" />
+    <Compile Include="Infinity\Store\Components\Available Item PST.cs" />
+    <Compile Include="Infinity\Store\Version\Store 9.cs" />
+    <Compile Include="Infinity\Store\Version\Store 1.1.cs" />
+    <Compile Include="Infinity\Store\Version\Store 1.cs" />
+    <Compile Include="Infinity\Store\Version\Store Header 2.cs" />
+    <Compile Include="Infinity\Store\Version\Store Header 1.cs" />
+    <Compile Include="Infinity\Store\Enums\Rooms Available.cs" />
+    <Compile Include="Infinity\Store\Enums\Store Type.cs" />
+    <Compile Include="Infinity\Store\Enums\Store Flags.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infinity\Spell\Enums\Spell Header 2 Flags.cs" />
     <Compile Include="Infinity\Spell\Enums\Spell Nature.cs" />
@@ -173,7 +194,6 @@
     <Folder Include="InfinityPlus1\" />
     <Folder Include="Infinity\BiowareIndexFileFormat\BiffC1\" />
     <Folder Include="Infinity\BiowareIndexFileFormat\CBiff1\" />
-    <Folder Include="Infinity\Character\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infinity\Creature\Creature 2.2\Creature 2.2.cs" />

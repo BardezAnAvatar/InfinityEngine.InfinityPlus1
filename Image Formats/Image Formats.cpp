@@ -3,4 +3,5 @@
 #include "stdafx.h"
 
 #include "Image Formats.h"
+#include "BlackIsleAnimation.h"
 

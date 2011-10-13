@@ -1162,7 +1162,10 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
         }
         
         /// <summary>Initializes the soundset ordered dictionary</summary>
-        /// <remarks>Keys matched from SOUNDOFF.IDS</remarks>
+        /// <remarks>
+        ///     Keys matched from SOUNDOFF.IDS
+        ///     Also look to CSOUND.2DA
+        /// </remarks>
         protected override void InitializeSoundSet()
         {
             /* 00 */ this.soundSet.Add("MORALE_FAILURE_1", new StringReference());
@@ -2033,7 +2036,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             builder.Append("\n\tTurn Undead Level:                          ");
             builder.Append(this.turnUndeadLevel);
             builder.Append("\n\tUnknown #2:                                 ");
-            builder.Append(StringFormat.ReservedToStringHex(this.unknown2));
+            builder.Append(StringFormat.ByteArrayToHexString(this.unknown2));
             builder.Append("\n\tTotal Levels:                               ");
             builder.Append(this.levelsTotal);
             builder.Append("\n\tBarbarian Levels:                           ");
@@ -2059,7 +2062,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             builder.Append("\n\tWizard Levels:                              ");
             builder.Append(this.levelsOfWizard);
             builder.Append("\n\tUnknown #3:                                 ");
-            builder.Append(StringFormat.ReservedToStringHex(this.unknown3));
+            builder.Append(StringFormat.ByteArrayToHexString(this.unknown3));
         }
 
         /// <summary>Generates a String representing the sound set area of the creature data structure</summary>
@@ -2149,7 +2152,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Exotic, Bastard Sword)"));
             builder.Append(this.exoticProficiencyBastardSword);
             builder.Append(StringFormat.ToStringAlignment("Remaining reserved Feat slots:"));
-            builder.Append(StringFormat.ReservedToStringHex(this.unknown4));
+            builder.Append(StringFormat.ByteArrayToHexString(this.unknown4));
 
             //Skills
             builder.Append(StringFormat.ToStringAlignment("Skill (Alchemy)"));
@@ -2185,7 +2188,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             builder.Append(StringFormat.ToStringAlignment("Skill (Wilderness Lore)"));
             builder.Append(this.skillWildernessLore);
             builder.Append(StringFormat.ToStringAlignment("Remaining reserved Skill slots:"));
-            builder.Append(StringFormat.ReservedToStringHex(this.skillReserved));
+            builder.Append(StringFormat.ByteArrayToHexString(this.skillReserved));
         }
         
         /// <summary>Generates a String representing the ability scores and simila after the proficiencis area of the creature data structure</summary>
@@ -2295,7 +2298,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             builder.Append("\n\tSaved Orientation:                          ");
             builder.Append(this.savedOrientation);
             builder.Append("\n\tUnknown #3 (Byte array):                    ");
-            builder.Append(StringFormat.ReservedToStringHex(this.unknown3));
+            builder.Append(StringFormat.ByteArrayToHexString(this.unknown3));
         }
 
         /// <summary>Generates a String representing the added Planescape: Torment values area of the creature data structure</summary>

@@ -10,6 +10,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Base
 
         #region Abstract IO methods
         /// <summary>This public method reads file format data structure from the output stream. Reads the whole data structure.</summary>
+        /// <param name="input">Stream to read from.</param>
         void Read(Stream input);
 
         /// <summary>This public method reads file format data structure from the output stream.</summary>

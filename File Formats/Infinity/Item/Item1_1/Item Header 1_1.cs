@@ -339,7 +339,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Item1_1
             builder.Append("\n\tPaperdoll color:                        ");
             builder.Append(this.paperdollColor);
             builder.Append("\n\tReserved Data:                          ");
-            builder.Append(StringFormat.ReservedToStringHex(this.reserved));
+            builder.Append(StringFormat.ByteArrayToHexString(this.reserved));
 
             builder.Append("\n\n");
 

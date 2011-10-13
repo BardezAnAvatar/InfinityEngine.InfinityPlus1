@@ -155,7 +155,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components
 
             for (Int32 i = 0; i < this.knownSpells.Count; ++i)
                 this.knownSpells[i].ToString(i);
-            builder.Append(this.memorization.ToString());
+            builder.Append(this.memorization.ToString(false));
 
             return builder.ToString();
         }

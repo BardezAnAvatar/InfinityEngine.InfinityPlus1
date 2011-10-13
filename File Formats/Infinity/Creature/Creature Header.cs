@@ -910,20 +910,5 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature
 
         /// <summary>Initializes the soundset ordered dictionary</summary>
         protected abstract void InitializeSoundSet();
-
-        #region IO method implemetations
-        /// <summary>This public method reads file format from the output stream. Reads the whole structure.</summary>
-        /// <param name="input">Input stream to read from</param>
-        public override void Read(Stream input)
-        {
-            //read signature
-            Byte[] buffer = ReusableIO.BinaryRead(input, 8);   //header buffer
-
-            this.signature = ReusableIO.ReadStringFromByteArray(buffer, 0, Constants.CultureCodeEnglish, 4);
-            this.version = ReusableIO.ReadStringFromByteArray(buffer, 4, Constants.CultureCodeEnglish, 4);
-
-            this.ReadBody(input);
-        }
-        #endregion
     }
 }

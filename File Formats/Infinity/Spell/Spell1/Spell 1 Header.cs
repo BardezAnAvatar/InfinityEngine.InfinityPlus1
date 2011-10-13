@@ -166,7 +166,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell.Spell1
             builder.Append("\n\tSpell nature (description):             ");
             builder.Append(this.nature.GetDescription());
             builder.Append("\n\tReserved data set #1:                   ");
-            builder.Append(StringFormat.ReservedToStringHex(this.reserved1));
+            builder.Append(StringFormat.ByteArrayToHexString(this.reserved1));
             builder.Append("\n\tSpell level:                            ");
             builder.Append(this.level);
             builder.Append("\n\tStack size:                             ");
@@ -175,13 +175,13 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell.Spell1
             builder.Append(this.icon.ResRef);
             builder.Append("'");
             builder.Append("\n\tReserved data set #2:                   ");
-            builder.Append(StringFormat.ReservedToStringHex(this.reserved2));
+            builder.Append(StringFormat.ByteArrayToHexString(this.reserved2));
             builder.Append("\n\tUnidentified Description StrRef:        ");
             builder.Append(this.descriptionUnidentified.StringReferenceIndex);
             builder.Append("\n\tIdentified Description StrRef:          ");
             builder.Append(this.descriptionIdentified.StringReferenceIndex);
             builder.Append("\n\tReserved data set #3:                   ");
-            builder.Append(StringFormat.ReservedToStringHex(this.reserved3));
+            builder.Append(StringFormat.ByteArrayToHexString(this.reserved3));
             builder.Append("\n\tOffset to item Abilities:               ");
             builder.Append(this.offsetAbilities);
             builder.Append("\n\tCount of item Abilities:                ");
