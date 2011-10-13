@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>SharpGL</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SharpGL</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Design">
+      <Name>System.Design</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Name>system.web.services</Name>
+      <HintPath>..\..\..\..\..\windows\assembly\gac\system.web.services\1.0.3300.0__b03f5f7f11d50a3a\system.web.services.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Attributes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Builder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cameras.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Collections.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\GLColourPicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\VertexControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DIBSection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DisplayList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Evaluators.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Feedback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GLColor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Imports.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Light.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Material.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MaterialListViewItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MaterialPreviewEngine.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Metagon.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mouser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NETDesignSurface.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NURBS.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OpenGL.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OpenGLControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SceneControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OptimisedPolygon.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ParticleSystem\Particle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ParticleSystem\ParticleSystems.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PerformanceMonitor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Persistence\CaligariFormat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Persistence\DiscreetFormat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Persistence\PersistenceEngine.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Persistence\PersistenceFormat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Persistence\SharpGLFormat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Persistence\Simple3DFormat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Persistence\StandardImagesFormat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Points.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Polygon.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Quadric.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Scene.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SceneObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleTypes.cs" />
+    <Compile Include="StockDrawing.cs" />
+    <Compile Include="Texture.cs" />
+    <EmbeddedResource Include="Controls\GLColourPicker.resx">
+      <DependentUpon>GLColourPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\VertexControl.resx">
+      <DependentUpon>VertexControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OpenGLControl.resx">
+      <DependentUpon>OpenGLControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SceneControl.resx">
+      <DependentUpon>SceneControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scene.resx">
+      <DependentUpon>Scene.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Copy of Polygon.xsx">
+      <DependentUpon>OptimisedPolygon.cs</DependentUpon>
+    </None>
+    <None Include="Polygon.xsx">
+      <DependentUpon>Polygon.cs</DependentUpon>
+    </None>
+    <Content Include="Info\Contributors.txt" />
+    <Content Include="Info\Problems.txt" />
+    <Content Include="Info\Updates.txt" />
+    <Content Include="Info\Wish List.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
