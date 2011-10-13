@@ -18,30 +18,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{FF993C95
 		Notes.txt = Notes.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGL", "SharpGL\SharpGL.csproj", "{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 1
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://bardezserver:8080/tfs/defaultcollection
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = File\u0020Formats\\File\u0020Formats.csproj
-		SccProjectName1 = File\u0020Formats
-		SccLocalPath1 = File\u0020Formats
-		SccProjectUniqueName2 = Tester\\Tester.csproj
-		SccProjectName2 = Tester
-		SccLocalPath2 = Tester
-		SccProjectUniqueName3 = ReusableCode\\ReusableCode.csproj
-		SccProjectName3 = ReusableCode
-		SccLocalPath3 = ReusableCode
-		SccProjectUniqueName4 = Test\\Test.csproj
-		SccProjectName4 = Test
-		SccLocalPath4 = Test
-		SccProjectUniqueName5 = Utility\\Utility.csproj
-		SccProjectName5 = Utility
-		SccLocalPath5 = Utility
-		SccProjectUniqueName6 = Configuration\u0020Handler\\Configuration\u0020Handler.csproj
-		SccProjectName6 = Configuration\u0020Handler
-		SccLocalPath6 = Configuration\u0020Handler
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -126,6 +110,18 @@ Global
 		{6E1496AB-268A-4EA2-99B3-726162F019F1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6E1496AB-268A-4EA2-99B3-726162F019F1}.Release|Win32.ActiveCfg = Release|Any CPU
 		{6E1496AB-268A-4EA2-99B3-726162F019F1}.Release|x86.ActiveCfg = Release|Any CPU
+		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Release|Win32.ActiveCfg = Release|Any CPU
+		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
