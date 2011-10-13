@@ -1,0 +1,8 @@
+SharpGL Contributors
+
+1.	Lee Davies
+	Lee spent literally hours of his own time debugging and profiling the 
+	appalingly slow SharpGL code and identified the speed problems, such 
+	as the fact that every second about 4 polygons were being created and 
+	not disposed....
+	

@@ -1,0 +1,128 @@
+SharpGL Version 1.8
+
+*	Added the Builder interface.
+
+*	SceneBuilder : Revamped Seletion. You can now apply selection masks,
+	select certain types only, modify the selection etc.
+
+*	SceneBuilder : Updated the material editor- you can load textures.
+
+*	SceneBuilder : Updated the rollup controls project, you can now 
+	drag rollups, and float them as windows.
+
+*	SharpGL : Updated texture code. A texture object can now be returned
+	as a bitmap correctly.
+
+
+SharpGL Version 1.7
+
+*	Added the statistics page.
+
+*	More quadrics to add to the scene.
+
+*	Nurbs now work at an appreciable speed, thanks to my display list code.
+
+*	BUG FIX : Fixed a little bastard of a bug in the polygon drawing code that
+	was messing with the attributes of everything drawn after it.
+
+*	Updated the SceneObject class to automatically optimise all drawing code
+	with display lists. This has made drawing much fast but leaves coders
+	with an added responsibity- if you draw using DoPreDraw you MUST set the
+	'modified' variable whenever you change something affects how it's the
+	object is drawn.
+
+*	Added the 'Narrow' tool. Every time you select anything, all of the selected 
+	objects are added to the narrow combo box. If you just want to be using one 
+	of them, select anything in the combo and it will narrow it for you.
+
+*	Updated the polygon editing, vertices can now be dragged around as before.
+
+*	Added the Simple3D persistence format. The Simple3D format is for files like
+	*.poly files, which contain objects of the C++ Polygon class. This is the file 
+	format I use in other projects, which means SharpGL can edit these files now,
+	which is very useful, as I can make a model in SharpGL and export it as a *.poly
+	file.
+
+*	Added the line and points classes, and the points builder.
+
+SharpGL Version 1.6
+
+*	Texture objects have a little preview in the properties window.
+
+*	GDI drawing in the OpenGL control can be disabled (and is by default) to optimise
+	performance.
+
+*	OpenGL now uses a DIB surface to draw to.
+
+*	BUG FIX: Sorted out the AmbiguitySelectionForm.
+
+*	Added the optimised polygon class, which you create from an ordinary polygon. It's
+	about twice as fast. However, it's much harder to edit.
+
+SharpGL Version 1.5
+
+*	Fixed shadows, they only work on properly made objects.
+
+*	Added NURBS. They are categorised as evaluators.
+
+*	Updated material code, you can now import materials from any image file, or use	
+	the new material builder. You can set an objects material by dragging the material
+	onto it from the scene tree.
+
+*	GDI drawing has been seamlessly mixed with OpenGL drawing. At any stage of the drawing
+	cycle you can do GDI drawing!
+
+*	PARTCILE SYSTEM BUILDER
+	
+	*	Added the particle system builder, shows a dynamic display of the current
+		system being made.
+
+*	BUG FIX: Sorted out attribute code.
+		
+*	Updated the particle systems code.
+
+*	Added serialization to SceneObject.
+
+*	Added the StockDrawing property to OpenGL. This allows you to use a host of new
+	objects for drawing, which I designed for things like lights. They are all display
+	lists, and are optimised.
+
+*	Added the 'TransformOrder' property to SceneObject, therefore nearly all objects.
+	This allows different orders of matrix transformations, useful for 'panning',
+	when you want to rotate BEFORE you translate.
+
+*	Updated materials, significantly updated the code, much faster now.
+
+*	Evaluators are back in action.
+
+*	Cameras are back in action!
+	
+*	Commented out most of the scene code, got back to basics.
+
+*	Seperated all OpenGL functions into their own class, OpenGL. Began the long process
+	of making GL into Scene.
+
+SharpGL Version 1.01
+
+*	Cleaned up Index code (added properties for the protected members).
+
+*	Face editing is now possible.
+
+*	Today I finally got rid of the last of the ArrayLists in the GL class, and replaced
+	them ALL with their own, type safe collections. This makes the code much more secure
+	readable and adaptable. You can now edit any collection whithin the properties window.
+	
+*	Added the OpenGLCtrlDesigner class. The benefits of this are that meaningless 
+	properties (fore color etc) are removed from the properties window, reducing clutter.
+
+SharpGL Version 1.00
+	
+*	Added the material collection.
+
+*	Added the custom collection, all collections are now strongly typed, which makes
+	the code faster, safer and easier to read.
+
+*	Removed the DataNode source file, it's not needed.
+
+*	I'm gonna start logging updates now, I make so many that I forget to write about on
+	the site.

@@ -1,0 +1,4 @@
+*	ToNode property of Scene Object. Means a scene object returns a treenode of itself
+	fully hierarchially, with children etc.
+	
+*	CreateMergedArray in Scene should have a flags object to choose which objects get added.
