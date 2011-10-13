@@ -254,7 +254,6 @@
       <DependentUpon>Polygon.cs</DependentUpon>
     </None>
     <Content Include="Info\Contributors.txt" />
-    <Content Include="Info\Problems.txt" />
     <Content Include="Info\Updates.txt" />
     <Content Include="Info\Wish List.txt" />
   </ItemGroup>
