@@ -70,6 +70,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bogus ConnectionStringConfigurationElement.cs" />
+    <Compile Include="Ini\Component\Ini Helper.cs" />
+    <Compile Include="Ini\Component\Ini Section.cs" />
+    <Compile Include="Ini\Ini Configuration.cs" />
+    <Compile Include="Ini\Line\Ini Line Base.cs" />
+    <Compile Include="Ini\Line\Ini Comment Line.cs" />
+    <Compile Include="Ini\Line\Ini Property Line.cs" />
+    <Compile Include="Ini\Line\Ini Section Line.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +96,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

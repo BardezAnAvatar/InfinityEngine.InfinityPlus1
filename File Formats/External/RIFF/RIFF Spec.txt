@@ -1,0 +1,19 @@
+﻿http://www.fileformat.info/format/riff/corion.htm
+All RIFF blocks begin on a word
+boundary so it might be necessary to skip an additional byte. In the present
+specification, only one RIFF block per file is allowed, and only the RIFF and
+LIST blocks may contain subblocks.
+
+The order of blocks in a RIFF file is not mandatory, so you should always scan
+the whole file for the block ID you seek. Each ID is always 4 characters dword
+
+---RiffBLOCK [LIST]
+This block contains a string list, again in the RIFF subblock format. This list
+is used for messages and/or copyright messages. All strings in the LIST block
+share the same format, each block contains one ASCIIZ string - the most common
+LIST block is the [INFO] block, which can contain the following subblocks :
+
+http://oreilly.com/www/centers/gff/formats/micriff/
+ChunkData contains data that is WORD-aligned within the RIFF file. If the data is an odd length in size, an extra byte of NULL padding is added to the end of the data. The ChunkSize value does not include the length of the padding. 
+
+If an ID is smaller than four characters, it is padded on the right using spaces (ASCII 32, 0x20)

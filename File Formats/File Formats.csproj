@@ -36,6 +36,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="External\Interplay\ACM\AudioFile.cs" />
+    <Compile Include="External\Interplay\ACM\Header.cs" />
+    <Compile Include="External\RIFF\Component\ChunkType.cs" />
+    <Compile Include="External\RIFF\Component\Riff Chunk Factory.cs" />
+    <Compile Include="External\RIFF\Component\RIFF Chunk.cs" />
+    <Compile Include="External\RIFF\Component\RIFF File.cs" />
+    <Compile Include="External\RIFF\Component\RIFF Throne Chunk.cs" />
+    <Compile Include="External\RIFF\Component\RIFF Sub Chunk.cs" />
+    <Compile Include="External\RIFF\Component\RIFF Super Chunk.cs" />
+    <Compile Include="External\RIFF\Wave\Enums\DataFormat.cs" />
+    <Compile Include="External\RIFF\Wave\Wave Format Chunk.cs" />
+    <Compile Include="External\RIFF\Wave\Wave Sample Data Chunk.cs" />
     <Compile Include="Infinity\Base\Interface Infinity Format.cs" />
     <Compile Include="Infinity\BiowareIndexFileFormat\Biff1\Biff1Archive.cs" />
     <Compile Include="Infinity\BiowareIndexFileFormat\Biff1\Biff1Header.cs" />
@@ -95,6 +107,13 @@
     <Compile Include="Infinity\Creature\Enums\Creature 2E Flags.cs" />
     <Compile Include="Infinity\Creature\Enums\D20 Feats 1.cs" />
     <Compile Include="Infinity\Creature\Enums\Kit 2E.cs" />
+    <Compile Include="Infinity\Dialog\Component\Dialog Header.cs" />
+    <Compile Include="Infinity\Dialog\Component\Dialog Script.cs" />
+    <Compile Include="Infinity\Dialog\Component\Dialog Transition.cs" />
+    <Compile Include="Infinity\Dialog\Component\Dialog State.cs" />
+    <Compile Include="Infinity\Dialog\Enums\Interruption Flag.cs" />
+    <Compile Include="Infinity\Dialog\Enums\Transition Flags.cs" />
+    <Compile Include="Infinity\Dialog\Version\Dialog 1.cs" />
     <Compile Include="Infinity\Effect\Effect 1\Effect 1 Wrapper.cs" />
     <Compile Include="Infinity\Effect\Effect 1\Effect 1.cs" />
     <Compile Include="Infinity\Effect\Effect 2\Effect 2 Wrapper.cs" />
@@ -118,6 +137,7 @@
     <Compile Include="Infinity\Globals\Resource Reference.cs" />
     <Compile Include="Infinity\Globals\Resource Enum.cs" />
     <Compile Include="Infinity\Base\Infinity Format.cs" />
+    <Compile Include="Infinity\Initialization\Initialization Configuration.cs" />
     <Compile Include="Infinity\Item\Enums\Item Ability Attack Type.cs" />
     <Compile Include="Infinity\Item\Enums\Item Ability Projectile Type.cs" />
     <Compile Include="Infinity\Item\Enums\Item Ability Flags.cs" />
@@ -152,6 +172,8 @@
     <Compile Include="Infinity\Store\Enums\Rooms Available.cs" />
     <Compile Include="Infinity\Store\Enums\Store Type.cs" />
     <Compile Include="Infinity\Store\Enums\Store Flags.cs" />
+    <Compile Include="Infinity\StringReferenceCount\Emotion String Reference.cs" />
+    <Compile Include="Infinity\StringReferenceCount\String Reference Count 1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infinity\Spell\Enums\Spell Header 2 Flags.cs" />
     <Compile Include="Infinity\Spell\Enums\Spell Nature.cs" />
@@ -181,6 +203,10 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Configuration Handler\Configuration Handler.csproj">
+      <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
+      <Name>Configuration Handler</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReusableCode\ReusableCode.csproj">
       <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
       <Name>ReusableCode</Name>
@@ -191,6 +217,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="External\Interplay\MVE\" />
+    <Folder Include="External\RIFF\AudioVideoInterleave\" />
+    <Folder Include="External\Weidu\" />
     <Folder Include="InfinityPlus1\" />
     <Folder Include="Infinity\BiowareIndexFileFormat\BiffC1\" />
     <Folder Include="Infinity\BiowareIndexFileFormat\CBiff1\" />
@@ -200,6 +229,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Bardez.ruleset" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="External\RIFF\RIFF Spec.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
