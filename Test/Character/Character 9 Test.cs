@@ -20,7 +20,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Character
 
         public void Test()
         {
-            String path = ConfigurationHandler.GetSettingValue("Test.Creature.Character9Path");
+            String path = ConfigurationHandler.GetSettingValue("Test.Character.Character9Path");
             this.Test(path);
         }
 

@@ -20,7 +20,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Character
         /// <summary>ITester Test method</summary>
         public void Test()
         {
-            String[] paths = ConfigurationHandlerMulti.GetSettingValues("Test.Creature.Biography2Path").ToArray();
+            String[] paths = ConfigurationHandlerMulti.GetSettingValues("Test.Character.Biography2Path").ToArray();
             this.TestMulti(paths);
         }
         

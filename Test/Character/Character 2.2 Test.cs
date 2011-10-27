@@ -20,10 +20,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.Character
 
         public void Test()
         {
-            //String path = ConfigurationHandler.GetSettingValue("Test.Creature.Character2.2Path");
+            //String path = ConfigurationHandler.GetSettingValue("Test.Character.Character2.2Path");
             //this.Test(path);
 
-            String[] paths = ConfigurationHandlerMulti.GetSettingValues("Test.Creature.Character2.2Path").ToArray();
+            String[] paths = ConfigurationHandlerMulti.GetSettingValues("Test.Character.Character2.2Path").ToArray();
             this.TestMulti(paths);
         }
 

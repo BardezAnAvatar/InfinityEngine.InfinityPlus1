@@ -20,7 +20,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Store
 
         public void Test()
         {
-            String path = ConfigurationHandler.GetSettingValue("Test.Creature.Store1.1Path");
+            String path = ConfigurationHandler.GetSettingValue("Test.Store.Store1.1Path");
             this.Test(path);
         }
 
