@@ -31,7 +31,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectX", "DirectX\DirectX.
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
+		SccNumberOfProjects = 10
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://bardezserver:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -59,6 +59,9 @@ Global
 		SccProjectUniqueName8 = Output\\Output.csproj
 		SccProjectName8 = Output
 		SccLocalPath8 = Output
+		SccProjectUniqueName9 = DirectX\\DirectX.vcxproj
+		SccProjectName9 = DirectX
+		SccLocalPath9 = DirectX
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
