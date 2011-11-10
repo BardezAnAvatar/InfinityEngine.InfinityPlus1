@@ -36,8 +36,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="External\Interplay\ACM\AudioFile.cs" />
+    <Compile Include="External\Interplay\ACM\ACM Bit Stream.cs" />
+    <Compile Include="External\Interplay\ACM\ACM Return Exception.cs" />
+    <Compile Include="External\Interplay\ACM\Amplitude Buffer.cs" />
+    <Compile Include="External\Interplay\ACM\Audio File.cs" />
+    <Compile Include="External\Interplay\ACM\Bit Block.cs" />
     <Compile Include="External\Interplay\ACM\Header.cs" />
+    <Compile Include="External\Interplay\ACM\Packed Block.cs" />
     <Compile Include="External\RIFF\Component\ChunkType.cs" />
     <Compile Include="External\RIFF\Component\Riff Chunk Factory.cs" />
     <Compile Include="External\RIFF\Component\RIFF Chunk.cs" />
@@ -68,7 +73,6 @@
     <Compile Include="Infinity\ChitinKey\Key BIF Entry.cs" />
     <Compile Include="Infinity\ChitinKey\Key Header.cs" />
     <Compile Include="Infinity\ChitinKey\Key Enums.cs" />
-    <Compile Include="Infinity\Common\Enums\EnumDescriptionToString.cs" />
     <Compile Include="Infinity\Common\Enums\ItemSpell Ability Damage Type.cs" />
     <Compile Include="Infinity\Common\Enums\ItemSpell Ability Depletion Behavior.cs" />
     <Compile Include="Infinity\Common\Enums\ItemSpell Ability Location.cs" />
