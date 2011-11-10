@@ -12,9 +12,9 @@ namespace Bardez
 {
 	namespace Projects
 	{
-		namespace DirectX
+		namespace Win32
 		{
-			namespace Sound
+			namespace Audio
 			{
 				/// <summary>Managed representation of Win32 WAVEFORMATEXTENSIBLE structure, inheriting the WaveFormatEx structure</summary>
 				public ref class WaveFormatExtensible : WaveFormatEx
@@ -112,7 +112,7 @@ namespace Bardez
 					/// <summary>Default constructor</summary>
 					WaveFormatExtensible() { }
 
-				internal:
+				//internal: //this was good while it was in a single C++/CLI project
 					/// <summary>WAVEFORMATEX Win32 constructor</summary>
 					WaveFormatExtensible(WAVEFORMATEXTENSIBLE waveEx);
 				#pragma endregion
@@ -125,7 +125,7 @@ namespace Bardez
 					/// <returns>A String representing the WaveFormatEx Object contents</returns>
 					String^ ToDescriptionString();
 
-				internal:
+				//internal: //this was good while it was in a single C++/CLI project
 					/// <summary>Returns an unmanaged version of this object</summary>
 					/// <returns>An unmanaged WAVEFORMATEX struct</returns>
 					WAVEFORMATEXTENSIBLE ToUnmanaged() new;

@@ -2,7 +2,7 @@
 #include "Wave Format Extensible.h"
 
 using namespace System::Text;
-using namespace Bardez::Projects::DirectX::Sound;
+using namespace Bardez::Projects::Win32::Audio;
 
 
 /// <summary>WAVEFORMATEX Win32 constructor</summary>

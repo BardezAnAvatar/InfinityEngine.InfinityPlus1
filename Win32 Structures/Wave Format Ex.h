@@ -3,7 +3,6 @@
 #define Bardez_Projects_Directx_Wave_FormatEx
 
 #include <windows.h>
-#include <xaudio2.h>
 
 using namespace System;
 
@@ -11,9 +10,9 @@ namespace Bardez
 {
 	namespace Projects
 	{
-		namespace DirectX
+		namespace Win32
 		{
-			namespace Sound
+			namespace Audio
 			{
 				/// <summary>Managed representation of Win32 WAVEFORMATEX structure</summary>
 				public ref class WaveFormatEx
@@ -107,8 +106,8 @@ namespace Bardez
 				public:
 					/// <summary>Default constructor</summary>
 					WaveFormatEx() { }
-
-				internal:
+					
+				//internal: //this was good while it was in a single C++/CLI project
 					/// <summary>Unmanaged WAVEFORMATEX Win32 constructor</summary>
 					WaveFormatEx(WAVEFORMATEX wave);
 				#pragma endregion
@@ -120,8 +119,8 @@ namespace Bardez
 					/// <summary>Generates a descriptive string (to be displayed to the end user)</summary>
 					/// <returns>A String representing the WaveFormatEx Object contents</returns>
 					String^ ToDescriptionString();
-
-				internal:
+					
+				//internal: //this was good while it was in a single C++/CLI project
 					/// <summary>Returns an unmanaged version of this object</summary>
 					/// <returns>An unmanaged WAVEFORMATEX struct</returns>
 					WAVEFORMATEX ToUnmanaged();
