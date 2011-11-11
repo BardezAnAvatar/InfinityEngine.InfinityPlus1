@@ -5,7 +5,7 @@ using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM;
 using Bardez.Projects.InfinityPlus1.Test;
 
-namespace Bardez.Projects.InfinityPlus1.Test.AudioCompressedMedia
+namespace Bardez.Projects.InfinityPlus1.Test.AmpitudeCodedModulation
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM.Header class.</summary>
     public class AcmHeaderTest : ITester
