@@ -1,0 +1,101 @@
+﻿sound is off just a tiny little bit. Not sure what the source is, just yet. But it is identifyably 'close'
+
+
+
+
+        // this is the recursive block that is more or less unknown in documentation.
+        // I will attempt to document what it does
+        static unsafe void juggle_block(ACMStream *acm)
+        {
+	        uint sub_count, sub_len, todo_count, step_subcount = 1, i;
+	        int *wrap_p;
+            int *block_p;
+            int *p;
+	
+	        /* juggle only if subblock_len > 1 */
+	        if (acm->info.acm_level == 0)
+		        return;
+
+	        /* 2048 / subblock_len */
+	        if (acm->info.acm_level > 9)
+		        step_subcount = 1;
+	        else
+		        step_subcount = (2048 >> acm->info.acm_level) - 2;
+
+	        /* Apply juggle()  (rows)x(cols)
+	         * from (step_subcount * 2)            x (subblock_len/2)
+	         * to   (step_subcount * subblock_len) x (1)
+	         */
+	        todo_count = acm->info.acm_rows;
+	        block_p = acm->block;
+	        while (true)
+            {
+		        wrap_p = acm->wrapbuf;
+		        sub_count = step_subcount;
+		        if (sub_count > todo_count)
+			        sub_count = todo_count;
+
+		        sub_len = acm->info.acm_cols / 2;   //EF this is documentation's block_len
+                sub_count *= 2;                     //EF this is documentation's cnt_of_blocks
+		
+		        juggle(wrap_p, block_p, sub_len, sub_count);
+		        wrap_p += sub_len*2;
+		
+                //the for-loop mentioned in documentation?
+		        for (i = 0, p = block_p; i < sub_count; i++) {
+			        p[0]++;
+			        p += sub_len;
+		        }
+		
+		        while (sub_len > 1) {
+			        sub_len /= 2;           //EF again, levels -- instead of columns /= 2 or columns >> 1
+			        sub_count *= 2;
+			        juggle(wrap_p, block_p, sub_len, sub_count);
+			        wrap_p += sub_len*2;
+		        }
+		        if (todo_count <= step_subcount)
+			        break;
+		        todo_count -= step_subcount;
+		        block_p += step_subcount << acm->info.acm_level;
+	        }
+        }
+
+        /*
+        /// <summary>Juggle operation</summary>
+        /// <param name="wrap_p">
+        ///     appears to be the decBuff from documentation, with size of 2 * columns - 2
+        ///     compare with 3 * (columns/2) - 2
+        ///     colums:2  doc: 1 berlios:2
+        ///     colums:8  doc: 10 berlios:14
+        ///     colums:32 doc: 46 berlios:62
+        ///     
+        ///     ...berlios comes out larger
+        /// </param>
+        /// <param name="block_p">Packed block</param>
+        /// <param name="sub_len">this is documentation's block_len, of columns incrementally halved</param>
+        /// <param name="sub_count">this is documentation's cnt_of_blocks, or Rows that are incrmetnally doubled</param>
+        static unsafe void juggle(int* wrap_p, int* block_p, uint sub_len, uint sub_count)
+        {
+	        uint i, j;
+	        int *p;
+            int r0, r1, r2, r3;
+
+            //for each adjusted column count
+	        for (i = 0; i < sub_len; i++) {
+		        p = block_p;        //p = block_p[i]
+		        r0 = wrap_p[0];     //get the first two values
+		        r1 = wrap_p[1];
+		        for (j = 0; j < sub_count/2; j++) {
+                    //for block_p[current position], add to existing value first value of wrap_p + double the second. Then move to the next 'column'
+			        r2 = *p;  *p = r1*2 + (r0 + r2);  p += sub_len;
+                    //for block_p[current position], add to existing value second value of wrap_p + double the last read original value. Then move to the next 'column'
+			        r3 = *p;  *p = r2*2 - (r1 + r3);  p += sub_len;
+                    //copy back to the start registers values that were encountered (but, the last set thereo)f
+			        r0 = r2;  r1 = r3;
+		        }
+		        *wrap_p++ = r0;
+		        *wrap_p++ = r1;
+		        block_p++;
+	        }
+        }
+        */
