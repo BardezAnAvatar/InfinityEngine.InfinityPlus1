@@ -3,11 +3,15 @@ using System.IO;
 using System.Text;
 
 using Bardez.Projects.ReusableCode;
+using Bardez.Projects.Win32.Audio;
 
 namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
 {
     /// <summary>Interplay ACM file header</summary>
-    public class Header
+    /// <remarks>
+    ///     When the definitions say that the bits are packed, they are read from right to left. That is, with a binary representation of 0x07, 0x01 read as a UInt16 is 0x0107; the first 4 bits would be 0x7.
+    /// </remarks>
+    public class Header : IWaveFormatEx
     {
         #region Members
         /// <summary>Leading four bytes of the header file</summary>
@@ -43,11 +47,11 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
         /// <see cref="http://falloutmods.wikia.com/wiki/ACM_File_Format" />
         public UInt32 SignatureACM
         {
-            get { return this.signature >> 8; }
+            get { return this.signature & 0x00FFFFFF; }
             set
             {
-                UInt32 val = value << 8;
-                UInt32 existing = this.signature & 0x000000FF;
+                UInt32 val = value & 0x00FFFFFF;
+                UInt32 existing = this.signature & 0xFF000000;
                 this.signature = val | existing;
             }
         }
@@ -56,11 +60,11 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
         /// <see cref="http://falloutmods.wikia.com/wiki/ACM_File_Format" />
         public UInt32 VersionACM
         {
-            get { return this.signature & 0x000000FF; }
+            get { return (this.signature & 0xFF000000) >> 24; }
             set
             {
-                UInt32 val = value & 0xFFFFFF00;
-                UInt32 existing = this.signature & 0xFFFFFF00;
+                UInt32 val = (value & 0x000000FF) << 24;
+                UInt32 existing = this.signature & 0x00FFFFFF;
                 this.signature = val | existing;
             }
         }
@@ -73,10 +77,17 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
         }
 
         /// <summary>Number of channels</summary>
-        /// <remarks>Supposedly bogus; does this mean intended as output (i.e.: mono, outputting stereo)?</remarks>
+        /// <remarks>
+        ///     Supposedly bogus; does this mean intended as output (i.e.: mono, outputting stereo)?
+        ///     Also, BerliOS seems to default to 2 channels if mono, oddly.
+        /// </remarks>
         public UInt16 ChannelsCount
         {
-            get { return this.channelsCount; }
+            get
+            {
+                //return this.channelsCount;
+                return unchecked((UInt16)((this.channelsCount < 2U) ? 2U : this.channelsCount));
+            }
             set { this.channelsCount = value; }
         }
 
@@ -96,26 +107,58 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
 
         /// <summary>Exponent packing attribute of this ACM file</summary>
         /// <see cref="http://falloutmods.wikia.com/wiki/ACM_File_Format" />
-        public UInt16 PackingAttributesValue1
+        /// <remarks>When this value is 0, no unpacking actually occurs.</remarks>
+        public UInt16 PackingLevels
         {
-            get { return Convert.ToUInt16(this.packingAttributes >> 12); }
+            get { return Convert.ToUInt16(this.packingAttributes & 0x000F); }
             set
             {
-                Int32 existing = 0x0FFF & this.packingAttributes;
-                Int32 val = value << 12;
+                Int32 existing = 0xFFF0 & this.packingAttributes;
+                Int32 val = value & 0x000F;
                 this.packingAttributes = Convert.ToUInt16(val | existing);
+            }
+        }
+
+        /// <summary>Exponent packing attribute of this ACM file</summary>
+        /// <see cref="http://falloutmods.wikia.com/wiki/ACM_File_Format" />
+        /// <remarks>When this value is 0, no unpacking actually occurs.</remarks>
+        public UInt32 PackingColumns
+        {
+            get
+            {
+                Int32 val = this.packingAttributes & 0x000F;
+                return 1U << val;
+            }
+            set
+            {
+                Int32 shift = 0;
+
+                //get the bitval
+                for (shift = 0; shift < 32; ++shift)
+                {
+                    UInt32 shifted = (value >> shift);
+                    if ((shifted & 1U) == 1U && shifted > 1)
+                        throw new ArgumentOutOfRangeException(String.Format("'value' is not a power of 2: {0}", value));
+                    else if ((shifted & 1U) == 1U)
+                        break;
+                }
+
+                if (shift > 31)
+                    throw new ArgumentOutOfRangeException(String.Format("'value' cannot be 0: {0}", value));
+
+                this.PackingLevels = Convert.ToUInt16(shift);
             }
         }
 
         /// <summary>Base packing size attribute of this ACM file</summary>
         /// <see cref="http://falloutmods.wikia.com/wiki/ACM_File_Format" />
-        public UInt16 PackingAttributesValue2
+        public UInt16 PackingRows
         {
-            get { return Convert.ToUInt16(this.packingAttributes & 0x0FFF); }
+            get { return Convert.ToUInt16(this.packingAttributes >> 4); }
             set
             {
-                Int32 existing = 0xF000 & this.packingAttributes;
-                Int32 val = value & 0x0FFF;
+                Int32 existing = 0x000F & this.packingAttributes;
+                Int32 val = value << 4;
                 this.packingAttributes = Convert.ToUInt16(val | existing);
             }
         }
@@ -143,8 +186,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
             this.samplesCount = samples;
             this.channelsCount = channels;
             this.sampleRate = frequency;
-            this.PackingAttributesValue1 = multiple;
-            this.PackingAttributesValue2 = size;
+            this.PackingColumns = multiple;
+            this.PackingRows = size;
         }
         #endregion
 
@@ -187,20 +230,37 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
             builder.Append(this.VersionACM);
             builder.Append(StringFormat.ToStringAlignment("Sample count"));
             builder.Append(this.samplesCount);
-            builder.Append(StringFormat.ToStringAlignment("Channels"));
+            builder.Append(StringFormat.ToStringAlignment("(Output) Channels"));
             builder.Append(this.channelsCount);
             builder.Append(StringFormat.ToStringAlignment("Sample rate"));
             builder.Append(this.sampleRate);
             builder.Append(StringFormat.ToStringAlignment("Packing attributes (4 byte)"));
             builder.Append(this.packingAttributes);
-            builder.Append(StringFormat.ToStringAlignment("Packing multiplier (4 bit)"));
-            builder.Append(this.PackingAttributesValue1);
-            builder.Append(StringFormat.ToStringAlignment("Packing base size (12 bit)"));
-            builder.Append(this.PackingAttributesValue2);
+            builder.Append(StringFormat.ToStringAlignment("Packing Columns (4 bit)"));
+            builder.Append(this.PackingColumns);
+            builder.Append(StringFormat.ToStringAlignment("Packing Rows (12 bit)"));
+            builder.Append(this.PackingRows);
             builder.Append("\n\n");
 
             return builder.ToString();
         }
         #endregion
+
+        /// <summary>Returns a WaveFormatEx instance from this header data</summary>
+        /// <returns>A WaveFormatEx instance to submit to API calls</returns>
+        public WaveFormatEx GetWaveFormat()
+        {
+            WaveFormatEx waveEx = new WaveFormatEx();
+
+            waveEx.AverageBytesPerSec = this.SampleRate * 2U /*sizeof(short)*/ * this.ChannelsCount /* sizeof(usort) */;
+            waveEx.BitsPerSample = 16; /* sizeof(short) */
+            waveEx.BlockAlignment = Convert.ToUInt16(2U * this.ChannelsCount);
+            waveEx.FormatTag = 1;   //1 for PCM
+            waveEx.NumberChannels = this.ChannelsCount; //designating 1 causes errors
+            waveEx.SamplesPerSec = this.SampleRate;
+            waveEx.Size = 0;    //no extra data; this is strictly a WaveFormatEx instance 
+
+            return waveEx;
+        }
     }
 }

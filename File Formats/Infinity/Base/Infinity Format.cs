@@ -38,7 +38,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Base
         public abstract void Initialize();
 
         #region Abstract IO methods
-        /// <summary>This public method reads file format from the output stream. Reads the whole structure.</summary>
+        /// <summary>This public method reads file format from the input stream. Reads the whole structure.</summary>
         /// <param name="input">Input stream to read from</param>
         public virtual void Read(Stream input)
         {

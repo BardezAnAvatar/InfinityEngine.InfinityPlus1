@@ -97,6 +97,7 @@ void WaveFormatEx::Size::set(System::UInt16 value)
 
 
 #pragma region Construction
+/*
 /// <summary>Unmanaged WAVEFORMATEX Win32 constructor</summary>
 WaveFormatEx::WaveFormatEx(WAVEFORMATEX wave)
 {
@@ -108,6 +109,7 @@ WaveFormatEx::WaveFormatEx(WAVEFORMATEX wave)
 	this->bitsPerSample = wave.wBitsPerSample;
 	this->size = wave.cbSize;
 }
+*/
 #pragma endregion
 
 
@@ -146,7 +148,7 @@ String^ WaveFormatEx::ToDescriptionString()
 	
 	return desc;
 }
-
+/*
 /// <summary>Returns an unmanaged version of this object</summary>
 /// <returns>An unmanaged WAVEFORMATEX struct</returns>
 WAVEFORMATEX WaveFormatEx::ToUnmanaged()
@@ -163,4 +165,5 @@ WAVEFORMATEX WaveFormatEx::ToUnmanaged()
 
 	return wave;
 }
+*/
 #pragma endregion

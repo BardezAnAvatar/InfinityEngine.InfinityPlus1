@@ -1,6 +1,6 @@
 
-#ifndef Bardez_Projects_Directx_WaveFormatExtensible
-#define Bardez_Projects_Directx_WaveFormatExtensible
+#ifndef Bardez_Projects_Win32_Audio_WaveFormatExtensible
+#define Bardez_Projects_Win32_Audio_WaveFormatExtensible
 
 #include <windows.h>
 #include <xaudio2.h>
@@ -113,8 +113,8 @@ namespace Bardez
 					WaveFormatExtensible() { }
 
 				//internal: //this was good while it was in a single C++/CLI project
-					/// <summary>WAVEFORMATEX Win32 constructor</summary>
-					WaveFormatExtensible(WAVEFORMATEXTENSIBLE waveEx);
+					///// <summary>WAVEFORMATEX Win32 constructor</summary>
+					//WaveFormatExtensible(WAVEFORMATEXTENSIBLE waveEx);
 				#pragma endregion
 
 
@@ -126,9 +126,9 @@ namespace Bardez
 					String^ ToDescriptionString();
 
 				//internal: //this was good while it was in a single C++/CLI project
-					/// <summary>Returns an unmanaged version of this object</summary>
-					/// <returns>An unmanaged WAVEFORMATEX struct</returns>
-					WAVEFORMATEXTENSIBLE ToUnmanaged() new;
+					///// <summary>Returns an unmanaged version of this object</summary>
+					///// <returns>An unmanaged WAVEFORMATEX struct</returns>
+					//WAVEFORMATEXTENSIBLE ToUnmanaged() new;
 				#pragma endregion
 				};
 			}

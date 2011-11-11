@@ -4,7 +4,7 @@
 using namespace System::Text;
 using namespace Bardez::Projects::Win32::Audio;
 
-
+/*
 /// <summary>WAVEFORMATEX Win32 constructor</summary>
 WaveFormatExtensible::WaveFormatExtensible(WAVEFORMATEXTENSIBLE waveEx)
 {
@@ -26,6 +26,7 @@ WaveFormatExtensible::WaveFormatExtensible(WAVEFORMATEXTENSIBLE waveEx)
 			waveEx.SubFormat.Data4[4], waveEx.SubFormat.Data4[5], waveEx.SubFormat.Data4[6], waveEx.SubFormat.Data4[7]
 		);
 }
+*/
 
 #pragma region Methods
 /// <summary>Generates a descriptive string (to be displayed to the end user)</summary>
@@ -54,6 +55,7 @@ String^ WaveFormatExtensible::ToDescriptionString()
 	return desc;
 }
 
+/*
 /// <summary>Returns an unmanaged version of this object</summary>
 /// <returns>An unmanaged WAVEFORMATEX struct</returns>
 WAVEFORMATEXTENSIBLE WaveFormatExtensible::ToUnmanaged()
@@ -81,3 +83,4 @@ WAVEFORMATEXTENSIBLE WaveFormatExtensible::ToUnmanaged()
 
 	return waveext;
 }
+*/

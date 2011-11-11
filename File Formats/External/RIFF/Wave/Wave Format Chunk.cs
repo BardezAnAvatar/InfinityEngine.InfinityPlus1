@@ -4,6 +4,7 @@ using System.IO;
 using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component;
 using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Wave.Enums;
 using Bardez.Projects.ReusableCode;
+using Bardez.Projects.Win32.Audio;
 
 namespace Bardez.Projects.InfinityPlus1.Files.External.RIFF.Wave
 {
@@ -13,7 +14,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.RIFF.Wave
     ///     I will need to re-think how the factory works. Or, maybe have an object for
     ///     extended data inside this class?
     /// </remarks>
-    public class WaveFormatChunk : RiffChunk
+    public class WaveFormatChunk : RiffChunk, IWaveFormatEx
     {
         #region Members
         /// <summary>Wave data type</summary>
@@ -141,6 +142,23 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.RIFF.Wave
             {
                 throw new Exception("Error occurred while reading WAVE format chunk data.", ex);
             }
+        }
+
+        /// <summary>Returns a WaveFormatEx instance from this header data</summary>
+        /// <returns>A WaveFormatEx instance to submit to API calls</returns>
+        public WaveFormatEx GetWaveFormat()
+        {
+            WaveFormatEx waveEx = new WaveFormatEx();
+
+            waveEx.AverageBytesPerSec = this.SampleRate * 2U /*sizeof(short)*/ * this.numChannels /* sizeof(usort) */;
+            waveEx.BitsPerSample = 16; /* sizeof(short) */
+            waveEx.BlockAlignment = Convert.ToUInt16(2U * this.numChannels);
+            waveEx.FormatTag = 1;   //1 for PCM
+            waveEx.NumberChannels = this.numChannels; //designating 1 causes errors
+            waveEx.SamplesPerSec = this.sampleRate;
+            waveEx.Size = 0;    //no extra data; this is strictly a WaveFormatEx instance 
+
+            return waveEx;
         }
     }
 }

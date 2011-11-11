@@ -77,10 +77,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="IWaveFormatEx.cpp" />
     <ClCompile Include="Wave Format Ex.cpp" />
     <ClCompile Include="Wave Format Extensible.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IWaveFormatEx.h" />
     <ClInclude Include="Wave Format Ex.h" />
     <ClInclude Include="Wave Format Extensible.h" />
   </ItemGroup>

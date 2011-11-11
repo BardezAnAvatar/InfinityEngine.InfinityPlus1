@@ -3,8 +3,8 @@ using System.IO;
 using System.Threading;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.DirectX.Sound;
 using Bardez.Projects.DirectX.XAudio2;
+using Bardez.Projects.Win32.Audio;
 using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component;
 using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Wave;
 using Bardez.Projects.InfinityPlus1.Test;
@@ -60,17 +60,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.Output.DirectX
 
             using (this.xaudio = XAudio2Interface.NewInstance())
             {
-                //UInt32 deviceCount = this.xaudio.GetDeviceCount();
-                //Console.Write("Number of XAudio2 devices: ");
-                //Console.WriteLine(deviceCount);
-
-                //for (UInt32 i = 0; i < deviceCount; ++i)
-                //{
-                //    DeviceDetails details = this.xaudio.GetDeviceDetails(i);
-                //    Console.WriteLine(String.Format("Device {0} details:", i));
-                //    Console.WriteLine(details.ToDescriptionString());
-                //}
-
                 using (MasteringVoice master = this.xaudio.CreateMasteringVoice(waveFormat.NumberChannels, waveFormat.SamplesPerSec))
                 {
                     using (SourceVoice sourceVoice = this.xaudio.CreateSourceVoice(waveFormat))

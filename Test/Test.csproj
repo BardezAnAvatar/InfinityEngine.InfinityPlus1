@@ -39,11 +39,14 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AudioCompressedMedia\ACM Header Test.cs" />
+    <Compile Include="AmpitudeCodedModulation\ACM Header Test.cs" />
+    <Compile Include="AmpitudeCodedModulation\Bit Block Test.cs" />
+    <Compile Include="AmpitudeCodedModulation\ACM File Test.cs" />
     <Compile Include="BiowareIndexFileFormat\Biff1\Biff1ArchiveTest.cs" />
     <Compile Include="BiowareIndexFileFormat\Biff1\Biff1HeaderTest.cs" />
     <Compile Include="BiowareIndexFileFormat\Biff1\Biff1ResourceEntryTest.cs" />
     <Compile Include="BiowareIndexFileFormat\Biff1\Biff1TilesetEntryTest.cs" />
+    <Compile Include="ReusableCode\BitStream Test.cs" />
     <Compile Include="Character\Character 1 Test.cs" />
     <Compile Include="Character\Character 2.2 Test.cs" />
     <Compile Include="Character\Character 9 Test.cs" />
@@ -103,9 +106,21 @@
       <Project>{F2085177-9356-43EE-9744-85AA2FFCACEE}</Project>
       <Name>File Formats</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Output\Output.csproj">
+      <Project>{6ECA5199-A497-4BF2-B956-CEB3F0912C17}</Project>
+      <Name>Output</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReusableCode\ReusableCode.csproj">
+      <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
+      <Name>ReusableCode</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utility\Utility.csproj">
       <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
       <Name>Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Win32 Structures\Win32 Structures.vcxproj">
+      <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
+      <Name>Win32 Structures</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -1,6 +1,6 @@
 
-#ifndef Bardez_Projects_Directx_Wave_FormatEx
-#define Bardez_Projects_Directx_Wave_FormatEx
+#ifndef Bardez_Projects_Win32_Audio_WaveFormatEx
+#define Bardez_Projects_Win32_Audio_WaveFormatEx
 
 #include <windows.h>
 
@@ -108,8 +108,8 @@ namespace Bardez
 					WaveFormatEx() { }
 					
 				//internal: //this was good while it was in a single C++/CLI project
-					/// <summary>Unmanaged WAVEFORMATEX Win32 constructor</summary>
-					WaveFormatEx(WAVEFORMATEX wave);
+					///// <summary>Unmanaged WAVEFORMATEX Win32 constructor</summary>
+					//WaveFormatEx(WAVEFORMATEX wave);
 				#pragma endregion
 					
 
@@ -121,9 +121,9 @@ namespace Bardez
 					String^ ToDescriptionString();
 					
 				//internal: //this was good while it was in a single C++/CLI project
-					/// <summary>Returns an unmanaged version of this object</summary>
-					/// <returns>An unmanaged WAVEFORMATEX struct</returns>
-					WAVEFORMATEX ToUnmanaged();
+					///// <summary>Returns an unmanaged version of this object</summary>
+					///// <returns>An unmanaged WAVEFORMATEX struct</returns>
+					//WAVEFORMATEX ToUnmanaged();
 				#pragma endregion
 				};
 			}
