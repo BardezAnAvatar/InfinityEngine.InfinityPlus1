@@ -1,6 +1,7 @@
 ﻿sound is off just a tiny little bit. Not sure what the source is, just yet. But it is identifyably 'close'
 
 
+This code below is from BerliOS, for the record and for transparency.
 
 
         // this is the recursive block that is more or less unknown in documentation.
