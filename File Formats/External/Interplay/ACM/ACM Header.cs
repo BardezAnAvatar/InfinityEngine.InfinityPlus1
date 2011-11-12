@@ -11,7 +11,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
     /// <remarks>
     ///     When the definitions say that the bits are packed, they are read from right to left. That is, with a binary representation of 0x07, 0x01 read as a UInt16 is 0x0107; the first 4 bits would be 0x7.
     /// </remarks>
-    public class Header : IWaveFormatEx
+    public class AcmHeader : IWaveFormatEx
     {
         #region Members
         /// <summary>Leading four bytes of the header file</summary>
@@ -166,10 +166,10 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
 
         #region Construction
         /// <summary>Default constructor</summary>
-        public Header() { }
+        public AcmHeader() { }
 
         /// <summary>Definition constructor</summary>
-        public Header(UInt32 sig, UInt32 samples, UInt16 channels, UInt16 frequency, UInt16 packing)
+        public AcmHeader(UInt32 sig, UInt32 samples, UInt16 channels, UInt16 frequency, UInt16 packing)
         {
             this.signature = sig;
             this.samplesCount = samples;
@@ -179,7 +179,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
         }
 
         /// <summary>Extended definition constructor</summary>
-        public Header(UInt32 sig, Byte version, UInt32 samples, UInt16 channels, UInt16 frequency, UInt16 multiple, UInt16 size)
+        public AcmHeader(UInt32 sig, Byte version, UInt32 samples, UInt16 channels, UInt16 frequency, UInt16 multiple, UInt16 size)
         {
             this.SignatureACM = sig;
             this.VersionACM = version;
