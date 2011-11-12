@@ -39,10 +39,12 @@
     <Compile Include="External\Interplay\ACM\ACM Bit Stream.cs" />
     <Compile Include="External\Interplay\ACM\ACM Return Exception.cs" />
     <Compile Include="External\Interplay\ACM\Amplitude Buffer.cs" />
-    <Compile Include="External\Interplay\ACM\Audio File.cs" />
+    <Compile Include="External\Interplay\ACM\ACM Audio File.cs" />
     <Compile Include="External\Interplay\ACM\Bit Block.cs" />
-    <Compile Include="External\Interplay\ACM\Header.cs" />
+    <Compile Include="External\Interplay\ACM\ACM Header.cs" />
     <Compile Include="External\Interplay\ACM\Packed Block.cs" />
+    <Compile Include="External\Interplay\ACM\WAVC Audio File.cs" />
+    <Compile Include="External\Interplay\ACM\WAVC Header.cs" />
     <Compile Include="External\RIFF\Component\ChunkType.cs" />
     <Compile Include="External\RIFF\Component\Riff Chunk Factory.cs" />
     <Compile Include="External\RIFF\Component\RIFF Chunk.cs" />
