@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 
 using Bardez.Projects.ReusableCode;
+using Bardez.Projects.Win32.Audio;
 
 namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
 {
     /// <summary>Represents an ACM file; is header and bitstream.</summary>
     /// <remarks>The bitstream appears to be overrunnable.</remarks>
-    public class AudioFile
+    public class AcmAudioFile : IWaveFormatEx
     {
         /// <summary>Leading 14 bytes of ACM header data.</summary>
-        public Header AcmHeader { get; set; }
+        public AcmHeader AcmHeader { get; set; }
 
         /// <summary>BitStream to populate </summary>
         public BitStream BitDataStream { get; set; }
@@ -19,13 +20,9 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
         /// <summary>List of packed block data</summary>
         protected List<PackedBlock> blocks;
 
-#if DEBUG
-        public String log;
-#endif
-
         #region Construction
         /// <summary>Default constructor</summary>
-        public AudioFile()
+        public AcmAudioFile()
         {
             this.AcmHeader = null;
             this.BitDataStream = null;
@@ -33,19 +30,21 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
         }
 
         /// <summary>Initializes field data.</summary>
-        protected void Initialize()
+        protected virtual void Initialize()
         {
-            this.AcmHeader = new Header();
+            this.AcmHeader = new AcmHeader();
             this.blocks = new List<PackedBlock>();
         }
         #endregion
 
         /// <summary>This public method reads file format from the input stream. Reads the whole structure.</summary>
         /// <param name="input">Input stream to read from</param>
-        public void Read(Stream input)
+        /// <param name="initialize">Boolean indicating whether or not to initialize the field data</param>
+        public virtual void Read(Stream input, Boolean initialize = true)
         {
             //(re-)Instatiate fields
-            this.Initialize();
+            if (initialize)
+                this.Initialize();
 
             this.AcmHeader.Read(input);
             
@@ -59,33 +58,15 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
             
             while (!this.BitDataStream.EndOfStream)
                 blocks.Add(bitBlock.Decode());
-#if DEBUG
-            this.log = bitBlock.logger.ToString();
-#endif
         }
 
         /// <summary>This public method reads file format from the input stream. Reads the whole structure.</summary>
         /// <param name="input">Input stream to read from</param>
-        public void ReadHeader(Stream input)
+        public virtual void ReadHeader(Stream input)
         {
             //(re-)Instatiate fields
             this.Initialize();
-
             this.AcmHeader.Read(input);
-
-            //Assumption: most Acm files are less than 1 MB, and I have yet to see one > 10 MB. Read the whole thing into memory.
-            Byte[] data = new Byte[input.Length - input.Position];
-            input.Read(data, 0, data.Length);
-            this.BitDataStream = new AcmBitStream(data);
-
-            BitBlock bitBlock = BitBlock.Instance;
-            bitBlock.SetFields(this.AcmHeader, this.BitDataStream);
-
-            while (!this.BitDataStream.EndOfStream)
-                blocks.Add(bitBlock.Decode());
-#if DEBUG
-            this.log = bitBlock.logger.ToString();
-#endif
         }
 
         /// <summary>Gets the sample data from the PackedBlocks.</summary>
@@ -125,6 +106,23 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
             }
 
             return samples;
+        }
+
+        /// <summary>Returns a WaveFormatEx instance from this header data</summary>
+        /// <returns>A WaveFormatEx instance to submit to API calls</returns>
+        public virtual WaveFormatEx GetWaveFormat()
+        {
+            WaveFormatEx waveEx = new WaveFormatEx();
+
+            waveEx.AverageBytesPerSec = this.AcmHeader.SampleRate * 2U /*sizeof(short)*/ * this.AcmHeader.ChannelsCount /* sizeof(usort) */;
+            waveEx.BitsPerSample = 16; /* sizeof(short) */
+            waveEx.BlockAlignment = Convert.ToUInt16(2U * this.AcmHeader.ChannelsCount);
+            waveEx.FormatTag = 1;   //1 for PCM
+            waveEx.NumberChannels = this.AcmHeader.ChannelsCount; //designating 1 causes errors
+            waveEx.SamplesPerSec = this.AcmHeader.SampleRate;
+            waveEx.Size = 0;    //no extra data; this is strictly a WaveFormatEx instance 
+
+            return waveEx;
         }
     }
 }

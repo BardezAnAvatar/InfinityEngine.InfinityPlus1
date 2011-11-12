@@ -51,7 +51,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
         #endregion
 
         #region Properties
-        public Header AcmHeader { get; set; }
+        public AcmHeader AcmHeader { get; set; }
 
         /// <summary>BitStream to populate </summary>
         public BitStream BitDataStream { get; set; }
@@ -69,10 +69,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
             }
         }
 
-#if DEBUG
-        public Int64 samples = 0;
-        public System.Text.StringBuilder logger = new System.Text.StringBuilder();
-#endif
         #endregion
         
         #region Construction
@@ -113,13 +109,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
                 for (Int32 column = 0; column < this.AcmHeader.PackingColumns; ++column)
                 {
                     Int32 functionIndex = this.BitDataStream.ReadInt16(5);
-#if DEBUG
-                    this.logger.AppendLine(String.Format("Entering into method {0} at sample {1}", this.fillers[functionIndex].Method.Name, this.samples));
-#endif
                     this.fillers[functionIndex](block, functionIndex, column);
-#if DEBUG
-                    this.samples += this.AcmHeader.PackingRows;
-#endif
                 }
 
                 //juggle as is necessary; the determinate code is inside the method, so just call directly
@@ -833,7 +823,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
         /// <summary>Sets the fields of the ACM file to this BitBlock.</summary>
         /// <param name="acmHeader">ACM Header instance to reference</param>
         /// <param name="dataStream">BitStream to read from</param>
-        public void SetFields(Header acmHeader, BitStream dataStream)
+        public void SetFields(AcmHeader acmHeader, BitStream dataStream)
         {
             lock (BitBlock.lockable)
             {

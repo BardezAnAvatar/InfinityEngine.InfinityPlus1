@@ -15,8 +15,10 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
     {
         #region Members
         /// <summary>Leading four bytes of the header file</summary>
-        /// <remarks>Read as two separate reads, one the first three bytes, the second the fourth</remarks>
-        /// <see cref="http://falloutmods.wikia.com/wiki/ACM_File_Format" />
+        /// <remarks>
+        ///     Read as two separate reads, one the first three bytes, the second the fourth.
+        ///     <see cref="http://falloutmods.wikia.com/wiki/ACM_File_Format" />
+        /// </remarks>
         protected UInt32 signature;
 
         /// <summary>Number of samples in this format</summary>
@@ -248,7 +250,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
 
         /// <summary>Returns a WaveFormatEx instance from this header data</summary>
         /// <returns>A WaveFormatEx instance to submit to API calls</returns>
-        public WaveFormatEx GetWaveFormat()
+        public virtual WaveFormatEx GetWaveFormat()
         {
             WaveFormatEx waveEx = new WaveFormatEx();
 
