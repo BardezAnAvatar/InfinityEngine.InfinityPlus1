@@ -8,7 +8,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
         #region Fields
         /// <summary>The Amplitude buffer</summary>
         /// <remarks>Should be 0x10000 bytes in size</remarks>
-        protected Int16[] buffer;
+        protected Int32[] buffer;
 
         /// <summary>Index to the middle of the amplitude buffer</summary>
         protected const Int32 middle = 0x8000;
@@ -20,7 +20,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
         #region Properties
         /// <summary>Represents the accessor to the middle of the amplitude buffer</summary>
         /// <param name="index">Index of the amplitude buffer</param>
-        public Int16 this[Int32 index]
+        public Int32 this[Int32 index]
         {
             get { return this.buffer[index + middle]; }
             set { this.buffer[index + middle] = value; }
@@ -31,7 +31,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
         /// <summary>Default constructor</summary>
         public AmplitudeBuffer()
         {
-            this.buffer = new Int16[AmplitudeBuffer.bufferSize];
+            this.buffer = new Int32[AmplitudeBuffer.bufferSize];
         }
 
         /// <summary>Filler constructor</summary>
