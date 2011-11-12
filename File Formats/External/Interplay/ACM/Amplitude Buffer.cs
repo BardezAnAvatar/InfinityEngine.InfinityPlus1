@@ -51,7 +51,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
             Int32 range = 1 << shift;
 
             for (Int32 index = -range; index < range; ++index)
-                this[index] = Convert.ToInt16(index * value);
+                this[index] = (index * value);
         }
     }
 }
