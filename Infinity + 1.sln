@@ -18,8 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{FF993C95
 		Notes.txt = Notes.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGL", "SharpGL\SharpGL.csproj", "{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F94A577A-DE5E-44E6-8395-53C5CE9BEDE3}"
 	ProjectSection(SolutionItems) = preProject
 		Infinity + 1.vsmdi = Infinity + 1.vsmdi
@@ -30,44 +28,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Output", "Output\Output.csproj", "{6ECA5199-A497-4BF2-B956-CEB3F0912C17}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectX", "DirectX\DirectX.vcxproj", "{FE898E65-DAFF-435D-9A72-4C9D3306636A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XAudio2", "XAudio2\XAudio2.vcxproj", "{FE898E65-DAFF-435D-9A72-4C9D3306636A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Win32 Structures", "Win32 Structures\Win32 Structures.vcxproj", "{257201A0-0B65-4EA0-AC04-0B8005AECC37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exception Handler", "Exception Manager\Exception Handler.csproj", "{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://bardezserver:8080/tfs/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = File\u0020Formats\\File\u0020Formats.csproj
-		SccProjectName1 = File\u0020Formats
-		SccLocalPath1 = File\u0020Formats
-		SccProjectUniqueName2 = Tester\\Tester.csproj
-		SccProjectName2 = Tester
-		SccLocalPath2 = Tester
-		SccProjectUniqueName3 = ReusableCode\\ReusableCode.csproj
-		SccProjectName3 = ReusableCode
-		SccLocalPath3 = ReusableCode
-		SccProjectUniqueName4 = Test\\Test.csproj
-		SccProjectName4 = Test
-		SccLocalPath4 = Test
-		SccProjectUniqueName5 = Utility\\Utility.csproj
-		SccProjectName5 = Utility
-		SccLocalPath5 = Utility
-		SccProjectUniqueName6 = Configuration\u0020Handler\\Configuration\u0020Handler.csproj
-		SccProjectName6 = Configuration\u0020Handler
-		SccLocalPath6 = Configuration\u0020Handler
-		SccProjectUniqueName7 = Output\\Output.csproj
-		SccProjectName7 = Output
-		SccLocalPath7 = Output
-		SccProjectUniqueName8 = DirectX\\DirectX.vcxproj
-		SccProjectName8 = DirectX
-		SccLocalPath8 = DirectX
-		SccProjectUniqueName9 = Win32\u0020Structures\\Win32\u0020Structures.vcxproj
-		SccProjectName9 = Win32\u0020Structures
-		SccLocalPath9 = Win32\u0020Structures
-	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Infinity + 1.vsmdi
 	EndGlobalSection
@@ -154,18 +121,6 @@ Global
 		{6E1496AB-268A-4EA2-99B3-726162F019F1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6E1496AB-268A-4EA2-99B3-726162F019F1}.Release|Win32.ActiveCfg = Release|Any CPU
 		{6E1496AB-268A-4EA2-99B3-726162F019F1}.Release|x86.ActiveCfg = Release|Any CPU
-		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Release|Win32.ActiveCfg = Release|Any CPU
-		{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}.Release|x86.ActiveCfg = Release|Any CPU
 		{6ECA5199-A497-4BF2-B956-CEB3F0912C17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6ECA5199-A497-4BF2-B956-CEB3F0912C17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ECA5199-A497-4BF2-B956-CEB3F0912C17}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -202,6 +157,18 @@ Global
 		{257201A0-0B65-4EA0-AC04-0B8005AECC37}.Release|Win32.ActiveCfg = Release|Win32
 		{257201A0-0B65-4EA0-AC04-0B8005AECC37}.Release|Win32.Build.0 = Release|Win32
 		{257201A0-0B65-4EA0-AC04-0B8005AECC37}.Release|x86.ActiveCfg = Release|Win32
+		{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}.Release|Win32.ActiveCfg = Release|Any CPU
+		{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
