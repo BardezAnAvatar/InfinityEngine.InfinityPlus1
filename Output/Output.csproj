@@ -12,10 +12,14 @@
     <AssemblyName>Output</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,9 +44,10 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audio\Audio Delegates.cs" />
     <Compile Include="Audio\Audio Output.cs" />
+    <Compile Include="Audio\XAudio2 Source Voice Reference.cs" />
     <Compile Include="Audio\Enums\XAudio2VoiceState.cs" />
-    <Compile Include="Audio\XAudio2 Callback.cs" />
     <Compile Include="Audio\XAudio2 Output.cs" />
     <Compile Include="Audio\XAudio2 Voice Reference.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

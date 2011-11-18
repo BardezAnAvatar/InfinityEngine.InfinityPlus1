@@ -22,7 +22,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
         /// <param name="bufferContext">Pointer to a buffer context, defined and used by the client software.</param>
         public override void OnBufferEnd(IntPtr bufferContext)
         {
-            this.Engine.OnBufferEnd(bufferContext);
+            this.Engine.BufferEndHandler(bufferContext);
         }
         #endregion
     }
