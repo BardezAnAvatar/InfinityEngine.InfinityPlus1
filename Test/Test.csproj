@@ -42,10 +42,12 @@
     <Compile Include="AmpitudeCodedModulation\ACM Header Test.cs" />
     <Compile Include="AmpitudeCodedModulation\Bit Block Test.cs" />
     <Compile Include="AmpitudeCodedModulation\ACM File Test.cs" />
+    <Compile Include="AmpitudeCodedModulation\WAVC File Test.cs" />
     <Compile Include="BiowareIndexFileFormat\Biff1\Biff1ArchiveTest.cs" />
     <Compile Include="BiowareIndexFileFormat\Biff1\Biff1HeaderTest.cs" />
     <Compile Include="BiowareIndexFileFormat\Biff1\Biff1ResourceEntryTest.cs" />
     <Compile Include="BiowareIndexFileFormat\Biff1\Biff1TilesetEntryTest.cs" />
+    <Compile Include="Music\Playlist Test.cs" />
     <Compile Include="ReusableCode\BitStream Test.cs" />
     <Compile Include="Character\Character 1 Test.cs" />
     <Compile Include="Character\Character 2.2 Test.cs" />
@@ -98,7 +100,7 @@
       <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
       <Name>Configuration Handler</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DirectX\DirectX.vcxproj">
+    <ProjectReference Include="..\Native Code\DirectX\XAudio2\XAudio2.vcxproj">
       <Project>{FE898E65-DAFF-435D-9A72-4C9D3306636A}</Project>
       <Name>DirectX</Name>
     </ProjectReference>
@@ -118,7 +120,7 @@
       <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
       <Name>Utility</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Win32 Structures\Win32 Structures.vcxproj">
+    <ProjectReference Include="..\Native Code\Win32 Structures\Win32 Structures.vcxproj">
       <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
       <Name>Win32 Structures</Name>
     </ProjectReference>

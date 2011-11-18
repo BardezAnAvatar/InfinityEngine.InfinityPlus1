@@ -10,9 +10,9 @@ namespace Bardez.Projects.InfinityPlus1.Test.AmpitudeCodedModulation
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM.Header class.</summary>
     public class AcmHeaderTest : ITester
     {
-        protected Header acmFile;
+        protected AcmHeader acmFile;
 
-        public Header ACM
+        public AcmHeader ACM
         {
             get { return this.acmFile; }
         }
@@ -50,7 +50,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.AmpitudeCodedModulation
         /// <param name="prompt">Boolean indicating whether or not to prompt for pressing [Enter] to continue</param>
         public void Test(Stream source, Boolean prompt)
         {
-            this.acmFile = new Header();
+            this.acmFile = new AcmHeader();
             this.acmFile.Read(source);
 
             Console.Write(this.acmFile.ToString());

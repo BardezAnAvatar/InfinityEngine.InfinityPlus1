@@ -14,17 +14,17 @@ using Bardez.Projects.InfinityPlus1.Test;
 
 namespace Bardez.Projects.InfinityPlus1.Test.AmpitudeCodedModulation
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM.AudioFile class.</summary>
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM.AcmAudioFile class.</summary>
     public class AcmFileTest : ITester
     {
         protected XAudio2Output output;
-        protected List<AudioFile> audioFiles;
-        protected List<AudioFile> AudioFiles
+        protected List<AcmAudioFile> audioFiles;
+        protected List<AcmAudioFile> AudioFiles
         {
             get
             {
                 if (this.audioFiles == null)
-                    this.audioFiles = new List<AudioFile>();
+                    this.audioFiles = new List<AcmAudioFile>();
 
                 return this.audioFiles;
             }
@@ -114,7 +114,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.AmpitudeCodedModulation
         /// <param name="prompt">Boolean indicating whether or not to prompt for pressing [Enter] to continue</param>
         public void Test(Stream source, Boolean prompt)
         {
-            AudioFile file = new AudioFile();
+            AcmAudioFile file = new AcmAudioFile();
             file.Read(source);
             this.AudioFiles.Add(file);
 
@@ -134,7 +134,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.AmpitudeCodedModulation
 
         /// <summary>Saves the raw PCM samples to disk</summary>
         /// <param name="file">AudioFile to read samples from</param>
-        protected static void SaveRawPcmToDisk(AudioFile file)
+        protected static void SaveRawPcmToDisk(AcmAudioFile file)
         {
             String path = ConfigurationHandlerMulti.GetSettingValue("Test.ACM.AcmPath") + ".acm.raw";
             using (FileStream dest = new FileStream(path, FileMode.Create, FileAccess.Write))
@@ -142,19 +142,13 @@ namespace Bardez.Projects.InfinityPlus1.Test.AmpitudeCodedModulation
                 Byte[] sampleData = file.GetSampleData();
                 dest.Write(sampleData, 0, sampleData.Length);
             }
-
-            using (FileStream dest = new FileStream(path + ".log", FileMode.Create, FileAccess.Write))
-            {
-                Byte[] logBytes = System.Text.UTF8Encoding.UTF8.GetBytes(file.log);
-                dest.Write(logBytes, 0, logBytes.Length);
-            }
         }
 
         /// <summary>Renders the audio file to hardware, used one file at a time</summary>
         /// <param name="file">Source AudioFile to read from</param>
-        protected void RenderAudioProcedurally(AudioFile file)
+        protected void RenderAudioProcedurally(AcmAudioFile file)
         {
-            WaveFormatEx waveFormat = file.AcmHeader.GetWaveFormat();
+            WaveFormatEx waveFormat = file.GetWaveFormat();
             Byte[] sampleData = file.GetSampleData();
 
             Int32 key = output.CreatePlayback(waveFormat);
@@ -178,7 +172,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.AmpitudeCodedModulation
                 foreach (String path in paths)
                     using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
                     {
-                        AudioFile file = new AudioFile();
+                        AcmAudioFile file = new AcmAudioFile();
                         file.Read(stream);
                         this.AudioFiles.Add(file);
                     }

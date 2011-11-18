@@ -166,6 +166,8 @@
     <Compile Include="Infinity\Item\Item2\Item Header 2.cs" />
     <Compile Include="Infinity\Item\Item1\Item Header 1.cs" />
     <Compile Include="Infinity\Item\Item Header.cs" />
+    <Compile Include="Infinity\Music\Playlist Entry.cs" />
+    <Compile Include="Infinity\Music\Playlist.cs" />
     <Compile Include="Infinity\Store\Components\Available Spell.cs" />
     <Compile Include="Infinity\Store\Components\Available Drink.cs" />
     <Compile Include="Infinity\Store\Components\Available Item.cs" />
@@ -221,7 +223,7 @@
       <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
       <Name>Utility</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Win32 Structures\Win32 Structures.vcxproj">
+    <ProjectReference Include="..\Native Code\Win32 Structures\Win32 Structures.vcxproj">
       <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
       <Name>Win32 Structures</Name>
     </ProjectReference>

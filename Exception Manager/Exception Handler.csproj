@@ -2,25 +2,22 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9BD4922B-BEC0-4140-8600-35571A479EB2}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bardez.Projects.InfinityPlus1.Tester</RootNamespace>
-    <AssemblyName>InfinityPlus1.Tester</AssemblyName>
+    <RootNamespace>Bardez.Projects.ExceptionHandler</RootNamespace>
+    <AssemblyName>Exception Handler</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -29,8 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,31 +36,30 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Exception Manager.cs" />
+    <Compile Include="Exception Information.cs" />
+    <Compile Include="IExceptionLogger.cs" />
+    <Compile Include="Loggers\Email Logger.cs" />
+    <Compile Include="Loggers\MessageBox Logger.cs" />
+    <Compile Include="Loggers\Text File Logger.cs" />
+    <Compile Include="Native Interaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Exception Manager\Exception Handler.csproj">
-      <Project>{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}</Project>
-      <Name>Exception Handler</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\File Formats\File Formats.csproj">
-      <Project>{F2085177-9356-43EE-9744-85AA2FFCACEE}</Project>
-      <Name>File Formats</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Test\Test.csproj">
-      <Project>{E79833DB-B2D2-4781-B0FC-79E85DA95BE5}</Project>
-      <Name>Test</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
+    <Compile Include="System Info.cs" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Configuration Handler\Configuration Handler.csproj">
+      <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
+      <Name>Configuration Handler</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

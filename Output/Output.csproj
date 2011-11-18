@@ -12,14 +12,10 @@
     <AssemblyName>Output</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,11 +49,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DirectX\DirectX.vcxproj">
+    <ProjectReference Include="..\Native Code\DirectX\XAudio2\XAudio2.vcxproj">
       <Project>{FE898E65-DAFF-435D-9A72-4C9D3306636A}</Project>
       <Name>DirectX</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Win32 Structures\Win32 Structures.vcxproj">
+    <ProjectReference Include="..\Native Code\Win32 Structures\Win32 Structures.vcxproj">
       <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
       <Name>Win32 Structures</Name>
     </ProjectReference>

@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Bardez.Projects.ExceptionHandler;
 using Bardez.Projects.InfinityPlus1.Test;
 using Bardez.Projects.InfinityPlus1.Test.AmpitudeCodedModulation;
 using Bardez.Projects.InfinityPlus1.Test.BiowareIndexFileFormat.Biff1;
@@ -10,6 +11,7 @@ using Bardez.Projects.InfinityPlus1.Test.Dialog;
 using Bardez.Projects.InfinityPlus1.Test.Effect;
 using Bardez.Projects.InfinityPlus1.Test.Initialization;
 using Bardez.Projects.InfinityPlus1.Test.Item;
+using Bardez.Projects.InfinityPlus1.Test.Music;
 using Bardez.Projects.InfinityPlus1.Test.Output.DirectX;
 using Bardez.Projects.InfinityPlus1.Test.ReusableCode;
 using Bardez.Projects.InfinityPlus1.Test.Riff;
@@ -28,7 +30,9 @@ namespace Bardez.Projects.InfinityPlus1.Tester
         /// <param name="args">String Array of application arguments</param>
         internal static void Main(String[] args)
         {
-            ITester tester = new AcmFileTest();
+            ExceptionManager.AttachManagerForConsole();
+            
+            ITester tester = new PlaylistTest();
             tester.Test();
 
             Console.Write("Press [Enter] to exit.");

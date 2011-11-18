@@ -35,6 +35,42 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exception Handler", "Exception Manager\Exception Handler.csproj", "{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}"
 EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 11
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://bardezserver:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ReusableCode\\ReusableCode.csproj
+		SccProjectName1 = ReusableCode
+		SccLocalPath1 = ReusableCode
+		SccProjectUniqueName2 = Native\u0020Code\\DirectX\\XAudio2\\XAudio2.vcxproj
+		SccProjectName2 = Native\u0020Code/DirectX/XAudio2
+		SccLocalPath2 = Native\u0020Code\\DirectX\\XAudio2
+		SccProjectUniqueName3 = Output\\Output.csproj
+		SccProjectName3 = Output
+		SccLocalPath3 = Output
+		SccProjectUniqueName4 = Configuration\u0020Handler\\Configuration\u0020Handler.csproj
+		SccProjectName4 = Configuration\u0020Handler
+		SccLocalPath4 = Configuration\u0020Handler
+		SccProjectUniqueName5 = Exception\u0020Manager\\Exception\u0020Handler.csproj
+		SccProjectName5 = Exception\u0020Manager
+		SccLocalPath5 = Exception\u0020Manager
+		SccProjectUniqueName6 = Native\u0020Code\\Win32\u0020Structures\\Win32\u0020Structures.vcxproj
+		SccProjectName6 = Native\u0020Code/Win32\u0020Structures
+		SccLocalPath6 = Native\u0020Code\\Win32\u0020Structures
+		SccProjectUniqueName7 = Utility\\Utility.csproj
+		SccProjectName7 = Utility
+		SccLocalPath7 = Utility
+		SccProjectUniqueName8 = Test\\Test.csproj
+		SccProjectName8 = Test
+		SccLocalPath8 = Test
+		SccProjectUniqueName9 = Tester\\Tester.csproj
+		SccProjectName9 = Tester
+		SccLocalPath9 = Tester
+		SccProjectUniqueName10 = File\u0020Formats\\File\u0020Formats.csproj
+		SccProjectName10 = File\u0020Formats
+		SccLocalPath10 = File\u0020Formats
+	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Infinity + 1.vsmdi
 	EndGlobalSection

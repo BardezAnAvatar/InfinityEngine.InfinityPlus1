@@ -20,5 +20,10 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
         /// <param name="destination">Destination to output submission to</param>
         /// <param name="expectMore">Flag indicating whether to expect more data</param>
         public abstract void SubmitData(Byte[] data, Int32 source, Int32 destination, Boolean expectMore);
+
+        /// <summary>Adds an event handler to request further data</summary>
+        /// <param name="sourcKey">Source key of object to add data to</param>
+        /// <param name="handler">Delegate to add more data</param>
+        public abstract void AddSourceNeedDataEventhandler(Int32 sourcKey, AudioNeedsMoreDataHandler handler);
     }
 }
