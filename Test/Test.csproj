@@ -40,66 +40,10 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AmpitudeCodedModulation\ACM Header Test.cs" />
-    <Compile Include="AmpitudeCodedModulation\Bit Block Test.cs" />
-    <Compile Include="AmpitudeCodedModulation\ACM File Test.cs" />
-    <Compile Include="AmpitudeCodedModulation\WAVC File Test.cs" />
-    <Compile Include="BiowareIndexFileFormat\Biff1\Biff1ArchiveTest.cs" />
-    <Compile Include="BiowareIndexFileFormat\Biff1\Biff1HeaderTest.cs" />
-    <Compile Include="BiowareIndexFileFormat\Biff1\Biff1ResourceEntryTest.cs" />
-    <Compile Include="BiowareIndexFileFormat\Biff1\Biff1TilesetEntryTest.cs" />
-    <Compile Include="File Tester Base.cs" />
     <Compile Include="Test Event Arguments.cs" />
     <Compile Include="Message Event Arguments.cs" />
-    <Compile Include="Music\Playlist Test.cs" />
     <Content Include="Notes.txt" />
-    <Compile Include="ReusableCode\BitStream Test.cs" />
-    <Compile Include="Character\Character 1 Test.cs" />
-    <Compile Include="Character\Character 2.2 Test.cs" />
-    <Compile Include="Character\Character 9 Test.cs" />
-    <Compile Include="Character\Biography 1 Test.cs" />
-    <Compile Include="Character\Biography 2 Test.cs" />
-    <Compile Include="ChitinKey\ChitinKey1BifEntry.cs" />
-    <Compile Include="ChitinKey\ChitinKey1HeaderTest.cs" />
-    <Compile Include="ChitinKey\ChitinKey1ResourceEntryTest.cs" />
-    <Compile Include="ChitinKey\ChitinKey1Test.cs" />
-    <Compile Include="Creature\Creature 2.2 Test.cs" />
-    <Compile Include="Creature\Creature 9 Test.cs" />
-    <Compile Include="Creature\Creature 1.2 Test.cs" />
-    <Compile Include="Creature\Creature 1 Test.cs" />
-    <Compile Include="Creature\Creature Header 9 Test.cs" />
-    <Compile Include="Creature\Creature Header 1.2 Test.cs" />
-    <Compile Include="Creature\Creature Header 1 Test.cs" />
-    <Compile Include="Dialog\Dialog Test.cs" />
-    <Compile Include="Effect\Effect 2 Test.cs" />
-    <Compile Include="Initialization\Ini Test.cs" />
-    <Compile Include="Item\Item 2 Test.cs" />
-    <Compile Include="Item\Item 1_1 Test.cs" />
-    <Compile Include="Item\Item 1 Test.cs" />
-    <Compile Include="Item\Item Ability Effect Test.cs" />
-    <Compile Include="Item\Item Ability Test.cs" />
-    <Compile Include="Item\Item Header 2 Test.cs" />
-    <Compile Include="Item\Item Header 1_1 Test.cs" />
-    <Compile Include="Item\Item Header 1 Test.cs" />
-    <Compile Include="ITester.cs" />
-    <Compile Include="Output\DirectX\XAudio2 Render Test.cs" />
-    <Compile Include="Output\DirectX\XAudio2 Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Riff\Riff Test.cs" />
-    <Compile Include="Spell\Spell 2 Test.cs" />
-    <Compile Include="Spell\Spell 1 Test.cs" />
-    <Compile Include="Spell\Spell Ability Test.cs" />
-    <Compile Include="Spell\Spell 2 Header Test.cs" />
-    <Compile Include="Spell\Spell 1 Header Test.cs" />
-    <Compile Include="Store\Store 1.1 Test.cs" />
-    <Compile Include="Store\Store 9 Test.cs" />
-    <Compile Include="Store\Store 1 Test.cs" />
-    <Compile Include="StringReferenceCount\Src 1 Test.cs" />
-    <Compile Include="Tester Base.cs" />
-    <Compile Include="TextLocationKey\TextLocationKeyHeaderTest.cs" />
-    <Compile Include="TextLocationKey\TextLocationKeyStringReferenceEntryTest.cs" />
-    <Compile Include="TextLocationKey\TextLocationKeyTest.cs" />
-    <Compile Include="TwoDimensionalArray\TwoDinensionalArray1Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Configuration Handler\Configuration Handler.csproj">
@@ -131,7 +75,10 @@
       <Name>Win32 Structures</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="BiowareIndexFileFormat\" />
+    <Folder Include="Output\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

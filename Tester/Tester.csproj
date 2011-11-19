@@ -63,12 +63,6 @@
     <Compile Include="Test UI.Designer.cs">
       <DependentUpon>Test UI.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForm\ACM Header Test Control.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="WinForm\ACM Header Test Control.Designer.cs">
-      <DependentUpon>ACM Header Test Control.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exception Manager\Exception Handler.csproj">
@@ -92,11 +86,6 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="WinForm\ACM Header Test Control.resx">
-      <DependentUpon>ACM Header Test Control.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
