@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 using Bardez.Projects.Configuration;
 using Bardez.Projects.DirectX.XAudio2;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Output.DirectX
 {
@@ -22,16 +24,20 @@ namespace Bardez.Projects.InfinityPlus1.Test.Output.DirectX
         {
             using (this.xaudio = XAudio2Interface.NewInstance())
             {
+                StringBuilder buffer = new StringBuilder();
+
                 UInt32 deviceCount = this.xaudio.GetDeviceCount();
-                Console.Write("Number of XAudio2 devices: ");
-                Console.WriteLine(deviceCount);
+                buffer.Append("Number of XAudio2 devices: ");
+                buffer.AppendLine(deviceCount.ToString());
 
                 for (UInt32 i = 0; i < deviceCount; ++i)
                 {
                     DeviceDetails details = this.xaudio.GetDeviceDetails(i);
-                    Console.WriteLine(String.Format("Device {0} details:", i));
-                    Console.WriteLine(details.ToDescriptionString());
+                    buffer.AppendLine(String.Format("Device {0} details:", i));
+                    buffer.AppendLine(details.ToDescriptionString());
                 }
+
+                Interceptor.WriteMessage(buffer.ToString());
             }
 
             //String[] paths = ConfigurationHandlerMulti.GetSettingValues("Test.Riff.RiffPath").ToArray();

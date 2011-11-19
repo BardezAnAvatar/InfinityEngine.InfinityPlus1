@@ -1,16 +1,18 @@
 ﻿using System;
 using System.IO;
+
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature9;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Creature
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature9.CreatureHeader1 class.</summary>
     public class CreatureHeader9Test : ITester
     {
-        protected Creature9Header header;
+        public Creature9Header Header { get; set; }
 
         public void Test()
         {
@@ -26,15 +28,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.Creature
 
         public void Test(Stream Source)
         {
-            this.header = new Creature9Header();
-            this.header.Read(Source);
+            this.Header = new Creature9Header();
+            this.Header.Read(Source);
 
-            Console.Write(this.header.ToString());
-        }
-
-        public Creature9Header Header
-        {
-            get { return this.header; }
+            Interceptor.WriteMessage(this.Header.ToString());
         }
     }
 }

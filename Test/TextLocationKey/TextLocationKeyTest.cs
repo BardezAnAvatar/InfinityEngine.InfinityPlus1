@@ -4,6 +4,7 @@ using System.Text;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.TextLocationKey;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.TextLocationKey
 {
@@ -23,7 +24,9 @@ namespace Bardez.Projects.InfinityPlus1.Test.TextLocationKey
         /// <param name="filePath">String describing the location of a TLK file</param>
         public void Test(String filePath)
         {
-            Console.WriteLine("Testing ad hoc read:\n");
+            StringBuilder buffer = new StringBuilder();
+
+            buffer.AppendLine("Testing ad hoc read:\n");
 
             //Console.WriteLine("Initializing at " + DateTime.Now.TimeOfDay.ToString() + ":");        //timestamp
             tlkFile = new Files.Infinity.TextLocationKey.TextLocationKey(false);
@@ -32,20 +35,20 @@ namespace Bardez.Projects.InfinityPlus1.Test.TextLocationKey
             tlkFile.ReadFile();
 
             //Console.Write(tlkFile.ToString());        //printing the entire dialog.tlk...that will take far too long.
-            Console.Write(tlkFile.ToString(false));
+            buffer.AppendLine(tlkFile.ToString(false));
 
-            Console.WriteLine("String Reference #25641:");
-            Console.Write(tlkFile[25641].ToString());
+            buffer.Append("String Reference #25641:");
+            buffer.AppendLine(tlkFile[25641].ToString());
 
 
             //try to write
-            Console.WriteLine("\n\n\nTesting no-read TLK write...\n");
+            buffer.AppendLine("\n\n\nTesting no-read TLK write...\n");
             tlkFile.WriteFile(filePath + ".new.tlk");
 
 
 
 
-            Console.WriteLine("\n\n\nTesting full read:\n");
+            buffer.AppendLine("\n\n\nTesting full read:\n");
 
             //Console.WriteLine("Initializing at " + DateTime.Now.TimeOfDay.ToString() + ":");        //timestamp
             tlkFile = new Files.Infinity.TextLocationKey.TextLocationKey();
@@ -54,14 +57,16 @@ namespace Bardez.Projects.InfinityPlus1.Test.TextLocationKey
             tlkFile.ReadFile();
 
             //Console.Write(tlkFile.ToString());        //printing the entire dialog.tlk...that will take far too long.
-            Console.Write(tlkFile.ToString(false));
+            buffer.AppendLine(tlkFile.ToString(false));
 
-            Console.WriteLine("String Reference #12345:");
-            Console.Write(tlkFile[12345].ToString());
+            buffer.Append("String Reference #12345:");
+            buffer.AppendLine(tlkFile[12345].ToString());
 
 
             //try to write
-            Console.WriteLine("\n\n\nTesting full write...\n");
+            buffer.AppendLine("\n\n\nTesting full write...\n");
+            Interceptor.WriteMessage(buffer.ToString());
+
             tlkFile.WriteFile(filePath + ".new2.tlk");
         }
     }

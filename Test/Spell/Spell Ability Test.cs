@@ -5,6 +5,7 @@ using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Spell;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Spell.Spell1;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Spell
 {
@@ -35,7 +36,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Spell
             this.ability = new SpellAbility();
             this.ability.Read(Source);
 
-            Console.Write(this.ability.ToString());
+            Interceptor.WriteMessage(this.ability.ToString());
         }
 
         public Spell1Header Header

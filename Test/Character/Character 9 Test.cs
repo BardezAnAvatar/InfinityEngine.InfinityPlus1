@@ -5,6 +5,7 @@ using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Character;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Version;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Character
 {
@@ -38,10 +39,9 @@ namespace Bardez.Projects.InfinityPlus1.Test.Character
             this.character = new Character9();
             this.character.Read(Source);
 
-            Console.Write(this.character.ToString());
+            Interceptor.WriteMessage(this.character.ToString());
 
-            Console.Write("Press [Enter] to continue...");
-            Console.ReadLine();
+            Interceptor.WaitForInput();
         }
 
         public void TestWrite(Stream destination)

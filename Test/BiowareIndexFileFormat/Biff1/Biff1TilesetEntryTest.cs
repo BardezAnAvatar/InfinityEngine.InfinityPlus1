@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.BiowareIndexFileFormat.Biff1;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.BiowareIndexFileFormat.Biff1
 {
@@ -26,7 +28,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.BiowareIndexFileFormat.Biff1
             this.tisEntry = new Biff1TilesetEntry();
             Source.Seek(Int32.Parse(ConfigurationHandler.GetSettingValue("Test.Biff1.TilesetEntry.Offset")), SeekOrigin.Begin);
             this.tisEntry.Read(Source);
-            Console.Write(this.tisEntry.ToString());
+            Interceptor.WriteMessage(this.tisEntry.ToString());
         }
     }
 }

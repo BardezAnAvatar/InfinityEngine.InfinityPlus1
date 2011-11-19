@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9BD4922B-BEC0-4140-8600-35571A479EB2}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Bardez.Projects.InfinityPlus1.Tester</RootNamespace>
     <AssemblyName>InfinityPlus1.Tester</AssemblyName>
@@ -20,7 +20,7 @@
     <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -38,12 +38,37 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scratch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Scratch.Designer.cs">
+      <DependentUpon>Scratch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test UI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test UI.Designer.cs">
+      <DependentUpon>Test UI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\ACM Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ACM Header Test Control.Designer.cs">
+      <DependentUpon>ACM Header Test Control.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exception Manager\Exception Handler.csproj">
@@ -58,13 +83,21 @@
       <Project>{E79833DB-B2D2-4781-B0FC-79E85DA95BE5}</Project>
       <Name>Test</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="WinForm\ACM Header Test Control.resx">
+      <DependentUpon>ACM Header Test Control.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

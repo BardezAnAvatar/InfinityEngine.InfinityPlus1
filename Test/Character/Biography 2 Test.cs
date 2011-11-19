@@ -4,6 +4,7 @@ using System.IO;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Biography;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Character
 {
@@ -54,12 +55,11 @@ namespace Bardez.Projects.InfinityPlus1.Test.Character
             this.biography = new Biography2();
             this.biography.Read(source);
 
-            Console.Write(this.biography.ToString());
+            Interceptor.WriteMessage(this.biography.ToString());
 
             if (prompt)
             {
-                Console.Write("Press [Enter] to continue...");
-                Console.ReadLine();
+                Interceptor.WaitForInput();
             }
         }
 

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
+
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Creature
 {
@@ -29,7 +31,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Creature
             this.header = new Creature1Header();
             this.header.Read(Source);
 
-            Console.Write(this.header.ToString());
+            Interceptor.WriteMessage(this.header.ToString());
         }
 
         public Creature1Header Header

@@ -26,6 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -47,7 +48,11 @@
     <Compile Include="BiowareIndexFileFormat\Biff1\Biff1HeaderTest.cs" />
     <Compile Include="BiowareIndexFileFormat\Biff1\Biff1ResourceEntryTest.cs" />
     <Compile Include="BiowareIndexFileFormat\Biff1\Biff1TilesetEntryTest.cs" />
+    <Compile Include="File Tester Base.cs" />
+    <Compile Include="Test Event Arguments.cs" />
+    <Compile Include="Message Event Arguments.cs" />
     <Compile Include="Music\Playlist Test.cs" />
+    <Content Include="Notes.txt" />
     <Compile Include="ReusableCode\BitStream Test.cs" />
     <Compile Include="Character\Character 1 Test.cs" />
     <Compile Include="Character\Character 2.2 Test.cs" />
@@ -90,6 +95,7 @@
     <Compile Include="Store\Store 9 Test.cs" />
     <Compile Include="Store\Store 1 Test.cs" />
     <Compile Include="StringReferenceCount\Src 1 Test.cs" />
+    <Compile Include="Tester Base.cs" />
     <Compile Include="TextLocationKey\TextLocationKeyHeaderTest.cs" />
     <Compile Include="TextLocationKey\TextLocationKeyStringReferenceEntryTest.cs" />
     <Compile Include="TextLocationKey\TextLocationKeyTest.cs" />
@@ -100,13 +106,13 @@
       <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
       <Name>Configuration Handler</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Native Code\DirectX\XAudio2\XAudio2.vcxproj">
-      <Project>{FE898E65-DAFF-435D-9A72-4C9D3306636A}</Project>
-      <Name>DirectX</Name>
-    </ProjectReference>
     <ProjectReference Include="..\File Formats\File Formats.csproj">
       <Project>{F2085177-9356-43EE-9744-85AA2FFCACEE}</Project>
       <Name>File Formats</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Native Code\DirectX\XAudio2\XAudio2.vcxproj">
+      <Project>{FE898E65-DAFF-435D-9A72-4C9D3306636A}</Project>
+      <Name>XAudio2</Name>
     </ProjectReference>
     <ProjectReference Include="..\Output\Output.csproj">
       <Project>{6ECA5199-A497-4BF2-B956-CEB3F0912C17}</Project>

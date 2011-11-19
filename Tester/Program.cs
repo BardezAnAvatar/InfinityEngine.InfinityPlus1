@@ -20,6 +20,7 @@ using Bardez.Projects.InfinityPlus1.Test.StringReferenceCount;
 using Bardez.Projects.InfinityPlus1.Test.Store;
 using Bardez.Projects.InfinityPlus1.Test.TextLocationKey;
 using Bardez.Projects.InfinityPlus1.Test.TwoDimensionalArray;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Tester
 {
@@ -35,8 +36,7 @@ namespace Bardez.Projects.InfinityPlus1.Tester
             ITester tester = new PlaylistTest();
             tester.Test();
 
-            Console.Write("Press [Enter] to exit.");
-            Console.ReadLine();
+            Interceptor.WaitForInput();
         }
     }
 }

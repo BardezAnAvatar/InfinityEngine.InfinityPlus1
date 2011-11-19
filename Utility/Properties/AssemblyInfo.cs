@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Utility")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("RLI Insurance")]
+[assembly: AssemblyCompany("SyNDiCaTEd Software")]
 [assembly: AssemblyProduct("Utility")]
-[assembly: AssemblyCopyright("Copyright © RLI Insurance 2011")]
+[assembly: AssemblyCopyright("Copyright © SyNDiCaTEd Software 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
+
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Spell;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Spell.Spell1;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Spell
 {
@@ -29,7 +31,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Spell
             this.header = new Spell1Header();
             this.header.Read(Source);
 
-            Console.Write(this.header.ToString());
+            Interceptor.WriteMessage(this.header.ToString());
         }
 
         public Spell1Header Header

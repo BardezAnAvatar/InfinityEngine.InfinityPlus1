@@ -4,6 +4,7 @@ using System.IO;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Version;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Dialog
 {
@@ -53,12 +54,11 @@ namespace Bardez.Projects.InfinityPlus1.Test.Dialog
             this.dialog = new Dialog1();
             this.dialog.Read(source);
 
-            Console.Write(this.dialog.ToString());
+            Interceptor.WriteMessage(this.dialog.ToString());
 
             if (prompt)
             {
-                Console.Write("Press [Enter] to continue...");
-                Console.ReadLine();
+                Interceptor.WaitForInput();
             }
         }
 

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
 using Bardez.Projects.Configuration;
+
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Creature
 {
@@ -37,10 +39,9 @@ namespace Bardez.Projects.InfinityPlus1.Test.Creature
             this.creature = new Creature1_2();
             this.creature.Read(Source);
 
-            Console.Write(this.creature.ToString());
+            Interceptor.WriteMessage(this.creature.ToString());
 
-            Console.Write("Press [Enter] to continue...");
-            Console.ReadLine();
+            Interceptor.WaitForInput();
         }
 
         public void TestWrite(Stream destination)

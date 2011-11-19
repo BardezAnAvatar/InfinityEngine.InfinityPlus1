@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
+
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Effect;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect2;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Effect
 {
@@ -37,10 +39,9 @@ namespace Bardez.Projects.InfinityPlus1.Test.Effect
             this.effect = new Effect2();
             this.effect.Read(Source);
 
-            Console.Write(this.effect.ToString());
+            Interceptor.WriteMessage(this.effect.ToString());
 
-            Console.Write("Press [Enter] to continue...");
-            Console.ReadLine();
+            Interceptor.WaitForInput();
         }
 
         public void TestWrite(Stream destination)

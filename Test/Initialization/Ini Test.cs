@@ -4,6 +4,7 @@ using System.IO;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Initialization;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Initialization
 {
@@ -53,12 +54,11 @@ namespace Bardez.Projects.InfinityPlus1.Test.Initialization
             this.ini = new InitConfig();
             this.ini.Read(source);
 
-            Console.Write(this.ini.ToString());
+            Interceptor.WriteMessage(this.ini.ToString());
 
             if (prompt)
             {
-                Console.Write("Press [Enter] to continue...");
-                Console.ReadLine();
+                Interceptor.WaitForInput();
             }
         }
 

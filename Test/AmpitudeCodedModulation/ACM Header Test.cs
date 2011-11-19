@@ -4,69 +4,58 @@ using System.IO;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.AmpitudeCodedModulation
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM.Header class.</summary>
-    public class AcmHeaderTest : ITester
+    public class AcmHeaderTest : FileTesterBase
     {
-        protected AcmHeader acmFile;
+        public const String configKey = "Test.ACM.AcmPath";
 
-        public AcmHeader ACM
+        protected AcmHeader acmFile { get; set; }
+
+        /// <summary>Default constructor</summary>
+        public AcmHeaderTest()
         {
-            get { return this.acmFile; }
+            this.InitializeInstance();
         }
 
-        public void Test()
+        /// <summary>Initializes the test class data</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="e">Specific initialization event parameters</param>
+        protected override void InitializeTestData(object sender, EventArgs e)
         {
-            String[] paths = ConfigurationHandlerMulti.GetSettingValues("Test.ACM.AcmPath").ToArray();
-            this.TestMulti(paths);
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(AcmHeaderTest.configKey);
         }
-        
-        /// <summary>Tests a single file</summary>
-        /// <param name="path">File to open and read, then replicate</param>
-        /// <param name="prompt">Boolean indicating whether or not to prompt between read and write</param>
-        public void Test(String path, Boolean prompt)
+
+        /// <summary>Event to raise for testing a specific value</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="testArgs">Arguments containing the item to test (usually a file path)</param>
+        protected override void TestCase(Object sender, TestEventArgs testArgs)
         {
-            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                this.Test(stream, prompt);
+            using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
+                this.TestRead(stream);
 
             //using (FileStream dest = new FileStream(path + ".rewrite", FileMode.Create, FileAccess.Write))
             //    this.TestWrite(dest);
         }
-
-        /// <summary>Tests the code </summary>
-        /// <param name="paths"></param>
-        public void TestMulti(String[] paths)
-        {
-            foreach (String path in paths)
-            {
-                this.Test(path, false);
-            }
-        }
+        
 
         /// <summary>Tests the read and ToString() methods of the structure</summary>
         /// <param name="source">Source Stream to read from</param>
-        /// <param name="prompt">Boolean indicating whether or not to prompt for pressing [Enter] to continue</param>
-        public void Test(Stream source, Boolean prompt)
+        protected void TestRead(Stream source)
         {
             this.acmFile = new AcmHeader();
             this.acmFile.Read(source);
-
-            Console.Write(this.acmFile.ToString());
-
-            //if (prompt)
-            //{
-            //    Console.Write("Press [Enter] to continue...");
-            //    Console.ReadLine();
-            //}
+            this.DoPostMessage(new MessageEventArgs(this.acmFile.ToString()));
         }
 
         /// <summary>Writes the data structure back out to a destination stream</summary>
         /// <param name="destination">Stream to write output to</param>
-        public void TestWrite(Stream destination)
+        protected void TestWrite(Stream destination)
         {
-            //this.chunk.Write(destination);
+            this.acmFile.Write(destination);
         }
     }
 }

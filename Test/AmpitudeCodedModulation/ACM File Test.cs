@@ -118,9 +118,11 @@ namespace Bardez.Projects.InfinityPlus1.Test.AmpitudeCodedModulation
             file.Read(source);
             this.AudioFiles.Add(file);
 
-            if (true)           //render audio
+            Boolean renderAudio = true;
+
+            if (renderAudio)        //render audio
                 this.RenderAudioProcedurally(file);
-            else if (true)      //save to disk for analysis
+            else                    //save to disk for analysis
                 SaveRawPcmToDisk(file);
             
             //Console.Write(file.ToString());

@@ -5,6 +5,7 @@ using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature9;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Creature
 {
@@ -59,10 +60,9 @@ namespace Bardez.Projects.InfinityPlus1.Test.Creature
             this.creature = new Creature9();
             this.creature.Read(source);
 
-            Console.Write(this.creature.ToString());
+            Interceptor.WriteMessage(this.creature.ToString());
 
-            Console.Write("Press [Enter] to continue...");
-            Console.ReadLine();
+            Interceptor.WaitForInput();
         }
 
         /// <summary>Tests the write method(s) on the provided stream</summary>

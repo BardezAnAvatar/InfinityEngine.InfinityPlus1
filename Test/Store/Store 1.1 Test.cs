@@ -5,6 +5,7 @@ using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Store;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Version;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Store
 {
@@ -38,10 +39,9 @@ namespace Bardez.Projects.InfinityPlus1.Test.Store
             this.store = new Store1_1();
             this.store.Read(Source);
 
-            Console.Write(this.store.ToString());
+            Interceptor.WriteMessage(this.store.ToString());
 
-            Console.Write("Press [Enter] to continue...");
-            Console.ReadLine();
+            Interceptor.WaitForInput();
         }
 
         public void TestWrite(Stream destination)

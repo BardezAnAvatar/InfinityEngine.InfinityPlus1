@@ -37,11 +37,22 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UiInterceptor\Console Wrapper.cs" />
+    <Compile Include="UiInterceptor\Form Wrapper.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="IDeepClonable.cs" />
+    <Compile Include="UiInterceptor\Interceptor.cs" />
+    <Compile Include="UiInterceptor\IUserInterfaceInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Configuration Handler\Configuration Handler.csproj">
+      <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
+      <Name>Configuration Handler</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

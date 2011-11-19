@@ -4,6 +4,7 @@ using System.IO;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.StringReferenceCount;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.StringReferenceCount
 {
@@ -53,12 +54,11 @@ namespace Bardez.Projects.InfinityPlus1.Test.StringReferenceCount
             this.biography = new StringReferenceCount1();
             this.biography.Read(source);
 
-            Console.Write(this.biography.ToString());
+            Interceptor.WriteMessage(this.biography.ToString());
 
             if (prompt)
             {
-                Console.Write("Press [Enter] to continue...");
-                Console.ReadLine();
+                Interceptor.WaitForInput();
             }
         }
 

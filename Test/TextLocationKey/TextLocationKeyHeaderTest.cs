@@ -4,6 +4,7 @@ using System.IO;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.TextLocationKey;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.TextLocationKey
 {
@@ -29,7 +30,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.TextLocationKey
             header = new TextLocationKeyHeader();
             header.ReadHeader(Source);
 
-            Console.Write(header.ToString());
+            Interceptor.WriteMessage(header.ToString());
         }
 
         public TextLocationKeyHeader Header

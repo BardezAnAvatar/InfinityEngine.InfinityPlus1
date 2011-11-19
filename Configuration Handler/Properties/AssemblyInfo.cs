@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Configuration Handler")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Direct Logic")]
+[assembly: AssemblyCompany("SyNDiCaTEd Software")]
 [assembly: AssemblyProduct("Configuration Handler")]
-[assembly: AssemblyCopyright("Copyright © Direct Logic 2009")]
+[assembly: AssemblyCopyright("Copyright © SyNDiCaTEd Software 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

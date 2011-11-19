@@ -8,6 +8,7 @@ using Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect1;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Item;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Item1;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Item
 {
@@ -50,7 +51,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Item
             this.effect = new Effect1();
             this.effect.Read(Source);
 
-            Console.Write(this.effect.ToString());
+            Interceptor.WriteMessage(this.effect.ToString());
         }
     }
 }

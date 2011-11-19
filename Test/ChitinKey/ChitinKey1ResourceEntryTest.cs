@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+
 using Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.ChitinKey
 {
@@ -34,7 +36,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.ChitinKey
             Source.Seek(5463, SeekOrigin.Begin);
             this.entry.Read(Source);
 
-            Console.Write(this.entry.ToString());
+            Interceptor.WriteMessage(this.entry.ToString());
         }
 
         public ChitinKeyResourceEntry Entry

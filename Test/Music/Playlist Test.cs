@@ -8,6 +8,7 @@ using Bardez.Projects.DirectX.XAudio2;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Music;
 using Bardez.Projects.InfinityPlus1.Output.Audio;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 using Bardez.Projects.Win32.Audio;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Music
@@ -66,12 +67,11 @@ namespace Bardez.Projects.InfinityPlus1.Test.Music
             this.playlist.Read(source);
             Console.WriteLine("Finished reading playlist...");
 
-            Console.Write(this.playlist.ToString());
+            Interceptor.WriteMessage(this.playlist.ToString());
 
             if (prompt)
             {
-                Console.Write("Press [Enter] to continue...");
-                Console.ReadLine();
+                Interceptor.WaitForInput();
             }
         }
 
@@ -102,8 +102,9 @@ namespace Bardez.Projects.InfinityPlus1.Test.Music
 
             //play audio & Let the sound play
             this.output.StartPlayback(this.outputSoundKey);
-            Console.WriteLine("Press [Enter] to interrupt and terminate playback...");
-            Console.ReadLine();
+
+            Interceptor.WaitForInput("Press [Enter]/[OK] to interrupt and terminate playback...");
+            
             this.playlist.Interrupt();
             Console.WriteLine("Playback interrupted...");
 

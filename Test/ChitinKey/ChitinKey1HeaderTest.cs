@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+
 using Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.ChitinKey
 {
@@ -33,7 +35,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.ChitinKey
             this.header = new ChitinKeyHeader();
             this.header.Read(Source);
 
-            Console.Write(this.header.ToString());
+            Interceptor.WriteMessage(this.header.ToString());
         }
 
         public ChitinKeyHeader Header

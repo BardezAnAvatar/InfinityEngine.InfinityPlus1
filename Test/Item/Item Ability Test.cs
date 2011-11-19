@@ -5,6 +5,7 @@ using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Item;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Item1;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Item
 {
@@ -35,7 +36,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Item
             this.ability = new ItemAbility();
             this.ability.Read(Source);
 
-            Console.Write(this.ability.ToString());
+            Interceptor.WriteMessage(this.ability.ToString());
         }
 
         public ItemHeader1 Header

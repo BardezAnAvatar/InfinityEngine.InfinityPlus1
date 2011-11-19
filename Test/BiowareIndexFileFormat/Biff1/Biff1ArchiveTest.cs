@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.BiowareIndexFileFormat.Biff1;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.BiowareIndexFileFormat.Biff1
 {
@@ -27,7 +29,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.BiowareIndexFileFormat.Biff1
             this.archive = new Biff1Archive();
             this.archive.Read(path);
 
-            Console.Write(this.archive.ToString());
+            Interceptor.WriteMessage(this.archive.ToString());
         }
 
         public void Test(Stream Source)
@@ -35,7 +37,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.BiowareIndexFileFormat.Biff1
             this.archive = new Biff1Archive();
             this.archive.Read(Source);
 
-            Console.Write(this.archive.ToString());
+            Interceptor.WriteMessage(this.archive.ToString());
         }
     }
 }

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Text;
+
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.TwoDimensionalArray._2DA1;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
 namespace Bardez.Projects.InfinityPlus1.Test.TwoDimensionalArray
 {
@@ -26,12 +29,16 @@ namespace Bardez.Projects.InfinityPlus1.Test.TwoDimensionalArray
             twoDeeAy = new TwoDimensionalArray1();
             twoDeeAy.Read(source);
 
-            Console.Write(twoDeeAy.ToString());
+            StringBuilder buffer = new StringBuilder();
 
-            Console.Write("\n\n\nGet a specific value: ");
+            buffer.AppendLine(twoDeeAy.ToString());
+
+            buffer.Append("\n\n\nGet a specific value: ");
             //conditional...
-            Console.WriteLine("[\"1\"][\"HitAnimation\"]: ");
-            Console.WriteLine(twoDeeAy["1"]["HitAnimation"]);
+            buffer.AppendLine("[\"1\"][\"HitAnimation\"]: ");
+            buffer.AppendLine(twoDeeAy["1"]["HitAnimation"]);
+
+            Interceptor.WriteMessage(buffer.ToString());
         }
     }
 }
