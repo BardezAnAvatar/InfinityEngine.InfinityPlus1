@@ -28,12 +28,12 @@
             this.lblListBoxDescriptor = new System.Windows.Forms.Label();
             this.lblOutputDescripor = new System.Windows.Forms.Label();
             this.pnlTest = new System.Windows.Forms.Panel();
+            this.bntClearLog = new System.Windows.Forms.Button();
             this.btnTestSelected = new System.Windows.Forms.Button();
             this.btnInitialize = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tblMain = new System.Windows.Forms.TableLayoutPanel();
-            this.bntClearLog = new System.Windows.Forms.Button();
             this.logOutput = new Bardez.Projects.InfinityPlus1.Test.WinForm.LoggingControl();
+            this.tblMain = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTest.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tblMain.SuspendLayout();
@@ -79,6 +79,16 @@
             this.pnlTest.Size = new System.Drawing.Size(693, 34);
             this.pnlTest.TabIndex = 0;
             // 
+            // bntClearLog
+            // 
+            this.bntClearLog.Location = new System.Drawing.Point(172, 3);
+            this.bntClearLog.Name = "bntClearLog";
+            this.bntClearLog.Size = new System.Drawing.Size(82, 30);
+            this.bntClearLog.TabIndex = 2;
+            this.bntClearLog.Text = "Clear Log";
+            this.bntClearLog.UseVisualStyleBackColor = true;
+            this.bntClearLog.Click += new System.EventHandler(this.bntClearLog_Click);
+            // 
             // btnTestSelected
             // 
             this.btnTestSelected.Location = new System.Drawing.Point(84, 3);
@@ -117,6 +127,15 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(693, 417);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
+            // logOutput
+            // 
+            this.logOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.logOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logOutput.Location = new System.Drawing.Point(210, 23);
+            this.logOutput.Name = "logOutput";
+            this.logOutput.Size = new System.Drawing.Size(480, 391);
+            this.logOutput.TabIndex = 2;
+            // 
             // tblMain
             // 
             this.tblMain.ColumnCount = 1;
@@ -131,25 +150,6 @@
             this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblMain.Size = new System.Drawing.Size(699, 463);
             this.tblMain.TabIndex = 2;
-            // 
-            // bntClearLog
-            // 
-            this.bntClearLog.Location = new System.Drawing.Point(172, 4);
-            this.bntClearLog.Name = "bntClearLog";
-            this.bntClearLog.Size = new System.Drawing.Size(82, 30);
-            this.bntClearLog.TabIndex = 2;
-            this.bntClearLog.Text = "Clear Log";
-            this.bntClearLog.UseVisualStyleBackColor = true;
-            this.bntClearLog.Click += new System.EventHandler(this.bntClearLog_Click);
-            // 
-            // logOutput
-            // 
-            this.logOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.logOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logOutput.Location = new System.Drawing.Point(210, 23);
-            this.logOutput.Name = "logOutput";
-            this.logOutput.Size = new System.Drawing.Size(480, 391);
-            this.logOutput.TabIndex = 2;
             // 
             // HarnessBaseTestControlBase
             // 
@@ -176,7 +176,7 @@
         protected System.Windows.Forms.Button btnInitialize;
         protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         protected System.Windows.Forms.TableLayoutPanel tblMain;
-        private LoggingControl logOutput;
+        protected LoggingControl logOutput;
         protected System.Windows.Forms.Button bntClearLog;
     }
 }

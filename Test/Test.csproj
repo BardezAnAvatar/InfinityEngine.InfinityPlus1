@@ -103,7 +103,10 @@
     <Compile Include="Test Event Arguments.cs" />
     <Compile Include="Message Event Arguments.cs" />
     <Compile Include="Testing Delegates.cs" />
-    <Compile Include="WinForm\ACM\AcmHeaderTestControl.cs">
+    <Compile Include="WinForm\ACM\Acm Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ACM\Acm File Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\Harness Test Control Base.cs">

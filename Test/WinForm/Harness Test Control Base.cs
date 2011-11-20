@@ -47,7 +47,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         /// <summary>Handler for Initialize click event</summary>
         /// <param name="sender">Object sending the event</param>
         /// <param name="e">EventArgs for the click event</param>
-        protected abstract void btnInitialize_Click(Object sender, EventArgs e);
+        protected virtual void btnInitialize_Click(Object sender, EventArgs e)
+        {
+            this.Harness.DoInitialize(this);
+        }
 
         /// <summary>Handler for Test Selected click event</summary>
         /// <param name="sender">Object sending the event</param>

@@ -10,22 +10,15 @@ using Bardez.Projects.InfinityPlus1.Utility;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
 {
-    public class AcmHeaderTestControl : HarnessBaseTestControlBase<AcmHeaderTest>
+    /// <summary>User control for testing the ACM file class</summary>
+    public class AcmFileTestControl : HarnessBaseTestControlBase<AcmFileTest>
     {
         /// <summary>Default constructor</summary>
-        public AcmHeaderTestControl()
+        public AcmFileTestControl()
         {
             this.InitializeComponent();
-            this.Harness = new AcmHeaderTest();
+            this.Harness = new AcmFileTest();
             this.InitializeControlFields();
-        }
-
-        /// <summary>Handler for Initialize click event</summary>
-        /// <param name="sender">Object sending the event</param>
-        /// <param name="e">EventArgs for the click event</param>
-        protected override void btnInitialize_Click(Object sender, EventArgs e)
-        {
-            this.Harness.DoInitialize(this);
         }
 
         /// <summary>Handler for Test Selected click event</summary>

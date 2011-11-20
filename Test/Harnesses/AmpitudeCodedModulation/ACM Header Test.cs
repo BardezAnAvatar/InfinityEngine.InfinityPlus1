@@ -4,11 +4,13 @@ using System.IO;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM;
 using Bardez.Projects.InfinityPlus1.Test;
+
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM.Header class.</summary>
     public class AcmHeaderTest : FileTesterBase
     {
+        /// <summary>Constant key to look up in app.config</summary>
         public const String configKey = "Test.ACM.AcmPath";
 
         protected AcmHeader acmFile { get; set; }
