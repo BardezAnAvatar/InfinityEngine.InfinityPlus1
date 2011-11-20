@@ -87,6 +87,14 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scratch.resx">
+      <DependentUpon>Scratch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test UI.resx">
+      <DependentUpon>Test UI.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

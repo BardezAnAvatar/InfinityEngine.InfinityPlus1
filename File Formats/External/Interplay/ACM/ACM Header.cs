@@ -223,7 +223,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
         public override String ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine("Interplay ACM header:");
+            builder.Append("Interplay ACM header:");
             builder.Append(StringFormat.ToStringAlignment("Signature"));
             builder.Append(this.signature);
             builder.Append(StringFormat.ToStringAlignment("Signature (3 byte)"));
@@ -242,7 +242,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
             builder.Append(this.PackingColumns);
             builder.Append(StringFormat.ToStringAlignment("Packing Rows (12 bit)"));
             builder.Append(this.PackingRows);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

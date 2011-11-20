@@ -4,9 +4,7 @@ using System.IO;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM;
 using Bardez.Projects.InfinityPlus1.Test;
-using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
-
-namespace Bardez.Projects.InfinityPlus1.Test.AmpitudeCodedModulation
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM.Header class.</summary>
     public class AcmHeaderTest : FileTesterBase
@@ -40,7 +38,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.AmpitudeCodedModulation
             //using (FileStream dest = new FileStream(path + ".rewrite", FileMode.Create, FileAccess.Write))
             //    this.TestWrite(dest);
         }
-        
 
         /// <summary>Tests the read and ToString() methods of the structure</summary>
         /// <param name="source">Source Stream to read from</param>

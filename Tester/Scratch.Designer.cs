@@ -28,11 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.acmHeaderTestControl1 = new Bardez.Projects.InfinityPlus1.Test.WinForm.ACM.AcmHeaderTestControl();
+            this.SuspendLayout();
+            // 
+            // acmHeaderTestControl1
+            // 
+            this.acmHeaderTestControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.acmHeaderTestControl1.Location = new System.Drawing.Point(0, 0);
+            this.acmHeaderTestControl1.Name = "acmHeaderTestControl1";
+            this.acmHeaderTestControl1.Size = new System.Drawing.Size(284, 262);
+            this.acmHeaderTestControl1.TabIndex = 0;
+            // 
+            // Scratch
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.acmHeaderTestControl1);
+            this.Name = "Scratch";
             this.Text = "Scratch";
+            this.Load += new System.EventHandler(this.Scratch_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private Test.WinForm.ACM.AcmHeaderTestControl acmHeaderTestControl1;
     }
 }

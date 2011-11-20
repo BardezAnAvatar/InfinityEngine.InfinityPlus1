@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 using Bardez.Projects.ExceptionHandler;
 using Bardez.Projects.InfinityPlus1.Test;
@@ -22,6 +23,8 @@ using Bardez.Projects.InfinityPlus1.Test.TextLocationKey;
 using Bardez.Projects.InfinityPlus1.Test.TwoDimensionalArray;
 using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
+using Bardez.Projects.InfinityPlus1.Test.WinForm.ACM;
+
 namespace Bardez.Projects.InfinityPlus1.Tester
 {
     /// <summary>Main program class/entry point object.</summary>
@@ -29,14 +32,18 @@ namespace Bardez.Projects.InfinityPlus1.Tester
     {
         /// <summary>Driving main method application entry point</summary>
         /// <param name="args">String Array of application arguments</param>
+        [STAThread]
         internal static void Main(String[] args)
         {
             ExceptionManager.AttachManagerForConsole();
-            
-            ITester tester = new PlaylistTest();
-            tester.Test();
 
-            Interceptor.WaitForInput();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new TestUI());
+            
+            //ITester tester = new PlaylistTest();
+            //tester.Test();
+            //Interceptor.WaitForInput();
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace Bardez.Projects.InfinityPlus1.Tester.WinForm
+﻿namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 {
-    partial class AcmHeaderTestControl
+    partial class LoggingControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,18 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.pnlControlParent = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // AcmHeaderTestControl
+            // pnlControlParent
+            // 
+            this.pnlControlParent.AutoScroll = true;
+            this.pnlControlParent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlControlParent.Location = new System.Drawing.Point(0, 0);
+            this.pnlControlParent.Name = "pnlControlParent";
+            this.pnlControlParent.Size = new System.Drawing.Size(132, 139);
+            this.pnlControlParent.TabIndex = 0;
+            // 
+            // LoggingControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "AcmHeaderTestControl";
-            this.Size = new System.Drawing.Size(699, 463);
+            this.Controls.Add(this.pnlControlParent);
+            this.Name = "LoggingControl";
+            this.Size = new System.Drawing.Size(132, 139);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Panel pnlControlParent;
     }
 }

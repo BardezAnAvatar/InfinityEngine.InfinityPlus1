@@ -1,27 +1,14 @@
 ﻿using System;
+using Bardez.Projects.InfinityPlus1.Utility;
 
 namespace Bardez.Projects.InfinityPlus1.Test
 {
-    #region Delegate declarations
-    /// <summary>Delegate for posting an output message to the UI</summary>
-    /// <param name="sender">Object sending the request</param>
-    /// <param name="message">Message to send</param>
-    public delegate void PostOutputMessage(Object sender, MessageEventArgs message);
-
-    /// <summary>Event to raise for initializng the test class</summary>
-    /// <param name="sender">Object sending/raising the request</param>
-    /// <param name="e">Specific initialization event parameters</param>
-    public delegate void InitializeTestClass(Object sender, EventArgs e);
-
-    /// <summary>Event to raise for testing a specific value</summary>
-    /// <param name="sender">Object sending/raising the request</param>
-    /// <param name="testArgs">Arguments containing the item to test (usually a file path)</param>
-    public delegate void TestItem(Object sender, TestEventArgs testArgs);
-    #endregion
-
     /// <summary>Base testing class, including events</summary>
     public abstract class TesterBase : ITester
     {
+        /// <summary>Logging collection to send messages to</summary>
+        public LogCollector Logger { get; set; }
+
         #region Events
         /// <summary>Publically exposed event for attaching to, that the test class can communicate from</summary>
         private event PostOutputMessage postMessage;
@@ -29,14 +16,24 @@ namespace Bardez.Projects.InfinityPlus1.Test
         /// <summary>Protected event for raising an initialize method</summary>
         protected event InitializeTestClass Initialize;
 
+        /// <summary>Event raised after the initialize method(s) are called</summary>
+        protected event EndInitializeTestClass postInitialize;
+
         /// <summary>Protected event for raising a test case</summary>
         protected event TestItem TestInstance;
 
         /// <summary>Externally exposed event for handling an output event</summary>
-        public event PostOutputMessage PostMessage
+        //public event PostOutputMessage PostMessage
+        //{
+        //    add { this.postMessage += value; }
+        //    remove { this.postMessage -= value; }
+        //}
+
+        /// <summary>Externally exposed event for handling then end of the initialization event</summary>
+        public event EndInitializeTestClass EndInitialize
         {
-            add { this.postMessage += value; }
-            remove { this.postMessage -= value; }
+            add { this.postInitialize += value; }
+            remove { this.postInitialize -= value; }
         }
         #endregion
 
@@ -46,6 +43,7 @@ namespace Bardez.Projects.InfinityPlus1.Test
         public virtual void DoInitialize(Object caller)
         {
             this.Initialize(caller, null);
+            this.postInitialize(this, new EventArgs()); //raise the post-initialize event
         }
 
         /// <summary>Raises an internal Initialize event</summary>
@@ -89,6 +87,16 @@ namespace Bardez.Projects.InfinityPlus1.Test
         {
             this.Initialize += new InitializeTestClass(this.InitializeTestData);
             this.TestInstance += new TestItem(this.TestCase);
+            this.Logger = new LogCollector();
+            this.postMessage += new PostOutputMessage(PostLogMessage);
+        }
+
+        /// <summary>Event handler to add messagess to the logger</summary>
+        /// <param name="sender">Object posting the message</param>
+        /// <param name="message">Message to log</param>
+        protected virtual void PostLogMessage(Object sender, MessageEventArgs message)
+        {
+            this.Logger.Add(new LogItem(LogType.Message, message.Message, this));
         }
         #endregion
 

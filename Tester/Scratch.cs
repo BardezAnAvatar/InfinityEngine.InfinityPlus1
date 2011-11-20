@@ -15,5 +15,10 @@ namespace Bardez.Projects.InfinityPlus1.Tester
         {
             InitializeComponent();
         }
+
+        private void Scratch_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

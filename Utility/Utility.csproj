@@ -40,6 +40,9 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Log Event Arguments.cs" />
+    <Compile Include="Log Collector.cs" />
+    <Compile Include="Log Item.cs" />
     <Compile Include="UiInterceptor\Console Wrapper.cs" />
     <Compile Include="UiInterceptor\Form Wrapper.cs" />
     <Compile Include="Extension.cs" />
