@@ -89,22 +89,22 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.BiowareIndexFileFormat.Bi
         {
             StringBuilder builder = new StringBuilder();
             builder.Append("Biff1ResourceEntry:");
-            builder.Append("\n\tResource Locator:  ");
+            builder.Append(StringFormat.ToStringAlignment("Resource Locator"));
             builder.Append(this.resourceLocator.Locator);
-            builder.Append("\n\t\tBIF Index:           ");
+            builder.Append(StringFormat.ToStringAlignment("BIFF Index"));
             builder.Append(this.resourceLocator.BifIndex);
-            builder.Append("\n\t\tBIF Tileset Index:   ");
+            builder.Append(StringFormat.ToStringAlignment("BIFF Tileset Index"));
             builder.Append(this.resourceLocator.TilesetIndex);
-            builder.Append("\n\t\tBIF Resource Index:  ");
+            builder.Append(StringFormat.ToStringAlignment("BIFF Resource Index"));
             builder.Append(this.resourceLocator.ResourceIndex);
-            builder.Append("\n\tOffset:            ");
+            builder.Append(StringFormat.ToStringAlignment("Offset"));
             builder.Append(this.offsetResource);
-            builder.Append("\n\tSize:              ");
+            builder.Append(StringFormat.ToStringAlignment("Size"));
             builder.Append(this.sizeResource);
-            builder.Append("\n\tType:              ");
+            builder.Append(StringFormat.ToStringAlignment("Type"));
             builder.Append(this.typeResource.ToString("G"));
-            builder.Append("\n\tType (hex):        ");
-            builder.Append(String.Format("0x{0:X4}",(Int16)this.typeResource));
+            builder.Append(StringFormat.ToStringAlignment("Type (hex)"));
+            builder.AppendLine(String.Format("0x{0:X4}",(Int16)this.typeResource));
             builder.Append("\n\n");
 
             return builder.ToString();

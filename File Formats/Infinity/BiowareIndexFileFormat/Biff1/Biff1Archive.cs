@@ -416,7 +416,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.BiowareIndexFileFormat.Bi
 
 
             builder.AppendLine("Resource Data:");
-            if (LongDefinition)
+            if (LongDefinition && this.dataResource.Count > 0)
             {
                 for (Int32 i = 0; i < this.dataResource.Count; ++i)
                 {
@@ -434,7 +434,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.BiowareIndexFileFormat.Bi
 
 
             builder.AppendLine("Tileset Data:");
-            if (LongDefinition)
+            if (LongDefinition && this.dataTileset.Count > 0)
             {
                 for (Int32 i = 0; i < this.dataTileset.Count; ++i)
                 {

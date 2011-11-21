@@ -139,19 +139,22 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.BiowareIndexFileFormat.Bi
         {
             StringBuilder builder = new StringBuilder();
             builder.Append("Biff1Header:");
-            builder.Append("\n\tSignature:        '");
+            builder.Append(StringFormat.ToStringAlignment("Signature"));
+            builder.Append("'");
             builder.Append(this.signature);
-            builder.Append("'\n\tVersion:          '");
+            builder.Append("'");
+            builder.Append(StringFormat.ToStringAlignment("Version"));
+            builder.Append("'");
             builder.Append(this.version);
-            builder.Append("'\n\tResource Count:   ");
+            builder.Append("'");
+            builder.Append(StringFormat.ToStringAlignment("Resource Count"));
             builder.Append(this.countResource);
-            builder.Append("\n\tTileset Count:    ");
+            builder.Append(StringFormat.ToStringAlignment("Tileset Count"));
             builder.Append(this.countTileset);
-            builder.Append("\n\tResource Offset:  ");
+            builder.Append(StringFormat.ToStringAlignment("Resource Count"));
             builder.Append(this.offsetResource);
-            builder.Append("\n\tTileset Offset:   ");
+            builder.Append(StringFormat.ToStringAlignment("Tileset Count"));
             builder.Append(this.OffsetTileset);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }
