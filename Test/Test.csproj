@@ -112,6 +112,9 @@
     <Compile Include="WinForm\ACM\BitBlock Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="WinForm\ACM\WAVC Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WinForm\Harness Non-File Test Control Base.cs">
       <SubType>UserControl</SubType>
     </Compile>

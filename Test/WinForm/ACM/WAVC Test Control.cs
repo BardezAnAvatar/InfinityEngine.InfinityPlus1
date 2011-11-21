@@ -10,8 +10,8 @@ using Bardez.Projects.InfinityPlus1.Utility;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
 {
-    /// <summary>User control for testing the ACM file class</summary>
-    public class AcmFileTestControl : HarnessFileBaseTestControlBase<AcmFileTest>
+    /// <summary>User control for testing the WAVC file class</summary>
+    public class WavCFileTestControl : HarnessFileBaseTestControlBase<WavcFileTest>
     {
         /// <summary>Boolean indicating whether audio should play back, used primarily during the testing loop on test cases</summary>
         protected Boolean playingAudio;
@@ -23,10 +23,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
         #endregion
 
         /// <summary>Default constructor</summary>
-        public AcmFileTestControl()
+        public WavCFileTestControl()
         {
             this.InitializeComponent();
-            this.Harness = new AcmFileTest();
+            this.Harness = new WavcFileTest();
             this.InitializeControlFields();
             this.chkbxRenderAudio.CheckedChanged += new EventHandler(this.chkbxRenderAudio_CheckedChanged);
             this.playingAudio = false;

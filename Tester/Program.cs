@@ -3,7 +3,6 @@ using System.Windows.Forms;
 
 using Bardez.Projects.ExceptionHandler;
 using Bardez.Projects.InfinityPlus1.Test;
-using Bardez.Projects.InfinityPlus1.Test.AmpitudeCodedModulation;
 using Bardez.Projects.InfinityPlus1.Test.BiowareIndexFileFormat.Biff1;
 using Bardez.Projects.InfinityPlus1.Test.Character;
 using Bardez.Projects.InfinityPlus1.Test.ChitinKey;

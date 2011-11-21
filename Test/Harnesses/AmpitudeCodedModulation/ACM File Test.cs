@@ -23,7 +23,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
         public const String configKey = "Test.ACM.AcmPath.BT1";
 
         /// <summary>Reference to XAudio2 object</summary>
-        protected XAudio2Output Output;
+        protected XAudio2Output Output { get; set; }
 
         /// <summary>List of audio files decoded</summary>
         protected GenericOrderedDictionary<String, AcmAudioFile> audioFiles;
@@ -75,9 +75,9 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
             AcmAudioFile file = this.audioFiles[testArgs.Path];
 
             if (this.RenderAudio)       //render audio
-                this.RenderAudioProcedurally(file);
+                this.RenderAudioSamples(file);
             else                        //save to disk for analysis
-                SaveRawPcmToDisk(file);
+                SaveRawPcmToDisk(file, testArgs.Path);
         }
 
         /// <summary>Method exposing a stop command</summary>
@@ -102,9 +102,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
 
         /// <summary>Saves the raw PCM samples to disk</summary>
         /// <param name="file">AudioFile to read samples from</param>
-        protected static void SaveRawPcmToDisk(AcmAudioFile file)
+        /// <param name="filePath">Base filpath to rewrite to</param>
+        protected static void SaveRawPcmToDisk(AcmAudioFile file, String filePath)
         {
-            String path = ConfigurationHandlerMulti.GetSettingValue("Test.ACM.AcmPath") + ".acm.raw";
+            String path = filePath + ".pcm.raw";
             using (FileStream dest = new FileStream(path, FileMode.Create, FileAccess.Write))
             {
                 Byte[] sampleData = file.GetSampleData();
@@ -114,7 +115,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
 
         /// <summary>Renders the audio file to hardware, used one file at a time</summary>
         /// <param name="file">Source AudioFile to read from</param>
-        protected void RenderAudioProcedurally(AcmAudioFile file)
+        protected void RenderAudioSamples(AcmAudioFile file)
         {
             WaveFormatEx waveFormat = file.GetWaveFormat();
             Byte[] sampleData = file.GetSampleData();
@@ -122,7 +123,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
             Int32 key = Output.CreatePlayback(waveFormat);
             Output.SubmitData(sampleData, key, 0, false);
 
-            //play audio & Let the sound play /* I've made myself a neat little race condition here! */
+            //play audio & Let the sound play
             Boolean isRunning = true;
             while (isRunning)
             {
@@ -133,7 +134,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
         }
         #endregion
 
-        #region Deprecatd Code
+        #region Deprecated Code
         /// <summary>Tests the code, one audio file at a time</summary>
         /// <param name="paths">File paths to test</param>
         [Obsolete("On-the-fly coding remnant")]

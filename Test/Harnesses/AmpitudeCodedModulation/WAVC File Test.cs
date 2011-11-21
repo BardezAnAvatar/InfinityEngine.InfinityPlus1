@@ -5,158 +5,184 @@ using System.Threading;
 
 using Bardez.Projects.Configuration;
 using Bardez.Projects.DirectX.XAudio2;
-using Bardez.Projects.InfinityPlus1.Output.Audio;
-using Bardez.Projects.Win32.Audio;
 using Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM;
 using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component;
 using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Wave;
+using Bardez.Projects.InfinityPlus1.Output.Audio;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.ReusableCode;
+using Bardez.Projects.Win32.Audio;
 
-namespace Bardez.Projects.InfinityPlus1.Test.AmpitudeCodedModulation
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM.WavCAudioFile class.</summary>
-    public class WavcFileTest : ITester
+    /// <remarks>Exteremely similar to AcmFileTest. Merge if further testing</remarks>
+    public class WavcFileTest : FileTesterBase
     {
-        protected const String configKey = "Test.WAVC.WavPath.IWD.Female_Rogue_2";
-        protected XAudio2Output output;
-        protected List<WavCAudioFile> audioFiles;
-        protected List<WavCAudioFile> AudioFiles
+        #region Fields
+        /// <summary>Constant key to look up in app.config</summary>
+        public const String configKey = "Test.WAVC.WavPath.IWD.Female_Rogue_2";
+
+        /// <summary>Reference to XAudio2 object</summary>
+        protected XAudio2Output Output { get; set; }
+
+        /// <summary>List of audio files decoded</summary>
+        protected GenericOrderedDictionary<String, WavCAudioFile> audioFiles;
+
+        /// <summary>Exposure of list of audio files decoded</summary>
+        protected GenericOrderedDictionary<String, WavCAudioFile> AudioFiles
         {
             get
             {
                 if (this.audioFiles == null)
-                    this.audioFiles = new List<WavCAudioFile>();
+                    this.audioFiles = new GenericOrderedDictionary<String, WavCAudioFile>();
 
                 return this.audioFiles;
             }
         }
+
+        /// <summary>Flag indicating status of decoded audio data</summary>
         protected Boolean decodedData = false;
 
-        public void Test()
-        {
-            this.output = XAudio2Output.Instance;
-
-            String[] paths = ConfigurationHandlerMulti.GetSettingValues(configKey).ToArray();
-            //this.TestProcedurally(paths);
-            this.TestSequentially(paths);
-
-            //String path = ConfigurationHandlerMulti.GetSettingValue("Test.ACM.AcmPath");
-            //this.Test(path, false);
-            //this.TestMulti(paths);
-        }
-
-        /// <summary>Tests the code, one audio file at a time</summary>
-        /// <param name="paths">File paths to test</param>
-        public void TestProcedurally(String[] paths)
-        {
-            foreach (String path in paths)
-                this.Test(path, false);
-
-            this.decodedData = true;
-        }
-
-        /// <summary>Tests the code, one audio file after another for gapless playback</summary>
-        public void TestSequentially(String[] paths)
-        {
-            this.ReadFiles(paths);
-
-            Int32 key = -1; //key to the source voice
-            if (this.AudioFiles.Count > 0)
-            {
-                //load up the initial Source voice
-                WaveFormatEx waveFormat = this.AudioFiles[0].GetWaveFormat();
-                key = output.CreatePlayback(waveFormat);
-
-                //prime before loop
-                Byte[] sampleData = this.AudioFiles[0].GetSampleData();
-                output.SubmitData(sampleData, key, 0, true, false);
-
-                //loop
-                for (Int32 index = 1; index < this.AudioFiles.Count; ++index)
-                {
-                    sampleData = this.AudioFiles[index].GetSampleData();
-                    output.SubmitSubsequentData(sampleData, key, (this.AudioFiles.Count - 1) > index);
-                }
-
-                this.output.StartPlayback(key);
-
-                //play audio & Let the sound play
-                Boolean isRunning = true;
-                while (isRunning)
-                {
-                    VoiceState state = output.GetSourceVoiceState(key);
-                    isRunning = (state != null) && (state.BuffersQueued > 0);
-                    Thread.Sleep(10);
-                }
-            }
-        }
+        /// <summary>Flag indicating whether or not to render audio data</summary>
+        public Boolean RenderAudio { get; set; }
+        #endregion
         
-        /// <summary>Tests a single file</summary>
-        /// <param name="path">File to open and read, then replicate</param>
-        /// <param name="prompt">Boolean indicating whether or not to prompt between read and write</param>
-        public void Test(String path, Boolean prompt)
+        #region Construction
+        /// <summary>Default constructor</summary>
+        public WavcFileTest()
         {
-            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                this.Test(stream, prompt);
+            this.InitializeInstance();
+            this.decodedData = false;
+            this.RenderAudio = true;
+        }
+        #endregion
+
+        /// <summary>Initializes the test class data</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="e">Specific initialization event parameters</param>
+        protected override void InitializeTestData(Object sender, EventArgs e)
+        {
+            this.Output = XAudio2Output.Instance;
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(WavcFileTest.configKey);
+            this.ReadFiles();
         }
 
-        /// <summary>Tests the read and ToString() methods of the structure</summary>
-        /// <param name="source">Source Stream to read from</param>
-        /// <param name="prompt">Boolean indicating whether or not to prompt for pressing [Enter] to continue</param>
-        public void Test(Stream source, Boolean prompt)
+        /// <summary>Event to raise for testing instance(s)</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="testArgs">Arguments containing the item to test (usually a file path)</param>
+        protected override void TestCase(Object sender, TestEventArgs testArgs)
         {
-            WavCAudioFile file = new WavCAudioFile();
-            file.Read(source);
-            this.AudioFiles.Add(file);
+            WavCAudioFile file = this.audioFiles[testArgs.Path];
 
-            if (true)           //render audio
-                this.RenderAudioProcedurally(file);
+            if (this.RenderAudio)       //render audio
+                this.RenderAudioSamples(file);
+            else                        //save to disk for analysis
+                SaveRawPcmToDisk(file, testArgs.Path);
+        }
+
+        /// <summary>Method exposing a stop command</summary>
+        public virtual void StopPlayback()
+        {
+            this.Output.HaltPlayback();
+        }
+
+        #region Helper Methods
+        /// <summary>Reads all audiofiles to the AudioFiles list</summary>
+        protected virtual void ReadFiles()
+        {
+            if (!this.decodedData)
+                foreach (String path in this.FilePaths)
+                    using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                    {
+                        WavCAudioFile file = new WavCAudioFile();
+                        file.Read(stream);
+                        this.AudioFiles.Add(path, file);
+                    }
+        }
+
+        /// <summary>Renders the audio file to hardware, used one file at a time</summary>
+        /// <param name="file">Source AudioFile to read from</param>
+        protected virtual void RenderAudioSamples(WavCAudioFile file)
+        {
+            WaveFormatEx waveFormat = file.GetWaveFormat();
+            Byte[] sampleData = file.GetSampleData();
+
+            Int32 key = Output.CreatePlayback(waveFormat);
+            Output.SubmitData(sampleData, key, 0, false);
+
+            //play audio & Let the sound play
+            Boolean isRunning = true;
+            while (isRunning)
+            {
+                VoiceState state = Output.GetSourceVoiceState(key);
+                isRunning = (state != null) && (state.BuffersQueued > 0);
+                Thread.Sleep(10);
+            }
         }
 
         /// <summary>Saves the raw PCM samples to disk</summary>
         /// <param name="file">AudioFile to read samples from</param>
-        protected static void SaveRawPcmToDisk(WavCAudioFile file)
+        /// <param name="filePath">Base filpath to rewrite to</param>
+        protected static void SaveRawPcmToDisk(AcmAudioFile file, String filePath)
         {
-            String path = ConfigurationHandlerMulti.GetSettingValue("Test.ACM.AcmPath") + ".acm.raw";
+            String path = filePath + ".pcm.raw";
             using (FileStream dest = new FileStream(path, FileMode.Create, FileAccess.Write))
             {
                 Byte[] sampleData = file.GetSampleData();
                 dest.Write(sampleData, 0, sampleData.Length);
             }
         }
+        #endregion
 
-        /// <summary>Renders the audio file to hardware, used one file at a time</summary>
-        /// <param name="file">Source AudioFile to read from</param>
-        protected void RenderAudioProcedurally(WavCAudioFile file)
+        #region Deprecated Code
+        /// <summary>Tests the code, one audio file at a time</summary>
+        /// <param name="paths">File paths to test</param>
+        [Obsolete("On-the-fly coding remnant")]
+        protected virtual void TestProcedurally(String[] paths)
         {
-            WaveFormatEx waveFormat = file.GetWaveFormat();
-            Byte[] sampleData = file.GetSampleData();
+            foreach (String path in paths)
+                this.TestCase(this, new TestEventArgs(path));
+            
+            this.decodedData = true;
+        }
 
-            Int32 key = output.CreatePlayback(waveFormat);
-            output.SubmitData(sampleData, key, 0, false);
+        /// <summary>Tests the code, one audio file after another for gapless playback</summary>
+        [Obsolete("On-the-fly coding remnant")]
+        protected virtual void TestSequentially(String[] paths)
+        {
+            this.ReadFiles();
 
-            //play audio & Let the sound play /* I've made myself a neat little race condition here! */
-            Boolean isRunning = true;
-            while (isRunning)
+            Int32 key = -1; //key to the source voice
+            if (this.AudioFiles.Count > 0)
             {
-                VoiceState state = output.GetSourceVoiceState(key);
-                isRunning = (state != null) && (state.BuffersQueued > 0);
-                Thread.Sleep(10);
+                //load up the initial Source voice
+                WaveFormatEx waveFormat = this.AudioFiles[0].GetWaveFormat();
+                key = Output.CreatePlayback(waveFormat);
+
+                //prime before loop
+                Byte[] sampleData = this.AudioFiles[0].GetSampleData();
+                Output.SubmitData(sampleData, key, 0, true, false);
+
+                //loop
+                for (Int32 index = 1; index < this.AudioFiles.Count; ++index)
+                {
+                    sampleData = this.AudioFiles[index].GetSampleData();
+                    Output.SubmitSubsequentData(sampleData, key, (this.AudioFiles.Count - 1) > index);
+                }
+
+                this.Output.StartPlayback(key);
+
+                //play audio & Let the sound play
+                Boolean isRunning = true;
+                while (isRunning)
+                {
+                    VoiceState state = Output.GetSourceVoiceState(key);
+                    isRunning = (state != null) && (state.BuffersQueued > 0);
+                    Thread.Sleep(10);
+                }
             }
         }
-
-        /// <summary>Reads all audiofiles to the AudioFiles list</summary>
-        /// <param name="paths">Filesystem paths for files to read</param>
-        protected void ReadFiles(String[] paths)
-        {
-            if (!this.decodedData)
-                foreach (String path in paths)
-                    using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                    {
-                        WavCAudioFile file = new WavCAudioFile();
-                        file.Read(stream);
-                        this.AudioFiles.Add(file);
-                    }
-        }
+        #endregion
     }
 }
