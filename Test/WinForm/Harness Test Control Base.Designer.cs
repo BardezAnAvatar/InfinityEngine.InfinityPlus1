@@ -31,12 +31,15 @@
             this.bntClearLog = new System.Windows.Forms.Button();
             this.btnTestSelected = new System.Windows.Forms.Button();
             this.btnInitialize = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.logOutput = new Bardez.Projects.InfinityPlus1.Test.WinForm.LoggingControl();
             this.tblMain = new System.Windows.Forms.TableLayoutPanel();
+            this.splitContainerHarnessResults = new System.Windows.Forms.SplitContainer();
+            this.logOutput = new Bardez.Projects.InfinityPlus1.Test.WinForm.LoggingControl();
             this.pnlTest.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.tblMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerHarnessResults)).BeginInit();
+            this.splitContainerHarnessResults.Panel1.SuspendLayout();
+            this.splitContainerHarnessResults.Panel2.SuspendLayout();
+            this.splitContainerHarnessResults.SuspendLayout();
             this.SuspendLayout();
             // 
             // chklbTestItems
@@ -44,15 +47,16 @@
             this.chklbTestItems.CheckOnClick = true;
             this.chklbTestItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chklbTestItems.FormattingEnabled = true;
-            this.chklbTestItems.Location = new System.Drawing.Point(3, 23);
+            this.chklbTestItems.Location = new System.Drawing.Point(0, 13);
             this.chklbTestItems.Name = "chklbTestItems";
-            this.chklbTestItems.Size = new System.Drawing.Size(201, 391);
+            this.chklbTestItems.Size = new System.Drawing.Size(229, 400);
             this.chklbTestItems.TabIndex = 0;
             // 
             // lblListBoxDescriptor
             // 
             this.lblListBoxDescriptor.AutoSize = true;
-            this.lblListBoxDescriptor.Location = new System.Drawing.Point(3, 0);
+            this.lblListBoxDescriptor.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblListBoxDescriptor.Location = new System.Drawing.Point(0, 0);
             this.lblListBoxDescriptor.Name = "lblListBoxDescriptor";
             this.lblListBoxDescriptor.Size = new System.Drawing.Size(73, 13);
             this.lblListBoxDescriptor.TabIndex = 1;
@@ -61,8 +65,9 @@
             // lblOutputDescripor
             // 
             this.lblOutputDescripor.AutoSize = true;
+            this.lblOutputDescripor.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblOutputDescripor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.lblOutputDescripor.Location = new System.Drawing.Point(210, 0);
+            this.lblOutputDescripor.Location = new System.Drawing.Point(0, 0);
             this.lblOutputDescripor.Name = "lblOutputDescripor";
             this.lblOutputDescripor.Size = new System.Drawing.Size(82, 13);
             this.lblOutputDescripor.TabIndex = 0;
@@ -109,47 +114,50 @@
             this.btnInitialize.UseVisualStyleBackColor = true;
             this.btnInitialize.Click += new System.EventHandler(this.btnInitialize_Click);
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel1.Controls.Add(this.chklbTestItems, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblListBoxDescriptor, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblOutputDescripor, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.logOutput, 1, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 43);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(693, 417);
-            this.tableLayoutPanel1.TabIndex = 3;
-            // 
-            // logOutput
-            // 
-            this.logOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.logOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logOutput.Location = new System.Drawing.Point(210, 23);
-            this.logOutput.Name = "logOutput";
-            this.logOutput.Size = new System.Drawing.Size(480, 391);
-            this.logOutput.TabIndex = 2;
-            // 
             // tblMain
             // 
             this.tblMain.ColumnCount = 1;
             this.tblMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblMain.Controls.Add(this.splitContainerHarnessResults, 0, 1);
             this.tblMain.Controls.Add(this.pnlTest, 0, 0);
-            this.tblMain.Controls.Add(this.tableLayoutPanel1, 0, 1);
             this.tblMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblMain.Location = new System.Drawing.Point(0, 0);
             this.tblMain.Name = "tblMain";
             this.tblMain.RowCount = 2;
             this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tblMain.Size = new System.Drawing.Size(699, 463);
             this.tblMain.TabIndex = 2;
+            // 
+            // splitContainerHarnessResults
+            // 
+            this.splitContainerHarnessResults.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.splitContainerHarnessResults.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerHarnessResults.Location = new System.Drawing.Point(3, 43);
+            this.splitContainerHarnessResults.Name = "splitContainerHarnessResults";
+            // 
+            // splitContainerHarnessResults.Panel1
+            // 
+            this.splitContainerHarnessResults.Panel1.Controls.Add(this.chklbTestItems);
+            this.splitContainerHarnessResults.Panel1.Controls.Add(this.lblListBoxDescriptor);
+            // 
+            // splitContainerHarnessResults.Panel2
+            // 
+            this.splitContainerHarnessResults.Panel2.Controls.Add(this.logOutput);
+            this.splitContainerHarnessResults.Panel2.Controls.Add(this.lblOutputDescripor);
+            this.splitContainerHarnessResults.Size = new System.Drawing.Size(693, 417);
+            this.splitContainerHarnessResults.SplitterDistance = 233;
+            this.splitContainerHarnessResults.TabIndex = 3;
+            // 
+            // logOutput
+            // 
+            this.logOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.logOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logOutput.Location = new System.Drawing.Point(0, 13);
+            this.logOutput.Name = "logOutput";
+            this.logOutput.Size = new System.Drawing.Size(452, 400);
+            this.logOutput.TabIndex = 2;
             // 
             // HarnessBaseTestControlBase
             // 
@@ -159,9 +167,13 @@
             this.Name = "HarnessBaseTestControlBase";
             this.Size = new System.Drawing.Size(699, 463);
             this.pnlTest.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.tblMain.ResumeLayout(false);
+            this.splitContainerHarnessResults.Panel1.ResumeLayout(false);
+            this.splitContainerHarnessResults.Panel1.PerformLayout();
+            this.splitContainerHarnessResults.Panel2.ResumeLayout(false);
+            this.splitContainerHarnessResults.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerHarnessResults)).EndInit();
+            this.splitContainerHarnessResults.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -174,9 +186,9 @@
         protected System.Windows.Forms.Panel pnlTest;
         protected System.Windows.Forms.Button btnTestSelected;
         protected System.Windows.Forms.Button btnInitialize;
-        protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         protected System.Windows.Forms.TableLayoutPanel tblMain;
         protected LoggingControl logOutput;
         protected System.Windows.Forms.Button bntClearLog;
+        protected System.Windows.Forms.SplitContainer splitContainerHarnessResults;
     }
 }

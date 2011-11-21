@@ -44,7 +44,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
         protected Boolean decodedData;
 
         /// <summary>Flag indicating whether or not to render audio data</summary>
-        protected Boolean renderAudio;
+        public Boolean RenderAudio { get; set; }
         #endregion
 
         #region Construction
@@ -53,7 +53,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
         {
             this.InitializeInstance();
             this.decodedData = false;
-            this.renderAudio = true;
+            this.RenderAudio = true;
         }
         #endregion
 
@@ -74,10 +74,16 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
         {
             AcmAudioFile file = this.audioFiles[testArgs.Path];
 
-            if (this.renderAudio)       //render audio
+            if (this.RenderAudio)       //render audio
                 this.RenderAudioProcedurally(file);
             else                        //save to disk for analysis
                 SaveRawPcmToDisk(file);
+        }
+
+        /// <summary>Method exposing a stop command</summary>
+        public virtual void StopPlayback()
+        {
+            this.Output.HaltPlayback();
         }
 
         #region Helper Methods
@@ -131,7 +137,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
         /// <summary>Tests the code, one audio file at a time</summary>
         /// <param name="paths">File paths to test</param>
         [Obsolete("On-the-fly coding remnant")]
-        public void TestProcedurally(String[] paths)
+        protected void TestProcedurally(String[] paths)
         {
             foreach (String path in paths)
                 this.TestCase(this, new TestEventArgs(path));
@@ -141,7 +147,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
 
         /// <summary>Tests the code, one audio file after another for gapless playback</summary>
         [Obsolete("On-the-fly coding remnant")]
-        public void TestSequentially(String[] paths)
+        protected void TestSequentially(String[] paths)
         {
             this.ReadFiles();
 

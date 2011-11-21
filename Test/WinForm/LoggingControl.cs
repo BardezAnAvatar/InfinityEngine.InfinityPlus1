@@ -12,6 +12,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
     /// <summary>Control intended to display loggin messages raised by another class</summary>
     public partial class LoggingControl : UserControl
     {
+        private delegate void VoidStringParameterInvoke(String param);
+
         /// <summary>Default constructor</summary>
         public LoggingControl()
         {
@@ -29,30 +31,35 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         /// <param name="text">Text of te new control to add</param>
         protected virtual void AddMessageControl(String text)
         {
-            TextBox messageControl = new TextBox();
-            messageControl.Text = text;
-            messageControl.BorderStyle = BorderStyle.FixedSingle;
-            messageControl.ReadOnly = true;
-            messageControl.Multiline = true;
-            messageControl.Dock = DockStyle.Top;
-            messageControl.WordWrap = true;
-            messageControl.Font = new Font("Consolas", 8.25f, FontStyle.Regular);
-
-            Size ofInterest = TextRenderer.MeasureText(text, messageControl.Font);
-            Size interest = TextRenderer.MeasureText(text, messageControl.Font, messageControl.Size);
-
-            if (this.pnlControlParent.Controls.Count == 0)
-                messageControl.Top = 0;
+            if (this.InvokeRequired)
+                this.Invoke(new VoidStringParameterInvoke(this.AddMessageControl), new Object[] { text });
             else
             {
-                Control previous = this.pnlControlParent.Controls[this.pnlControlParent.Controls.Count - 1];
-                messageControl.Top = previous.Top + previous.Height + 2;
+                TextBox messageControl = new TextBox();
+                messageControl.Text = text;
+                messageControl.BorderStyle = BorderStyle.FixedSingle;
+                messageControl.ReadOnly = true;
+                messageControl.Multiline = true;
+                messageControl.Dock = DockStyle.Top;
+                messageControl.WordWrap = true;
+                messageControl.Font = new Font("Consolas", 8.25f, FontStyle.Regular);
+
+                Size ofInterest = TextRenderer.MeasureText(text, messageControl.Font);
+                Size interest = TextRenderer.MeasureText(text, messageControl.Font, messageControl.Size);
+
+                if (this.pnlControlParent.Controls.Count == 0)
+                    messageControl.Top = 0;
+                else
+                {
+                    Control previous = this.pnlControlParent.Controls[this.pnlControlParent.Controls.Count - 1];
+                    messageControl.Top = previous.Top + previous.Height + 2;
+                }
+
+                Size output = this.CalculateDimensionsConstrainedByWidth(text, messageControl.Font, this.pnlControlParent.Size);
+                messageControl.Size = output;
+
+                this.pnlControlParent.Controls.Add(messageControl);
             }
-
-            Size output = this.CalculateDimensionsConstrainedByWidth(text, messageControl.Font, this.pnlControlParent.Size);
-            messageControl.Size = output;
-
-            this.pnlControlParent.Controls.Add(messageControl);
         }
 
         /// <summary>Calculates the appropriate dimensions of a control, given the text to be assigned</summary>

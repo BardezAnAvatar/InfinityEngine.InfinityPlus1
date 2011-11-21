@@ -32,7 +32,8 @@
             this.tabpage2DA = new System.Windows.Forms.TabPage();
             this.tabpageAcm = new System.Windows.Forms.TabPage();
             this.tabctrlAcm = new System.Windows.Forms.TabControl();
-            this.tabPageAcmHeader = new System.Windows.Forms.TabPage();
+            this.tabpageAcmHeader = new System.Windows.Forms.TabPage();
+            this.acmHeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ACM.AcmHeaderTestControl();
             this.tabpageBiff = new System.Windows.Forms.TabPage();
             this.tabpageCharacter = new System.Windows.Forms.TabPage();
             this.tabpageKey = new System.Windows.Forms.TabPage();
@@ -41,7 +42,7 @@
             this.tabpageEffect = new System.Windows.Forms.TabPage();
             this.tabpageIni = new System.Windows.Forms.TabPage();
             this.tabpageItem = new System.Windows.Forms.TabPage();
-            this.tabPageMusic = new System.Windows.Forms.TabPage();
+            this.tabpageMusic = new System.Windows.Forms.TabPage();
             this.tabpageRiff = new System.Windows.Forms.TabPage();
             this.tabpageSpell = new System.Windows.Forms.TabPage();
             this.tabpageStore = new System.Windows.Forms.TabPage();
@@ -49,11 +50,13 @@
             this.tabpageTalk = new System.Windows.Forms.TabPage();
             this.tabpageOutput = new System.Windows.Forms.TabPage();
             this.tabpageReusableCode = new System.Windows.Forms.TabPage();
-            this.acmHeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ACM.AcmHeaderTestControl();
+            this.tabpageAcmFile = new System.Windows.Forms.TabPage();
+            this.acmFileTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ACM.AcmFileTestControl();
             this.tabctrlMain.SuspendLayout();
             this.tabpageAcm.SuspendLayout();
             this.tabctrlAcm.SuspendLayout();
-            this.tabPageAcmHeader.SuspendLayout();
+            this.tabpageAcmHeader.SuspendLayout();
+            this.tabpageAcmFile.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabctrlMain
@@ -68,7 +71,7 @@
             this.tabctrlMain.Controls.Add(this.tabpageEffect);
             this.tabctrlMain.Controls.Add(this.tabpageIni);
             this.tabctrlMain.Controls.Add(this.tabpageItem);
-            this.tabctrlMain.Controls.Add(this.tabPageMusic);
+            this.tabctrlMain.Controls.Add(this.tabpageMusic);
             this.tabctrlMain.Controls.Add(this.tabpageRiff);
             this.tabctrlMain.Controls.Add(this.tabpageSpell);
             this.tabctrlMain.Controls.Add(this.tabpageStore);
@@ -105,7 +108,8 @@
             // 
             // tabctrlAcm
             // 
-            this.tabctrlAcm.Controls.Add(this.tabPageAcmHeader);
+            this.tabctrlAcm.Controls.Add(this.tabpageAcmHeader);
+            this.tabctrlAcm.Controls.Add(this.tabpageAcmFile);
             this.tabctrlAcm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabctrlAcm.Location = new System.Drawing.Point(3, 3);
             this.tabctrlAcm.Name = "tabctrlAcm";
@@ -113,16 +117,25 @@
             this.tabctrlAcm.Size = new System.Drawing.Size(1092, 450);
             this.tabctrlAcm.TabIndex = 0;
             // 
-            // tabPageAcmHeader
+            // tabpageAcmHeader
             // 
-            this.tabPageAcmHeader.Controls.Add(this.acmHeaderTestControl);
-            this.tabPageAcmHeader.Location = new System.Drawing.Point(4, 22);
-            this.tabPageAcmHeader.Name = "tabPageAcmHeader";
-            this.tabPageAcmHeader.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAcmHeader.Size = new System.Drawing.Size(1084, 424);
-            this.tabPageAcmHeader.TabIndex = 0;
-            this.tabPageAcmHeader.Text = "Header";
-            this.tabPageAcmHeader.UseVisualStyleBackColor = true;
+            this.tabpageAcmHeader.Controls.Add(this.acmHeaderTestControl);
+            this.tabpageAcmHeader.Location = new System.Drawing.Point(4, 22);
+            this.tabpageAcmHeader.Name = "tabpageAcmHeader";
+            this.tabpageAcmHeader.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageAcmHeader.Size = new System.Drawing.Size(1084, 424);
+            this.tabpageAcmHeader.TabIndex = 0;
+            this.tabpageAcmHeader.Text = "Header";
+            this.tabpageAcmHeader.UseVisualStyleBackColor = true;
+            // 
+            // acmHeaderTestControl
+            // 
+            this.acmHeaderTestControl.BackColor = System.Drawing.SystemColors.Control;
+            this.acmHeaderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.acmHeaderTestControl.Location = new System.Drawing.Point(3, 3);
+            this.acmHeaderTestControl.Name = "acmHeaderTestControl";
+            this.acmHeaderTestControl.Size = new System.Drawing.Size(1078, 418);
+            this.acmHeaderTestControl.TabIndex = 0;
             // 
             // tabpageBiff
             // 
@@ -196,14 +209,14 @@
             this.tabpageItem.TabIndex = 8;
             this.tabpageItem.Text = "ITM";
             // 
-            // tabPageMusic
+            // tabpageMusic
             // 
-            this.tabPageMusic.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPageMusic.Location = new System.Drawing.Point(4, 22);
-            this.tabPageMusic.Name = "tabPageMusic";
-            this.tabPageMusic.Size = new System.Drawing.Size(1098, 456);
-            this.tabPageMusic.TabIndex = 9;
-            this.tabPageMusic.Text = "MUS";
+            this.tabpageMusic.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageMusic.Location = new System.Drawing.Point(4, 22);
+            this.tabpageMusic.Name = "tabpageMusic";
+            this.tabpageMusic.Size = new System.Drawing.Size(1098, 456);
+            this.tabpageMusic.TabIndex = 9;
+            this.tabpageMusic.Text = "MUS";
             // 
             // tabpageRiff
             // 
@@ -268,14 +281,23 @@
             this.tabpageReusableCode.TabIndex = 11;
             this.tabpageReusableCode.Text = "Reusable Code";
             // 
-            // acmHeaderTestControl
+            // tabpageAcmFile
             // 
-            this.acmHeaderTestControl.BackColor = System.Drawing.SystemColors.Control;
-            this.acmHeaderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.acmHeaderTestControl.Location = new System.Drawing.Point(3, 3);
-            this.acmHeaderTestControl.Name = "acmHeaderTestControl";
-            this.acmHeaderTestControl.Size = new System.Drawing.Size(1078, 418);
-            this.acmHeaderTestControl.TabIndex = 0;
+            this.tabpageAcmFile.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageAcmFile.Controls.Add(this.acmFileTestControl);
+            this.tabpageAcmFile.Location = new System.Drawing.Point(4, 22);
+            this.tabpageAcmFile.Name = "tabpageAcmFile";
+            this.tabpageAcmFile.Size = new System.Drawing.Size(1084, 424);
+            this.tabpageAcmFile.TabIndex = 1;
+            this.tabpageAcmFile.Text = "File";
+            // 
+            // acmFileTestControl
+            // 
+            this.acmFileTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.acmFileTestControl.Location = new System.Drawing.Point(0, 0);
+            this.acmFileTestControl.Name = "acmFileTestControl";
+            this.acmFileTestControl.Size = new System.Drawing.Size(1084, 424);
+            this.acmFileTestControl.TabIndex = 0;
             // 
             // TestUI
             // 
@@ -288,7 +310,8 @@
             this.tabctrlMain.ResumeLayout(false);
             this.tabpageAcm.ResumeLayout(false);
             this.tabctrlAcm.ResumeLayout(false);
-            this.tabPageAcmHeader.ResumeLayout(false);
+            this.tabpageAcmHeader.ResumeLayout(false);
+            this.tabpageAcmFile.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -299,7 +322,7 @@
         private System.Windows.Forms.TabPage tabpage2DA;
         private System.Windows.Forms.TabPage tabpageAcm;
         private System.Windows.Forms.TabControl tabctrlAcm;
-        private System.Windows.Forms.TabPage tabPageAcmHeader;
+        private System.Windows.Forms.TabPage tabpageAcmHeader;
         private System.Windows.Forms.TabPage tabpageBiff;
         private System.Windows.Forms.TabPage tabpageCharacter;
         private System.Windows.Forms.TabPage tabpageKey;
@@ -308,7 +331,7 @@
         private System.Windows.Forms.TabPage tabpageEffect;
         private System.Windows.Forms.TabPage tabpageIni;
         private System.Windows.Forms.TabPage tabpageItem;
-        private System.Windows.Forms.TabPage tabPageMusic;
+        private System.Windows.Forms.TabPage tabpageMusic;
         private System.Windows.Forms.TabPage tabpageRiff;
         private System.Windows.Forms.TabPage tabpageSpell;
         private System.Windows.Forms.TabPage tabpageStore;
@@ -317,5 +340,7 @@
         private System.Windows.Forms.TabPage tabpageOutput;
         private System.Windows.Forms.TabPage tabpageReusableCode;
         private Test.WinForm.ACM.AcmHeaderTestControl acmHeaderTestControl;
+        private System.Windows.Forms.TabPage tabpageAcmFile;
+        private Test.WinForm.ACM.AcmFileTestControl acmFileTestControl;
     }
 }
