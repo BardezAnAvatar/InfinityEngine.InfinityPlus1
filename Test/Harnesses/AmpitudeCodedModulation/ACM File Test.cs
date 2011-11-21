@@ -60,14 +60,14 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
         /// <summary>Initializes the test class data</summary>
         /// <param name="sender">Object sending/raising the request</param>
         /// <param name="e">Specific initialization event parameters</param>
-        protected override void InitializeTestData(object sender, EventArgs e)
+        protected override void InitializeTestData(Object sender, EventArgs e)
         {
             this.Output = XAudio2Output.Instance;
             this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(AcmFileTest.configKey);
             this.ReadFiles();
         }
 
-        /// <summary>Event to raise for testing a specific value</summary>
+        /// <summary>Event to raise for testing instance(s)</summary>
         /// <param name="sender">Object sending/raising the request</param>
         /// <param name="testArgs">Arguments containing the item to test (usually a file path)</param>
         protected override void TestCase(Object sender, TestEventArgs testArgs)

@@ -4,18 +4,36 @@ using System.Diagnostics;
 using Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Test.AmpitudeCodedModulation
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
 {
     /// <summary>This class is a fairly legitimate unit test of all the amplitude and bitread conditions for "k12" - "k45"</summary>
-    public class BitBlockTest : ITester
+    public class BitBlockTest : TesterBase
     {
-        public void Test()
+        #region Construction
+        /// <summary>Default constructor</summary>
+        public BitBlockTest()
         {
-            //this.TestAllAmplitudeReads();
-            this.TestBase3Code();
+            this.InitializeInstance();
+        }
+        #endregion
+
+        /// <summary>Initializes the test class data</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="e">Specific initialization event parameters</param>
+        /// <remarks>No implementation due to lack of initialization to this test class</remarks>
+        protected override void InitializeTestData(object sender, EventArgs e) { }
+
+        /// <summary>Event to raise for testing instance(s)</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="testArgs">Arguments containing the item to test (usually a file path)</param>
+        protected override void TestCase(Object sender, TestEventArgs testArgs)
+        {
+            this.TestAllAmplitudeReads();
+            //this.TestBase3Code();
         }
 
-        public void TestAllAmplitudeReads()
+        /// <summary>Tests all amplitude reads (all ACM basic amplitude functions)</summary>
+        protected virtual void TestAllAmplitudeReads()
         {
             //1, 2
             this.TestSingleRead(0, 1, 2, 0);
@@ -166,15 +184,25 @@ namespace Bardez.Projects.InfinityPlus1.Test.AmpitudeCodedModulation
             this.TestSingleRead(31, 4, 5, 31);
         }
 
-        public void TestSingleRead(Byte datum, Int32 amplitude, Int32 maxBits, Int32 expectedValue)
+        /// <summary>Unit-tests a single read from the BitBlock</summary>
+        /// <param name="datum">Datum byte to populate the datastream</param>
+        /// <param name="amplitude">Amplitude bits read</param>
+        /// <param name="maxBits">Maximum numer of bits to read</param>
+        /// <param name="expectedValue">Expected value from the read</param>
+        protected void TestSingleRead(Byte datum, Int32 amplitude, Int32 maxBits, Int32 expectedValue)
         {
             BitBlock block = BitBlock.Instance;
             block.BitDataStream = new BitStream(new Byte[] { datum });
             Int32 result = block.ReadAmplitudeBits(amplitude, maxBits);
-            Debug.Assert(result == expectedValue, String.Format("Testing method with value {0}, amplitude {1} and bits of {2}; expected {3}, got {4}", datum, amplitude, maxBits, expectedValue, result));
+
+            //replacement for Debug.Assert
+            if (result != expectedValue)
+                this.DoPostMessage(new MessageEventArgs(String.Format("Testing method with value {0}, amplitude {1} and bits of {2}; expected {3}, got {4}", datum, amplitude, maxBits, expectedValue, result)));
         }
 
-        public void TestBase3Code()
+        /// <summary>Tests the base 3 data read</summary>
+        [Obsolete("Used to debg a specific issue, no output")]
+        protected void TestBase3Code()
         {
 	        int x1, x2, x3;
 

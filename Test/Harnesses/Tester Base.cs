@@ -75,7 +75,7 @@ namespace Bardez.Projects.InfinityPlus1.Test
         /// <param name="e">Specific initialization event parameters</param>
         protected abstract void InitializeTestData(Object sender, EventArgs e);
 
-        /// <summary>Event to raise for testing a specific value</summary>
+        /// <summary>Event to raise for testing instance(s)</summary>
         /// <param name="sender">Object sending/raising the request</param>
         /// <param name="testArgs">Arguments containing the item to test (usually a file path)</param>
         protected abstract void TestCase(Object sender, TestEventArgs testArgs);
