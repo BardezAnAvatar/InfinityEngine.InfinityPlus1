@@ -11,7 +11,7 @@ using Bardez.Projects.InfinityPlus1.Utility;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
 {
     /// <summary>User control for testing the ACM header</summary>
-    public class AcmHeaderTestControl : HarnessBaseTestControlBase<AcmHeaderTest>
+    public class AcmHeaderTestControl : HarnessFileBaseTestControlBase<AcmHeaderTest>
     {
         /// <summary>Default constructor</summary>
         public AcmHeaderTestControl()

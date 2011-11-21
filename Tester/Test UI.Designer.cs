@@ -34,6 +34,8 @@
             this.tabctrlAcm = new System.Windows.Forms.TabControl();
             this.tabpageAcmHeader = new System.Windows.Forms.TabPage();
             this.acmHeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ACM.AcmHeaderTestControl();
+            this.tabpageAcmFile = new System.Windows.Forms.TabPage();
+            this.acmFileTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ACM.AcmFileTestControl();
             this.tabpageBiff = new System.Windows.Forms.TabPage();
             this.tabpageCharacter = new System.Windows.Forms.TabPage();
             this.tabpageKey = new System.Windows.Forms.TabPage();
@@ -50,13 +52,14 @@
             this.tabpageTalk = new System.Windows.Forms.TabPage();
             this.tabpageOutput = new System.Windows.Forms.TabPage();
             this.tabpageReusableCode = new System.Windows.Forms.TabPage();
-            this.tabpageAcmFile = new System.Windows.Forms.TabPage();
-            this.acmFileTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ACM.AcmFileTestControl();
+            this.tabpageBitblock = new System.Windows.Forms.TabPage();
+            this.bitBlockTestControl1 = new Bardez.Projects.InfinityPlus1.Test.WinForm.ACM.BitBlockTestControl();
             this.tabctrlMain.SuspendLayout();
             this.tabpageAcm.SuspendLayout();
             this.tabctrlAcm.SuspendLayout();
             this.tabpageAcmHeader.SuspendLayout();
             this.tabpageAcmFile.SuspendLayout();
+            this.tabpageBitblock.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabctrlMain
@@ -110,6 +113,7 @@
             // 
             this.tabctrlAcm.Controls.Add(this.tabpageAcmHeader);
             this.tabctrlAcm.Controls.Add(this.tabpageAcmFile);
+            this.tabctrlAcm.Controls.Add(this.tabpageBitblock);
             this.tabctrlAcm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabctrlAcm.Location = new System.Drawing.Point(3, 3);
             this.tabctrlAcm.Name = "tabctrlAcm";
@@ -136,6 +140,24 @@
             this.acmHeaderTestControl.Name = "acmHeaderTestControl";
             this.acmHeaderTestControl.Size = new System.Drawing.Size(1078, 418);
             this.acmHeaderTestControl.TabIndex = 0;
+            // 
+            // tabpageAcmFile
+            // 
+            this.tabpageAcmFile.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageAcmFile.Controls.Add(this.acmFileTestControl);
+            this.tabpageAcmFile.Location = new System.Drawing.Point(4, 22);
+            this.tabpageAcmFile.Name = "tabpageAcmFile";
+            this.tabpageAcmFile.Size = new System.Drawing.Size(1084, 424);
+            this.tabpageAcmFile.TabIndex = 1;
+            this.tabpageAcmFile.Text = "File";
+            // 
+            // acmFileTestControl
+            // 
+            this.acmFileTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.acmFileTestControl.Location = new System.Drawing.Point(0, 0);
+            this.acmFileTestControl.Name = "acmFileTestControl";
+            this.acmFileTestControl.Size = new System.Drawing.Size(1084, 424);
+            this.acmFileTestControl.TabIndex = 0;
             // 
             // tabpageBiff
             // 
@@ -281,23 +303,23 @@
             this.tabpageReusableCode.TabIndex = 11;
             this.tabpageReusableCode.Text = "Reusable Code";
             // 
-            // tabpageAcmFile
+            // tabpageBitblock
             // 
-            this.tabpageAcmFile.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageAcmFile.Controls.Add(this.acmFileTestControl);
-            this.tabpageAcmFile.Location = new System.Drawing.Point(4, 22);
-            this.tabpageAcmFile.Name = "tabpageAcmFile";
-            this.tabpageAcmFile.Size = new System.Drawing.Size(1084, 424);
-            this.tabpageAcmFile.TabIndex = 1;
-            this.tabpageAcmFile.Text = "File";
+            this.tabpageBitblock.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageBitblock.Controls.Add(this.bitBlockTestControl1);
+            this.tabpageBitblock.Location = new System.Drawing.Point(4, 22);
+            this.tabpageBitblock.Name = "tabpageBitblock";
+            this.tabpageBitblock.Size = new System.Drawing.Size(1084, 424);
+            this.tabpageBitblock.TabIndex = 2;
+            this.tabpageBitblock.Text = "BitBlock";
             // 
-            // acmFileTestControl
+            // bitBlockTestControl1
             // 
-            this.acmFileTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.acmFileTestControl.Location = new System.Drawing.Point(0, 0);
-            this.acmFileTestControl.Name = "acmFileTestControl";
-            this.acmFileTestControl.Size = new System.Drawing.Size(1084, 424);
-            this.acmFileTestControl.TabIndex = 0;
+            this.bitBlockTestControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bitBlockTestControl1.Location = new System.Drawing.Point(0, 0);
+            this.bitBlockTestControl1.Name = "bitBlockTestControl1";
+            this.bitBlockTestControl1.Size = new System.Drawing.Size(1084, 424);
+            this.bitBlockTestControl1.TabIndex = 0;
             // 
             // TestUI
             // 
@@ -312,6 +334,7 @@
             this.tabctrlAcm.ResumeLayout(false);
             this.tabpageAcmHeader.ResumeLayout(false);
             this.tabpageAcmFile.ResumeLayout(false);
+            this.tabpageBitblock.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -342,5 +365,7 @@
         private Test.WinForm.ACM.AcmHeaderTestControl acmHeaderTestControl;
         private System.Windows.Forms.TabPage tabpageAcmFile;
         private Test.WinForm.ACM.AcmFileTestControl acmFileTestControl;
+        private System.Windows.Forms.TabPage tabpageBitblock;
+        private Test.WinForm.ACM.BitBlockTestControl bitBlockTestControl1;
     }
 }

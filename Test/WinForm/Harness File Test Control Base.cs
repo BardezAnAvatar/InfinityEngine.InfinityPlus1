@@ -10,10 +10,13 @@ using Bardez.Projects.InfinityPlus1.Utility;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 {
     /// <summary>User Control that is a base for a testing harness User Control</summary>
-    public abstract partial class HarnessBaseTestControlBase<HarnessType> : UserControl where HarnessType : FileTesterBase
+    public abstract partial class HarnessFileBaseTestControlBase<HarnessType> : UserControl where HarnessType : FileTesterBase
     {
-        /// <summary>Delegate for threaded pplication, where Invoke is required</summary>
-        protected delegate void ThreadedCallback();
+        /// <summary>Delegate for threaded application, where Invoke is required</summary>
+        protected delegate void VoidInvoke();
+
+        /// <summary>Delegate for threaded application, where Invoke is required</summary>
+        protected delegate void VoidInvokeParameterBoolean(Boolean parameter);
 
         #region Members
         /// <summary>Testing harness</summary>
@@ -36,11 +39,14 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         /// <param name="enabled">Flag indicating whether the controls should be enabled or disabled</param>
         protected virtual void ToggleControls(Boolean enabled)
         {
-            lock (this.toggleLock)
-            {
-                this.chklbTestItems.Enabled = enabled;
-                this.btnTestSelected.Enabled = enabled;
-            }
+            if (this.InvokeRequired)
+                this.Invoke(new VoidInvokeParameterBoolean(this.ToggleControls), new Object[] { enabled });
+            else
+                lock (this.toggleLock)
+                {
+                    this.chklbTestItems.Enabled = enabled;
+                    this.btnTestSelected.Enabled = enabled;
+                }
         }
         
         /// <summary>Method called after the initialize event is finished processing</summary>
@@ -64,7 +70,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         protected virtual void LoadHarnessItems()
         {
             if (this.chklbTestItems.InvokeRequired) //check if an invoke is required, call on UI thead
-                this.chklbTestItems.Invoke(new ThreadedCallback(this.LoadHarnessItems));
+                this.chklbTestItems.Invoke(new VoidInvoke(this.LoadHarnessItems));
             else    //good on existing thread
             {
                 foreach (String path in this.Harness.FilePaths)

@@ -11,7 +11,7 @@ using Bardez.Projects.InfinityPlus1.Utility;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
 {
     /// <summary>User control for testing the ACM file class</summary>
-    public class AcmFileTestControl : HarnessBaseTestControlBase<AcmFileTest>
+    public class AcmFileTestControl : HarnessFileBaseTestControlBase<AcmFileTest>
     {
         /// <summary>Boolean indicating whether audio should play back, used primarily during the testing loop on test cases</summary>
         protected Boolean playingAudio;

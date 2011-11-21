@@ -109,11 +109,20 @@
     <Compile Include="WinForm\ACM\Acm File Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WinForm\Harness Test Control Base.cs">
+    <Compile Include="WinForm\ACM\BitBlock Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WinForm\Harness Test Control Base.Designer.cs">
-      <DependentUpon>Harness Test Control Base.cs</DependentUpon>
+    <Compile Include="WinForm\Harness Non-File Test Control Base.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness Non-File Test Control Base.Designer.cs">
+      <DependentUpon>Harness Non-File Test Control Base.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Harness File Test Control Base.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness File Test Control Base.Designer.cs">
+      <DependentUpon>Harness File Test Control Base.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\LoggingControl.cs">
       <SubType>UserControl</SubType>
@@ -155,8 +164,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="WinForm\Harness Test Control Base.resx">
-      <DependentUpon>Harness Test Control Base.cs</DependentUpon>
+    <EmbeddedResource Include="WinForm\Harness Non-File Test Control Base.resx">
+      <DependentUpon>Harness Non-File Test Control Base.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Harness File Test Control Base.resx">
+      <DependentUpon>Harness File Test Control Base.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\LoggingControl.resx">
       <DependentUpon>LoggingControl.cs</DependentUpon>
