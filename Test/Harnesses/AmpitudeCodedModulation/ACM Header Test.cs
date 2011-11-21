@@ -11,7 +11,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
     public class AcmHeaderTest : FileTesterBase
     {
         /// <summary>Constant key to look up in app.config</summary>
-        public const String configKey = "Test.ACM.AcmPath";
+        protected const String configKey = "Test.ACM.AcmPath";
 
         protected AcmHeader acmFile { get; set; }
 

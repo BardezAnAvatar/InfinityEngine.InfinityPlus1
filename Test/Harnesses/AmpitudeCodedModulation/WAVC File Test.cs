@@ -21,7 +21,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
     {
         #region Fields
         /// <summary>Constant key to look up in app.config</summary>
-        public const String configKey = "Test.WAVC.WavPath.IWD.Female_Rogue_2";
+        protected const String configKey = "Test.WAVC.WavPath.IWD.Female_Rogue_2";
 
         /// <summary>Reference to XAudio2 object</summary>
         protected XAudio2Output Output { get; set; }

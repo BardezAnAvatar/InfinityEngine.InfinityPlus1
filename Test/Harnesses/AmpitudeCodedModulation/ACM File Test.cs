@@ -20,7 +20,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
     {
         #region Fields
         /// <summary>Constant key to look up in app.config</summary>
-        public const String configKey = "Test.ACM.AcmPath.BT1";
+        protected const String configKey = "Test.ACM.AcmPath.BT1";
 
         /// <summary>Reference to XAudio2 object</summary>
         protected XAudio2Output Output { get; set; }
