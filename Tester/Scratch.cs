@@ -20,10 +20,5 @@ namespace Bardez.Projects.InfinityPlus1.Tester
         {
 
         }
-
-        private void userControl11_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
