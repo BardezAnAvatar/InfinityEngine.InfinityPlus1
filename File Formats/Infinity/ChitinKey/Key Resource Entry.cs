@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Common;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
 using Bardez.Projects.InfinityPlus1.Utility;
@@ -26,12 +27,9 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey
     ///                                     * bits 13- 0: non-tileset file index (any 12 bit value, so long as it matches
     ///                                         the value used in the BIF file)
     /// </remarks>
-    public class ChitinKeyResourceEntry : IDeepCloneable
+    public class ChitinKeyResourceEntry : IInfinityFormat, IDeepCloneable
     {
         #region Protected members
-        /// <summary>This member contains the name of the resource1.</summary>
-        protected String resourceName;
-
         /// <summary>This member contains the Int32 value dictating the type of the resource1.</summary>
         protected ResourceType resourceType;
 
@@ -44,11 +42,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey
 
         #region Properties
         /// <summary>This property represents the name of the resource1.</summary>
-        public String ResourceName
-        {
-            get { return this.resourceName; }
-            set { this.resourceName = value; }
-        }
+        public ZString ResourceName { get; set; }
 
         /// <summary>This property represents the Int16 value dictating the type of the resource1.</summary>
         public ResourceType ResourceType
@@ -67,17 +61,41 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey
             set { this.resourceLocator = value; }
         }
         #endregion
-        
+
+        #region Construction
+        /// <summary>Instantiates reference types</summary>
+        public void Initialize()
+        {
+            this.ResourceName = new ZString();
+        }
+        #endregion
+
         #region Public Methods
         /// <summary>This public method reads the 18-byte header into the header record</summary>
         /// <param name="input">Input stream to read from</param>
         public void Read(Stream input)
         {
+            this.ReadBody(input);
+        }
+
+        /// <summary>This public method reads file format data structure from the input stream.</summary>
+        /// <param name="input">Stream to read from.</param>
+        /// <param name="fullRead">Boolean indicating whether to read the full stream or just everything after the identifying signature (and possibly version)</param>
+        public void Read(Stream input, Boolean fullRead)
+        {
+            this.ReadBody(input);
+        }
+
+        /// <summary>This public method reads file format data structure from the input stream, after the signature has already been read.</summary>
+        /// <param name="input">Stream to read from</param>
+        public void ReadBody(Stream input)
+        {
+            this.Initialize();
+
             Byte[] buffer = ReusableIO.BinaryRead(input, 14);   //header buffer
-            //Encoding encoding = new ASCIIEncoding();
 
             //Resource Name
-            this.resourceName = ReusableIO.ReadStringFromByteArray(buffer, 0, Constants.CultureCodeEnglish);
+            this.ResourceName.Source = ReusableIO.ReadStringFromByteArray(buffer, 0, Constants.CultureCodeEnglish);
 
             //Resource Type
             this.resourceType = (ResourceType)ReusableIO.ReadInt16FromArray(buffer, 0x8);
@@ -91,7 +109,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey
         public void Write(Stream output)
         {
             //Resource Name
-            ReusableIO.WriteStringToStream(this.resourceName, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.ResourceName.Source, output, Constants.CultureCodeEnglish);
 
             //Resource Type
             ReusableIO.WriteInt16ToStream((Int16)this.resourceType, output);
@@ -102,25 +120,24 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey
 
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>
         /// <returns>A String containing the member data line by line</returns>
-        public override string ToString()
+        public override String ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("ChitinKeyResourceEntry:");
-            builder.Append("\n\tResource Name:         '");
-            builder.Append(this.resourceName);
-            builder.Append("'\n\tResource Type:         ");
+            builder.Append(StringFormat.ReturnAndIndent("ChitinKeyResourceEntry:", 0));
+            builder.Append(StringFormat.ToStringAlignment("Resource Name"));
+            builder.Append(String.Format("'{0}'", this.ResourceName.Value));
+            builder.Append(StringFormat.ToStringAlignment("Resource Type"));
             builder.Append(this.resourceType.ToString("G"));
-            builder.Append("\n\tResource Type Value:   ");
+            builder.Append(StringFormat.ToStringAlignment("Resource Type Value"));
             builder.Append(((Int16)this.resourceType).ToString("X"));
-            builder.Append("\n\tResource Locator:      ");
+            builder.Append(StringFormat.ToStringAlignment("Resource Locator"));
             builder.Append(this.resourceLocator.Locator);
-            builder.Append("\n\t\tBIF Index:           ");
+            builder.Append(StringFormat.ToStringAlignment("BIFF Index", 2));
             builder.Append(this.resourceLocator.BifIndex);
-            builder.Append("\n\t\tBIF Tileset Index:   ");
+            builder.Append(StringFormat.ToStringAlignment("BIFF Tileset Index", 2));
             builder.Append(this.resourceLocator.TilesetIndex);
-            builder.Append("\n\t\tBIF Resource Index:  ");
+            builder.Append(StringFormat.ToStringAlignment("BIFF Resource Index", 2));
             builder.Append(this.resourceLocator.ResourceIndex);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

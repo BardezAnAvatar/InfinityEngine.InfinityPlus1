@@ -385,15 +385,14 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature
         public override String ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(this.Headline);
-            builder.Append(this.header.ToString());
-            builder.Append(this.GenerateKnownSpellsString());
-            builder.Append(this.GenerateSpellMemorizationString());
-            builder.Append(this.GeneratePreparedSpellsString());
-            builder.Append(this.GenerateEffectsString());
-            builder.Append(this.GenerateItemsString());
-            builder.Append(this.GenerateItemSlotsString());
-            builder.Append("\n\n");
+            builder.AppendLine(this.Headline);
+            builder.AppendLine(this.header.ToString());
+            builder.AppendLine(this.GenerateKnownSpellsString());
+            builder.AppendLine(this.GenerateSpellMemorizationString());
+            builder.AppendLine(this.GeneratePreparedSpellsString());
+            builder.AppendLine(this.GenerateEffectsString());
+            builder.AppendLine(this.GenerateItemsString());
+            builder.AppendLine(this.GenerateItemSlotsString());
 
             return builder.ToString();
         }
@@ -463,10 +462,11 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature
         protected String GenerateItemSlotsString()
         {
             StringBuilder sb = new StringBuilder();
-            
+            sb.Append("Item slots:");
+
             foreach (String key in this.itemSlots.Keys)
             {
-                sb.Append("\n\tItem slot " + String.Format("{0, -35}", "'" + key + "':"));
+                sb.Append(StringFormat.ToStringAlignment("Item slot '" + key + "'"));
                 sb.Append(this.itemSlots[key]);
             }
 

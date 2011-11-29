@@ -3,21 +3,21 @@ using System.IO;
 
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect1;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Item1;
+using Bardez.Projects.InfinityPlus1.Files.Infinity.Spell.Spell1;
 using Bardez.Projects.InfinityPlus1.Test;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Item
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Spell
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl.ItemSpellAbilityEffect class.</summary>
-    public class ItemSpellAbilityEffectTest : FileTesterBase
+    public class SpellAbilityEffectTest : FileTesterBase
     {
         #region Fields
         /// <summary>Constant key to look up in app.config</summary>
-        protected const String configKey = "Test.Item.Item1Path";
+        protected const String configKey = "Test.Spell.Spell1Path";
 
         /// <summary>Instance supporting data read</summary>
-        protected ItemHeader1 Header { get; set; }
+        protected Spell1Header Header { get; set; }
 
         /// <summary>Format instance to test</summary>
         protected Effect1 Effect { get; set; }
@@ -25,7 +25,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Item
 
         #region Construction
         /// <summary>Default constructor</summary>
-        public ItemSpellAbilityEffectTest()
+        public SpellAbilityEffectTest()
         {
             this.InitializeInstance();
         }
@@ -36,7 +36,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Item
         /// <param name="e">Specific initialization event parameters</param>
         protected override void InitializeTestData(Object sender, EventArgs e)
         {
-            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(ItemSpellAbilityEffectTest.configKey);
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(SpellAbilityEffectTest.configKey);
         }
 
         /// <summary>Event to raise for testing instance(s)</summary>
@@ -47,7 +47,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Item
             String effect = "No abilities";
             using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
             {
-                this.Header = new ItemHeader1();
+                this.Header = new Spell1Header();
                 this.Header.Read(stream);
 
                 if (this.Header.CountAbilities > 0)
@@ -59,7 +59,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Item
                 }
             }
 
-            this.DoPostMessage(new MessageEventArgs(effect));
+            this.DoPostMessage(new MessageEventArgs(effect, "Output", testArgs.Path));
 
             if (this.Header.CountAbilities > 0)
                 //not sure how I want to handle this...

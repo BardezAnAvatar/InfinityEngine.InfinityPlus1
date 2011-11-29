@@ -2,6 +2,7 @@
 
 namespace Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey
 {
+    /// <summary>This enum indicates the location of a given BIFF file</summary>
     [Flags]
     public enum ChitinKeyBifLocationEnum : ushort /* UInt16 */
     {
@@ -15,6 +16,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey
         Disc6 = 128
     }
 
+    /// <summary>Indicates the location of BIFF Strings withing the KEY file</summary>
     public enum ChitinKeyBifStringsLocation
     {
         BeforeBifEntries,

@@ -188,7 +188,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect1
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
         public String ToString(Int32 abilityIndex)
         {
-            return String.Format("Effect # {0}:", abilityIndex) + this.GetStringRepresentation();
+            return StringFormat.ReturnAndIndent(String.Format("Effect # {0}:", abilityIndex), 0) + this.GetStringRepresentation();
         }
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
@@ -196,48 +196,46 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect1
         protected String GetStringRepresentation()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("\n\tEffect opcode:                                  ");
+            builder.Append(StringFormat.ToStringAlignment("Effect opcode"));
             builder.Append(this.opcode);
-            builder.Append("\n\tEffect target:                                  ");
+            builder.Append(StringFormat.ToStringAlignment("Effect target"));
             builder.Append((Byte)this.target);
-            builder.Append("\n\tEffect target (description):\n\t\t");
+            builder.Append(StringFormat.ToStringAlignment("Effect target (description)"));
             builder.Append(this.target.GetDescription());
-            builder.Append("\n\tPower:                                          ");
+            builder.Append(StringFormat.ToStringAlignment("Power"));
             builder.Append(this.power);
-            builder.Append("\n\tEffect Parameter 1:                             ");
+            builder.Append(StringFormat.ToStringAlignment("Effect Parameter 1"));
             builder.Append(this.parameter1);
-            builder.Append("\n\tEffect Parameter 2:                             ");
+            builder.Append(StringFormat.ToStringAlignment("Effect Parameter 2"));
             builder.Append(this.parameter2);
-            builder.Append("\n\tTiming mode:                                    ");
+            builder.Append(StringFormat.ToStringAlignment("Timing mode"));
             builder.Append((Byte)this.timingMode);
-            builder.Append("\n\tTiming mode (description):                      ");
+            builder.Append(StringFormat.ToStringAlignment("Timing mode (description)"));
             builder.Append(this.timingMode.GetDescription());
-            builder.Append("\n\tResistance:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Resistance"));
             builder.Append((Byte)this.resistance);
-            builder.Append("\n\tResistance (enumerated):                        ");
+            builder.Append(StringFormat.ToStringAlignment("Resistance (enumerated)"));
             builder.Append(this.GetEffectResistanceString());
-            builder.Append("\n\tEffect duration:                                ");
+            builder.Append(StringFormat.ToStringAlignment("Effect duration"));
             builder.Append(this.duration);
-            builder.Append("\n\tEffect probability 1:                           ");
+            builder.Append(StringFormat.ToStringAlignment("Effect probability 1"));
             builder.Append(this.probability1);
-            builder.Append("\n\tEffect probability 2:                           ");
+            builder.Append(StringFormat.ToStringAlignment("Effect probability 2"));
             builder.Append(this.probability2);
-            builder.Append("\n\tEffect resource:                                '");
-            builder.Append(this.resource1.ResRef);
-            builder.Append("'");
-            builder.Append("\n\tDice count:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Effect resource"));
+            builder.Append(String.Format("'{0}'", this.resource1.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Dice count"));
             builder.Append(this.diceCount);
-            builder.Append("\n\tDice sides:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Dice sides"));
             builder.Append(this.diceSides);
-            builder.Append("\n\tSaving throw:                                   ");
+            builder.Append(StringFormat.ToStringAlignment("Saving throw"));
             builder.Append((UInt32)this.savingThrowType);
-            builder.Append("\n\tSaving throw (enumerated):                      ");
+            builder.Append(StringFormat.ToStringAlignment("Saving throw (enumerated)"));
             builder.Append(this.GetEffectSavingThrowString());
-            builder.Append("\n\tSaving throw modifier:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Saving throw modifier"));
             builder.Append(this.savingThrowModifier);
-            builder.Append("\n\tUnknown:                                        ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown"));
             builder.Append(this.unknown1);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }
@@ -252,7 +250,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect1
             StringFormat.AppendSubItem(sb, (this.resistance & EffectResistance.IgnoreResistance) == EffectResistance.IgnoreResistance, EffectResistance.IgnoreResistance.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
 
         /// <summary>Generates a human-readable multi-line string for console output that indicates which ItemUability1 flags are set</summary>
@@ -268,7 +266,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect1
             StringFormat.AppendSubItem(sb, (this.savingThrowType & EffectSavingThrow.PolymorphOrWill) == EffectSavingThrow.PolymorphOrWill, EffectSavingThrow.PolymorphOrWill.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
         #endregion
     }

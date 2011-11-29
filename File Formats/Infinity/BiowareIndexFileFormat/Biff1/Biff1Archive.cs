@@ -371,82 +371,73 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.BiowareIndexFileFormat.Bi
         public String ToString(Boolean LongDefinition)
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("File path:          ");
-            builder.AppendLine(this.filePath);
-            builder.Append("Maintain data:      ");
+            builder.Append(StringFormat.ToStringAlignment("File path"));
+            builder.Append(this.filePath);
+            builder.Append(StringFormat.ToStringAlignment("Maintain data"));
             builder.AppendLine(this.maintainData.ToString());
 
-            builder.AppendLine("Header:");
             builder.Append(this.header.ToString());
 
-            builder.AppendLine("Resource Entries:");
+            builder.Append(StringFormat.ToStringAlignment("Resource Entries"));
             if (LongDefinition)
             {
                 for (Int32 i = 0; i < this.entriesResource.Count; ++i)
                 {
-                    builder.Append("\tIndex ");
-                    builder.Append(i.ToString());
-                    builder.AppendLine(":");
+                    builder.Append(StringFormat.ToStringAlignment(String.Format("Index {0}", i)));
                     builder.Append(this.entriesResource[i].ToString());
                 }
             }
             else
             {
-                builder.AppendLine("Count:  ");
+                builder.Append(StringFormat.ToStringAlignment("Count"));
                 builder.AppendLine(this.entriesResource.Count.ToString());
             }
 
 
-            builder.AppendLine("Tileset Entries:");
+            builder.Append(StringFormat.ToStringAlignment("Tileset Entries"));
             if (LongDefinition)
             {
                 for (Int32 i = 0; i < this.entriesTileset.Count; ++i)
                 {
-                    builder.Append("\tIndex ");
-                    builder.Append(i.ToString());
-                    builder.AppendLine(":");
+                    builder.Append(StringFormat.ToStringAlignment(String.Format("Index {0}", i)));
                     builder.Append(this.entriesTileset[i].ToString());
                 }
             }
             else
             {
-                builder.AppendLine("Count:  ");
+                builder.Append(StringFormat.ToStringAlignment("Count"));
                 builder.AppendLine(this.entriesTileset.Count.ToString());
             }
 
 
-            builder.AppendLine("Resource Data:");
+            builder.Append(StringFormat.ToStringAlignment("Resource Data"));
             if (LongDefinition && this.dataResource.Count > 0)
             {
                 for (Int32 i = 0; i < this.dataResource.Count; ++i)
                 {
-                    builder.Append("\tIndex ");
-                    builder.Append(i.ToString());
-                    builder.AppendLine(":");
+                    builder.Append(StringFormat.ToStringAlignment(String.Format("Index {0}", i)));
                     builder.Append(this.dataResource[i].ToString());
                 }
             }
             else
             {
-                builder.AppendLine("Count:  ");
+                builder.Append(StringFormat.ToStringAlignment("Count"));
                 builder.AppendLine(this.dataResource.Count.ToString());
             }
 
 
-            builder.AppendLine("Tileset Data:");
+            builder.Append(StringFormat.ToStringAlignment("Tileset Data"));
             if (LongDefinition && this.dataTileset.Count > 0)
             {
                 for (Int32 i = 0; i < this.dataTileset.Count; ++i)
                 {
-                    builder.Append("\tIndex ");
-                    builder.Append(i.ToString());
-                    builder.AppendLine(":");
+                    builder.Append(StringFormat.ToStringAlignment(String.Format("Index {0}", i)));
                     builder.Append(this.dataTileset[i].ToString());
                 }
             }
             else
             {
-                builder.AppendLine("Count:  ");
+                builder.Append(StringFormat.ToStringAlignment("Count"));
                 builder.AppendLine(this.dataTileset.Count.ToString());
             }
 

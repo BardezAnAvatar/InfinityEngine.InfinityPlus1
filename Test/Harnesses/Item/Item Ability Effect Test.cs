@@ -10,7 +10,7 @@ using Bardez.Projects.ReusableCode;
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Item
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl.ItemSpellAbilityEffect class.</summary>
-    public class ItemSpellAbilityEffectTest : FileTesterBase
+    public class ItemAbilityEffectTest : FileTesterBase
     {
         #region Fields
         /// <summary>Constant key to look up in app.config</summary>
@@ -25,7 +25,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Item
 
         #region Construction
         /// <summary>Default constructor</summary>
-        public ItemSpellAbilityEffectTest()
+        public ItemAbilityEffectTest()
         {
             this.InitializeInstance();
         }
@@ -36,7 +36,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Item
         /// <param name="e">Specific initialization event parameters</param>
         protected override void InitializeTestData(Object sender, EventArgs e)
         {
-            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(ItemSpellAbilityEffectTest.configKey);
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(ItemAbilityEffectTest.configKey);
         }
 
         /// <summary>Event to raise for testing instance(s)</summary>
@@ -59,7 +59,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Item
                 }
             }
 
-            this.DoPostMessage(new MessageEventArgs(effect));
+            this.DoPostMessage(new MessageEventArgs(effect, "Output", testArgs.Path));
 
             if (this.Header.CountAbilities > 0)
                 //not sure how I want to handle this...

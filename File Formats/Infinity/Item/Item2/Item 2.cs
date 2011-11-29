@@ -19,7 +19,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Item2
 
         protected override String Headline
         {
-            get { return "ITEM Version 2.0:\n"; }
+            get { return "ITEM Version 2.0:"; }
         }
 
         protected override UInt32 HeaderSize

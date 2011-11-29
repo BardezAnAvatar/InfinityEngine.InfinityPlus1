@@ -119,7 +119,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
             builder.Append(this.BitsPerSample);
             builder.Append(StringFormat.ToStringAlignment("Sample rate"));
             builder.Append(this.Frequency);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

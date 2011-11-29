@@ -2,74 +2,60 @@
 using System.IO;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2;
 using Bardez.Projects.InfinityPlus1.Test;
-using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
-namespace Bardez.Projects.InfinityPlus1.Test.Creature
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Creature
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2.CreatureHeader1 class.</summary>
-    public class Creature2_2Test : ITester
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2.Creature2_2 class.</summary>
+    public class Creature2_2Test : FileTesterBase
     {
-        /// <summary>Test instance</summary>
-        protected Creature2_2 creature;
+        #region Fields
+        /// <summary>Constant key to look up in app.config</summary>
+        protected const String configKey = "Test.Creature.Creature2.2Path";
 
-        /// <summary>Test instance exposure</summary>
-        public Creature2_2 Header
+        /// <summary>Format instance to test</summary>
+        protected Creature2_2 Creature { get; set; }
+        #endregion
+
+        #region Construction
+        /// <summary>Default constructor</summary>
+        public Creature2_2Test()
         {
-            get { return this.creature; }
+            this.InitializeInstance();
+        }
+        #endregion
+
+        /// <summary>Initializes the test class data</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="e">Specific initialization event parameters</param>
+        protected override void InitializeTestData(Object sender, EventArgs e)
+        {
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(Creature2_2Test.configKey);
         }
 
-        /// <summary>Test harness method, gets the path from the app.config file</summary>
-        public void Test()
+        /// <summary>Event to raise for testing instance(s)</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="testArgs">Arguments containing the item to test (usually a file path)</param>
+        protected override void TestCase(Object sender, TestEventArgs testArgs)
         {
-            String path = ConfigurationHandler.GetSettingValue("Test.Creature.Creature2.2Path");
-            this.Test(path);
-        }
-
-        /// <summary>Test harness method, reads and re-writes the file from the path passed in, writing to a .rewrite extension</summary>
-        /// <param name="path">Array of directory & filename combinations to read from</param>
-        public void Test(String[] paths)
-        {
-            foreach (String path in paths)
+            using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
             {
-                using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                    this.Test(stream);
-
-                using (FileStream dest = new FileStream(path + ".rewrite", FileMode.OpenOrCreate, FileAccess.Write))
-                    this.TestWrite(dest);
+                this.Creature = new Creature2_2();
+                this.Creature.Read(stream);
             }
-        }
 
-        /// <summary>Test harness method, reads and re-writes the file from the path passed in, writing to a .rewrite extension</summary>
-        /// <param name="path">directory & filename to read from</param>
-        public void Test(String path)
-        {
-            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                this.Test(stream);
+            this.DoPostMessage(new MessageEventArgs(this.Creature.ToString(), "Output", testArgs.Path));
 
-            using (FileStream dest = new FileStream(path + ".rewrite", FileMode.OpenOrCreate, FileAccess.Write))
+            using (FileStream dest = new FileStream(testArgs.Path + ".rewrite", FileMode.Create, FileAccess.Write))
                 this.TestWrite(dest);
         }
 
-        /// <summary>Tests the read method(s) on the provided stream</summary>
-        /// <param name="source">Stream to read from</param>
-        public void Test(Stream source)
+        /// <summary>Writes the data structure back out to a destination stream</summary>
+        /// <param name="destination">Stream to write output to</param>
+        protected virtual void TestWrite(Stream destination)
         {
-            this.creature = new Creature2_2();
-            this.creature.Read(source);
-
-            Interceptor.WriteMessage(this.creature.ToString());
-
-            Interceptor.WaitForInput();
-        }
-
-        /// <summary>Tests the write method(s) on the provided stream</summary>
-        /// <param name="destination">Stream to write to</param>
-        public void TestWrite(Stream destination)
-        {
-            this.creature.Write(destination);
+            this.Creature.Write(destination);
         }
     }
 }

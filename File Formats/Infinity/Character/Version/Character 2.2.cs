@@ -126,7 +126,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Version
             builder.Append("Character version 2.2");
             builder.Append(this.header.ToString());
             builder.Append(this.creature.ToString());
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

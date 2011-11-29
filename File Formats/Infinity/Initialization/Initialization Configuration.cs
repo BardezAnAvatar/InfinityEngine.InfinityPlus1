@@ -118,11 +118,11 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Initialization
 
             foreach (String key in this.config.Sections.Keys)
             {
-                builder.AppendLine(String.Concat("[", key, "]"));
+                builder.Append(StringFormat.ReturnAndIndent(String.Concat("[", key, "]"), 0));
                 Dictionary<String, IniPropertyLine> section = this.config.Sections[key];
 
                 foreach (String property in section.Keys)
-                    builder.AppendLine(property + " = " + section[property].Value);
+                    builder.Append(StringFormat.ReturnAndIndent(property + " = " + section[property].Value, 0));
             }
 
             return builder.ToString();

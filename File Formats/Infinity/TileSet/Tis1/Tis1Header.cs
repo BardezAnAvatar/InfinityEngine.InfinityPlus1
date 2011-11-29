@@ -153,19 +153,18 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.TileSet.Tis1
         {
             StringBuilder builder = new StringBuilder();
             builder.Append("Tis1Header:");
-            builder.Append("\n\tSignature:              '");
-            builder.Append(this.signature);
-            builder.Append("'\n\tVersion:                '");
-            builder.Append(this.version);
-            builder.Append("'\n\tTile Count:             ");
+            builder.Append(StringFormat.ToStringAlignment("Signature"));
+            builder.Append(String.Format("'{0}'", this.signature));
+            builder.Append(StringFormat.ToStringAlignment("Version"));
+            builder.Append(String.Format("'{0}'", this.version));
+            builder.Append(StringFormat.ToStringAlignment("Tile Count"));
             builder.Append(this.countTiles);
-            builder.Append("\n\tSingle Tile Length:     ");
+            builder.Append(StringFormat.ToStringAlignment("Single Tile Length"));
             builder.Append(this.lengthSingleTileData);
-            builder.Append("\n\tTile Data Offset:       ");
+            builder.Append(StringFormat.ToStringAlignment("Tile Data Offset"));
             builder.Append(this.offsetTileData);
-            builder.Append("\n\tSingle Tile Dimension:  ");
+            builder.Append(StringFormat.ToStringAlignment("Single Tile Dimension"));
             builder.Append(this.dimensionTile);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

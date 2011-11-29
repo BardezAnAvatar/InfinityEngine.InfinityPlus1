@@ -4,69 +4,58 @@ using System.IO;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Version;
 using Bardez.Projects.InfinityPlus1.Test;
-using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
-namespace Bardez.Projects.InfinityPlus1.Test.Dialog
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Dialog
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Version.Dialog1 class.</summary>
-    public class DialogTest : ITester
+    public class DialogTest : FileTesterBase
     {
-        protected Dialog1 dialog;
+        #region Fields
+        /// <summary>Constant key to look up in app.config</summary>
+        protected const String configKey = "Test.Dialog.DialogPath";
 
-        public Dialog1 Dialog
+        /// <summary>Format instance to test</summary>
+        protected Dialog1 Dialog { get; set; }
+        #endregion
+
+        #region Construction
+        /// <summary>Default constructor</summary>
+        public DialogTest()
         {
-            get { return this.dialog; }
+            this.InitializeInstance();
+        }
+        #endregion
+
+        /// <summary>Initializes the test class data</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="e">Specific initialization event parameters</param>
+        protected override void InitializeTestData(Object sender, EventArgs e)
+        {
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(DialogTest.configKey);
         }
 
-        public void Test()
+        /// <summary>Event to raise for testing instance(s)</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="testArgs">Arguments containing the item to test (usually a file path)</param>
+        protected override void TestCase(Object sender, TestEventArgs testArgs)
         {
-            String[] paths = ConfigurationHandlerMulti.GetSettingValues("Test.Dialog.DialogPath").ToArray();
-            this.TestMulti(paths);
-        }
-        
-        /// <summary>Tests a single file</summary>
-        /// <param name="path">File to open and read, then replicate</param>
-        /// <param name="prompt">Boolean indicating whether or not to prompt between read and write</param>
-        public void Test(String path, Boolean prompt)
-        {
-            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                this.Test(stream, prompt);
+            using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
+            {
+                this.Dialog = new Dialog1();
+                this.Dialog.Read(stream);
+            }
 
-            using (FileStream dest = new FileStream(path + ".rewrite", FileMode.Create, FileAccess.Write))
+            this.DoPostMessage(new MessageEventArgs(this.Dialog.ToString(), "Output", testArgs.Path));
+
+            using (FileStream dest = new FileStream(testArgs.Path + ".rewrite", FileMode.Create, FileAccess.Write))
                 this.TestWrite(dest);
-        }
-
-        /// <summary>Tests the code </summary>
-        /// <param name="paths"></param>
-        public void TestMulti(String[] paths)
-        {
-            foreach (String path in paths)
-            {
-                this.Test(path, false);
-            }
-        }
-
-        /// <summary>Tests the read and ToString() methods of the structure</summary>
-        /// <param name="source">Source Stream to read from</param>
-        /// <param name="prompt">Boolean indicating whether or not to prompt for pressing [Enter] to continue</param>
-        public void Test(Stream source, Boolean prompt)
-        {
-            this.dialog = new Dialog1();
-            this.dialog.Read(source);
-
-            Interceptor.WriteMessage(this.dialog.ToString());
-
-            if (prompt)
-            {
-                Interceptor.WaitForInput();
-            }
         }
 
         /// <summary>Writes the data structure back out to a destination stream</summary>
         /// <param name="destination">Stream to write output to</param>
-        public void TestWrite(Stream destination)
+        protected virtual void TestWrite(Stream destination)
         {
-            this.dialog.Write(destination);
+            this.Dialog.Write(destination);
         }
     }
 }

@@ -96,28 +96,31 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
         /// <summary>Disposal code</summary>
         public void Dispose()
         {
-            if (this.sourceVoices != null)
-                for (Int32 i = 0; i < this.sourceVoices.Count; ++i)
-                {
-                    if (this.sourceVoices[i] != null)
-                    {
-                        this.sourceVoices[i].Dispose();
-                        this.sourceVoices[i] = null;
-                    }
-                }
-
-            //dispose of submix voices, then mastering voices
-            this.DisposeVoiceType(this.destinationVoices, typeof(SubmixVoice));
-            this.DisposeVoiceType(this.destinationVoices, typeof(MasteringVoice));
-
-            if (this.XAudio2 != null)
+            lock (XAudio2Output.singletonLock)  //do not attempt to dispose more than once
             {
-                this.XAudio2.Dispose();
-                this.XAudio2 = null;
+                if (this.sourceVoices != null)
+                    for (Int32 i = 0; i < this.sourceVoices.Count; ++i)
+                    {
+                        if (this.sourceVoices[i] != null)
+                        {
+                            this.sourceVoices[i].Dispose();
+                            this.sourceVoices[i] = null;
+                        }
+                    }
+
+                //dispose of submix voices, then mastering voices
+                this.DisposeVoiceType(this.destinationVoices, typeof(SubmixVoice));
+                this.DisposeVoiceType(this.destinationVoices, typeof(MasteringVoice));
+
+                if (this.XAudio2 != null)
+                {
+                    this.XAudio2.Dispose();
+                    this.XAudio2 = null;
+                }
             }
         }
 
-        /// <summary>Desposal</summary>
+        /// <summary>Disposal</summary>
         /// <remarks>Finalize()</remarks>
         ~XAudio2Output()
         {

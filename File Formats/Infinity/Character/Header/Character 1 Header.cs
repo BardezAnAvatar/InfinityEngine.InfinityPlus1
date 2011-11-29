@@ -113,7 +113,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             //read remiander
             Byte[] header = ReusableIO.BinaryRead(input, this.StructSize - 8);
 
-            this.name = ReusableIO.ReadStringFromByteArray(header, 0, Constants.CultureCodeEnglish, 32);
+            this.Name.Value = ReusableIO.ReadStringFromByteArray(header, 0, Constants.CultureCodeEnglish, 32);
             this.offsetCreature = ReusableIO.ReadUInt32FromArray(header, 32);
             this.lengthCreature = ReusableIO.ReadUInt32FromArray(header, 36);
             this.quickWeaponSlotIndex1 = ReusableIO.ReadUInt16FromArray(header, 40);
@@ -141,7 +141,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
         {
             ReusableIO.WriteStringToStream(this.signature, output, Constants.CultureCodeEnglish, false, 4);
             ReusableIO.WriteStringToStream(this.version, output, Constants.CultureCodeEnglish, false, 4);
-            ReusableIO.WriteStringToStream(this.name, output, Constants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(this.Name.Value, output, Constants.CultureCodeEnglish, false, 32);
             ReusableIO.WriteUInt32ToStream(this.offsetCreature, output);
             ReusableIO.WriteUInt32ToStream(this.lengthCreature, output);
             ReusableIO.WriteUInt16ToStream(this.quickWeaponSlotIndex1, output);
@@ -182,7 +182,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             builder.Append(StringFormat.ToStringAlignment("Version"));
             builder.Append(this.version);
             builder.Append(StringFormat.ToStringAlignment("Name"));
-            builder.Append(this.name);
+            builder.Append(this.Name.Value);
             builder.Append(StringFormat.ToStringAlignment("Creature offset"));
             builder.Append(this.offsetCreature);
             builder.Append(StringFormat.ToStringAlignment("Creature length"));
@@ -204,11 +204,17 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             builder.Append(StringFormat.ToStringAlignment("Show quick weapon slot 4"));
             builder.Append(this.showQuickWeaponSlot4);
             builder.Append(StringFormat.ToStringAlignment("Quick spell ResRef 1"));
-            builder.Append(this.quickSpell1.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSpell1.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick spell ResRef 2"));
-            builder.Append(this.quickSpell2.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSpell2.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick spell ResRef 3"));
-            builder.Append(this.quickSpell3.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSpell3.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick item index 1"));
             builder.Append(this.quickItemSlotIndex1);
             builder.Append(StringFormat.ToStringAlignment("Quick item index 2"));
@@ -221,7 +227,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             builder.Append(this.showQuickItemSlot2);
             builder.Append(StringFormat.ToStringAlignment("Show quick item 3"));
             builder.Append(this.showQuickItemSlot3);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

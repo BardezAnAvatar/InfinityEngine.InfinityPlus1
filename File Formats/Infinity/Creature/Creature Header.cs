@@ -306,7 +306,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature
 
         /// <summary>Death script variable postfix</summary>
         /// <value>Sets the SPRITE_IS_DEAD variable on death</value>
-        protected String deathVariable;
+        protected ZString deathVariable;
 
         //more deviation on spells and memorization
 
@@ -845,11 +845,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature
 
         /// <summary>Death script variable postfix</summary>
         /// <value>Sets the SPRITE_IS_DEAD variable on death</value>
-        public String DeathVariable
-        {
-            get { return this.deathVariable; }
-            set { this.deathVariable = value; }
-        }
+        public ZString DeathVariable { get; set; }
 
         /// <summary>Offset to item slots</summary>
         public UInt32 OffsetItemSlots
@@ -904,6 +900,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature
             this.scriptOverride = new ResourceReference();
             this.dialog = new ResourceReference();
             this.soundSet = new GenericOrderedDictionary<String, StringReference>();
+            this.deathVariable = new ZString();
 
             this.InitializeSoundSet();
         }

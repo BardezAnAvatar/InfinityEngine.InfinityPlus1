@@ -29,7 +29,7 @@ namespace Bardez.Projects.ExceptionHandler
         private static String GetSystemMemoryA()
         {
             PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes");
-            return "\tAvailable:                  " + ramCounter.NextValue().ToString() + " MB\n";
+            return "\tAvailable:                  " + ramCounter.NextValue().ToString() + " MB";
         }
 
         private static String GetSystemMemoryC()
@@ -47,7 +47,6 @@ namespace Bardez.Projects.ExceptionHandler
         {
             MEMORYSTATUSEX memStatus = MEMORYSTATUSEX.GetGlobalMemoryStatusEx();
             StringBuilder memory = new StringBuilder();
-            //String memory = "Memory:\n";
             memory.AppendLine("\tDetail:");
             memory.AppendLine("\t\tLength:                 " + memStatus.dwLength);
             memory.AppendLine("\t\tMemory Load:            " + memStatus.dwMemoryLoad);

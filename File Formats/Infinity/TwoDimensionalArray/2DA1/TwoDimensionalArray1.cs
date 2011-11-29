@@ -83,7 +83,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.TwoDimensionalArray._2DA1
             MemoryStream binData = InfinityXorEncryption.Decrypt(input);
 
             //read signature
-            Byte[] buffer = ReusableIO.BinaryRead(input, 8);   //header buffer
+            Byte[] buffer = ReusableIO.BinaryRead(binData, 8);   //header buffer
 
             this.signature = ReusableIO.ReadStringFromByteArray(buffer, 0, Constants.CultureCodeEnglish, 4);
             this.version = ReusableIO.ReadStringFromByteArray(buffer, 4, Constants.CultureCodeEnglish, 4);

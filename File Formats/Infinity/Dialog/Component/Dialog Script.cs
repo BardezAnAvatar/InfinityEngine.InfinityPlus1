@@ -14,39 +14,16 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
         /// <summary>Binary size of the struct on disk</summary>
         public const Int32 StructSize = 8;
 
-        #region Members
+        #region Fields
         /// <summary>Offset from start of file to the Scripting Trigger</summary>
-        protected UInt32 offsetScript;
+        public UInt32 OffsetScript { get; set; }
 
         /// <summary>Length of the scripting Trigger</summary>
-        protected UInt32 lengthScript;
+        public UInt32 LengthScript { get; set; }
 
         /// <summary>Actual string representing the scripting trigger</summary>
         /// <remarks>Not directly referenced as part of the struct; inferred member</remarks>
-        protected String script;
-        #endregion
-
-        #region Properties
-        /// <summary>Offset from start of file to the Scripting Trigger</summary>
-        public UInt32 OffsetScript
-        {
-            get { return this.offsetScript; }
-            set { this.offsetScript = value; }
-        }
-
-        /// <summary>Length of the scripting Trigger</summary>
-        public UInt32 LengthScript
-        {
-            get { return this.lengthScript; }
-            set { this.lengthScript = value; }
-        }
-
-        /// <summary>Actual string representing the scripting trigger</summary>
-        public String Script
-        {
-            get { return this.script; }
-            set { this.script = value; }
-        }
+        public ZString Script { get; set; }
         #endregion
 
         #region Construction
@@ -54,7 +31,10 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
         public DialogScript() { }
  
         /// <summary>Instantiates reference types</summary>
-        public void Initialize() { }
+        public void Initialize()
+        {
+            this.Script = new ZString();
+        }
         #endregion
 
         #region Abstract IO methods
@@ -81,8 +61,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
 
             Byte[] triggerData = ReusableIO.BinaryRead(input, StructSize);
 
-            this.offsetScript = ReusableIO.ReadUInt32FromArray(triggerData, 0);
-            this.lengthScript = ReusableIO.ReadUInt32FromArray(triggerData, 4);
+            this.OffsetScript = ReusableIO.ReadUInt32FromArray(triggerData, 0);
+            this.LengthScript = ReusableIO.ReadUInt32FromArray(triggerData, 4);
         }
 
         /// <summary>This public method reads the underlying trigger string from the inout stream, after the offsets have been read</summary>
@@ -91,26 +71,26 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
         {
             this.Initialize();
 
-            ReusableIO.SeekIfAble(input, this.offsetScript, SeekOrigin.Begin);
-            Byte[] triggerData = ReusableIO.BinaryRead(input, this.lengthScript);
+            ReusableIO.SeekIfAble(input, this.OffsetScript, SeekOrigin.Begin);
+            Byte[] triggerData = ReusableIO.BinaryRead(input, this.LengthScript);
 
-            this.script = ReusableIO.ReadStringFromByteArray(triggerData, 0, Constants.CultureCodeEnglish, triggerData.Length);
+            this.Script.Source = ReusableIO.ReadStringFromByteArray(triggerData, 0, Constants.CultureCodeEnglish, triggerData.Length);
         }
 
         /// <summary>This public method writes the file format data structure to the output stream.</summary>
         /// <param name="output">Stream to write to</param>
         public void Write(Stream output)
         {
-            ReusableIO.WriteUInt32ToStream(this.offsetScript, output);
-            ReusableIO.WriteUInt32ToStream(this.lengthScript, output);
+            ReusableIO.WriteUInt32ToStream(this.OffsetScript, output);
+            ReusableIO.WriteUInt32ToStream(this.LengthScript, output);
         }
 
         /// <summary>This public method writes the file format data structure to the output stream.</summary>
         /// <param name="output">Stream to write to</param>
         public void WriteScript(Stream output)
         {
-            ReusableIO.SeekIfAble(output, this.offsetScript);
-            ReusableIO.WriteStringToStream(this.script, output, Constants.CultureCodeEnglish, true);
+            ReusableIO.SeekIfAble(output, this.OffsetScript);
+            ReusableIO.WriteStringToStream(this.Script.Source, output, Constants.CultureCodeEnglish, true);
         }
         #endregion
 
@@ -142,7 +122,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
         public String ToString(Int32 entryIndex)
         {
-            return String.Format("Dialog trigger # {0}:", entryIndex) + this.GetStringRepresentation();
+            return StringFormat.ReturnAndIndent(String.Format("Dialog trigger # {0}", entryIndex), 0) + this.GetStringRepresentation();
         }
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
@@ -151,12 +131,11 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
         {
             StringBuilder builder = new StringBuilder();
             builder.Append(StringFormat.ToStringAlignment("Offset"));
-            builder.Append(this.offsetScript);
+            builder.Append(this.OffsetScript);
             builder.Append(StringFormat.ToStringAlignment("Length"));
-            builder.Append(this.lengthScript);
-            builder.Append(StringFormat.ToStringAlignment("Trigger"));
-            builder.Append(this.script);
-            builder.Append("\n\n");
+            builder.Append(this.LengthScript);
+            builder.AppendLine(StringFormat.ToStringAlignment("Trigger"));
+            builder.Append(String.Format("'{0}'", this.Script.Value));
 
             return builder.ToString();
         }
@@ -165,8 +144,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
         /// <summary>Maintains the data integrity of the instance</summary>
         public void MaintainMinimalDataIntegrity()
         {
-            Byte[] data = ReusableIO.WriteStringToByteArray(this.script, Constants.CultureCodeEnglish);
-            this.lengthScript = Convert.ToUInt32(data.Length);
+            Byte[] data = ReusableIO.WriteStringToByteArray(this.Script.Source, Constants.CultureCodeEnglish);
+            this.LengthScript = Convert.ToUInt32(data.Length);
         }
     }
 }

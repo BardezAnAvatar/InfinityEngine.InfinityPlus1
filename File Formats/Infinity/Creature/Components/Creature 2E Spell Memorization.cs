@@ -166,7 +166,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
         public String ToString(Int32 entryIndex)
         {
-            return String.Format("Prepared Spells Entry # {0}:", entryIndex) + this.GetStringRepresentation();
+            return StringFormat.ReturnAndIndent(String.Format("Prepared Spells Entry # {0}:", entryIndex), 0) + this.GetStringRepresentation();
         }
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
@@ -174,21 +174,20 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components
         protected String GetStringRepresentation()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("\n\tSpell level:                                    ");
+            builder.Append(StringFormat.ToStringAlignment("Spell level"));
             builder.Append(this.spellLevel);
-            builder.Append("\n\tSpell level: (actual)                           ");
+            builder.Append(StringFormat.ToStringAlignment("Spell level (actual)"));
             builder.Append(this.SpellLevelActual);
-            builder.Append("\n\tCount of spells able to be prepared:            ");
+            builder.Append(StringFormat.ToStringAlignment("Count of spells able to be prepared"));
             builder.Append(this.slotsBase);
-            builder.Append("\n\tCount of spells prepareable (w/effects):        ");
+            builder.Append(StringFormat.ToStringAlignment("Count of spells prepareable (w/effects)"));
             builder.Append(this.slotsAfterEffects);
-            builder.Append("\n\tSpell Type:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Spell Type"));
             builder.Append((UInt16)this.type);
-            builder.Append("\n\tMemorized spell index:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Memorized spell index"));
             builder.Append(this.indexMemorizedSpells);
-            builder.Append("\n\tCount of Memorized spells this level:           ");
+            builder.Append(StringFormat.ToStringAlignment("Count of Memorized spells this level"));
             builder.Append(this.countMemorizedSpells);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

@@ -1,124 +1,93 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Threading;
 
 using Bardez.Projects.Configuration;
 using Bardez.Projects.DirectX.XAudio2;
-using Bardez.Projects.Win32.Audio;
 using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component;
 using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Wave;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.Win32.Audio;
 
-namespace Bardez.Projects.InfinityPlus1.Test.Output.DirectX
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Output.DirectX
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component.RiffHeader and the Bardez.Projects.DirectX.XAudio2.XAudio2Interface classes.</summary>
-    public class XAudio2RenderTest : ITester
+    /// <summary>
+    ///     This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component.RiffHeader
+    ///     and the Bardez.Projects.DirectX.XAudio2.XAudio2Interface classes.
+    /// </summary>
+    public class XAudio2RenderTest : TesterBase
     {
-        protected XAudio2Interface xaudio;
+        #region Fields
+        /// <summary>Constant key to look up in app.config</summary>
+        protected const String configKey = "Test.Riff.RiffPath";
 
-        public XAudio2Interface XAudio
+        /// <summary>Format instance to test</summary>
+        protected XAudio2Interface XAudio { get; set; }
+        #endregion
+
+        #region Construction
+        /// <summary>Default constructor</summary>
+        public XAudio2RenderTest()
         {
-            get { return this.xaudio; }
+            this.InitializeInstance();
         }
+        #endregion
 
-        /// <summary>Tests the class in question</summary>
-        public void Test()
-        {
-            String[] paths = ConfigurationHandlerMulti.GetSettingValues("Test.Riff.RiffPath").ToArray();
-            this.TestMulti(paths);
-        }
+        /// <summary>Initializes the test class data</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="e">Specific initialization event parameters</param>
+        /// <remarks>No implementation due to lack of initialization to this test class</remarks>
+        protected override void InitializeTestData(Object sender, EventArgs e) { }
 
-        /// <summary>Tests a single file</summary>
-        /// <param name="path">File to open and read, then replicate</param>
-        /// <param name="prompt">Boolean indicating whether or not to prompt between read and write</param>
-        public void Test(String path, Boolean prompt)
+        /// <summary>Event to raise for testing instance(s)</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="testArgs">Arguments containing the item to test (usually a file path)</param>
+        protected override void TestCase(Object sender, TestEventArgs testArgs)
         {
-            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                this.Test(stream, prompt);
-        }
-
-        /// <summary>Tests the code </summary>
-        /// <param name="paths"></param>
-        public void TestMulti(String[] paths)
-        {
-            foreach (String path in paths)
+            using (FileStream stream = new FileStream(ConfigurationHandlerMulti.GetSettingValue(XAudio2RenderTest.configKey), FileMode.Open, FileAccess.Read))
             {
-                this.Test(path, false);
-            }
-        }
+                RiffFile riffFile = new RiffFile();
+                riffFile.Read(stream);
+                WaveFormatEx waveFormat = riffFile.GetWaveFormat();
+                Byte[] sampleData = this.GetWaveData(riffFile);
 
-        /// <summary>Tests the read and ToString() methods of the structure</summary>
-        /// <param name="source">Source Stream to read from</param>
-        /// <param name="prompt">Boolean indicating whether or not to prompt for pressing [Enter] to continue</param>
-        public void Test(Stream source, Boolean prompt)
-        {
-            RiffFile riffFile = new RiffFile();
-            riffFile.Read(source);
-
-            WaveFormatEx waveFormat = this.GetWaveFormat(riffFile);
-            Byte[] sampleData = this.GetWaveData(riffFile);
-
-            using (this.xaudio = XAudio2Interface.NewInstance())
-            {
-                using (MasteringVoice master = this.xaudio.CreateMasteringVoice(waveFormat.NumberChannels, waveFormat.SamplesPerSec))
+                using (this.XAudio = XAudio2Interface.NewInstance())
                 {
-                    using (SourceVoice sourceVoice = this.xaudio.CreateSourceVoice(waveFormat))
+                    using (MasteringVoice master = this.XAudio.CreateMasteringVoice(waveFormat.NumberChannels, waveFormat.SamplesPerSec))
                     {
-                        AudioBuffer buffer = new AudioBuffer(0x0040U, sampleData, 0, 0, 0, 0, 0, IntPtr.Zero);
-
-                        sourceVoice.SetOutputVoices(new VoiceSendDescriptor[] { new VoiceSendDescriptor(0, master) });
-                        sourceVoice.SubmitSourceBuffer(buffer, null);
-
-                        //this.xaudio.StartEngine();
-
-                        ResultCode result = sourceVoice.Start();
-
-                        //play audio & Let the sound play
-                        Boolean isRunning = true;
-                        while (result == ResultCode.Success_OK && isRunning)
+                        using (SourceVoice sourceVoice = this.XAudio.CreateSourceVoice(waveFormat))
                         {
-                            VoiceState state = sourceVoice.GetState();
-                            isRunning = (state.BuffersQueued > 0);
-                            Thread.Sleep(10);
+                            AudioBuffer buffer = new AudioBuffer(0x0040U, sampleData, 0, 0, 0, 0, 0, IntPtr.Zero);
+
+                            sourceVoice.SetOutputVoices(new VoiceSendDescriptor[] { new VoiceSendDescriptor(0, master) });
+                            sourceVoice.SubmitSourceBuffer(buffer, null);
+
+                            //this.xaudio.StartEngine();
+
+                            ResultCode result = sourceVoice.Start();
+
+                            //play audio & Let the sound play
+                            Boolean isRunning = true;
+                            while (result == ResultCode.Success_OK && isRunning)
+                            {
+                                VoiceState state = sourceVoice.GetState();
+                                isRunning = (state.BuffersQueued > 0);
+                                Thread.Sleep(10);
+                            }
                         }
                     }
                 }
             }
         }
 
-        /// <summary>Writes the data structure back out to a destination stream</summary>
-        /// <param name="destination">Stream to write output to</param>
-        public void TestWrite(Stream destination)
-        {
-            //this.chunk.Write(destination);
-        }
-        
-
-        public Byte[] GetWaveData(RiffFile riff)
+        /// <summary>Gets binary sample data from Riff file</summary>
+        /// <param name="riff">Riff file to read data from</param>
+        /// <returns>Byte array of sample data</returns>
+        protected virtual Byte[] GetWaveData(RiffFile riff)
         {
             WaveSampleDataChunk wave = (riff.Header.FindFirstSubChunk(ChunkType.data).Chunk as WaveSampleDataChunk);
-            Byte[] data = wave.Data;
-            return data;
-        }
-        
-        //todo: move to waveFormatChunk to get a waveformatex object
-        public WaveFormatEx GetWaveFormat(RiffFile riff)
-        {
-            WaveFormatEx waveEx = new WaveFormatEx();
-            WaveFormatExtensible waveExtensible = new WaveFormatExtensible();
-
-            WaveFormatChunk format = (riff.Header.FindFirstSubChunk(ChunkType.fmt).Chunk as WaveFormatChunk);
-            format.Read();
-
-            waveEx.AverageBytesPerSec = format.ByteRate;
-            waveEx.BitsPerSample = format.BitsPerSample;
-            waveEx.BlockAlignment = format.BlockAlignment;
-            waveEx.FormatTag = (UInt16)format.DataType;
-            waveEx.NumberChannels = format.NumChannels;
-            waveEx.SamplesPerSec = format.SampleRate;
-            waveEx.Size = 0; //Convert.ToUInt16(format.Size);
-
-            return waveEx;
+            return wave.Data;
         }
     }
 }

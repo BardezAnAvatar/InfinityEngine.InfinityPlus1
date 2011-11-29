@@ -96,7 +96,8 @@ namespace Bardez.Projects.InfinityPlus1.Test
         /// <param name="message">Message to log</param>
         protected virtual void PostLogMessage(Object sender, MessageEventArgs message)
         {
-            this.Logger.Add(new LogItem(LogType.Message, message.Message, this));
+            LogType messageType = message.Description == "Output" ? LogType.Output : LogType.Message;
+            this.Logger.Add(new LogItem(messageType, message.Message, message.Description, message.Context, this));
         }
         #endregion
 

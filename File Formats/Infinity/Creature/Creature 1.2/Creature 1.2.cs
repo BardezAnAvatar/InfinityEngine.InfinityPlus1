@@ -38,7 +38,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
         /// <summary>Gets the headline for the creature file</summary>
         public override String Headline
         {
-            get { return "Creature 1.2:\n"; }
+            get { return "Creature 1.2:"; }
         }
 
         /// <summary>Gets the size of the header</summary>
@@ -301,16 +301,15 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
         public override String ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(this.Headline);
-            builder.Append(this.header.ToString());
-            builder.Append(this.GenerateOverlaysString());
-            builder.Append(this.GenerateKnownSpellsString());
-            builder.Append(this.GenerateSpellMemorizationString());
-            builder.Append(this.GeneratePreparedSpellsString());
-            builder.Append(this.GenerateEffectsString());
-            builder.Append(this.GenerateItemsString());
-            builder.Append(this.GenerateItemSlotsString());
-            builder.Append("\n\n");
+            builder.AppendLine(this.Headline);
+            builder.AppendLine(this.header.ToString());
+            builder.AppendLine(this.GenerateOverlaysString());
+            builder.AppendLine(this.GenerateKnownSpellsString());
+            builder.AppendLine(this.GenerateSpellMemorizationString());
+            builder.AppendLine(this.GeneratePreparedSpellsString());
+            builder.AppendLine(this.GenerateEffectsString());
+            builder.AppendLine(this.GenerateItemsString());
+            builder.AppendLine(this.GenerateItemSlotsString());
 
             return builder.ToString();
         }

@@ -5,48 +5,58 @@ using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Store;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Version;
 using Bardez.Projects.InfinityPlus1.Test;
-using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
-namespace Bardez.Projects.InfinityPlus1.Test.Store
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Store
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Version.Store1_1 class.</summary>
-    public class Store1_1Test : ITester
+    public class Store1_1Test : FileTesterBase
     {
-        protected Store1_1 store;
+        #region Fields
+        /// <summary>Constant key to look up in app.config</summary>
+        protected const String configKey = "Test.Store.Store1.1Path";
 
-        public Store1_1 Store
+        /// <summary>Format instance to test</summary>
+        protected Store1_1 Store { get; set; }
+        #endregion
+
+        #region Construction
+        /// <summary>Default constructor</summary>
+        public Store1_1Test()
         {
-            get { return this.store; }
+            this.InitializeInstance();
+        }
+        #endregion
+
+        /// <summary>Initializes the test class data</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="e">Specific initialization event parameters</param>
+        protected override void InitializeTestData(Object sender, EventArgs e)
+        {
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(Store1_1Test.configKey);
         }
 
-        public void Test()
+        /// <summary>Event to raise for testing instance(s)</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="testArgs">Arguments containing the item to test (usually a file path)</param>
+        protected override void TestCase(Object sender, TestEventArgs testArgs)
         {
-            String path = ConfigurationHandler.GetSettingValue("Test.Store.Store1.1Path");
-            this.Test(path);
-        }
+            using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
+            {
+                this.Store = new Store1_1();
+                this.Store.Read(stream);
+            }
 
-        public void Test(String Path)
-        {
-            using (FileStream stream = new FileStream(Path, FileMode.Open, FileAccess.Read))
-                this.Test(stream);
+            this.DoPostMessage(new MessageEventArgs(this.Store.ToString(), "Output", testArgs.Path));
 
-            using (FileStream dest = new FileStream(Path + ".rewrite", FileMode.OpenOrCreate, FileAccess.Write))
+            using (FileStream dest = new FileStream(testArgs.Path + ".rewrite", FileMode.Create, FileAccess.Write))
                 this.TestWrite(dest);
         }
 
-        public void Test(Stream Source)
+        /// <summary>Writes the data structure back out to a destination stream</summary>
+        /// <param name="destination">Stream to write output to</param>
+        protected virtual void TestWrite(Stream destination)
         {
-            this.store = new Store1_1();
-            this.store.Read(Source);
-
-            Interceptor.WriteMessage(this.store.ToString());
-
-            Interceptor.WaitForInput();
-        }
-
-        public void TestWrite(Stream destination)
-        {
-            this.store.Write(destination);
+            this.Store.Write(destination);
         }
     }
 }

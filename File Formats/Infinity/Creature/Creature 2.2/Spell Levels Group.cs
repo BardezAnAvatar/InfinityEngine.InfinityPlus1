@@ -239,7 +239,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             builder.Append(this.level8);
             builder.Append(StringFormat.ToStringAlignment(spellClass + " Spell offset Level 9"));
             builder.Append(this.level9);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

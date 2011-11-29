@@ -465,7 +465,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Version
             builder.Append(StringFormat.ToStringAlignment("Item capacity"));
             builder.Append(this.capacity);
             builder.Append(StringFormat.ToStringAlignment("Theft dialog"));
-            builder.Append(this.theftDialog.ResRef);
+            builder.Append(this.theftDialog.ZResRef);
             builder.Append(StringFormat.ToStringAlignment("Purchase types offset"));
             builder.Append(this.offsetPurchaseTypes);
             builder.Append(StringFormat.ToStringAlignment("Purchase types count"));
@@ -479,13 +479,13 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Version
             builder.Append(StringFormat.ToStringAlignment("Cost to perform identify"));
             builder.Append(this.costIdentify);
             builder.Append(StringFormat.ToStringAlignment("Bar rumors dialog"));
-            builder.Append(this.rumorsBar.ResRef);
+            builder.Append(this.rumorsBar.ZResRef);
             builder.Append(StringFormat.ToStringAlignment("Drinks offset"));
             builder.Append(this.offsetDrinks);
             builder.Append(StringFormat.ToStringAlignment("Drinks count"));
             builder.Append(this.countDrinks);
             builder.Append(StringFormat.ToStringAlignment("Temple rumors dialog"));
-            builder.Append(this.rumorsTemple.ResRef);
+            builder.Append(this.rumorsTemple.ZResRef);
             builder.Append(StringFormat.ToStringAlignment("Rooms available"));
             builder.Append((UInt32)this.roomsAvailable);
             builder.Append(StringFormat.ToStringAlignment("Rooms available (enumerated)"));
@@ -504,7 +504,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Version
             builder.Append(this.countHealing);
             builder.Append(StringFormat.ToStringAlignment("Reserved"));
             builder.Append(StringFormat.ByteArrayToHexString(this.reserved1));
-            builder.Append("\n\n");
 
             return builder.ToString();
         }
@@ -527,7 +526,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Version
             StringFormat.AppendSubItem(sb, (this.flags & StoreFlags.Fence) == StoreFlags.Fence, StoreFlags.Fence.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
 
         /// <summary>Generates a human-readable multi-line string for console output that indicates which Storelags flags are set</summary>
@@ -542,7 +541,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Version
             StringFormat.AppendSubItem(sb, (this.roomsAvailable & AvailableRooms.Royal) == AvailableRooms.Royal, AvailableRooms.Royal.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
         #endregion
     }

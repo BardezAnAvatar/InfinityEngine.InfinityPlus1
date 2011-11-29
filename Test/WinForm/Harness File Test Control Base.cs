@@ -12,12 +12,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
     /// <summary>User Control that is a base for a testing harness User Control</summary>
     public abstract partial class HarnessFileBaseTestControlBase<HarnessType> : UserControl where HarnessType : FileTesterBase
     {
-        /// <summary>Delegate for threaded application, where Invoke is required</summary>
-        protected delegate void VoidInvoke();
-
-        /// <summary>Delegate for threaded application, where Invoke is required</summary>
-        protected delegate void VoidInvokeParameterBoolean(Boolean parameter);
-
         #region Members
         /// <summary>Testing harness</summary>
         protected HarnessType Harness { get; set; }
@@ -32,6 +26,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         {
             this.Harness.Logger.LogMessage += new LogMessageHandler(this.PostMessage);
             this.Harness.EndInitialize += new EndInitializeTestClass(this.EndHarnessInitialize);
+            this.ToggleControls(false);
         }
         #endregion
 
@@ -46,6 +41,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
                 {
                     this.chklbTestItems.Enabled = enabled;
                     this.btnTestSelected.Enabled = enabled;
+                    this.btnInvertSelection.Enabled = enabled;
                 }
         }
         
@@ -55,7 +51,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         protected virtual void EndHarnessInitialize(Object sender, EventArgs e)
         {
             this.LoadHarnessItems();
-            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Initialization ended: {0}", DateTime.Now.ToShortTimeString()))));
+            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Initialization ended: {0}", DateTime.Now.ToShortTimeString()), "Initialization", "Ended", this)));
         }
 
         /// <summary>Method that will post a message to the log collection object. Intended to be attached to an event that the Harness will raise internally.</summary>
@@ -63,7 +59,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         /// <param name="message">Log Message being posted</param>
         protected virtual void PostMessage(Object sender, LogEventArgs message)
         {
-            this.logOutput.PostMessage(message.LogMessage.Message);
+            this.logOutput.PostMessage(message);
         }
 
         /// <summary>Abstract method to load harness items</summary>
@@ -88,7 +84,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         {
             this.chklbTestItems.Items.Clear();  //clear out existing items
             this.ToggleControls(false);
-            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Initialization started: {0}", DateTime.Now.ToShortTimeString()))));
+            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Initialization started: {0}", DateTime.Now.ToShortTimeString()), "Initialization", "Started", this)));
             Thread thread = new Thread(new ThreadStart(this.RunInitializeThread));
             thread.Start();
         }
@@ -99,12 +95,21 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
             this.Harness.DoInitialize(this);
         }
 
+        /// <summary>Inverts the file list selection</summary>
+        /// <param name="sender">Object raising the event</param>
+        /// <param name="e">Standard event arguments</param>
+        protected virtual void btnInvertSelection_Click(Object sender, EventArgs e)
+        {
+            for (Int32 i = 0; i < this.chklbTestItems.Items.Count; ++i)
+                this.chklbTestItems.SetItemChecked(i, ! this.chklbTestItems.GetItemChecked(i));
+        }
+
         /// <summary>Handler for Test Selected click event</summary>
         /// <param name="sender">Object sending the event</param>
         /// <param name="e">EventArgs for the click event</param>
         protected virtual void btnTestSelected_Click(Object sender, EventArgs e)
         {
-            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Testing started: {0}", DateTime.Now.ToShortTimeString()))));
+            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Testing started: {0}", DateTime.Now.ToShortTimeString()), "Testing", "Started", this)));
             Thread thread = new Thread(new ThreadStart(this.RunTestThread));
             thread.Start();
         }
@@ -115,15 +120,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
             foreach (Object item in this.chklbTestItems.CheckedItems)
                 this.Harness.DoTest(this, new TestEventArgs(item as String));
 
-            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Testing ended: {0}", DateTime.Now.ToShortTimeString()))));
-        }
-
-        /// <summary>Handler for Clear Log click event</summary>
-        /// <param name="sender">Object sending the event</param>
-        /// <param name="e">EventArgs for the click event</param>
-        protected virtual void bntClearLog_Click(Object sender, EventArgs e)
-        {
-            this.logOutput.ClearControls();
+            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Testing ended: {0}", DateTime.Now.ToShortTimeString()), "Testing", "Ended", this)));
         }
         #endregion
     }

@@ -143,9 +143,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
         /// <summary>Amount by which to increment the PC's murder variable</summary>
         protected Byte variableIncrementMurder;
 
-        /// <summary>Name/group to add into the Monstrous Compendium</summary>
-        protected String monstrousCompendiumEntry;
-
         /// <summary>Range to activate dialog</summary>
         protected Byte dialogActivationRange;
 
@@ -507,11 +504,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
         }
 
         /// <summary>Name/group to add into the Monstrous Compendium</summary>
-        public String MonstrousCompendiumEntry
-        {
-            get { return this.monstrousCompendiumEntry; }
-            set { this.monstrousCompendiumEntry = value; }
-        }
+        public ZString MonstrousCompendiumEntry { get; set; }
 
         /// <summary>Range to activate dialog</summary>
         public Byte DialogActivationRange
@@ -725,6 +718,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
             this.unknown2 = new Byte[8];
             this.unknown3 = new Byte[3];
             this.unknown4 = new Byte[16];
+            this.MonstrousCompendiumEntry = new ZString();
         }
 
         /// <summary>Initializes the soundset ordered dictionary</summary>
@@ -915,7 +909,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
             this.variableIncrementLaw = headerBody[689];
             this.variableIncrementLady = headerBody[690];
             this.variableIncrementMurder = headerBody[691];
-            this.monstrousCompendiumEntry = ReusableIO.ReadStringFromByteArray(headerBody, 692, Constants.CultureCodeEnglish, 32);
+            this.MonstrousCompendiumEntry.Source = ReusableIO.ReadStringFromByteArray(headerBody, 692, Constants.CultureCodeEnglish, 32);
             this.dialogActivationRange = headerBody[724];
             this.selectionCircleSize = ReusableIO.ReadUInt16FromArray(headerBody, 725);
             this.countColors = headerBody[727];
@@ -1038,7 +1032,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
             output.WriteByte(this.variableIncrementLaw);
             output.WriteByte(this.variableIncrementLady);
             output.WriteByte(this.variableIncrementMurder);
-            ReusableIO.WriteStringToStream(this.monstrousCompendiumEntry, output, Constants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(this.MonstrousCompendiumEntry.Source, output, Constants.CultureCodeEnglish, false, 32);
             output.WriteByte(this.dialogActivationRange);
             ReusableIO.WriteUInt16ToStream(this.selectionCircleSize, output);
             output.WriteByte(this.countColors);
@@ -1109,7 +1103,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
             StringFormat.AppendSubItem(sb, (this.attributeFlags & AttributeFlags.DoNotIncrementGlobals) == AttributeFlags.DoNotIncrementGlobals, AttributeFlags.DoNotIncrementGlobals.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
 
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>
@@ -1134,58 +1128,58 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
         /// <param name="builder">StringBuilder to append to</param>
         protected override void ToStringCreatureVersion(StringBuilder builder)
         {
-            builder.Append("Creature version 1.2 header:");
+            builder.AppendLine("Creature version 1.2 header:");
         }
 
         /// <summary>Generates a String representing the proficiencies area of the creature data structure</summary>
         /// <param name="builder">StringBuilder to append to</param>
         protected override void ToStringProcifiencies(StringBuilder builder)
         {
-            builder.Append("\n\tProficiency (Fist):                         ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Fist)"));
             builder.Append(this.proficiencyFist);
-            builder.Append("\n\tProficiency (Edged):                        ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Edged)"));
             builder.Append(this.proficiencyEdged);
-            builder.Append("\n\tProficiency (Hammer):                       ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Hammer)"));
             builder.Append(this.proficiencyHammer);
-            builder.Append("\n\tProficiency (Axe):                          ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Axe)"));
             builder.Append(this.proficiencyAxe);
-            builder.Append("\n\tProficiency (Club):                         ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Club)"));
             builder.Append(this.proficiencyClub);
-            builder.Append("\n\tProficiency (Bow):                          ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Bow)"));
             builder.Append(this.proficiencyBow);
-            builder.Append("\n\tProficiency (Unused #1):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #1)"));
             builder.Append(this.proficiencyUnused1);
-            builder.Append("\n\tProficiency (Unused #2):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #2)"));
             builder.Append(this.proficiencyUnused2);
-            builder.Append("\n\tProficiency (Unused #3):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #3)"));
             builder.Append(this.proficiencyUnused3);
-            builder.Append("\n\tProficiency (Unused #4):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #4)"));
             builder.Append(this.proficiencyUnused4);
-            builder.Append("\n\tProficiency (Unused #5):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #5)"));
             builder.Append(this.proficiencyUnused5);
-            builder.Append("\n\tProficiency (Unused #6):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #6)"));
             builder.Append(this.proficiencyUnused6);
-            builder.Append("\n\tProficiency (Unused #7):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #7)"));
             builder.Append(this.proficiencyUnused7);
-            builder.Append("\n\tProficiency (Unused #8):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #8)"));
             builder.Append(this.proficiencyUnused8);
-            builder.Append("\n\tProficiency (Unused #9):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #9)"));
             builder.Append(this.proficiencyUnused9);
-            builder.Append("\n\tProficiency (Unused #10):                   ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #10)"));
             builder.Append(this.proficiencyUnused10);
-            builder.Append("\n\tProficiency (Unused #11):                   ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #11)"));
             builder.Append(this.proficiencyUnused11);
-            builder.Append("\n\tProficiency (Unused #12):                   ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #12)"));
             builder.Append(this.proficiencyUnused12);
-            builder.Append("\n\tProficiency (Unused #13):                   ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #13)"));
             builder.Append(this.proficiencyUnused13);
-            builder.Append("\n\tProficiency (Unused #14):                   ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #14)"));
             builder.Append(this.proficiencyUnused14);
-            builder.Append("\n\tProficiency (Unused #15):                   ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #15)"));
             builder.Append(this.proficiencyUnused15);
-            builder.Append("\n\tTracking:                                   ");
+            builder.Append(StringFormat.ToStringAlignment("Tracking"));
             builder.Append(this.tracking);
-            builder.Append("\n\tReserved non-weapon proficiencies:          ");
+            builder.Append(StringFormat.ToStringAlignment("Reserved non-weapon proficiencies"));
             builder.Append(StringFormat.ByteArrayToHexString(this.reservedNonweaponProficiencies));
         }
 
@@ -1193,11 +1187,11 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
         /// <param name="dataArray">StringBuilder to append to</param>
         protected override void ToStringKitValues(StringBuilder builder)
         {
-            builder.Append("\n\tDeity:                                      ");
+            builder.Append(StringFormat.ToStringAlignment("Deity"));
             builder.Append(this.deity);
-            builder.Append("\n\tKit:                                        ");
+            builder.Append(StringFormat.ToStringAlignment("Kit"));
             builder.Append((UInt32)this.kit);
-            builder.Append("\n\tKit (description):                          ");
+            builder.Append(StringFormat.ToStringAlignment("Kit (description)"));
             builder.Append(this.kit.GetDescription());
         }
 
@@ -1205,27 +1199,27 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
         /// <param name="builder">StringBuilder to append to</param>
         protected override void ToStringClassifications(StringBuilder builder)
         {
-            builder.Append("\n\tClassification (Hostility)  [EA.IDS]:       ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Hostility) [EA.IDS]"));
             builder.Append(this.classificationHostility);
-            builder.Append("\n\tClassification (General)    [GENERAL.IDS]:  ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (General)   [GENERAL.IDS]"));
             builder.Append(this.classificationGeneral);
-            builder.Append("\n\tClassification (Race)       [RACE.IDS]:     ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Race)      [RACE.IDS]"));
             builder.Append(this.classificationRace);
-            builder.Append("\n\tClassification (Class)      [CLASS.IDS]:    ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Class)     [CLASS.IDS]"));
             builder.Append(this.classificationClass);
-            builder.Append("\n\tClassification (Gender)     [GENDER.IDS]:   ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Gender)    [GENDER.IDS]"));
             builder.Append(this.classificationGender);
-            builder.Append("\n\tClassification (Object 1)   [OBJECT.IDS]:   ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Object 1)  [OBJECT.IDS]"));
             builder.Append(this.classificationObject1);
-            builder.Append("\n\tClassification (Object 2)   [OBJECT.IDS]:   ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Object 2)  [OBJECT.IDS]"));
             builder.Append(this.classificationObject2);
-            builder.Append("\n\tClassification (Object 3)   [OBJECT.IDS]:   ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Object 3)  [OBJECT.IDS]"));
             builder.Append(this.classificationObject3);
-            builder.Append("\n\tClassification (Object 4)   [OBJECT.IDS]:   ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Object 4)  [OBJECT.IDS]"));
             builder.Append(this.classificationObject4);
-            builder.Append("\n\tClassification (Object 5)   [OBJECT.IDS]:   ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Object 5)  [OBJECT.IDS]"));
             builder.Append(this.classificationObject5);
-            builder.Append("\n\tClassification (Alignment)  [ALIGNMEN.IDS]: ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Alignment) [ALIGNMEN.IDS]"));
             builder.Append(this.classificationAlignment);
         }
 
@@ -1233,100 +1227,99 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
         /// <param name="builder">StringBuilder to append to</param>
         protected void ToStringPlanescapeAdditions(StringBuilder builder)
         {
-            builder.Append("\n\tUnknown #1 (Byte array):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #1 (Byte array)"));
             builder.Append(StringFormat.ByteArrayToHexString(this.unknown1));
-            builder.Append("\n\tZombie disguise:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Zombie disguise"));
             builder.Append(this.zombieDisguise);
-            builder.Append("\n\tZombie disguise (description):              ");
+            builder.Append(StringFormat.ToStringAlignment("Zombie disguise (description)"));
             builder.Append(this.zombieDisguise == -1 ? "True" : this.zombieDisguise == 0 ? "False" : "Unknown");
-            builder.Append("\n\tUnknown #2 (Byte array):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #2 (Byte array)"));
             builder.Append(StringFormat.ByteArrayToHexString(this.unknown2));
-            builder.Append("\n\tOverlays offset:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Overlays offset"));
             builder.Append(this.offsetOverlays);
-            builder.Append("\n\tOverlays size:                              ");
+            builder.Append(StringFormat.ToStringAlignment("Overlays size"));
             builder.Append(this.sizeOverlays);
-            builder.Append("\n\tSecond class XP total:                      ");
+            builder.Append(StringFormat.ToStringAlignment("Second class XP total"));
             builder.Append(this.experienceSecondClass);
-            builder.Append("\n\tThird class XP total:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Third class XP total"));
             builder.Append(this.experienceThirdClass);
-            builder.Append("\n\tInternal variable #1:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #1"));
             builder.Append(this.internalVariable1);
-            builder.Append("\n\tInternal variable #2:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #2"));
             builder.Append(this.internalVariable2);
-            builder.Append("\n\tInternal variable #3:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #3"));
             builder.Append(this.internalVariable3);
-            builder.Append("\n\tInternal variable #4:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #4"));
             builder.Append(this.internalVariable4);
-            builder.Append("\n\tInternal variable #5:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #5"));
             builder.Append(this.internalVariable5);
-            builder.Append("\n\tInternal variable #6:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #6"));
             builder.Append(this.internalVariable6);
-            builder.Append("\n\tInternal variable #7:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #7"));
             builder.Append(this.internalVariable7);
-            builder.Append("\n\tInternal variable #8:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #8"));
             builder.Append(this.internalVariable8);
-            builder.Append("\n\tInternal variable #9:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #9"));
             builder.Append(this.internalVariable9);
-            builder.Append("\n\tInternal variable #10:                      ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #10"));
             builder.Append(this.internalVariable10);
-            builder.Append("\n\tGOOD variable increment value:              ");
+            builder.Append(StringFormat.ToStringAlignment("GOOD variable increment value"));
             builder.Append(this.variableIncrementGood);
-            builder.Append("\n\tLAW variable increment value:               ");
+            builder.Append(StringFormat.ToStringAlignment("LAW variable increment value"));
             builder.Append(this.variableIncrementLaw);
-            builder.Append("\n\tLADY variable increment value:              ");
+            builder.Append(StringFormat.ToStringAlignment("LADY variable increment value"));
             builder.Append(this.variableIncrementLady);
-            builder.Append("\n\tMURDER variable increment value:            ");
+            builder.Append(StringFormat.ToStringAlignment("MURDER variable increment value"));
             builder.Append(this.variableIncrementMurder);
-            builder.Append("\n\tMonstrous compendium entry:                 '");
-            builder.Append(this.monstrousCompendiumEntry);
-            builder.Append("'");
-            builder.Append("\n\tDialog activation range:                    ");
+            builder.Append(StringFormat.ToStringAlignment("Monstrous compendium entry"));
+            builder.Append(StringFormat.ToStringAlignment(String.Format("'{0}'", this.MonstrousCompendiumEntry.Value)));
+            builder.Append(StringFormat.ToStringAlignment("Dialog activation range"));
             builder.Append(this.dialogActivationRange);
-            builder.Append("\n\tSelection circle size:                      ");
+            builder.Append(StringFormat.ToStringAlignment("Selection circle size"));
             builder.Append(this.selectionCircleSize);
-            builder.Append("\n\tColors count:                               ");
+            builder.Append(StringFormat.ToStringAlignment("Colors count"));
             builder.Append(this.countColors);
-            builder.Append("\n\tAttribute Flags:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Attribute Flags"));
             builder.Append((UInt32)this.attributeFlags);
-            builder.Append("\n\tAttribute Flags (enumerated):               ");
+            builder.Append(StringFormat.ToStringAlignment("Attribute Flags (enumerated)"));
             builder.Append(this.GetCreatureAttributeFlagsString());
-            builder.Append("\n\tColor #1:                                   ");
+            builder.Append(StringFormat.ToStringAlignment("Color #1"));
             builder.Append(this.color1);
-            builder.Append("\n\tColor #2:                                   ");
+            builder.Append(StringFormat.ToStringAlignment("Color #2"));
             builder.Append(this.color2);
-            builder.Append("\n\tColor #3:                                   ");
+            builder.Append(StringFormat.ToStringAlignment("Color #3"));
             builder.Append(this.color3);
-            builder.Append("\n\tColor #4:                                   ");
+            builder.Append(StringFormat.ToStringAlignment("Color #4"));
             builder.Append(this.color4);
-            builder.Append("\n\tColor #5:                                   ");
+            builder.Append(StringFormat.ToStringAlignment("Color #5"));
             builder.Append(this.color5);
-            builder.Append("\n\tColor #6:                                   ");
+            builder.Append(StringFormat.ToStringAlignment("Color #6"));
             builder.Append(this.color6);
-            builder.Append("\n\tColor #7:                                   ");
+            builder.Append(StringFormat.ToStringAlignment("Color #7"));
             builder.Append(this.color7);
-            builder.Append("\n\tUnknown #3 (Byte array):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #3 (Byte array)"));
             builder.Append(StringFormat.ByteArrayToHexString(this.unknown3));
-            builder.Append("\n\tColor placement #1:                         ");
+            builder.Append(StringFormat.ToStringAlignment("Color placement #1"));
             builder.Append(this.colorPlacement1);
-            builder.Append("\n\tColor placement #2:                         ");
+            builder.Append(StringFormat.ToStringAlignment("Color placement #2"));
             builder.Append(this.colorPlacement2);
-            builder.Append("\n\tColor placement #3:                         ");
+            builder.Append(StringFormat.ToStringAlignment("Color placement #3"));
             builder.Append(this.colorPlacement3);
-            builder.Append("\n\tColor placement #4:                         ");
+            builder.Append(StringFormat.ToStringAlignment("Color placement #4"));
             builder.Append(this.colorPlacement4);
-            builder.Append("\n\tColor placement #5:                         ");
+            builder.Append(StringFormat.ToStringAlignment("Color placement #5"));
             builder.Append(this.colorPlacement5);
-            builder.Append("\n\tColor placement #6:                         ");
+            builder.Append(StringFormat.ToStringAlignment("Color placement #6"));
             builder.Append(this.colorPlacement6);
-            builder.Append("\n\tColor placement #7:                         ");
+            builder.Append(StringFormat.ToStringAlignment("Color placement #7"));
             builder.Append(this.colorPlacement7);
-            builder.Append("\n\tUnknown #4 (Byte array):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #4 (Byte array)"));
             builder.Append(StringFormat.ByteArrayToHexString(this.unknown4));
-            builder.Append("\n\tUnknown #5:                                 ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #5"));
             builder.Append(this.unknown5);
-            builder.Append("\n\tUnknown #6:                                 ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #6"));
             builder.Append(this.unknown6);
-            builder.Append("\n\tUnknown #7:                                 ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #7"));
             builder.Append(this.unknown7);
         }
         #endregion

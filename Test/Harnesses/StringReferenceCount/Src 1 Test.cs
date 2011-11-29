@@ -4,69 +4,58 @@ using System.IO;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.StringReferenceCount;
 using Bardez.Projects.InfinityPlus1.Test;
-using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
-namespace Bardez.Projects.InfinityPlus1.Test.StringReferenceCount
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.StringReferenceCount
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.StringReferenceCount.StringReferenceCount1 class.</summary>
-    public class Src1Test : ITester
+    public class Src1Test : FileTesterBase
     {
-        protected StringReferenceCount1 biography;
+        #region Fields
+        /// <summary>Constant key to look up in app.config</summary>
+        protected const String configKey = "Test.StringReference.Src1Path";
 
-        public StringReferenceCount1 Src
+        /// <summary>Format instance to test</summary>
+        protected StringReferenceCount1 Src { get; set; }
+        #endregion
+
+        #region Construction
+        /// <summary>Default constructor</summary>
+        public Src1Test()
         {
-            get { return this.biography; }
+            this.InitializeInstance();
+        }
+        #endregion
+
+        /// <summary>Initializes the test class data</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="e">Specific initialization event parameters</param>
+        protected override void InitializeTestData(Object sender, EventArgs e)
+        {
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(Src1Test.configKey);
         }
 
-        public void Test()
+        /// <summary>Event to raise for testing instance(s)</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="testArgs">Arguments containing the item to test (usually a file path)</param>
+        protected override void TestCase(Object sender, TestEventArgs testArgs)
         {
-            String[] paths = ConfigurationHandlerMulti.GetSettingValues("Test.StringReference.Src1Path").ToArray();
-            this.TestMulti(paths);
-        }
-        
-        /// <summary>Tests a single file</summary>
-        /// <param name="path">File to open and read, then replicate</param>
-        /// <param name="prompt">Boolean indicating whether or not to prompt between read and write</param>
-        public void Test(String path, Boolean prompt)
-        {
-            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                this.Test(stream, prompt);
+            using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
+            {
+                this.Src = new StringReferenceCount1();
+                this.Src.Read(stream);
+            }
 
-            using (FileStream dest = new FileStream(path + ".rewrite", FileMode.Create, FileAccess.Write))
+            this.DoPostMessage(new MessageEventArgs(this.Src.ToString(), "Output", testArgs.Path));
+
+            using (FileStream dest = new FileStream(testArgs.Path + ".rewrite", FileMode.Create, FileAccess.Write))
                 this.TestWrite(dest);
-        }
-
-        /// <summary>Tests the code </summary>
-        /// <param name="paths"></param>
-        public void TestMulti(String[] paths)
-        {
-            foreach (String path in paths)
-            {
-                this.Test(path, false);
-            }
-        }
-
-        /// <summary>Tests the read and ToString() methods of the structure</summary>
-        /// <param name="source">Source Stream to read from</param>
-        /// <param name="prompt">Boolean indicating whether or not to prompt for pressing [Enter] to continue</param>
-        public void Test(Stream source, Boolean prompt)
-        {
-            this.biography = new StringReferenceCount1();
-            this.biography.Read(source);
-
-            Interceptor.WriteMessage(this.biography.ToString());
-
-            if (prompt)
-            {
-                Interceptor.WaitForInput();
-            }
         }
 
         /// <summary>Writes the data structure back out to a destination stream</summary>
         /// <param name="destination">Stream to write output to</param>
-        public void TestWrite(Stream destination)
+        protected virtual void TestWrite(Stream destination)
         {
-            this.biography.Write(destination);
+            this.Src.Write(destination);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell.Spell1
 
         protected override String Headline
         {
-            get { return "SPELL Version 1.0:\n"; }
+            get { return "SPELL Version 1.0:"; }
         }
 
         protected override UInt32 HeaderSize

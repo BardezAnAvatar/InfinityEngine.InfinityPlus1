@@ -196,7 +196,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
         public String ToString(Int32 entryIndex)
         {
-            return String.Format("Item Entry # {0}:", entryIndex) + this.GetStringRepresentation();
+            return StringFormat.ReturnAndIndent(String.Format("Item Entry # {0}:", entryIndex), 0) + this.GetStringRepresentation();
         }
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
@@ -204,22 +204,21 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl
         protected String GetStringRepresentation()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("\n\tReferenced item resource:                       '");
-            builder.Append(this.item.ResRef);
-            builder.Append("'");
-            builder.Append("\n\tItem lifetime:                                  ");
+            builder.Append(StringFormat.ToStringAlignment("Referenced item resource"));
+            builder.Append(String.Format("'{0}'", this.item.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Item lifetime"));
             builder.Append(this.itemLifeTime);
-            builder.Append("\n\tItem count down:                                ");
+            builder.Append(StringFormat.ToStringAlignment("Item count down"));
             builder.Append(this.itemCountDown);
-            builder.Append("\n\tQuantity/Charges #1:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Quantity/Charges #1"));
             builder.Append(this.quantityCharges1);
-            builder.Append("\n\tQuantity/Charges #2:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Quantity/Charges #2"));
             builder.Append(this.quantityCharges2);
-            builder.Append("\n\tQuantity/Charges #3:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Quantity/Charges #3"));
             builder.Append(this.quantityCharges3);
-            builder.Append("\n\tItem flags:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Item flags"));
             builder.Append((UInt32)this.flags);
-            builder.Append("\n\tItem flags (enumerated):");
+            builder.Append(StringFormat.ToStringAlignment("Item flags (enumerated)"));
             builder.Append(this.GetItemFlagsString());
 
             return builder.ToString();
@@ -237,7 +236,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl
             StringFormat.AppendSubItem(sb, (this.flags & ItemInstanceFlags.UndroppableOrLoreRequirement) == ItemInstanceFlags.UndroppableOrLoreRequirement, ItemInstanceFlags.UndroppableOrLoreRequirement.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
         #endregion
     }

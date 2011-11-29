@@ -231,7 +231,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
         public override String ToString(Int32 abilityIndex)
         {
-            return String.Format("ITEM Ability # {0}:", abilityIndex) + this.GetStringRepresentation();
+            return StringFormat.ReturnAndIndent(String.Format("ITEM Ability # {0}:", abilityIndex), 0) + this.GetStringRepresentation();
         }
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
@@ -239,78 +239,76 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item
         protected override String GetStringRepresentation()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("\n\tAbility type:                                   ");
+            builder.Append(StringFormat.ToStringAlignment("Ability type"));
             builder.Append((Byte)this.abilityType);
-            builder.Append("\n\tAbility type (description):                     ");
+            builder.Append(StringFormat.ToStringAlignment("Ability type (description)"));
             builder.Append(this.abilityType.GetDescription());
-            builder.Append("\n\tUse of ability requires item to be identified:  ");
+            builder.Append(StringFormat.ToStringAlignment("Use of ability requires item to be identified"));
             builder.Append(this.identifyRequired);
-            builder.Append("\n\tAbility UI location:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Ability UI location"));
             builder.Append((UInt16)this.abilityLocation);
-            builder.Append("\n\tAbility UI location (description):              ");
+            builder.Append(StringFormat.ToStringAlignment("Ability UI location (description)"));
             builder.Append(this.abilityLocation.GetDescription());
-            builder.Append("\n\tAbility Icon:                                   '");
-            builder.Append(this.icon.ResRef);
-            builder.Append("'");
-            builder.Append("\n\tAbility Target:                                 ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Icon"));
+            builder.Append(String.Format("'{0}'", this.icon.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Ability Target"));
             builder.Append((Byte)this.target);
-            builder.Append("\n\tAbility Target (description):                   ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Target (description)"));
             builder.Append(this.target.GetDescription());
-            builder.Append("\n\tAbility Target Count:                           ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Target Count"));
             builder.Append(this.targetCount);
-            builder.Append("\n\tAbility Range (in search rectangles?):          ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Range (in search rectangles?)"));
             builder.Append(this.range);
-            builder.Append("\n\tAbility Projectile Type:                        ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Projectile Type"));
             builder.Append((UInt16)this.projectileType);
-            builder.Append("\n\tAbility Projectile Type (description):          ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Projectile Type (description)"));
             builder.Append(this.projectileType.GetDescription());
-            builder.Append("\n\tAbility Speed Factor:                           ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Speed Factor"));
             builder.Append(this.speedFactor);
-            builder.Append("\n\tAbility Attack Bonus (Thac0 2E, Attack 3E):     ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Attack Bonus (Thac0 2E, Attack 3E)"));
             builder.Append(this.attackBonus);
-            builder.Append("\n\tAbility Dice Sides:                             ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Dice Sides"));
             builder.Append(this.diceSides);
-            builder.Append("\n\tAbility Dice Number:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Dice Number"));
             builder.Append(this.diceNumber);
-            builder.Append("\n\tAbility Damage Bonus:                           ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Damage Bonus"));
             builder.Append(this.damageBonus);
-            builder.Append("\n\tAbility Damage Type:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Damage Type"));
             builder.Append((UInt16)this.damageType);
-            builder.Append("\n\tAbility Damage Type (description):\n\t\t");
+            builder.Append(StringFormat.ToStringAlignment("Ability Damage Type (description)"));
             builder.Append(this.damageType.GetDescription());
-            builder.Append("\n\tAbility Effects Count:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Effects Count"));
             builder.Append(this.featureCount);
-            builder.Append("\n\tAbility Effects Offset:                         ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Effects Offset"));
             builder.Append(this.featureOffset);
-            builder.Append("\n\tAbility Charges Count:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Charges Count"));
             builder.Append(this.charges);
-            builder.Append("\n\tCharge depletion behavior:                      ");
+            builder.Append(StringFormat.ToStringAlignment("Charge depletion behavior"));
             builder.Append((UInt16)this.depletionBehavior);
-            builder.Append("\n\tCharge depletion behavior (description):        ");
+            builder.Append(StringFormat.ToStringAlignment("Charge depletion behavior (description)"));
             builder.Append(this.depletionBehavior.GetDescription());
-            builder.Append("\n\tAbility flags:                                  ");
+            builder.Append(StringFormat.ToStringAlignment("Ability flags"));
             builder.Append((UInt16)this.flags);
-            builder.Append("\n\tAbility flags (enumerated):                     ");
+            builder.Append(StringFormat.ToStringAlignment("Ability flags (enumerated)"));
             builder.Append(this.GetAbilityFlagsString());
-            builder.Append("\n\tAbility attack type:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Ability attack type"));
             builder.Append((UInt16)this.attackType);
-            builder.Append("\n\tAbility attack type (enumerated):               ");
+            builder.Append(StringFormat.ToStringAlignment("Ability attack type (enumerated)"));
             builder.Append(this.GetAbilityItemAttackTypeString());
-            builder.Append("\n\tAbility Projectile Animation (see *.IDS):       ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Projectile Animation (see *.IDS)"));
             builder.Append(this.projectileAnimation);
-            builder.Append("\n\tAttack % Overhand:                              ");
+            builder.Append(StringFormat.ToStringAlignment("Attack % Overhand"));
             builder.Append(this.attackPercentOverhand);
-            builder.Append("\n\tAttack % Backhand:                              ");
+            builder.Append(StringFormat.ToStringAlignment("Attack % Backhand"));
             builder.Append(this.attackPercentBackhand);
-            builder.Append("\n\tAttack % Thrust:                                ");
+            builder.Append(StringFormat.ToStringAlignment("Attack % Thrust"));
             builder.Append(this.attackPercentThrust);
-            builder.Append("\n\tIs arrow:                                       ");
+            builder.Append(StringFormat.ToStringAlignment("Is arrow"));
             builder.Append(this.isArrow);
-            builder.Append("\n\tIs bolt:                                        ");
+            builder.Append(StringFormat.ToStringAlignment("Is bolt"));
             builder.Append(this.isBolt);
-            builder.Append("\n\tIs missile:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Is missile"));
             builder.Append(this.isMissile);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }
@@ -325,7 +323,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item
             StringFormat.AppendSubItem(sb, (this.attackType & ItemAbilityAttackType.Keen) == ItemAbilityAttackType.Keen, ItemAbilityAttackType.Keen.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
 
         /// <summary>Generates a human-readable multi-line string for console output that indicates which ItemUability1 flags are set</summary>
@@ -340,7 +338,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item
             StringFormat.AppendSubItem(sb, (this.flags & ItemAbilityFlags.AfterRest) == ItemAbilityFlags.AfterRest, ItemAbilityFlags.AfterRest.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
         #endregion
     }

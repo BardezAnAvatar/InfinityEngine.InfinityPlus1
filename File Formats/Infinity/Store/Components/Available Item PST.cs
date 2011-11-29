@@ -94,7 +94,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Components
             builder.Append(this.trigger.StringReferenceIndex);
             builder.Append(StringFormat.ToStringAlignment("Unknown"));
             builder.Append(StringFormat.ByteArrayToHexString(this.unknown));
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

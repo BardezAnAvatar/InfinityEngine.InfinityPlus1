@@ -4,69 +4,58 @@ using System.IO;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Biography;
 using Bardez.Projects.InfinityPlus1.Test;
-using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
-namespace Bardez.Projects.InfinityPlus1.Test.Character
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Character
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Biography.Version.Biography1 class.</summary>
-    public class Biography1Test : ITester
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Biography.Biography1 class.</summary>
+    public class Biography1Test : FileTesterBase
     {
-        protected Biography1 biography;
+        #region Fields
+        /// <summary>Constant key to look up in app.config</summary>
+        protected const String configKey = "Test.Character.Biography1Path";
 
-        public Biography1 Biography
+        /// <summary>Format instance to test</summary>
+        protected Biography1 Biography { get; set; }
+        #endregion
+
+        #region Construction
+        /// <summary>Default constructor</summary>
+        public Biography1Test()
         {
-            get { return this.biography; }
+            this.InitializeInstance();
+        }
+        #endregion
+
+        /// <summary>Initializes the test class data</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="e">Specific initialization event parameters</param>
+        protected override void InitializeTestData(Object sender, EventArgs e)
+        {
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(Biography1Test.configKey);
         }
 
-        public void Test()
+        /// <summary>Event to raise for testing instance(s)</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="testArgs">Arguments containing the item to test (usually a file path)</param>
+        protected override void TestCase(Object sender, TestEventArgs testArgs)
         {
-            String[] paths = ConfigurationHandlerMulti.GetSettingValues("Test.Character.Biography1Path").ToArray();
-            this.TestMulti(paths);
-        }
-        
-        /// <summary>Tests a single file</summary>
-        /// <param name="path">File to open and read, then replicate</param>
-        /// <param name="prompt">Boolean indicating whether or not to prompt between read and write</param>
-        public void Test(String path, Boolean prompt)
-        {
-            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                this.Test(stream, prompt);
+            using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
+            {
+                this.Biography = new Biography1();
+                this.Biography.Read(stream);
 
-            using (FileStream dest = new FileStream(path + ".rewrite", FileMode.Create, FileAccess.Write))
+                this.DoPostMessage(new MessageEventArgs(this.Biography.ToString(), "Output", testArgs.Path));
+            }
+
+            using (FileStream dest = new FileStream(testArgs.Path + ".rewrite", FileMode.Create, FileAccess.Write))
                 this.TestWrite(dest);
-        }
-
-        /// <summary>Tests the code </summary>
-        /// <param name="paths"></param>
-        public void TestMulti(String[] paths)
-        {
-            foreach (String path in paths)
-            {
-                this.Test(path, false);
-            }
-        }
-
-        /// <summary>Tests the read and ToString() methods of the structure</summary>
-        /// <param name="source">Source Stream to read from</param>
-        /// <param name="prompt">Boolean indicating whether or not to prompt for pressing [Enter] to continue</param>
-        public void Test(Stream source, Boolean prompt)
-        {
-            this.biography = new Biography1();
-            this.biography.Read(source);
-
-            Interceptor.WriteMessage(this.biography.ToString());
-
-            if (prompt)
-            {
-                Interceptor.WaitForInput();
-            }
         }
 
         /// <summary>Writes the data structure back out to a destination stream</summary>
         /// <param name="destination">Stream to write output to</param>
-        public void TestWrite(Stream destination)
+        protected virtual void TestWrite(Stream destination)
         {
-            this.biography.Write(destination);
+            this.Biography.Write(destination);
         }
     }
 }

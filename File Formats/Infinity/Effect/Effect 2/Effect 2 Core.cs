@@ -111,9 +111,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect2
         /// <summary>parent resource slot</summary>
         protected Int32 parentResourceSlot;
 
-        /// <summary>Name of ay local variable being set. 32 bytes.</summary>
-        protected String localVariableName;
-
         /// <summary>Caster level of any effect applied</summary>
         protected UInt32 casterLevel;
 
@@ -338,11 +335,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect2
         }
 
         /// <summary>Name of ay local variable being set. 32 bytes.</summary>
-        public String LocalVariableName
-        {
-            get { return this.localVariableName; }
-            set { this.localVariableName = value; }
-        }
+        public ZString LocalVariableName { get; set; }
 
         /// <summary>Caster level of any effect applied</summary>
         public UInt32 CasterLevel
@@ -373,7 +366,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect2
         }
         #endregion
         
-        #region Constructor(s)
+        #region Construction
         /// <summary>Default constructor</summary>
         public Effect2Core()
         {
@@ -382,8 +375,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect2
             this.resource2 = null;
             this.resource3 = null;
             this.resourceUnknown = null;
+            this.LocalVariableName = null;
         }
-        #endregion
         
         /// <summary>Instantiates reference types</summary>
         public override void Initialize()
@@ -394,7 +387,9 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect2
             this.resource3 = new ResourceReference();
             this.resourceUnknown = new ResourceReference();
             this.parentResource = new ResourceReference();
+            this.LocalVariableName = new ZString();
         }
+        #endregion
 
         #region IO method implemetations
         /// <summary>This public method reads file format from the output stream. Reads the whole structure.</summary>
@@ -458,7 +453,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect2
             this.parentResourceFlags = (EffectResourceFlags)ReusableIO.ReadUInt32FromArray(remainingBody, 140);
             this.projectile = ReusableIO.ReadUInt32FromArray(remainingBody, 144);
             this.parentResourceSlot = ReusableIO.ReadInt32FromArray(remainingBody, 148);
-            this.localVariableName = ReusableIO.ReadStringFromByteArray(remainingBody, 152, Constants.CultureCodeEnglish, 32);
+            this.LocalVariableName.Source = ReusableIO.ReadStringFromByteArray(remainingBody, 152, Constants.CultureCodeEnglish, 32);
             this.casterLevel = ReusableIO.ReadUInt32FromArray(remainingBody, 184);
             this.unknown2 = ReusableIO.ReadUInt32FromArray(remainingBody, 188);
             this.magicType = (EffectMagicType)ReusableIO.ReadUInt32FromArray(remainingBody, 192);
@@ -504,7 +499,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect2
             ReusableIO.WriteUInt32ToStream((UInt32)this.parentResourceFlags, output);
             ReusableIO.WriteUInt32ToStream(this.projectile, output);
             ReusableIO.WriteInt32ToStream(this.parentResourceSlot, output);
-            ReusableIO.WriteStringToStream(this.localVariableName, output, Constants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(this.LocalVariableName.Source, output, Constants.CultureCodeEnglish, false, 32);
             ReusableIO.WriteUInt32ToStream(this.casterLevel, output);
             ReusableIO.WriteUInt32ToStream(this.unknown2, output);
             ReusableIO.WriteUInt32ToStream((UInt32)this.magicType, output);
@@ -547,109 +542,102 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect2
         protected String GetStringRepresentation()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("\n\tEffect opcode:                                  ");
+            builder.Append(StringFormat.ToStringAlignment("Effect opcode"));
             builder.Append(this.opcode);
-            builder.Append("\n\tEffect target:                                  ");
+            builder.Append(StringFormat.ToStringAlignment("Effect target"));
             builder.Append((SByte)this.target);
-            builder.Append("\n\tEffect target (description):\n\t\t");
+            builder.Append(StringFormat.ToStringAlignment("Effect target (description)"));
             builder.Append(this.target.GetDescription());
-            builder.Append("\n\tPower:                                          ");
+            builder.Append(StringFormat.ToStringAlignment("Power"));
             builder.Append(this.power);
-            builder.Append("\n\tEffect Parameter 1:                             ");
+            builder.Append(StringFormat.ToStringAlignment("Effect Parameter 1"));
             builder.Append(this.parameter1);
-            builder.Append("\n\tEffect Parameter 2:                             ");
+            builder.Append(StringFormat.ToStringAlignment("Effect Parameter 2"));
             builder.Append(this.parameter2);
-            builder.Append("\n\tTiming mode:                                    ");
+            builder.Append(StringFormat.ToStringAlignment("Timing mode"));
             builder.Append((UInt16)this.timingMode);
-            builder.Append("\n\tTiming mode (description):                      ");
+            builder.Append(StringFormat.ToStringAlignment("Timing mode (description)"));
             builder.Append(this.timingMode.GetDescription());
-            builder.Append("\n\tTiming unknown:                                 ");
+            builder.Append(StringFormat.ToStringAlignment("Timing unknown"));
             builder.Append((UInt16)this.timingUnknown);
-            builder.Append("\n\tEffect duration:                                ");
+            builder.Append(StringFormat.ToStringAlignment("Effect duration"));
             builder.Append(this.duration);
-            builder.Append("\n\tEffect probability 1:                           ");
+            builder.Append(StringFormat.ToStringAlignment("Effect probability 1"));
             builder.Append(this.probability1);
-            builder.Append("\n\tEffect probability 2:                           ");
+            builder.Append(StringFormat.ToStringAlignment("Effect probability 2"));
             builder.Append(this.probability2);
-            builder.Append("\n\tEffect resource #1:                             '");
-            builder.Append(this.resource1.ResRef);
-            builder.Append("'");
-            builder.Append("\n\tDice count:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Effect resource #1"));
+            builder.Append(String.Format("'{0}'", this.resource1.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Dice count"));
             builder.Append(this.diceCount);
-            builder.Append("\n\tDice sides:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Dice sides"));
             builder.Append(this.diceSides);
-            builder.Append("\n\tSaving throw:                                   ");
+            builder.Append(StringFormat.ToStringAlignment("Saving throw"));
             builder.Append((UInt32)this.savingThrowType);
-            builder.Append("\n\tSaving throw (enumerated):                      ");
+            builder.Append(StringFormat.ToStringAlignment("Saving throw (enumerated)"));
             builder.Append(this.GetEffectSavingThrowString());
-            builder.Append("\n\tSaving throw modifier:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Saving throw modifier"));
             builder.Append(this.savingThrowModifier);
-            builder.Append("\n\tSet local variable (if unset?):                 ");
+            builder.Append(StringFormat.ToStringAlignment("Set local variable (if unset?)"));
             builder.Append(this.setLocalIfNotSet);
-            builder.Append("\n\tMage School:                                    ");
+            builder.Append(StringFormat.ToStringAlignment("Mage School"));
             builder.Append((UInt32)this.mageSchool);
-            builder.Append("\n\tMage School (description):                      ");
+            builder.Append(StringFormat.ToStringAlignment("Mage School (description)"));
             builder.Append(this.mageSchool.GetDescription());
-            builder.Append("\n\tUnknown #1:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #1"));
             builder.Append(this.unknown1);
-            builder.Append("\n\tLowest affected level:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Lowest affected level"));
             builder.Append(this.levelAffectedMin);
-            builder.Append("\n\tHighest affected level:                         ");
+            builder.Append(StringFormat.ToStringAlignment("Highest affected level"));
             builder.Append(this.levelAffectedMax);
-            builder.Append("\n\tResistance:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Resistance"));
             builder.Append(this.resistanceField);
-            builder.Append("\n\tResistance (enumerated):                        ");
+            builder.Append(StringFormat.ToStringAlignment("Resistance (enumerated)"));
             builder.Append(this.GetEffectResistanceString());
-            builder.Append("\n\tEffect Parameter 3:                             ");
+            builder.Append(StringFormat.ToStringAlignment("Effect Parameter 3"));
             builder.Append(this.parameter3);
-            builder.Append("\n\tEffect Parameter 4:                             ");
+            builder.Append(StringFormat.ToStringAlignment("Effect Parameter 4"));
             builder.Append(this.parameter4);
-            builder.Append("\n\tEffect resource #2:                             '");
-            builder.Append(this.resource2.ResRef);
-            builder.Append("'");
-            builder.Append("\n\tEffect resource #3 (VVC):                       '");
-            builder.Append(this.resource3.ResRef);
-            builder.Append("'");
-            builder.Append("\n\tEffect resource #4 (unknown):                   '");
-            builder.Append(this.resourceUnknown.ResRef);
-            builder.Append("'");
-            builder.Append("\n\tCaster coordinate X:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Effect resource #2"));
+            builder.Append(String.Format("'{0}'", this.resource2.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Effect resource #3 (VVC)"));
+            builder.Append(String.Format("'{0}'", this.resource3.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Effect resource #4 (unknown)"));
+            builder.Append(String.Format("'{0}'", this.resourceUnknown.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Caster coordinate X"));
             builder.Append(this.positionCasterX);
-            builder.Append("\n\tCaster coordinate Y:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Caster coordinate Y"));
             builder.Append(this.positionCasterY);
-            builder.Append("\n\tTarget coordinate X:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Target coordinate X"));
             builder.Append(this.positionTargetX);
-            builder.Append("\n\tTarget coordinate Y:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Target coordinate Y"));
             builder.Append(this.positionTargetY);
-            builder.Append("\n\tParent resource type:                           ");
+            builder.Append(StringFormat.ToStringAlignment("Parent resource type"));
             builder.Append((UInt32)this.parentResourceType);
-            builder.Append("\n\tParent resource type (enumerated):              ");
+            builder.Append(StringFormat.ToStringAlignment("Parent resource type (enumerated)"));
             builder.Append(this.parentResourceType.GetDescription());
-            builder.Append("\n\tParent resource:                                '");
-            builder.Append(this.parentResource.ResRef);
-            builder.Append("'");
-            builder.Append("\n\tParent resource flag:                           ");
+            builder.Append(StringFormat.ToStringAlignment("Parent resource"));
+            builder.Append(String.Format("'{0}'", this.parentResource.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Parent resource flag"));
             builder.Append((UInt32)this.parentResourceFlags);
-            builder.Append("\n\tParent resource flag (enumerated):              ");
+            builder.Append(StringFormat.ToStringAlignment("Parent resource flag (enumerated)"));
             builder.Append(this.parentResourceFlags.GetDescription());
-            builder.Append("\n\tProjectile:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Projectile"));
             builder.Append(this.projectile);
-            builder.Append("\n\tParent resource slot:                           ");
+            builder.Append(StringFormat.ToStringAlignment("Parent resource slot"));
             builder.Append(this.parentResourceSlot);
-            builder.Append("\n\tLocal variable:\n\t\t'");
-            builder.Append(this.localVariableName);
-            builder.Append("'");
-            builder.Append("\n\tCaster level:                                   ");
+            builder.Append(StringFormat.ToStringAlignment("Local variable"));
+            builder.Append(StringFormat.ToStringAlignment(String.Format("'{0}'", this.LocalVariableName.Value), 2));
+            builder.Append(StringFormat.ToStringAlignment("Caster level"));
             builder.Append(this.casterLevel);
-            builder.Append("\n\tUnknown #2:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #2"));
             builder.Append(this.unknown2);
-            builder.Append("\n\tMagic type:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Magic type"));
             builder.Append((UInt32)this.magicType);
-            builder.Append("\n\tMagic type (description):                       ");
+            builder.Append(StringFormat.ToStringAlignment("Magic type (description)"));
             builder.Append(this.magicType.GetDescription());
-            builder.Append("\n\tTrailing unknown 60 Bytes:");
+            builder.Append(StringFormat.ToStringAlignment("Trailing unknown 60 Bytes"));
             builder.Append(StringFormat.ByteArrayToHexString(this.unknown3));
-            builder.Append("\n\n");
 
             return builder.ToString();
         }
@@ -664,7 +652,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect2
             StringFormat.AppendSubItem(sb, (this.Resistance & EffectResistance.IgnoreResistance) == EffectResistance.IgnoreResistance, EffectResistance.IgnoreResistance.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
 
         /// <summary>Generates a human-readable multi-line string for console output that indicates which ItemUability1 flags are set</summary>
@@ -680,7 +668,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect2
             StringFormat.AppendSubItem(sb, (this.savingThrowType & EffectSavingThrow.PolymorphOrWill) == EffectSavingThrow.PolymorphOrWill, EffectSavingThrow.PolymorphOrWill.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
         #endregion
     }

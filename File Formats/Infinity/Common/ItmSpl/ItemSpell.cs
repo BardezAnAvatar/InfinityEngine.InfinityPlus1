@@ -129,8 +129,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl
             for (Int32 i = 0; i < this.effects.Count; ++i)
                 builder.Append(effects[i].ToString(i + 1));
 
-            builder.Append("\n\n");
-
             return builder.ToString();
         }
 

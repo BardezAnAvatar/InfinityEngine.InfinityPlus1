@@ -90,6 +90,7 @@
     <Compile Include="Harnesses\Spell\Spell 1 Test.cs" />
     <Compile Include="Harnesses\Spell\Spell 2 Header Test.cs" />
     <Compile Include="Harnesses\Spell\Spell 2 Test.cs" />
+    <Compile Include="Harnesses\Spell\Spell Ability Effect Test.cs" />
     <Compile Include="Harnesses\Spell\Spell Ability Test.cs" />
     <Compile Include="Harnesses\Store\Store 1 Test.cs" />
     <Compile Include="Harnesses\Store\Store 1.1 Test.cs" />
@@ -103,6 +104,9 @@
     <Compile Include="Test Event Arguments.cs" />
     <Compile Include="Message Event Arguments.cs" />
     <Compile Include="Testing Delegates.cs" />
+    <Compile Include="WinForm\2DA\2DA File Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WinForm\ACM\Acm Header Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -118,6 +122,51 @@
     <Compile Include="WinForm\BIFF\Uncompressed\Biff Archive Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="WinForm\BIFF\Uncompressed\Biff Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\BIFF\Uncompressed\Biff Resource Entry Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\BIFF\Uncompressed\Biff Tileset Entry Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CHR\Biography 1 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CHR\Biography 2 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CHR\Character 1 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CHR\Character 2 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CHR\Character 9 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CRE\Creature 1.2 Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CRE\Creature 9.0 Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CRE\Creature 1.0 Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CRE\Creature 2.2 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CRE\Creature 1.2 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CRE\Creature 9.0 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\DLG\Dialog Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WinForm\Harness Non-File Test Control Base.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -130,14 +179,107 @@
     <Compile Include="WinForm\Harness File Test Control Base.Designer.cs">
       <DependentUpon>Harness File Test Control Base.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinForm\INI\Ini Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ITM\Item Ability Effect Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ITM\Item Ability Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ITM\Item 1.0 Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ITM\Item 1.1 Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ITM\Item 2.0 Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ITM\Item 2.0 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ITM\Item 1.1 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ITM\Item 1.0 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\KEY\Key Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\KEY\Key Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\KEY\Key Resource Entry Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\KEY\Key Biff Entry Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WinForm\LoggingControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\LoggingControl.Designer.cs">
       <DependentUpon>LoggingControl.cs</DependentUpon>
     </Compile>
-    <Content Include="Notes.txt" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WinForm\MUS\Music Playlist Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Output\XAudio2\XAudio2 Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Output\XAudio2\XAudio2 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ReusableCode\Bit Stream Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\RIFF\Riff Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\SPL\Spell Ability Effect Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\SPL\Spell Ability Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\SPL\Spell 1.0 Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\SPL\Spell 2.0 Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\SPL\Spell 2.0 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\SPL\Spell 1.0 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\SRC\SRC Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\STO\Store 9.0 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\STO\Store 1.1 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\STO\Store 1.0 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Threading Delegates.cs" />
+    <Compile Include="WinForm\TLK\TLK Strref Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\TLK\TLK Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\TLK\TLK Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Configuration Handler\Configuration Handler.csproj">
@@ -183,6 +325,16 @@
   <ItemGroup>
     <Folder Include="WinForm\BIFF\BIFFC\" />
     <Folder Include="WinForm\BIFF\CBIFF\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="WinForm\CRE\Creature 1.0 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="WinForm\EFF\Effect 2.0 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

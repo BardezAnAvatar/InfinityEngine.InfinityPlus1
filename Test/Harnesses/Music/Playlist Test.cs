@@ -8,117 +8,101 @@ using Bardez.Projects.DirectX.XAudio2;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Music;
 using Bardez.Projects.InfinityPlus1.Output.Audio;
 using Bardez.Projects.InfinityPlus1.Test;
-using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
-using Bardez.Projects.Win32.Audio;
+using Bardez.Projects.InfinityPlus1.Utility;
 
-namespace Bardez.Projects.InfinityPlus1.Test.Music
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Music
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Infinity.Music.Playlist class.</summary>
-    public class PlaylistTest : ITester
+    public class PlaylistTest : FileTesterBase
     {
-        protected XAudio2Output output;
-        protected Playlist playlist;
-        protected Int32 outputSoundKey;
+        #region Fields
+        /// <summary>Constant key to look up in app.config</summary>
+        protected const String configKey = "Test.MUS.Path";
 
-        /// <summary>Main test entry point</summary>
-        public void Test()
+        /// <summary>Reference to XAudio2 object</summary>
+        protected XAudio2Output Output { get; set; }
+
+        /// <summary>Format instance to test</summary>
+        protected Playlist playlist { get; set; }
+
+        /// <summary>Unique key context for the output source</summary>
+        protected Int32 OutputSoundKey;
+        #endregion
+
+        #region Construction
+        /// <summary>Default constructor</summary>
+        public PlaylistTest()
         {
-            this.output = XAudio2Output.Instance;
+            this.InitializeInstance();
+        }
+        #endregion
 
-            String[] paths = ConfigurationHandlerMulti.GetSettingValues("Test.MUS.Path").ToArray();
-            //String path = ConfigurationHandlerMulti.GetSettingValue("Test.ACM.AcmPath");
-            //this.Test(path, false);
-            this.TestMulti(paths);
-
-            //dispose
-            this.output.Dispose();
+        /// <summary>Initializes the test class data</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="e">Specific initialization event parameters</param>
+        protected override void InitializeTestData(Object sender, EventArgs e)
+        {
+            this.Output = XAudio2Output.Instance;
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(PlaylistTest.configKey);
         }
 
-        /// <summary>Tests the code </summary>
-        /// <param name="paths">Paths of fils to test</param>
-        public void TestMulti(String[] paths)
+        /// <summary>Event to raise for testing instance(s)</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="testArgs">Arguments containing the item to test (usually a file path)</param>
+        protected override void TestCase(Object sender, TestEventArgs testArgs)
         {
-            foreach (String path in paths)
-                this.Test(path, false);
-        }
-
-        /// <summary>Tests a single file</summary>
-        /// <param name="path">File to open and read, then replicate</param>
-        /// <param name="prompt">Boolean indicating whether or not to prompt between read and write</param>
-        public void Test(String path, Boolean prompt)
-        {
-            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                this.Test(stream, prompt);
-
-            this.playlist.RootFilePath = new FileInfo(path).DirectoryName;
-            this.TestPlayback();
-
-            //using (FileStream dest = new FileStream(path + ".rewrite", FileMode.Create, FileAccess.Write))
-            //    this.TestWrite(dest);
-        }
-
-        /// <summary>Tests the read and ToString() methods of the structure</summary>
-        /// <param name="source">Source Stream to read from</param>
-        /// <param name="prompt">Boolean indicating whether or not to prompt for pressing [Enter] to continue</param>
-        public void Test(Stream source, Boolean prompt)
-        {
-            this.playlist = new Playlist();
-            Console.WriteLine("Reading playlist...");
-            this.playlist.Read(source);
-            Console.WriteLine("Finished reading playlist...");
-
-            Interceptor.WriteMessage(this.playlist.ToString());
-
-            if (prompt)
+            using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
             {
-                Interceptor.WaitForInput();
+                this.playlist = new Playlist();
+                this.DoPostMessage(new MessageEventArgs("Reading playlist...", "Reading", testArgs.Path));
+                this.playlist.Read(stream);
+                this.DoPostMessage(new MessageEventArgs(this.playlist.ToString(), "Output", testArgs.Path));
+
+                this.playlist.RootFilePath = new FileInfo(testArgs.Path).DirectoryName;
+                this.TestPlayback();
             }
+
+            using (FileStream dest = new FileStream(testArgs.Path + ".rewrite", FileMode.Create, FileAccess.Write))
+                this.TestWrite(dest);
         }
 
         /// <summary>Writes the data structure back out to a destination stream</summary>
         /// <param name="destination">Stream to write output to</param>
-        public void TestWrite(Stream destination)
+        protected virtual void TestWrite(Stream destination)
         {
             this.playlist.Write(destination);
         }
 
+        #region Helper methods
         /// <summary>Tests audio playback, allowing for an interrupt to occur by hitting enter.</summary>
         public void TestPlayback()
         {
-            Console.WriteLine("Decoding playlist files...");
+            this.DoPostMessage(new MessageEventArgs("Decoding playlist files...", "Decoding", this.playlist.PlaylistName));
             this.playlist.ReadPlayListItems();  //tell it to load everything
-            Console.WriteLine("Finished decoding...");
+            this.DoPostMessage(new MessageEventArgs("Finished decoding...", "Finished decoding", this.playlist.PlaylistName));
 
-            this.output = XAudio2Output.Instance;
+            this.Output = XAudio2Output.Instance;
 
             //load up the initial Source voice
-            this.outputSoundKey = output.CreatePlayback(this.playlist.WaveFormat);
+            this.OutputSoundKey = Output.CreatePlayback(this.playlist.WaveFormat);
 
             //Adjust callback(s)
-            this.output.AddSourceNeedDataEventhandler(this.outputSoundKey, new AudioNeedsMoreDataHandler(this.NeedsMoreSamples));
+            this.Output.AddSourceNeedDataEventhandler(this.OutputSoundKey, new AudioNeedsMoreDataHandler(this.NeedsMoreSamples));
 
             //submit first data
             this.NeedsMoreSamples();
 
             //play audio & Let the sound play
-            this.output.StartPlayback(this.outputSoundKey);
+            this.Output.StartPlayback(this.OutputSoundKey);
 
-            Interceptor.WaitForInput("Press [Enter]/[OK] to interrupt and terminate playback...");
-            
-            this.playlist.Interrupt();
-            Console.WriteLine("Playback interrupted...");
-
-            //wait until finished.
-            this.WaitUntilFinished();
-
-            Console.WriteLine("Playback completed.");
+            this.DoPostMessage(new MessageEventArgs("Waiting for playlist interrupt...", "Waiting", this.playlist.PlaylistName));
         }
         
         /// <summary>Callback event handler that sends more data to the output buffer</summary>
         public void NeedsMoreSamples()
         {
             Byte[] samples = this.playlist.GetNext();
-            this.output.SubmitSubsequentData(samples, this.outputSoundKey, !this.playlist.Interrupted);
+            this.Output.SubmitSubsequentData(samples, this.OutputSoundKey, !this.playlist.Interrupted);
         }
 
         /// <summary>Waits for the playlist to finish playback buffer</summary>
@@ -128,10 +112,29 @@ namespace Bardez.Projects.InfinityPlus1.Test.Music
             Boolean isRunning = true;
             while (isRunning)
             {
-                VoiceState state = output.GetSourceVoiceState(this.outputSoundKey);
+                VoiceState state = Output.GetSourceVoiceState(this.OutputSoundKey);
                 isRunning = (state != null) && (state.BuffersQueued > 0);
                 Thread.Sleep(10);
             }
         }
+
+        /// <summary>Method exposing a stop command</summary>
+        public virtual void StopPlayback()
+        {
+            this.Output.HaltPlayback();
+        }
+
+        /// <summary>Method exposing an Interrupt command</summary>
+        public virtual void InterruptPlayback()
+        {
+            this.playlist.Interrupt();
+            this.DoPostMessage(new MessageEventArgs("Playback interrupted...", "Interrupt", this.playlist.PlaylistName));
+
+            //wait until finished.
+            this.WaitUntilFinished();
+
+            this.DoPostMessage(new MessageEventArgs("Playback completed.", "Playback completed", this.playlist.PlaylistName));
+        }
+        #endregion
     }
 }

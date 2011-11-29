@@ -132,7 +132,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.StringReferenceCount
             builder.Append(this.emotion.StringReferenceIndex);
             builder.Append(StringFormat.ToStringAlignment("Displayable"));
             builder.Append(this.displayable);
-            builder.Append("\n");
 
             return builder.ToString();
         }

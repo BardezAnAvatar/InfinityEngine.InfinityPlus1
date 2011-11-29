@@ -117,7 +117,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Components
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
         public String ToString(Int32 entryIndex)
         {
-            return String.Format("Store Spell avaiable # {0}:", entryIndex) + this.GetStringRepresentation();
+            return StringFormat.ReturnAndIndent(String.Format("Store Spell avaiable # {0}:", entryIndex), 0) + this.GetStringRepresentation();
         }
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
@@ -126,10 +126,9 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Components
         {
             StringBuilder builder = new StringBuilder();
             builder.Append(StringFormat.ToStringAlignment("Spell available"));
-            builder.Append(this.spell.ResRef);
+            builder.Append(this.spell.ZResRef);
             builder.Append(StringFormat.ToStringAlignment("Cost"));
             builder.Append(this.cost);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

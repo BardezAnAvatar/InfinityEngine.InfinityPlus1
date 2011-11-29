@@ -39,10 +39,13 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.BiowareIndexFileFormat.Bi
         /// <param name="testArgs">Arguments containing the item to test (usually a file path)</param>
         protected override void TestCase(Object sender, TestEventArgs testArgs)
         {
-            this.Archive = new Biff1Archive();
-            this.Archive.Read(testArgs.Path);
+            using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
+            {
+                this.Archive = new Biff1Archive();
+                this.Archive.Read(stream);
 
-            this.DoPostMessage(new MessageEventArgs(this.Archive.ToString()));
+                this.DoPostMessage(new MessageEventArgs(this.Archive.ToString(), "Output", testArgs.Path));
+            }
         }
     }
 }

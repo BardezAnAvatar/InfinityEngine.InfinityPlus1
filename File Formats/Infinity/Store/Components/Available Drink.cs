@@ -145,7 +145,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Components
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
         public String ToString(Int32 entryIndex)
         {
-            return String.Format("Store drink avaiable # {0}:", entryIndex) + this.GetStringRepresentation();
+            return StringFormat.ReturnAndIndent(String.Format("Store drink avaiable # {0}:", entryIndex), 0) + this.GetStringRepresentation();
         }
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
@@ -154,14 +154,13 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Components
         {
             StringBuilder builder = new StringBuilder();
             builder.Append(StringFormat.ToStringAlignment("Overriding Rumor Dialog"));
-            builder.Append(this.specialRumor.ResRef);
+            builder.Append(this.specialRumor.ZResRef);
             builder.Append(StringFormat.ToStringAlignment("Drink on tap"));
             builder.Append(this.drinkName.StringReferenceIndex);
             builder.Append(StringFormat.ToStringAlignment("Cost"));
             builder.Append(this.cost);
             builder.Append(StringFormat.ToStringAlignment("Drink strength"));
             builder.Append(this.alcoholicStrength);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

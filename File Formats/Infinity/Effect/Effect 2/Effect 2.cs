@@ -75,9 +75,9 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect2
         {
             StringBuilder builder = new StringBuilder();
             builder.Append("Effect Version 2:");
-            builder.Append("\n\tSignature:                                      ");
+            builder.Append(StringFormat.ToStringAlignment("Signature"));
             builder.Append(this.signature);
-            builder.Append("\n\tVersion:                                        ");
+            builder.Append(StringFormat.ToStringAlignment("Version"));
             builder.Append(this.version);
             builder.Append(this.inner.ToString());
 

@@ -106,7 +106,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.BiowareIndexFileFormat.Bi
         public override String ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("Biff1TilesetEntry:");
+            builder.Append(StringFormat.ToStringAlignment("Biff1TilesetEntry", 0));
             builder.Append(StringFormat.ToStringAlignment("Resource Locator"));
             builder.Append(this.resourceLocator.Locator);
             builder.Append(StringFormat.ToStringAlignment("BIFF Index"));

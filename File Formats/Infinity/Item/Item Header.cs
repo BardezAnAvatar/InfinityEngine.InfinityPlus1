@@ -343,7 +343,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item
             StringFormat.AppendSubItem(sb, (this.itemFlags & ItemFlags.Pulsating) == ItemFlags.Pulsating, ItemFlags.Pulsating.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
 
         /// <summary>Generates a human-readable multi-line string for console output that indicates which KitUability1 flags are set</summary>
@@ -362,7 +362,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item
             StringFormat.AppendSubItem(sb, (this.kitProhibitions1 & KitProhibitions1.MageWild) == KitProhibitions1.MageWild, KitProhibitions1.MageWild.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
 
         /// <summary>Generates a human-readable multi-line string for console output that indicates which KitUability2 flags are set</summary>
@@ -381,7 +381,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item
             StringFormat.AppendSubItem(sb, (this.kitProhibitions2 & KitProhibitions2.BardSkald) == KitProhibitions2.BardSkald, KitProhibitions2.BardSkald.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
 
         /// <summary>Generates a human-readable multi-line string for console output that indicates which KitUability3 flags are set</summary>
@@ -400,7 +400,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item
             StringFormat.AppendSubItem(sb, (this.kitProhibitions3 & KitProhibitions3.RangerArcher) == KitProhibitions3.RangerArcher, KitProhibitions3.RangerArcher.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
 
         /// <summary>Generates a human-readable multi-line string for console output that indicates which KitUability4 flags are set</summary>
@@ -419,7 +419,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item
             StringFormat.AppendSubItem(sb, (this.kitProhibitions4 & KitProhibitions4.MageConjurer) == KitProhibitions4.MageConjurer, KitProhibitions4.MageConjurer.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
         #endregion
     }

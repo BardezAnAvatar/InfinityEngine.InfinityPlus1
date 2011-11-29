@@ -252,7 +252,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
         public String ToString(Int32 entryIndex)
         {
-            return String.Format("Overlay Entry # {0}:", entryIndex) + this.GetStringRepresentation();
+            return StringFormat.ReturnAndIndent(String.Format("Overlay Entry # {0}:", entryIndex), 0) + this.GetStringRepresentation();
         }
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
@@ -261,30 +261,24 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.Append("\n\tOverlay resource:                               '");
-            builder.Append(this.overlayBam.ResRef);
-            builder.Append("'");
-            builder.Append("\n\tUnknown #1:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Overlay resource"));
+            builder.Append(String.Format("'{0}'", this.overlayBam.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Unknown #1"));
             builder.Append(this.unknown1);
-            builder.Append("\n\tTiming:                                         ");
+            builder.Append(StringFormat.ToStringAlignment("Timing"));
             builder.Append(this.timing);
-            builder.Append("\n\tType:                                           ");
+            builder.Append(StringFormat.ToStringAlignment("Type"));
             builder.Append(this.type);
-            builder.Append("\n\tDuration:                                       ");
+            builder.Append(StringFormat.ToStringAlignment("Duration"));
             builder.Append(this.duration);
-            builder.Append("\n\tUnknown #2:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #2"));
             builder.Append(this.unknown2);
-            builder.Append("\n\tUnknown #3:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #3"));
             builder.Append(this.unknown3);
-            builder.Append("\n\tUnknown #4:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #4"));
             builder.Append(this.unknown4);
-            builder.Append("\n\tUnknown #5:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #5"));
             builder.Append(this.unknown5);
-            //builder.Append("\n\tUnknown #6:                                     ");
-            //builder.Append(this.unknown6);
-            //builder.Append("\n\tUnknown #7:                                     ");
-            //builder.Append(this.unknown7);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

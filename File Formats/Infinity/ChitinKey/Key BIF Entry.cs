@@ -2,6 +2,8 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
+using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
 using Bardez.Projects.InfinityPlus1.Utility;
 using Bardez.Projects.ReusableCode;
 
@@ -23,7 +25,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey
     ///                                     * Bit G determines if the file is in the \cache directory
     ///                                     * Bit H determines if the file is in the \data directory
     /// </remarks>
-    public class ChitinKeyBifEntry : IDeepCloneable
+    public class ChitinKeyBifEntry : IInfinityFormat, IDeepCloneable
     {
         #region Protected Members
         /// <summary>This four-byte value indicates the (expected) length of the BIF file</summary>
@@ -34,9 +36,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey
 
         /// <summary>This two-byte value indicates the length of the filename of the BIF file</summary>
         protected UInt16 lengthBifFileName;
-
-        /// <summary>This String is the filename of the BIF file. It is read from elsewhere in the file, and not contained in the structure when written.</summary>
-        protected String bifFileName;
 
         /// <summary>This two-byte value indicates the location(s) of the BIF file within the engine.</summary>
         protected ChitinKeyBifLocationEnum bifLocationFlags; 
@@ -65,11 +64,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey
         }
 
         /// <summary>This String is the filename of the BIF file. It is read from elsewhere in the file, and not contained in the structure when written.</summary>
-        public String BifFileName
-        {
-            get { return this.bifFileName; }
-            set { this.bifFileName = value; }
-        }
+        public ZString BifFileName { get; set; }
 
         /// <summary>This two-byte value indicates the location(s) of the BIF file within the engine.</summary>
         public ChitinKeyBifLocationEnum BifLocationFlags
@@ -126,11 +121,36 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey
             set { this.bifLocationFlags |= ChitinKeyBifLocationEnum.Disc6; }
         }
         #endregion
-        
+
+        #region Construction
+        /// <summary>Instantiates reference types</summary>
+        public virtual void Initialize()
+        {
+            this.BifFileName = new ZString();
+        }
+        #endregion
+
         #region Public Methods
         /// <summary>This public method reads the 18-byte header into the header record</summary>
-        public void Read(Stream input)
+        public virtual void Read(Stream input)
         {
+            this.ReadBody(input);
+        }
+
+        /// <summary>This public method reads file format data structure from the input stream.</summary>
+        /// <param name="input">Stream to read from.</param>
+        /// <param name="fullRead">Boolean indicating whether to read the full stream or just everything after the identifying signature (and possibly version)</param>
+        public virtual void Read(Stream input, Boolean fullRead)
+        {
+            this.Read(input);
+        }
+
+        /// <summary>This public method reads file format data structure from the input stream, after the signature has already been read.</summary>
+        /// <param name="input">Stream to read from</param>
+        public virtual void ReadBody(Stream input)
+        {
+            this.Initialize();
+
             Byte[] buffer = ReusableIO.BinaryRead(input, 12);   //header buffer
 
             //BIF length
@@ -149,18 +169,18 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey
         /// <summary>This private method reads the referenced string from the file</summary>
         /// <param name="input">Stream to read from</param>
         /// <param name="cultureReference">String representing the source culture</param>
-        public void ReadBifName(Stream input, String cultureReference)
+        public virtual void ReadBifName(Stream input, String cultureReference)
         {
             //seek to offset
             ReusableIO.SeekIfAble(input, this.offsetBifFileName, SeekOrigin.Begin);
 
             Byte[] buffer = ReusableIO.BinaryRead(input, this.lengthBifFileName);
-            this.bifFileName = ReusableIO.ReadStringFromByteArray(buffer, 0, cultureReference, this.lengthBifFileName);
+            this.BifFileName.Source = ReusableIO.ReadStringFromByteArray(buffer, 0, cultureReference, this.lengthBifFileName);
         }
 
         /// <summary>This public method writes the header to an output stream</summary>
         /// <param name="output">Stream object into which to write to</param>
-        public void Write(Stream output)
+        public virtual void Write(Stream output)
         {
             //BIF length
             ReusableIO.WriteUInt32ToStream(this.lengthBifFile, output);
@@ -177,39 +197,38 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey
 
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>
         /// <returns>A String containing the member data line by line</returns>
-        public override string ToString()
+        public override String ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("ChitinKeyBifEntry:");
-            builder.Append("\n\tBIF length:                ");
+            builder.Append(StringFormat.ReturnAndIndent("ChitinKeyBifEntry:", 0));
+            builder.Append(StringFormat.ToStringAlignment("BIF length"));
             builder.Append(this.lengthBifFile);
-            builder.Append("\n\tBIF Name Offset:           ");
+            builder.Append(StringFormat.ToStringAlignment("BIF Name Offset"));
             builder.Append(this.offsetBifFileName);
-            builder.Append("\n\tBIF Name Length:           ");
+            builder.Append(StringFormat.ToStringAlignment("BIF Name Length"));
             builder.Append(this.lengthBifFileName);
-            builder.Append("\n\tBIF Name:                  '");
-            builder.Append(this.bifFileName);
-            builder.Append("'\n\tBIF Location Flags:        ");
+            builder.Append(StringFormat.ToStringAlignment("BIF Name"));
+            builder.Append(String.Format("'{0}'", this.BifFileName.Value));
+            builder.Append(StringFormat.ToStringAlignment("BIF Location Flags"));
             builder.Append(this.bifLocationFlags.ToString("G"));
-            builder.Append("\n\tBIF Location Flags Value:  ");
+            builder.Append(StringFormat.ToStringAlignment("BIF Location Flags Value"));
             builder.Append((Int16)this.bifLocationFlags);
-            builder.Append("\n\t\tData Directory:    ");
+            builder.Append(StringFormat.ToStringAlignment("Data Directory", 2));
             builder.Append(this.LocationData);
-            builder.Append("\n\t\tCache Directory:   ");
+            builder.Append(StringFormat.ToStringAlignment("Cache Directory", 2));
             builder.Append(this.LocationCache);
-            builder.Append("\n\t\tDisc 1:            ");
+            builder.Append(StringFormat.ToStringAlignment("Disc 1", 2));
             builder.Append(this.LocationDisc1);
-            builder.Append("\n\t\tDisc 2:            ");
+            builder.Append(StringFormat.ToStringAlignment("Disc 2", 2));
             builder.Append(this.LocationDisc2);
-            builder.Append("\n\t\tDisc 3:            ");
+            builder.Append(StringFormat.ToStringAlignment("Disc 3", 2));
             builder.Append(this.LocationDisc3);
-            builder.Append("\n\t\tDisc 4:            ");
+            builder.Append(StringFormat.ToStringAlignment("Disc 4", 2));
             builder.Append(this.LocationDisc4);
-            builder.Append("\n\t\tDisc 5:            ");
+            builder.Append(StringFormat.ToStringAlignment("Disc 5", 2));
             builder.Append(this.LocationDisc5);
-            builder.Append("\n\t\tDisc 6:            ");
+            builder.Append(StringFormat.ToStringAlignment("Disc 6", 2));
             builder.Append(this.LocationDisc6);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }
@@ -217,7 +236,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>
         /// <param name="detail">Boolean indicating whether or not to print full detail</param>
         /// <returns>A String containing the member data line by line</returns>
-        public string ToString(Boolean detail)
+        public String ToString(Boolean detail)
         {
             String data;
 
@@ -226,20 +245,19 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey
             else
             {
                 StringBuilder builder = new StringBuilder();
-                builder.Append("ChitinKeyBifEntry:");
-                builder.Append("\n\tBIF length:                ");
+                builder.Append(StringFormat.ReturnAndIndent("ChitinKeyBifEntry:", 0));
+                builder.Append(StringFormat.ToStringAlignment("BIFF length"));
                 builder.Append(this.lengthBifFile);
-                builder.Append("\n\tBIF Name Offset:           ");
+                builder.Append(StringFormat.ToStringAlignment("BIFF Name Offset"));
                 builder.Append(this.offsetBifFileName);
-                builder.Append("\n\tBIF Name Length:           ");
+                builder.Append(StringFormat.ToStringAlignment("BIFF Name Length"));
                 builder.Append(this.lengthBifFileName);
-                builder.Append("\n\tBIF Name:                  '");
-                builder.Append(this.bifFileName);
-                builder.Append("'\n\tBIF Location Flags:        ");
+                builder.Append(StringFormat.ToStringAlignment("BIFF Name"));
+                builder.Append(String.Format("'{0}'", this.BifFileName.Value));
+                builder.Append(StringFormat.ToStringAlignment("BIFF Location Flags"));
                 builder.Append(this.bifLocationFlags.ToString("G"));
-                builder.Append("\n\tBIF Location Flags Value:  ");
+                builder.Append(StringFormat.ToStringAlignment("BIFF Location Flags Value"));
                 builder.Append((Int16)this.bifLocationFlags);
-                builder.Append("\n");
 
                 data = builder.ToString();
             }

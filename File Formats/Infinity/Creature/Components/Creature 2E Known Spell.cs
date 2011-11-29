@@ -139,7 +139,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
         public String ToString(Int32 entryIndex)
         {
-            return String.Format("Known Spells Entry # {0}:", entryIndex) + this.GetStringRepresentation();
+            return StringFormat.ReturnAndIndent(String.Format("Known Spells Entry # {0}:", entryIndex), 0) + this.GetStringRepresentation();
         }
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
@@ -148,18 +148,16 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.Append("\n\tSpell resource:                                 '");
-            builder.Append(this.spell.ResRef);
-            builder.Append("'");
-            builder.Append("\n\tSpell level:                                    ");
-            builder.Append(this.spellLevel);
-            builder.Append("\n\tSpell level: (actual)                           ");
-            builder.Append(this.SpellLevelActual);
-            builder.Append("\n\tSpell Type:                                     ");
+            builder.Append(StringFormat.ToStringAlignment("Spell resource"));
+            builder.Append(String.Format("'{0}'", this.spell.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Spell level"));
+            builder.Append(this.spellLevel.ToString());
+            builder.Append(StringFormat.ToStringAlignment("Spell level (actual)"));
+            builder.Append(this.SpellLevelActual.ToString());
+            builder.Append(StringFormat.ToStringAlignment("Spell Type"));
             builder.Append((UInt16)this.type);
-            builder.Append("\n\tSpell Type (description):                       ");
+            builder.Append(StringFormat.ToStringAlignment("Spell Type (description)"));
             builder.Append(this.type.GetDescription());
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

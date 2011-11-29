@@ -1,49 +1,63 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey;
 using Bardez.Projects.InfinityPlus1.Test;
-using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
+using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Test.ChitinKey
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.ChitinKey
 {
-    public class ChitinKey1Test : ITester
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey.ChitinKey1 class.</summary>
+    public class ChitinKey1Test : FileTesterBase
     {
-        /// <summary>Testing object</summary>
-        protected ChitinKey1 keyFile;
+        #region Fields
+        /// <summary>Constant key to look up in app.config</summary>
+        protected const String configKey = "Test.Key.Key1Path";
 
-        /// <summary>ITester Interface method</summary>
-        public void Test()
+        /// <summary>Format instance to test</summary>
+        protected ChitinKey1 keyFile { get; set; }
+        #endregion
+
+        #region Construction
+        /// <summary>Default constructor</summary>
+        public ChitinKey1Test()
         {
-            String path = ConfigurationHandler.GetSettingValue("Test.Key.Key1Path");            
-            this.Test(path);
+            this.InitializeInstance();
+        }
+        #endregion
+
+        /// <summary>Initializes the test class data</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="e">Specific initialization event parameters</param>
+        protected override void InitializeTestData(Object sender, EventArgs e)
+        {
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(ChitinKey1Test.configKey);
         }
 
-        /// <summary>Tests the testing object</summary>
-        /// <param name="filePath">String describing the location of a TLK file</param>
-        public void Test(String filePath)
+        /// <summary>Event to raise for testing instance(s)</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="testArgs">Arguments containing the item to test (usually a file path)</param>
+        protected override void TestCase(Object sender, TestEventArgs testArgs)
         {
-            StringBuilder buffer = new StringBuilder();
-            buffer.AppendLine("Testing read:\n");
+            using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
+            {
+                this.keyFile = new ChitinKey1(true);
+                this.keyFile.Read(stream);
+            }
 
-            buffer.AppendLine("Initializing at " + DateTime.Now.TimeOfDay.ToString() + ":");            //timestamp
-            this.keyFile = new ChitinKey1(true);
-            this.keyFile.KeyFilePath = filePath;
-            buffer.AppendLine("     Reading at " + DateTime.Now.TimeOfDay.ToString() + ":");            //timestamp
-            this.keyFile.Read();
+            this.DoPostMessage(new MessageEventArgs(this.keyFile.ToString(false), "Output", testArgs.Path));
 
-            buffer.AppendLine("     Printing at " + DateTime.Now.TimeOfDay.ToString() + ":");           //timestamp
-            buffer.AppendLine(keyFile.ToString(false));
-            buffer.AppendLine("     Finished Printing at " + DateTime.Now.TimeOfDay.ToString() + ":");  //timestamp
+            using (FileStream dest = new FileStream(testArgs.Path + ".rewrite", FileMode.Create, FileAccess.Write))
+                this.TestWrite(dest);
+        }
 
-            Interceptor.WriteMessage(buffer.ToString());
-
-            Interceptor.WaitForInput();
-            
-            //try to write
-            Console.WriteLine("\n\n\nTesting write...\n");
-            keyFile.Write(filePath + ".new.key");
+        /// <summary>Writes the data structure back out to a destination stream</summary>
+        /// <param name="destination">Stream to write output to</param>
+        protected virtual void TestWrite(Stream destination)
+        {
+            this.keyFile.Write(destination);
         }
     }
 }

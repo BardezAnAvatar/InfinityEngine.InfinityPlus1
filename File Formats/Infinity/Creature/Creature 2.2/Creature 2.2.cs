@@ -111,7 +111,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
         /// <summary>Gets the headline for the creature file</summary>
         public String Headline
         {
-            get { return "Creature 2.2:\n"; }
+            get { return "Creature 2.2:"; }
         }
 
         /// <summary>Gets the size of the header</summary>
@@ -546,13 +546,12 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
         public override String ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(this.Headline);
-            builder.Append(this.header.ToString());
-            builder.Append(this.GenerateKnownSpellsString());
-            builder.Append(this.GenerateItemsString());
-            builder.Append(this.GenerateItemSlotsString());
-            builder.Append(this.GenerateEffectsString());
-            builder.Append("\n\n");
+            builder.AppendLine(this.Headline);
+            builder.AppendLine(this.header.ToString());
+            builder.AppendLine(this.GenerateKnownSpellsString());
+            builder.AppendLine(this.GenerateItemsString());
+            builder.AppendLine(this.GenerateItemSlotsString());
+            builder.AppendLine(this.GenerateEffectsString());
 
             return builder.ToString();
         }
@@ -599,10 +598,11 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
         protected String GenerateItemSlotsString()
         {
             StringBuilder sb = new StringBuilder();
+            sb.Append("Item slots:");
 
             foreach (String key in this.itemSlots.Keys)
             {
-                sb.Append("\n\tItem slot " + String.Format("{0, -35}", "'" + key + "':"));
+                sb.Append(StringFormat.ToStringAlignment("Item slot '" + key + "'"));
                 sb.Append(this.itemSlots[key]);
             }
 

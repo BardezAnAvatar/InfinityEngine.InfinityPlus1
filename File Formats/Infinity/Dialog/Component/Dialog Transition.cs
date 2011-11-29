@@ -186,7 +186,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
         public String ToString(Int32 entryIndex)
         {
-            return String.Format("Dialog transition # {0}:", entryIndex) + this.GetStringRepresentation();
+            return StringFormat.ReturnAndIndent(String.Format("Dialog transition # {0}:", entryIndex), 0) + this.GetStringRepresentation();
         }
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
@@ -207,10 +207,9 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
             builder.Append(StringFormat.ToStringAlignment("Action index"));
             builder.Append(this.indexAction);
             builder.Append(StringFormat.ToStringAlignment("Next dialog file"));
-            builder.Append(this.nextDialog.ResRef);
+            builder.Append(this.nextDialog.ZResRef);
             builder.Append(StringFormat.ToStringAlignment("Next dialog state"));
             builder.Append(this.indexState);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }
@@ -231,7 +230,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
             StringFormat.AppendSubItem(sb, (this.flags & TransitionFlags.RemovesJournalEntryQuest) == TransitionFlags.RemovesJournalEntryQuest, TransitionFlags.RemovesJournalEntryQuest.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
         #endregion
     }

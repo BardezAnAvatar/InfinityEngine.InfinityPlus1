@@ -30,49 +30,216 @@
         {
             this.tabctrlMain = new System.Windows.Forms.TabControl();
             this.tabpage2DA = new System.Windows.Forms.TabPage();
+            this._2DAFileTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm._2DA._2DAFileTestControl();
             this.tabpageAcm = new System.Windows.Forms.TabPage();
             this.tabctrlAcm = new System.Windows.Forms.TabControl();
-            this.tabpageAcmHeader = new System.Windows.Forms.TabPage();
-            this.tabpageAcmFile = new System.Windows.Forms.TabPage();
             this.tabpageBitblock = new System.Windows.Forms.TabPage();
-            this.tabpageWavc = new System.Windows.Forms.TabPage();
-            this.tabpageBiff = new System.Windows.Forms.TabPage();
-            this.tabpageCharacter = new System.Windows.Forms.TabPage();
-            this.tabpageKey = new System.Windows.Forms.TabPage();
-            this.tabpageCreature = new System.Windows.Forms.TabPage();
-            this.tabpageDialog = new System.Windows.Forms.TabPage();
-            this.tabpageEffect = new System.Windows.Forms.TabPage();
-            this.tabpageIni = new System.Windows.Forms.TabPage();
-            this.tabpageItem = new System.Windows.Forms.TabPage();
-            this.tabpageMusic = new System.Windows.Forms.TabPage();
-            this.tabpageRiff = new System.Windows.Forms.TabPage();
-            this.tabpageSpell = new System.Windows.Forms.TabPage();
-            this.tabpageStore = new System.Windows.Forms.TabPage();
-            this.tabpageSrc = new System.Windows.Forms.TabPage();
-            this.tabpageTalk = new System.Windows.Forms.TabPage();
-            this.tabpageOutput = new System.Windows.Forms.TabPage();
-            this.tabpageReusableCode = new System.Windows.Forms.TabPage();
             this.bitBlockTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ACM.BitBlockTestControl();
+            this.tabpageAcmHeader = new System.Windows.Forms.TabPage();
             this.acmHeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ACM.AcmHeaderTestControl();
+            this.tabpageAcmFile = new System.Windows.Forms.TabPage();
             this.acmFileTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ACM.AcmFileTestControl();
+            this.tabpageWavc = new System.Windows.Forms.TabPage();
             this.wavCFileTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ACM.WavCFileTestControl();
+            this.tabpageBiff = new System.Windows.Forms.TabPage();
             this.tabcrlBiff = new System.Windows.Forms.TabControl();
             this.tabpageBiffUncompressed = new System.Windows.Forms.TabPage();
             this.tabctrlBiffUncompressed = new System.Windows.Forms.TabControl();
             this.tabpageBiffUncompressedArchive = new System.Windows.Forms.TabPage();
-            this.biffArchiveTestControl1 = new Bardez.Projects.InfinityPlus1.Test.WinForm.BIFF.Uncompressed.BiffArchiveTestControl();
+            this.biffArchiveTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.BIFF.Uncompressed.BiffArchiveTestControl();
+            this.tabpageBiffUncompressedHeader = new System.Windows.Forms.TabPage();
+            this.biffHeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.BIFF.Uncompressed.BiffHeaderTestControl();
+            this.tabpageBiffUncompressedResourceEntry = new System.Windows.Forms.TabPage();
+            this.biffResourceEntryTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.BIFF.Uncompressed.BiffResourceEntryTestControl();
+            this.tabpageBiffUncompressedTilesetEntry = new System.Windows.Forms.TabPage();
+            this.biffTilesetEntryTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.BIFF.Uncompressed.BiffTilesetEntryTestControl();
+            this.tabpageCharacter = new System.Windows.Forms.TabPage();
+            this.tabctrlCharacter = new System.Windows.Forms.TabControl();
+            this.tabpageCharacter1 = new System.Windows.Forms.TabPage();
+            this.character1TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.CHR.Character1TestControl();
+            this.tabpageCharacter2 = new System.Windows.Forms.TabPage();
+            this.character2TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.CHR.Character2TestControl();
+            this.tabpageCharacter9 = new System.Windows.Forms.TabPage();
+            this.character9TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.CHR.Character9TestControl();
+            this.tabpageBiography1 = new System.Windows.Forms.TabPage();
+            this.biography1TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.CHR.Biography1TestControl();
+            this.tabpageBiography2 = new System.Windows.Forms.TabPage();
+            this.biography2TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.CHR.Biography2TestControl();
+            this.tabpageCreature = new System.Windows.Forms.TabPage();
+            this.tabctrlCreature = new System.Windows.Forms.TabControl();
+            this.tabpageCreature1 = new System.Windows.Forms.TabPage();
+            this.creature1TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.CRE.Creature1TestControl();
+            this.tabpageCreature1_2 = new System.Windows.Forms.TabPage();
+            this.creature1_2TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.CRE.Creature1_2TestControl();
+            this.tabpageCreature2_2 = new System.Windows.Forms.TabPage();
+            this.creature2_2TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.CRE.Creature2_2TestControl();
+            this.tabpageCreature9 = new System.Windows.Forms.TabPage();
+            this.creature9TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.CRE.Creature9TestControl();
+            this.tabpageCreature1Header = new System.Windows.Forms.TabPage();
+            this.creature1HeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.CRE.Creature1HeaderTestControl();
+            this.tabpageCreature1_2Header = new System.Windows.Forms.TabPage();
+            this.creature1_2HeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.CRE.Creature1_2HeaderTestControl();
+            this.tabpageCreature9Header = new System.Windows.Forms.TabPage();
+            this.creature9HeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.CRE.Creature9HeaderTestControl();
+            this.tabpageDialog = new System.Windows.Forms.TabPage();
+            this.dialogTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.DLG.DialogTestControl();
+            this.tabpageEffect = new System.Windows.Forms.TabPage();
+            this.effect2TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.EFF.Effect2TestControl();
+            this.tabpageKey = new System.Windows.Forms.TabPage();
+            this.tabctrlChitinKey = new System.Windows.Forms.TabControl();
+            this.tabpageChitinKeyBiffEntry = new System.Windows.Forms.TabPage();
+            this.keyBiffEntryTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.KEY.KeyBiffEntryTestControl();
+            this.tabpageChitinKeyResourceEntry = new System.Windows.Forms.TabPage();
+            this.keyResourceEntryTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.KEY.KeyResourceEntryTestControl();
+            this.tabpageChitinKeyHeader = new System.Windows.Forms.TabPage();
+            this.keyHeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.KEY.KeyHeaderTestControl();
+            this.tabpageChitinKey = new System.Windows.Forms.TabPage();
+            this.keyTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.KEY.KeyTestControl();
+            this.tabpageIni = new System.Windows.Forms.TabPage();
+            this.iniTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.INI.IniTestControl();
+            this.tabpageItem = new System.Windows.Forms.TabPage();
+            this.tabctrlItem = new System.Windows.Forms.TabControl();
+            this.tabpageItemAbility = new System.Windows.Forms.TabPage();
+            this.itemAbilityTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ITM.ItemAbilityTestControl();
+            this.tabpageItemAbilityEffect = new System.Windows.Forms.TabPage();
+            this.itemAbilityEffectTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ITM.ItemAbilityEffectTestControl();
+            this.tabpageItem1Header = new System.Windows.Forms.TabPage();
+            this.item1HeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ITM.Item1HeaderTestControl();
+            this.tabpageItem1_1Header = new System.Windows.Forms.TabPage();
+            this.item1_1HeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ITM.Item1_1HeaderTestControl();
+            this.tabpageItem2Header = new System.Windows.Forms.TabPage();
+            this.item2HeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ITM.Item2HeaderTestControl();
+            this.tabpageItem1 = new System.Windows.Forms.TabPage();
+            this.item1TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ITM.Item1TestControl();
+            this.tabpageItem1_1 = new System.Windows.Forms.TabPage();
+            this.item1_1TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ITM.Item1_1TestControl();
+            this.tabpageItem2 = new System.Windows.Forms.TabPage();
+            this.item2TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ITM.Item2TestControl();
+            this.tabpageMusic = new System.Windows.Forms.TabPage();
+            this.musicPlaylistTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.MUS.MusicPlaylistTestControl();
+            this.tabpageRiff = new System.Windows.Forms.TabPage();
+            this.riffTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.RIFF.RiffTestControl();
+            this.tabpageSpell = new System.Windows.Forms.TabPage();
+            this.tabctrlSpell = new System.Windows.Forms.TabControl();
+            this.tabctrlSpell1File = new System.Windows.Forms.TabPage();
+            this.spell1TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.SPL.Spell1TestControl();
+            this.tabctrlSpell2File = new System.Windows.Forms.TabPage();
+            this.spell2TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.SPL.Spell2TestControl();
+            this.tabctrlSpell1FileHeader = new System.Windows.Forms.TabPage();
+            this.spell1HeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.SPL.Spell1HeaderTestControl();
+            this.tabctrlSpell2FileHeader = new System.Windows.Forms.TabPage();
+            this.spell2HeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.SPL.Spell2HeaderTestControl();
+            this.tabctrlSpellAblity = new System.Windows.Forms.TabPage();
+            this.spellAbilityTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.SPL.SpellAbilityTestControl();
+            this.tabctrlSpellAblityEffect = new System.Windows.Forms.TabPage();
+            this.spellAbilityEffectTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.SPL.SpellAbilityEffectTestControl();
+            this.tabpageStore = new System.Windows.Forms.TabPage();
+            this.tabctrlStore = new System.Windows.Forms.TabControl();
+            this.tabpageStore1 = new System.Windows.Forms.TabPage();
+            this.store1TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.STO.Store1TestControl();
+            this.tabpageStore1p1 = new System.Windows.Forms.TabPage();
+            this.store1_1TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.STO.Store1_1TestControl();
+            this.tabpageStore9 = new System.Windows.Forms.TabPage();
+            this.store9TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.STO.Store9TestControl();
+            this.tabpageSrc = new System.Windows.Forms.TabPage();
+            this.srcTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.SRC.SrcTestControl();
+            this.tabpageTalk = new System.Windows.Forms.TabPage();
+            this.tabctrlTalk = new System.Windows.Forms.TabControl();
+            this.tabpageTalkFile = new System.Windows.Forms.TabPage();
+            this.tlkTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.TLK.TlkTestControl();
+            this.tabpageTalkHeader = new System.Windows.Forms.TabPage();
+            this.tlkHeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.TLK.TlkHeaderTestControl();
+            this.tabpageTalkStrref = new System.Windows.Forms.TabPage();
+            this.tlkStrrefTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.TLK.TlkStrrefTestControl();
+            this.tabpageOutput = new System.Windows.Forms.TabPage();
+            this.tabctrlOutput = new System.Windows.Forms.TabControl();
+            this.tabpageXAudio2 = new System.Windows.Forms.TabPage();
+            this.tabctrlXAudio2 = new System.Windows.Forms.TabControl();
+            this.tabpageXAudio2Devices = new System.Windows.Forms.TabPage();
+            this.xAudio2TestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.Output.XAudio2.XAudio2TestControl();
+            this.tabpageXAudio2Render = new System.Windows.Forms.TabPage();
+            this.xAudio2RenderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.Output.XAudio2.XAudio2RenderTestControl();
+            this.tabpageReusableCode = new System.Windows.Forms.TabPage();
+            this.bitStreamTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ReusableCode.BitStreamTestControl();
             this.tabctrlMain.SuspendLayout();
+            this.tabpage2DA.SuspendLayout();
             this.tabpageAcm.SuspendLayout();
             this.tabctrlAcm.SuspendLayout();
+            this.tabpageBitblock.SuspendLayout();
             this.tabpageAcmHeader.SuspendLayout();
             this.tabpageAcmFile.SuspendLayout();
-            this.tabpageBitblock.SuspendLayout();
             this.tabpageWavc.SuspendLayout();
             this.tabpageBiff.SuspendLayout();
             this.tabcrlBiff.SuspendLayout();
             this.tabpageBiffUncompressed.SuspendLayout();
             this.tabctrlBiffUncompressed.SuspendLayout();
             this.tabpageBiffUncompressedArchive.SuspendLayout();
+            this.tabpageBiffUncompressedHeader.SuspendLayout();
+            this.tabpageBiffUncompressedResourceEntry.SuspendLayout();
+            this.tabpageBiffUncompressedTilesetEntry.SuspendLayout();
+            this.tabpageCharacter.SuspendLayout();
+            this.tabctrlCharacter.SuspendLayout();
+            this.tabpageCharacter1.SuspendLayout();
+            this.tabpageCharacter2.SuspendLayout();
+            this.tabpageCharacter9.SuspendLayout();
+            this.tabpageBiography1.SuspendLayout();
+            this.tabpageBiography2.SuspendLayout();
+            this.tabpageCreature.SuspendLayout();
+            this.tabctrlCreature.SuspendLayout();
+            this.tabpageCreature1.SuspendLayout();
+            this.tabpageCreature1_2.SuspendLayout();
+            this.tabpageCreature2_2.SuspendLayout();
+            this.tabpageCreature9.SuspendLayout();
+            this.tabpageCreature1Header.SuspendLayout();
+            this.tabpageCreature1_2Header.SuspendLayout();
+            this.tabpageCreature9Header.SuspendLayout();
+            this.tabpageDialog.SuspendLayout();
+            this.tabpageEffect.SuspendLayout();
+            this.tabpageKey.SuspendLayout();
+            this.tabctrlChitinKey.SuspendLayout();
+            this.tabpageChitinKeyBiffEntry.SuspendLayout();
+            this.tabpageChitinKeyResourceEntry.SuspendLayout();
+            this.tabpageChitinKeyHeader.SuspendLayout();
+            this.tabpageChitinKey.SuspendLayout();
+            this.tabpageIni.SuspendLayout();
+            this.tabpageItem.SuspendLayout();
+            this.tabctrlItem.SuspendLayout();
+            this.tabpageItemAbility.SuspendLayout();
+            this.tabpageItemAbilityEffect.SuspendLayout();
+            this.tabpageItem1Header.SuspendLayout();
+            this.tabpageItem1_1Header.SuspendLayout();
+            this.tabpageItem2Header.SuspendLayout();
+            this.tabpageItem1.SuspendLayout();
+            this.tabpageItem1_1.SuspendLayout();
+            this.tabpageItem2.SuspendLayout();
+            this.tabpageMusic.SuspendLayout();
+            this.tabpageRiff.SuspendLayout();
+            this.tabpageSpell.SuspendLayout();
+            this.tabctrlSpell.SuspendLayout();
+            this.tabctrlSpell1File.SuspendLayout();
+            this.tabctrlSpell2File.SuspendLayout();
+            this.tabctrlSpell1FileHeader.SuspendLayout();
+            this.tabctrlSpell2FileHeader.SuspendLayout();
+            this.tabctrlSpellAblity.SuspendLayout();
+            this.tabctrlSpellAblityEffect.SuspendLayout();
+            this.tabpageStore.SuspendLayout();
+            this.tabctrlStore.SuspendLayout();
+            this.tabpageStore1.SuspendLayout();
+            this.tabpageStore1p1.SuspendLayout();
+            this.tabpageStore9.SuspendLayout();
+            this.tabpageSrc.SuspendLayout();
+            this.tabpageTalk.SuspendLayout();
+            this.tabctrlTalk.SuspendLayout();
+            this.tabpageTalkFile.SuspendLayout();
+            this.tabpageTalkHeader.SuspendLayout();
+            this.tabpageTalkStrref.SuspendLayout();
+            this.tabpageOutput.SuspendLayout();
+            this.tabctrlOutput.SuspendLayout();
+            this.tabpageXAudio2.SuspendLayout();
+            this.tabctrlXAudio2.SuspendLayout();
+            this.tabpageXAudio2Devices.SuspendLayout();
+            this.tabpageXAudio2Render.SuspendLayout();
+            this.tabpageReusableCode.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabctrlMain
@@ -81,10 +248,10 @@
             this.tabctrlMain.Controls.Add(this.tabpageAcm);
             this.tabctrlMain.Controls.Add(this.tabpageBiff);
             this.tabctrlMain.Controls.Add(this.tabpageCharacter);
-            this.tabctrlMain.Controls.Add(this.tabpageKey);
             this.tabctrlMain.Controls.Add(this.tabpageCreature);
             this.tabctrlMain.Controls.Add(this.tabpageDialog);
             this.tabctrlMain.Controls.Add(this.tabpageEffect);
+            this.tabctrlMain.Controls.Add(this.tabpageKey);
             this.tabctrlMain.Controls.Add(this.tabpageIni);
             this.tabctrlMain.Controls.Add(this.tabpageItem);
             this.tabctrlMain.Controls.Add(this.tabpageMusic);
@@ -99,17 +266,27 @@
             this.tabctrlMain.Location = new System.Drawing.Point(0, 0);
             this.tabctrlMain.Name = "tabctrlMain";
             this.tabctrlMain.SelectedIndex = 0;
-            this.tabctrlMain.Size = new System.Drawing.Size(1106, 482);
+            this.tabctrlMain.Size = new System.Drawing.Size(835, 482);
             this.tabctrlMain.TabIndex = 0;
             // 
             // tabpage2DA
             // 
             this.tabpage2DA.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpage2DA.Controls.Add(this._2DAFileTestControl);
             this.tabpage2DA.Location = new System.Drawing.Point(4, 22);
             this.tabpage2DA.Name = "tabpage2DA";
-            this.tabpage2DA.Size = new System.Drawing.Size(1098, 456);
+            this.tabpage2DA.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpage2DA.Size = new System.Drawing.Size(827, 456);
             this.tabpage2DA.TabIndex = 17;
             this.tabpage2DA.Text = "2DA";
+            // 
+            // _2DAFileTestControl
+            // 
+            this._2DAFileTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._2DAFileTestControl.Location = new System.Drawing.Point(3, 3);
+            this._2DAFileTestControl.Name = "_2DAFileTestControl";
+            this._2DAFileTestControl.Size = new System.Drawing.Size(821, 450);
+            this._2DAFileTestControl.TabIndex = 0;
             // 
             // tabpageAcm
             // 
@@ -118,24 +295,41 @@
             this.tabpageAcm.Location = new System.Drawing.Point(4, 22);
             this.tabpageAcm.Name = "tabpageAcm";
             this.tabpageAcm.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpageAcm.Size = new System.Drawing.Size(1098, 456);
+            this.tabpageAcm.Size = new System.Drawing.Size(827, 456);
             this.tabpageAcm.TabIndex = 0;
             this.tabpageAcm.Text = "ACM";
             // 
             // tabctrlAcm
             // 
-            this.tabctrlAcm.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabctrlAcm.Controls.Add(this.tabpageBitblock);
             this.tabctrlAcm.Controls.Add(this.tabpageAcmHeader);
             this.tabctrlAcm.Controls.Add(this.tabpageAcmFile);
             this.tabctrlAcm.Controls.Add(this.tabpageWavc);
-            this.tabctrlAcm.Location = new System.Drawing.Point(0, 0);
+            this.tabctrlAcm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabctrlAcm.Location = new System.Drawing.Point(3, 3);
             this.tabctrlAcm.Name = "tabctrlAcm";
             this.tabctrlAcm.SelectedIndex = 0;
-            this.tabctrlAcm.Size = new System.Drawing.Size(1092, 450);
+            this.tabctrlAcm.Size = new System.Drawing.Size(821, 450);
             this.tabctrlAcm.TabIndex = 0;
+            // 
+            // tabpageBitblock
+            // 
+            this.tabpageBitblock.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageBitblock.Controls.Add(this.bitBlockTestControl);
+            this.tabpageBitblock.Location = new System.Drawing.Point(4, 22);
+            this.tabpageBitblock.Name = "tabpageBitblock";
+            this.tabpageBitblock.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageBitblock.Size = new System.Drawing.Size(813, 424);
+            this.tabpageBitblock.TabIndex = 2;
+            this.tabpageBitblock.Text = "BitBlock";
+            // 
+            // bitBlockTestControl
+            // 
+            this.bitBlockTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bitBlockTestControl.Location = new System.Drawing.Point(3, 3);
+            this.bitBlockTestControl.Name = "bitBlockTestControl";
+            this.bitBlockTestControl.Size = new System.Drawing.Size(807, 418);
+            this.bitBlockTestControl.TabIndex = 0;
             // 
             // tabpageAcmHeader
             // 
@@ -144,9 +338,18 @@
             this.tabpageAcmHeader.Location = new System.Drawing.Point(4, 22);
             this.tabpageAcmHeader.Name = "tabpageAcmHeader";
             this.tabpageAcmHeader.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpageAcmHeader.Size = new System.Drawing.Size(1084, 424);
+            this.tabpageAcmHeader.Size = new System.Drawing.Size(178, 42);
             this.tabpageAcmHeader.TabIndex = 0;
             this.tabpageAcmHeader.Text = "ACM Header";
+            // 
+            // acmHeaderTestControl
+            // 
+            this.acmHeaderTestControl.BackColor = System.Drawing.SystemColors.Control;
+            this.acmHeaderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.acmHeaderTestControl.Location = new System.Drawing.Point(3, 3);
+            this.acmHeaderTestControl.Name = "acmHeaderTestControl";
+            this.acmHeaderTestControl.Size = new System.Drawing.Size(807, 418);
+            this.acmHeaderTestControl.TabIndex = 0;
             // 
             // tabpageAcmFile
             // 
@@ -154,19 +357,18 @@
             this.tabpageAcmFile.Controls.Add(this.acmFileTestControl);
             this.tabpageAcmFile.Location = new System.Drawing.Point(4, 22);
             this.tabpageAcmFile.Name = "tabpageAcmFile";
-            this.tabpageAcmFile.Size = new System.Drawing.Size(1084, 424);
+            this.tabpageAcmFile.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageAcmFile.Size = new System.Drawing.Size(178, 42);
             this.tabpageAcmFile.TabIndex = 1;
             this.tabpageAcmFile.Text = "AMC File";
             // 
-            // tabpageBitblock
+            // acmFileTestControl
             // 
-            this.tabpageBitblock.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageBitblock.Controls.Add(this.bitBlockTestControl);
-            this.tabpageBitblock.Location = new System.Drawing.Point(4, 22);
-            this.tabpageBitblock.Name = "tabpageBitblock";
-            this.tabpageBitblock.Size = new System.Drawing.Size(1084, 424);
-            this.tabpageBitblock.TabIndex = 2;
-            this.tabpageBitblock.Text = "BitBlock";
+            this.acmFileTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.acmFileTestControl.Location = new System.Drawing.Point(3, 3);
+            this.acmFileTestControl.Name = "acmFileTestControl";
+            this.acmFileTestControl.Size = new System.Drawing.Size(172, 36);
+            this.acmFileTestControl.TabIndex = 0;
             // 
             // tabpageWavc
             // 
@@ -174,9 +376,18 @@
             this.tabpageWavc.Controls.Add(this.wavCFileTestControl);
             this.tabpageWavc.Location = new System.Drawing.Point(4, 22);
             this.tabpageWavc.Name = "tabpageWavc";
-            this.tabpageWavc.Size = new System.Drawing.Size(1084, 424);
+            this.tabpageWavc.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageWavc.Size = new System.Drawing.Size(178, 42);
             this.tabpageWavc.TabIndex = 3;
             this.tabpageWavc.Text = "WAVC File";
+            // 
+            // wavCFileTestControl
+            // 
+            this.wavCFileTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wavCFileTestControl.Location = new System.Drawing.Point(3, 3);
+            this.wavCFileTestControl.Name = "wavCFileTestControl";
+            this.wavCFileTestControl.Size = new System.Drawing.Size(172, 36);
+            this.wavCFileTestControl.TabIndex = 0;
             // 
             // tabpageBiff
             // 
@@ -184,188 +395,19 @@
             this.tabpageBiff.Controls.Add(this.tabcrlBiff);
             this.tabpageBiff.Location = new System.Drawing.Point(4, 22);
             this.tabpageBiff.Name = "tabpageBiff";
-            this.tabpageBiff.Size = new System.Drawing.Size(1098, 456);
+            this.tabpageBiff.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageBiff.Size = new System.Drawing.Size(827, 456);
             this.tabpageBiff.TabIndex = 1;
             this.tabpageBiff.Text = "BIFF";
-            // 
-            // tabpageCharacter
-            // 
-            this.tabpageCharacter.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageCharacter.Location = new System.Drawing.Point(4, 22);
-            this.tabpageCharacter.Name = "tabpageCharacter";
-            this.tabpageCharacter.Size = new System.Drawing.Size(1098, 456);
-            this.tabpageCharacter.TabIndex = 2;
-            this.tabpageCharacter.Text = "CHR";
-            // 
-            // tabpageKey
-            // 
-            this.tabpageKey.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageKey.Location = new System.Drawing.Point(4, 22);
-            this.tabpageKey.Name = "tabpageKey";
-            this.tabpageKey.Size = new System.Drawing.Size(1098, 456);
-            this.tabpageKey.TabIndex = 3;
-            this.tabpageKey.Text = "KEY";
-            // 
-            // tabpageCreature
-            // 
-            this.tabpageCreature.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageCreature.Location = new System.Drawing.Point(4, 22);
-            this.tabpageCreature.Name = "tabpageCreature";
-            this.tabpageCreature.Size = new System.Drawing.Size(1098, 456);
-            this.tabpageCreature.TabIndex = 4;
-            this.tabpageCreature.Text = "CRE";
-            // 
-            // tabpageDialog
-            // 
-            this.tabpageDialog.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageDialog.Location = new System.Drawing.Point(4, 22);
-            this.tabpageDialog.Name = "tabpageDialog";
-            this.tabpageDialog.Size = new System.Drawing.Size(1098, 456);
-            this.tabpageDialog.TabIndex = 5;
-            this.tabpageDialog.Text = "DLG";
-            // 
-            // tabpageEffect
-            // 
-            this.tabpageEffect.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageEffect.Location = new System.Drawing.Point(4, 22);
-            this.tabpageEffect.Name = "tabpageEffect";
-            this.tabpageEffect.Size = new System.Drawing.Size(1098, 456);
-            this.tabpageEffect.TabIndex = 6;
-            this.tabpageEffect.Text = "EFF";
-            // 
-            // tabpageIni
-            // 
-            this.tabpageIni.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageIni.Location = new System.Drawing.Point(4, 22);
-            this.tabpageIni.Name = "tabpageIni";
-            this.tabpageIni.Size = new System.Drawing.Size(1098, 456);
-            this.tabpageIni.TabIndex = 7;
-            this.tabpageIni.Text = "INI";
-            // 
-            // tabpageItem
-            // 
-            this.tabpageItem.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageItem.Location = new System.Drawing.Point(4, 22);
-            this.tabpageItem.Name = "tabpageItem";
-            this.tabpageItem.Size = new System.Drawing.Size(1098, 456);
-            this.tabpageItem.TabIndex = 8;
-            this.tabpageItem.Text = "ITM";
-            // 
-            // tabpageMusic
-            // 
-            this.tabpageMusic.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageMusic.Location = new System.Drawing.Point(4, 22);
-            this.tabpageMusic.Name = "tabpageMusic";
-            this.tabpageMusic.Size = new System.Drawing.Size(1098, 456);
-            this.tabpageMusic.TabIndex = 9;
-            this.tabpageMusic.Text = "MUS";
-            // 
-            // tabpageRiff
-            // 
-            this.tabpageRiff.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageRiff.Location = new System.Drawing.Point(4, 22);
-            this.tabpageRiff.Name = "tabpageRiff";
-            this.tabpageRiff.Size = new System.Drawing.Size(1098, 456);
-            this.tabpageRiff.TabIndex = 12;
-            this.tabpageRiff.Text = "RIFF";
-            // 
-            // tabpageSpell
-            // 
-            this.tabpageSpell.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageSpell.Location = new System.Drawing.Point(4, 22);
-            this.tabpageSpell.Name = "tabpageSpell";
-            this.tabpageSpell.Size = new System.Drawing.Size(1098, 456);
-            this.tabpageSpell.TabIndex = 13;
-            this.tabpageSpell.Text = "SPL";
-            // 
-            // tabpageStore
-            // 
-            this.tabpageStore.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageStore.Location = new System.Drawing.Point(4, 22);
-            this.tabpageStore.Name = "tabpageStore";
-            this.tabpageStore.Size = new System.Drawing.Size(1098, 456);
-            this.tabpageStore.TabIndex = 14;
-            this.tabpageStore.Text = "STO";
-            // 
-            // tabpageSrc
-            // 
-            this.tabpageSrc.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageSrc.Location = new System.Drawing.Point(4, 22);
-            this.tabpageSrc.Name = "tabpageSrc";
-            this.tabpageSrc.Size = new System.Drawing.Size(1098, 456);
-            this.tabpageSrc.TabIndex = 15;
-            this.tabpageSrc.Text = "SRC";
-            // 
-            // tabpageTalk
-            // 
-            this.tabpageTalk.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageTalk.Location = new System.Drawing.Point(4, 22);
-            this.tabpageTalk.Name = "tabpageTalk";
-            this.tabpageTalk.Size = new System.Drawing.Size(1098, 456);
-            this.tabpageTalk.TabIndex = 16;
-            this.tabpageTalk.Text = "TLK";
-            // 
-            // tabpageOutput
-            // 
-            this.tabpageOutput.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageOutput.Location = new System.Drawing.Point(4, 22);
-            this.tabpageOutput.Name = "tabpageOutput";
-            this.tabpageOutput.Size = new System.Drawing.Size(1098, 456);
-            this.tabpageOutput.TabIndex = 10;
-            this.tabpageOutput.Text = "Output";
-            // 
-            // tabpageReusableCode
-            // 
-            this.tabpageReusableCode.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageReusableCode.Location = new System.Drawing.Point(4, 22);
-            this.tabpageReusableCode.Name = "tabpageReusableCode";
-            this.tabpageReusableCode.Size = new System.Drawing.Size(1098, 456);
-            this.tabpageReusableCode.TabIndex = 11;
-            this.tabpageReusableCode.Text = "Reusable Code";
-            // 
-            // bitBlockTestControl
-            // 
-            this.bitBlockTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bitBlockTestControl.Location = new System.Drawing.Point(0, 0);
-            this.bitBlockTestControl.Name = "bitBlockTestControl";
-            this.bitBlockTestControl.Size = new System.Drawing.Size(1084, 424);
-            this.bitBlockTestControl.TabIndex = 0;
-            // 
-            // acmHeaderTestControl
-            // 
-            this.acmHeaderTestControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.acmHeaderTestControl.BackColor = System.Drawing.SystemColors.Control;
-            this.acmHeaderTestControl.Location = new System.Drawing.Point(0, 0);
-            this.acmHeaderTestControl.Name = "acmHeaderTestControl";
-            this.acmHeaderTestControl.Size = new System.Drawing.Size(1084, 424);
-            this.acmHeaderTestControl.TabIndex = 0;
-            // 
-            // acmFileTestControl
-            // 
-            this.acmFileTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.acmFileTestControl.Location = new System.Drawing.Point(0, 0);
-            this.acmFileTestControl.Name = "acmFileTestControl";
-            this.acmFileTestControl.Size = new System.Drawing.Size(1084, 424);
-            this.acmFileTestControl.TabIndex = 0;
-            // 
-            // wavCFileTestControl
-            // 
-            this.wavCFileTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wavCFileTestControl.Location = new System.Drawing.Point(0, 0);
-            this.wavCFileTestControl.Name = "wavCFileTestControl";
-            this.wavCFileTestControl.Size = new System.Drawing.Size(1084, 424);
-            this.wavCFileTestControl.TabIndex = 0;
             // 
             // tabcrlBiff
             // 
             this.tabcrlBiff.Controls.Add(this.tabpageBiffUncompressed);
             this.tabcrlBiff.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabcrlBiff.Location = new System.Drawing.Point(0, 0);
+            this.tabcrlBiff.Location = new System.Drawing.Point(3, 3);
             this.tabcrlBiff.Name = "tabcrlBiff";
             this.tabcrlBiff.SelectedIndex = 0;
-            this.tabcrlBiff.Size = new System.Drawing.Size(1098, 456);
+            this.tabcrlBiff.Size = new System.Drawing.Size(186, 68);
             this.tabcrlBiff.TabIndex = 0;
             // 
             // tabpageBiffUncompressed
@@ -375,59 +417,1261 @@
             this.tabpageBiffUncompressed.Location = new System.Drawing.Point(4, 22);
             this.tabpageBiffUncompressed.Name = "tabpageBiffUncompressed";
             this.tabpageBiffUncompressed.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpageBiffUncompressed.Size = new System.Drawing.Size(1090, 430);
+            this.tabpageBiffUncompressed.Size = new System.Drawing.Size(178, 42);
             this.tabpageBiffUncompressed.TabIndex = 0;
             this.tabpageBiffUncompressed.Text = "BIFF";
             // 
             // tabctrlBiffUncompressed
             // 
             this.tabctrlBiffUncompressed.Controls.Add(this.tabpageBiffUncompressedArchive);
+            this.tabctrlBiffUncompressed.Controls.Add(this.tabpageBiffUncompressedHeader);
+            this.tabctrlBiffUncompressed.Controls.Add(this.tabpageBiffUncompressedResourceEntry);
+            this.tabctrlBiffUncompressed.Controls.Add(this.tabpageBiffUncompressedTilesetEntry);
             this.tabctrlBiffUncompressed.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabctrlBiffUncompressed.Location = new System.Drawing.Point(3, 3);
             this.tabctrlBiffUncompressed.Name = "tabctrlBiffUncompressed";
             this.tabctrlBiffUncompressed.SelectedIndex = 0;
-            this.tabctrlBiffUncompressed.Size = new System.Drawing.Size(1084, 424);
+            this.tabctrlBiffUncompressed.Size = new System.Drawing.Size(172, 36);
             this.tabctrlBiffUncompressed.TabIndex = 0;
             // 
             // tabpageBiffUncompressedArchive
             // 
             this.tabpageBiffUncompressedArchive.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageBiffUncompressedArchive.Controls.Add(this.biffArchiveTestControl1);
+            this.tabpageBiffUncompressedArchive.Controls.Add(this.biffArchiveTestControl);
             this.tabpageBiffUncompressedArchive.Location = new System.Drawing.Point(4, 22);
             this.tabpageBiffUncompressedArchive.Name = "tabpageBiffUncompressedArchive";
             this.tabpageBiffUncompressedArchive.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpageBiffUncompressedArchive.Size = new System.Drawing.Size(1076, 398);
+            this.tabpageBiffUncompressedArchive.Size = new System.Drawing.Size(164, 10);
             this.tabpageBiffUncompressedArchive.TabIndex = 0;
             this.tabpageBiffUncompressedArchive.Text = "Archive";
             // 
-            // biffArchiveTestControl1
+            // biffArchiveTestControl
             // 
-            this.biffArchiveTestControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.biffArchiveTestControl1.Location = new System.Drawing.Point(3, 3);
-            this.biffArchiveTestControl1.Name = "biffArchiveTestControl1";
-            this.biffArchiveTestControl1.Size = new System.Drawing.Size(1070, 392);
-            this.biffArchiveTestControl1.TabIndex = 0;
+            this.biffArchiveTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.biffArchiveTestControl.Location = new System.Drawing.Point(3, 3);
+            this.biffArchiveTestControl.Name = "biffArchiveTestControl";
+            this.biffArchiveTestControl.Size = new System.Drawing.Size(158, 4);
+            this.biffArchiveTestControl.TabIndex = 0;
+            // 
+            // tabpageBiffUncompressedHeader
+            // 
+            this.tabpageBiffUncompressedHeader.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageBiffUncompressedHeader.Controls.Add(this.biffHeaderTestControl);
+            this.tabpageBiffUncompressedHeader.Location = new System.Drawing.Point(4, 22);
+            this.tabpageBiffUncompressedHeader.Name = "tabpageBiffUncompressedHeader";
+            this.tabpageBiffUncompressedHeader.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageBiffUncompressedHeader.Size = new System.Drawing.Size(164, 10);
+            this.tabpageBiffUncompressedHeader.TabIndex = 1;
+            this.tabpageBiffUncompressedHeader.Text = "Header";
+            // 
+            // biffHeaderTestControl
+            // 
+            this.biffHeaderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.biffHeaderTestControl.Location = new System.Drawing.Point(3, 3);
+            this.biffHeaderTestControl.Name = "biffHeaderTestControl";
+            this.biffHeaderTestControl.Size = new System.Drawing.Size(793, 386);
+            this.biffHeaderTestControl.TabIndex = 0;
+            // 
+            // tabpageBiffUncompressedResourceEntry
+            // 
+            this.tabpageBiffUncompressedResourceEntry.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageBiffUncompressedResourceEntry.Controls.Add(this.biffResourceEntryTestControl);
+            this.tabpageBiffUncompressedResourceEntry.Location = new System.Drawing.Point(4, 22);
+            this.tabpageBiffUncompressedResourceEntry.Name = "tabpageBiffUncompressedResourceEntry";
+            this.tabpageBiffUncompressedResourceEntry.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageBiffUncompressedResourceEntry.Size = new System.Drawing.Size(164, 10);
+            this.tabpageBiffUncompressedResourceEntry.TabIndex = 2;
+            this.tabpageBiffUncompressedResourceEntry.Text = "Resource Entry";
+            // 
+            // biffResourceEntryTestControl
+            // 
+            this.biffResourceEntryTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.biffResourceEntryTestControl.Location = new System.Drawing.Point(3, 3);
+            this.biffResourceEntryTestControl.Name = "biffResourceEntryTestControl";
+            this.biffResourceEntryTestControl.Size = new System.Drawing.Size(172, 36);
+            this.biffResourceEntryTestControl.TabIndex = 0;
+            // 
+            // tabpageBiffUncompressedTilesetEntry
+            // 
+            this.tabpageBiffUncompressedTilesetEntry.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageBiffUncompressedTilesetEntry.Controls.Add(this.biffTilesetEntryTestControl);
+            this.tabpageBiffUncompressedTilesetEntry.Location = new System.Drawing.Point(4, 22);
+            this.tabpageBiffUncompressedTilesetEntry.Name = "tabpageBiffUncompressedTilesetEntry";
+            this.tabpageBiffUncompressedTilesetEntry.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageBiffUncompressedTilesetEntry.Size = new System.Drawing.Size(164, 10);
+            this.tabpageBiffUncompressedTilesetEntry.TabIndex = 3;
+            this.tabpageBiffUncompressedTilesetEntry.Text = "Tileset Entry";
+            // 
+            // biffTilesetEntryTestControl
+            // 
+            this.biffTilesetEntryTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.biffTilesetEntryTestControl.Location = new System.Drawing.Point(3, 3);
+            this.biffTilesetEntryTestControl.Name = "biffTilesetEntryTestControl";
+            this.biffTilesetEntryTestControl.Size = new System.Drawing.Size(172, 36);
+            this.biffTilesetEntryTestControl.TabIndex = 0;
+            // 
+            // tabpageCharacter
+            // 
+            this.tabpageCharacter.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageCharacter.Controls.Add(this.tabctrlCharacter);
+            this.tabpageCharacter.Location = new System.Drawing.Point(4, 22);
+            this.tabpageCharacter.Name = "tabpageCharacter";
+            this.tabpageCharacter.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageCharacter.Size = new System.Drawing.Size(827, 456);
+            this.tabpageCharacter.TabIndex = 2;
+            this.tabpageCharacter.Text = "CHR";
+            // 
+            // tabctrlCharacter
+            // 
+            this.tabctrlCharacter.Controls.Add(this.tabpageCharacter1);
+            this.tabctrlCharacter.Controls.Add(this.tabpageCharacter2);
+            this.tabctrlCharacter.Controls.Add(this.tabpageCharacter9);
+            this.tabctrlCharacter.Controls.Add(this.tabpageBiography1);
+            this.tabctrlCharacter.Controls.Add(this.tabpageBiography2);
+            this.tabctrlCharacter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabctrlCharacter.Location = new System.Drawing.Point(3, 3);
+            this.tabctrlCharacter.Name = "tabctrlCharacter";
+            this.tabctrlCharacter.SelectedIndex = 0;
+            this.tabctrlCharacter.Size = new System.Drawing.Size(186, 68);
+            this.tabctrlCharacter.TabIndex = 0;
+            // 
+            // tabpageCharacter1
+            // 
+            this.tabpageCharacter1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageCharacter1.Controls.Add(this.character1TestControl);
+            this.tabpageCharacter1.Location = new System.Drawing.Point(4, 22);
+            this.tabpageCharacter1.Name = "tabpageCharacter1";
+            this.tabpageCharacter1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageCharacter1.Size = new System.Drawing.Size(178, 42);
+            this.tabpageCharacter1.TabIndex = 0;
+            this.tabpageCharacter1.Text = "CHR 1";
+            // 
+            // character1TestControl
+            // 
+            this.character1TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.character1TestControl.Location = new System.Drawing.Point(3, 3);
+            this.character1TestControl.Name = "character1TestControl";
+            this.character1TestControl.Size = new System.Drawing.Size(172, 36);
+            this.character1TestControl.TabIndex = 0;
+            // 
+            // tabpageCharacter2
+            // 
+            this.tabpageCharacter2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageCharacter2.Controls.Add(this.character2TestControl);
+            this.tabpageCharacter2.Location = new System.Drawing.Point(4, 22);
+            this.tabpageCharacter2.Name = "tabpageCharacter2";
+            this.tabpageCharacter2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageCharacter2.Size = new System.Drawing.Size(178, 42);
+            this.tabpageCharacter2.TabIndex = 1;
+            this.tabpageCharacter2.Text = "CHR 2.2";
+            // 
+            // character2TestControl
+            // 
+            this.character2TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.character2TestControl.Location = new System.Drawing.Point(3, 3);
+            this.character2TestControl.Name = "character2TestControl";
+            this.character2TestControl.Size = new System.Drawing.Size(807, 418);
+            this.character2TestControl.TabIndex = 0;
+            // 
+            // tabpageCharacter9
+            // 
+            this.tabpageCharacter9.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageCharacter9.Controls.Add(this.character9TestControl);
+            this.tabpageCharacter9.Location = new System.Drawing.Point(4, 22);
+            this.tabpageCharacter9.Name = "tabpageCharacter9";
+            this.tabpageCharacter9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageCharacter9.Size = new System.Drawing.Size(178, 42);
+            this.tabpageCharacter9.TabIndex = 2;
+            this.tabpageCharacter9.Text = "CHR 9";
+            // 
+            // character9TestControl
+            // 
+            this.character9TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.character9TestControl.Location = new System.Drawing.Point(3, 3);
+            this.character9TestControl.Name = "character9TestControl";
+            this.character9TestControl.Size = new System.Drawing.Size(807, 418);
+            this.character9TestControl.TabIndex = 0;
+            // 
+            // tabpageBiography1
+            // 
+            this.tabpageBiography1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageBiography1.Controls.Add(this.biography1TestControl);
+            this.tabpageBiography1.Location = new System.Drawing.Point(4, 22);
+            this.tabpageBiography1.Name = "tabpageBiography1";
+            this.tabpageBiography1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageBiography1.Size = new System.Drawing.Size(178, 42);
+            this.tabpageBiography1.TabIndex = 3;
+            this.tabpageBiography1.Text = "BIO";
+            // 
+            // biography1TestControl
+            // 
+            this.biography1TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.biography1TestControl.Location = new System.Drawing.Point(3, 3);
+            this.biography1TestControl.Name = "biography1TestControl";
+            this.biography1TestControl.Size = new System.Drawing.Size(807, 418);
+            this.biography1TestControl.TabIndex = 0;
+            // 
+            // tabpageBiography2
+            // 
+            this.tabpageBiography2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageBiography2.Controls.Add(this.biography2TestControl);
+            this.tabpageBiography2.Location = new System.Drawing.Point(4, 22);
+            this.tabpageBiography2.Name = "tabpageBiography2";
+            this.tabpageBiography2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageBiography2.Size = new System.Drawing.Size(178, 42);
+            this.tabpageBiography2.TabIndex = 4;
+            this.tabpageBiography2.Text = "RES";
+            // 
+            // biography2TestControl
+            // 
+            this.biography2TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.biography2TestControl.Location = new System.Drawing.Point(3, 3);
+            this.biography2TestControl.Name = "biography2TestControl";
+            this.biography2TestControl.Size = new System.Drawing.Size(807, 418);
+            this.biography2TestControl.TabIndex = 0;
+            // 
+            // tabpageCreature
+            // 
+            this.tabpageCreature.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageCreature.Controls.Add(this.tabctrlCreature);
+            this.tabpageCreature.Location = new System.Drawing.Point(4, 22);
+            this.tabpageCreature.Name = "tabpageCreature";
+            this.tabpageCreature.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageCreature.Size = new System.Drawing.Size(827, 456);
+            this.tabpageCreature.TabIndex = 4;
+            this.tabpageCreature.Text = "CRE";
+            // 
+            // tabctrlCreature
+            // 
+            this.tabctrlCreature.Controls.Add(this.tabpageCreature1);
+            this.tabctrlCreature.Controls.Add(this.tabpageCreature1_2);
+            this.tabctrlCreature.Controls.Add(this.tabpageCreature2_2);
+            this.tabctrlCreature.Controls.Add(this.tabpageCreature9);
+            this.tabctrlCreature.Controls.Add(this.tabpageCreature1Header);
+            this.tabctrlCreature.Controls.Add(this.tabpageCreature1_2Header);
+            this.tabctrlCreature.Controls.Add(this.tabpageCreature9Header);
+            this.tabctrlCreature.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabctrlCreature.Location = new System.Drawing.Point(3, 3);
+            this.tabctrlCreature.Name = "tabctrlCreature";
+            this.tabctrlCreature.SelectedIndex = 0;
+            this.tabctrlCreature.Size = new System.Drawing.Size(186, 68);
+            this.tabctrlCreature.TabIndex = 0;
+            // 
+            // tabpageCreature1
+            // 
+            this.tabpageCreature1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageCreature1.Controls.Add(this.creature1TestControl);
+            this.tabpageCreature1.Location = new System.Drawing.Point(4, 22);
+            this.tabpageCreature1.Name = "tabpageCreature1";
+            this.tabpageCreature1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageCreature1.Size = new System.Drawing.Size(178, 42);
+            this.tabpageCreature1.TabIndex = 0;
+            this.tabpageCreature1.Text = "CRE 1.0";
+            // 
+            // creature1TestControl
+            // 
+            this.creature1TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.creature1TestControl.Location = new System.Drawing.Point(3, 3);
+            this.creature1TestControl.Name = "creature1TestControl";
+            this.creature1TestControl.Size = new System.Drawing.Size(172, 36);
+            this.creature1TestControl.TabIndex = 0;
+            // 
+            // tabpageCreature1_2
+            // 
+            this.tabpageCreature1_2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageCreature1_2.Controls.Add(this.creature1_2TestControl);
+            this.tabpageCreature1_2.Location = new System.Drawing.Point(4, 22);
+            this.tabpageCreature1_2.Name = "tabpageCreature1_2";
+            this.tabpageCreature1_2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageCreature1_2.Size = new System.Drawing.Size(178, 42);
+            this.tabpageCreature1_2.TabIndex = 1;
+            this.tabpageCreature1_2.Text = "CRE 1.2";
+            // 
+            // creature1_2TestControl
+            // 
+            this.creature1_2TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.creature1_2TestControl.Location = new System.Drawing.Point(3, 3);
+            this.creature1_2TestControl.Name = "creature1_2TestControl";
+            this.creature1_2TestControl.Size = new System.Drawing.Size(807, 418);
+            this.creature1_2TestControl.TabIndex = 0;
+            // 
+            // tabpageCreature2_2
+            // 
+            this.tabpageCreature2_2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageCreature2_2.Controls.Add(this.creature2_2TestControl);
+            this.tabpageCreature2_2.Location = new System.Drawing.Point(4, 22);
+            this.tabpageCreature2_2.Name = "tabpageCreature2_2";
+            this.tabpageCreature2_2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageCreature2_2.Size = new System.Drawing.Size(178, 42);
+            this.tabpageCreature2_2.TabIndex = 2;
+            this.tabpageCreature2_2.Text = "CRE 2.2";
+            // 
+            // creature2_2TestControl
+            // 
+            this.creature2_2TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.creature2_2TestControl.Location = new System.Drawing.Point(3, 3);
+            this.creature2_2TestControl.Name = "creature2_2TestControl";
+            this.creature2_2TestControl.Size = new System.Drawing.Size(807, 418);
+            this.creature2_2TestControl.TabIndex = 0;
+            // 
+            // tabpageCreature9
+            // 
+            this.tabpageCreature9.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageCreature9.Controls.Add(this.creature9TestControl);
+            this.tabpageCreature9.Location = new System.Drawing.Point(4, 22);
+            this.tabpageCreature9.Name = "tabpageCreature9";
+            this.tabpageCreature9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageCreature9.Size = new System.Drawing.Size(178, 42);
+            this.tabpageCreature9.TabIndex = 3;
+            this.tabpageCreature9.Text = "CRE 9.0";
+            // 
+            // creature9TestControl
+            // 
+            this.creature9TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.creature9TestControl.Location = new System.Drawing.Point(3, 3);
+            this.creature9TestControl.Name = "creature9TestControl";
+            this.creature9TestControl.Size = new System.Drawing.Size(807, 418);
+            this.creature9TestControl.TabIndex = 0;
+            // 
+            // tabpageCreature1Header
+            // 
+            this.tabpageCreature1Header.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageCreature1Header.Controls.Add(this.creature1HeaderTestControl);
+            this.tabpageCreature1Header.Location = new System.Drawing.Point(4, 22);
+            this.tabpageCreature1Header.Name = "tabpageCreature1Header";
+            this.tabpageCreature1Header.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageCreature1Header.Size = new System.Drawing.Size(178, 42);
+            this.tabpageCreature1Header.TabIndex = 4;
+            this.tabpageCreature1Header.Text = "Header 1.0";
+            // 
+            // creature1HeaderTestControl
+            // 
+            this.creature1HeaderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.creature1HeaderTestControl.Location = new System.Drawing.Point(3, 3);
+            this.creature1HeaderTestControl.Name = "creature1HeaderTestControl";
+            this.creature1HeaderTestControl.Size = new System.Drawing.Size(807, 418);
+            this.creature1HeaderTestControl.TabIndex = 0;
+            // 
+            // tabpageCreature1_2Header
+            // 
+            this.tabpageCreature1_2Header.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageCreature1_2Header.Controls.Add(this.creature1_2HeaderTestControl);
+            this.tabpageCreature1_2Header.Location = new System.Drawing.Point(4, 22);
+            this.tabpageCreature1_2Header.Name = "tabpageCreature1_2Header";
+            this.tabpageCreature1_2Header.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageCreature1_2Header.Size = new System.Drawing.Size(178, 42);
+            this.tabpageCreature1_2Header.TabIndex = 5;
+            this.tabpageCreature1_2Header.Text = "Header 1.2";
+            // 
+            // creature1_2HeaderTestControl
+            // 
+            this.creature1_2HeaderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.creature1_2HeaderTestControl.Location = new System.Drawing.Point(3, 3);
+            this.creature1_2HeaderTestControl.Name = "creature1_2HeaderTestControl";
+            this.creature1_2HeaderTestControl.Size = new System.Drawing.Size(807, 418);
+            this.creature1_2HeaderTestControl.TabIndex = 0;
+            // 
+            // tabpageCreature9Header
+            // 
+            this.tabpageCreature9Header.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageCreature9Header.Controls.Add(this.creature9HeaderTestControl);
+            this.tabpageCreature9Header.Location = new System.Drawing.Point(4, 22);
+            this.tabpageCreature9Header.Name = "tabpageCreature9Header";
+            this.tabpageCreature9Header.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageCreature9Header.Size = new System.Drawing.Size(178, 42);
+            this.tabpageCreature9Header.TabIndex = 6;
+            this.tabpageCreature9Header.Text = "Header 9.0";
+            // 
+            // creature9HeaderTestControl
+            // 
+            this.creature9HeaderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.creature9HeaderTestControl.Location = new System.Drawing.Point(3, 3);
+            this.creature9HeaderTestControl.Name = "creature9HeaderTestControl";
+            this.creature9HeaderTestControl.Size = new System.Drawing.Size(807, 418);
+            this.creature9HeaderTestControl.TabIndex = 0;
+            // 
+            // tabpageDialog
+            // 
+            this.tabpageDialog.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageDialog.Controls.Add(this.dialogTestControl);
+            this.tabpageDialog.Location = new System.Drawing.Point(4, 22);
+            this.tabpageDialog.Name = "tabpageDialog";
+            this.tabpageDialog.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageDialog.Size = new System.Drawing.Size(827, 456);
+            this.tabpageDialog.TabIndex = 5;
+            this.tabpageDialog.Text = "DLG";
+            // 
+            // dialogTestControl
+            // 
+            this.dialogTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dialogTestControl.Location = new System.Drawing.Point(3, 3);
+            this.dialogTestControl.Name = "dialogTestControl";
+            this.dialogTestControl.Size = new System.Drawing.Size(186, 68);
+            this.dialogTestControl.TabIndex = 0;
+            // 
+            // tabpageEffect
+            // 
+            this.tabpageEffect.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageEffect.Controls.Add(this.effect2TestControl);
+            this.tabpageEffect.Location = new System.Drawing.Point(4, 22);
+            this.tabpageEffect.Name = "tabpageEffect";
+            this.tabpageEffect.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageEffect.Size = new System.Drawing.Size(827, 456);
+            this.tabpageEffect.TabIndex = 6;
+            this.tabpageEffect.Text = "EFF";
+            // 
+            // effect2TestControl
+            // 
+            this.effect2TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.effect2TestControl.Location = new System.Drawing.Point(3, 3);
+            this.effect2TestControl.Name = "effect2TestControl";
+            this.effect2TestControl.Size = new System.Drawing.Size(186, 68);
+            this.effect2TestControl.TabIndex = 0;
+            // 
+            // tabpageKey
+            // 
+            this.tabpageKey.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageKey.Controls.Add(this.tabctrlChitinKey);
+            this.tabpageKey.Location = new System.Drawing.Point(4, 22);
+            this.tabpageKey.Name = "tabpageKey";
+            this.tabpageKey.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageKey.Size = new System.Drawing.Size(827, 456);
+            this.tabpageKey.TabIndex = 3;
+            this.tabpageKey.Text = "KEY";
+            // 
+            // tabctrlChitinKey
+            // 
+            this.tabctrlChitinKey.Controls.Add(this.tabpageChitinKeyBiffEntry);
+            this.tabctrlChitinKey.Controls.Add(this.tabpageChitinKeyResourceEntry);
+            this.tabctrlChitinKey.Controls.Add(this.tabpageChitinKeyHeader);
+            this.tabctrlChitinKey.Controls.Add(this.tabpageChitinKey);
+            this.tabctrlChitinKey.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabctrlChitinKey.Location = new System.Drawing.Point(3, 3);
+            this.tabctrlChitinKey.Name = "tabctrlChitinKey";
+            this.tabctrlChitinKey.SelectedIndex = 0;
+            this.tabctrlChitinKey.Size = new System.Drawing.Size(186, 68);
+            this.tabctrlChitinKey.TabIndex = 0;
+            // 
+            // tabpageChitinKeyBiffEntry
+            // 
+            this.tabpageChitinKeyBiffEntry.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageChitinKeyBiffEntry.Controls.Add(this.keyBiffEntryTestControl);
+            this.tabpageChitinKeyBiffEntry.Location = new System.Drawing.Point(4, 22);
+            this.tabpageChitinKeyBiffEntry.Name = "tabpageChitinKeyBiffEntry";
+            this.tabpageChitinKeyBiffEntry.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageChitinKeyBiffEntry.Size = new System.Drawing.Size(178, 42);
+            this.tabpageChitinKeyBiffEntry.TabIndex = 0;
+            this.tabpageChitinKeyBiffEntry.Text = "BIFF Entry";
+            // 
+            // keyBiffEntryTestControl
+            // 
+            this.keyBiffEntryTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.keyBiffEntryTestControl.Location = new System.Drawing.Point(3, 3);
+            this.keyBiffEntryTestControl.Name = "keyBiffEntryTestControl";
+            this.keyBiffEntryTestControl.Size = new System.Drawing.Size(172, 36);
+            this.keyBiffEntryTestControl.TabIndex = 0;
+            // 
+            // tabpageChitinKeyResourceEntry
+            // 
+            this.tabpageChitinKeyResourceEntry.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageChitinKeyResourceEntry.Controls.Add(this.keyResourceEntryTestControl);
+            this.tabpageChitinKeyResourceEntry.Location = new System.Drawing.Point(4, 22);
+            this.tabpageChitinKeyResourceEntry.Name = "tabpageChitinKeyResourceEntry";
+            this.tabpageChitinKeyResourceEntry.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageChitinKeyResourceEntry.Size = new System.Drawing.Size(178, 42);
+            this.tabpageChitinKeyResourceEntry.TabIndex = 1;
+            this.tabpageChitinKeyResourceEntry.Text = "Resource Entry";
+            // 
+            // keyResourceEntryTestControl
+            // 
+            this.keyResourceEntryTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.keyResourceEntryTestControl.Location = new System.Drawing.Point(3, 3);
+            this.keyResourceEntryTestControl.Name = "keyResourceEntryTestControl";
+            this.keyResourceEntryTestControl.Size = new System.Drawing.Size(807, 418);
+            this.keyResourceEntryTestControl.TabIndex = 0;
+            // 
+            // tabpageChitinKeyHeader
+            // 
+            this.tabpageChitinKeyHeader.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageChitinKeyHeader.Controls.Add(this.keyHeaderTestControl);
+            this.tabpageChitinKeyHeader.Location = new System.Drawing.Point(4, 22);
+            this.tabpageChitinKeyHeader.Name = "tabpageChitinKeyHeader";
+            this.tabpageChitinKeyHeader.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageChitinKeyHeader.Size = new System.Drawing.Size(178, 42);
+            this.tabpageChitinKeyHeader.TabIndex = 2;
+            this.tabpageChitinKeyHeader.Text = "Header";
+            // 
+            // keyHeaderTestControl
+            // 
+            this.keyHeaderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.keyHeaderTestControl.Location = new System.Drawing.Point(3, 3);
+            this.keyHeaderTestControl.Name = "keyHeaderTestControl";
+            this.keyHeaderTestControl.Size = new System.Drawing.Size(807, 418);
+            this.keyHeaderTestControl.TabIndex = 0;
+            // 
+            // tabpageChitinKey
+            // 
+            this.tabpageChitinKey.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageChitinKey.Controls.Add(this.keyTestControl);
+            this.tabpageChitinKey.Location = new System.Drawing.Point(4, 22);
+            this.tabpageChitinKey.Name = "tabpageChitinKey";
+            this.tabpageChitinKey.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageChitinKey.Size = new System.Drawing.Size(178, 42);
+            this.tabpageChitinKey.TabIndex = 3;
+            this.tabpageChitinKey.Text = "File";
+            // 
+            // keyTestControl
+            // 
+            this.keyTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.keyTestControl.Location = new System.Drawing.Point(3, 3);
+            this.keyTestControl.Name = "keyTestControl";
+            this.keyTestControl.Size = new System.Drawing.Size(807, 418);
+            this.keyTestControl.TabIndex = 0;
+            // 
+            // tabpageIni
+            // 
+            this.tabpageIni.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageIni.Controls.Add(this.iniTestControl);
+            this.tabpageIni.Location = new System.Drawing.Point(4, 22);
+            this.tabpageIni.Name = "tabpageIni";
+            this.tabpageIni.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageIni.Size = new System.Drawing.Size(827, 456);
+            this.tabpageIni.TabIndex = 7;
+            this.tabpageIni.Text = "INI";
+            // 
+            // iniTestControl
+            // 
+            this.iniTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iniTestControl.Location = new System.Drawing.Point(3, 3);
+            this.iniTestControl.Name = "iniTestControl";
+            this.iniTestControl.Size = new System.Drawing.Size(186, 68);
+            this.iniTestControl.TabIndex = 0;
+            // 
+            // tabpageItem
+            // 
+            this.tabpageItem.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageItem.Controls.Add(this.tabctrlItem);
+            this.tabpageItem.Location = new System.Drawing.Point(4, 22);
+            this.tabpageItem.Name = "tabpageItem";
+            this.tabpageItem.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageItem.Size = new System.Drawing.Size(827, 456);
+            this.tabpageItem.TabIndex = 8;
+            this.tabpageItem.Text = "ITM";
+            // 
+            // tabctrlItem
+            // 
+            this.tabctrlItem.Controls.Add(this.tabpageItemAbility);
+            this.tabctrlItem.Controls.Add(this.tabpageItemAbilityEffect);
+            this.tabctrlItem.Controls.Add(this.tabpageItem1Header);
+            this.tabctrlItem.Controls.Add(this.tabpageItem1_1Header);
+            this.tabctrlItem.Controls.Add(this.tabpageItem2Header);
+            this.tabctrlItem.Controls.Add(this.tabpageItem1);
+            this.tabctrlItem.Controls.Add(this.tabpageItem1_1);
+            this.tabctrlItem.Controls.Add(this.tabpageItem2);
+            this.tabctrlItem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabctrlItem.Location = new System.Drawing.Point(3, 3);
+            this.tabctrlItem.Name = "tabctrlItem";
+            this.tabctrlItem.SelectedIndex = 0;
+            this.tabctrlItem.Size = new System.Drawing.Size(186, 68);
+            this.tabctrlItem.TabIndex = 0;
+            // 
+            // tabpageItemAbility
+            // 
+            this.tabpageItemAbility.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageItemAbility.Controls.Add(this.itemAbilityTestControl);
+            this.tabpageItemAbility.Location = new System.Drawing.Point(4, 22);
+            this.tabpageItemAbility.Name = "tabpageItemAbility";
+            this.tabpageItemAbility.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageItemAbility.Size = new System.Drawing.Size(178, 42);
+            this.tabpageItemAbility.TabIndex = 1;
+            this.tabpageItemAbility.Text = "Ability";
+            // 
+            // itemAbilityTestControl
+            // 
+            this.itemAbilityTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.itemAbilityTestControl.Location = new System.Drawing.Point(3, 3);
+            this.itemAbilityTestControl.Name = "itemAbilityTestControl";
+            this.itemAbilityTestControl.Size = new System.Drawing.Size(172, 36);
+            this.itemAbilityTestControl.TabIndex = 0;
+            // 
+            // tabpageItemAbilityEffect
+            // 
+            this.tabpageItemAbilityEffect.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageItemAbilityEffect.Controls.Add(this.itemAbilityEffectTestControl);
+            this.tabpageItemAbilityEffect.Location = new System.Drawing.Point(4, 22);
+            this.tabpageItemAbilityEffect.Name = "tabpageItemAbilityEffect";
+            this.tabpageItemAbilityEffect.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageItemAbilityEffect.Size = new System.Drawing.Size(178, 42);
+            this.tabpageItemAbilityEffect.TabIndex = 0;
+            this.tabpageItemAbilityEffect.Text = "Ability Effect";
+            // 
+            // itemAbilityEffectTestControl
+            // 
+            this.itemAbilityEffectTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.itemAbilityEffectTestControl.Location = new System.Drawing.Point(3, 3);
+            this.itemAbilityEffectTestControl.Name = "itemAbilityEffectTestControl";
+            this.itemAbilityEffectTestControl.Size = new System.Drawing.Size(807, 418);
+            this.itemAbilityEffectTestControl.TabIndex = 0;
+            // 
+            // tabpageItem1Header
+            // 
+            this.tabpageItem1Header.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageItem1Header.Controls.Add(this.item1HeaderTestControl);
+            this.tabpageItem1Header.Location = new System.Drawing.Point(4, 22);
+            this.tabpageItem1Header.Name = "tabpageItem1Header";
+            this.tabpageItem1Header.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageItem1Header.Size = new System.Drawing.Size(178, 42);
+            this.tabpageItem1Header.TabIndex = 2;
+            this.tabpageItem1Header.Text = "Header 1.0";
+            // 
+            // item1HeaderTestControl
+            // 
+            this.item1HeaderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.item1HeaderTestControl.Location = new System.Drawing.Point(3, 3);
+            this.item1HeaderTestControl.Name = "item1HeaderTestControl";
+            this.item1HeaderTestControl.Size = new System.Drawing.Size(807, 418);
+            this.item1HeaderTestControl.TabIndex = 0;
+            // 
+            // tabpageItem1_1Header
+            // 
+            this.tabpageItem1_1Header.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageItem1_1Header.Controls.Add(this.item1_1HeaderTestControl);
+            this.tabpageItem1_1Header.Location = new System.Drawing.Point(4, 22);
+            this.tabpageItem1_1Header.Name = "tabpageItem1_1Header";
+            this.tabpageItem1_1Header.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageItem1_1Header.Size = new System.Drawing.Size(178, 42);
+            this.tabpageItem1_1Header.TabIndex = 3;
+            this.tabpageItem1_1Header.Text = "Header 1.1";
+            // 
+            // item1_1HeaderTestControl
+            // 
+            this.item1_1HeaderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.item1_1HeaderTestControl.Location = new System.Drawing.Point(3, 3);
+            this.item1_1HeaderTestControl.Name = "item1_1HeaderTestControl";
+            this.item1_1HeaderTestControl.Size = new System.Drawing.Size(807, 418);
+            this.item1_1HeaderTestControl.TabIndex = 0;
+            // 
+            // tabpageItem2Header
+            // 
+            this.tabpageItem2Header.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageItem2Header.Controls.Add(this.item2HeaderTestControl);
+            this.tabpageItem2Header.Location = new System.Drawing.Point(4, 22);
+            this.tabpageItem2Header.Name = "tabpageItem2Header";
+            this.tabpageItem2Header.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageItem2Header.Size = new System.Drawing.Size(178, 42);
+            this.tabpageItem2Header.TabIndex = 4;
+            this.tabpageItem2Header.Text = "Header 2.0";
+            // 
+            // item2HeaderTestControl
+            // 
+            this.item2HeaderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.item2HeaderTestControl.Location = new System.Drawing.Point(3, 3);
+            this.item2HeaderTestControl.Name = "item2HeaderTestControl";
+            this.item2HeaderTestControl.Size = new System.Drawing.Size(807, 418);
+            this.item2HeaderTestControl.TabIndex = 0;
+            // 
+            // tabpageItem1
+            // 
+            this.tabpageItem1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageItem1.Controls.Add(this.item1TestControl);
+            this.tabpageItem1.Location = new System.Drawing.Point(4, 22);
+            this.tabpageItem1.Name = "tabpageItem1";
+            this.tabpageItem1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageItem1.Size = new System.Drawing.Size(178, 42);
+            this.tabpageItem1.TabIndex = 5;
+            this.tabpageItem1.Text = "ITM 1.0";
+            // 
+            // item1TestControl
+            // 
+            this.item1TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.item1TestControl.Location = new System.Drawing.Point(3, 3);
+            this.item1TestControl.Name = "item1TestControl";
+            this.item1TestControl.Size = new System.Drawing.Size(807, 418);
+            this.item1TestControl.TabIndex = 0;
+            // 
+            // tabpageItem1_1
+            // 
+            this.tabpageItem1_1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageItem1_1.Controls.Add(this.item1_1TestControl);
+            this.tabpageItem1_1.Location = new System.Drawing.Point(4, 22);
+            this.tabpageItem1_1.Name = "tabpageItem1_1";
+            this.tabpageItem1_1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageItem1_1.Size = new System.Drawing.Size(178, 42);
+            this.tabpageItem1_1.TabIndex = 6;
+            this.tabpageItem1_1.Text = "ITM 1.1";
+            // 
+            // item1_1TestControl
+            // 
+            this.item1_1TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.item1_1TestControl.Location = new System.Drawing.Point(3, 3);
+            this.item1_1TestControl.Name = "item1_1TestControl";
+            this.item1_1TestControl.Size = new System.Drawing.Size(807, 418);
+            this.item1_1TestControl.TabIndex = 0;
+            // 
+            // tabpageItem2
+            // 
+            this.tabpageItem2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageItem2.Controls.Add(this.item2TestControl);
+            this.tabpageItem2.Location = new System.Drawing.Point(4, 22);
+            this.tabpageItem2.Name = "tabpageItem2";
+            this.tabpageItem2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageItem2.Size = new System.Drawing.Size(178, 42);
+            this.tabpageItem2.TabIndex = 7;
+            this.tabpageItem2.Text = "ITM 2.0";
+            // 
+            // item2TestControl
+            // 
+            this.item2TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.item2TestControl.Location = new System.Drawing.Point(3, 3);
+            this.item2TestControl.Name = "item2TestControl";
+            this.item2TestControl.Size = new System.Drawing.Size(807, 418);
+            this.item2TestControl.TabIndex = 0;
+            // 
+            // tabpageMusic
+            // 
+            this.tabpageMusic.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageMusic.Controls.Add(this.musicPlaylistTestControl);
+            this.tabpageMusic.Location = new System.Drawing.Point(4, 22);
+            this.tabpageMusic.Name = "tabpageMusic";
+            this.tabpageMusic.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageMusic.Size = new System.Drawing.Size(827, 456);
+            this.tabpageMusic.TabIndex = 9;
+            this.tabpageMusic.Text = "MUS";
+            // 
+            // musicPlaylistTestControl
+            // 
+            this.musicPlaylistTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.musicPlaylistTestControl.Location = new System.Drawing.Point(3, 3);
+            this.musicPlaylistTestControl.Name = "musicPlaylistTestControl";
+            this.musicPlaylistTestControl.Size = new System.Drawing.Size(186, 68);
+            this.musicPlaylistTestControl.TabIndex = 0;
+            // 
+            // tabpageRiff
+            // 
+            this.tabpageRiff.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageRiff.Controls.Add(this.riffTestControl);
+            this.tabpageRiff.Location = new System.Drawing.Point(4, 22);
+            this.tabpageRiff.Name = "tabpageRiff";
+            this.tabpageRiff.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageRiff.Size = new System.Drawing.Size(827, 456);
+            this.tabpageRiff.TabIndex = 12;
+            this.tabpageRiff.Text = "RIFF";
+            // 
+            // riffTestControl
+            // 
+            this.riffTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.riffTestControl.Location = new System.Drawing.Point(3, 3);
+            this.riffTestControl.Name = "riffTestControl";
+            this.riffTestControl.Size = new System.Drawing.Size(186, 68);
+            this.riffTestControl.TabIndex = 0;
+            // 
+            // tabpageSpell
+            // 
+            this.tabpageSpell.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageSpell.Controls.Add(this.tabctrlSpell);
+            this.tabpageSpell.Location = new System.Drawing.Point(4, 22);
+            this.tabpageSpell.Name = "tabpageSpell";
+            this.tabpageSpell.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageSpell.Size = new System.Drawing.Size(827, 456);
+            this.tabpageSpell.TabIndex = 13;
+            this.tabpageSpell.Text = "SPL";
+            // 
+            // tabctrlSpell
+            // 
+            this.tabctrlSpell.Controls.Add(this.tabctrlSpell1File);
+            this.tabctrlSpell.Controls.Add(this.tabctrlSpell2File);
+            this.tabctrlSpell.Controls.Add(this.tabctrlSpell1FileHeader);
+            this.tabctrlSpell.Controls.Add(this.tabctrlSpell2FileHeader);
+            this.tabctrlSpell.Controls.Add(this.tabctrlSpellAblity);
+            this.tabctrlSpell.Controls.Add(this.tabctrlSpellAblityEffect);
+            this.tabctrlSpell.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabctrlSpell.Location = new System.Drawing.Point(3, 3);
+            this.tabctrlSpell.Name = "tabctrlSpell";
+            this.tabctrlSpell.SelectedIndex = 0;
+            this.tabctrlSpell.Size = new System.Drawing.Size(186, 68);
+            this.tabctrlSpell.TabIndex = 0;
+            // 
+            // tabctrlSpell1File
+            // 
+            this.tabctrlSpell1File.BackColor = System.Drawing.SystemColors.Control;
+            this.tabctrlSpell1File.Controls.Add(this.spell1TestControl);
+            this.tabctrlSpell1File.Location = new System.Drawing.Point(4, 22);
+            this.tabctrlSpell1File.Name = "tabctrlSpell1File";
+            this.tabctrlSpell1File.Padding = new System.Windows.Forms.Padding(3);
+            this.tabctrlSpell1File.Size = new System.Drawing.Size(178, 42);
+            this.tabctrlSpell1File.TabIndex = 0;
+            this.tabctrlSpell1File.Text = "SPL 1.0";
+            // 
+            // spell1TestControl
+            // 
+            this.spell1TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spell1TestControl.Location = new System.Drawing.Point(3, 3);
+            this.spell1TestControl.Name = "spell1TestControl";
+            this.spell1TestControl.Size = new System.Drawing.Size(172, 36);
+            this.spell1TestControl.TabIndex = 0;
+            // 
+            // tabctrlSpell2File
+            // 
+            this.tabctrlSpell2File.BackColor = System.Drawing.SystemColors.Control;
+            this.tabctrlSpell2File.Controls.Add(this.spell2TestControl);
+            this.tabctrlSpell2File.Location = new System.Drawing.Point(4, 22);
+            this.tabctrlSpell2File.Name = "tabctrlSpell2File";
+            this.tabctrlSpell2File.Padding = new System.Windows.Forms.Padding(3);
+            this.tabctrlSpell2File.Size = new System.Drawing.Size(178, 42);
+            this.tabctrlSpell2File.TabIndex = 1;
+            this.tabctrlSpell2File.Text = "SPL 2.0";
+            // 
+            // spell2TestControl
+            // 
+            this.spell2TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spell2TestControl.Location = new System.Drawing.Point(3, 3);
+            this.spell2TestControl.Name = "spell2TestControl";
+            this.spell2TestControl.Size = new System.Drawing.Size(807, 418);
+            this.spell2TestControl.TabIndex = 0;
+            // 
+            // tabctrlSpell1FileHeader
+            // 
+            this.tabctrlSpell1FileHeader.BackColor = System.Drawing.SystemColors.Control;
+            this.tabctrlSpell1FileHeader.Controls.Add(this.spell1HeaderTestControl);
+            this.tabctrlSpell1FileHeader.Location = new System.Drawing.Point(4, 22);
+            this.tabctrlSpell1FileHeader.Name = "tabctrlSpell1FileHeader";
+            this.tabctrlSpell1FileHeader.Padding = new System.Windows.Forms.Padding(3);
+            this.tabctrlSpell1FileHeader.Size = new System.Drawing.Size(178, 42);
+            this.tabctrlSpell1FileHeader.TabIndex = 2;
+            this.tabctrlSpell1FileHeader.Text = "Header 1.0";
+            // 
+            // spell1HeaderTestControl
+            // 
+            this.spell1HeaderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spell1HeaderTestControl.Location = new System.Drawing.Point(3, 3);
+            this.spell1HeaderTestControl.Name = "spell1HeaderTestControl";
+            this.spell1HeaderTestControl.Size = new System.Drawing.Size(807, 418);
+            this.spell1HeaderTestControl.TabIndex = 0;
+            // 
+            // tabctrlSpell2FileHeader
+            // 
+            this.tabctrlSpell2FileHeader.BackColor = System.Drawing.SystemColors.Control;
+            this.tabctrlSpell2FileHeader.Controls.Add(this.spell2HeaderTestControl);
+            this.tabctrlSpell2FileHeader.Location = new System.Drawing.Point(4, 22);
+            this.tabctrlSpell2FileHeader.Name = "tabctrlSpell2FileHeader";
+            this.tabctrlSpell2FileHeader.Padding = new System.Windows.Forms.Padding(3);
+            this.tabctrlSpell2FileHeader.Size = new System.Drawing.Size(178, 42);
+            this.tabctrlSpell2FileHeader.TabIndex = 3;
+            this.tabctrlSpell2FileHeader.Text = "Header 2.0";
+            // 
+            // spell2HeaderTestControl
+            // 
+            this.spell2HeaderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spell2HeaderTestControl.Location = new System.Drawing.Point(3, 3);
+            this.spell2HeaderTestControl.Name = "spell2HeaderTestControl";
+            this.spell2HeaderTestControl.Size = new System.Drawing.Size(807, 418);
+            this.spell2HeaderTestControl.TabIndex = 0;
+            // 
+            // tabctrlSpellAblity
+            // 
+            this.tabctrlSpellAblity.BackColor = System.Drawing.SystemColors.Control;
+            this.tabctrlSpellAblity.Controls.Add(this.spellAbilityTestControl);
+            this.tabctrlSpellAblity.Location = new System.Drawing.Point(4, 22);
+            this.tabctrlSpellAblity.Name = "tabctrlSpellAblity";
+            this.tabctrlSpellAblity.Padding = new System.Windows.Forms.Padding(3);
+            this.tabctrlSpellAblity.Size = new System.Drawing.Size(178, 42);
+            this.tabctrlSpellAblity.TabIndex = 4;
+            this.tabctrlSpellAblity.Text = "Ability";
+            // 
+            // spellAbilityTestControl
+            // 
+            this.spellAbilityTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spellAbilityTestControl.Location = new System.Drawing.Point(3, 3);
+            this.spellAbilityTestControl.Name = "spellAbilityTestControl";
+            this.spellAbilityTestControl.Size = new System.Drawing.Size(807, 418);
+            this.spellAbilityTestControl.TabIndex = 0;
+            // 
+            // tabctrlSpellAblityEffect
+            // 
+            this.tabctrlSpellAblityEffect.BackColor = System.Drawing.SystemColors.Control;
+            this.tabctrlSpellAblityEffect.Controls.Add(this.spellAbilityEffectTestControl);
+            this.tabctrlSpellAblityEffect.Location = new System.Drawing.Point(4, 22);
+            this.tabctrlSpellAblityEffect.Name = "tabctrlSpellAblityEffect";
+            this.tabctrlSpellAblityEffect.Padding = new System.Windows.Forms.Padding(3);
+            this.tabctrlSpellAblityEffect.Size = new System.Drawing.Size(178, 42);
+            this.tabctrlSpellAblityEffect.TabIndex = 5;
+            this.tabctrlSpellAblityEffect.Text = "Ability Effect";
+            // 
+            // spellAbilityEffectTestControl
+            // 
+            this.spellAbilityEffectTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spellAbilityEffectTestControl.Location = new System.Drawing.Point(3, 3);
+            this.spellAbilityEffectTestControl.Name = "spellAbilityEffectTestControl";
+            this.spellAbilityEffectTestControl.Size = new System.Drawing.Size(807, 418);
+            this.spellAbilityEffectTestControl.TabIndex = 0;
+            // 
+            // tabpageStore
+            // 
+            this.tabpageStore.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageStore.Controls.Add(this.tabctrlStore);
+            this.tabpageStore.Location = new System.Drawing.Point(4, 22);
+            this.tabpageStore.Name = "tabpageStore";
+            this.tabpageStore.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageStore.Size = new System.Drawing.Size(827, 456);
+            this.tabpageStore.TabIndex = 14;
+            this.tabpageStore.Text = "STO";
+            // 
+            // tabctrlStore
+            // 
+            this.tabctrlStore.Controls.Add(this.tabpageStore1);
+            this.tabctrlStore.Controls.Add(this.tabpageStore1p1);
+            this.tabctrlStore.Controls.Add(this.tabpageStore9);
+            this.tabctrlStore.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabctrlStore.Location = new System.Drawing.Point(3, 3);
+            this.tabctrlStore.Name = "tabctrlStore";
+            this.tabctrlStore.SelectedIndex = 0;
+            this.tabctrlStore.Size = new System.Drawing.Size(186, 68);
+            this.tabctrlStore.TabIndex = 0;
+            // 
+            // tabpageStore1
+            // 
+            this.tabpageStore1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageStore1.Controls.Add(this.store1TestControl);
+            this.tabpageStore1.Location = new System.Drawing.Point(4, 22);
+            this.tabpageStore1.Name = "tabpageStore1";
+            this.tabpageStore1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageStore1.Size = new System.Drawing.Size(178, 42);
+            this.tabpageStore1.TabIndex = 0;
+            this.tabpageStore1.Text = "STO 1.0";
+            // 
+            // store1TestControl
+            // 
+            this.store1TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.store1TestControl.Location = new System.Drawing.Point(3, 3);
+            this.store1TestControl.Name = "store1TestControl";
+            this.store1TestControl.Size = new System.Drawing.Size(172, 36);
+            this.store1TestControl.TabIndex = 0;
+            // 
+            // tabpageStore1p1
+            // 
+            this.tabpageStore1p1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageStore1p1.Controls.Add(this.store1_1TestControl);
+            this.tabpageStore1p1.Location = new System.Drawing.Point(4, 22);
+            this.tabpageStore1p1.Name = "tabpageStore1p1";
+            this.tabpageStore1p1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageStore1p1.Size = new System.Drawing.Size(178, 42);
+            this.tabpageStore1p1.TabIndex = 1;
+            this.tabpageStore1p1.Text = "STO 1.1";
+            // 
+            // store1_1TestControl
+            // 
+            this.store1_1TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.store1_1TestControl.Location = new System.Drawing.Point(3, 3);
+            this.store1_1TestControl.Name = "store1_1TestControl";
+            this.store1_1TestControl.Size = new System.Drawing.Size(807, 418);
+            this.store1_1TestControl.TabIndex = 0;
+            // 
+            // tabpageStore9
+            // 
+            this.tabpageStore9.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageStore9.Controls.Add(this.store9TestControl);
+            this.tabpageStore9.Location = new System.Drawing.Point(4, 22);
+            this.tabpageStore9.Name = "tabpageStore9";
+            this.tabpageStore9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageStore9.Size = new System.Drawing.Size(178, 42);
+            this.tabpageStore9.TabIndex = 2;
+            this.tabpageStore9.Text = "STO 9.0";
+            // 
+            // store9TestControl
+            // 
+            this.store9TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.store9TestControl.Location = new System.Drawing.Point(3, 3);
+            this.store9TestControl.Name = "store9TestControl";
+            this.store9TestControl.Size = new System.Drawing.Size(807, 418);
+            this.store9TestControl.TabIndex = 0;
+            // 
+            // tabpageSrc
+            // 
+            this.tabpageSrc.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageSrc.Controls.Add(this.srcTestControl);
+            this.tabpageSrc.Location = new System.Drawing.Point(4, 22);
+            this.tabpageSrc.Name = "tabpageSrc";
+            this.tabpageSrc.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageSrc.Size = new System.Drawing.Size(827, 456);
+            this.tabpageSrc.TabIndex = 15;
+            this.tabpageSrc.Text = "SRC";
+            // 
+            // srcTestControl
+            // 
+            this.srcTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.srcTestControl.Location = new System.Drawing.Point(3, 3);
+            this.srcTestControl.Name = "srcTestControl";
+            this.srcTestControl.Size = new System.Drawing.Size(186, 68);
+            this.srcTestControl.TabIndex = 0;
+            // 
+            // tabpageTalk
+            // 
+            this.tabpageTalk.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageTalk.Controls.Add(this.tabctrlTalk);
+            this.tabpageTalk.Location = new System.Drawing.Point(4, 22);
+            this.tabpageTalk.Name = "tabpageTalk";
+            this.tabpageTalk.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageTalk.Size = new System.Drawing.Size(827, 456);
+            this.tabpageTalk.TabIndex = 16;
+            this.tabpageTalk.Text = "TLK";
+            // 
+            // tabctrlTalk
+            // 
+            this.tabctrlTalk.Controls.Add(this.tabpageTalkFile);
+            this.tabctrlTalk.Controls.Add(this.tabpageTalkHeader);
+            this.tabctrlTalk.Controls.Add(this.tabpageTalkStrref);
+            this.tabctrlTalk.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabctrlTalk.Location = new System.Drawing.Point(3, 3);
+            this.tabctrlTalk.Name = "tabctrlTalk";
+            this.tabctrlTalk.SelectedIndex = 0;
+            this.tabctrlTalk.Size = new System.Drawing.Size(186, 68);
+            this.tabctrlTalk.TabIndex = 0;
+            // 
+            // tabpageTalkFile
+            // 
+            this.tabpageTalkFile.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageTalkFile.Controls.Add(this.tlkTestControl);
+            this.tabpageTalkFile.Location = new System.Drawing.Point(4, 22);
+            this.tabpageTalkFile.Name = "tabpageTalkFile";
+            this.tabpageTalkFile.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageTalkFile.Size = new System.Drawing.Size(178, 42);
+            this.tabpageTalkFile.TabIndex = 0;
+            this.tabpageTalkFile.Text = "TLK File";
+            // 
+            // tlkTestControl
+            // 
+            this.tlkTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlkTestControl.Location = new System.Drawing.Point(3, 3);
+            this.tlkTestControl.Name = "tlkTestControl";
+            this.tlkTestControl.Size = new System.Drawing.Size(172, 36);
+            this.tlkTestControl.TabIndex = 0;
+            // 
+            // tabpageTalkHeader
+            // 
+            this.tabpageTalkHeader.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageTalkHeader.Controls.Add(this.tlkHeaderTestControl);
+            this.tabpageTalkHeader.Location = new System.Drawing.Point(4, 22);
+            this.tabpageTalkHeader.Name = "tabpageTalkHeader";
+            this.tabpageTalkHeader.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageTalkHeader.Size = new System.Drawing.Size(178, 42);
+            this.tabpageTalkHeader.TabIndex = 2;
+            this.tabpageTalkHeader.Text = "Header";
+            // 
+            // tlkHeaderTestControl
+            // 
+            this.tlkHeaderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlkHeaderTestControl.Location = new System.Drawing.Point(3, 3);
+            this.tlkHeaderTestControl.Name = "tlkHeaderTestControl";
+            this.tlkHeaderTestControl.Size = new System.Drawing.Size(807, 418);
+            this.tlkHeaderTestControl.TabIndex = 0;
+            // 
+            // tabpageTalkStrref
+            // 
+            this.tabpageTalkStrref.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageTalkStrref.Controls.Add(this.tlkStrrefTestControl);
+            this.tabpageTalkStrref.Location = new System.Drawing.Point(4, 22);
+            this.tabpageTalkStrref.Name = "tabpageTalkStrref";
+            this.tabpageTalkStrref.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageTalkStrref.Size = new System.Drawing.Size(178, 42);
+            this.tabpageTalkStrref.TabIndex = 1;
+            this.tabpageTalkStrref.Text = "Strref";
+            // 
+            // tlkStrrefTestControl
+            // 
+            this.tlkStrrefTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlkStrrefTestControl.Location = new System.Drawing.Point(3, 3);
+            this.tlkStrrefTestControl.Name = "tlkStrrefTestControl";
+            this.tlkStrrefTestControl.Size = new System.Drawing.Size(807, 418);
+            this.tlkStrrefTestControl.TabIndex = 0;
+            // 
+            // tabpageOutput
+            // 
+            this.tabpageOutput.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageOutput.Controls.Add(this.tabctrlOutput);
+            this.tabpageOutput.Location = new System.Drawing.Point(4, 22);
+            this.tabpageOutput.Name = "tabpageOutput";
+            this.tabpageOutput.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageOutput.Size = new System.Drawing.Size(827, 456);
+            this.tabpageOutput.TabIndex = 10;
+            this.tabpageOutput.Text = "Output";
+            // 
+            // tabctrlOutput
+            // 
+            this.tabctrlOutput.Controls.Add(this.tabpageXAudio2);
+            this.tabctrlOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabctrlOutput.Location = new System.Drawing.Point(3, 3);
+            this.tabctrlOutput.Name = "tabctrlOutput";
+            this.tabctrlOutput.SelectedIndex = 0;
+            this.tabctrlOutput.Size = new System.Drawing.Size(186, 68);
+            this.tabctrlOutput.TabIndex = 0;
+            // 
+            // tabpageXAudio2
+            // 
+            this.tabpageXAudio2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageXAudio2.Controls.Add(this.tabctrlXAudio2);
+            this.tabpageXAudio2.Location = new System.Drawing.Point(4, 22);
+            this.tabpageXAudio2.Name = "tabpageXAudio2";
+            this.tabpageXAudio2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageXAudio2.Size = new System.Drawing.Size(178, 42);
+            this.tabpageXAudio2.TabIndex = 0;
+            this.tabpageXAudio2.Text = "XAudio2";
+            // 
+            // tabctrlXAudio2
+            // 
+            this.tabctrlXAudio2.Controls.Add(this.tabpageXAudio2Devices);
+            this.tabctrlXAudio2.Controls.Add(this.tabpageXAudio2Render);
+            this.tabctrlXAudio2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabctrlXAudio2.Location = new System.Drawing.Point(3, 3);
+            this.tabctrlXAudio2.Name = "tabctrlXAudio2";
+            this.tabctrlXAudio2.SelectedIndex = 0;
+            this.tabctrlXAudio2.Size = new System.Drawing.Size(172, 36);
+            this.tabctrlXAudio2.TabIndex = 0;
+            // 
+            // tabpageXAudio2Devices
+            // 
+            this.tabpageXAudio2Devices.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageXAudio2Devices.Controls.Add(this.xAudio2TestControl);
+            this.tabpageXAudio2Devices.Location = new System.Drawing.Point(4, 22);
+            this.tabpageXAudio2Devices.Name = "tabpageXAudio2Devices";
+            this.tabpageXAudio2Devices.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageXAudio2Devices.Size = new System.Drawing.Size(164, 10);
+            this.tabpageXAudio2Devices.TabIndex = 0;
+            this.tabpageXAudio2Devices.Text = "Devices";
+            // 
+            // xAudio2TestControl
+            // 
+            this.xAudio2TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xAudio2TestControl.Location = new System.Drawing.Point(3, 3);
+            this.xAudio2TestControl.Name = "xAudio2TestControl";
+            this.xAudio2TestControl.Size = new System.Drawing.Size(158, 4);
+            this.xAudio2TestControl.TabIndex = 0;
+            // 
+            // tabpageXAudio2Render
+            // 
+            this.tabpageXAudio2Render.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageXAudio2Render.Controls.Add(this.xAudio2RenderTestControl);
+            this.tabpageXAudio2Render.Location = new System.Drawing.Point(4, 22);
+            this.tabpageXAudio2Render.Name = "tabpageXAudio2Render";
+            this.tabpageXAudio2Render.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageXAudio2Render.Size = new System.Drawing.Size(164, 10);
+            this.tabpageXAudio2Render.TabIndex = 1;
+            this.tabpageXAudio2Render.Text = "Render";
+            // 
+            // xAudio2RenderTestControl
+            // 
+            this.xAudio2RenderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xAudio2RenderTestControl.Location = new System.Drawing.Point(3, 3);
+            this.xAudio2RenderTestControl.Name = "xAudio2RenderTestControl";
+            this.xAudio2RenderTestControl.Size = new System.Drawing.Size(793, 386);
+            this.xAudio2RenderTestControl.TabIndex = 0;
+            // 
+            // tabpageReusableCode
+            // 
+            this.tabpageReusableCode.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageReusableCode.Controls.Add(this.bitStreamTestControl);
+            this.tabpageReusableCode.Location = new System.Drawing.Point(4, 22);
+            this.tabpageReusableCode.Name = "tabpageReusableCode";
+            this.tabpageReusableCode.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageReusableCode.Size = new System.Drawing.Size(827, 456);
+            this.tabpageReusableCode.TabIndex = 11;
+            this.tabpageReusableCode.Text = "Reusable Code";
+            // 
+            // bitStreamTestControl
+            // 
+            this.bitStreamTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bitStreamTestControl.Location = new System.Drawing.Point(3, 3);
+            this.bitStreamTestControl.Name = "bitStreamTestControl";
+            this.bitStreamTestControl.Size = new System.Drawing.Size(186, 68);
+            this.bitStreamTestControl.TabIndex = 0;
             // 
             // TestUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1106, 482);
+            this.ClientSize = new System.Drawing.Size(835, 482);
             this.Controls.Add(this.tabctrlMain);
+            this.DoubleBuffered = true;
             this.Name = "TestUI";
             this.Text = "Infinity +1 Tester UI";
             this.tabctrlMain.ResumeLayout(false);
+            this.tabpage2DA.ResumeLayout(false);
             this.tabpageAcm.ResumeLayout(false);
             this.tabctrlAcm.ResumeLayout(false);
+            this.tabpageBitblock.ResumeLayout(false);
             this.tabpageAcmHeader.ResumeLayout(false);
             this.tabpageAcmFile.ResumeLayout(false);
-            this.tabpageBitblock.ResumeLayout(false);
             this.tabpageWavc.ResumeLayout(false);
             this.tabpageBiff.ResumeLayout(false);
             this.tabcrlBiff.ResumeLayout(false);
             this.tabpageBiffUncompressed.ResumeLayout(false);
             this.tabctrlBiffUncompressed.ResumeLayout(false);
             this.tabpageBiffUncompressedArchive.ResumeLayout(false);
+            this.tabpageBiffUncompressedHeader.ResumeLayout(false);
+            this.tabpageBiffUncompressedResourceEntry.ResumeLayout(false);
+            this.tabpageBiffUncompressedTilesetEntry.ResumeLayout(false);
+            this.tabpageCharacter.ResumeLayout(false);
+            this.tabctrlCharacter.ResumeLayout(false);
+            this.tabpageCharacter1.ResumeLayout(false);
+            this.tabpageCharacter2.ResumeLayout(false);
+            this.tabpageCharacter9.ResumeLayout(false);
+            this.tabpageBiography1.ResumeLayout(false);
+            this.tabpageBiography2.ResumeLayout(false);
+            this.tabpageCreature.ResumeLayout(false);
+            this.tabctrlCreature.ResumeLayout(false);
+            this.tabpageCreature1.ResumeLayout(false);
+            this.tabpageCreature1_2.ResumeLayout(false);
+            this.tabpageCreature2_2.ResumeLayout(false);
+            this.tabpageCreature9.ResumeLayout(false);
+            this.tabpageCreature1Header.ResumeLayout(false);
+            this.tabpageCreature1_2Header.ResumeLayout(false);
+            this.tabpageCreature9Header.ResumeLayout(false);
+            this.tabpageDialog.ResumeLayout(false);
+            this.tabpageEffect.ResumeLayout(false);
+            this.tabpageKey.ResumeLayout(false);
+            this.tabctrlChitinKey.ResumeLayout(false);
+            this.tabpageChitinKeyBiffEntry.ResumeLayout(false);
+            this.tabpageChitinKeyResourceEntry.ResumeLayout(false);
+            this.tabpageChitinKeyHeader.ResumeLayout(false);
+            this.tabpageChitinKey.ResumeLayout(false);
+            this.tabpageIni.ResumeLayout(false);
+            this.tabpageItem.ResumeLayout(false);
+            this.tabctrlItem.ResumeLayout(false);
+            this.tabpageItemAbility.ResumeLayout(false);
+            this.tabpageItemAbilityEffect.ResumeLayout(false);
+            this.tabpageItem1Header.ResumeLayout(false);
+            this.tabpageItem1_1Header.ResumeLayout(false);
+            this.tabpageItem2Header.ResumeLayout(false);
+            this.tabpageItem1.ResumeLayout(false);
+            this.tabpageItem1_1.ResumeLayout(false);
+            this.tabpageItem2.ResumeLayout(false);
+            this.tabpageMusic.ResumeLayout(false);
+            this.tabpageRiff.ResumeLayout(false);
+            this.tabpageSpell.ResumeLayout(false);
+            this.tabctrlSpell.ResumeLayout(false);
+            this.tabctrlSpell1File.ResumeLayout(false);
+            this.tabctrlSpell2File.ResumeLayout(false);
+            this.tabctrlSpell1FileHeader.ResumeLayout(false);
+            this.tabctrlSpell2FileHeader.ResumeLayout(false);
+            this.tabctrlSpellAblity.ResumeLayout(false);
+            this.tabctrlSpellAblityEffect.ResumeLayout(false);
+            this.tabpageStore.ResumeLayout(false);
+            this.tabctrlStore.ResumeLayout(false);
+            this.tabpageStore1.ResumeLayout(false);
+            this.tabpageStore1p1.ResumeLayout(false);
+            this.tabpageStore9.ResumeLayout(false);
+            this.tabpageSrc.ResumeLayout(false);
+            this.tabpageTalk.ResumeLayout(false);
+            this.tabctrlTalk.ResumeLayout(false);
+            this.tabpageTalkFile.ResumeLayout(false);
+            this.tabpageTalkHeader.ResumeLayout(false);
+            this.tabpageTalkStrref.ResumeLayout(false);
+            this.tabpageOutput.ResumeLayout(false);
+            this.tabctrlOutput.ResumeLayout(false);
+            this.tabpageXAudio2.ResumeLayout(false);
+            this.tabctrlXAudio2.ResumeLayout(false);
+            this.tabpageXAudio2Devices.ResumeLayout(false);
+            this.tabpageXAudio2Render.ResumeLayout(false);
+            this.tabpageReusableCode.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -466,6 +1710,106 @@
         private System.Windows.Forms.TabPage tabpageBiffUncompressed;
         private System.Windows.Forms.TabControl tabctrlBiffUncompressed;
         private System.Windows.Forms.TabPage tabpageBiffUncompressedArchive;
-        private Test.WinForm.BIFF.Uncompressed.BiffArchiveTestControl biffArchiveTestControl1;
+        private Test.WinForm.BIFF.Uncompressed.BiffArchiveTestControl biffArchiveTestControl;
+        private System.Windows.Forms.TabPage tabpageBiffUncompressedHeader;
+        private System.Windows.Forms.TabPage tabpageBiffUncompressedResourceEntry;
+        private Test.WinForm.BIFF.Uncompressed.BiffResourceEntryTestControl biffResourceEntryTestControl;
+        private System.Windows.Forms.TabPage tabpageBiffUncompressedTilesetEntry;
+        private Test.WinForm.BIFF.Uncompressed.BiffTilesetEntryTestControl biffTilesetEntryTestControl;
+        private Test.WinForm.BIFF.Uncompressed.BiffHeaderTestControl biffHeaderTestControl;
+        private System.Windows.Forms.TabControl tabctrlCharacter;
+        private System.Windows.Forms.TabPage tabpageCharacter1;
+        private System.Windows.Forms.TabPage tabpageCharacter2;
+        private System.Windows.Forms.TabPage tabpageCharacter9;
+        private System.Windows.Forms.TabPage tabpageBiography1;
+        private System.Windows.Forms.TabPage tabpageBiography2;
+        private Test.WinForm.CHR.Character1TestControl character1TestControl;
+        private Test.WinForm.CHR.Character2TestControl character2TestControl;
+        private Test.WinForm.CHR.Character9TestControl character9TestControl;
+        private Test.WinForm.CHR.Biography1TestControl biography1TestControl;
+        private Test.WinForm.CHR.Biography2TestControl biography2TestControl;
+        private System.Windows.Forms.TabControl tabctrlChitinKey;
+        private System.Windows.Forms.TabPage tabpageChitinKeyBiffEntry;
+        private System.Windows.Forms.TabPage tabpageChitinKeyResourceEntry;
+        private System.Windows.Forms.TabPage tabpageChitinKeyHeader;
+        private System.Windows.Forms.TabPage tabpageChitinKey;
+        private Test.WinForm.KEY.KeyBiffEntryTestControl keyBiffEntryTestControl;
+        private Test.WinForm.KEY.KeyResourceEntryTestControl keyResourceEntryTestControl;
+        private Test.WinForm.KEY.KeyHeaderTestControl keyHeaderTestControl;
+        private Test.WinForm.KEY.KeyTestControl keyTestControl;
+        private System.Windows.Forms.TabControl tabctrlCreature;
+        private System.Windows.Forms.TabPage tabpageCreature1;
+        private System.Windows.Forms.TabPage tabpageCreature1_2;
+        private System.Windows.Forms.TabPage tabpageCreature2_2;
+        private System.Windows.Forms.TabPage tabpageCreature9;
+        private System.Windows.Forms.TabPage tabpageCreature1Header;
+        private System.Windows.Forms.TabPage tabpageCreature1_2Header;
+        private System.Windows.Forms.TabPage tabpageCreature9Header;
+        private Test.WinForm.CRE.Creature1TestControl creature1TestControl;
+        private Test.WinForm.CRE.Creature1_2TestControl creature1_2TestControl;
+        private Test.WinForm.CRE.Creature2_2TestControl creature2_2TestControl;
+        private Test.WinForm.CRE.Creature9TestControl creature9TestControl;
+        private Test.WinForm.CRE.Creature1HeaderTestControl creature1HeaderTestControl;
+        private Test.WinForm.CRE.Creature1_2HeaderTestControl creature1_2HeaderTestControl;
+        private Test.WinForm.CRE.Creature9HeaderTestControl creature9HeaderTestControl;
+        private Test.WinForm.DLG.DialogTestControl dialogTestControl;
+        private Test.WinForm.EFF.Effect2TestControl effect2TestControl;
+        private Test.WinForm.INI.IniTestControl iniTestControl;
+        private System.Windows.Forms.TabControl tabctrlItem;
+        private System.Windows.Forms.TabPage tabpageItemAbility;
+        private Test.WinForm.ITM.ItemAbilityTestControl itemAbilityTestControl;
+        private System.Windows.Forms.TabPage tabpageItemAbilityEffect;
+        private Test.WinForm.ITM.ItemAbilityEffectTestControl itemAbilityEffectTestControl;
+        private System.Windows.Forms.TabPage tabpageItem1Header;
+        private Test.WinForm.ITM.Item1HeaderTestControl item1HeaderTestControl;
+        private System.Windows.Forms.TabPage tabpageItem1_1Header;
+        private Test.WinForm.ITM.Item1_1HeaderTestControl item1_1HeaderTestControl;
+        private System.Windows.Forms.TabPage tabpageItem2Header;
+        private Test.WinForm.ITM.Item2HeaderTestControl item2HeaderTestControl;
+        private System.Windows.Forms.TabPage tabpageItem1;
+        private Test.WinForm.ITM.Item1TestControl item1TestControl;
+        private System.Windows.Forms.TabPage tabpageItem1_1;
+        private Test.WinForm.ITM.Item1_1TestControl item1_1TestControl;
+        private System.Windows.Forms.TabPage tabpageItem2;
+        private Test.WinForm.ITM.Item2TestControl item2TestControl;
+        private Test.WinForm.MUS.MusicPlaylistTestControl musicPlaylistTestControl;
+        private Test.WinForm.RIFF.RiffTestControl riffTestControl;
+        private Test.WinForm.ReusableCode.BitStreamTestControl bitStreamTestControl;
+        private System.Windows.Forms.TabControl tabctrlOutput;
+        private System.Windows.Forms.TabPage tabpageXAudio2;
+        private System.Windows.Forms.TabControl tabctrlXAudio2;
+        private System.Windows.Forms.TabPage tabpageXAudio2Devices;
+        private Test.WinForm.Output.XAudio2.XAudio2TestControl xAudio2TestControl;
+        private System.Windows.Forms.TabPage tabpageXAudio2Render;
+        private Test.WinForm.Output.XAudio2.XAudio2RenderTestControl xAudio2RenderTestControl;
+        private Test.WinForm._2DA._2DAFileTestControl _2DAFileTestControl;
+        private System.Windows.Forms.TabControl tabctrlSpell;
+        private System.Windows.Forms.TabPage tabctrlSpell1File;
+        private Test.WinForm.SPL.Spell1TestControl spell1TestControl;
+        private System.Windows.Forms.TabPage tabctrlSpell2File;
+        private Test.WinForm.SPL.Spell2TestControl spell2TestControl;
+        private System.Windows.Forms.TabPage tabctrlSpell1FileHeader;
+        private Test.WinForm.SPL.Spell1HeaderTestControl spell1HeaderTestControl;
+        private System.Windows.Forms.TabPage tabctrlSpell2FileHeader;
+        private Test.WinForm.SPL.Spell2HeaderTestControl spell2HeaderTestControl;
+        private System.Windows.Forms.TabPage tabctrlSpellAblity;
+        private Test.WinForm.SPL.SpellAbilityTestControl spellAbilityTestControl;
+        private System.Windows.Forms.TabPage tabctrlSpellAblityEffect;
+        private Test.WinForm.SPL.SpellAbilityEffectTestControl spellAbilityEffectTestControl;
+        private System.Windows.Forms.TabControl tabctrlStore;
+        private System.Windows.Forms.TabPage tabpageStore1;
+        private Test.WinForm.STO.Store1TestControl store1TestControl;
+        private System.Windows.Forms.TabPage tabpageStore1p1;
+        private Test.WinForm.STO.Store1_1TestControl store1_1TestControl;
+        private System.Windows.Forms.TabPage tabpageStore9;
+        private Test.WinForm.STO.Store9TestControl store9TestControl;
+        private Test.WinForm.SRC.SrcTestControl srcTestControl;
+        private System.Windows.Forms.TabControl tabctrlTalk;
+        private System.Windows.Forms.TabPage tabpageTalkFile;
+        private Test.WinForm.TLK.TlkTestControl tlkTestControl;
+        private System.Windows.Forms.TabPage tabpageTalkHeader;
+        private Test.WinForm.TLK.TlkHeaderTestControl tlkHeaderTestControl;
+        private System.Windows.Forms.TabPage tabpageTalkStrref;
+        private Test.WinForm.TLK.TlkStrrefTestControl tlkStrrefTestControl;
     }
 }

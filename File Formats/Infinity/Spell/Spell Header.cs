@@ -159,7 +159,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell
             StringFormat.AppendSubItem(sb, (this.prohibitionFlags & SpellProhibitionFlags.DivineDruidRanger) == SpellProhibitionFlags.DivineDruidRanger, SpellProhibitionFlags.DivineDruidRanger.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
         #endregion
     }

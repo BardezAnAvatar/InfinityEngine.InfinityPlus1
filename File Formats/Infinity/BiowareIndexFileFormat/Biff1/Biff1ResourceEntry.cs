@@ -88,7 +88,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.BiowareIndexFileFormat.Bi
         public override String ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("Biff1ResourceEntry:");
+            builder.Append(StringFormat.ToStringAlignment("Biff1ResourceEntry", 0));
             builder.Append(StringFormat.ToStringAlignment("Resource Locator"));
             builder.Append(this.resourceLocator.Locator);
             builder.Append(StringFormat.ToStringAlignment("BIFF Index"));
@@ -105,7 +105,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.BiowareIndexFileFormat.Bi
             builder.Append(this.typeResource.ToString("G"));
             builder.Append(StringFormat.ToStringAlignment("Type (hex)"));
             builder.AppendLine(String.Format("0x{0:X4}",(Int16)this.typeResource));
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

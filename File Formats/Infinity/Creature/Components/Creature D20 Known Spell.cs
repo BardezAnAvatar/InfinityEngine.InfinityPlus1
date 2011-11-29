@@ -141,7 +141,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
         public String ToString(Int32 entryIndex)
         {
-            return String.Format("Known Spells Entry # {0}:", entryIndex) + this.GetStringRepresentation();
+            return StringFormat.ReturnAndIndent(String.Format("Known Spells Entry # {0}:", entryIndex), 0) + this.GetStringRepresentation();
         }
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
@@ -150,15 +150,14 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.Append("\n\tSpell 2DA entry index:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Spell 2DA entry index"));
             builder.Append(this.index2da);
-            builder.Append("\n\tNumber prepared:                                ");
+            builder.Append(StringFormat.ToStringAlignment("Number prepared"));
             builder.Append(this.amountPrepared);
-            builder.Append("\n\tNumber uncast:                                  ");
+            builder.Append(StringFormat.ToStringAlignment("Number uncast"));
             builder.Append(this.amountRemaining);
-            builder.Append("\n\tUnknown:                                        ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown"));
             builder.Append(this.unknown);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

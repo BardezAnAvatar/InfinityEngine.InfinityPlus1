@@ -39,9 +39,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components
         #endregion
 
         /// <summary>Instantiates reference types</summary>
-        public void Initialize()
-        {
-        }
+        public void Initialize() { }
 
         #region IO method implemetations
         /// <summary>This public method reads file format from the output stream. Reads the whole structure.</summary>
@@ -109,7 +107,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
         public String ToString(Int32 entryIndex)
         {
-            return String.Format("Spell level memorization Entry # {0}:", entryIndex) + this.GetStringRepresentation();
+            return StringFormat.ReturnAndIndent(String.Format("Spell level memorization Entry # {0}:", entryIndex), 0) + this.GetStringRepresentation();
         }
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
@@ -117,11 +115,10 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components
         protected String GetStringRepresentation()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("\n\tTotal memorization slots:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Total memorization slots"));
             builder.Append(this.slotsTotal);
-            builder.Append("\n\tRemaining memorization slots                    ");
+            builder.Append(StringFormat.ToStringAlignment("Remaining memorization slots"));
             builder.Append(this.slotsRemaining);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

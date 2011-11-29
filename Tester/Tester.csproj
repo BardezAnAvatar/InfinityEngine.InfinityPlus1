@@ -73,6 +73,10 @@
       <Project>{F2085177-9356-43EE-9744-85AA2FFCACEE}</Project>
       <Name>File Formats</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Output\Output.csproj">
+      <Project>{6ECA5199-A497-4BF2-B956-CEB3F0912C17}</Project>
+      <Name>Output</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Test\Test.csproj">
       <Project>{E79833DB-B2D2-4781-B0FC-79E85DA95BE5}</Project>
       <Name>Test</Name>

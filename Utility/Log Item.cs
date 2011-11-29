@@ -13,7 +13,8 @@ namespace Bardez.Projects.InfinityPlus1.Utility
         Error,
         Informational,
         Event,
-        Insignificant
+        Insignificant,
+        Output
     }
 
     /// <summary>Instance of an item being logged</summary>
@@ -25,23 +26,28 @@ namespace Bardez.Projects.InfinityPlus1.Utility
         /// <summary>Message to log</summary>
         public String Message { get; set; }
 
-        /// <summary>Context of the message. Should be null, normally.</summary>
-        public Object Context { get; set; }
+        /// <summary>Message to log</summary>
+        public String Description { get; set; }
 
-        /// <summary>efinition constructor</summary>
+        /// <summary>Relative text context to the message.</summary>
+        public String MessageContext { get; set; }
+
+        /// <summary>Code object context of the message. Can be null.</summary>
+        public Object SendingContext { get; set; }
+
+        /// <summary>Definition constructor</summary>
         /// <param name="type">Type/level of item being logged</param>
         /// <param name="message">Message being logged</param>
-        public LogItem(LogType type, String message) : this (type, message, null) { }
-
-        /// <summary>efinition constructor</summary>
-        /// <param name="type">Type/level of item being logged</param>
-        /// <param name="message">Message being logged</param>
-        /// <param name="context">Object reference for context of the message. Usually null</param>
-        public LogItem(LogType type, String message, Object context)
+        /// <param name="description">Short description of the message being logged being logged</param>
+        /// <param name="messageContext">String describing the context of the message</param>
+        /// <param name="codeContext">Object reference for context of the message</param>
+        public LogItem(LogType type, String message, String description, String messageContext, Object codeContext)
         {
             this.Type = type;
             this.Message = message;
-            this.Context = context;
+            this.Description = description;
+            this.MessageContext = messageContext;
+            this.SendingContext = codeContext;
         }
     }
 }

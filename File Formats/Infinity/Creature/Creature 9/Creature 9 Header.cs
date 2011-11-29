@@ -100,14 +100,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature9
         /// <summary>Fifth internal variable array</summary>
         protected Int16 internalVariable5;
 
-        /// <summary>Secondary death variable</summary>
-        /// <remarks>set to 1 on death</remarks>
-        protected String secondaryDeathVariable;
-
-        /// <summary>Tertiary death variable</summary>
-        /// <remarks>incremented by 1 on death</remarks>
-        protected String tertiaryDeathVariable;
-
         /// <summary>Unknown two bytes that follows the preceeding extra death variables</summary>
         protected UInt16 unknown2;
 
@@ -296,19 +288,11 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature9
 
         /// <summary>Secondary death variable</summary>
         /// <remarks>set to 1 on death</remarks>
-        public String SecondaryDeathVariable
-        {
-            get { return this.secondaryDeathVariable; }
-            set { this.secondaryDeathVariable = value; }
-        }
+        public ZString SecondaryDeathVariable { get; set; }
 
         /// <summary>Tertiary death variable</summary>
         /// <remarks>incremented by 1 on death</remarks>
-        public String TertiaryDeathVariable
-        {
-            get { return this.tertiaryDeathVariable; }
-            set { this.tertiaryDeathVariable = value; }
-        }
+        public ZString TertiaryDeathVariable { get; set; }
 
         /// <summary>Unknown two bytes that follows the preceeding extra death variables</summary>
         public UInt16 Unknown2
@@ -359,6 +343,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature9
         {
             base.Initialize();
             this.unknown3 = new Byte[18];
+            this.SecondaryDeathVariable = new ZString();
+            this.TertiaryDeathVariable = new ZString();
         }
 
         /// <summary>Initializes the soundset ordered dictionary</summary>
@@ -533,8 +519,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature9
             this.internalVariable3 = ReusableIO.ReadInt16FromArray(headerBody, 624);
             this.internalVariable4 = ReusableIO.ReadInt16FromArray(headerBody, 626);
             this.internalVariable5 = ReusableIO.ReadInt16FromArray(headerBody, 628);
-            this.secondaryDeathVariable = ReusableIO.ReadStringFromByteArray(headerBody, 630, Constants.CultureCodeEnglish, 32);
-            this.tertiaryDeathVariable = ReusableIO.ReadStringFromByteArray(headerBody, 662, Constants.CultureCodeEnglish, 32);
+            this.SecondaryDeathVariable.Source = ReusableIO.ReadStringFromByteArray(headerBody, 630, Constants.CultureCodeEnglish, 32);
+            this.TertiaryDeathVariable.Source = ReusableIO.ReadStringFromByteArray(headerBody, 662, Constants.CultureCodeEnglish, 32);
             this.unknown2 = ReusableIO.ReadUInt16FromArray(headerBody, 694);
             this.savedCoordinateX = ReusableIO.ReadUInt16FromArray(headerBody, 696);
             this.savedCoordinateY = ReusableIO.ReadUInt16FromArray(headerBody, 698);
@@ -616,8 +602,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature9
             ReusableIO.WriteInt16ToStream(this.internalVariable3, output);
             ReusableIO.WriteInt16ToStream(this.internalVariable4, output);
             ReusableIO.WriteInt16ToStream(this.internalVariable5, output);
-            ReusableIO.WriteStringToStream(this.secondaryDeathVariable, output, Constants.CultureCodeEnglish, false, 32);
-            ReusableIO.WriteStringToStream(this.tertiaryDeathVariable, output, Constants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(this.SecondaryDeathVariable.Source, output, Constants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(this.TertiaryDeathVariable.Source, output, Constants.CultureCodeEnglish, false, 32);
             ReusableIO.WriteUInt16ToStream(this.unknown2, output);
             ReusableIO.WriteUInt16ToStream(this.savedCoordinateX, output);
             ReusableIO.WriteUInt16ToStream(this.savedCoordinateY, output);
@@ -649,58 +635,58 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature9
         /// <param name="builder">StringBuilder to append to</param>
         protected override void ToStringCreatureVersion(StringBuilder builder)
         {
-            builder.Append("Creature version 9.0 header:");
+            builder.AppendLine("Creature version 9.0 header:");
         }
 
         /// <summary>Generates a String representing the proficiencies area of the creature data structure</summary>
         /// <param name="builder">StringBuilder to append to</param>
         protected override void ToStringProcifiencies(StringBuilder builder)
         {
-            builder.Append("\n\tProficiency (Large Sword):                  ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Large Sword)"));
             builder.Append(this.proficiencyLargeSword);
-            builder.Append("\n\tProficiency (Small Sword):                  ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Small Sword)"));
             builder.Append(this.proficiencySmallSword);
-            builder.Append("\n\tProficiency (Bow):                          ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Bow)"));
             builder.Append(this.proficiencyBow);
-            builder.Append("\n\tProficiency (Spear):                        ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Spear)"));
             builder.Append(this.proficiencySpear);
-            builder.Append("\n\tProficiency (Axe):                          ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Axe)"));
             builder.Append(this.proficiencyAxe);
-            builder.Append("\n\tProficiency (Missile):                      ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Missile)"));
             builder.Append(this.proficiencyMissile);
-            builder.Append("\n\tProficiency (Great Sword):                  ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Great Sword)"));
             builder.Append(this.proficiencyGreatSword);
-            builder.Append("\n\tProficiency (Dagger):                       ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Dagger)"));
             builder.Append(this.proficiencyDagger);
-            builder.Append("\n\tProficiency (Halberd):                      ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Halberd)"));
             builder.Append(this.proficiencyHalberd);
-            builder.Append("\n\tProficiency (Mace):                         ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Mace)"));
             builder.Append(this.proficiencyMace);
-            builder.Append("\n\tProficiency (Flail):                        ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Flail)"));
             builder.Append(this.proficiencyFlail);
-            builder.Append("\n\tProficiency (Hammer):                       ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Hammer)"));
             builder.Append(this.proficiencyHammer);
-            builder.Append("\n\tProficiency (Club):                         ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Club)"));
             builder.Append(this.proficiencyClub);
-            builder.Append("\n\tProficiency (Quarterstaff):                 ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Quarterstaff)"));
             builder.Append(this.proficiencyQuarterstaff);
-            builder.Append("\n\tProficiency (Crossbow):                     ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Crossbow)"));
             builder.Append(this.proficiencyCrossbow);
-            builder.Append("\n\tProficiency (Unused #1):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #1)"));
             builder.Append(this.proficiencyUnused1);
-            builder.Append("\n\tProficiency (Unused #2):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #2)"));
             builder.Append(this.proficiencyUnused2);
-            builder.Append("\n\tProficiency (Unused #3):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #3)"));
             builder.Append(this.proficiencyUnused3);
-            builder.Append("\n\tProficiency (Unused #4):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #4)"));
             builder.Append(this.proficiencyUnused4);
-            builder.Append("\n\tProficiency (Unused #5):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #5)"));
             builder.Append(this.proficiencyUnused5);
-            builder.Append("\n\tProficiency (Unused #6):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #6)"));
             builder.Append(this.proficiencyUnused6);
-            builder.Append("\n\tTracking:                                   ");
+            builder.Append(StringFormat.ToStringAlignment("Tracking"));
             builder.Append(this.tracking);
-            builder.Append("\n\tReserved non-weapon proficiencies:          ");
+            builder.Append(StringFormat.ToStringAlignment("Reserved non-weapon proficiencies"));
             builder.Append(StringFormat.ByteArrayToHexString(this.reservedNonweaponProficiencies));
         }
 
@@ -708,39 +694,41 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature9
         /// <param name="builder">StringBuilder to append to</param>
         protected void ToStringIcewindDaleAdditions(StringBuilder builder)
         {
-            builder.Append("\n\tVisible:                                    ");
+            builder.Append(StringFormat.ToStringAlignment("Visible"));
             builder.Append(this.visible);
-            builder.Append("\n\tSet _DEAD variable on death:                ");
+            builder.Append(StringFormat.ToStringAlignment("Set _DEAD variable on death"));
             builder.Append(this.setVariableDEAD);
-            builder.Append("\n\tSet KILL_<scriptname>_CNT variable on death:");
+            builder.Append(StringFormat.ToStringAlignment("Set KILL_<scriptname>_CNT variable on death"));
             builder.Append(this.setVariableKILL_CNT);
-            builder.Append("\n\tUnknown #1:                                 ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #1"));
             builder.Append(this.unknown1);
-            builder.Append("\n\tInternal variable #1:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #1"));
             builder.Append(this.internalVariable1);
-            builder.Append("\n\tInternal variable #2:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #2"));
             builder.Append(this.internalVariable2);
-            builder.Append("\n\tInternal variable #3:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #3"));
             builder.Append(this.internalVariable3);
-            builder.Append("\n\tInternal variable #4:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #4"));
             builder.Append(this.internalVariable4);
-            builder.Append("\n\tInternal variable #5:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #5"));
             builder.Append(this.internalVariable5);
-            builder.Append("\n\tSecondary Death variable:                   '");
-            builder.Append(this.secondaryDeathVariable);
+            builder.Append(StringFormat.ToStringAlignment("Secondary Death variable"));
             builder.Append("'");
-            builder.Append("\n\tTertiary Death variable:                    '");
-            builder.Append(this.tertiaryDeathVariable);
+            builder.Append(this.SecondaryDeathVariable.Value);
             builder.Append("'");
-            builder.Append("\n\tUnknown #2:                                 ");
+            builder.Append(StringFormat.ToStringAlignment("Tertiary Death variable"));
+            builder.Append("'");
+            builder.Append(this.TertiaryDeathVariable.Value);
+            builder.Append("'");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #2"));
             builder.Append(this.unknown2);
-            builder.Append("\n\tSaved X Co-ordinate:                        ");
+            builder.Append(StringFormat.ToStringAlignment("Saved X Co-ordinate"));
             builder.Append(this.savedCoordinateX);
-            builder.Append("\n\tSaved Y Co-ordinate:                        ");
+            builder.Append(StringFormat.ToStringAlignment("Saved Y Co-ordinate"));
             builder.Append(this.savedCoordinateY);
-            builder.Append("\n\tSaved Orientation:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Saved Orientation"));
             builder.Append(this.savedOrientation);
-            builder.Append("\n\tUnknown #3 (Byte array):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #3 (Byte array)"));
             builder.Append(StringFormat.ByteArrayToHexString(this.unknown3));
         }
         #endregion

@@ -5,40 +5,58 @@ using System.Text;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.TwoDimensionalArray._2DA1;
 using Bardez.Projects.InfinityPlus1.Test;
-using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
-namespace Bardez.Projects.InfinityPlus1.Test.TwoDimensionalArray
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.TwoDimensionalArray
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.TwoDimensionalArray._2DA1 class</summary>
-    public class TwoDinensionalArray1Test : ITester
+    public class TwoDinensionalArray1Test : FileTesterBase
     {
-        protected TwoDimensionalArray1 twoDeeAy;
-        public void Test()
+        #region Fields
+        /// <summary>Constant key to look up in app.config</summary>
+        protected const String configKey = "Test.2Da1.2daPath";
+
+        /// <summary>Format instance to test</summary>
+        protected TwoDimensionalArray1 TwoDimensionalArray { get; set; }
+        #endregion
+
+        #region Construction
+        /// <summary>Default constructor</summary>
+        public TwoDinensionalArray1Test()
         {
-            this.Test(ConfigurationHandler.GetSettingValue("Test.2Da1.2daPath"));
+            this.InitializeInstance();
+        }
+        #endregion
+
+        /// <summary>Initializes the test class data</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="e">Specific initialization event parameters</param>
+        protected override void InitializeTestData(Object sender, EventArgs e)
+        {
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(TwoDinensionalArray1Test.configKey);
         }
 
-        public void Test(String Path)
+        /// <summary>Event to raise for testing instance(s)</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="testArgs">Arguments containing the item to test (usually a file path)</param>
+        protected override void TestCase(Object sender, TestEventArgs testArgs)
         {
-            using (FileStream stream = new FileStream(Path, FileMode.Open))
-                Test(stream);
+            using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
+            {
+                this.TwoDimensionalArray = new TwoDimensionalArray1();
+                this.TwoDimensionalArray.Read(stream);
+            }
+
+            this.DoPostMessage(new MessageEventArgs(this.TwoDimensionalArray.ToString(), "Output", testArgs.Path));
+
+            using (FileStream dest = new FileStream(testArgs.Path + ".rewrite", FileMode.Create, FileAccess.Write))
+                this.TestWrite(dest);
         }
 
-        public void Test(Stream source)
+        /// <summary>Writes the data structure back out to a destination stream</summary>
+        /// <param name="destination">Stream to write output to</param>
+        protected virtual void TestWrite(Stream destination)
         {
-            twoDeeAy = new TwoDimensionalArray1();
-            twoDeeAy.Read(source);
-
-            StringBuilder buffer = new StringBuilder();
-
-            buffer.AppendLine(twoDeeAy.ToString());
-
-            buffer.Append("\n\n\nGet a specific value: ");
-            //conditional...
-            buffer.AppendLine("[\"1\"][\"HitAnimation\"]: ");
-            buffer.AppendLine(twoDeeAy["1"]["HitAnimation"]);
-
-            Interceptor.WriteMessage(buffer.ToString());
+            this.TwoDimensionalArray.Write(destination);
         }
     }
 }

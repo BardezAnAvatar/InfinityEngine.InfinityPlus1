@@ -19,6 +19,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
         #region Additional Conrol(s)
         /// <summary>Checkbox for whether or not to render audio</summary>
         protected CheckBox chkbxRenderAudio;
+
+        /// <summary>Button to stop playback</summary>
         protected Button btnStopPlayback;
         #endregion
 
@@ -47,7 +49,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
 
             /* btnStopPlayback */
             this.btnStopPlayback = new System.Windows.Forms.Button();
-            this.btnStopPlayback.Location = new System.Drawing.Point(260, 3);
+            this.btnStopPlayback.Location = new System.Drawing.Point(270, 3);
             this.btnStopPlayback.Name = "btnStopPlayback";
             this.btnStopPlayback.Size = new System.Drawing.Size(96, 30);
             this.btnStopPlayback.TabIndex = 5;
@@ -61,7 +63,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
             this.chkbxRenderAudio.AutoSize = true;
             this.chkbxRenderAudio.Checked = true;
             this.chkbxRenderAudio.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkbxRenderAudio.Location = new System.Drawing.Point(362, 11);
+            this.chkbxRenderAudio.Location = new System.Drawing.Point(372, 11);
             this.chkbxRenderAudio.Name = "chkbxRenderAudio";
             this.chkbxRenderAudio.Size = new System.Drawing.Size(80, 17);
             this.chkbxRenderAudio.TabIndex = 3;
@@ -86,7 +88,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
                 if (this.playingAudio)  //added test to see if playback was ever interrupted
                     this.Harness.DoTest(this, new TestEventArgs(item as String));
 
-            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Testing ended: {0}", DateTime.Now.ToShortTimeString()))));
+            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Testing ended: {0}", DateTime.Now.ToShortTimeString()), "Testing", "Ended", this)));
         }
 
         /// <summary>Handler for Test Selected click event</summary>

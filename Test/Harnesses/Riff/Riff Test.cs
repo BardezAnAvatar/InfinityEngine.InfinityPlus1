@@ -5,68 +5,50 @@ using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component;
 using Bardez.Projects.InfinityPlus1.Test;
 
-namespace Bardez.Projects.InfinityPlus1.Test.Riff
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Riff
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component.RiffHeader class.</summary>
-    public class RiffTest : ITester
+    public class RiffTest : FileTesterBase
     {
-        protected RiffFile riffFile;
+        #region Fields
+        /// <summary>Constant key to look up in app.config</summary>
+        protected const String configKey = "Test.Riff.RiffPath";
 
-        public RiffFile Riff
+        /// <summary>Format instance to test</summary>
+        protected RiffFile Riff { get; set; }
+        #endregion
+
+        #region Construction
+        /// <summary>Default constructor</summary>
+        public RiffTest()
         {
-            get { return this.riffFile; }
+            this.InitializeInstance();
+        }
+        #endregion
+
+        /// <summary>Initializes the test class data</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="e">Specific initialization event parameters</param>
+        protected override void InitializeTestData(Object sender, EventArgs e)
+        {
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(RiffTest.configKey);
         }
 
-        public void Test()
+        /// <summary>Event to raise for testing instance(s)</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="testArgs">Arguments containing the item to test (usually a file path)</param>
+        protected override void TestCase(Object sender, TestEventArgs testArgs)
         {
-            String[] paths = ConfigurationHandlerMulti.GetSettingValues("Test.Riff.RiffPath").ToArray();
-            this.TestMulti(paths);
-        }
-        
-        /// <summary>Tests a single file</summary>
-        /// <param name="path">File to open and read, then replicate</param>
-        /// <param name="prompt">Boolean indicating whether or not to prompt between read and write</param>
-        public void Test(String path, Boolean prompt)
-        {
-            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                this.Test(stream, prompt);
-
-            //using (FileStream dest = new FileStream(path + ".rewrite", FileMode.Create, FileAccess.Write))
-            //    this.TestWrite(dest);
-        }
-
-        /// <summary>Tests the code </summary>
-        /// <param name="paths"></param>
-        public void TestMulti(String[] paths)
-        {
-            foreach (String path in paths)
+            using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
             {
-                this.Test(path, false);
+                this.Riff = new RiffFile();
+                this.Riff.Read(stream);
+
+                //has to be inside the opened file block due to RIFF code
+                this.DoPostMessage(new MessageEventArgs(this.Riff.ToString(), "Output", testArgs.Path));
             }
-        }
 
-        /// <summary>Tests the read and ToString() methods of the structure</summary>
-        /// <param name="source">Source Stream to read from</param>
-        /// <param name="prompt">Boolean indicating whether or not to prompt for pressing [Enter] to continue</param>
-        public void Test(Stream source, Boolean prompt)
-        {
-            this.riffFile = new RiffFile();
-            this.riffFile.Read(source);
-
-            //Console.Write(this.chunk.ToString());
-
-            //if (prompt)
-            //{
-            //    Console.Write("Press [Enter] to continue...");
-            //    Console.ReadLine();
-            //}
-        }
-
-        /// <summary>Writes the data structure back out to a destination stream</summary>
-        /// <param name="destination">Stream to write output to</param>
-        public void TestWrite(Stream destination)
-        {
-            //this.chunk.Write(destination);
+            //no rewrite at the moment
         }
     }
 }

@@ -327,14 +327,13 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Version
         public override String ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("Dialog version 1.0");
-            builder.Append(this.header.ToString());
-            builder.Append(this.GenerateStatesString());
-            builder.Append(this.GenerateTransitionsString());
-            builder.Append(this.GenerateStateTriggersString());
-            builder.Append(this.GenerateTransitionTriggersString());
+            builder.AppendLine("Dialog version 1.0");
+            builder.AppendLine(this.header.ToString());
+            builder.AppendLine(this.GenerateStatesString());
+            builder.AppendLine(this.GenerateTransitionsString());
+            builder.AppendLine(this.GenerateStateTriggersString());
+            builder.AppendLine(this.GenerateTransitionTriggersString());
             builder.Append(this.GenerateActionsString());
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

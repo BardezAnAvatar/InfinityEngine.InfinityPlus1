@@ -5,72 +5,58 @@ using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Character;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Version;
 using Bardez.Projects.InfinityPlus1.Test;
-using Bardez.Projects.InfinityPlus1.Utility.UiInterceptor;
 
-namespace Bardez.Projects.InfinityPlus1.Test.Character
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Character
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Version.Character2_2 class.</summary>
-    public class Character2_2Test : ITester
+    public class Character2_2Test : FileTesterBase
     {
-        protected Character2_2 character;
+        #region Fields
+        /// <summary>Constant key to look up in app.config</summary>
+        protected const String configKey = "Test.Character.Character2.2Path";
 
-        public Character2_2 Character
+        /// <summary>Format instance to test</summary>
+        protected Character2_2 Character { get; set; }
+        #endregion
+
+        #region Construction
+        /// <summary>Default constructor</summary>
+        public Character2_2Test()
         {
-            get { return this.character; }
+            this.InitializeInstance();
+        }
+        #endregion
+
+        /// <summary>Initializes the test class data</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="e">Specific initialization event parameters</param>
+        protected override void InitializeTestData(Object sender, EventArgs e)
+        {
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(Character2_2Test.configKey);
         }
 
-        public void Test()
+        /// <summary>Event to raise for testing instance(s)</summary>
+        /// <param name="sender">Object sending/raising the request</param>
+        /// <param name="testArgs">Arguments containing the item to test (usually a file path)</param>
+        protected override void TestCase(Object sender, TestEventArgs testArgs)
         {
-            //String path = ConfigurationHandler.GetSettingValue("Test.Character.Character2.2Path");
-            //this.Test(path);
+            using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
+            {
+                this.Character = new Character2_2();
+                this.Character.Read(stream);
 
-            String[] paths = ConfigurationHandlerMulti.GetSettingValues("Test.Character.Character2.2Path").ToArray();
-            this.TestMulti(paths);
-        }
+                this.DoPostMessage(new MessageEventArgs(this.Character.ToString(), "Output", testArgs.Path));
+            }
 
-        /// <summary>Tests a single file</summary>
-        /// <param name="path">File to open and read, then replicate</param>
-        /// <param name="prompt">Boolean indicating whether or not to prompt between read and write</param>
-        public void Test(String path, Boolean prompt)
-        {
-            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                this.Test(stream, prompt);
-
-            using (FileStream dest = new FileStream(path + ".rewrite", FileMode.Create, FileAccess.Write))
+            using (FileStream dest = new FileStream(testArgs.Path + ".rewrite", FileMode.Create, FileAccess.Write))
                 this.TestWrite(dest);
-        }
-
-        /// <summary>Tests the code </summary>
-        /// <param name="paths"></param>
-        public void TestMulti(String[] paths)
-        {
-            foreach (String path in paths)
-            {
-                this.Test(path, false);
-            }
-        }
-        
-        /// <summary>Tests the read and ToString() methods of the structure</summary>
-        /// <param name="source">Source Stream to read from</param>
-        /// <param name="prompt">Boolean indicating whether or not to prompt for pressing [Enter] to continue</param>
-        public void Test(Stream source, Boolean prompt)
-        {
-            this.character = new Character2_2();
-            this.character.Read(source);
-
-            Interceptor.WriteMessage(this.character.ToString());
-
-            if (prompt)
-            {
-                Interceptor.WaitForInput();
-            }
         }
 
         /// <summary>Writes the data structure back out to a destination stream</summary>
         /// <param name="destination">Stream to write output to</param>
-        public void TestWrite(Stream destination)
+        protected virtual void TestWrite(Stream destination)
         {
-            this.character.Write(destination);
+            this.Character.Write(destination);
         }
     }
 }

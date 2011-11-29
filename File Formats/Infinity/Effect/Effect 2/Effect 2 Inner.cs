@@ -71,10 +71,10 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect2
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.Append("\n\tInner signature:                                ");
-            builder.Append(this.signature);
-            builder.Append("\n\tInner version:                                  ");
-            builder.Append(this.version);
+            builder.Append(StringFormat.ToStringAlignment("Inner signature"));
+            builder.Append(ZString.GetZString(this.signature)); //noticed at least one file that did not duplicate the header, was 0'd out
+            builder.Append(StringFormat.ToStringAlignment("Inner version"));
+            builder.Append(ZString.GetZString(this.version));   //noticed at least one file that did not duplicate the header, was 0'd out
             builder.Append(this.core.ToString(false));
 
             return builder.ToString();

@@ -126,12 +126,10 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Version
         public override String ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("Character version:   ");
-            builder.Append(this.header.Version);
-
-            builder.Append(this.header.ToString());
-            builder.Append(this.creature.ToString());
-            builder.Append("\n\n");
+            builder.Append("Character version:");
+            builder.AppendLine(this.header.Version);
+            builder.AppendLine(this.header.ToString());
+            builder.AppendLine(this.creature.ToString());
 
             return builder.ToString();
         }

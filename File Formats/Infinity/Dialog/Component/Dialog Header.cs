@@ -284,7 +284,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
             builder.Append(this.interruptionFlags == null ? "NULL" : ((UInt32)this.interruptionFlags).ToString());
             builder.Append(StringFormat.ToStringAlignment("Dialog Interruption Flag Action (enumerated)"));
             builder.Append(this.GetInterruptionFlagString());
-            builder.Append("\n\n");
 
             return builder.ToString();
         }
@@ -303,13 +302,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
             }
 
             String result = sb.ToString();
-
-            if (this.interruptionFlags == null)
-                result = "NULL";
-            else if (result == String.Empty)
-                result = "\n\t\tNone";
-
-            return result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
         #endregion
     }

@@ -259,7 +259,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Version
             builder.Append(this.GenerateDrinksString());
             builder.Append(this.GenerateHealingSpellsString());
             builder.Append(this.GeneratePurchaseTypesString());
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

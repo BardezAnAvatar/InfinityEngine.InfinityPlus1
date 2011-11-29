@@ -70,7 +70,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
         public String ToString(Int32 entryIndex)
         {
-            return String.Format("Effect # {0}:", entryIndex) + this.ToString();
+            return StringFormat.ReturnAndIndent(String.Format("Effect # {0}:", entryIndex), 0) + this.ToString();
         }
         #endregion
     }

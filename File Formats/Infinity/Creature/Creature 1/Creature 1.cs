@@ -25,7 +25,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1
         /// <summary>Gets the headline for the creature file</summary>
         public override String Headline
         {
-            get { return "Creature 1.0:\n"; }
+            get { return "Creature 1.0:"; }
         }
 
         /// <summary>Gets the size of the header</summary>

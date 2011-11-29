@@ -335,14 +335,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
         /// <summary>Fifth internal variable array</summary>
         protected Int16 internalVariable5;
 
-        /// <summary>Secondary death variable</summary>
-        /// <remarks>set to 1 on death</remarks>
-        protected String secondaryDeathVariable;
-
-        /// <summary>Tertiary death variable</summary>
-        /// <remarks>incremented by 1 on death</remarks>
-        protected String tertiaryDeathVariable;
-
         /// <summary>Unknown two bytes that follows the preceeding extra death variables</summary>
         protected UInt16 unknown7;
 
@@ -1056,19 +1048,11 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
 
         /// <summary>Secondary death variable</summary>
         /// <remarks>set to 1 on death</remarks>
-        public String SecondaryDeathVariable
-        {
-            get { return this.secondaryDeathVariable; }
-            set { this.secondaryDeathVariable = value; }
-        }
+        public ZString SecondaryDeathVariable { get; set; }
 
         /// <summary>Tertiary death variable</summary>
         /// <remarks>incremented by 1 on death</remarks>
-        public String TertiaryDeathVariable
-        {
-            get { return this.tertiaryDeathVariable; }
-            set { this.tertiaryDeathVariable = value; }
-        }
+        public ZString TertiaryDeathVariable { get; set; }
 
         /// <summary>Unknown two bytes that follows the preceeding extra death variables</summary>
         public UInt16 Unknown7
@@ -1159,6 +1143,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             this.scriptSpecial3 = new ResourceReference();
             this.scriptMovement = new ResourceReference();
             this.skillReserved = new Byte[50];
+            this.SecondaryDeathVariable = new ZString();
+            this.TertiaryDeathVariable = new ZString();
         }
         
         /// <summary>Initializes the soundset ordered dictionary</summary>
@@ -1526,8 +1512,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             this.internalVariable3 = ReusableIO.ReadInt16FromArray(headerBody, 668);
             this.internalVariable4 = ReusableIO.ReadInt16FromArray(headerBody, 670);
             this.internalVariable5 = ReusableIO.ReadInt16FromArray(headerBody, 672);
-            this.secondaryDeathVariable = ReusableIO.ReadStringFromByteArray(headerBody, 674, Constants.CultureCodeEnglish, 32);
-            this.tertiaryDeathVariable = ReusableIO.ReadStringFromByteArray(headerBody, 706, Constants.CultureCodeEnglish, 32);
+            this.SecondaryDeathVariable.Source = ReusableIO.ReadStringFromByteArray(headerBody, 674, Constants.CultureCodeEnglish, 32);
+            this.TertiaryDeathVariable.Source = ReusableIO.ReadStringFromByteArray(headerBody, 706, Constants.CultureCodeEnglish, 32);
             this.unknown7 = ReusableIO.ReadUInt16FromArray(headerBody, 738);
             this.savedCoordinateX = ReusableIO.ReadUInt16FromArray(headerBody, 740);
             this.savedCoordinateY = ReusableIO.ReadUInt16FromArray(headerBody, 742);
@@ -1559,7 +1545,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
         {
             this.enumGlobal = ReusableIO.ReadInt16FromArray(remainingHeaderArray, 904);
             this.enumLocal = ReusableIO.ReadInt16FromArray(remainingHeaderArray, 906);
-            this.deathVariable = ReusableIO.ReadStringFromByteArray(remainingHeaderArray, 908, Constants.CultureCodeEnglish, 32);
+            this.deathVariable.Source = ReusableIO.ReadStringFromByteArray(remainingHeaderArray, 908, Constants.CultureCodeEnglish, 32);
             this.avClass = ReusableIO.ReadUInt16FromArray(remainingHeaderArray, 940);
             this.classMsk = ReusableIO.ReadUInt16FromArray(remainingHeaderArray, 942);
             this.unknown9 = ReusableIO.ReadUInt16FromArray(remainingHeaderArray, 944);
@@ -1809,8 +1795,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             ReusableIO.WriteInt16ToStream(this.internalVariable3, output);
             ReusableIO.WriteInt16ToStream(this.internalVariable4, output);
             ReusableIO.WriteInt16ToStream(this.internalVariable5, output);
-            ReusableIO.WriteStringToStream(secondaryDeathVariable, output, Constants.CultureCodeEnglish, false, 32);
-            ReusableIO.WriteStringToStream(tertiaryDeathVariable, output, Constants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(SecondaryDeathVariable.Source, output, Constants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(TertiaryDeathVariable.Source, output, Constants.CultureCodeEnglish, false, 32);
             ReusableIO.WriteUInt16ToStream(this.unknown7, output);
             ReusableIO.WriteUInt16ToStream(this.savedCoordinateX, output);
             ReusableIO.WriteUInt16ToStream(this.savedCoordinateY, output);
@@ -1842,7 +1828,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
         {
             ReusableIO.WriteInt16ToStream(this.enumGlobal, output);
             ReusableIO.WriteInt16ToStream(this.enumLocal, output);
-            ReusableIO.WriteStringToStream(this.deathVariable, output, Constants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(this.deathVariable.Source, output, Constants.CultureCodeEnglish, false, 32);
             ReusableIO.WriteUInt16ToStream(this.avClass, output);
             ReusableIO.WriteUInt16ToStream(this.classMsk, output);
             ReusableIO.WriteUInt16ToStream(this.unknown9, output);
@@ -1919,149 +1905,145 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
         /// <param name="builder">StringBuilder to append to</param>
         protected void ToStringCreatureVersion(StringBuilder builder)
         {
-            builder.Append("Creature version 2.2 header:");
+            builder.AppendLine("Creature version 2.2 header:");
         }
 
         /// <summary>Generates a String representing the leading D20 creature structure data</summary>
         protected void ToStringLeadingValues(StringBuilder builder)
         {
-            builder.Append("\n\tSignature:                                  '");
-            builder.Append(this.signature);
-            builder.Append("'");
-            builder.Append("\n\tVersion:                                    '");
-            builder.Append(this.version);
-            builder.Append("'");
-            builder.Append("\n\tLong Name StrRef:                           ");
+            builder.Append(StringFormat.ToStringAlignment("Signature"));
+            builder.Append(String.Format("'{0}'", this.signature));
+            builder.Append(StringFormat.ToStringAlignment("Version"));
+            builder.Append(String.Format("'{0}'", this.version));
+            builder.Append(StringFormat.ToStringAlignment("Long Name StrRef"));
             builder.Append(this.nameLong.StringReferenceIndex);
-            builder.Append("\n\tShort Name StrRef:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Short Name StrRef"));
             builder.Append(this.nameShort.StringReferenceIndex);
-            builder.Append("\n\tCreature Flags:                             ");
+            builder.Append(StringFormat.ToStringAlignment("Creature Flags"));
             builder.Append((UInt32)this.flags);
-            builder.Append("\n\tCreature Flags (enumerated):                ");
+            builder.Append(StringFormat.ToStringAlignment("Creature Flags (enumerated)"));
             builder.Append(this.GetCreatureFlagsString());
-            builder.Append("\n\tKill XP reward:                             ");
+            builder.Append(StringFormat.ToStringAlignment("Kill XP reward"));
             builder.Append(this.experienceValue);
-            builder.Append("\n\tAccumulated XP total:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Accumulated XP total"));
             builder.Append(this.experienceTotal);
-            builder.Append("\n\tGold:                                       ");
+            builder.Append(StringFormat.ToStringAlignment("Gold"));
             builder.Append(this.gold);
-            builder.Append("\n\tStatus Flags:                               ");
+            builder.Append(StringFormat.ToStringAlignment("Status Flags"));
             builder.Append(this.statusFlags);
-            builder.Append("\n\t(Status flag enumeration unavailable due to being IDS values)");
-            builder.Append("\n\tHit points (current):                       ");
+            builder.Append(StringFormat.ToStringAlignment("(Status flag enumeration unavailable due to being IDS values)"));
+            builder.Append(StringFormat.ToStringAlignment("Hit points (current)"));
             builder.Append(this.hitPointsCurrent);
-            builder.Append("\n\tHit points (total):                         ");
+            builder.Append(StringFormat.ToStringAlignment("Hit points (total)"));
             builder.Append(this.hitPointsMaximum);
-            builder.Append("\n\tAnimation ID:                               ");
+            builder.Append(StringFormat.ToStringAlignment("Animation ID"));
             builder.Append(this.animationId);
-            builder.Append("\n\t(Animation description unavailable due to being hard coded values)");
-            builder.Append("\n\tMetal color index:                          ");
+            builder.Append(StringFormat.ToStringAlignment("(Animation description unavailable due to being hard coded values)"));
+            builder.Append(StringFormat.ToStringAlignment("Metal color index"));
             builder.Append(this.colorIndexMetal);
-            builder.Append("\n\tMinor color index:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Minor color index"));
             builder.Append(this.colorIndexMinor);
-            builder.Append("\n\tMajor color index:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Major color index"));
             builder.Append(this.colorIndexMajor);
-            builder.Append("\n\tSkin color index:                           ");
+            builder.Append(StringFormat.ToStringAlignment("Skin color index"));
             builder.Append(this.colorIndexSkin);
-            builder.Append("\n\tLeather color index:                        ");
+            builder.Append(StringFormat.ToStringAlignment("Leather color index"));
             builder.Append(this.colorIndexLeather);
-            builder.Append("\n\tArmor color index:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Armor color index"));
             builder.Append(this.colorIndexArmor);
-            builder.Append("\n\tHair color index:                           ");
+            builder.Append(StringFormat.ToStringAlignment("Hair color index"));
             builder.Append(this.colorIndexHair);
-            builder.Append("\n\tUse version 2 Effect structure:             ");
+            builder.Append(StringFormat.ToStringAlignment("Use version 2 Effect structure"));
             builder.Append(this.useEffectStructureVersion2);
-            builder.Append("\n\tSmall portrait:                             '");
-            builder.Append(this.portraitSmall.ResRef);
-            builder.Append("'");
-            builder.Append("\n\tLarge portrait:                             '");
-            builder.Append(this.portraitLarge.ResRef);
-            builder.Append("'");
-            builder.Append("\n\tReputation:                                 ");
+            builder.Append(StringFormat.ToStringAlignment("Small portrait"));
+            builder.Append(String.Format("'{0}'", this.portraitSmall.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Large portrait"));
+            builder.Append(String.Format("'{0}'", this.portraitLarge.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Reputation"));
             builder.Append(this.reputation);
-            builder.Append("\n\tHide in shadows:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Hide in shadows"));
             builder.Append(this.hideInShadows);
-            builder.Append("\n\tArmor Class (Natural):                      ");
+            builder.Append(StringFormat.ToStringAlignment("Armor Class (Natural)"));
             builder.Append(this.armorClassNatural);
-            builder.Append("\n\tArmor Class Modifier (Crushing):            ");
+            builder.Append(StringFormat.ToStringAlignment("Armor Class Modifier (Crushing)"));
             builder.Append(this.armorClassModifierCrushing);
-            builder.Append("\n\tArmor Class Modifier (Missile):             ");
+            builder.Append(StringFormat.ToStringAlignment("Armor Class Modifier (Missile)"));
             builder.Append(this.armorClassModifierMissile);
-            builder.Append("\n\tArmor Class Modifier (Piercing):            ");
+            builder.Append(StringFormat.ToStringAlignment("Armor Class Modifier (Piercing)"));
             builder.Append(this.armorClassModifierPiercing);
-            builder.Append("\n\tArmor Class Modifier (Slashing):            ");
+            builder.Append(StringFormat.ToStringAlignment("Armor Class Modifier (Slashing)"));
             builder.Append(this.armorClassModifierSlashing);
-            builder.Append("\n\tBase Attack Bonus:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Base Attack Bonus"));
             builder.Append(this.attackBase);
-            builder.Append("\n\tAttacks per round:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Attacks per round"));
             builder.Append(this.attacksPerRound);
-            builder.Append("\n\tSaving Throw Modifier (Fortitude):          ");
+            builder.Append(StringFormat.ToStringAlignment("Saving Throw Modifier (Fortitude)"));
             builder.Append(this.savingThrowFortitude);
-            builder.Append("\n\tSaving Throw Modifier (Reflex):             ");
+            builder.Append(StringFormat.ToStringAlignment("Saving Throw Modifier (Reflex)"));
             builder.Append(this.savingThrowReflex);
-            builder.Append("\n\tSaving Throw Modifier (Will):               ");
+            builder.Append(StringFormat.ToStringAlignment("Saving Throw Modifier (Will)"));
             builder.Append(this.savingThrowWill);
-            builder.Append("\n\tDamage resistance (Fire):                   ");
+            builder.Append(StringFormat.ToStringAlignment("Damage resistance (Fire)"));
             builder.Append(this.resistFire);
-            builder.Append("\n\tDamage resistance (Cold):                   ");
+            builder.Append(StringFormat.ToStringAlignment("Damage resistance (Cold)"));
             builder.Append(this.resistCold);
-            builder.Append("\n\tDamage resistance (Electricity):            ");
+            builder.Append(StringFormat.ToStringAlignment("Damage resistance (Electricity)"));
             builder.Append(this.resistElectricity);
-            builder.Append("\n\tDamage resistance (Acid):                   ");
+            builder.Append(StringFormat.ToStringAlignment("Damage resistance (Acid)"));
             builder.Append(this.resistAcid);
-            builder.Append("\n\tMagic resistance:                           ");
+            builder.Append(StringFormat.ToStringAlignment("Magic resistance"));
             builder.Append(this.resistMagic);
-            builder.Append("\n\tDamage resistance (Magical Fire):           ");
+            builder.Append(StringFormat.ToStringAlignment("Damage resistance (Magical Fire)"));
             builder.Append(this.resistFireMagic);
-            builder.Append("\n\tDamage resistance (Magical Cold):           ");
+            builder.Append(StringFormat.ToStringAlignment("Damage resistance (Magical Cold)"));
             builder.Append(this.resistColdMagic);
-            builder.Append("\n\tDamage resistance (Slashing):               ");
+            builder.Append(StringFormat.ToStringAlignment("Damage resistance (Slashing)"));
             builder.Append(this.resistPhysicalSlashing);
-            builder.Append("\n\tDamage resistance (Crushing):               ");
+            builder.Append(StringFormat.ToStringAlignment("Damage resistance (Crushing)"));
             builder.Append(this.resistPhysicalCrushing);
-            builder.Append("\n\tDamage resistance (Piercing):               ");
+            builder.Append(StringFormat.ToStringAlignment("Damage resistance (Piercing)"));
             builder.Append(this.resistPhysicalPiercing);
-            builder.Append("\n\tDamage resistance (Missile):                ");
+            builder.Append(StringFormat.ToStringAlignment("Damage resistance (Missile)"));
             builder.Append(this.resistPhysicalMissile);
-            builder.Append("\n\tDamage resistance (Magic):                  ");
+            builder.Append(StringFormat.ToStringAlignment("Damage resistance (Magic)"));
             builder.Append(this.resistMagicDamage);
-            builder.Append("\n\tUnknown #1:                                 ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #1"));
             builder.Append(this.unknown1);
-            builder.Append("\n\tFatigue:                                    ");
+            builder.Append(StringFormat.ToStringAlignment("Fatigue"));
             builder.Append(this.fatigue);
-            builder.Append("\n\tIntoxication:                               ");
+            builder.Append(StringFormat.ToStringAlignment("Intoxication"));
             builder.Append(this.intoxication);
-            builder.Append("\n\tLuck:                                       ");
+            builder.Append(StringFormat.ToStringAlignment("Luck"));
             builder.Append(this.luck);
-            builder.Append("\n\tTurn Undead Level:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Turn Undead Level"));
             builder.Append(this.turnUndeadLevel);
-            builder.Append("\n\tUnknown #2:                                 ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #2"));
             builder.Append(StringFormat.ByteArrayToHexString(this.unknown2));
-            builder.Append("\n\tTotal Levels:                               ");
+            builder.Append(StringFormat.ToStringAlignment("Total Levels"));
             builder.Append(this.levelsTotal);
-            builder.Append("\n\tBarbarian Levels:                           ");
+            builder.Append(StringFormat.ToStringAlignment("Barbarian Levels"));
             builder.Append(this.levelsOfBarbarian);
-            builder.Append("\n\tBard Levels:                                ");
+            builder.Append(StringFormat.ToStringAlignment("Bard Levels"));
             builder.Append(this.levelsOfBard);
-            builder.Append("\n\tCleric Levels:                              ");
+            builder.Append(StringFormat.ToStringAlignment("Cleric Levels"));
             builder.Append(this.levelsOfCleric);
-            builder.Append("\n\tDruid Levels:                               ");
+            builder.Append(StringFormat.ToStringAlignment("Druid Levels"));
             builder.Append(this.levelsOfDruid);
-            builder.Append("\n\tFighter Levels:                             ");
+            builder.Append(StringFormat.ToStringAlignment("Fighter Levels"));
             builder.Append(this.levelsOfFighter);
-            builder.Append("\n\tMonk Levels:                                ");
+            builder.Append(StringFormat.ToStringAlignment("Monk Levels"));
             builder.Append(this.levelsOfMonk);
-            builder.Append("\n\tPaladin Levels:                             ");
+            builder.Append(StringFormat.ToStringAlignment("Paladin Levels"));
             builder.Append(this.levelsOfPaladin);
-            builder.Append("\n\tRanger Levels:                              ");
+            builder.Append(StringFormat.ToStringAlignment("Ranger Levels"));
             builder.Append(this.levelsOfRanger);
-            builder.Append("\n\tRogue Levels:                               ");
+            builder.Append(StringFormat.ToStringAlignment("Rogue Levels"));
             builder.Append(this.levelsOfRogue);
-            builder.Append("\n\tSorcerer Levels:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Sorcerer Levels"));
             builder.Append(this.levelsOfSorcerer);
-            builder.Append("\n\tWizard Levels:                              ");
+            builder.Append(StringFormat.ToStringAlignment("Wizard Levels"));
             builder.Append(this.levelsOfWizard);
-            builder.Append("\n\tUnknown #3:                                 ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #3"));
             builder.Append(StringFormat.ByteArrayToHexString(this.unknown3));
         }
 
@@ -2070,7 +2052,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
         {
             foreach (String key in this.soundSet.Keys) //i < this.soundSet.Count
             {
-                builder.Append("\n\tSoundset " + String.Format("{0, -35}", "(" + key + "):"));
+                builder.Append(StringFormat.ToStringAlignment("Soundset " + "(" + key + ")"));
                 builder.Append(this.soundSet[key].StringReferenceIndex);
             }
         }
@@ -2079,29 +2061,27 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
         /// <param name="builder">StringBuilder to append to</param>
         protected void ToStringProficienciesFeatsAndSkills(StringBuilder builder)
         {
-            builder.Append("\n\tTeam script:                                '");
-            builder.Append(this.scriptTeam);
-            builder.Append("'");
-            builder.Append("\n\tSpecial script #1:                          '");
-            builder.Append(this.scriptSpecial1);
-            builder.Append("'");
-            builder.Append("\n\tCreature enchantment level (weapon to-hit)  :");
+            builder.Append(StringFormat.ToStringAlignment("Team script"));
+            builder.Append(String.Format("'{0}'", this.scriptTeam.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Special script #1"));
+            builder.Append(String.Format("'{0}'", this.scriptSpecial1.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Creature enchantment level (weapon to-hit)"));
             builder.Append(this.creatureEnchantmentLevel);
-            builder.Append("\n\tFeat Flags #1:                              ");
+            builder.Append(StringFormat.ToStringAlignment("Feat Flags #1"));
             builder.Append((UInt64)this.featsFlag1);
-            builder.Append("\n\tFeat Flags #1 (enumerated):                 ");
+            builder.Append(StringFormat.ToStringAlignment("Feat Flags #1 (enumerated)"));
             builder.Append(this.GetFeatFlags1String());
-            builder.Append("\n\tFeat Flags #2:                              ");
+            builder.Append(StringFormat.ToStringAlignment("Feat Flags #2"));
             builder.Append((UInt64)this.featsFlag2);
-            builder.Append("\n\tFeat Flags #2 (enumerated):                 ");
+            builder.Append(StringFormat.ToStringAlignment("Feat Flags #2 (enumerated)"));
             builder.Append(this.GetFeatFlags2String());
-            builder.Append("\n\tReserved Creature Flags:                    ");
+            builder.Append(StringFormat.ToStringAlignment("Reserved Creature Flags"));
             builder.Append(this.featsFlagReserved);
 
             //Weapon proficiencies
-            builder.Append("\n\tProficiency (Martial, Bow):                 ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Martial, Bow)"));
             builder.Append(this.martialProficiencyBow);
-            builder.Append("\n\tProficiency (Simple, Crossbow):             ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Simple, Crossbow)"));
             builder.Append(this.simpleProficiencyCrossbow);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Simple, Missile)"));
             builder.Append(this.simpleProficiencyMissile);
@@ -2240,64 +2220,52 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             builder.Append(StringFormat.ToStringAlignment("Archetypes (enumerated)"));
             builder.Append(this.GetArchetypeString());
             builder.Append(StringFormat.ToStringAlignment("Script (Override)"));
-            builder.Append("'");
-            builder.Append(this.scriptOverride.ResRef);
-            builder.Append("'");
+            builder.Append(String.Format("'{0}'", this.scriptOverride.ZResRef));
             builder.Append(StringFormat.ToStringAlignment("Script (Special #2)"));
-            builder.Append("'");
-            builder.Append(this.scriptSpecial2.ResRef);
-            builder.Append("'");
+            builder.Append(String.Format("'{0}'", this.scriptSpecial2.ZResRef));
             builder.Append(StringFormat.ToStringAlignment("Script (Combat)"));
-            builder.Append("'");
-            builder.Append(this.scriptCombat.ResRef);
-            builder.Append("'");
+            builder.Append(String.Format("'{0}'", this.scriptCombat.ZResRef));
             builder.Append(StringFormat.ToStringAlignment("Script (Special #3)"));
-            builder.Append("'");
-            builder.Append(this.scriptSpecial3.ResRef);
-            builder.Append("'");
+            builder.Append(String.Format("'{0}'", this.scriptSpecial3.ZResRef));
             builder.Append(StringFormat.ToStringAlignment("Script (Movement)"));
-            builder.Append("'");
-            builder.Append(this.scriptMovement.ResRef);
-            builder.Append("'");
+            builder.Append(String.Format("'{0}'", this.scriptMovement.ZResRef));
         }
 
         /// <summary>Generates a String representing the added Icewind Dale values area of the creature data structure</summary>
         /// <param name="builder">StringBuilder to append to</param>
         protected void ToStringIcewindDaleAdditions(StringBuilder builder)
         {
-            builder.Append("\n\tVisible:                                    ");
+            builder.Append(StringFormat.ToStringAlignment("Visible"));
             builder.Append(this.visible);
-            builder.Append("\n\tSet _DEAD variable on death:                ");
+            builder.Append(StringFormat.ToStringAlignment("Set _DEAD variable on death"));
             builder.Append(this.setVariableDEAD);
-            builder.Append("\n\tSet KILL_<scriptname>_CNT variable on death:");
+            builder.Append(StringFormat.ToStringAlignment("Set KILL_<scriptname>_CNT variable on death"));
             builder.Append(this.setVariableKILL_CNT);
-            builder.Append("\n\tUnknown #1:                                 ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #1"));
             builder.Append(this.unknown1);
-            builder.Append("\n\tInternal variable #1:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #1"));
             builder.Append(this.internalVariable1);
-            builder.Append("\n\tInternal variable #2:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #2"));
             builder.Append(this.internalVariable2);
-            builder.Append("\n\tInternal variable #3:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #3"));
             builder.Append(this.internalVariable3);
-            builder.Append("\n\tInternal variable #4:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #4"));
             builder.Append(this.internalVariable4);
-            builder.Append("\n\tInternal variable #5:                       ");
+            builder.Append(StringFormat.ToStringAlignment("Internal variable #5"));
             builder.Append(this.internalVariable5);
-            builder.Append("\n\tSecondary Death variable:                   '");
-            builder.Append(this.secondaryDeathVariable);
-            builder.Append("'");
-            builder.Append("\n\tTertiary Death variable:                    '");
-            builder.Append(this.tertiaryDeathVariable);
-            builder.Append("'");
-            builder.Append("\n\tUnknown #2:                                 ");
-            builder.Append(this.unknown2);
-            builder.Append("\n\tSaved X Co-ordinate:                        ");
+            builder.Append(StringFormat.ToStringAlignment("Secondary Death variable"));
+            builder.Append(StringFormat.ToStringAlignment(String.Format("'{0}'", this.SecondaryDeathVariable.Value)));
+            builder.Append(StringFormat.ToStringAlignment("Tertiary Death variable"));
+            builder.Append(StringFormat.ToStringAlignment(String.Format("'{0}'", this.TertiaryDeathVariable.Value)));
+            builder.Append(StringFormat.ToStringAlignment("Unknown #2"));
+            builder.Append(StringFormat.ByteArrayToHexString(this.unknown2));
+            builder.Append(StringFormat.ToStringAlignment("Saved X Co-ordinate"));
             builder.Append(this.savedCoordinateX);
-            builder.Append("\n\tSaved Y Co-ordinate:                        ");
+            builder.Append(StringFormat.ToStringAlignment("Saved Y Co-ordinate"));
             builder.Append(this.savedCoordinateY);
-            builder.Append("\n\tSaved Orientation:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Saved Orientation"));
             builder.Append(this.savedOrientation);
-            builder.Append("\n\tUnknown #3 (Byte array):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Unknown #3 (Byte array)"));
             builder.Append(StringFormat.ByteArrayToHexString(this.unknown3));
         }
 
@@ -2305,27 +2273,27 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
         /// <param name="builder">StringBuilder to append to</param>
         protected void ToStringClassifications(StringBuilder builder)
         {
-            builder.Append("\n\tClassification (Hostility)  [EA.IDS]:       ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Hostility) [EA.IDS]"));
             builder.Append(this.classificationHostility);
-            builder.Append("\n\tClassification (General)    [GENERAL.IDS]:  ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (General)   [GENERAL.IDS]"));
             builder.Append(this.classificationGeneral);
-            builder.Append("\n\tClassification (Race)       [RACE.IDS]:     ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Race)      [RACE.IDS]"));
             builder.Append(this.classificationRace);
-            builder.Append("\n\tClassification (Class)      [CLASS.IDS]:    ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Class)     [CLASS.IDS]"));
             builder.Append(this.classificationClass);
-            builder.Append("\n\tClassification (Gender)     [GENDER.IDS]:   ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Gender)    [GENDER.IDS]"));
             builder.Append(this.classificationGender);
-            builder.Append("\n\tClassification (Object 1)   [OBJECT.IDS]:   ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Object 1)  [OBJECT.IDS]"));
             builder.Append(this.classificationObject1);
-            builder.Append("\n\tClassification (Object 2)   [OBJECT.IDS]:   ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Object 2)  [OBJECT.IDS]"));
             builder.Append(this.classificationObject2);
-            builder.Append("\n\tClassification (Object 3)   [OBJECT.IDS]:   ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Object 3)  [OBJECT.IDS]"));
             builder.Append(this.classificationObject3);
-            builder.Append("\n\tClassification (Object 4)   [OBJECT.IDS]:   ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Object 4)  [OBJECT.IDS]"));
             builder.Append(this.classificationObject4);
-            builder.Append("\n\tClassification (Object 5)   [OBJECT.IDS]:   ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Object 5)  [OBJECT.IDS]"));
             builder.Append(this.classificationObject5);
-            builder.Append("\n\tClassification (Alignment)  [ALIGNMEN.IDS]: ");
+            builder.Append(StringFormat.ToStringAlignment("Classification (Alignment) [ALIGNMEN.IDS]"));
             builder.Append(this.classificationAlignment);
         }
 
@@ -2333,13 +2301,12 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
         /// <param name="builder">StringBuilder to append to</param>
         protected void ToStringBeforeOffsets(StringBuilder builder)
         {
-            builder.Append("\n\tGlobal enumerator:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Global enumerator"));
             builder.Append(this.enumGlobal);
-            builder.Append("\n\tLocal enumerator:                           ");
+            builder.Append(StringFormat.ToStringAlignment("Local enumerator"));
             builder.Append(this.enumLocal);
-            builder.Append("\n\tDeath variable:\n\t\t'");
-            builder.Append(this.deathVariable);
-            builder.Append("'");
+            builder.Append(StringFormat.ToStringAlignment("Death variable"));
+            builder.Append(StringFormat.ToStringAlignment(String.Format("'{0}'", this.deathVariable.Value)));
             builder.Append(StringFormat.ToStringAlignment("AV Class"));
             builder.Append(this.avClass);
             builder.Append(StringFormat.ToStringAlignment("Class Mask"));
@@ -2366,20 +2333,18 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
         /// <param name="builder">StringBuilder to append to</param>
         protected void ToStringHeaderFooter(StringBuilder builder)
         {
-            builder.Append("\n\tItem slots offset:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Item slots offset"));
             builder.Append(this.offsetItemSlots);
-            builder.Append("\n\tItems offset:                               ");
+            builder.Append(StringFormat.ToStringAlignment("Items offset"));
             builder.Append(this.offsetItems);
-            builder.Append("\n\tItems count:                                ");
+            builder.Append(StringFormat.ToStringAlignment("Items count"));
             builder.Append(this.countItems);
-            builder.Append("\n\tEffects offset:                             ");
+            builder.Append(StringFormat.ToStringAlignment("Effects offset"));
             builder.Append(this.offsetEffects);
-            builder.Append("\n\tEffects count:                              ");
+            builder.Append(StringFormat.ToStringAlignment("Effects count"));
             builder.Append(this.countEffects);
-            builder.Append("\n\tDialog:                                     '");
-            builder.Append(this.dialog.ResRef);
-            builder.Append("'");
-            builder.Append("\n\n");
+            builder.Append(StringFormat.ToStringAlignment("Dialog"));
+            builder.Append(String.Format("'{0}'", this.dialog.ZResRef));
         }
 
         /// <summary>Generates a human-readable multi-line string for console output that indicates which CreatureD20Flags flags are set</summary>
@@ -2413,7 +2378,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             StringFormat.AppendSubItem(sb, (this.flags & CreatureD20Flags.UnknownCorpseRelated) == CreatureD20Flags.UnknownCorpseRelated, CreatureD20Flags.UnknownCorpseRelated.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
 
         /// <summary>Generates a human-readable multi-line string for console output that indicates which CreatureD20Flags flags are set</summary>
@@ -2488,7 +2453,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             StringFormat.AppendSubItem(sb, (this.featsFlag1 & D20Feats1.SPELL_FOCUS_TRANSMUTE) == D20Feats1.SPELL_FOCUS_TRANSMUTE, D20Feats1.SPELL_FOCUS_TRANSMUTE.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
 
         /// <summary>Generates a human-readable multi-line string for console output that indicates which CreatureD20Flags flags are set</summary>
@@ -2510,7 +2475,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             StringFormat.AppendSubItem(sb, (this.featsFlag2 & D20Feats2.WILDSHAPE_SHAMBLER) == D20Feats2.WILDSHAPE_SHAMBLER, D20Feats2.WILDSHAPE_SHAMBLER.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
 
         /// <summary>Generates a human-readable multi-line string for console output that indicates which D20 arcetype flags are set</summary>
@@ -2545,7 +2510,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             StringFormat.AppendSubItem(sb, (this.archetype & KitD20.CLERIC_TALOS) == KitD20.CLERIC_TALOS, KitD20.CLERIC_TALOS.GetDescription());
 
             String result = sb.ToString();
-            return result == String.Empty ? "\n\t\tNone" : result;
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
         #endregion
     }

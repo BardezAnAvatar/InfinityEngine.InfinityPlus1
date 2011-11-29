@@ -35,19 +35,15 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
         protected override void TestCase(Object sender, TestEventArgs testArgs)
         {
             using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
-                this.TestRead(stream);
+            {
+                this.acmFile = new AcmHeader();
+                this.acmFile.Read(stream);
+            }
+
+            this.DoPostMessage(new MessageEventArgs(this.acmFile.ToString(), "Output", testArgs.Path));
 
             //using (FileStream dest = new FileStream(path + ".rewrite", FileMode.Create, FileAccess.Write))
             //    this.TestWrite(dest);
-        }
-
-        /// <summary>Tests the read and ToString() methods of the structure</summary>
-        /// <param name="source">Source Stream to read from</param>
-        protected void TestRead(Stream source)
-        {
-            this.acmFile = new AcmHeader();
-            this.acmFile.Read(source);
-            this.DoPostMessage(new MessageEventArgs(this.acmFile.ToString()));
         }
 
         /// <summary>Writes the data structure back out to a destination stream</summary>

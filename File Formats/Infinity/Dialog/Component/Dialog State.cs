@@ -142,7 +142,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
         public String ToString(Int32 entryIndex)
         {
-            return String.Format("Dialog state # {0}:", entryIndex) + this.GetStringRepresentation();
+            return StringFormat.ReturnAndIndent(String.Format("Dialog state # {0}:", entryIndex), 0) + this.GetStringRepresentation();
         }
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
@@ -158,7 +158,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
             builder.Append(this.countTransition);
             builder.Append(StringFormat.ToStringAlignment("Trigger index"));
             builder.Append(this.indexTrigger);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

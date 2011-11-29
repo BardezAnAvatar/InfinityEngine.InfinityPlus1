@@ -423,58 +423,58 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1
         /// <param name="builder">StringBuilder to append to</param>
         protected override void ToStringCreatureVersion(StringBuilder builder)
         {
-            builder.Append("Creature version 1.0 header:");
+            builder.AppendLine("Creature version 1.0 header:");
         }
 
         /// <summary>Generates a String representing the proficiencies area of the creature data structure</summary>
         /// <param name="builder">StringBuilder to append to</param>
         protected override void ToStringProcifiencies(StringBuilder builder)
         {
-            builder.Append("\n\tProficiency (Large Sword):                  ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Large Sword)"));
             builder.Append(this.proficiencyLargeSword);
-            builder.Append("\n\tProficiency (Small Sword):                  ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Small Sword)"));
             builder.Append(this.proficiencySmallSword);
-            builder.Append("\n\tProficiency (Bow):                          ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Bow)"));
             builder.Append(this.proficiencyBow);
-            builder.Append("\n\tProficiency (Spear):                        ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Spear)"));
             builder.Append(this.proficiencySpear);
-            builder.Append("\n\tProficiency (Blunt):                        ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Blunt)"));
             builder.Append(this.proficiencyBlunt);
-            builder.Append("\n\tProficiency (Spiked):                       ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Spiked)"));
             builder.Append(this.proficiencySpiked);
-            builder.Append("\n\tProficiency (Axe):                          ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Axe)"));
             builder.Append(this.proficiencyAxe);
-            builder.Append("\n\tProficiency (Missile):                      ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Missile)"));
             builder.Append(this.proficiencyMissile);
-            builder.Append("\n\tProficiency (Unused #1):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #1)"));
             builder.Append(this.proficiencyUnused1);
-            builder.Append("\n\tProficiency (Unused #2):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #2)"));
             builder.Append(this.proficiencyUnused2);
-            builder.Append("\n\tProficiency (Unused #3):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #3)"));
             builder.Append(this.proficiencyUnused3);
-            builder.Append("\n\tProficiency (Unused #4):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #4)"));
             builder.Append(this.proficiencyUnused4);
-            builder.Append("\n\tProficiency (Unused #5):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #5)"));
             builder.Append(this.proficiencyUnused5);
-            builder.Append("\n\tProficiency (Unused #6):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #6)"));
             builder.Append(this.proficiencyUnused6);
-            builder.Append("\n\tProficiency (Unused #7):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #7)"));
             builder.Append(this.proficiencyUnused7);
-            builder.Append("\n\tProficiency (Unused #8):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #8)"));
             builder.Append(this.proficiencyUnused8);
-            builder.Append("\n\tProficiency (Unused #9):                    ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #9)"));
             builder.Append(this.proficiencyUnused9);
-            builder.Append("\n\tProficiency (Unused #10):                   ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #10)"));
             builder.Append(this.proficiencyUnused10);
-            builder.Append("\n\tProficiency (Unused #11):                   ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #11)"));
             builder.Append(this.proficiencyUnused11);
-            builder.Append("\n\tProficiency (Unused #12):                   ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #12)"));
             builder.Append(this.proficiencyUnused12);
-            builder.Append("\n\tProficiency (Unused #13):                   ");
+            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #13)"));
             builder.Append(this.proficiencyUnused13);
-            builder.Append("\n\tTracking:                                   ");
+            builder.Append(StringFormat.ToStringAlignment("Tracking"));
             builder.Append(this.tracking);
-            builder.Append("\n\tReserved non-weapon proficiencies:          ");
+            builder.Append(StringFormat.ToStringAlignment("Reserved non-weapon proficiencies"));
             builder.Append(StringFormat.ByteArrayToHexString(this.reservedNonweaponProficiencies));
         }
         #endregion

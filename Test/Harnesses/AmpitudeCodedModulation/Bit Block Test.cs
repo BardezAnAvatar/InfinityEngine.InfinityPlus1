@@ -197,7 +197,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
 
             //replacement for Debug.Assert
             if (result != expectedValue)
-                this.DoPostMessage(new MessageEventArgs(String.Format("Testing method with value {0}, amplitude {1} and bits of {2}; expected {3}, got {4}", datum, amplitude, maxBits, expectedValue, result)));
+                this.DoPostMessage(new MessageEventArgs(String.Format("Testing method with value {0}, amplitude {1} and bits of {2}; expected {3}, got {4}", datum, amplitude, maxBits, expectedValue, result), "Assertion", "TestSingleRead"));
         }
 
         /// <summary>Tests the base 3 data read</summary>

@@ -135,7 +135,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
         public String ToString(Int32 entryIndex)
         {
-            return String.Format("Memorized Spells Entry # {0}:", entryIndex) + this.GetStringRepresentation();
+            return StringFormat.ReturnAndIndent(String.Format("Memorized Spells Entry # {0}:", entryIndex), 0) + this.GetStringRepresentation();
         }
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
@@ -143,14 +143,12 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components
         protected String GetStringRepresentation()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("\n\tSpell:                                          '");
-            builder.Append(this.spell.ResRef);
-            builder.Append("'");
-            builder.Append("\n\tMemorized:                                      ");
+            builder.Append(StringFormat.ToStringAlignment("Spell"));
+            builder.Append(String.Format("'{0}'", this.spell.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Memorized"));
             builder.Append(this.memorized);
-            builder.Append("\n\tAvailable to cast:                              ");
+            builder.Append(StringFormat.ToStringAlignment("Available to cast"));
             builder.Append(this.Available);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

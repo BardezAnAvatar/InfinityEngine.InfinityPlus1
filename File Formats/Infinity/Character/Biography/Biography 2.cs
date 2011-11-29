@@ -76,8 +76,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Biography
         {
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("Character Biography version 2:");
-            builder.Append(this.biography.Value);
-            builder.Append("\n\n");
+            builder.Append(this.biography.Value.Replace("\n", "\r\n"));
 
             return builder.ToString();
         }

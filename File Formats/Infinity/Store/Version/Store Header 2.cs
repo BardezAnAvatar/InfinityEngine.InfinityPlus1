@@ -196,7 +196,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Version
             builder.Append(StringFormat.ToStringAlignment("Unknown #1"));
             builder.Append(this.unknown1);
             builder.Append(StringFormat.ToStringAlignment("Theft dialog"));
-            builder.Append(this.theftDialog.ResRef);
+            builder.Append(this.theftDialog.ZResRef);
             builder.Append(StringFormat.ToStringAlignment("Purchase types offset"));
             builder.Append(this.offsetPurchaseTypes);
             builder.Append(StringFormat.ToStringAlignment("Purchase types count"));
@@ -210,13 +210,13 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Version
             builder.Append(StringFormat.ToStringAlignment("Cost to perform identify"));
             builder.Append(this.costIdentify);
             builder.Append(StringFormat.ToStringAlignment("Bar rumors dialog"));
-            builder.Append(this.rumorsBar.ResRef);
+            builder.Append(this.rumorsBar.ZResRef);
             builder.Append(StringFormat.ToStringAlignment("Drinks offset"));
             builder.Append(this.offsetDrinks);
             builder.Append(StringFormat.ToStringAlignment("Drinks count"));
             builder.Append(this.countDrinks);
             builder.Append(StringFormat.ToStringAlignment("Temple rumors dialog"));
-            builder.Append(this.rumorsTemple.ResRef);
+            builder.Append(this.rumorsTemple.ZResRef);
             builder.Append(StringFormat.ToStringAlignment("Rooms available"));
             builder.Append((UInt32)this.roomsAvailable);
             builder.Append(StringFormat.ToStringAlignment("Rooms available (enumerated)"));
@@ -239,7 +239,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Version
             builder.Append(StringFormat.ToStringAlignment("Reserved #2"));
             builder.Append(StringFormat.ByteArrayToHexString(this.reserved2));
             builder.Append(this.capacity);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

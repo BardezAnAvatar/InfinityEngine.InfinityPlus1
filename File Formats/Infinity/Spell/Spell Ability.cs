@@ -169,7 +169,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
         public override String ToString(Int32 abilityIndex)
         {
-            return String.Format("Spell Ability # {0}:", abilityIndex) + this.GetStringRepresentation();
+            return StringFormat.ReturnAndIndent(String.Format("Spell Ability # {0}:", abilityIndex), 0) + this.GetStringRepresentation();
         }
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
@@ -177,55 +177,52 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell
         protected override String GetStringRepresentation()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("\n\tAbility type:                                   '");
+            builder.Append(StringFormat.ToStringAlignment("Ability type"));
             builder.Append((Byte)this.abilityType);
-            builder.Append("'");
-            builder.Append("\n\tAbility type (description):                     ");
+            builder.Append(StringFormat.ToStringAlignment("Ability type (description)"));
             builder.Append(this.abilityType.GetDescription());
-            builder.Append("\n\tUse of ability hostility level:                 ");
+            builder.Append(StringFormat.ToStringAlignment("Use of ability hostility level"));
             builder.Append(this.spellHostility);
-            builder.Append("\n\tAbility UI location:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Ability UI location"));
             builder.Append((UInt16)this.abilityLocation);
-            builder.Append("\n\tAbility UI location (description):              ");
+            builder.Append(StringFormat.ToStringAlignment("Ability UI location (description)"));
             builder.Append(this.abilityLocation.GetDescription());
-            builder.Append("\n\tAbility Icon:                                   '");
-            builder.Append(this.icon.ResRef);
-            builder.Append("'");
-            builder.Append("\n\tAbility Target:                                 ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Icon"));
+            builder.Append(String.Format("'{0}'", this.icon.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Ability Target"));
             builder.Append((Byte)this.target);
-            builder.Append("\n\tAbility Target (description):                   ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Target (description)"));
             builder.Append(this.target.GetDescription());
-            builder.Append("\n\tAbility Target Count:                           ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Target Count"));
             builder.Append(this.targetCount);
-            builder.Append("\n\tAbility Range (in search rectangles?):          ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Range (in search rectangles?)"));
             builder.Append(this.range);
-            builder.Append("\n\tLevel requirement:                              ");
+            builder.Append(StringFormat.ToStringAlignment("Level requirement"));
             builder.Append(this.levelRequirement);
-            builder.Append("\n\tCasting speed:                                  ");
+            builder.Append(StringFormat.ToStringAlignment("Casting speed"));
             builder.Append(this.castingSpeed);
-            builder.Append("\n\tAbility Dice Sides:                             ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Dice Sides"));
             builder.Append(this.diceSides);
-            builder.Append("\n\tAbility Dice Number:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Dice Number"));
             builder.Append(this.diceNumber);
-            builder.Append("\n\tAbility Damage Bonus:                           ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Damage Bonus"));
             builder.Append(this.damageBonus);
-            builder.Append("\n\tAbility Damage Type:                            ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Damage Type"));
             builder.Append((UInt16)this.damageType);
-            builder.Append("\n\tAbility Damage Type (description):\n\t\t");
+            builder.Append(StringFormat.ToStringAlignment("Ability Damage Type (description)"));
             builder.Append(this.damageType.GetDescription());
-            builder.Append("\n\tAbility Effects Count:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Effects Count"));
             builder.Append(this.featureCount);
-            builder.Append("\n\tAbility Effects Offset:                         ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Effects Offset"));
             builder.Append(this.featureOffset);
-            builder.Append("\n\tAbility Charges Count:                          ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Charges Count"));
             builder.Append(this.charges);
-            builder.Append("\n\tCharge depletion behavior:                      ");
+            builder.Append(StringFormat.ToStringAlignment("Charge depletion behavior"));
             builder.Append((UInt16)this.depletionBehavior);
-            builder.Append("\n\tCharge depletion behavior (description):        ");
+            builder.Append(StringFormat.ToStringAlignment("Charge depletion behavior (description)"));
             builder.Append(this.depletionBehavior.GetDescription());
-            builder.Append("\n\tAbility Projectile Animation (see *.IDS):       ");
+            builder.Append(StringFormat.ToStringAlignment("Ability Projectile Animation (see *.IDS)"));
             builder.Append(this.projectileAnimation);
-            builder.Append("\n\n");
 
             return builder.ToString();
         }

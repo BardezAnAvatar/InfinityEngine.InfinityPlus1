@@ -54,8 +54,9 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         protected virtual void EndHarnessInitialize(Object sender, EventArgs e)
         {
             this.LoadHarnessItems();
-            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Initialization ended: {0}", DateTime.Now.ToShortTimeString()))));
+            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Initialization ended: {0}", DateTime.Now.ToShortTimeString()), "Initialization", "Ended", this)));
             this.ToggleControls(true);  //enable controls
+            this.ResumeLayout();
         }
 
         /// <summary>Method that will post a message to the log collection object. Intended to be attached to an event that the Harness will raise internally.</summary>
@@ -63,7 +64,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         /// <param name="message">Log Message being posted</param>
         protected virtual void PostMessage(Object sender, LogEventArgs message)
         {
-            this.logOutput.PostMessage(message.LogMessage.Message);
+            this.logOutput.PostMessage(message);
         }
 
         /// <summary>Abstract method to load harness items</summary>
@@ -76,7 +77,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         protected virtual void btnInitialize_Click(Object sender, EventArgs e)
         {
             this.ToggleControls(false);
-            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Initialization started: {0}", DateTime.Now.ToShortTimeString()))));
+            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Initialization started: {0}", DateTime.Now.ToShortTimeString()), "Initialization", "Started", this)));
+            this.SuspendLayout();
             Thread thread = new Thread(new ThreadStart(this.RunInitializeThread));
             thread.Start();
         }
@@ -92,7 +94,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         /// <param name="e">EventArgs for the click event</param>
         protected virtual void btnTest_Click(Object sender, EventArgs e)
         {
-            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Testing started: {0}", DateTime.Now.ToShortTimeString()))));
+            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Testing started: {0}", DateTime.Now.ToShortTimeString()), "Testing", "Started", this)));
             Thread thread = new Thread(new ThreadStart(this.RunTestThread));
             thread.Start();
         }
@@ -101,15 +103,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         protected virtual void RunTestThread()
         {
             this.Harness.DoTest(this, new TestEventArgs());
-            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Testing ended: {0}", DateTime.Now.ToShortTimeString()))));
-        }
-
-        /// <summary>Handler for Clear Log click event</summary>
-        /// <param name="sender">Object sending the event</param>
-        /// <param name="e">EventArgs for the click event</param>
-        protected virtual void bntClearLog_Click(Object sender, EventArgs e)
-        {
-            this.logOutput.ClearControls();
+            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Testing ended: {0}", DateTime.Now.ToShortTimeString()), "Testing", "Ended", this)));
         }
         #endregion
     }

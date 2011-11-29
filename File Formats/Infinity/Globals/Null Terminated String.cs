@@ -6,20 +6,13 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Globals
     public class ZString
     {
         /// <summary>source string being stored</summary>
-        protected String source;
-
-        /// <summary>source string being stored</summary>
-        public String Source
-        {
-            get { return this.source; }
-            set { this.source = value; }
-        }
+        public String Source { get; set; }
 
         /// <summary>ZString string being stored</summary>
         public String Value
         {
-            get { return GetZString(this.source); }
-            set { this.source = GetZString(value); }
+            get { return GetZString(this.Source); }
+            set { this.Source = GetZString(value); }
         }
 
         /// <summary>Truncates the string at the first found NULL character</summary>

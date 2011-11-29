@@ -236,9 +236,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
         /// <summary>Soundset resource reference</summary>
         protected ResourceReference soundSet;
 
-        /// <summary>Biff archive in which the soundset is stored. 20 Bytes.</summary>
-        protected String soundSetBiff;
-
         /// <summary>128 reserved bytes. Probably unused.</summary>
         protected Byte[] reserved;
         #endregion
@@ -747,11 +744,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
         }
 
         /// <summary>Biff archive in which the soundset is stored. 20 Bytes.</summary>
-        public String SoundSetBiff
-        {
-            get { return this.soundSetBiff; }
-            set { this.soundSetBiff = value; }
-        }
+        public ZString SoundSetBiff { get; set; }
 
         /// <summary>128 reserved bytes. Probably unused.</summary>
         public Byte[] Reserved
@@ -828,6 +821,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             this.quickSong9 = new ResourceReference();
             this.unknown4 = new Byte[14];
             this.soundSet = new ResourceReference();
+            this.SoundSetBiff = new ZString();
             this.reserved = new Byte[128];
         }
         #endregion
@@ -843,7 +837,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             //read remiander
             Byte[] header = ReusableIO.BinaryRead(input, StructSize - 8);
 
-            this.name = ReusableIO.ReadStringFromByteArray(header, 0, Constants.CultureCodeEnglish, 32);
+            this.Name.Source = ReusableIO.ReadStringFromByteArray(header, 0, Constants.CultureCodeEnglish, 32);
             this.offsetCreature = ReusableIO.ReadUInt32FromArray(header, 32);
             this.lengthCreature = ReusableIO.ReadUInt32FromArray(header, 36);
             this.quickWeaponSlotIndex1 = ReusableIO.ReadUInt16FromArray(header, 40);
@@ -927,7 +921,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             this.unknown3 = header[357];
             Array.Copy(header, 358, this.unknown4, 0, 14);
             this.soundSet.ResRef = ReusableIO.ReadStringFromByteArray(header, 372, Constants.CultureCodeEnglish);
-            this.soundSetBiff = ReusableIO.ReadStringFromByteArray(header, 380, Constants.CultureCodeEnglish, 32);
+            this.SoundSetBiff.Source = ReusableIO.ReadStringFromByteArray(header, 380, Constants.CultureCodeEnglish, 32);
             Array.Copy(header, 412, this.reserved, 0, 128);
         }
 
@@ -937,7 +931,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
         {
             ReusableIO.WriteStringToStream(this.signature, output, Constants.CultureCodeEnglish, false, 4);
             ReusableIO.WriteStringToStream(this.version, output, Constants.CultureCodeEnglish, false, 4);
-            ReusableIO.WriteStringToStream(this.name, output, Constants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(this.Name.Source, output, Constants.CultureCodeEnglish, false, 32);
             ReusableIO.WriteUInt32ToStream(this.offsetCreature, output);
             ReusableIO.WriteUInt32ToStream(this.lengthCreature, output);
             ReusableIO.WriteUInt16ToStream(this.quickWeaponSlotIndex1, output);
@@ -1021,7 +1015,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             output.WriteByte(this.unknown3);
             output.Write(this.unknown4, 0, 14);
             ReusableIO.WriteStringToStream(this.soundSet.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.soundSetBiff, output, Constants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(this.SoundSetBiff.Source, output, Constants.CultureCodeEnglish, false, 32);
             output.Write(this.reserved, 0, 128);
         }
         #endregion
@@ -1037,7 +1031,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             builder.Append(StringFormat.ToStringAlignment("Version"));
             builder.Append(this.version);
             builder.Append(StringFormat.ToStringAlignment("Name"));
-            builder.Append(this.name);
+            builder.Append(this.Name.Value);
             builder.Append(StringFormat.ToStringAlignment("Creature offset"));
             builder.Append(this.offsetCreature);
             builder.Append(StringFormat.ToStringAlignment("Creature length"));
@@ -1075,23 +1069,41 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             builder.Append(StringFormat.ToStringAlignment("Quick Shield slot 4 usable"));
             builder.Append(this.usableQuickShieldSlot4);
             builder.Append(StringFormat.ToStringAlignment("Quick spell ResRef 1"));
-            builder.Append(this.quickSpell1.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSpell1.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick spell ResRef 2"));
-            builder.Append(this.quickSpell2.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSpell2.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick spell ResRef 3"));
-            builder.Append(this.quickSpell3.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSpell3.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick spell ResRef 4"));
-            builder.Append(this.quickSpell4.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSpell4.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick spell ResRef 5"));
-            builder.Append(this.quickSpell5.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSpell5.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick spell ResRef 6"));
-            builder.Append(this.quickSpell6.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSpell6.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick spell ResRef 7"));
-            builder.Append(this.quickSpell7.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSpell7.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick spell ResRef 8"));
-            builder.Append(this.quickSpell8.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSpell8.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick spell ResRef 9"));
-            builder.Append(this.quickSpell9.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSpell9.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Class of quick spell 1"));
             builder.Append(this.classQuickSpell1);
             builder.Append(StringFormat.ToStringAlignment("Class of quick spell 2"));
@@ -1125,41 +1137,77 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             builder.Append(StringFormat.ToStringAlignment("Quick item 3 usable"));
             builder.Append(this.usableQuickItemSlot3);
             builder.Append(StringFormat.ToStringAlignment("Quick Innate ResRef 1"));
-            builder.Append(this.quickInnate1.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickInnate1.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick Innate ResRef 2"));
-            builder.Append(this.quickInnate2.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickInnate2.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick Innate ResRef 3"));
-            builder.Append(this.quickInnate3.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickInnate3.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick Innate ResRef 4"));
-            builder.Append(this.quickInnate4.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickInnate4.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick Innate ResRef 5"));
-            builder.Append(this.quickInnate5.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickInnate5.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick Innate ResRef 6"));
-            builder.Append(this.quickInnate6.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickInnate6.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick Innate ResRef 7"));
-            builder.Append(this.quickInnate7.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickInnate7.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick Innate ResRef 8"));
-            builder.Append(this.quickInnate8.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickInnate8.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick Innate ResRef 9"));
-            builder.Append(this.quickInnate9.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickInnate9.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick Song ResRef 1"));
-            builder.Append(this.quickSong1.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSong1.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick Song ResRef 2"));
-            builder.Append(this.quickSong2.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSong2.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick Song ResRef 3"));
-            builder.Append(this.quickSong3.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSong3.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick Song ResRef 4"));
-            builder.Append(this.quickSong4.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSong4.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick Song ResRef 5"));
-            builder.Append(this.quickSong5.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSong5.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick Song ResRef 6"));
-            builder.Append(this.quickSong6.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSong6.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick Song ResRef 7"));
-            builder.Append(this.quickSong7.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSong7.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick Song ResRef 8"));
-            builder.Append(this.quickSong8.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSong8.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Quick Song ResRef 9"));
-            builder.Append(this.quickSong9.ResRef);
+            builder.Append("'");
+            builder.Append(this.quickSong9.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Customizable button #1"));
             builder.Append((UInt32)this.button1);
             builder.Append(StringFormat.ToStringAlignment("Customizable button #1 (description)"));
@@ -1221,12 +1269,16 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             builder.Append(StringFormat.ToStringAlignment("Unknown #4"));
             builder.Append(StringFormat.ByteArrayToHexString(this.unknown4));
             builder.Append(StringFormat.ToStringAlignment("Sound set prefix"));
-            builder.Append(this.soundSet.ResRef);
+            builder.Append("'");
+            builder.Append(this.soundSet.ZResRef);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Sound set archive"));
-            builder.Append(this.soundSetBiff);
+            builder.Append("'");
+            builder.Append(this.SoundSetBiff.Value);
+            builder.Append("'");
             builder.Append(StringFormat.ToStringAlignment("Trailing reservd bytes"));
-            builder.Append(StringFormat.ByteArrayToHexString(this.reserved));
-            builder.Append("\n\n");
+            builder.AppendLine(StringFormat.ByteArrayToHexString(this.reserved));
+
 
             return builder.ToString();
         }

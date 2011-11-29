@@ -28,7 +28,7 @@
             this.lblListBoxDescriptor = new System.Windows.Forms.Label();
             this.lblOutputDescripor = new System.Windows.Forms.Label();
             this.pnlTest = new System.Windows.Forms.Panel();
-            this.bntClearLog = new System.Windows.Forms.Button();
+            this.btnInvertSelection = new System.Windows.Forms.Button();
             this.btnTestSelected = new System.Windows.Forms.Button();
             this.btnInitialize = new System.Windows.Forms.Button();
             this.tblMain = new System.Windows.Forms.TableLayoutPanel();
@@ -50,7 +50,7 @@
             this.chklbTestItems.Location = new System.Drawing.Point(0, 13);
             this.chklbTestItems.Name = "chklbTestItems";
             this.chklbTestItems.Size = new System.Drawing.Size(229, 400);
-            this.chklbTestItems.TabIndex = 0;
+            this.chklbTestItems.TabIndex = 70;
             // 
             // lblListBoxDescriptor
             // 
@@ -59,7 +59,7 @@
             this.lblListBoxDescriptor.Location = new System.Drawing.Point(0, 0);
             this.lblListBoxDescriptor.Name = "lblListBoxDescriptor";
             this.lblListBoxDescriptor.Size = new System.Drawing.Size(73, 13);
-            this.lblListBoxDescriptor.TabIndex = 1;
+            this.lblListBoxDescriptor.TabIndex = 60;
             this.lblListBoxDescriptor.Text = "Loaded items:";
             // 
             // lblOutputDescripor
@@ -70,46 +70,46 @@
             this.lblOutputDescripor.Location = new System.Drawing.Point(0, 0);
             this.lblOutputDescripor.Name = "lblOutputDescripor";
             this.lblOutputDescripor.Size = new System.Drawing.Size(82, 13);
-            this.lblOutputDescripor.TabIndex = 0;
+            this.lblOutputDescripor.TabIndex = 80;
             this.lblOutputDescripor.Text = "Harness output:";
             // 
             // pnlTest
             // 
-            this.pnlTest.Controls.Add(this.bntClearLog);
+            this.pnlTest.Controls.Add(this.btnInvertSelection);
             this.pnlTest.Controls.Add(this.btnTestSelected);
             this.pnlTest.Controls.Add(this.btnInitialize);
             this.pnlTest.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTest.Location = new System.Drawing.Point(3, 3);
             this.pnlTest.Name = "pnlTest";
             this.pnlTest.Size = new System.Drawing.Size(693, 34);
-            this.pnlTest.TabIndex = 0;
+            this.pnlTest.TabIndex = 10;
             // 
-            // bntClearLog
+            // btnInvertSelection
             // 
-            this.bntClearLog.Location = new System.Drawing.Point(172, 3);
-            this.bntClearLog.Name = "bntClearLog";
-            this.bntClearLog.Size = new System.Drawing.Size(82, 30);
-            this.bntClearLog.TabIndex = 2;
-            this.bntClearLog.Text = "Clear Log";
-            this.bntClearLog.UseVisualStyleBackColor = true;
-            this.bntClearLog.Click += new System.EventHandler(this.bntClearLog_Click);
+            this.btnInvertSelection.Location = new System.Drawing.Point(86, 3);
+            this.btnInvertSelection.Name = "btnInvertSelection";
+            this.btnInvertSelection.Size = new System.Drawing.Size(90, 30);
+            this.btnInvertSelection.TabIndex = 30;
+            this.btnInvertSelection.Text = "Invert Selection";
+            this.btnInvertSelection.UseVisualStyleBackColor = true;
+            this.btnInvertSelection.Click += new System.EventHandler(this.btnInvertSelection_Click);
             // 
             // btnTestSelected
             // 
-            this.btnTestSelected.Location = new System.Drawing.Point(84, 3);
+            this.btnTestSelected.Location = new System.Drawing.Point(182, 3);
             this.btnTestSelected.Name = "btnTestSelected";
             this.btnTestSelected.Size = new System.Drawing.Size(82, 30);
-            this.btnTestSelected.TabIndex = 1;
+            this.btnTestSelected.TabIndex = 40;
             this.btnTestSelected.Text = "Test Selected";
             this.btnTestSelected.UseVisualStyleBackColor = true;
             this.btnTestSelected.Click += new System.EventHandler(this.btnTestSelected_Click);
             // 
             // btnInitialize
             // 
-            this.btnInitialize.Location = new System.Drawing.Point(3, 3);
+            this.btnInitialize.Location = new System.Drawing.Point(5, 3);
             this.btnInitialize.Name = "btnInitialize";
             this.btnInitialize.Size = new System.Drawing.Size(75, 30);
-            this.btnInitialize.TabIndex = 0;
+            this.btnInitialize.TabIndex = 20;
             this.btnInitialize.Text = "Initialize";
             this.btnInitialize.UseVisualStyleBackColor = true;
             this.btnInitialize.Click += new System.EventHandler(this.btnInitialize_Click);
@@ -128,7 +128,7 @@
             this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tblMain.Size = new System.Drawing.Size(699, 463);
-            this.tblMain.TabIndex = 2;
+            this.tblMain.TabIndex = 0;
             // 
             // splitContainerHarnessResults
             // 
@@ -148,23 +148,22 @@
             this.splitContainerHarnessResults.Panel2.Controls.Add(this.lblOutputDescripor);
             this.splitContainerHarnessResults.Size = new System.Drawing.Size(693, 417);
             this.splitContainerHarnessResults.SplitterDistance = 233;
-            this.splitContainerHarnessResults.TabIndex = 3;
+            this.splitContainerHarnessResults.TabIndex = 50;
             // 
             // logOutput
             // 
-            this.logOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.logOutput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.logOutput.Location = new System.Drawing.Point(0, 13);
             this.logOutput.Name = "logOutput";
             this.logOutput.Size = new System.Drawing.Size(452, 400);
-            this.logOutput.TabIndex = 2;
+            this.logOutput.TabIndex = 90;
             // 
-            // HarnessBaseTestControlBase
+            // HarnessFileBaseTestControlBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tblMain);
-            this.Name = "HarnessBaseTestControlBase";
+            this.Name = "HarnessFileBaseTestControlBase";
             this.Size = new System.Drawing.Size(699, 463);
             this.pnlTest.ResumeLayout(false);
             this.tblMain.ResumeLayout(false);
@@ -188,7 +187,7 @@
         protected System.Windows.Forms.Button btnInitialize;
         protected System.Windows.Forms.TableLayoutPanel tblMain;
         protected LoggingControl logOutput;
-        protected System.Windows.Forms.Button bntClearLog;
         protected System.Windows.Forms.SplitContainer splitContainerHarnessResults;
+        protected System.Windows.Forms.Button btnInvertSelection;
     }
 }

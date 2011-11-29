@@ -13,9 +13,6 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
     public abstract class CharacterHeaderBase : InfinityFormat
     {
         #region Members
-        /// <summary>Character name, up to 32 bytes</summary>
-        protected String name;
-
         /// <summary>Offset to the creature structure</summary>
         protected UInt32 offsetCreature;
 
@@ -62,11 +59,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
 
         #region Properties
         /// <summary>Character name, up to 32 bytes</summary>
-        public String Name
-        {
-            get { return this.name; }
-            set { this.name = value; }
-        }
+        public ZString Name { get; set; }
 
         /// <summary>Offset to the creature structure</summary>
         public UInt32 OffsetCreature
@@ -167,6 +160,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             this.quickSpell1 = new ResourceReference();
             this.quickSpell2 = new ResourceReference();
             this.quickSpell3 = new ResourceReference();
+            this.Name = new ZString();
         }
         #endregion
 
