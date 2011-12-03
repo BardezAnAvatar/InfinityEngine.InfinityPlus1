@@ -78,13 +78,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="IWaveFormatEx.cpp" />
+    <ClCompile Include="Result Codes.cpp" />
     <ClCompile Include="Wave Format Ex.cpp" />
     <ClCompile Include="Wave Format Extensible.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IWaveFormatEx.h" />
+    <ClInclude Include="Result Codes.h" />
     <ClInclude Include="Wave Format Ex.h" />
     <ClInclude Include="Wave Format Extensible.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

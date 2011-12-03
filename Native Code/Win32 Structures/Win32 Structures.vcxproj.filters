@@ -13,27 +13,39 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Audio">
+      <UniqueIdentifier>{359f67eb-bbb5-404a-9084-6713794314f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Audio">
+      <UniqueIdentifier>{6cdb97fd-ff64-44cf-8e00-ca4b55d4b1f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Wave Format Ex.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="IWaveFormatEx.cpp">
+      <Filter>Source Files\Audio</Filter>
     </ClCompile>
     <ClCompile Include="Wave Format Extensible.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="IWaveFormatEx.cpp">
+    <ClCompile Include="Wave Format Ex.cpp">
+      <Filter>Source Files\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Result Codes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Wave Format Extensible.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Wave Format Ex.h">
+    <ClInclude Include="Result Codes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IWaveFormatEx.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Wave Format Ex.h">
+      <Filter>Header Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Wave Format Extensible.h">
+      <Filter>Header Files\Audio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
