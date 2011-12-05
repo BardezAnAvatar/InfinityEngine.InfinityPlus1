@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{44208309-EFE3-4A6F-B0F8-9013A16B20DF}</ProjectGuid>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <Keyword>ManagedCProj</Keyword>
+    <RootNamespace>Direct2D</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>bin\$(Configuration)\</OutDir>
+    <IntDir>tmp\$(Configuration)\</IntDir>
+    <IncludePath>\Code\DirectX\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>\Code\DirectX\Lib\x86;$(IncludePath);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Link>
+    <Xdcmake>
+      <DocumentLibraryDependencies>true</DocumentLibraryDependencies>
+    </Xdcmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Alpha Mode.h" />
+    <ClInclude Include="AntialiasMode.h" />
+    <ClInclude Include="Bitmap Interpolation Mode.h" />
+    <ClInclude Include="Bitmap Properties.h" />
+    <ClInclude Include="Bitmap.h" />
+    <ClInclude Include="Compatible Render Target Options.h" />
+    <ClInclude Include="DirectX Version.h" />
+    <ClInclude Include="DPI Resolution.h" />
+    <ClInclude Include="DXGI Channel Format.h" />
+    <ClInclude Include="Pixel Format.h" />
+    <ClInclude Include="Point2dF.h" />
+    <ClInclude Include="Point2dU.h" />
+    <ClInclude Include="RectangleF.h" />
+    <ClInclude Include="RectangleU.h" />
+    <ClInclude Include="Render Target Properties.h" />
+    <ClInclude Include="Render Target Type.h" />
+    <ClInclude Include="Render Target Usage.h" />
+    <ClInclude Include="Render Target.h" />
+    <ClInclude Include="SizeF.h" />
+    <ClInclude Include="SizeU.h" />
+    <ClInclude Include="Type Declarations.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Win32 Structures\Win32 Structures.vcxproj">
+      <Project>{257201a0-0b65-4ea0-ac04-0b8005aecc37}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Bitmap Properties.cpp" />
+    <ClCompile Include="Bitmap.cpp" />
+    <ClCompile Include="compilr.cpp" />
+    <ClCompile Include="DPI Resolution.cpp" />
+    <ClCompile Include="Pixel Format.cpp" />
+    <ClCompile Include="Point2dF.cpp" />
+    <ClCompile Include="Point2dU.cpp" />
+    <ClCompile Include="RectangleF.cpp" />
+    <ClCompile Include="RectangleU.cpp" />
+    <ClCompile Include="Render Target Properties.cpp" />
+    <ClCompile Include="SizeF.cpp" />
+    <ClCompile Include="SizeU.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
