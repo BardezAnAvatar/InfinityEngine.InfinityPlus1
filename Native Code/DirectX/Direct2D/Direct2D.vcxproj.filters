@@ -28,11 +28,26 @@
     <Filter Include="Source Files\Bitmap">
       <UniqueIdentifier>{a1e2ea93-29ff-4d62-ac82-df8b3995c7e0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Brushes">
+      <UniqueIdentifier>{5165d29f-66d9-42dd-9357-06ec7b388a56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Brushes">
+      <UniqueIdentifier>{a17d354a-d7d1-4e4a-9a28-1ff29d096020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Render Targets">
+      <UniqueIdentifier>{95f33316-9a9e-4d2f-afe8-c35f4ab235c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render Targets">
+      <UniqueIdentifier>{cd3ccafe-07aa-44e1-9bb1-173255219023}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Properties">
+      <UniqueIdentifier>{9ab73a62-eeb1-45ff-a1ed-1471ec54fa0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Properties">
+      <UniqueIdentifier>{3aaf1d23-8887-4d5e-b8f8-3f0c56029543}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Render Target.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Pixel Format.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
@@ -75,17 +90,11 @@
     <ClInclude Include="Bitmap Interpolation Mode.h">
       <Filter>Header Files\Enums</Filter>
     </ClInclude>
-    <ClInclude Include="AntialiasMode.h">
-      <Filter>Header Files\Enums</Filter>
-    </ClInclude>
     <ClInclude Include="DPI Resolution.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Render Target Type.h">
       <Filter>Header Files\Enums</Filter>
-    </ClInclude>
-    <ClInclude Include="Render Target Properties.h">
-      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Render Target Usage.h">
       <Filter>Header Files\Enums</Filter>
@@ -93,11 +102,119 @@
     <ClInclude Include="DirectX Version.h">
       <Filter>Header Files\Enums</Filter>
     </ClInclude>
+    <ClInclude Include="ColorF.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Control State.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug Level.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory Type.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Presentation Options.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer Options.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix3x2F.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Antialias Mode.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Brush Extend Mode.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Gamma.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Gradient Stop Collection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Gradient Stop.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Linear Gradient Brush.h">
+      <Filter>Header Files\Brushes</Filter>
+    </ClInclude>
+    <ClInclude Include="Brush.h">
+      <Filter>Header Files\Brushes</Filter>
+    </ClInclude>
+    <ClInclude Include="Bitmap Brush.h">
+      <Filter>Header Files\Brushes</Filter>
+    </ClInclude>
+    <ClInclude Include="Radial Gradient Brush.h">
+      <Filter>Header Files\Brushes</Filter>
+    </ClInclude>
+    <ClInclude Include="Solid Color Brush.h">
+      <Filter>Header Files\Brushes</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Target.h">
+      <Filter>Header Files\Render Targets</Filter>
+    </ClInclude>
+    <ClInclude Include="Control Render Target.h">
+      <Filter>Header Files\Render Targets</Filter>
+    </ClInclude>
+    <ClInclude Include="Bitmap Render Target.h">
+      <Filter>Header Files\Render Targets</Filter>
+    </ClInclude>
+    <ClInclude Include="Bitmap Brush Properties.h">
+      <Filter>Header Files\Components\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="Brush Properties.h">
+      <Filter>Header Files\Components\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="HWND Render Target Properties.h">
+      <Filter>Header Files\Components\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="Linear Gradient Brush Properties.h">
+      <Filter>Header Files\Components\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer Properties.h">
+      <Filter>Header Files\Components\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="Radial Gradient Brush Properties.h">
+      <Filter>Header Files\Components\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Target Properties.h">
+      <Filter>Header Files\Components\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellipse.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Cap Style.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Stroke Style.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dash Style.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Line Joint.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Stroke Style Properties.h">
+      <Filter>Header Files\Components\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="Rounded RectangleF.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="compilr.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SizeU.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
@@ -128,7 +245,79 @@
     <ClCompile Include="DPI Resolution.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="ColorF.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix3x2F.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Layer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Gradient Stop.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Gradient Stop Collection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Brush.cpp">
+      <Filter>Source Files\Brushes</Filter>
+    </ClCompile>
+    <ClCompile Include="Linear Gradient Brush.cpp">
+      <Filter>Source Files\Brushes</Filter>
+    </ClCompile>
+    <ClCompile Include="Bitmap Brush.cpp">
+      <Filter>Source Files\Brushes</Filter>
+    </ClCompile>
+    <ClCompile Include="Radial Gradient Brush.cpp">
+      <Filter>Source Files\Brushes</Filter>
+    </ClCompile>
+    <ClCompile Include="Solid Color Brush.cpp">
+      <Filter>Source Files\Brushes</Filter>
+    </ClCompile>
+    <ClCompile Include="Render Target.cpp">
+      <Filter>Source Files\Render Targets</Filter>
+    </ClCompile>
+    <ClCompile Include="Control Render Target.cpp">
+      <Filter>Source Files\Render Targets</Filter>
+    </ClCompile>
+    <ClCompile Include="Bitmap Render Target.cpp">
+      <Filter>Source Files\Render Targets</Filter>
+    </ClCompile>
+    <ClCompile Include="Radial Gradient Brush Properties.cpp">
+      <Filter>Source Files\Components\Properties</Filter>
+    </ClCompile>
     <ClCompile Include="Render Target Properties.cpp">
+      <Filter>Source Files\Components\Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="Linear Gradient Brush Properties.cpp">
+      <Filter>Source Files\Components\Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="Layer Properties.cpp">
+      <Filter>Source Files\Components\Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="HWND Render Target Properties.cpp">
+      <Filter>Source Files\Components\Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="Brush Properties.cpp">
+      <Filter>Source Files\Components\Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="Bitmap Brush Properties.cpp">
+      <Filter>Source Files\Components\Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellipse.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Stroke Style.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Stroke Style Properties.cpp">
+      <Filter>Source Files\Components\Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="Rounded RectangleF.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>

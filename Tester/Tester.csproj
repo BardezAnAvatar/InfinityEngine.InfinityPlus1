@@ -14,10 +14,14 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -72,6 +76,10 @@
     <ProjectReference Include="..\File Formats\File Formats.csproj">
       <Project>{F2085177-9356-43EE-9744-85AA2FFCACEE}</Project>
       <Name>File Formats</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Native Code\DirectX\Direct2D\Direct2D.vcxproj">
+      <Project>{44208309-EFE3-4A6F-B0F8-9013A16B20DF}</Project>
+      <Name>Direct2D</Name>
     </ProjectReference>
     <ProjectReference Include="..\Output\Output.csproj">
       <Project>{6ECA5199-A497-4BF2-B956-CEB3F0912C17}</Project>

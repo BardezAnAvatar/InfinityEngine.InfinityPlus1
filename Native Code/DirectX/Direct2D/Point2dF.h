@@ -24,14 +24,16 @@ namespace Bardez
 					System::Single y;
 				#pragma endregion
 
+
 				#pragma region Properties
+				public:
 					/// <summary>Represents the X coordinate of the point in question</summary>
 					property System::Single X
 					{
 						System::Single get();
 						void set(System::Single value);
 					}
-					
+
 					/// <summary>Represents the Y coordinate of the point in question</summary>
 					property System::Single Y
 					{
@@ -39,6 +41,7 @@ namespace Bardez
 						void set(System::Single value);
 					}
 				#pragma endregion
+
 
 				#pragma region Construction
 				public:
@@ -57,10 +60,11 @@ namespace Bardez
 					Point2dF(D2D_POINT_2F point);
 				#pragma endregion
 
+
 				#pragma region Methods
 				internal:
 					/// <summary>Converts the managed class reference to an unmanaged equivalent structure</summary>
-					/// <returns>An unmanaged Direct2D struct euqivalent</returns>
+					/// <returns>An unmanaged Direct2D struct equivalent</returns>
 					D2D_POINT_2F ToUnmanaged();
 				#pragma endregion
 				};

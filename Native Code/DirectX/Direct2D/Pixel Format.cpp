@@ -38,7 +38,7 @@ Bardez::Projects::DirectX::Direct2D::PixelFormat::PixelFormat(Bardez::Projects::
 }
 
 /// <summary>Unmanaged constructor</summary>
-/// <param name="size">D2D1_PIXEL_FORMAT source structure</param>
+/// <param name="format">D2D1_PIXEL_FORMAT source structure</param>
 Bardez::Projects::DirectX::Direct2D::PixelFormat::PixelFormat(D2D1_PIXEL_FORMAT format)
 {
 	this->format = (DXGI_ChannelFormat)(format.format);
@@ -49,7 +49,7 @@ Bardez::Projects::DirectX::Direct2D::PixelFormat::PixelFormat(D2D1_PIXEL_FORMAT 
 
 #pragma region Methods
 /// <summary>Converts the managed class reference to an unmanaged equivalent structure</summary>
-/// <returns>An unmanaged Direct2D struct euqivalent</returns>
+/// <returns>An unmanaged Direct2D struct equivalent</returns>
 D2D1_PIXEL_FORMAT Bardez::Projects::DirectX::Direct2D::PixelFormat::ToUnmanaged()
 {
 	D2D1_PIXEL_FORMAT PixelFormat;

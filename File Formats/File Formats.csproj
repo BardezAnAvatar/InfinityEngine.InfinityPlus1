@@ -12,10 +12,14 @@
     <AssemblyName>InfinityPlus1.Files</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,6 +40,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="External\Image\Bitmap\Bitmap File Header.cs" />
+    <Compile Include="External\Image\Bitmap\Bitmap Info Header v2.cs" />
+    <Compile Include="External\Image\Bitmap\Bitmap Info Header v3.cs" />
+    <Compile Include="External\Image\Bitmap\Bitmap Info Header v4.cs" />
+    <Compile Include="External\Image\Bitmap\Bitmap Info Header v5.cs" />
+    <Compile Include="External\Image\Bitmap\Bitmap Info Wrapper.cs" />
+    <Compile Include="External\Image\Bitmap\Device Independent Bitmap.cs" />
+    <Compile Include="External\Image\Bitmap\Enums\Bitmap Bits Per Pixel.cs" />
+    <Compile Include="External\Image\Bitmap\Enums\Bitmap Compression.cs" />
+    <Compile Include="External\Image\Bitmap\Enums\Color Space.cs" />
+    <Compile Include="External\Image\Bitmap\Enums\Rendering Intent.cs" />
+    <Compile Include="External\Image\Bitmap\RGB Coordinate.cs" />
+    <Compile Include="External\Image\Bitmap\RGB Coordinate Triplet.cs" />
+    <Compile Include="External\Image\Pixels\Palette.cs" />
+    <Compile Include="External\Image\Pixels\RGB Quad.cs" />
+    <Compile Include="External\Image\Pixels\RGB Triplet.cs" />
+    <Compile Include="External\Image\Pixels\Enums\PixelFormat.cs" />
+    <Compile Include="External\Image\Enums\ScanLineOrder.cs" />
+    <Compile Include="External\Image\Frame.cs" />
+    <Compile Include="External\Image\Pixels\Pixel Base.cs" />
+    <Compile Include="External\Image\Pixels\Pixel Data.cs" />
+    <Compile Include="External\Image\Pixels\YUV 444.cs" />
     <Compile Include="External\Interplay\ACM\ACM Bit Stream.cs" />
     <Compile Include="External\Interplay\ACM\ACM Return Exception.cs" />
     <Compile Include="External\Interplay\ACM\Amplitude Buffer.cs" />

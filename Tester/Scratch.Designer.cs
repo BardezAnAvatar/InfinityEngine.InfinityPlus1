@@ -28,20 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.direct2dRenderControl1 = new Bardez.Projects.InfinityPlus1.Output.Visual.Direct2dRenderControl();
             this.SuspendLayout();
+            // 
+            // direct2dRenderControl1
+            // 
+            this.direct2dRenderControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.direct2dRenderControl1.Location = new System.Drawing.Point(0, 0);
+            this.direct2dRenderControl1.Name = "direct2dRenderControl1";
+            this.direct2dRenderControl1.Size = new System.Drawing.Size(764, 463);
+            this.direct2dRenderControl1.TabIndex = 0;
             // 
             // Scratch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 463);
+            this.Controls.Add(this.direct2dRenderControl1);
             this.Name = "Scratch";
             this.Text = "Scratch";
             this.Load += new System.EventHandler(this.Scratch_Load);
             this.ResumeLayout(false);
+
+            this.direct2dRenderControl1.InitializeControlDirect2D();
         }
 
         #endregion
+
+        private Output.Visual.Direct2dRenderControl direct2dRenderControl1;
 
     }
 }

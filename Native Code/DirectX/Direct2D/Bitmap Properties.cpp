@@ -50,6 +50,25 @@ Bardez::Projects::DirectX::Direct2D::BitmapProperties::BitmapProperties(Bardez::
 	this->dpi = Bardez::Projects::DirectX::Direct2D::DpiResolution(dpiHorizontal, dpiVertical);
 }
 
+/// <summary>Definition constructor</summary>
+/// <param name="format">Pixel format of the data</param>
+/// <param name="DPI">DPI of the bitmap</param>
+Bardez::Projects::DirectX::Direct2D::BitmapProperties::BitmapProperties(Bardez::Projects::DirectX::Direct2D::PixelFormat^ format, Bardez::Projects::DirectX::Direct2D::DpiResolution DPI)
+{
+	this->pixelFormat = format;
+	this->dpi = DPI;
+}
+
+/// <summary>Definition constructor</summary>
+/// <param name="format">Binary pixel format</param>
+/// <param name="alphaMode">Alpha transparency mode</param>
+/// <param name="DPI">DPI of the bitmap</param>
+Bardez::Projects::DirectX::Direct2D::BitmapProperties::BitmapProperties(Bardez::Projects::DirectX::Direct2D::DXGI_ChannelFormat format, Bardez::Projects::DirectX::Direct2D::AlphaMode alphaMode, Bardez::Projects::DirectX::Direct2D::DpiResolution DPI)
+{
+	this->pixelFormat = gcnew Bardez::Projects::DirectX::Direct2D::PixelFormat(format, alphaMode);
+	this->dpi = DPI;
+}
+
 /// <summary>Unmanaged constructor</summary>
 /// <param name="properties">Unmanaged souce structure</param>
 Bardez::Projects::DirectX::Direct2D::BitmapProperties::BitmapProperties(D2D1_BITMAP_PROPERTIES properties)
@@ -62,7 +81,7 @@ Bardez::Projects::DirectX::Direct2D::BitmapProperties::BitmapProperties(D2D1_BIT
 
 #pragma region Methods
 /// <summary>Converts the managed class reference to an unmanaged equivalent structure</summary>
-/// <returns>An unmanaged Direct2D struct euqivalent</returns>
+/// <returns>An unmanaged Direct2D struct equivalent</returns>
 D2D1_BITMAP_PROPERTIES Bardez::Projects::DirectX::Direct2D::BitmapProperties::ToUnmanaged()
 {
 	D2D1_BITMAP_PROPERTIES properties;

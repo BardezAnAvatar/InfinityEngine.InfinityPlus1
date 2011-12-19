@@ -3,6 +3,7 @@
 #define Bardez_Projects_DirectX_Direct2D_RectangleF
 
 #include <d2dBaseTypes.h>
+#include "SizeF.h"
 
 namespace Bardez
 {
@@ -31,6 +32,7 @@ namespace Bardez
 				#pragma endregion
 
 				#pragma region Properties
+				public:
 					/// <summary>Represents the left X coordinate of the rectangle in question</summary>
 					property System::Single Left
 					{
@@ -58,6 +60,12 @@ namespace Bardez
 						System::Single get();
 						void set(System::Single value);
 					}
+
+					/// <summary>Exposes a rectangle that has its upper-left corner set to (negative infinity, negative infinity) and its lower-right corner set to (infinity, infinity).</summary>
+					static property RectangleF^ InfiniteRectangle
+					{
+						RectangleF^ get();
+					}
 				#pragma endregion
 
 				#pragma region Construction
@@ -70,19 +78,27 @@ namespace Bardez
 					RectangleF(System::Single left, System::Single right, System::Single top, System::Single bottom);
 
 					/// <summary>Definition constructor</summary>
+					/// <param name="size">Size of the rectangle, origin of 0,0</param>
+					RectangleF(SizeF^ size);
+
+					/// <summary>Definition constructor</summary>
 					/// <param name="rectangle">System.Drawing struct containing a rectangle</param>
 					RectangleF(System::Drawing::RectangleF rectangle);
 
+					/// <summary>Definition constructor</summary>
+					/// <param name="rectangle">System.Drawing struct containing a rectangle</param>
+					RectangleF(System::Drawing::Rectangle rectangle);
+
 				internal:
 					/// <summary>Unmanaged constructor</summary>
-					/// <param name="point">D2D_RECT_F source structure</param>
+					/// <param name="rectangle">D2D_RECT_F source structure</param>
 					RectangleF(D2D_RECT_F rectangle);
 				#pragma endregion
 
 				#pragma region Methods
 				internal:
 					/// <summary>Converts the managed class reference to an unmanaged equivalent structure</summary>
-					/// <returns>An unmanaged Direct2D struct euqivalent</returns>
+					/// <returns>An unmanaged Direct2D struct equivalent</returns>
 					D2D_RECT_F ToUnmanaged();
 				#pragma endregion
 				};

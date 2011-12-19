@@ -57,7 +57,7 @@ Bardez::Projects::DirectX::Direct2D::Point2dU::Point2dU(D2D_POINT_2U point)
 
 #pragma region Methods
 /// <summary>Converts the managed class reference to an unmanaged equivalent structure</summary>
-/// <returns>An unmanaged Direct2D struct euqivalent</returns>
+/// <returns>An unmanaged Direct2D struct equivalent</returns>
 D2D_POINT_2U Bardez::Projects::DirectX::Direct2D::Point2dU::ToUnmanaged()
 {
 	D2D_POINT_2U point;

@@ -21,19 +21,21 @@ namespace Bardez
 				protected:
 					/// <summary>Represents the pixel format of the binary data of the pixel(s)</summary>
 					DXGI_ChannelFormat format;
-					
+
 					/// <summary>Represents the alpha transparency format of the binary data of the pixel(s)</summary>
 					AlphaMode alphaType;
 				#pragma endregion
 
+
 				#pragma region Properties
+				public:
 					/// <summary>Represents the pixel format of the binary data of the pixel(s)</summary>
 					property DXGI_ChannelFormat Format
 					{
 						DXGI_ChannelFormat get();
 						void set(DXGI_ChannelFormat value);
 					}
-					
+
 					/// <summary>Represents the alpha transparency format of the binary data of the pixel(s)</summary>
 					property AlphaMode AlphaType
 					{
@@ -41,6 +43,7 @@ namespace Bardez
 						void set(AlphaMode value);
 					}
 				#pragma endregion
+
 
 				#pragma region Construction
 				public:
@@ -51,14 +54,14 @@ namespace Bardez
 
 				internal:
 					/// <summary>Unmanaged constructor</summary>
-					/// <param name="size">D2D1_PIXEL_FORMAT source structure</param>
+					/// <param name="format">D2D1_PIXEL_FORMAT source structure</param>
 					PixelFormat(D2D1_PIXEL_FORMAT format);
 				#pragma endregion
 
 				#pragma region Methods
 				internal:
 					/// <summary>Converts the managed class reference to an unmanaged equivalent structure</summary>
-					/// <returns>An unmanaged Direct2D struct euqivalent</returns>
+					/// <returns>An unmanaged Direct2D struct equivalent</returns>
 					D2D1_PIXEL_FORMAT ToUnmanaged();
 				#pragma endregion
 				};

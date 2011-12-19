@@ -57,7 +57,7 @@ Bardez::Projects::DirectX::Direct2D::SizeF::SizeF(D2D_SIZE_F size)
 
 #pragma region Methods
 /// <summary>Converts the managed class reference to an unmanaged equivalent structure</summary>
-/// <returns>An unmanaged Direct2D struct euqivalent</returns>
+/// <returns>An unmanaged Direct2D struct equivalent</returns>
 D2D_SIZE_F Bardez::Projects::DirectX::Direct2D::SizeF::ToUnmanaged()
 {
 	D2D_SIZE_F SizeF;

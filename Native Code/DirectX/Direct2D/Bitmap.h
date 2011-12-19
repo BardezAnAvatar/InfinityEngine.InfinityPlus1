@@ -53,6 +53,20 @@ namespace Bardez
 				#pragma endregion
 
 
+				#pragma region Destruction
+					/// <summary>Destrutor</summary>
+					/// <remarks>Dispose()</remarks>
+					~Bitmap();
+
+					/// <summary>Destrutor</summary>
+					/// <remarks>Finalize()</remarks>
+					!Bitmap();
+
+					/// <summary>Destrutor logic, disposes the object</summary>
+					virtual void DisposeUnmanaged();
+				#pragma endregion
+
+
 				#pragma region Methods
 				public:
 					/// <summary>Copies the specified region from the specified bitmap into the current bitmap.</summary>

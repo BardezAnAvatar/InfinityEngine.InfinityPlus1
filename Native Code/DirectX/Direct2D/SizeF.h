@@ -25,6 +25,7 @@ namespace Bardez
 				#pragma endregion
 
 				#pragma region Properties
+				public:
 					/// <summary>Represents the width of the size in question</summary>
 					property System::Single Width
 					{
@@ -60,7 +61,7 @@ namespace Bardez
 				#pragma region Methods
 				internal:
 					/// <summary>Converts the managed class reference to an unmanaged equivalent structure</summary>
-					/// <returns>An unmanaged Direct2D struct euqivalent</returns>
+					/// <returns>An unmanaged Direct2D struct equivalent</returns>
 					D2D_SIZE_F ToUnmanaged();
 				#pragma endregion
 				};

@@ -12,10 +12,14 @@
     <AssemblyName>Output</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,6 +44,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Audio\Audio Delegates.cs" />
@@ -49,8 +55,24 @@
     <Compile Include="Audio\XAudio2 Output.cs" />
     <Compile Include="Audio\XAudio2 Voice Reference.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Visual\Direct 2D Resource Manager.cs" />
+    <Compile Include="Visual\Direct2D Render Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Visual\Visual Render Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Visual\Visual Render Resource Manager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\File Formats\File Formats.csproj">
+      <Project>{F2085177-9356-43EE-9744-85AA2FFCACEE}</Project>
+      <Name>File Formats</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Native Code\DirectX\Direct2D\Direct2D.vcxproj">
+      <Project>{44208309-EFE3-4A6F-B0F8-9013A16B20DF}</Project>
+      <Name>Direct2D</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Native Code\DirectX\XAudio2\XAudio2.vcxproj">
       <Project>{FE898E65-DAFF-435D-9A72-4C9D3306636A}</Project>
       <Name>XAudio2</Name>

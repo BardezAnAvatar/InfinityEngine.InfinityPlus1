@@ -27,6 +27,7 @@ void Bardez::Projects::DirectX::Direct2D::SizeU::Height::set(System::UInt32 valu
 }
 #pragma endregion
 
+
 #pragma region Construction
 /// <summary>Definition constructor</summary>
 /// <param name="width">Width of the size, as an integer</param>
@@ -57,7 +58,7 @@ Bardez::Projects::DirectX::Direct2D::SizeU::SizeU(D2D_SIZE_U size)
 
 #pragma region Methods
 /// <summary>Converts the managed class reference to an unmanaged equivalent structure</summary>
-/// <returns>An unmanaged Direct2D struct euqivalent</returns>
+/// <returns>An unmanaged Direct2D struct equivalent</returns>
 D2D_SIZE_U Bardez::Projects::DirectX::Direct2D::SizeU::ToUnmanaged()
 {
 	D2D_SIZE_U sizeu;

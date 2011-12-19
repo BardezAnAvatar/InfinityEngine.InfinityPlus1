@@ -155,7 +155,7 @@ Bardez::Projects::DirectX::Direct2D::RenderTargetProperties::RenderTargetPropert
 
 #pragma region Methods
 /// <summary>Converts the managed class reference to an unmanaged equivalent structure</summary>
-/// <returns>An unmanaged Direct2D struct euqivalent</returns>
+/// <returns>An unmanaged Direct2D struct equivalent</returns>
 D2D1_RENDER_TARGET_PROPERTIES Bardez::Projects::DirectX::Direct2D::RenderTargetProperties::ToUnmanaged()
 {
 	D2D1_RENDER_TARGET_PROPERTIES properties;

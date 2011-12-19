@@ -16,9 +16,11 @@ namespace Bardez
 				/// <remarks>See http://msdn.microsoft.com/en-us/library/windows/desktop/dd368085%28v=VS.85%29.aspx for more detail</remarks>
 				public enum struct CompatibleRenderTargetOptions : System::UInt32
 				{
+					///	<summary>The render target supports no additional features.</summary>
 					[DescriptionAttribute("The render target supports no additional features.")]
 					None			= 0,
-						
+
+					///	<summary>The render target supports interoperability with the Windows Graphics Device Interface (GDI).</summary>
 					[DescriptionAttribute("The render target supports interoperability with the Windows Graphics Device Interface (GDI).")]
 					GdiCompatible   = 1,
 				};

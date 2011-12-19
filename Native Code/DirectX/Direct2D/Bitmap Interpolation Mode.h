@@ -13,6 +13,7 @@ namespace Bardez
 		{
 			namespace Direct2D
 			{
+				/// <summary>Represents the interpolation mode of a bitmap</summary>
 				/// <remarks>
 				///		To stretch an image, each pixel in the original image must be mapped to a group of pixels in the larger image.
 				///		To shrink an image, groups of pixels in the original image must be mapped to single pixels in the smaller image.
@@ -24,9 +25,11 @@ namespace Bardez
 				///	</remarks>
 				public enum struct BitmapInterpolationMode : System::UInt32
 				{
+					/// <summary>Use the exact color of the nearest bitmap pixel to the current rendering pixel.</summary>
 					[DescriptionAttribute("Use the exact color of the nearest bitmap pixel to the current rendering pixel.")]
 					NearestNeighbor	= 0,
 						
+					/// <summary>Interpolate a color from the four bitmap pixels that are the nearest to the rendering pixel.</summary>
 					[DescriptionAttribute("Interpolate a color from the four bitmap pixels that are the nearest to the rendering pixel.")]
 					Linear			= 1,
 				};

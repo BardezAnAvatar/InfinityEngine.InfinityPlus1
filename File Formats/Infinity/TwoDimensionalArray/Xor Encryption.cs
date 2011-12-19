@@ -37,7 +37,9 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.TwoDimensionalArray
                 Int32 keyIndex = 0;
                 for (Int32 index = 2; index < input.Length; ++index)
                 {
-                    keyIndex %= Key.Length;    //wrap the index back to 0
+                    if (Key.Length > 0)
+                        keyIndex %= Key.Length;    //wrap the index back to 0
+
                     decrypted[index - 2] = (Byte)(input[index] ^ Key[keyIndex]);
                     ++keyIndex;
                 }

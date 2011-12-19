@@ -25,6 +25,7 @@ namespace Bardez
 				#pragma endregion
 
 				#pragma region Properties
+				public:
 					/// <summary>Represents the X coordinate of the point in question</summary>
 					property System::UInt32 X
 					{
@@ -60,7 +61,7 @@ namespace Bardez
 				#pragma region Methods
 				internal:
 					/// <summary>Converts the managed class reference to an unmanaged equivalent structure</summary>
-					/// <returns>An unmanaged Direct2D struct euqivalent</returns>
+					/// <returns>An unmanaged Direct2D struct equivalent</returns>
 					D2D_POINT_2U ToUnmanaged();
 				#pragma endregion
 				};

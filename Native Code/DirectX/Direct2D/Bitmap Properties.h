@@ -61,6 +61,17 @@ namespace Bardez
 					/// <param name="dpiHorizontal">Horizontal DPI of the bitmap</param>
 					/// <param name="dpiVertical">Vertical DPI of the bitmap</param>
 					BitmapProperties(DXGI_ChannelFormat format, AlphaMode alphaMode, System::Single dpiHorizontal, System::Single dpiVertical);
+
+					/// <summary>Definition constructor</summary>
+					/// <param name="format">Pixel format of the data</param>
+					/// <param name="DPI">DPI of the bitmap</param>
+					BitmapProperties(PixelFormat^ format, DpiResolution DPI);
+
+					/// <summary>Definition constructor</summary>
+					/// <param name="format">Binary pixel format</param>
+					/// <param name="alphaMode">Alpha transparency mode</param>
+					/// <param name="DPI">DPI of the bitmap</param>
+					BitmapProperties(DXGI_ChannelFormat format, AlphaMode alphaMode, DpiResolution DPI);
 				
 				internal:
 					/// <summary>Unmanaged constructor</summary>
@@ -72,7 +83,7 @@ namespace Bardez
 				#pragma region Methods
 				internal:
 					/// <summary>Converts the managed class reference to an unmanaged equivalent structure</summary>
-					/// <returns>An unmanaged Direct2D struct euqivalent</returns>
+					/// <returns>An unmanaged Direct2D struct equivalent</returns>
 					D2D1_BITMAP_PROPERTIES ToUnmanaged();
 				#pragma endregion
 				};

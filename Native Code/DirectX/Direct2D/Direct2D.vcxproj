@@ -54,6 +54,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -77,25 +78,59 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Alpha Mode.h" />
-    <ClInclude Include="AntialiasMode.h" />
+    <ClInclude Include="Antialias Mode.h" />
+    <ClInclude Include="Bitmap Brush Properties.h" />
+    <ClInclude Include="Bitmap Brush.h" />
     <ClInclude Include="Bitmap Interpolation Mode.h" />
     <ClInclude Include="Bitmap Properties.h" />
+    <ClInclude Include="Bitmap Render Target.h" />
     <ClInclude Include="Bitmap.h" />
+    <ClInclude Include="Brush Extend Mode.h" />
+    <ClInclude Include="Brush Properties.h" />
+    <ClInclude Include="Brush.h" />
+    <ClInclude Include="Cap Style.h" />
+    <ClInclude Include="ColorF.h" />
     <ClInclude Include="Compatible Render Target Options.h" />
+    <ClInclude Include="Control Render Target.h" />
+    <ClInclude Include="Control State.h" />
+    <ClInclude Include="Dash Style.h" />
+    <ClInclude Include="Debug Level.h" />
     <ClInclude Include="DirectX Version.h" />
     <ClInclude Include="DPI Resolution.h" />
     <ClInclude Include="DXGI Channel Format.h" />
+    <ClInclude Include="Ellipse.h" />
+    <ClInclude Include="Factory Type.h" />
+    <ClInclude Include="Factory.h" />
+    <ClInclude Include="Gamma.h" />
+    <ClInclude Include="Geometry.h" />
+    <ClInclude Include="Gradient Stop Collection.h" />
+    <ClInclude Include="Gradient Stop.h" />
+    <ClInclude Include="HWND Render Target Properties.h" />
+    <ClInclude Include="Layer Options.h" />
+    <ClInclude Include="Layer Properties.h" />
+    <ClInclude Include="Layer.h" />
+    <ClInclude Include="Line Joint.h" />
+    <ClInclude Include="Linear Gradient Brush Properties.h" />
+    <ClInclude Include="Linear Gradient Brush.h" />
+    <ClInclude Include="Matrix3x2F.h" />
     <ClInclude Include="Pixel Format.h" />
     <ClInclude Include="Point2dF.h" />
     <ClInclude Include="Point2dU.h" />
+    <ClInclude Include="Presentation Options.h" />
+    <ClInclude Include="Radial Gradient Brush Properties.h" />
+    <ClInclude Include="Radial Gradient Brush.h" />
     <ClInclude Include="RectangleF.h" />
     <ClInclude Include="RectangleU.h" />
     <ClInclude Include="Render Target Properties.h" />
     <ClInclude Include="Render Target Type.h" />
     <ClInclude Include="Render Target Usage.h" />
     <ClInclude Include="Render Target.h" />
+    <ClInclude Include="Rounded RectangleF.h" />
     <ClInclude Include="SizeF.h" />
     <ClInclude Include="SizeU.h" />
+    <ClInclude Include="Solid Color Brush.h" />
+    <ClInclude Include="Stroke Style Properties.h" />
+    <ClInclude Include="Stroke Style.h" />
     <ClInclude Include="Type Declarations.h" />
   </ItemGroup>
   <ItemGroup>
@@ -104,22 +139,48 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bitmap Brush Properties.cpp" />
+    <ClCompile Include="Bitmap Brush.cpp" />
     <ClCompile Include="Bitmap Properties.cpp" />
+    <ClCompile Include="Bitmap Render Target.cpp" />
     <ClCompile Include="Bitmap.cpp" />
-    <ClCompile Include="compilr.cpp" />
+    <ClCompile Include="Brush Properties.cpp" />
+    <ClCompile Include="Brush.cpp" />
+    <ClCompile Include="ColorF.cpp" />
+    <ClCompile Include="Control Render Target.cpp" />
     <ClCompile Include="DPI Resolution.cpp" />
+    <ClCompile Include="Ellipse.cpp" />
+    <ClCompile Include="Factory.cpp" />
+    <ClCompile Include="Gradient Stop Collection.cpp" />
+    <ClCompile Include="Gradient Stop.cpp" />
+    <ClCompile Include="HWND Render Target Properties.cpp" />
+    <ClCompile Include="Layer Properties.cpp" />
+    <ClCompile Include="Layer.cpp" />
+    <ClCompile Include="Linear Gradient Brush Properties.cpp" />
+    <ClCompile Include="Linear Gradient Brush.cpp" />
+    <ClCompile Include="Matrix3x2F.cpp" />
     <ClCompile Include="Pixel Format.cpp" />
     <ClCompile Include="Point2dF.cpp" />
     <ClCompile Include="Point2dU.cpp" />
+    <ClCompile Include="Radial Gradient Brush Properties.cpp" />
+    <ClCompile Include="Radial Gradient Brush.cpp" />
     <ClCompile Include="RectangleF.cpp" />
     <ClCompile Include="RectangleU.cpp" />
     <ClCompile Include="Render Target Properties.cpp" />
+    <ClCompile Include="Render Target.cpp" />
+    <ClCompile Include="Rounded RectangleF.cpp" />
     <ClCompile Include="SizeF.cpp" />
     <ClCompile Include="SizeU.cpp" />
+    <ClCompile Include="Solid Color Brush.cpp" />
+    <ClCompile Include="Stroke Style Properties.cpp" />
+    <ClCompile Include="Stroke Style.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

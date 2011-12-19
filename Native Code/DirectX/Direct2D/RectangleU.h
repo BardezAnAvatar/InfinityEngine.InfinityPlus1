@@ -3,6 +3,7 @@
 #define Bardez_Projects_DirectX_Direct2D_RectangleU
 
 #include <d2dBaseTypes.h>
+#include "SizeU.h"
 
 namespace Bardez
 {
@@ -31,6 +32,7 @@ namespace Bardez
 				#pragma endregion
 
 				#pragma region Properties
+				public:
 					/// <summary>Represents the left X coordinate of the rectangle in question</summary>
 					property System::UInt32 Left
 					{
@@ -70,19 +72,23 @@ namespace Bardez
 					RectangleU(System::UInt32 left, System::UInt32 right, System::UInt32 top, System::UInt32 bottom);
 
 					/// <summary>Definition constructor</summary>
+					/// <param name="size">Size of the rectangle, origin of 0,0</param>
+					RectangleU(SizeU^ size);
+
+					/// <summary>Definition constructor</summary>
 					/// <param name="rectangle">System.Drawing struct containing a rectangle</param>
 					RectangleU(System::Drawing::Rectangle rectangle);
 
 				internal:
 					/// <summary>Unmanaged constructor</summary>
-					/// <param name="point">D2D_RECT_U source structure</param>
+					/// <param name="rectangle">D2D_RECT_U source structure</param>
 					RectangleU(D2D_RECT_U rectangle);
 				#pragma endregion
 
 				#pragma region Methods
 				internal:
 					/// <summary>Converts the managed class reference to an unmanaged equivalent structure</summary>
-					/// <returns>An unmanaged Direct2D struct euqivalent</returns>
+					/// <returns>An unmanaged Direct2D struct equivalent</returns>
 					D2D_RECT_U ToUnmanaged();
 				#pragma endregion
 				};

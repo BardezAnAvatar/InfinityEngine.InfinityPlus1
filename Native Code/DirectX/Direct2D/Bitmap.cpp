@@ -27,6 +27,34 @@ Bardez::Projects::DirectX::Direct2D::Bitmap::Bitmap(ID2D1Bitmap* handle)
 #pragma endregion
 
 
+#pragma region Destruction
+/// <summary>Destrutor</summary>
+/// <remarks>Dispose()</remarks>
+Bardez::Projects::DirectX::Direct2D::Bitmap::~Bitmap()
+{
+	this->DisposeUnmanaged();
+}
+
+/// <summary>Destrutor</summary>
+/// <remarks>Finalize()</remarks>
+Bardez::Projects::DirectX::Direct2D::Bitmap::!Bitmap()
+{
+	this->DisposeUnmanaged();
+}
+
+/// <summary>Destrutor logic, disposes the object</summary>
+void Bardez::Projects::DirectX::Direct2D::Bitmap::DisposeUnmanaged()
+{
+	// Dispose this rendering target
+	if (this->BitmapPtr)
+	{
+		this->BitmapPtr->Release();
+		this->BitmapPtr = NULL;
+	}
+}
+#pragma endregion
+
+
 #pragma region Methods
 /// <summary>Copies the specified region from the specified bitmap into the current bitmap.</summary>
 /// <param name="upperPoint">In the current bitmap, the upper-left corner of the area to which the data is copied. If null, [0,0] will be used</param>
@@ -39,7 +67,7 @@ Bardez::Projects::DirectX::Direct2D::Bitmap::Bitmap(ID2D1Bitmap* handle)
 ///</remarks>
 Bardez::Projects::Win32::ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromBitmap(Bardez::Projects::DirectX::Direct2D::Point2dU^ upperPoint, Bardez::Projects::DirectX::Direct2D::Bitmap^ source, Bardez::Projects::DirectX::Direct2D::RectangleU^ area)
 {
-	if (source = nullptr)
+	if (source == nullptr)
 		throw gcnew System::ArgumentNullException("Source Bitmap cannot be null.");
 
 	D2D_POINT_2U* ptrPoint = (upperPoint == nullptr ? NULL : &(upperPoint->ToUnmanaged()));
@@ -73,7 +101,7 @@ Bardez::Projects::Win32::ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap:
 ///</remarks>
 Bardez::Projects::Win32::ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromRenderTarget(Bardez::Projects::DirectX::Direct2D::Point2dU^ upperPoint, Bardez::Projects::DirectX::Direct2D::RenderTarget^ source, Bardez::Projects::DirectX::Direct2D::RectangleU^ area)
 {
-	if (source = nullptr)
+	if (source == nullptr)
 		throw gcnew System::ArgumentNullException("Source RenderTarget cannot be null.");
 
 	D2D_POINT_2U* ptrPoint = (upperPoint == nullptr ? NULL : &(upperPoint->ToUnmanaged()));
@@ -111,7 +139,7 @@ Bardez::Projects::Win32::ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap:
 ///</remarks>
 Bardez::Projects::Win32::ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromMemory(Bardez::Projects::DirectX::Direct2D::RectangleU^ area, array<System::Byte>^ source, System::UInt32 pitch)
 {
-	if (source = nullptr)
+	if (source == nullptr)
 		throw gcnew System::ArgumentNullException("Source data cannot be null.");
 
 	D2D_RECT_U* ptrRect = (area == nullptr ? NULL : &(area->ToUnmanaged()));

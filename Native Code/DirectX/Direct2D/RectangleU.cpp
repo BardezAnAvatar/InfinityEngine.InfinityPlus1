@@ -76,8 +76,18 @@ Bardez::Projects::DirectX::Direct2D::RectangleU::RectangleU(System::Drawing::Rec
 	this->bottom = rectangle.Bottom;
 }
 
+/// <summary>Definition constructor</summary>
+/// <param name="size">Size of the rectangle, origin of 0,0</param>
+Bardez::Projects::DirectX::Direct2D::RectangleU::RectangleU(Bardez::Projects::DirectX::Direct2D::SizeU^ size)
+{
+	this->left = 0;
+	this->right = size->Width > 0 ? size->Width - 1 : 0;
+	this->top = 0;
+	this->bottom = size->Height > 0 ? size->Height - 1 : 0;
+}
+
 /// <summary>Unmanaged constructor</summary>
-/// <param name="point">D2D_RECT_U source structure</param>
+/// <param name="rectangle">D2D_RECT_U source structure</param>
 Bardez::Projects::DirectX::Direct2D::RectangleU::RectangleU(D2D_RECT_U rectangle)
 {
 	this->left = rectangle.left;
@@ -90,7 +100,7 @@ Bardez::Projects::DirectX::Direct2D::RectangleU::RectangleU(D2D_RECT_U rectangle
 
 #pragma region Methods
 /// <summary>Converts the managed class reference to an unmanaged equivalent structure</summary>
-/// <returns>An unmanaged Direct2D struct euqivalent</returns>
+/// <returns>An unmanaged Direct2D struct equivalent</returns>
 D2D_RECT_U Bardez::Projects::DirectX::Direct2D::RectangleU::ToUnmanaged()
 {
 	D2D_RECT_U rectangle;

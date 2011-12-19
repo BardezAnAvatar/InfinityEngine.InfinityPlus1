@@ -147,7 +147,7 @@ namespace Bardez
 				#pragma region Methods
 				internal:
 					/// <summary>Converts the managed class reference to an unmanaged equivalent structure</summary>
-					/// <returns>An unmanaged Direct2D struct euqivalent</returns>
+					/// <returns>An unmanaged Direct2D struct equivalent</returns>
 					D2D1_RENDER_TARGET_PROPERTIES ToUnmanaged();
 				#pragma endregion
 				};

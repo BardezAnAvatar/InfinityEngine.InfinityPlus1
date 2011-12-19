@@ -8,6 +8,7 @@ using Bardez.Projects.DirectX.XAudio2;
 using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component;
 using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Wave;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.Win32;
 using Bardez.Projects.Win32.Audio;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Output.DirectX

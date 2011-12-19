@@ -19,9 +19,14 @@ namespace Bardez
 				///	</remarks>
 				public enum struct AntialiasMode : System::UInt32
 				{
+					/// <summary>Edges are antialiased using the Direct2D per-primitive method of high-quality antialiasing.</summary>
 					[DescriptionAttribute("Edges are antialiased using the Direct2D per-primitive method of high-quality antialiasing.")]
 					PerPrimitive	= 0,
-						
+
+					/// <summary>
+					///		Objects are aliased in most cases. Objects are antialiased only when they are drawn to a render target created by the CreateDxgiSurfaceRenderTarget
+					//		method and Direct3D multisampling has been enabled on the backing DirectX Graphics Infrastructure (DXGI) surface.
+					///	</summary>
 					[DescriptionAttribute("Objects are aliased in most cases. Objects are antialiased only when they are drawn to a render target created by the CreateDxgiSurfaceRenderTarget method and Direct3D multisampling has been enabled on the backing DirectX Graphics Infrastructure (DXGI) surface.")]
 					Aliased			= 1,
 				};
