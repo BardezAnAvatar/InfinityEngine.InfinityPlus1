@@ -12,14 +12,10 @@
     <AssemblyName>InfinityPlus1.Files</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,6 +49,9 @@
     <Compile Include="External\Image\Bitmap\Enums\Rendering Intent.cs" />
     <Compile Include="External\Image\Bitmap\RGB Coordinate.cs" />
     <Compile Include="External\Image\Bitmap\RGB Coordinate Triplet.cs" />
+    <Compile Include="External\Image\JPEG\JFIF Header.cs" />
+    <Compile Include="External\Image\JPEG\JPEG JFIF.cs" />
+    <Compile Include="External\Image\JPEG\JPEG Interchange Constants.cs" />
     <Compile Include="External\Image\Pixels\Palette.cs" />
     <Compile Include="External\Image\Pixels\RGB Quad.cs" />
     <Compile Include="External\Image\Pixels\RGB Triplet.cs" />
@@ -164,7 +163,7 @@
     <Compile Include="Infinity\Effect\Enums\Effect Resistance.cs" />
     <Compile Include="Infinity\Effect\Enums\Effect Saving Throw.cs" />
     <Compile Include="Infinity\Globals\Constants.cs" />
-    <Compile Include="Infinity\Globals\Null Terminated String.cs" />
+    <Compile Include="Base\Null Terminated String.cs" />
     <Compile Include="Infinity\Globals\String Reference.cs" />
     <Compile Include="Infinity\Globals\Resource Reference.cs" />
     <Compile Include="Infinity\Globals\Resource Enum.cs" />
