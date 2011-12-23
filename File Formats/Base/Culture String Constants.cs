@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Globals
+namespace Bardez.Projects.InfinityPlus1.Files.Base
 {
-    internal static class Constants
+    /// <summary>Contains a list of constants</summary>
+    internal static class CultureConstants
     {
         /// <summary>String representing the English localisation code</summary>
         internal const String CultureCodeEnglish = "en-US";
