@@ -292,10 +292,6 @@
       <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
       <Name>Configuration Handler</Name>
     </ProjectReference>
-    <ProjectReference Include="..\File Formats\File Formats.csproj">
-      <Project>{F2085177-9356-43EE-9744-85AA2FFCACEE}</Project>
-      <Name>File Formats</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Native Code\DirectX\XAudio2\XAudio2.vcxproj">
       <Project>{FE898E65-DAFF-435D-9A72-4C9D3306636A}</Project>
       <Name>XAudio2</Name>
