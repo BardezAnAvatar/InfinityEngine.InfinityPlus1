@@ -35,16 +35,107 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Image\Bitmap\Bitmap File Header.cs" />
+    <Compile Include="Image\Bitmap\Bitmap Info Header v2.cs" />
+    <Compile Include="Image\Bitmap\Bitmap Info Header v3.cs" />
+    <Compile Include="Image\Bitmap\Bitmap Info Header v4.cs" />
+    <Compile Include="Image\Bitmap\Bitmap Info Header v5.cs" />
+    <Compile Include="Image\Bitmap\Bitmap Info Wrapper.cs" />
+    <Compile Include="Image\Bitmap\Device Independent Bitmap.cs" />
+    <Compile Include="Image\Bitmap\Enums\Bitmap Bits Per Pixel.cs" />
+    <Compile Include="Image\Bitmap\Enums\Bitmap Compression.cs" />
+    <Compile Include="Image\Bitmap\Enums\Color Space.cs" />
+    <Compile Include="Image\Bitmap\Enums\Rendering Intent.cs" />
+    <Compile Include="Image\Bitmap\RGB Coordinate.cs" />
+    <Compile Include="Image\Bitmap\RGB Coordinate Triplet.cs" />
+    <Compile Include="Image\JPEG\Component Data Float.cs" />
+    <Compile Include="Image\JPEG\Component Data Integer.cs" />
+    <Compile Include="Image\JPEG\Component Data.cs" />
+    <Compile Include="Image\JPEG\JPEG Parser.cs" />
+    <Compile Include="Image\Mathematics\AC Predictive Smoothing.cs" />
+    <Compile Include="Image\Mathematics\Discrete Cosine Transformation.cs" />
+    <Compile Include="Image\JPEG\Generic Coding Table Segment.cs" />
+    <Compile Include="Image\JPEG\ICoder.cs" />
+    <Compile Include="Image\JPEG\Mimimum Coded Unit.cs" />
+    <Compile Include="Image\JPEG\Scan Component Data.cs" />
+    <Compile Include="Image\JPEG\Frame Component Parameter.cs" />
+    <Compile Include="Image\JPEG\Container Segment.cs" />
+    <Compile Include="Image\JPEG\Entropy Coded Secment.cs" />
+    <Compile Include="Image\JPEG\Enums\Density Unit.cs" />
+    <Compile Include="Image\JPEG\Generic Coding Table.cs" />
+    <Compile Include="Image\JPEG\Generic Table Segment.cs" />
+    <Compile Include="Image\JPEG\Generic Table.cs" />
+    <Compile Include="Image\JPEG\Huffman Bit Reader.cs" />
+    <Compile Include="Image\JPEG\Huffman Table.cs" />
+    <Compile Include="Image\JPEG\Huffman Coder.cs" />
+    <Compile Include="Image\JPEG\JFIF Header.cs" />
+    <Compile Include="Image\JPEG\Frame Header.cs" />
+    <Compile Include="Image\JPEG\JPEG Frame.cs" />
+    <Compile Include="Image\JPEG\JPEG JFIF Interchange.cs" />
+    <Compile Include="Image\JPEG\Interchange Constants.cs" />
+    <Compile Include="Image\JPEG\JPEG JFIF Parser.cs" />
+    <Compile Include="Image\JPEG\Marker Segment Sub-Stream.cs" />
+    <Compile Include="Image\JPEG\Marker Segment.cs" />
+    <Compile Include="Image\JPEG\Quantization Table.cs" />
+    <Compile Include="Image\JPEG\Restart Marker.cs" />
+    <Compile Include="Image\JPEG\Restart Interval.cs" />
+    <Compile Include="Image\JPEG\Scan Component Parameter.cs" />
+    <Compile Include="Image\JPEG\Scan Header.cs" />
+    <Compile Include="Image\JPEG\Scan.cs" />
+    <Compile Include="Image\Pixels\Palette.cs" />
+    <Compile Include="Image\Pixels\Resize.cs" />
+    <Compile Include="Image\Pixels\RGB Quad.cs" />
+    <Compile Include="Image\Pixels\RGB Triplet.cs" />
+    <Compile Include="Image\Pixels\Enums\PixelFormat.cs" />
+    <Compile Include="Image\Enums\ScanLineOrder.cs" />
+    <Compile Include="Image\Frame.cs" />
+    <Compile Include="Image\Pixels\Pixel Base.cs" />
+    <Compile Include="Image\Pixels\Pixel Data.cs" />
+    <Compile Include="Image\Pixels\YUV 444.cs" />
+    <Compile Include="RIFF\Component\ChunkType.cs" />
+    <Compile Include="RIFF\Component\Riff Chunk Factory.cs" />
+    <Compile Include="RIFF\Component\RIFF Chunk.cs" />
+    <Compile Include="RIFF\Component\RIFF File.cs" />
+    <Compile Include="RIFF\Component\RIFF Throne Chunk.cs" />
+    <Compile Include="RIFF\Component\RIFF Sub Chunk.cs" />
+    <Compile Include="RIFF\Component\RIFF Super Chunk.cs" />
+    <Compile Include="RIFF\Wave\Enums\Data Format.cs" />
+    <Compile Include="RIFF\Wave\Wave Format Chunk.cs" />
+    <Compile Include="RIFF\Wave\Wave Sample Data Chunk.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Configuration Handler\Configuration Handler.csproj">
+      <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
+      <Name>Configuration Handler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReusableCode\ReusableCode.csproj">
+      <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
+      <Name>ReusableCode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Native Code\Win32 Structures\Win32 Structures.vcxproj">
+      <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
+      <Name>Win32 Structures</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="RIFF\AudioVideoInterleave\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Image\JPEG\_Notes.txt" />
+    <Content Include="RIFF\RIFF Spec.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
