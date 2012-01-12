@@ -2,14 +2,14 @@
 using System.IO;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Item;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Item1;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item.Item1;
 using Bardez.Projects.InfinityPlus1.Test;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Item
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Item.ItemAbility class.</summary>
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item.ItemAbility class.</summary>
     public class ItemAbilityTest : FileTesterBase
     {
         #region Fields

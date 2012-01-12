@@ -8,7 +8,7 @@
     <ProjectGuid>{4D2A899B-3674-4288-81A8-C8F11636C2DA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bardez.Projects.InfinityPlus1.FileFormats.Base</RootNamespace>
+    <RootNamespace>Bardez.Projects.InfinityPlus1.FileFormats.Basic</RootNamespace>
     <AssemblyName>Basic Formats</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

@@ -2,12 +2,12 @@
 using System.IO;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Initialization;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Initialization;
 using Bardez.Projects.InfinityPlus1.Test;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Initialization
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Initialization.InitConfig class.</summary>
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Initialization.InitConfig class.</summary>
     public class IniTest : FileTesterBase
     {
         #region Fields

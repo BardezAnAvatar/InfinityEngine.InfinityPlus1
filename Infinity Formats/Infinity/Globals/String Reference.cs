@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Globals
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals
 {
     /// <summary>Represents an index into the dialog.tlk file, referencing a string</summary>
     public class StringReference

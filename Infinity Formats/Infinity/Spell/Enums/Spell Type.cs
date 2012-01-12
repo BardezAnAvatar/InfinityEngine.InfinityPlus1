@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell.Enums
 {
     public enum SpellType : ushort /* UInt16 */
     {

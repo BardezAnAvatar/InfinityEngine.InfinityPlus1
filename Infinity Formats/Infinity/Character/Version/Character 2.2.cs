@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Character.Header;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_2;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Version
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Character.Version
 {
     /// <summary>Character 2.2, used in Icewind Dale II</summary>
     public class Character2_2 : IInfinityFormat

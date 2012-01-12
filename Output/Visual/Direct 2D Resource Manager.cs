@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 using Bardez.Projects.DirectX.Direct2D;
-using Bardez.Projects.InfinityPlus1.Files.External.Image;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image;
 
 namespace Bardez.Projects.InfinityPlus1.Output.Visual
 {

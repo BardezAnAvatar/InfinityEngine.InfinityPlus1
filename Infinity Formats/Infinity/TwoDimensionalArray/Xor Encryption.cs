@@ -5,7 +5,7 @@ using System.Text;
 
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.TwoDimensionalArray
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TwoDimensionalArray
 {
     public static class InfinityXorEncryption
     {

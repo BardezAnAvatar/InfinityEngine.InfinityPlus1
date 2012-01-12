@@ -2,10 +2,10 @@
 using System.IO;
 using System.Text;
 
-using Bardez.Projects.InfinityPlus1.Files.Base;
+using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Base
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base
 {
     public abstract class InfinityFormat : IInfinityFormat
     {

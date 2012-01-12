@@ -2,14 +2,14 @@
 using System.IO;
 using System.Text;
 
-using Bardez.Projects.InfinityPlus1.Files.Base;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.Enums;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.ItmSpl;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item.Enums;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell
 {
     public class SpellAbility : ItemSpellAbility
     {
@@ -22,7 +22,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell
         ///     Except for PS:T, which uses it to identify the level of hostility of the overlay.
         ///     i.e.: Strength of One (SPWI219.SPL) is Non-Hostile (4)
         ///     
-        ///     See <see cref="Bardez.Projects.InfinityPlus1.Files.Infinity.Spell.Enums.SpellHeader1Flags" /> for comparison
+        ///     See <see cref="Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell.Enums.SpellHeader1Flags" /> for comparison
         /// </remarks>
         /// <value>
         ///     Near Infinity is the only app to report on this.

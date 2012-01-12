@@ -2,12 +2,12 @@
 using System.IO;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component;
 using Bardez.Projects.InfinityPlus1.Test;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Riff
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component.RiffHeader class.</summary>
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component.RiffHeader class.</summary>
     public class RiffTest : FileTesterBase
     {
         #region Fields

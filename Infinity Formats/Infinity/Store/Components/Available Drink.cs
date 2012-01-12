@@ -2,12 +2,12 @@
 using System.IO;
 using System.Text;
 
-using Bardez.Projects.InfinityPlus1.Files.Base;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
+using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Components
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Store.Components
 {
     /// <summary>Structure representing a drink available by a store to be consumed</summary>
     public class AvailableDrink : IInfinityFormat

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Common.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.Enums
 {
     public enum ItemSpellAbilityType : byte /* Byte */
     {

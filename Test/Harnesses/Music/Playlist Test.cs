@@ -5,7 +5,7 @@ using System.Threading;
 
 using Bardez.Projects.Configuration;
 using Bardez.Projects.DirectX.XAudio2;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Music;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Music;
 using Bardez.Projects.InfinityPlus1.Output.Audio;
 using Bardez.Projects.InfinityPlus1.Test;
 using Bardez.Projects.InfinityPlus1.Utility;

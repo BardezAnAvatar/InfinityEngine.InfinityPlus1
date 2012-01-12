@@ -3,13 +3,13 @@ using System.IO;
 using System.Text;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey;
 using Bardez.Projects.InfinityPlus1.Test;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.ChitinKey
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey.ChitinKey1 class.</summary>
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey.ChitinKey1 class.</summary>
     public class ChitinKey1Test : FileTesterBase
     {
         #region Fields

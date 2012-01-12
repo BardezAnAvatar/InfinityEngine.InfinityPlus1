@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Spell;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Spell.Spell2;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.ItmSpl;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell.Spell2;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell.Spell2
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell.Spell2
 {
     public class Spell2 : Spell
     {

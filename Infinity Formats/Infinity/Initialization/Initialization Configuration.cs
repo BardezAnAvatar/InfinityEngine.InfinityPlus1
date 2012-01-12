@@ -4,16 +4,16 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Text;
 
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.Enums;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 
 using Bardez.Projects.Configuration.Ini;
 using Bardez.Projects.Configuration.Ini.Component;
 using Bardez.Projects.Configuration.Ini.Line;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Initialization
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Initialization
 {
     public class InitConfig : IInfinityFormat
     {

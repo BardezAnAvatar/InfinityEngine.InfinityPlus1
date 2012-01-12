@@ -2,14 +2,14 @@
 using System.IO;
 using System.Text;
 
-using Bardez.Projects.InfinityPlus1.Files.Base;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.Enums;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.ItmSpl;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item.Enums;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Item1
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item.Item1
 {
     public class ItemHeader1 : ItemHeader
     {

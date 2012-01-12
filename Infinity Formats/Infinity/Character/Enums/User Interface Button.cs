@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Character.Enums
 {
     /// <summary>Valid Customized User Interface button values</summary>
     public enum UserInterfaceButton : uint /* UInt32 */

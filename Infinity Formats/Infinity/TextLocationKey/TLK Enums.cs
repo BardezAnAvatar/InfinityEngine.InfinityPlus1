@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.TextLocationKey
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TextLocationKey
 {
     /// <summary>This enumerator describes the language of the Infinity Engine game running</summary>
     public enum InfinityEngineLanguage : short /* Int16 */

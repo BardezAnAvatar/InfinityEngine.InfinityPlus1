@@ -1,18 +1,18 @@
-﻿using Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG;
+﻿using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 
-namespace TestProject1
+namespace Bardez.Projects.InfinityPlus1.UnitTesting
 {
     
     
     /// <summary>
-    ///This is a test class for JpegJfifInterchangeTest and is intended
-    ///to contain all JpegJfifInterchangeTest Unit Tests
+    ///This is a test class for ComponentDataTest and is intended
+    ///to contain all ComponentDataTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class JpegJfifInterchangeTest
+    public class ComponentDataTest
     {
 
 
@@ -64,15 +64,16 @@ namespace TestProject1
         //
         #endregion
 
-        
+
         /// <summary>
         ///A test for UnZigZag
         ///</summary>
-        [TestMethod()]
-        [DeploymentItem("InfinityPlus1.Files.dll")]
-        public void UnZigZagTest()
+        public void UnZigZagTestHelper<Primitive>()
+            where Primitive : struct
         {
-            JpegJfifInterchange_Accessor target = new JpegJfifInterchange_Accessor();
+            PrivateObject param0 = null;
+            ComponentData_Accessor<Int32> target = new ComponentData_Accessor<Int32>(param0);
+
             List<Int32> zigZagList = new List<Int32>();
 
             zigZagList.Add(1); zigZagList.Add(2); zigZagList.Add(9); zigZagList.Add(17); zigZagList.Add(10); zigZagList.Add(3); zigZagList.Add(4); zigZagList.Add(11);
@@ -82,9 +83,11 @@ namespace TestProject1
             zigZagList.Add(36); zigZagList.Add(43); zigZagList.Add(50); zigZagList.Add(57); zigZagList.Add(58); zigZagList.Add(51); zigZagList.Add(44); zigZagList.Add(37);
             zigZagList.Add(30); zigZagList.Add(23); zigZagList.Add(16); zigZagList.Add(24); zigZagList.Add(31); zigZagList.Add(38); zigZagList.Add(45); zigZagList.Add(52);
             zigZagList.Add(59); zigZagList.Add(60); zigZagList.Add(53); zigZagList.Add(46); zigZagList.Add(39); zigZagList.Add(32); zigZagList.Add(40); zigZagList.Add(47);
-            zigZagList.Add(54); zigZagList.Add(61); zigZagList.Add(62); zigZagList.Add(55); zigZagList.Add(48); zigZagList.Add(56); zigZagList.Add(63); zigZagList.Add(64); 
-            
-            target.UnZigZag(zigZagList);
+            zigZagList.Add(54); zigZagList.Add(61); zigZagList.Add(62); zigZagList.Add(55); zigZagList.Add(48); zigZagList.Add(56); zigZagList.Add(63); zigZagList.Add(64);
+
+            target.SourceData = zigZagList;
+
+            target.UnZigZag();
 
             Boolean worked = false;
             for (Int32 i = 1; i < 64; ++i)
@@ -95,6 +98,23 @@ namespace TestProject1
             }
 
             Assert.AreEqual(true, worked);
+        }
+
+        internal virtual ComponentData_Accessor<Int32> CreateComponentData_Accessor<Primitive>()
+            where Primitive : struct
+        {
+            // TODO: Instantiate an appropriate concrete class.
+            ComponentData_Accessor<Int32> target = null;
+            return target;
+        }
+
+        [TestMethod()]
+        [DeploymentItem("External Formats.dll")]
+        public void UnZigZagTest()
+        {
+            Assert.Inconclusive("No appropriate type parameter is found to satisfies the type constraint(s) of Pri" +
+                    "mitive. Please call UnZigZagTestHelper<Primitive>() with appropriate type parame" +
+                    "ters.");
         }
     }
 }

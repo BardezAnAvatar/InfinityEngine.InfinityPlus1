@@ -5,7 +5,7 @@ using System.Text;
 using Bardez.Projects.ReusableCode;
 using Bardez.Projects.Win32.Audio;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.ACM
 {
     /// <summary>Interplay ACM file header</summary>
     /// <remarks>

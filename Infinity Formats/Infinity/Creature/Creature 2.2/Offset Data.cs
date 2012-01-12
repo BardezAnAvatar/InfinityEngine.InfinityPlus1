@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_2
 {
     /// <summary>Class that contains the offset to and count of known spells in a creature version 2.2 file</summary>
 	public class D20KnownSpellOffsetData

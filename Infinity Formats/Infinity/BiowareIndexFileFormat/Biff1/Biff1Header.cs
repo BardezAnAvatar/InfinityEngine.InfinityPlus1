@@ -4,7 +4,7 @@ using System.Text;
 
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.BiowareIndexFileFormat.Biff1
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BiowareIndexFileFormat.Biff1
 {
     /// <summary>This class is a representation of the BIFF version 1 file format.</summary>
     /// <remarks>

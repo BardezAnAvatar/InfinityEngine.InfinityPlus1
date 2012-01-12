@@ -1,7 +1,7 @@
 ﻿using System;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.ACM
 {
     /// <summary>Declaration of a delegate type for the filler functions associated with ACM file format</summary>
     /// <param name="block">Block to fill</param>

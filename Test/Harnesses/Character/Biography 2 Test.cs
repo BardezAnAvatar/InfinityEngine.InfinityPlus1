@@ -2,12 +2,12 @@
 using System.IO;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Biography;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Character.Biography;
 using Bardez.Projects.InfinityPlus1.Test;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Character
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Biography.Biography2 class.</summary>
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Biography.Biography2 class.</summary>
     public class Biography2Test : FileTesterBase
     {
         #region Fields

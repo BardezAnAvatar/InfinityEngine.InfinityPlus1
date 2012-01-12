@@ -1,12 +1,10 @@
-﻿using Bardez.Projects.InfinityPlus1.Files.External.Image.Mathematics;
+﻿using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 
-namespace TestProject1
+namespace Bardez.Projects.InfinityPlus1.UnitTesting
 {
-    
-    
     /// <summary>
     ///This is a test class for JpegJfifParserTest and is intended
     ///to contain all JpegJfifParserTest Unit Tests

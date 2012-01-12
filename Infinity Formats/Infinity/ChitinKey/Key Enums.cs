@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
 {
     /// <summary>This enum indicates the location of a given BIFF file</summary>
     [Flags]

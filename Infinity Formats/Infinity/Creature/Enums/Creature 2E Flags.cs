@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Enums
 {
     /// <summary>Various flags set on the creature</summary>
     /// <remarks>For multi-classed characters, none of the original class are set; only for dual- and single- class</remarks>

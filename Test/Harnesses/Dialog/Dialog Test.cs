@@ -2,12 +2,12 @@
 using System.IO;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Version;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Dialog.Version;
 using Bardez.Projects.InfinityPlus1.Test;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Dialog
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Version.Dialog1 class.</summary>
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Dialog.Version.Dialog1 class.</summary>
     public class DialogTest : FileTesterBase
     {
         #region Fields

@@ -2,12 +2,12 @@
 using System.IO;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Item2;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item.Item2;
 using Bardez.Projects.InfinityPlus1.Test;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Item
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Item2.ItemHeader2 class.</summary>
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item.Item2.ItemHeader2 class.</summary>
     public class ItemHeader2Test : FileTesterBase
     {
         #region Fields

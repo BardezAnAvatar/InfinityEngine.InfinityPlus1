@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Dialog.Enums
 {
     /// <summary>This enum represents the flags available to dialog headers</summary>
     /// <remarks>Any of these bits, apparently, sets the dialog to be interruptable</remarks>

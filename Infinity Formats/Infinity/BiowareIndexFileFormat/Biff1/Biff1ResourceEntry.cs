@@ -2,10 +2,10 @@
 using System.IO;
 using System.Text;
 
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.BiowareIndexFileFormat.Biff1
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BiowareIndexFileFormat.Biff1
 {
     /// <summary>This class describes a resource1 entry within the BIFF archive</summary>
     /// <remarks>

@@ -2,13 +2,13 @@
 using System.IO;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Store;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Version;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Store;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Store.Version;
 using Bardez.Projects.InfinityPlus1.Test;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Store
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Version.Store9 class.</summary>
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Store.Version.Store9 class.</summary>
     public class Store9Test : FileTesterBase
     {
         #region Fields

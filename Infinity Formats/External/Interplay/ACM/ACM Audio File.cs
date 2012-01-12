@@ -5,7 +5,7 @@ using System.IO;
 using Bardez.Projects.ReusableCode;
 using Bardez.Projects.Win32.Audio;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.ACM
 {
     /// <summary>Represents an ACM file; is header and bitstream.</summary>
     /// <remarks>The bitstream appears to be overrunnable.</remarks>

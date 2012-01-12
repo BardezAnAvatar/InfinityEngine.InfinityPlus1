@@ -2,13 +2,13 @@
 using System.IO;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Character;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Version;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Character;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Character.Version;
 using Bardez.Projects.InfinityPlus1.Test;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Character
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Version.Character1 class.</summary>
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Character.Version.Character1 class.</summary>
     public class Character1Test : FileTesterBase
     {
         #region Fields

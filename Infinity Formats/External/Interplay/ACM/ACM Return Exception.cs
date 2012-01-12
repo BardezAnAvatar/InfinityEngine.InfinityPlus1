@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.ACM
 {
     /// <summary>Strongly typed exception child of the Exception object</summary>
     public class AcmReturnException : Exception

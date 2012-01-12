@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Enums
 {
     /// <summary>Type of memorized overlay</summary>
     public enum Creature2EKnownSpellType : ushort /* UInt16 */

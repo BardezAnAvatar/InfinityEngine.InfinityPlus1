@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Character.Header;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Version
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Character.Version
 {
     /// <summary>Character 1.0 and 2.0, used in Baldur's Gate and Baldur's Gate II</summary>
     public class Character1 : IInfinityFormat

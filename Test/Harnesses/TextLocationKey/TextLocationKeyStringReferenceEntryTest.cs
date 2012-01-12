@@ -2,7 +2,7 @@
 using System.IO;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.TextLocationKey;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TextLocationKey;
 using Bardez.Projects.InfinityPlus1.Test;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.TextLocationKey

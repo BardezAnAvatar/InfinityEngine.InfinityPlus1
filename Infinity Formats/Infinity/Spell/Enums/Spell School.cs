@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell.Enums
 {
     /// <summary>
     /// 

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Music
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Music
 {
     /// <summary>Represents a line-item in the playlist</summary>
     /// <remarks>The exist special silence ACM files. These will need to be special cases.</remarks>

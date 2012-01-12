@@ -2,13 +2,13 @@
 using System.IO;
 using System.Text;
 
-using Bardez.Projects.InfinityPlus1.Files.Base;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
+using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature9
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature9
 {
     /// <summary>Creature header version 9</summary>
     public class Creature9Header : Creature2eHeader

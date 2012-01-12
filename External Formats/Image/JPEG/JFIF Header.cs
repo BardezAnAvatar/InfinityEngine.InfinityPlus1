@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-using Bardez.Projects.InfinityPlus1.FileFormats.Base;
+using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG.Enums;
 using Bardez.Projects.ReusableCode;
 

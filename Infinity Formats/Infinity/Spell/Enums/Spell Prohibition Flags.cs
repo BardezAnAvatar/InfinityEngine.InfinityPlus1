@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell.Enums
 {
     /// <summary>Flags indicating overlay exclusion</summary>
     /// <remarks>According to IESDP, Alignment and School exclusion bits cannot be combined.</remarks>

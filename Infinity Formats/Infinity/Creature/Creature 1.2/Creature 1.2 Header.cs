@@ -2,15 +2,15 @@
 using System.IO;
 using System.Text;
 
-using Bardez.Projects.InfinityPlus1.Files.Base;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.Enums;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Enums;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
+using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1_2
 {
     /// <summary>Creature header version 1.2</summary>
     public class Creature1_2Header : Creature2eHeader

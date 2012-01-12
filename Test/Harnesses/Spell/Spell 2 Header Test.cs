@@ -2,12 +2,12 @@
 using System.IO;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Spell.Spell2;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell.Spell2;
 using Bardez.Projects.InfinityPlus1.Test;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Spell
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Spell.Spell2.Spell2Header class.</summary>
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell.Spell2.Spell2Header class.</summary>
     public class SpellHeader2Test : FileTesterBase
     {
         #region Fields

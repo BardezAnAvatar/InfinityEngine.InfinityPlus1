@@ -3,8 +3,10 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using Direct2D = Bardez.Projects.DirectX.Direct2D;
+using ExternalPixelEnums = Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Pixels.Enums;
 using Bardez.Projects.DirectX.Direct2D;
-using Bardez.Projects.InfinityPlus1.Files.External.Image;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Enums;
 using Bardez.Projects.Win32;
 
 namespace Bardez.Projects.InfinityPlus1.Output.Visual
@@ -283,7 +285,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
             SizeU dimensions = new SizeU(Convert.ToUInt32(resource.Pixels.Metadata.Width), Convert.ToUInt32(resource.Pixels.Metadata.Height));
             ResultCode result = this.bmpRengerTarget.CreateBitmap(dimensions, properties, out bmp);
 
-            Byte[] data = resource.Pixels.GetPixelData(Files.External.Image.Pixels.Enums.PixelFormat.RGBA_B8G8R8A8, Files.External.Image.Enums.ScanLineOrder.TopDown, 0, 0);
+            Byte[] data = resource.Pixels.GetPixelData(ExternalPixelEnums.PixelFormat.RGBA_B8G8R8A8, ScanLineOrder.TopDown, 0, 0);
             result = bmp.CopyFromMemory(new RectangleU(dimensions), data, Convert.ToUInt32(resource.Pixels.Metadata.Width * 4));
 
             return Direct2dResourceManager.Instance.AddFrameResource(bmp);

@@ -3,12 +3,12 @@ using System.IO;
 using System.Text;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.TwoDimensionalArray._2DA1;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TwoDimensionalArray._2DA1;
 using Bardez.Projects.InfinityPlus1.Test;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.TwoDimensionalArray
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.TwoDimensionalArray._2DA1 class</summary>
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TwoDimensionalArray._2DA1 class</summary>
     public class TwoDinensionalArray1Test : FileTesterBase
     {
         #region Fields

@@ -5,8 +5,8 @@ using System.Threading;
 
 using Bardez.Projects.Configuration;
 using Bardez.Projects.DirectX.XAudio2;
-using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component;
-using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Wave;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave;
 using Bardez.Projects.InfinityPlus1.Test;
 using Bardez.Projects.Win32;
 using Bardez.Projects.Win32.Audio;
@@ -14,7 +14,7 @@ using Bardez.Projects.Win32.Audio;
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Output.DirectX
 {
     /// <summary>
-    ///     This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component.RiffHeader
+    ///     This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component.RiffHeader
     ///     and the Bardez.Projects.DirectX.XAudio2.XAudio2Interface classes.
     /// </summary>
     public class XAudio2RenderTest : TesterBase

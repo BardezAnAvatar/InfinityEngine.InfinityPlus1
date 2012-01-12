@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Enums
 {
     /// <remarks>
     ///     According to IESDP, if more than 1 saving throw is specified, the target

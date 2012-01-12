@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Enums
 {
     /// <summary>Indicates the parent resource flags</summary>
     public enum EffectResourceFlags : uint /* UInt32 */

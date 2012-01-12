@@ -61,6 +61,10 @@
     <Compile Include="Visual\Visual Render Resource Manager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\External Formats\External Formats.csproj">
+      <Project>{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}</Project>
+      <Name>External Formats</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Native Code\DirectX\Direct2D\Direct2D.vcxproj">
       <Project>{44208309-EFE3-4A6F-B0F8-9013A16B20DF}</Project>
       <Name>Direct2D</Name>

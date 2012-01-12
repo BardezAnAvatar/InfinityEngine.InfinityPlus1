@@ -2,12 +2,12 @@
 using System.IO;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature9;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature9;
 using Bardez.Projects.InfinityPlus1.Test;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Creature
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature9.Creature9Header class.</summary>
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature9.Creature9Header class.</summary>
     public class CreatureHeader9Test : FileTesterBase
     {
         #region Fields

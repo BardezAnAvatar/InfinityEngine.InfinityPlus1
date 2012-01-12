@@ -4,7 +4,7 @@ using System.Text;
 
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.TileSet.Tis1
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1
 {
     /// <summary>This class is a representation of the TIS version 1 file format.</summary>
     /// <remarks>

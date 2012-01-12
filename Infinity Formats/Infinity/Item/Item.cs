@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect1;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Item;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.ItmSpl;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect1;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item
 {
     public abstract class ItemBase : ItemSpell
     {

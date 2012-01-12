@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Store.Enums
 {
     public enum StoreType : uint /* UInt32 */
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Enums
 {
     /// <summary>Indicates the effect's magic type</summary>
     public enum EffectMagicType : uint /* UInt32 */

@@ -2,7 +2,7 @@
 
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.ACM
 {
     /// <summary>ACM implementation of a Bitstream. Will allow for reading past the end of file, returning 0s</summary>
     public class AcmBitStream : BitStream

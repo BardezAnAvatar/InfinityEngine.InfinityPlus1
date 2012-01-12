@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.ItmSpl;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item.Enums
 {
     /// <summary>This enum is a flag bitfield for item flags</summary>
     [Flags]

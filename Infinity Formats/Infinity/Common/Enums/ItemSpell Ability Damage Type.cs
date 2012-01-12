@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Common.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.Enums
 {
     public enum ItemSpellAbilityDamageType : ushort /* UInt16 */
     {

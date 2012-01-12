@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-using Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.ACM;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation

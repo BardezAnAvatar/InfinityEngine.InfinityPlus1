@@ -2,12 +2,12 @@
 using System.IO;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect2;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2;
 using Bardez.Projects.InfinityPlus1.Test;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Effect
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect2.Effect2 class.</summary>
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2.Effect2 class.</summary>
     public class Effect2Test : FileTesterBase
     {
         #region Fields

@@ -9,12 +9,12 @@
     <ProjectGuid>{61DCF1C6-109C-4886-A10A-FEE95DE901CA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestProject1</RootNamespace>
+    <RootNamespace>Bardez.Projects.InfinityPlus1.UnitTesting</RootNamespace>
     <AssemblyName>TestProject1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <SccProjectName>%24/Infinity Engine/Infinity +1/TestProject1</SccProjectName>
+    <SccProjectName>%24/Infinity Engine/Infinity +1/Unit Testing</SccProjectName>
     <SccLocalPath>.</SccLocalPath>
     <SccAuxPath>http://bardezserver:8080/tfs/defaultcollection</SccAuxPath>
     <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
@@ -44,7 +44,6 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.XML" />
-    <Reference Include="Win32 Structures, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
@@ -52,17 +51,26 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComponentDataTest.cs" />
     <Compile Include="DCT Test.cs" />
-    <Compile Include="JpegJfifInterchangeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Shadow Include="Test References\InfinityPlus1.Files.accessor" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\Basic Formats\Basic Formats.csproj">
+      <Project>{4D2A899B-3674-4288-81A8-C8F11636C2DA}</Project>
+      <Name>Basic Formats</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Configuration Handler\Configuration Handler.csproj">
       <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
       <Name>Configuration Handler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\External Formats\External Formats.csproj">
+      <Project>{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}</Project>
+      <Name>External Formats</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Native Code\Win32 Structures\Win32 Structures.vcxproj">
+      <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
+      <Name>Win32 Structures</Name>
     </ProjectReference>
     <ProjectReference Include="..\ReusableCode\ReusableCode.csproj">
       <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
@@ -72,6 +80,10 @@
       <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
       <Name>Utility</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Shadow Include="Test References\External Formats.accessor" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Store.Enums
 {
     /// <summary>This enum represents the types of rooms available for the night</summary>
     [Flags]

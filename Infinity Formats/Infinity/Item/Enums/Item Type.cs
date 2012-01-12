@@ -1,9 +1,9 @@
 ﻿using System;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.ItmSpl;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 using System.ComponentModel;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item.Enums
 {
     public enum ItemType : short /* Int16 */
     {

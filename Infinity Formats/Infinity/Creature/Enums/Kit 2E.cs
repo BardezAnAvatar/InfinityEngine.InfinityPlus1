@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Enums
 {
     /// <summary>Valid Kit2e values</summary>
     public enum Kit2e : uint /* UInt32 */

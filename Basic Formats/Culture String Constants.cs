@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Base
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Basic
 {
     /// <summary>Contains a list of constants</summary>
     public static class CultureConstants

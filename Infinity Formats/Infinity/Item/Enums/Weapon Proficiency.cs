@@ -2,7 +2,7 @@
 using System.ComponentModel;
 
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item.Enums
 {
     public enum WeaponProficiency : byte /* Byte */
     {

@@ -40,6 +40,10 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Basic Formats\Basic Formats.csproj">
+      <Project>{4D2A899B-3674-4288-81A8-C8F11636C2DA}</Project>
+      <Name>Basic Formats</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Configuration Handler\Configuration Handler.csproj">
       <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
       <Name>Configuration Handler</Name>
@@ -218,7 +222,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="External\Interplay\MVE\" />
-    <Folder Include="External\RIFF\AudioVideoInterleave\" />
     <Folder Include="External\Weidu\" />
     <Folder Include="Infinity\BiowareIndexFileFormat\BiffC1\" />
     <Folder Include="Infinity\BiowareIndexFileFormat\CBiff1\" />

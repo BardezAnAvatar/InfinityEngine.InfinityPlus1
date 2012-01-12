@@ -4,8 +4,8 @@ using System.IO;
 using System.Windows.Forms;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.External.Image;
-using Bardez.Projects.InfinityPlus1.Files.External.Image.Bitmap;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Output.Direct2D

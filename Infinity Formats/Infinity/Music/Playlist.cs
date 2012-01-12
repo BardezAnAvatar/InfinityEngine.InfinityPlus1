@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-using Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.ACM;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.ReusableCode;
 using Bardez.Projects.Win32.Audio;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Music
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Music
 {
     /// <summary>Represents a MUS playlist file of ACM media</summary>
     public class Playlist : IInfinityFormat

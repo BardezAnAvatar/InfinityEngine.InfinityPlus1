@@ -4,11 +4,11 @@ using System.Data;
 using System.IO;
 using System.Text;
 
-using Bardez.Projects.InfinityPlus1.Files.Base;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
+using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.TwoDimensionalArray._2DA1
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TwoDimensionalArray._2DA1
 {
     public class TwoDimensionalArray1 : InfinityFormat
     {

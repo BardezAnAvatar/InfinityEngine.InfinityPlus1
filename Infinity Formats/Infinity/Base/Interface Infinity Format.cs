@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Base
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base
 {
     /// <summary>Interface dictating I/O <see cref="System.IO.Stream"/> methods for reading and writing the associated data</summary>
     public interface IInfinityFormat

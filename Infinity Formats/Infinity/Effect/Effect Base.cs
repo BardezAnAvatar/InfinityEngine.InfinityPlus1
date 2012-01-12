@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
 
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Common;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Enums;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect
 {
     public abstract class EffectBase : IInfinityFormat
     {

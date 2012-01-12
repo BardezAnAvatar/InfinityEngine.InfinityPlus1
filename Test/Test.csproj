@@ -292,6 +292,14 @@
       <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
       <Name>Configuration Handler</Name>
     </ProjectReference>
+    <ProjectReference Include="..\External Formats\External Formats.csproj">
+      <Project>{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}</Project>
+      <Name>External Formats</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infinity Formats\Infinity Formats.csproj">
+      <Project>{3EE5137B-C08F-4337-B089-E20A502C2A0C}</Project>
+      <Name>Infinity Formats</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Native Code\DirectX\XAudio2\XAudio2.vcxproj">
       <Project>{FE898E65-DAFF-435D-9A72-4C9D3306636A}</Project>
       <Name>XAudio2</Name>

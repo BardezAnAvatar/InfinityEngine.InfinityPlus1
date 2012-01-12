@@ -5,9 +5,9 @@ using System.Threading;
 
 using Bardez.Projects.Configuration;
 using Bardez.Projects.DirectX.XAudio2;
-using Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM;
-using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component;
-using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Wave;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.ACM;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave;
 using Bardez.Projects.InfinityPlus1.Output.Audio;
 using Bardez.Projects.InfinityPlus1.Test;
 using Bardez.Projects.ReusableCode;
@@ -15,7 +15,7 @@ using Bardez.Projects.Win32.Audio;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM.AcmAudioFile class.</summary>
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.ACM.AcmAudioFile class.</summary>
     public class AcmFileTest : FileTesterBase
     {
         #region Fields

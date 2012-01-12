@@ -70,6 +70,10 @@
       <Project>{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}</Project>
       <Name>Exception Handler</Name>
     </ProjectReference>
+    <ProjectReference Include="..\External Formats\External Formats.csproj">
+      <Project>{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}</Project>
+      <Name>External Formats</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Native Code\DirectX\Direct2D\Direct2D.vcxproj">
       <Project>{44208309-EFE3-4A6F-B0F8-9013A16B20DF}</Project>
       <Name>Direct2D</Name>

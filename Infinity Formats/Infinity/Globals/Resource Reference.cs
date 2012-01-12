@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Bardez.Projects.InfinityPlus1.Files.Base;
+using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Globals
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals
 {
     /// <summary>
     ///     This public class represents a resource reference within the Infinity Engine Game files.

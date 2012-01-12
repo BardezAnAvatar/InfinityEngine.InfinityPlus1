@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Common
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common
 {
     /// <summary>
     ///     This class is a representation of a resource1 locator, a bitfield used in BIFF version 1

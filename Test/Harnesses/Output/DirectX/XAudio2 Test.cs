@@ -9,7 +9,7 @@ using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Output.DirectX
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component.RiffHeader class.</summary>
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component.RiffHeader class.</summary>
     public class XAudio2Test : TesterBase
     {
         protected XAudio2Interface XAudio { get; set; }

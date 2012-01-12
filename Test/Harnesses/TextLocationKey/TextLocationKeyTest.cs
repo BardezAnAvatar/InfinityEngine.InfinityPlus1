@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.TextLocationKey;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TextLocationKey;
 using Bardez.Projects.InfinityPlus1.Test;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.TextLocationKey
@@ -16,7 +16,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.TextLocationKey
         protected const String configKey = "Test.Tlk1.Tlk1Path";
 
         /// <summary>Format instance to test</summary>
-        protected Files.Infinity.TextLocationKey.TextLocationKey TlkFile { get; set; }
+        protected FileFormats.Infinity.TextLocationKey.TextLocationKey TlkFile { get; set; }
         #endregion
 
         #region Construction
@@ -44,7 +44,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.TextLocationKey
 
             using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
             {
-                this.TlkFile = new Files.Infinity.TextLocationKey.TextLocationKey(false);
+                this.TlkFile = new FileFormats.Infinity.TextLocationKey.TextLocationKey(false);
                 this.TlkFile.Read(stream);
 
                 buffer.AppendLine(TlkFile.ToString(false));
@@ -52,7 +52,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.TextLocationKey
                 buffer.AppendLine(TlkFile[25641].ToString());
 
                 buffer.AppendLine("Testing full read:");
-                this.TlkFile = new Files.Infinity.TextLocationKey.TextLocationKey();
+                this.TlkFile = new FileFormats.Infinity.TextLocationKey.TextLocationKey();
                 this.TlkFile.Read(stream);
 
                 buffer.Append("String Reference #12345:");

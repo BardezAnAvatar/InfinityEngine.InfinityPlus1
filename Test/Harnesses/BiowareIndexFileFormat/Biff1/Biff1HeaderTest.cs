@@ -3,11 +3,11 @@ using System.IO;
 using System.Text;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.BiowareIndexFileFormat.Biff1;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BiowareIndexFileFormat.Biff1;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.BiowareIndexFileFormat.Biff1
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.BiowareIndexFileFormat.Biff1.Biff1Header class.</summary>
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BiowareIndexFileFormat.Biff1.Biff1Header class.</summary>
     public class Biff1HeaderTest : FileTesterBase
     {
         #region Fields

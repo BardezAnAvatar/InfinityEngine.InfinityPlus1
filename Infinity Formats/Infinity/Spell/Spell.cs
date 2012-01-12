@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect1;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Spell;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.ItmSpl;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect1;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell
 {
     public abstract class Spell : ItemSpell
     {

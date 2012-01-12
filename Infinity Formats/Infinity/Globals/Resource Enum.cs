@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Globals
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals
 {
     public enum ResourceType : short /* Int16 */
     {

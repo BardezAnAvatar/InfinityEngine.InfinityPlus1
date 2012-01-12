@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Item;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Item2;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.ItmSpl;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item.Item2;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Item2
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item.Item2
 {
     public class Item2 : ItemBase
     {

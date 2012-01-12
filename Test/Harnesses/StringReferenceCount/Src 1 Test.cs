@@ -2,12 +2,12 @@
 using System.IO;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.StringReferenceCount;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.StringReferenceCount;
 using Bardez.Projects.InfinityPlus1.Test;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.StringReferenceCount
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.Files.Infinity.StringReferenceCount.StringReferenceCount1 class.</summary>
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.StringReferenceCount.StringReferenceCount1 class.</summary>
     public class Src1Test : FileTesterBase
     {
         #region Fields
