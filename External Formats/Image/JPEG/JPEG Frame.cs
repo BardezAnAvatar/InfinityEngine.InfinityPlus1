@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
     /// <summary>Represents a JPEG specification Frame, coded as JFIF interchange</summary>
     /// <remarks>MUST Contain a JFIF App0 first in table/markers or else it is not JFIF.</remarks>

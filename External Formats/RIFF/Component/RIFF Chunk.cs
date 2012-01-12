@@ -3,7 +3,7 @@ using System.IO;
 
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
 {
     /// <summary>Base clas for RIFF chunks. Contains the chunk type/id/name, size and offset to data, as well as the data stream to read from</summary>
     public class RiffChunk

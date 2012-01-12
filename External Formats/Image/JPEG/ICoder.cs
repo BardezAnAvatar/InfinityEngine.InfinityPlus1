@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
     /// <summary>Represents an interface for Huffman decode and Arithmetic decode</summary>
     public interface ICoder

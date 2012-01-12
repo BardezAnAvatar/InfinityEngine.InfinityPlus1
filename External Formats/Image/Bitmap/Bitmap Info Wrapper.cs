@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
 
-using Bardez.Projects.InfinityPlus1.Files.External.Image.Bitmap.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap.Enums;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.Bitmap
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap
 {
     /// <summary>Wrapper class that contains the size of the Info Header and a reference to the base type</summary>
     public class BitmapInfoWrapper

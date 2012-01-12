@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
     /// <summary>Represents a scan component, entropy-decoded</summary>
     public class ScanComponentData

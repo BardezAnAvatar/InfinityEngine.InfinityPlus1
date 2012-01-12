@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
     /// <summary>Represents the restart index between 0 and 7 for MCUs.</summary>
     public class RestartMarker : MarkerSegment

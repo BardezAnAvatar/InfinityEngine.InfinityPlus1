@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
     /// <summary>Abstract implementation of Component Data.</summary>
     /// <typeparam name="Primitive">A primitive type, intended to be of Int32 or Double types</typeparam>

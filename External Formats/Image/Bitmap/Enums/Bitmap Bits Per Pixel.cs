@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.Bitmap.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap.Enums
 {
     /// <summary>The number of bits-per-pixel. determines the number of bits that define each pixel and the maximum number of colors in the bitmap.</summary>
     public enum BitsPerPixel : ushort /* UInt16 */

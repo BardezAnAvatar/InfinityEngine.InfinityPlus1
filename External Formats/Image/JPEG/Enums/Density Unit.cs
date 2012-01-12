@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG.Enums
 {
     /// <summary>Represents pixel density measurments</summary>
     public enum DensityUnit : byte /* Byte */

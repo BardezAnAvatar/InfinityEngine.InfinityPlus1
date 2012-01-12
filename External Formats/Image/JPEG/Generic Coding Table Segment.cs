@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
     /// <summary>Represents a generic marker segment which defines one or more tables</summary>
     /// <remarks>See pages 39-42, JPEG spec, §B.2.4.1 - B.2.4.3</remarks>

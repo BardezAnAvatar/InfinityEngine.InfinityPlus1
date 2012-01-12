@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
     /// <summary>Represents a base class for JPEG coding tables, be they Arithmetic, or Huffman</summary>
     public abstract class GenericCodingTable : GenericTable

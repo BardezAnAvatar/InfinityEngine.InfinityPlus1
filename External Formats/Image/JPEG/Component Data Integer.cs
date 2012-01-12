@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Bardez.Projects.InfinityPlus1.Files.External.Image.Mathematics;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
     /// <summary>Implementation of integer (Int32) Component Data.</summary>
     public class ComponentDataInteger : ComponentData<Int32>

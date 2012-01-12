@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
     /// <summary>Represents a list of entropy-coded MCUs</summary>
+    /// <remarks>contains multiple minimum coded units</remarks>
     public class EntropyCodedSegment
     {
-        //contains multiple minimum coded units
         #region Field(s)
         /// <summary>Represents the list of MCUs</summary>
         protected List<MimimumCodedUnit> mimimumCodedUnits;

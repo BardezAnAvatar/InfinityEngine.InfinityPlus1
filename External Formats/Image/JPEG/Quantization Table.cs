@@ -3,7 +3,7 @@ using System.IO;
 
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
     /// <summary>Represents a single quantization table</summary>
     public class QuantizationTable : GenericTable

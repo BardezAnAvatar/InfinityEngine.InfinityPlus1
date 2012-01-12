@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
 {
     /// <summary>Base chunk class that has sub-chunks</summary>
     public class RiffSuperChunk : RiffChunk

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
 {
     /// <summary>Enumerator descring the RIF chunk type. Enumerator is for known RIFF chunk types</summary>
     /// <remarks>I wrote with hex because the UInt32 represenation is backward from the actual value; if recompiling or a differnt endianness, invert the values</remarks>

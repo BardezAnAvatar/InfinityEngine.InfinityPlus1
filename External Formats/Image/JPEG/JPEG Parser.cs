@@ -4,7 +4,7 @@ using System.IO;
 
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
     /// <summary>Static class that reads JPEG data from an input stream.</summary>
     public static class JpegParser

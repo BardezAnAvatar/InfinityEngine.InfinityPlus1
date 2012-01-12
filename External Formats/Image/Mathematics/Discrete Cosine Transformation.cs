@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.Mathematics
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics
 {
     /// <summary>Represents a collection of static methods that perform the DCT and IDCT routines, and various implementations thereof.</summary>
     /// <remarks>

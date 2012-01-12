@@ -2,11 +2,11 @@
 using System.IO;
 using System.Text;
 
-using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Wave;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave;
 using Bardez.Projects.ReusableCode;
 using Bardez.Projects.Win32.Audio;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
 {
     public class RiffFile
     {

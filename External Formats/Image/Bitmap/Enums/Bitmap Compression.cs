@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.Bitmap.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap.Enums
 {
     /// <summary>The type of compression for a compressed bottom-up bitmap (top-down DIBs cannot be compressed).</summary>
     public enum BitmapCompression : int /* Int32 */

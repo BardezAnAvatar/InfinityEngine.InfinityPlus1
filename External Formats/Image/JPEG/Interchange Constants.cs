@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
     /// <summary>Contains a list of JPEG constants</summary>
     /// <remarks>Taken from Table B.1 of the JPEG specification</remarks>

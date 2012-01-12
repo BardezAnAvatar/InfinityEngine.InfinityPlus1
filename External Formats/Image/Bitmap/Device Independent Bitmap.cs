@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 
-using Bardez.Projects.InfinityPlus1.Files.External.Image.Enums;
-using Bardez.Projects.InfinityPlus1.Files.External.Image.Bitmap.Enums;
-using Bardez.Projects.InfinityPlus1.Files.External.Image.Pixels;
-using Bardez.Projects.InfinityPlus1.Files.External.Image.Pixels.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Pixels;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Pixels.Enums;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.Bitmap
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap
 {
     /// <summary>Represents a raster graphics image file format used to store bitmap digital images, independently of the display device (such as a graphics adapter).</summary>
     /// <remarks>

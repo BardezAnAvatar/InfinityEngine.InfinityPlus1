@@ -1,12 +1,11 @@
 ﻿using System;
 using System.IO;
 
-using Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.Base;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG.Enums;
 using Bardez.Projects.ReusableCode;
 
-using Bardez.Projects.InfinityPlus1.Files.Base;
-
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
     /// <summary>Represents the binary data stored within the JFIF APP0 opening data stream.</summary>
     public class JfifHeader : MarkerSegment

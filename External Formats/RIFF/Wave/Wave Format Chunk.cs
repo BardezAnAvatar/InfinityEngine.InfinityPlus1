@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
 
-using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component;
-using Bardez.Projects.InfinityPlus1.Files.External.RIFF.Wave.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave.Enums;
 using Bardez.Projects.ReusableCode;
 using Bardez.Projects.Win32.Audio;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.RIFF.Wave
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
 {
     /// <summary>Describes the basic PCM WAVE fmt chunk.</summary>
     /// <remarks>

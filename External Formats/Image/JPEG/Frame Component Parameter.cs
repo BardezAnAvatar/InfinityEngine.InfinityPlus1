@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
     /// <summary>Represents an individual Component parameter in a frame</summary>
     public class FrameComponentParameter

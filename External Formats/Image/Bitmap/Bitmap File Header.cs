@@ -3,7 +3,7 @@ using System.IO;
 
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.Bitmap
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap
 {
     /// <summary>Contains information about the type, size, and layout of a file that contains a DIB.</summary>
     public class BitmapFileHeader

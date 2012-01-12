@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
     /// <summary>Provides a common base for a mimumum coded unit, does nothing else.</summary>
-    public abstract class MimimumCodedUnit
-    {
-    }
+    public abstract class MimimumCodedUnit { }
 
     /// <summary>Represents an MCU of sample blocks</summary>
     public class DctMcu : MimimumCodedUnit

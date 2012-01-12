@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.Mathematics
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics
 {
     /// <summary>Represents the mathematics represented in §K.2.8 of the JPEG specification</summary>
     public static class AmplitudeCoefficientPredictiveSmoothing

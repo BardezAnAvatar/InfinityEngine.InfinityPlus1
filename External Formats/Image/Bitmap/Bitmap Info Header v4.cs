@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
 
-using Bardez.Projects.InfinityPlus1.Files.External.Image.Bitmap.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap.Enums;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.Bitmap
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap
 {
     /// <summary>Contains core bitmap header information</summary>
     /// <remarks>Corresponds to the BITMAPV4HEADER Win32 structure, in Wingdi.h</remarks>

@@ -3,7 +3,7 @@ using System.IO;
 
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
 {
     /// <summary>Main RIFF chunk, a super-chunk, indicating the sub-type of the RIFF data file (WAVE, AVI, etc.), containing all the RIFF sub-chunks</summary>
     public class RiffThroneChunk : RiffSuperChunk

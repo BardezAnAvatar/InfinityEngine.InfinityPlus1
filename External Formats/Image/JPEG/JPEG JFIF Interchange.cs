@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 
-using Bardez.Projects.InfinityPlus1.Files.External.Image.Mathematics;
-using Bardez.Projects.InfinityPlus1.Files.External.Image.Pixels;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Pixels;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
     /// <summary>Represents a raster graphics image file format used to store digital images, independently of the display device (such as a graphics adapter), compling to JPEG specifications.</summary>
     /// <remarks>

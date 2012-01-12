@@ -1,7 +1,8 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.Bitmap.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap.Enums
 {
+    /// <summary>Represents the colorspace of a Bitmap file</summary>
     public enum ColorSpace : int /* Int32 */
     {
         CalibratedRgb       = 0,

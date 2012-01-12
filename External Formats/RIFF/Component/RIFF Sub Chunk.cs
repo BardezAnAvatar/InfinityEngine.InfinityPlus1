@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.RIFF.Component
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
 {
     /// <summary>Simple structure that defines a chunk and the offset to that chunk in memory</summary>
     public class RiffSubChunk

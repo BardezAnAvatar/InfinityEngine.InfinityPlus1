@@ -1,7 +1,8 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.Bitmap.Enums
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap.Enums
 {
+    /// <summary>Represents the intended rendering device for the image (print, screen, etc., but in a more abstract sense; Absolute (math), relative(business), etc.)</summary>
     public enum RenderingIntent : uint /* UInt32 */
     {
         /// <summary>Maintains the white point. Matches the colors to their nearest color in the destination gamut.</summary>

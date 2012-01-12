@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.Bitmap
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap
 {
     /// <summary>Contains the x,y, and z coordinates of the three colors that correspond to the red, green, and blue.</summary>
     /// <remarks>

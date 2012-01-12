@@ -87,7 +87,7 @@
     <Compile Include="Image\Pixels\RGB Quad.cs" />
     <Compile Include="Image\Pixels\RGB Triplet.cs" />
     <Compile Include="Image\Pixels\Enums\PixelFormat.cs" />
-    <Compile Include="Image\Enums\ScanLineOrder.cs" />
+    <Compile Include="Image\Enums\Scan Line Order.cs" />
     <Compile Include="Image\Frame.cs" />
     <Compile Include="Image\Pixels\Pixel Base.cs" />
     <Compile Include="Image\Pixels\Pixel Data.cs" />
@@ -110,6 +110,10 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Basic Formats\Basic Formats.csproj">
+      <Project>{4D2A899B-3674-4288-81A8-C8F11636C2DA}</Project>
+      <Name>Basic Formats</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Configuration Handler\Configuration Handler.csproj">
       <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
       <Name>Configuration Handler</Name>
@@ -128,14 +132,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="RIFF\AudioVideoInterleave\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Image\JPEG\_Notes.txt" />
-    <Content Include="RIFF\RIFF Spec.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

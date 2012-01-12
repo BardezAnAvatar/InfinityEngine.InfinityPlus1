@@ -4,7 +4,7 @@ using System.IO;
 
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
     /// <summary>Represents a single JPEG Huffman table</summary>
     /// <remarks>See T.81, page 40-41, §B.2.4.2, JPEG Spec</remarks>

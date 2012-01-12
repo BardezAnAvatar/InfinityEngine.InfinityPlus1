@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Bardez.Projects.InfinityPlus1.Files.External.Image.JPEG
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
     /// <summary>Represents a base class for JPEG tables, be they Arithmetic, Huffman or Quantization</summary>
     public abstract class GenericTable
