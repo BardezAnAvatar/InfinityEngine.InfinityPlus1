@@ -179,6 +179,18 @@
     <Compile Include="WinForm\Harness File Test Control Base.Designer.cs">
       <DependentUpon>Harness File Test Control Base.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinForm\Image\BMP Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Image\BMP Render Test Control.Designer.cs">
+      <DependentUpon>BMP Render Test Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Image\JPEG Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Image\JPEG Render Test Control.Designer.cs">
+      <DependentUpon>JPEG Render Test Control.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForm\INI\Ini Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -327,6 +339,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Harness File Test Control Base.resx">
       <DependentUpon>Harness File Test Control Base.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Image\BMP Render Test Control.resx">
+      <DependentUpon>BMP Render Test Control.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Image\JPEG Render Test Control.resx">
+      <DependentUpon>JPEG Render Test Control.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\LoggingControl.resx">
       <DependentUpon>LoggingControl.cs</DependentUpon>
