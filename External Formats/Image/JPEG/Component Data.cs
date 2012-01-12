@@ -121,7 +121,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             this.UndoLevelShift(samplePrecision);
 
             //re-order the samples to form a true top-down image
-            this.ReorderBlockSampleData();
+            //this.ReorderBlockSampleData();
+            this.ReorderBlockSampleDataIndexed();
         }
         #endregion
 
@@ -219,7 +220,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             //rather than in sample order. We need to further loop through the data
             //and re-arrange samples into the actual sample order. This has to be done *after* all block processing, however.
             //In the interim, persist the reorganized blocks.
-            List<Int32> output = new List<Int32>();
+            List<Int32> output = new List<Int32>(this.SourceData.Count);
 
             for (y = 0; y < this.ContiguousBlockCountVertical; ++y)
                 for (x = 0; x < this.ContiguousBlockCountHorizontal; ++x)
@@ -249,8 +250,61 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 
             for (Int32 y = 0; y < this.ContiguousBlockCountVertical; ++y)
                 for (Int32 blockScanline = 0; blockScanline < 8; ++blockScanline)
+                {
+                    Int32 scanLineBaseIndex = blockScanline * 8;
                     for (Int32 x = 0; x < this.ContiguousBlockCountHorizontal; ++x)
-                        unblocked.AddRange(blocks[x, y].GetRange(blockScanline * 8, 8));
+                    {
+                        //avoid addrange, getrange
+                        unblocked.Add(blocks[x, y][scanLineBaseIndex]);
+                        unblocked.Add(blocks[x, y][scanLineBaseIndex + 1]);
+                        unblocked.Add(blocks[x, y][scanLineBaseIndex + 2]);
+                        unblocked.Add(blocks[x, y][scanLineBaseIndex + 3]);
+                        unblocked.Add(blocks[x, y][scanLineBaseIndex + 4]);
+                        unblocked.Add(blocks[x, y][scanLineBaseIndex + 5]);
+                        unblocked.Add(blocks[x, y][scanLineBaseIndex + 6]);
+                        unblocked.Add(blocks[x, y][scanLineBaseIndex + 7]);
+                        //unblocked.AddRange(blocks[x, y].GetRange(blockScanline * 8, 8));
+                    }
+                }
+
+            this.SampleData = unblocked;
+        }
+
+        /// <summary>Reorders the component data 8x8 blocks based on multiple vertical sampling levels</summary>
+        /// <param name="componentData">Component to unshuffle</param>
+        /// <remarks>Performed on Sample Data.</remarks>
+        protected void ReorderBlockSampleDataIndexed()
+        {
+            Int32[,] blocks = new Int32[this.ContiguousBlockCountHorizontal, this.ContiguousBlockCountVertical];
+            Int32 indexer = 0;
+            for (Int32 y = 0; y < this.ContiguousBlockCountVertical; ++y)
+            {
+                for (Int32 x = 0; x < this.ContiguousBlockCountHorizontal; ++x)
+                {
+                    blocks[x, y] = indexer;
+                    indexer += 64;
+                }
+            }
+
+            //Application has the unzigged data. Now it shall un-block the samples.
+            List<Primitive> unblocked = new List<Primitive>();
+
+            for (Int32 y = 0; y < this.ContiguousBlockCountVertical; ++y)
+                for (Int32 blockScanline = 0; blockScanline < 8; ++blockScanline)
+                {
+                    Int32 scanLineBaseIndex = blockScanline * 8;
+                    for (Int32 x = 0; x < this.ContiguousBlockCountHorizontal; ++x)
+                    {
+                        unblocked.Add(this.SampleData[blocks[x, y] + scanLineBaseIndex]);
+                        unblocked.Add(this.SampleData[blocks[x, y] + scanLineBaseIndex + 1]);
+                        unblocked.Add(this.SampleData[blocks[x, y] + scanLineBaseIndex + 2]);
+                        unblocked.Add(this.SampleData[blocks[x, y] + scanLineBaseIndex + 3]);
+                        unblocked.Add(this.SampleData[blocks[x, y] + scanLineBaseIndex + 4]);
+                        unblocked.Add(this.SampleData[blocks[x, y] + scanLineBaseIndex + 5]);
+                        unblocked.Add(this.SampleData[blocks[x, y] + scanLineBaseIndex + 6]);
+                        unblocked.Add(this.SampleData[blocks[x, y] + scanLineBaseIndex + 7]);
+                    }
+                }
 
             this.SampleData = unblocked;
         }

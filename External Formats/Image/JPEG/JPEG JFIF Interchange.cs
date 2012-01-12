@@ -87,27 +87,15 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 
         protected Byte[] MergeComponentsFloat()
         {
-            ////gather components
-            //List<ScanComponentData> scanComponents = new List<ScanComponentData>();
-            //foreach (JpegScan scan in this.Frame.Scans)
-            //{
-            //    foreach (ScanComponentData component in scan.Components)
-            //        scanComponents.Add(component);
-            //}
-
             ////sort by component number
             //scanComponents.Sort((a, b) => a.Identifier.CompareTo(b.Identifier));
 
-            ////resample all components to output size
-            //List<List<Double>> scaledData = new List<List<Double>>();
-            //foreach (ScanComponentData component in scanComponents)
-            //    scaledData.Add(Resize.BilinearResampleFloat(component.ComponentDecodedDataFloat, component.Height, component.Width, component.ContiguousBlockHeight, component.ContiguousBlockWidth, this.Frame.ScanLines, this.Frame.Header.Width));
-
+            //resample all components to output size
             List<List<Double>> scaledData = new List<List<Double>>();
             foreach (ComponentDataFloat component in this.ComponentData)
                 scaledData.Add(Resize.BilinearResampleFloat(component.SampleData, component.Height, component.Width, component.ContiguousBlockHeight, component.ContiguousBlockWidth, this.Frame.ScanLines, this.Frame.Header.Width));
 
-            ////the scaleData array should contain Y and probably Cb and Cr, in that order, all of the same scale.
+            //the scaleData array should contain Y and probably Cb and Cr, in that order, all of the same scale.
 
             
             Int32 dataSize = this.Frame.ScanLines * this.Frame.Header.Width;
@@ -764,7 +752,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// <returns>Byte-clamped value of the sample provided</returns>
         protected static Byte ConvertSampleToByte(Double sample)
         {
-            return sample < 0.0 ? (Byte)0 : sample > 255.0 ? (Byte)255 : Convert.ToByte(sample);
+            return sample < 0.0 ? Byte.MinValue : sample > 255.0 ? Byte.MaxValue : Convert.ToByte(sample);
         }
 
         /// <summary>Sets up and populates the non-sample data of the components</summary>
