@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "File Formats", "File Formats\File Formats.csproj", "{F2085177-9356-43EE-9744-85AA2FFCACEE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{9BD4922B-BEC0-4140-8600-35571A479EB2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReusableCode", "ReusableCode\ReusableCode.csproj", "{72729DA3-9933-4C3D-91C6-2CF0336D6493}"
@@ -48,9 +46,80 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing Projects", "Testing
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "File Format Projects", "File Format Projects", "{B48DC58F-AF29-427D-B363-0C7DFD067380}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infinity Formats", "Infinity Formats\Infinity Formats.csproj", "{3EE5137B-C08F-4337-B089-E20A502C2A0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basic Formats", "Basic Formats\Basic Formats.csproj", "{4D2A899B-3674-4288-81A8-C8F11636C2DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "External Formats", "External Formats\External Formats.csproj", "{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infinity+ 1 Formats", "Infinity + 1 Formats\Infinity+ 1 Formats.csproj", "{F2085177-9356-43EE-9744-85AA2FFCACEE}"
+EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = Infinity + 1.vsmdi
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 16
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://bardezserver:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = TestProject1\\TestProject1.csproj
+		SccProjectTopLevelParentUniqueName1 = Infinity\u0020+\u00201.sln
+		SccProjectName1 = TestProject1
+		SccLocalPath1 = TestProject1
+		SccProjectUniqueName2 = Native\u0020Code\\DirectX\\Direct2D\\Direct2D.vcxproj
+		SccProjectTopLevelParentUniqueName2 = Infinity\u0020+\u00201.sln
+		SccProjectName2 = Native\u0020Code/DirectX/Direct2D
+		SccLocalPath2 = Native\u0020Code\\DirectX\\Direct2D
+		SccProjectUniqueName3 = Exception\u0020Manager\\Exception\u0020Handler.csproj
+		SccProjectTopLevelParentUniqueName3 = Infinity\u0020+\u00201.sln
+		SccProjectName3 = Exception\u0020Manager
+		SccLocalPath3 = Exception\u0020Manager
+		SccProjectUniqueName4 = Native\u0020Code\\Win32\u0020Structures\\Win32\u0020Structures.vcxproj
+		SccProjectTopLevelParentUniqueName4 = Infinity\u0020+\u00201.sln
+		SccProjectName4 = Native\u0020Code/Win32\u0020Structures
+		SccLocalPath4 = Native\u0020Code\\Win32\u0020Structures
+		SccProjectUniqueName5 = Output\\Output.csproj
+		SccProjectTopLevelParentUniqueName5 = Infinity\u0020+\u00201.sln
+		SccProjectName5 = Output
+		SccLocalPath5 = Output
+		SccProjectUniqueName6 = Configuration\u0020Handler\\Configuration\u0020Handler.csproj
+		SccProjectTopLevelParentUniqueName6 = Infinity\u0020+\u00201.sln
+		SccProjectName6 = Configuration\u0020Handler
+		SccLocalPath6 = Configuration\u0020Handler
+		SccProjectUniqueName7 = Utility\\Utility.csproj
+		SccProjectTopLevelParentUniqueName7 = Infinity\u0020+\u00201.sln
+		SccProjectName7 = Utility
+		SccLocalPath7 = Utility
+		SccProjectUniqueName8 = Test\\Test.csproj
+		SccProjectTopLevelParentUniqueName8 = Infinity\u0020+\u00201.sln
+		SccProjectName8 = Test
+		SccLocalPath8 = Test
+		SccProjectUniqueName9 = ReusableCode\\ReusableCode.csproj
+		SccProjectTopLevelParentUniqueName9 = Infinity\u0020+\u00201.sln
+		SccProjectName9 = ReusableCode
+		SccLocalPath9 = ReusableCode
+		SccProjectUniqueName10 = Tester\\Tester.csproj
+		SccProjectTopLevelParentUniqueName10 = Infinity\u0020+\u00201.sln
+		SccProjectName10 = Tester
+		SccLocalPath10 = Tester
+		SccProjectUniqueName11 = Infinity\u0020Formats\\Infinity\u0020Formats.csproj
+		SccProjectTopLevelParentUniqueName11 = Infinity\u0020+\u00201.sln
+		SccProjectName11 = Infinity\u0020Formats
+		SccLocalPath11 = Infinity\u0020Formats
+		SccProjectUniqueName12 = Basic\u0020Formats\\Basic\u0020Formats.csproj
+		SccProjectTopLevelParentUniqueName12 = Infinity\u0020+\u00201.sln
+		SccProjectName12 = Basic\u0020Formats
+		SccLocalPath12 = Basic\u0020Formats
+		SccProjectUniqueName13 = External\u0020Formats\\External\u0020Formats.csproj
+		SccProjectTopLevelParentUniqueName13 = Infinity\u0020+\u00201.sln
+		SccProjectName13 = External\u0020Formats
+		SccLocalPath13 = External\u0020Formats
+		SccProjectUniqueName14 = Native\u0020Code\\DirectX\\XAudio2\\XAudio2.vcxproj
+		SccProjectTopLevelParentUniqueName14 = Infinity\u0020+\u00201.sln
+		SccProjectName14 = Native\u0020Code/DirectX/XAudio2
+		SccLocalPath14 = Native\u0020Code\\DirectX\\XAudio2
+		SccProjectUniqueName15 = Infinity\u0020+\u00201\u0020Formats\\Infinity+\u00201\u0020Formats.csproj
+		SccProjectTopLevelParentUniqueName15 = Infinity\u0020+\u00201.sln
+		SccProjectName15 = Infinity\u0020+\u00201\u0020Formats
+		SccLocalPath15 = Infinity\u0020+\u00201\u0020Formats
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,18 +132,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Release|Win32.ActiveCfg = Release|Any CPU
-		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Release|x86.ActiveCfg = Release|Any CPU
 		{9BD4922B-BEC0-4140-8600-35571A479EB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9BD4922B-BEC0-4140-8600-35571A479EB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BD4922B-BEC0-4140-8600-35571A479EB2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -207,22 +264,73 @@ Global
 		{61DCF1C6-109C-4886-A10A-FEE95DE901CA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{61DCF1C6-109C-4886-A10A-FEE95DE901CA}.Release|Win32.ActiveCfg = Release|Any CPU
 		{61DCF1C6-109C-4886-A10A-FEE95DE901CA}.Release|x86.ActiveCfg = Release|Any CPU
+		{3EE5137B-C08F-4337-B089-E20A502C2A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EE5137B-C08F-4337-B089-E20A502C2A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EE5137B-C08F-4337-B089-E20A502C2A0C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3EE5137B-C08F-4337-B089-E20A502C2A0C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3EE5137B-C08F-4337-B089-E20A502C2A0C}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{3EE5137B-C08F-4337-B089-E20A502C2A0C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3EE5137B-C08F-4337-B089-E20A502C2A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EE5137B-C08F-4337-B089-E20A502C2A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EE5137B-C08F-4337-B089-E20A502C2A0C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3EE5137B-C08F-4337-B089-E20A502C2A0C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3EE5137B-C08F-4337-B089-E20A502C2A0C}.Release|Win32.ActiveCfg = Release|Any CPU
+		{3EE5137B-C08F-4337-B089-E20A502C2A0C}.Release|x86.ActiveCfg = Release|Any CPU
+		{4D2A899B-3674-4288-81A8-C8F11636C2DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D2A899B-3674-4288-81A8-C8F11636C2DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D2A899B-3674-4288-81A8-C8F11636C2DA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4D2A899B-3674-4288-81A8-C8F11636C2DA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4D2A899B-3674-4288-81A8-C8F11636C2DA}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{4D2A899B-3674-4288-81A8-C8F11636C2DA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4D2A899B-3674-4288-81A8-C8F11636C2DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D2A899B-3674-4288-81A8-C8F11636C2DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D2A899B-3674-4288-81A8-C8F11636C2DA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4D2A899B-3674-4288-81A8-C8F11636C2DA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4D2A899B-3674-4288-81A8-C8F11636C2DA}.Release|Win32.ActiveCfg = Release|Any CPU
+		{4D2A899B-3674-4288-81A8-C8F11636C2DA}.Release|x86.ActiveCfg = Release|Any CPU
+		{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}.Release|Win32.ActiveCfg = Release|Any CPU
+		{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}.Release|x86.ActiveCfg = Release|Any CPU
+		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Release|Win32.ActiveCfg = Release|Any CPU
+		{F2085177-9356-43EE-9744-85AA2FFCACEE}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{257201A0-0B65-4EA0-AC04-0B8005AECC37} = {2D9452D4-316F-405B-B124-006048F5EED9}
-		{FE898E65-DAFF-435D-9A72-4C9D3306636A} = {2D9452D4-316F-405B-B124-006048F5EED9}
-		{44208309-EFE3-4A6F-B0F8-9013A16B20DF} = {2D9452D4-316F-405B-B124-006048F5EED9}
+		{E79833DB-B2D2-4781-B0FC-79E85DA95BE5} = {39258658-C7D2-4BA8-998A-50256FCB46B5}
+		{61DCF1C6-109C-4886-A10A-FEE95DE901CA} = {39258658-C7D2-4BA8-998A-50256FCB46B5}
+		{9BD4922B-BEC0-4140-8600-35571A479EB2} = {39258658-C7D2-4BA8-998A-50256FCB46B5}
 		{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A} = {F486BF8B-E23F-4BE4-B837-9ABC8A5F3BEE}
 		{6E1496AB-268A-4EA2-99B3-726162F019F1} = {F486BF8B-E23F-4BE4-B837-9ABC8A5F3BEE}
 		{6EEC2717-FB0D-42D7-BABA-D2C024074B4F} = {F486BF8B-E23F-4BE4-B837-9ABC8A5F3BEE}
 		{72729DA3-9933-4C3D-91C6-2CF0336D6493} = {F486BF8B-E23F-4BE4-B837-9ABC8A5F3BEE}
 		{6ECA5199-A497-4BF2-B956-CEB3F0912C17} = {70C59CBB-5228-4CA6-9065-AFD09708840A}
-		{E79833DB-B2D2-4781-B0FC-79E85DA95BE5} = {39258658-C7D2-4BA8-998A-50256FCB46B5}
-		{61DCF1C6-109C-4886-A10A-FEE95DE901CA} = {39258658-C7D2-4BA8-998A-50256FCB46B5}
-		{9BD4922B-BEC0-4140-8600-35571A479EB2} = {39258658-C7D2-4BA8-998A-50256FCB46B5}
+		{257201A0-0B65-4EA0-AC04-0B8005AECC37} = {2D9452D4-316F-405B-B124-006048F5EED9}
+		{FE898E65-DAFF-435D-9A72-4C9D3306636A} = {2D9452D4-316F-405B-B124-006048F5EED9}
+		{44208309-EFE3-4A6F-B0F8-9013A16B20DF} = {2D9452D4-316F-405B-B124-006048F5EED9}
+		{3EE5137B-C08F-4337-B089-E20A502C2A0C} = {B48DC58F-AF29-427D-B363-0C7DFD067380}
+		{4D2A899B-3674-4288-81A8-C8F11636C2DA} = {B48DC58F-AF29-427D-B363-0C7DFD067380}
+		{FA2C0C9A-6897-41DD-8A32-D29A96B555E6} = {B48DC58F-AF29-427D-B363-0C7DFD067380}
 		{F2085177-9356-43EE-9744-85AA2FFCACEE} = {B48DC58F-AF29-427D-B363-0C7DFD067380}
 	EndGlobalSection
 EndGlobal

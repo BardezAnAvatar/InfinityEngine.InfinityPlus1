@@ -8,7 +8,7 @@
     <ProjectGuid>{F2085177-9356-43EE-9744-85AA2FFCACEE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bardez.Projects.InfinityPlus1.Files</RootNamespace>
+    <RootNamespace>Bardez.Projects.InfinityPlus1.FileFormats.InfinityPlus1</RootNamespace>
     <AssemblyName>InfinityPlus1.Files</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
