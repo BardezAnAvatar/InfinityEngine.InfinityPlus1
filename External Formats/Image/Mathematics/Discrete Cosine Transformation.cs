@@ -390,17 +390,19 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics
                 //second pass on columns
                 for (Int32 column = 0; column < 8; ++column)
                 {
+                    Int32 row2 = column + 8, row3 = column + 16, row4 = column + 24, row5 = column + 32, row6 = column + 40, row7 = column + 48, row8 = column + 56;
+
                     //if 0...7 are all 0, all the cross addition/multiplication comes out to 0 anyway.
-                    if (idctTemp[column] == 0 && idctTemp[8 + column] == 0 && idctTemp[16 + column] == 0 && idctTemp[24 + column] == 0
-                        && idctTemp[32 + column] == 0 && idctTemp[40 + column] == 0 && idctTemp[48 + column] == 0 && idctTemp[56 + column] == 0)
+                    if (idctTemp[column] == 0 && idctTemp[row2] == 0 && idctTemp[row3] == 0 && idctTemp[row4] == 0
+                        && idctTemp[row5] == 0 && idctTemp[row6] == 0 && idctTemp[row7] == 0 && idctTemp[row8] == 0)
                         continue;   //idctTemp is already initialized to 0.
                     else
                     {
                         DiscreteCosineTransformation.InverseDiscreteCosineTransformFastRowFloat(
-                            out idctTemp[column], out idctTemp[column + 8], out idctTemp[column + 16], out idctTemp[column + 24],
-                            out idctTemp[column + 32], out idctTemp[column + 40], out idctTemp[column + 48], out idctTemp[column + 56],
-                            idctTemp[column], idctTemp[column + 8], idctTemp[column + 16], idctTemp[column + 24],
-                            idctTemp[column + 32], idctTemp[column + 40], idctTemp[column + 48], idctTemp[column + 56]);
+                            out idctTemp[column], out idctTemp[row2], out idctTemp[row3], out idctTemp[row4],
+                            out idctTemp[row5], out idctTemp[row6], out idctTemp[row7], out idctTemp[row8],
+                            idctTemp[column], idctTemp[row2], idctTemp[row3], idctTemp[row4],
+                            idctTemp[row5], idctTemp[row6], idctTemp[row7], idctTemp[row8]);
                     }
                 }
 
@@ -409,10 +411,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics
                 //I can't tell if this is commonly left out in mathematical papers as obvious, nor
                 //can I tell if it i a needed division of 1/(2*root(2)) after each pass, or if it is
                 //a needed division of N=8.
+                // Note: Later found out it is 1 / (2 root 2).
                 for (Int32 descaleIndex = 0; descaleIndex < 64; ++descaleIndex)
-                    idctTemp[descaleIndex] /= 8;
-
-                idct.AddRange(idctTemp);
+                    idct.Add(idctTemp[descaleIndex] / 8);
             }
 
             return idct;

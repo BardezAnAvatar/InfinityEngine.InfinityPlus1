@@ -24,11 +24,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// <param name="quantizationElements">Quantization table elements to dequantize against</param>
         protected override void Dequantize(QuantizationTable qt)
         {
-            for (Int32 qDctIndex = 0; qDctIndex < this.SourceData.Count; ++qDctIndex)
-            {
-                Int32 dct = this.SourceData[qDctIndex] * qt.Elements[qDctIndex % 64];
-                this.SampleData.Add(dct);
-            }
+            Int32 sourceSize = this.SourceData.Count;
+            this.SampleData = new List<Int32>(sourceSize);
+
+            for (Int32 qDctIndex = 0; qDctIndex < sourceSize; ++qDctIndex)
+                this.SampleData.Add(this.SourceData[qDctIndex] * qt.Elements[qDctIndex % 64]);
         }
 
         /// <summary>Attempts to implement JPEG specification §K.2.8.1</summary>
