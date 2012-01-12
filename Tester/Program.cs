@@ -17,8 +17,8 @@ namespace Bardez.Projects.InfinityPlus1.Tester
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new TestUI());
-            Application.Run(new Scratch());
+            Application.Run(new TestUI());
+            //Application.Run(new Scratch());
 
             //ITester tester = new PlaylistTest();
             //tester.Test();
