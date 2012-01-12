@@ -61,10 +61,11 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
             this.controlBufferLock = new Object();
             this.controlPaintRenderLock = new Object();
             this.currentFrameKey = -1;
+            this.InitializeControlDirect2D();
         }
 
         /// <summary>Initializes the Direct2D</summary>
-        public void InitializeControlDirect2D()
+        protected void InitializeControlDirect2D()
         {
             // Build options on the Control render target
             PixelFormat format = new PixelFormat(DXGI_ChannelFormat.FORMAT_B8G8R8A8_UNORM, AlphaMode.Unknown);  //32-bit color, pure alpha
@@ -79,6 +80,42 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
 
             // create a bitmap rendering target
             this.ctrlRenderTarget.CreateCompatibleRenderTarget(out this.bmpRengerTarget);
+        }
+        #endregion
+
+
+        #region Destruction
+        /// <summary>Disposal code; releases unmanaged resources</summary>
+        /// <param name="disposing">True indicates to dispose managed resources</param>
+        /// <remarks>Dispose()</remarks>
+        protected override void Dispose(Boolean disposing)
+        {
+            lock (this.controlBufferLock)
+            {
+                if (this.bmpRengerTarget != null)
+                {
+                    this.bmpRengerTarget.Dispose();
+                    this.bmpRengerTarget = null;
+                }
+            }
+
+            lock (this.controlPaintRenderLock)
+            {
+                if (this.ctrlRenderTarget != null)
+                {
+                    this.ctrlRenderTarget.Dispose();
+                    this.ctrlRenderTarget = null;
+                }
+            }
+
+            base.Dispose(disposing);
+        }
+
+        /// <summary>Disposal</summary>
+        /// <remarks>Finalize()</remarks>
+        ~Direct2dRenderControl()
+        {
+            this.Dispose();
         }
         #endregion
 
@@ -260,6 +297,12 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
                 this.DrawBitmapToBuffer(Direct2dResourceManager.Instance.GetBitmapResource(key));
 
             this.currentFrameKey = key;
+        }
+
+        /// <summary>This method invokes the rendering. For use by the appliation to tell the control to change images on demand.</summary>
+        public void Render()
+        {
+            this.Invalidate();
         }
         #endregion
 

@@ -77,20 +77,26 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
             lock (this.resourceLock)
             {
                 //dispose the bitmaps
-                for (Int32 i = 0; i < this.renderResourceCollection.Count; ++i)
+                if (this.renderResourceCollection != null)
                 {
-                    if (this.renderResourceCollection[i] != null)
+                    for (Int32 i = 0; i < this.renderResourceCollection.Count; ++i)
                     {
-                        this.renderResourceCollection[i].Dispose();
-                        this.renderResourceCollection[i] = null;
+                        if (this.renderResourceCollection[i] != null)
+                        {
+                            this.renderResourceCollection[i].Dispose();
+                            this.renderResourceCollection[i] = null;
+                        }
                     }
+
+                    this.renderResourceCollection = null;
                 }
 
-                this.renderResourceCollection = null;
-
-                //dispose the factory
-                this.factory.Dispose();
-                this.factory = null;
+                //dispose the facotry
+                if (this.factory != null)
+                {
+                    this.factory.Dispose();
+                    this.factory = null;
+                }
             }
         }
 

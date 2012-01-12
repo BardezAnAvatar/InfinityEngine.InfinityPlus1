@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Globals
+namespace Bardez.Projects.InfinityPlus1.Files.Base
 {
     /// <summary>Class representing a NULL-terminated string</summary>
     public class ZString

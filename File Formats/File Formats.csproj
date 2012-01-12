@@ -12,10 +12,14 @@
     <AssemblyName>InfinityPlus1.Files</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,19 +53,42 @@
     <Compile Include="External\Image\Bitmap\Enums\Rendering Intent.cs" />
     <Compile Include="External\Image\Bitmap\RGB Coordinate.cs" />
     <Compile Include="External\Image\Bitmap\RGB Coordinate Triplet.cs" />
+    <Compile Include="External\Image\JPEG\Component Data Float.cs" />
+    <Compile Include="External\Image\JPEG\Component Data Integer.cs" />
+    <Compile Include="External\Image\JPEG\Component Data.cs" />
+    <Compile Include="External\Image\JPEG\JPEG Parser.cs" />
+    <Compile Include="External\Image\Math\AC Predictive Smoothing.cs" />
+    <Compile Include="External\Image\Math\Discrete Cosine Transformation.cs" />
+    <Compile Include="External\Image\JPEG\Generic Coding Table Segment.cs" />
+    <Compile Include="External\Image\JPEG\ICoder.cs" />
+    <Compile Include="External\Image\JPEG\Mimimum Coded Unit.cs" />
+    <Compile Include="External\Image\JPEG\Scan Component Data.cs" />
+    <Compile Include="External\Image\JPEG\Frame Component Parameter.cs" />
+    <Compile Include="External\Image\JPEG\Container Segment.cs" />
     <Compile Include="External\Image\JPEG\Entropy Coded Secment.cs" />
     <Compile Include="External\Image\JPEG\Enums\Density Unit.cs" />
+    <Compile Include="External\Image\JPEG\Generic Coding Table.cs" />
+    <Compile Include="External\Image\JPEG\Generic Table Segment.cs" />
+    <Compile Include="External\Image\JPEG\Generic Table.cs" />
+    <Compile Include="External\Image\JPEG\Huffman Bit Reader.cs" />
     <Compile Include="External\Image\JPEG\Huffman Table.cs" />
+    <Compile Include="External\Image\JPEG\Huffman Coder.cs" />
     <Compile Include="External\Image\JPEG\JFIF Header.cs" />
     <Compile Include="External\Image\JPEG\Frame Header.cs" />
     <Compile Include="External\Image\JPEG\JPEG Frame.cs" />
     <Compile Include="External\Image\JPEG\JPEG JFIF Interchange.cs" />
     <Compile Include="External\Image\JPEG\Interchange Constants.cs" />
+    <Compile Include="External\Image\JPEG\JPEG JFIF Parser.cs" />
+    <Compile Include="External\Image\JPEG\Marker Segment Sub-Stream.cs" />
     <Compile Include="External\Image\JPEG\Marker Segment.cs" />
     <Compile Include="External\Image\JPEG\Quantization Table.cs" />
+    <Compile Include="External\Image\JPEG\Restart Marker.cs" />
+    <Compile Include="External\Image\JPEG\Restart Interval.cs" />
+    <Compile Include="External\Image\JPEG\Scan Component Parameter.cs" />
     <Compile Include="External\Image\JPEG\Scan Header.cs" />
     <Compile Include="External\Image\JPEG\Scan.cs" />
     <Compile Include="External\Image\Pixels\Palette.cs" />
+    <Compile Include="External\Image\Pixels\Resize.cs" />
     <Compile Include="External\Image\Pixels\RGB Quad.cs" />
     <Compile Include="External\Image\Pixels\RGB Triplet.cs" />
     <Compile Include="External\Image\Pixels\Enums\PixelFormat.cs" />
@@ -277,6 +304,7 @@
     <None Include="Bardez.ruleset" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="External\Image\JPEG\_Notes.txt" />
     <Content Include="External\RIFF\RIFF Spec.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

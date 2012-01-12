@@ -232,6 +232,12 @@
     <Compile Include="WinForm\MUS\Music Playlist Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="WinForm\Output\Direct2D\Direct2D Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Output\Direct2D\Direct2D Render Test Control.Designer.cs">
+      <DependentUpon>Direct2D Render Test Control.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForm\Output\XAudio2\XAudio2 Render Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -324,6 +330,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\LoggingControl.resx">
       <DependentUpon>LoggingControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Output\Direct2D\Direct2D Render Test Control.resx">
+      <DependentUpon>Direct2D Render Test Control.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
