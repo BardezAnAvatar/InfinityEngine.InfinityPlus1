@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.Enums;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Enums;
@@ -58,8 +59,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect2
         /// <param name="output">Output stream to write to</param>
         public override void Write(Stream output)
         {
-            ReusableIO.WriteStringToStream(this.signature, output, Constants.CultureCodeEnglish, false, 4);
-            ReusableIO.WriteStringToStream(this.version, output, Constants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.signature, output, CultureConstants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.version, output, CultureConstants.CultureCodeEnglish, false, 4);
             this.core.Write(output);
         }
         #endregion

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
@@ -71,8 +71,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
         {
             Byte[] header = ReusableIO.BinaryRead(input, 28);
 
-            this.Signature = ReusableIO.ReadStringFromByteArray(header, 0, Constants.CultureCodeEnglish, 4);
-            this.Version = ReusableIO.ReadStringFromByteArray(header, 4, Constants.CultureCodeEnglish, 4);
+            this.Signature = ReusableIO.ReadStringFromByteArray(header, 0, CultureConstants.CultureCodeEnglish, 4);
+            this.Version = ReusableIO.ReadStringFromByteArray(header, 4, CultureConstants.CultureCodeEnglish, 4);
             this.SizeUncompressed = ReusableIO.ReadUInt32FromArray(header, 8);
             this.SizeCompressed = ReusableIO.ReadUInt32FromArray(header, 12);
             this.OffsetAcm = ReusableIO.ReadUInt32FromArray(header, 16);
@@ -85,8 +85,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.External.Interplay.ACM
         /// <param name="output">Stream to write the header to</param>
         public void Write(Stream output)
         {
-            ReusableIO.WriteStringToStream(this.Signature, output, Constants.CultureCodeEnglish, false, 4);
-            ReusableIO.WriteStringToStream(this.Version, output, Constants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.Signature, output, CultureConstants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.Version, output, CultureConstants.CultureCodeEnglish, false, 4);
             ReusableIO.WriteUInt32ToStream(this.SizeUncompressed, output);
             ReusableIO.WriteUInt32ToStream(this.SizeCompressed, output);
             ReusableIO.WriteUInt32ToStream(this.OffsetAcm, output);

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.Enums;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
@@ -108,7 +109,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell
             this.abilityType = (ItemSpellAbilityType)remainingBody[0];
             this.spellHostility = remainingBody[1];
             this.abilityLocation = (ItemSpellAbilityLocation)ReusableIO.ReadUInt16FromArray(remainingBody, 2);
-            this.icon.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 4, Constants.CultureCodeEnglish);
+            this.icon.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 4, CultureConstants.CultureCodeEnglish);
             this.target = (ItemSpellAbilityTarget)remainingBody[12];
             this.targetCount = remainingBody[13];
             this.range = ReusableIO.ReadUInt16FromArray(remainingBody, 14);
@@ -131,7 +132,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell
             output.WriteByte((Byte)this.abilityType);
             output.WriteByte(this.spellHostility);
             ReusableIO.WriteUInt16ToStream((UInt16)this.abilityLocation, output);
-            ReusableIO.WriteStringToStream(this.icon.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.icon.ResRef, output, CultureConstants.CultureCodeEnglish);
             output.WriteByte((Byte)this.target);
             output.WriteByte(this.targetCount);
             ReusableIO.WriteUInt16ToStream(this.range, output);

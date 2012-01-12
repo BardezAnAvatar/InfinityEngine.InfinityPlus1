@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.Enums;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
@@ -69,7 +70,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell.Spell1
 
             this.nameUnidentified.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 0);
             this.nameIdentified.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 4);
-            this.castingCompletionSound.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 8, Constants.CultureCodeEnglish);
+            this.castingCompletionSound.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 8, CultureConstants.CultureCodeEnglish);
             this.flags = (SpellHeader1Flags)ReusableIO.ReadUInt32FromArray(remainingBody, 16);
             this.type = (SpellType)ReusableIO.ReadUInt16FromArray(remainingBody, 20);
             this.prohibitionFlags = (SpellProhibitionFlags)ReusableIO.ReadUInt32FromArray(remainingBody, 22);
@@ -79,7 +80,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell.Spell1
             Array.Copy(remainingBody, 32, this.reserved1, 0, 12);
             this.level = ReusableIO.ReadUInt32FromArray(remainingBody, 44);
             this.stackSize = ReusableIO.ReadUInt16FromArray(remainingBody, 48);
-            this.icon.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 50, Constants.CultureCodeEnglish);
+            this.icon.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 50, CultureConstants.CultureCodeEnglish);
             Array.Copy(remainingBody, 58, this.reserved2, 0, 14);
             this.descriptionUnidentified.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 72);
             this.descriptionIdentified.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 76);
@@ -94,11 +95,11 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell.Spell1
         /// <summary>This public method writes the file format to the output stream.</summary>
         public override void Write(Stream output)
         {
-            ReusableIO.WriteStringToStream(this.signature, output, Constants.CultureCodeEnglish, false, 4);
-            ReusableIO.WriteStringToStream(this.version, output, Constants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.signature, output, CultureConstants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.version, output, CultureConstants.CultureCodeEnglish, false, 4);
             ReusableIO.WriteInt32ToStream(this.nameUnidentified.StringReferenceIndex, output);
             ReusableIO.WriteInt32ToStream(this.nameIdentified.StringReferenceIndex, output);
-            ReusableIO.WriteStringToStream(this.castingCompletionSound.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.castingCompletionSound.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteUInt32ToStream((UInt32)this.flags, output);
             ReusableIO.WriteUInt16ToStream((UInt16)this.type, output);
             ReusableIO.WriteUInt32ToStream((UInt32)this.prohibitionFlags, output);
@@ -108,7 +109,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Spell.Spell1
             output.Write(this.reserved1, 0, 12);
             ReusableIO.WriteUInt32ToStream(this.level, output);
             ReusableIO.WriteUInt16ToStream(this.stackSize, output);
-            ReusableIO.WriteStringToStream(this.icon.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.icon.ResRef, output, CultureConstants.CultureCodeEnglish);
             output.Write(this.reserved2, 0, 14);
             ReusableIO.WriteInt32ToStream(this.descriptionUnidentified.StringReferenceIndex, output);
             ReusableIO.WriteInt32ToStream(this.descriptionIdentified.StringReferenceIndex, output);

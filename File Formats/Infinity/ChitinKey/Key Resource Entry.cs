@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Common;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
@@ -95,7 +96,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey
             Byte[] buffer = ReusableIO.BinaryRead(input, 14);   //header buffer
 
             //Resource Name
-            this.ResourceName.Source = ReusableIO.ReadStringFromByteArray(buffer, 0, Constants.CultureCodeEnglish);
+            this.ResourceName.Source = ReusableIO.ReadStringFromByteArray(buffer, 0, CultureConstants.CultureCodeEnglish);
 
             //Resource Type
             this.resourceType = (ResourceType)ReusableIO.ReadInt16FromArray(buffer, 0x8);
@@ -109,7 +110,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.ChitinKey
         public void Write(Stream output)
         {
             //Resource Name
-            ReusableIO.WriteStringToStream(this.ResourceName.Source, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.ResourceName.Source, output, CultureConstants.CultureCodeEnglish);
 
             //Resource Type
             ReusableIO.WriteInt16ToStream((Int16)this.resourceType, output);

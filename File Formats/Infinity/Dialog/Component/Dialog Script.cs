@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
 using Bardez.Projects.ReusableCode;
@@ -74,7 +75,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
             ReusableIO.SeekIfAble(input, this.OffsetScript, SeekOrigin.Begin);
             Byte[] triggerData = ReusableIO.BinaryRead(input, this.LengthScript);
 
-            this.Script.Source = ReusableIO.ReadStringFromByteArray(triggerData, 0, Constants.CultureCodeEnglish, triggerData.Length);
+            this.Script.Source = ReusableIO.ReadStringFromByteArray(triggerData, 0, CultureConstants.CultureCodeEnglish, triggerData.Length);
         }
 
         /// <summary>This public method writes the file format data structure to the output stream.</summary>
@@ -90,7 +91,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
         public void WriteScript(Stream output)
         {
             ReusableIO.SeekIfAble(output, this.OffsetScript);
-            ReusableIO.WriteStringToStream(this.Script.Source, output, Constants.CultureCodeEnglish, true);
+            ReusableIO.WriteStringToStream(this.Script.Source, output, CultureConstants.CultureCodeEnglish, true);
         }
         #endregion
 
@@ -144,7 +145,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
         /// <summary>Maintains the data integrity of the instance</summary>
         public void MaintainMinimalDataIntegrity()
         {
-            Byte[] data = ReusableIO.WriteStringToByteArray(this.Script.Source, Constants.CultureCodeEnglish);
+            Byte[] data = ReusableIO.WriteStringToByteArray(this.Script.Source, CultureConstants.CultureCodeEnglish);
             this.LengthScript = Convert.ToUInt32(data.Length);
         }
     }

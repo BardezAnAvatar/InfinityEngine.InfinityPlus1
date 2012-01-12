@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.Enums;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Enums;
@@ -131,7 +132,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect1
             this.duration = ReusableIO.ReadUInt32FromArray(remainingBody, 14);
             this.probability1 = remainingBody[18];
             this.probability2 = remainingBody[19];
-            this.resource1.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 20, Constants.CultureCodeEnglish);
+            this.resource1.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 20, CultureConstants.CultureCodeEnglish);
             this.diceCount = ReusableIO.ReadUInt32FromArray(remainingBody, 28);
             this.diceSides = ReusableIO.ReadUInt32FromArray(remainingBody, 32);
             this.savingThrowType = (EffectSavingThrow)ReusableIO.ReadUInt32FromArray(remainingBody, 36);
@@ -152,7 +153,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Effect.Effect1
             ReusableIO.WriteUInt32ToStream(this.duration, output);
             output.WriteByte(this.probability1);
             output.WriteByte(this.probability2);
-            ReusableIO.WriteStringToStream(this.resource1.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.resource1.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteUInt32ToStream(this.diceCount, output);
             ReusableIO.WriteUInt32ToStream(this.diceSides, output);
             ReusableIO.WriteUInt32ToStream((UInt32)this.savingThrowType, output);

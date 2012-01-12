@@ -81,9 +81,12 @@ Bardez::Projects::DirectX::Direct2D::RectangleU::RectangleU(System::Drawing::Rec
 Bardez::Projects::DirectX::Direct2D::RectangleU::RectangleU(Bardez::Projects::DirectX::Direct2D::SizeU^ size)
 {
 	this->left = 0;
-	this->right = size->Width > 0 ? size->Width - 1 : 0;
 	this->top = 0;
-	this->bottom = size->Height > 0 ? size->Height - 1 : 0;
+	//these cause unintentional cropping
+	//this->right = size->Width > 0 ? size->Width - 1 : 0;
+	//this->bottom = size->Height > 0 ? size->Height - 1 : 0;
+	this->right = size->Width > 0 ? size->Width : 0;
+	this->bottom = size->Height > 0 ? size->Height : 0;
 }
 
 /// <summary>Unmanaged constructor</summary>

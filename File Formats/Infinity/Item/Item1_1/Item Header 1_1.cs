@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.Enums;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
@@ -129,11 +130,11 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Item1_1
 
             this.nameUnidentified.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 0);
             this.nameIdentified.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 4);
-            this.dropSound.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 8, Constants.CultureCodeEnglish);
+            this.dropSound.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 8, CultureConstants.CultureCodeEnglish);
             this.itemFlags = (Enums.ItemFlags)ReusableIO.ReadUInt32FromArray(remainingBody, 16);
             this.itemType = (Enums.ItemType)ReusableIO.ReadUInt16FromArray(remainingBody, 20);
             this.itemProhibitionFlags = (Enums.ItemProhibitions1_1)ReusableIO.ReadUInt32FromArray(remainingBody, 22);
-            this.weaponAnimation = ReusableIO.ReadStringFromByteArray(remainingBody, 26, Constants.CultureCodeEnglish, 2);
+            this.weaponAnimation = ReusableIO.ReadStringFromByteArray(remainingBody, 26, CultureConstants.CultureCodeEnglish, 2);
             this.minLevel = ReusableIO.ReadUInt16FromArray(remainingBody, 28);
             this.minStrength = remainingBody[30];
             this.unused1 = remainingBody[31];
@@ -151,20 +152,20 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Item1_1
             this.unused2 = remainingBody[43];
             this.price = ReusableIO.ReadUInt32FromArray(remainingBody, 44);
             this.stackSize = ReusableIO.ReadUInt16FromArray(remainingBody, 48);
-            this.inventoryIcon.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 50, Constants.CultureCodeEnglish);
+            this.inventoryIcon.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 50, CultureConstants.CultureCodeEnglish);
             this.identifyThreshold = ReusableIO.ReadUInt16FromArray(remainingBody, 58);
-            this.groundIcon.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 60, Constants.CultureCodeEnglish);
+            this.groundIcon.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 60, CultureConstants.CultureCodeEnglish);
             this.weight = ReusableIO.ReadUInt32FromArray(remainingBody, 68);
             this.descriptionUnidentified.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 72);
             this.descriptionIdentified.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 76);
-            this.pickupSound.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 80, Constants.CultureCodeEnglish);
+            this.pickupSound.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 80, CultureConstants.CultureCodeEnglish);
             this.enchantment = ReusableIO.ReadUInt32FromArray(remainingBody, 88);
             this.offsetAbilities = ReusableIO.ReadUInt32FromArray(remainingBody, 92);
             this.countAbilities = ReusableIO.ReadUInt16FromArray(remainingBody, 96);
             this.offsetAbilityEffects = ReusableIO.ReadUInt32FromArray(remainingBody, 98);
             this.indexEquippedEffects = ReusableIO.ReadUInt16FromArray(remainingBody, 102);
             this.countEquippedEffects = ReusableIO.ReadUInt16FromArray(remainingBody, 104);
-            this.dialog.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 106, Constants.CultureCodeEnglish);
+            this.dialog.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 106, CultureConstants.CultureCodeEnglish);
             this.conversableLabel.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 114);
             this.paperdollColor = ReusableIO.ReadUInt16FromArray(remainingBody, 118);
             Array.Copy(remainingBody, 120, this.reserved, 0, 26);
@@ -173,15 +174,15 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Item1_1
         /// <summary>This public method writes the file format to the output stream.</summary>
         public override void Write(Stream output)
         {
-            ReusableIO.WriteStringToStream(this.signature, output, Constants.CultureCodeEnglish, false, 4);
-            ReusableIO.WriteStringToStream(this.version, output, Constants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.signature, output, CultureConstants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.version, output, CultureConstants.CultureCodeEnglish, false, 4);
             ReusableIO.WriteInt32ToStream(this.nameUnidentified.StringReferenceIndex, output);
             ReusableIO.WriteInt32ToStream(this.nameIdentified.StringReferenceIndex, output);
-            ReusableIO.WriteStringToStream(this.dropSound.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.dropSound.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteUInt32ToStream((UInt32)this.itemFlags, output);
             ReusableIO.WriteUInt16ToStream((UInt16)this.itemType, output);
             ReusableIO.WriteUInt32ToStream((UInt32)this.itemProhibitionFlags, output);
-            ReusableIO.WriteStringToStream(this.weaponAnimation, output, Constants.CultureCodeEnglish, false, 2);
+            ReusableIO.WriteStringToStream(this.weaponAnimation, output, CultureConstants.CultureCodeEnglish, false, 2);
             ReusableIO.WriteUInt16ToStream(this.minLevel, output);
             output.WriteByte(this.minStrength);
             output.WriteByte(this.unused1);
@@ -199,20 +200,20 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Item.Item1_1
             output.WriteByte(this.unused2);
             ReusableIO.WriteUInt32ToStream(this.price, output);
             ReusableIO.WriteUInt16ToStream(this.stackSize, output);
-            ReusableIO.WriteStringToStream(this.inventoryIcon.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.inventoryIcon.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteUInt16ToStream(this.identifyThreshold, output);
-            ReusableIO.WriteStringToStream(this.groundIcon.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.groundIcon.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteUInt32ToStream(this.weight, output);
             ReusableIO.WriteInt32ToStream(this.descriptionUnidentified.StringReferenceIndex, output);
             ReusableIO.WriteInt32ToStream(this.descriptionIdentified.StringReferenceIndex, output);
-            ReusableIO.WriteStringToStream(this.pickupSound.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.pickupSound.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteUInt32ToStream(this.enchantment, output);
             ReusableIO.WriteUInt32ToStream(this.offsetAbilities, output);
             ReusableIO.WriteUInt16ToStream(this.countAbilities, output);
             ReusableIO.WriteUInt32ToStream(this.offsetAbilityEffects, output);
             ReusableIO.WriteUInt16ToStream(this.indexEquippedEffects, output);
             ReusableIO.WriteUInt16ToStream(this.countEquippedEffects, output);
-            ReusableIO.WriteStringToStream(this.dialog.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.dialog.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteInt32ToStream(this.conversableLabel.StringReferenceIndex, output);
             ReusableIO.WriteUInt16ToStream(this.paperdollColor, output);
             output.Write(this.reserved, 0, this.reserved.Length);

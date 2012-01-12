@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
@@ -519,8 +520,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature9
             this.internalVariable3 = ReusableIO.ReadInt16FromArray(headerBody, 624);
             this.internalVariable4 = ReusableIO.ReadInt16FromArray(headerBody, 626);
             this.internalVariable5 = ReusableIO.ReadInt16FromArray(headerBody, 628);
-            this.SecondaryDeathVariable.Source = ReusableIO.ReadStringFromByteArray(headerBody, 630, Constants.CultureCodeEnglish, 32);
-            this.TertiaryDeathVariable.Source = ReusableIO.ReadStringFromByteArray(headerBody, 662, Constants.CultureCodeEnglish, 32);
+            this.SecondaryDeathVariable.Source = ReusableIO.ReadStringFromByteArray(headerBody, 630, CultureConstants.CultureCodeEnglish, 32);
+            this.TertiaryDeathVariable.Source = ReusableIO.ReadStringFromByteArray(headerBody, 662, CultureConstants.CultureCodeEnglish, 32);
             this.unknown2 = ReusableIO.ReadUInt16FromArray(headerBody, 694);
             this.savedCoordinateX = ReusableIO.ReadUInt16FromArray(headerBody, 696);
             this.savedCoordinateY = ReusableIO.ReadUInt16FromArray(headerBody, 698);
@@ -602,8 +603,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature9
             ReusableIO.WriteInt16ToStream(this.internalVariable3, output);
             ReusableIO.WriteInt16ToStream(this.internalVariable4, output);
             ReusableIO.WriteInt16ToStream(this.internalVariable5, output);
-            ReusableIO.WriteStringToStream(this.SecondaryDeathVariable.Source, output, Constants.CultureCodeEnglish, false, 32);
-            ReusableIO.WriteStringToStream(this.TertiaryDeathVariable.Source, output, Constants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(this.SecondaryDeathVariable.Source, output, CultureConstants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(this.TertiaryDeathVariable.Source, output, CultureConstants.CultureCodeEnglish, false, 32);
             ReusableIO.WriteUInt16ToStream(this.unknown2, output);
             ReusableIO.WriteUInt16ToStream(this.savedCoordinateX, output);
             ReusableIO.WriteUInt16ToStream(this.savedCoordinateY, output);

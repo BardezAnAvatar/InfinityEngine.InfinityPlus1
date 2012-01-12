@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Enums;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
@@ -95,14 +96,14 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components
             //read effect
             Byte[] remainingBody = ReusableIO.BinaryRead(input, 12);
 
-            this.spell.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 0, Constants.CultureCodeEnglish);
+            this.spell.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 0, CultureConstants.CultureCodeEnglish);
             this.memorized = ReusableIO.ReadUInt32FromArray(remainingBody, 8);
         }
 
         /// <summary>This public method writes the file format to the output stream.</summary>
         public void Write(Stream output)
         {
-            ReusableIO.WriteStringToStream(this.spell.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.spell.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteUInt32ToStream(this.memorized, output);
         }
         #endregion

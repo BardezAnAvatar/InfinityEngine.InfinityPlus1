@@ -2,8 +2,8 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
 using Bardez.Projects.InfinityPlus1.Utility;
 using Bardez.Projects.ReusableCode;
 

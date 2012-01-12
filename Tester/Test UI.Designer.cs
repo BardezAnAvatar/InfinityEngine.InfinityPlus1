@@ -161,6 +161,10 @@
             this.xAudio2RenderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.Output.XAudio2.XAudio2RenderTestControl();
             this.tabpageReusableCode = new System.Windows.Forms.TabPage();
             this.bitStreamTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ReusableCode.BitStreamTestControl();
+            this.tabpageDirect2D = new System.Windows.Forms.TabPage();
+            this.tabctrlDirect2D = new System.Windows.Forms.TabControl();
+            this.tabpageRenderTest = new System.Windows.Forms.TabPage();
+            this.direct2DRenderTestControl1 = new Bardez.Projects.InfinityPlus1.Test.WinForm.Output.Direct2D.Direct2DRenderTestControl();
             this.tabctrlMain.SuspendLayout();
             this.tabpage2DA.SuspendLayout();
             this.tabpageAcm.SuspendLayout();
@@ -240,6 +244,9 @@
             this.tabpageXAudio2Devices.SuspendLayout();
             this.tabpageXAudio2Render.SuspendLayout();
             this.tabpageReusableCode.SuspendLayout();
+            this.tabpageDirect2D.SuspendLayout();
+            this.tabctrlDirect2D.SuspendLayout();
+            this.tabpageRenderTest.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabctrlMain
@@ -367,7 +374,7 @@
             this.acmFileTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.acmFileTestControl.Location = new System.Drawing.Point(3, 3);
             this.acmFileTestControl.Name = "acmFileTestControl";
-            this.acmFileTestControl.Size = new System.Drawing.Size(172, 36);
+            this.acmFileTestControl.Size = new System.Drawing.Size(807, 418);
             this.acmFileTestControl.TabIndex = 0;
             // 
             // tabpageWavc
@@ -1498,11 +1505,12 @@
             // tabctrlOutput
             // 
             this.tabctrlOutput.Controls.Add(this.tabpageXAudio2);
+            this.tabctrlOutput.Controls.Add(this.tabpageDirect2D);
             this.tabctrlOutput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabctrlOutput.Location = new System.Drawing.Point(3, 3);
             this.tabctrlOutput.Name = "tabctrlOutput";
             this.tabctrlOutput.SelectedIndex = 0;
-            this.tabctrlOutput.Size = new System.Drawing.Size(186, 68);
+            this.tabctrlOutput.Size = new System.Drawing.Size(821, 450);
             this.tabctrlOutput.TabIndex = 0;
             // 
             // tabpageXAudio2
@@ -1512,7 +1520,7 @@
             this.tabpageXAudio2.Location = new System.Drawing.Point(4, 22);
             this.tabpageXAudio2.Name = "tabpageXAudio2";
             this.tabpageXAudio2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpageXAudio2.Size = new System.Drawing.Size(178, 42);
+            this.tabpageXAudio2.Size = new System.Drawing.Size(813, 424);
             this.tabpageXAudio2.TabIndex = 0;
             this.tabpageXAudio2.Text = "XAudio2";
             // 
@@ -1524,7 +1532,7 @@
             this.tabctrlXAudio2.Location = new System.Drawing.Point(3, 3);
             this.tabctrlXAudio2.Name = "tabctrlXAudio2";
             this.tabctrlXAudio2.SelectedIndex = 0;
-            this.tabctrlXAudio2.Size = new System.Drawing.Size(172, 36);
+            this.tabctrlXAudio2.Size = new System.Drawing.Size(807, 418);
             this.tabctrlXAudio2.TabIndex = 0;
             // 
             // tabpageXAudio2Devices
@@ -1534,7 +1542,7 @@
             this.tabpageXAudio2Devices.Location = new System.Drawing.Point(4, 22);
             this.tabpageXAudio2Devices.Name = "tabpageXAudio2Devices";
             this.tabpageXAudio2Devices.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpageXAudio2Devices.Size = new System.Drawing.Size(164, 10);
+            this.tabpageXAudio2Devices.Size = new System.Drawing.Size(799, 392);
             this.tabpageXAudio2Devices.TabIndex = 0;
             this.tabpageXAudio2Devices.Text = "Devices";
             // 
@@ -1543,7 +1551,7 @@
             this.xAudio2TestControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xAudio2TestControl.Location = new System.Drawing.Point(3, 3);
             this.xAudio2TestControl.Name = "xAudio2TestControl";
-            this.xAudio2TestControl.Size = new System.Drawing.Size(158, 4);
+            this.xAudio2TestControl.Size = new System.Drawing.Size(793, 386);
             this.xAudio2TestControl.TabIndex = 0;
             // 
             // tabpageXAudio2Render
@@ -1553,7 +1561,7 @@
             this.tabpageXAudio2Render.Location = new System.Drawing.Point(4, 22);
             this.tabpageXAudio2Render.Name = "tabpageXAudio2Render";
             this.tabpageXAudio2Render.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpageXAudio2Render.Size = new System.Drawing.Size(164, 10);
+            this.tabpageXAudio2Render.Size = new System.Drawing.Size(799, 392);
             this.tabpageXAudio2Render.TabIndex = 1;
             this.tabpageXAudio2Render.Text = "Render";
             // 
@@ -1583,6 +1591,45 @@
             this.bitStreamTestControl.Name = "bitStreamTestControl";
             this.bitStreamTestControl.Size = new System.Drawing.Size(186, 68);
             this.bitStreamTestControl.TabIndex = 0;
+            // 
+            // tabpageDirect2D
+            // 
+            this.tabpageDirect2D.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageDirect2D.Controls.Add(this.tabctrlDirect2D);
+            this.tabpageDirect2D.Location = new System.Drawing.Point(4, 22);
+            this.tabpageDirect2D.Name = "tabpageDirect2D";
+            this.tabpageDirect2D.Size = new System.Drawing.Size(813, 424);
+            this.tabpageDirect2D.TabIndex = 1;
+            this.tabpageDirect2D.Text = "Direct2D";
+            // 
+            // tabctrlDirect2D
+            // 
+            this.tabctrlDirect2D.Controls.Add(this.tabpageRenderTest);
+            this.tabctrlDirect2D.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabctrlDirect2D.Location = new System.Drawing.Point(0, 0);
+            this.tabctrlDirect2D.Name = "tabctrlDirect2D";
+            this.tabctrlDirect2D.SelectedIndex = 0;
+            this.tabctrlDirect2D.Size = new System.Drawing.Size(813, 424);
+            this.tabctrlDirect2D.TabIndex = 0;
+            // 
+            // tabpageRenderTest
+            // 
+            this.tabpageRenderTest.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageRenderTest.Controls.Add(this.direct2DRenderTestControl1);
+            this.tabpageRenderTest.Location = new System.Drawing.Point(4, 22);
+            this.tabpageRenderTest.Name = "tabpageRenderTest";
+            this.tabpageRenderTest.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageRenderTest.Size = new System.Drawing.Size(805, 398);
+            this.tabpageRenderTest.TabIndex = 0;
+            this.tabpageRenderTest.Text = "Render";
+            // 
+            // direct2DRenderTestControl1
+            // 
+            this.direct2DRenderTestControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.direct2DRenderTestControl1.Location = new System.Drawing.Point(3, 3);
+            this.direct2DRenderTestControl1.Name = "direct2DRenderTestControl1";
+            this.direct2DRenderTestControl1.Size = new System.Drawing.Size(799, 392);
+            this.direct2DRenderTestControl1.TabIndex = 0;
             // 
             // TestUI
             // 
@@ -1672,6 +1719,9 @@
             this.tabpageXAudio2Devices.ResumeLayout(false);
             this.tabpageXAudio2Render.ResumeLayout(false);
             this.tabpageReusableCode.ResumeLayout(false);
+            this.tabpageDirect2D.ResumeLayout(false);
+            this.tabctrlDirect2D.ResumeLayout(false);
+            this.tabpageRenderTest.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1811,5 +1861,9 @@
         private Test.WinForm.TLK.TlkHeaderTestControl tlkHeaderTestControl;
         private System.Windows.Forms.TabPage tabpageTalkStrref;
         private Test.WinForm.TLK.TlkStrrefTestControl tlkStrrefTestControl;
+        private System.Windows.Forms.TabPage tabpageDirect2D;
+        private System.Windows.Forms.TabControl tabctrlDirect2D;
+        private System.Windows.Forms.TabPage tabpageRenderTest;
+        private Test.WinForm.Output.Direct2D.Direct2DRenderTestControl direct2DRenderTestControl1;
     }
 }

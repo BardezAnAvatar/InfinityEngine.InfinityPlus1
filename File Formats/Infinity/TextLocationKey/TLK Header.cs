@@ -2,8 +2,8 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Files.Infinity.TextLocationKey
@@ -52,17 +52,17 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.TextLocationKey
                 switch (Language)
                 {
                     case InfinityEngineLanguage.French:
-                        culture = Constants.CultureCodeFrench;
+                        culture = CultureConstants.CultureCodeFrench;
                         break;
                     case InfinityEngineLanguage.German:
-                        culture = Constants.CultureCodeGerman;
+                        culture = CultureConstants.CultureCodeGerman;
                         break;
                     case InfinityEngineLanguage.Spanish:
-                        culture = Constants.CultureCodeSpanish;
+                        culture = CultureConstants.CultureCodeSpanish;
                         break;
                     case InfinityEngineLanguage.English:
                     default:
-                        culture = Constants.CultureCodeEnglish;
+                        culture = CultureConstants.CultureCodeEnglish;
                         break;
                 }
                 return culture;
@@ -83,10 +83,10 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.TextLocationKey
             Byte[] buffer = ReusableIO.BinaryRead(input, 18);   //header buffer
 
             //In all Infinity Engine cases it should be 'TLK '.
-            this.signature = ReusableIO.ReadStringFromByteArray(buffer, 0, Constants.CultureCodeEnglish, 4);
+            this.signature = ReusableIO.ReadStringFromByteArray(buffer, 0, CultureConstants.CultureCodeEnglish, 4);
 
             //In all Infinity Engine cases it should be 'V1  '.
-            this.version = ReusableIO.ReadStringFromByteArray(buffer, 4, Constants.CultureCodeEnglish, 4);
+            this.version = ReusableIO.ReadStringFromByteArray(buffer, 4, CultureConstants.CultureCodeEnglish, 4);
 
             this.languageID = ReusableIO.ReadInt16FromArray(buffer, 8);
             this.StringReferenceCount = ReusableIO.ReadInt32FromArray(buffer, 10);
@@ -97,8 +97,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.TextLocationKey
         /// <param name="output">Stream object into which to write to</param>
         public override void Write(Stream output)
         {
-            ReusableIO.WriteStringToStream(this.signature, output, Constants.CultureCodeEnglish, false, 4);
-            ReusableIO.WriteStringToStream(this.version, output, Constants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.signature, output, CultureConstants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.version, output, CultureConstants.CultureCodeEnglish, false, 4);
             ReusableIO.WriteInt16ToStream(this.languageID, output);
             ReusableIO.WriteInt32ToStream(this.StringReferenceCount, output);
             ReusableIO.WriteInt32ToStream(this.StringsReferenceOffset, output);

@@ -2,6 +2,7 @@
 using System.Collections.Specialized;
 using System.IO;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Enums;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;

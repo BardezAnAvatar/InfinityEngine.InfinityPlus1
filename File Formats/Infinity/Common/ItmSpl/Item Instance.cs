@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.Enums;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Enums;
@@ -145,7 +146,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl
             //read effect
             Byte[] remainingBody = ReusableIO.BinaryRead(input, 20);
 
-            this.item.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 0, Constants.CultureCodeEnglish);
+            this.item.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 0, CultureConstants.CultureCodeEnglish);
             this.itemLifeTime = remainingBody[8];
             this.itemCountDown = remainingBody[9];
             this.quantityCharges1 = ReusableIO.ReadUInt16FromArray(remainingBody, 10);
@@ -158,7 +159,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl
         /// <param name="output">Output stream to write to</param>
         public void Write(Stream output)
         {
-            ReusableIO.WriteStringToStream(this.item.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.item.ResRef, output, CultureConstants.CultureCodeEnglish);
             output.WriteByte(this.itemLifeTime);
             output.WriteByte(this.itemCountDown);
             ReusableIO.WriteUInt16ToStream(this.quantityCharges1, output);

@@ -33,11 +33,12 @@
             // 
             // direct2dRenderControl1
             // 
-            this.direct2dRenderControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.direct2dRenderControl1.Location = new System.Drawing.Point(0, 0);
+            this.direct2dRenderControl1.Location = new System.Drawing.Point(13, 13);
             this.direct2dRenderControl1.Name = "direct2dRenderControl1";
-            this.direct2dRenderControl1.Size = new System.Drawing.Size(764, 463);
+            this.direct2dRenderControl1.Size = new System.Drawing.Size(739, 438);
             this.direct2dRenderControl1.TabIndex = 0;
+            this.direct2dRenderControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+
             // 
             // Scratch
             // 
@@ -50,12 +51,12 @@
             this.Load += new System.EventHandler(this.Scratch_Load);
             this.ResumeLayout(false);
 
-            this.direct2dRenderControl1.InitializeControlDirect2D();
         }
 
         #endregion
 
         private Output.Visual.Direct2dRenderControl direct2dRenderControl1;
+
 
     }
 }

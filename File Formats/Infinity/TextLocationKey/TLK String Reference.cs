@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
 using Bardez.Projects.ReusableCode;
@@ -118,7 +119,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.TextLocationKey
         public void Write(Stream output)
         {
             ReusableIO.WriteInt16ToStream((Int16)this.ReferenceFlags, output);
-            ReusableIO.WriteStringToStream(this.SoundResourceReference.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.SoundResourceReference.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteInt32ToStream(this.VolumeVariance, output);
             ReusableIO.WriteInt32ToStream(this.PitchVariance, output);
             ReusableIO.WriteInt32ToStream(this.StringOffset, output);
@@ -145,7 +146,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.TextLocationKey
             Byte[] buffer = ReusableIO.BinaryRead(source, 26);
 
             this.ReferenceFlags = (InfinityEngineStringReferenceFlags)ReusableIO.ReadInt16FromArray(buffer, 0);
-            this.SoundResourceReference.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 2, Constants.CultureCodeEnglish);
+            this.SoundResourceReference.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 2, CultureConstants.CultureCodeEnglish);
             this.VolumeVariance = ReusableIO.ReadInt32FromArray(buffer, 0xA);
             this.PitchVariance = ReusableIO.ReadInt32FromArray(buffer, 0xE);
             this.StringOffset = ReusableIO.ReadInt32FromArray(buffer, 0x12);

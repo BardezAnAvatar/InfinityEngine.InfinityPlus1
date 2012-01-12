@@ -1,0 +1,4 @@
+﻿It is, somehow, important to me to keep the data in place as it is read, and in place in the specification.
+
+So. I will keep all application data segments as they are read, restarts, etc.
+I shall also keep a 'current list of' section of tables, since they are redefinable

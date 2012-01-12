@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.Enums;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Enums;
@@ -1354,8 +1355,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             this.colorIndexArmor = remainingBody[41];
             this.colorIndexHair = remainingBody[42];
             this.useEffectStructureVersion2 = Convert.ToBoolean(remainingBody[43]);
-            this.portraitSmall.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 44, Constants.CultureCodeEnglish);
-            this.portraitLarge.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 52, Constants.CultureCodeEnglish);
+            this.portraitSmall.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 44, CultureConstants.CultureCodeEnglish);
+            this.portraitLarge.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 52, CultureConstants.CultureCodeEnglish);
             this.reputation = remainingBody[60];
             this.hideInShadows = remainingBody[61];
             this.armorClassNatural = ReusableIO.ReadInt16FromArray(remainingBody, 62);
@@ -1414,8 +1415,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
         /// <param name="remainingBody">Byte array to read from</param>
         protected void ReadBodyFeatsSkillsAndProficiencies(Byte[] remainingBody)
         {
-            this.scriptTeam.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 420, Constants.CultureCodeEnglish);
-            this.scriptSpecial1.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 428, Constants.CultureCodeEnglish);
+            this.scriptTeam.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 420, CultureConstants.CultureCodeEnglish);
+            this.scriptSpecial1.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 428, CultureConstants.CultureCodeEnglish);
             this.creatureEnchantmentLevel = ReusableIO.ReadInt32FromArray(remainingBody, 436);
             this.featsFlag1 = (D20Feats1)ReusableIO.ReadUInt64FromArray(remainingBody, 440);
             this.featsFlag2 = (D20Feats2)ReusableIO.ReadUInt64FromArray(remainingBody, 448);
@@ -1491,11 +1492,11 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             this.moraleBreak = remainingBody[613];
             this.moraleRecoveryTime = ReusableIO.ReadUInt16FromArray(remainingBody, 614);
             this.archetype = (KitD20)ReusableIO.ReadUInt32FromArray(remainingBody, 616);
-            this.scriptOverride.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 620, Constants.CultureCodeEnglish);
-            this.scriptSpecial2.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 628, Constants.CultureCodeEnglish);
-            this.scriptCombat.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 636, Constants.CultureCodeEnglish);
-            this.scriptSpecial3.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 644, Constants.CultureCodeEnglish);
-            this.scriptMovement.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 652, Constants.CultureCodeEnglish);
+            this.scriptOverride.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 620, CultureConstants.CultureCodeEnglish);
+            this.scriptSpecial2.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 628, CultureConstants.CultureCodeEnglish);
+            this.scriptCombat.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 636, CultureConstants.CultureCodeEnglish);
+            this.scriptSpecial3.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 644, CultureConstants.CultureCodeEnglish);
+            this.scriptMovement.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 652, CultureConstants.CultureCodeEnglish);
         }
 
         /// <summary>Reads Icewind Dale structure additions</summary>
@@ -1512,8 +1513,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             this.internalVariable3 = ReusableIO.ReadInt16FromArray(headerBody, 668);
             this.internalVariable4 = ReusableIO.ReadInt16FromArray(headerBody, 670);
             this.internalVariable5 = ReusableIO.ReadInt16FromArray(headerBody, 672);
-            this.SecondaryDeathVariable.Source = ReusableIO.ReadStringFromByteArray(headerBody, 674, Constants.CultureCodeEnglish, 32);
-            this.TertiaryDeathVariable.Source = ReusableIO.ReadStringFromByteArray(headerBody, 706, Constants.CultureCodeEnglish, 32);
+            this.SecondaryDeathVariable.Source = ReusableIO.ReadStringFromByteArray(headerBody, 674, CultureConstants.CultureCodeEnglish, 32);
+            this.TertiaryDeathVariable.Source = ReusableIO.ReadStringFromByteArray(headerBody, 706, CultureConstants.CultureCodeEnglish, 32);
             this.unknown7 = ReusableIO.ReadUInt16FromArray(headerBody, 738);
             this.savedCoordinateX = ReusableIO.ReadUInt16FromArray(headerBody, 740);
             this.savedCoordinateY = ReusableIO.ReadUInt16FromArray(headerBody, 742);
@@ -1545,7 +1546,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
         {
             this.enumGlobal = ReusableIO.ReadInt16FromArray(remainingHeaderArray, 904);
             this.enumLocal = ReusableIO.ReadInt16FromArray(remainingHeaderArray, 906);
-            this.deathVariable.Source = ReusableIO.ReadStringFromByteArray(remainingHeaderArray, 908, Constants.CultureCodeEnglish, 32);
+            this.deathVariable.Source = ReusableIO.ReadStringFromByteArray(remainingHeaderArray, 908, CultureConstants.CultureCodeEnglish, 32);
             this.avClass = ReusableIO.ReadUInt16FromArray(remainingHeaderArray, 940);
             this.classMsk = ReusableIO.ReadUInt16FromArray(remainingHeaderArray, 942);
             this.unknown9 = ReusableIO.ReadUInt16FromArray(remainingHeaderArray, 944);
@@ -1594,7 +1595,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             this.countItems = ReusableIO.ReadUInt32FromArray(remainingHeaderArray, 1554);
             this.offsetEffects = ReusableIO.ReadUInt32FromArray(remainingHeaderArray, 1558);
             this.countEffects = ReusableIO.ReadUInt32FromArray(remainingHeaderArray, 1562);
-            this.dialog.ResRef = ReusableIO.ReadStringFromByteArray(remainingHeaderArray, 1566, Constants.CultureCodeEnglish);
+            this.dialog.ResRef = ReusableIO.ReadStringFromByteArray(remainingHeaderArray, 1566, CultureConstants.CultureCodeEnglish);
         }
 
         /// <summary>This public method writes the file format to the output stream.</summary>
@@ -1617,8 +1618,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
         protected void WriteLeadingValues(Stream output)
         {
             //Write the signature & version
-            ReusableIO.WriteStringToStream(this.signature, output, Constants.CultureCodeEnglish, false, 4);
-            ReusableIO.WriteStringToStream(this.version, output, Constants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.signature, output, CultureConstants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.version, output, CultureConstants.CultureCodeEnglish, false, 4);
 
             //Write header
             ReusableIO.WriteInt32ToStream(this.nameLong.StringReferenceIndex, output);
@@ -1639,8 +1640,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             output.WriteByte(this.colorIndexArmor);
             output.WriteByte(this.colorIndexHair);
             output.WriteByte(Convert.ToByte(this.useEffectStructureVersion2));
-            ReusableIO.WriteStringToStream(this.portraitSmall.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.portraitLarge.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.portraitSmall.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.portraitLarge.ResRef, output, CultureConstants.CultureCodeEnglish);
             output.WriteByte(this.reputation);
             output.WriteByte(this.hideInShadows);
             ReusableIO.WriteInt16ToStream(this.armorClassNatural, output);
@@ -1698,8 +1699,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
         /// <param name="output">Output stream to write to</param>
         protected void WriteFeatsSkillsAndProficiencies(Stream output)
         {
-            ReusableIO.WriteStringToStream(this.scriptTeam.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.scriptSpecial1.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.scriptTeam.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.scriptSpecial1.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteInt32ToStream(this.creatureEnchantmentLevel, output);
             ReusableIO.WriteUInt64ToStream((UInt64)this.featsFlag1, output);
             ReusableIO.WriteUInt64ToStream((UInt64)this.featsFlag2, output);
@@ -1775,11 +1776,11 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             output.WriteByte(this.moraleBreak);
             ReusableIO.WriteUInt16ToStream(this.moraleRecoveryTime, output);
             ReusableIO.WriteUInt32ToStream((UInt32)this.archetype, output);
-            ReusableIO.WriteStringToStream(this.scriptOverride.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.scriptSpecial2.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.scriptCombat.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.scriptSpecial3.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.scriptMovement.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.scriptOverride.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.scriptSpecial2.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.scriptCombat.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.scriptSpecial3.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.scriptMovement.ResRef, output, CultureConstants.CultureCodeEnglish);
         }
 
         /// <summary>Writes the Icewind Dale structure additions to the output stream</summary>
@@ -1795,8 +1796,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             ReusableIO.WriteInt16ToStream(this.internalVariable3, output);
             ReusableIO.WriteInt16ToStream(this.internalVariable4, output);
             ReusableIO.WriteInt16ToStream(this.internalVariable5, output);
-            ReusableIO.WriteStringToStream(SecondaryDeathVariable.Source, output, Constants.CultureCodeEnglish, false, 32);
-            ReusableIO.WriteStringToStream(TertiaryDeathVariable.Source, output, Constants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(SecondaryDeathVariable.Source, output, CultureConstants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(TertiaryDeathVariable.Source, output, CultureConstants.CultureCodeEnglish, false, 32);
             ReusableIO.WriteUInt16ToStream(this.unknown7, output);
             ReusableIO.WriteUInt16ToStream(this.savedCoordinateX, output);
             ReusableIO.WriteUInt16ToStream(this.savedCoordinateY, output);
@@ -1828,7 +1829,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
         {
             ReusableIO.WriteInt16ToStream(this.enumGlobal, output);
             ReusableIO.WriteInt16ToStream(this.enumLocal, output);
-            ReusableIO.WriteStringToStream(this.deathVariable.Source, output, Constants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(this.deathVariable.Source, output, CultureConstants.CultureCodeEnglish, false, 32);
             ReusableIO.WriteUInt16ToStream(this.avClass, output);
             ReusableIO.WriteUInt16ToStream(this.classMsk, output);
             ReusableIO.WriteUInt16ToStream(this.unknown9, output);
@@ -1876,7 +1877,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature2_2
             ReusableIO.WriteUInt32ToStream(this.countItems, output);
             ReusableIO.WriteUInt32ToStream(this.offsetEffects, output);
             ReusableIO.WriteUInt32ToStream(this.countEffects, output);
-            ReusableIO.WriteStringToStream(this.dialog.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.dialog.ResRef, output, CultureConstants.CultureCodeEnglish);
         }
         #endregion
 

@@ -2,10 +2,10 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.Enums;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.ItmSpl;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Enums;
 using Bardez.Projects.ReusableCode;
 
@@ -75,17 +75,17 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Version
             this.depreciationRate = ReusableIO.ReadUInt32FromArray(header, 20);
             this.theftDifficulty = ReusableIO.ReadUInt16FromArray(header, 24);
             this.unknown1 = ReusableIO.ReadUInt16FromArray(header, 26);
-            this.theftDialog.ResRef = ReusableIO.ReadStringFromByteArray(header, 28, Constants.CultureCodeEnglish);
+            this.theftDialog.ResRef = ReusableIO.ReadStringFromByteArray(header, 28, CultureConstants.CultureCodeEnglish);
             this.offsetPurchaseTypes = ReusableIO.ReadUInt32FromArray(header, 36);
             this.countPurchaseTypes = ReusableIO.ReadUInt32FromArray(header, 40);
             this.offsetItems = ReusableIO.ReadUInt32FromArray(header, 44);
             this.countItems = ReusableIO.ReadUInt32FromArray(header, 48);
             this.lore = ReusableIO.ReadUInt32FromArray(header, 52);
             this.costIdentify = ReusableIO.ReadUInt32FromArray(header, 56);
-            this.rumorsBar.ResRef = ReusableIO.ReadStringFromByteArray(header, 60, Constants.CultureCodeEnglish);
+            this.rumorsBar.ResRef = ReusableIO.ReadStringFromByteArray(header, 60, CultureConstants.CultureCodeEnglish);
             this.offsetDrinks = ReusableIO.ReadUInt32FromArray(header, 68);
             this.countDrinks = ReusableIO.ReadUInt32FromArray(header, 72);
-            this.rumorsTemple.ResRef = ReusableIO.ReadStringFromByteArray(header, 76, Constants.CultureCodeEnglish);
+            this.rumorsTemple.ResRef = ReusableIO.ReadStringFromByteArray(header, 76, CultureConstants.CultureCodeEnglish);
             this.roomsAvailable = (AvailableRooms)ReusableIO.ReadUInt32FromArray(header, 84);
             this.costRoomPeasant = ReusableIO.ReadUInt32FromArray(header, 88);
             this.costRoomMerchant = ReusableIO.ReadUInt32FromArray(header, 92);
@@ -102,8 +102,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Version
         /// <param name="output">Output stream to write to</param>
         public override void Write(Stream output)
         {
-            ReusableIO.WriteStringToStream(this.signature, output, Constants.CultureCodeEnglish, false, 4);
-            ReusableIO.WriteStringToStream(this.version, output, Constants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.signature, output, CultureConstants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.version, output, CultureConstants.CultureCodeEnglish, false, 4);
             ReusableIO.WriteUInt32ToStream((UInt32)this.type, output);
             ReusableIO.WriteInt32ToStream(this.name.StringReferenceIndex, output);
             ReusableIO.WriteUInt32ToStream((UInt32)this.flags, output);
@@ -112,17 +112,17 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Version
             ReusableIO.WriteUInt32ToStream(this.depreciationRate, output);
             ReusableIO.WriteUInt16ToStream(this.theftDifficulty, output);
             ReusableIO.WriteUInt16ToStream(this.unknown1, output);
-            ReusableIO.WriteStringToStream(this.theftDialog.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.theftDialog.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteUInt32ToStream(this.offsetPurchaseTypes, output);
             ReusableIO.WriteUInt32ToStream(this.countPurchaseTypes, output);
             ReusableIO.WriteUInt32ToStream(this.offsetItems, output);
             ReusableIO.WriteUInt32ToStream(this.countItems, output);
             ReusableIO.WriteUInt32ToStream(this.lore, output);
             ReusableIO.WriteUInt32ToStream(this.costIdentify, output);
-            ReusableIO.WriteStringToStream(this.rumorsBar.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.rumorsBar.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteUInt32ToStream(this.offsetDrinks, output);
             ReusableIO.WriteUInt32ToStream(this.countDrinks, output);
-            ReusableIO.WriteStringToStream(this.rumorsTemple.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.rumorsTemple.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteUInt32ToStream((UInt32)this.roomsAvailable, output);
             ReusableIO.WriteUInt32ToStream(this.costRoomPeasant, output);
             ReusableIO.WriteUInt32ToStream(this.costRoomMerchant, output);

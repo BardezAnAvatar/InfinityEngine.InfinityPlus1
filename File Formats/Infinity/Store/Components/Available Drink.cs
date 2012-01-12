@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
 using Bardez.Projects.ReusableCode;
@@ -100,7 +101,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Components
 
             Byte[] drinkForSale = ReusableIO.BinaryRead(input, StructSize);
 
-            this.specialRumor.ResRef = ReusableIO.ReadStringFromByteArray(drinkForSale, 0, Constants.CultureCodeEnglish);
+            this.specialRumor.ResRef = ReusableIO.ReadStringFromByteArray(drinkForSale, 0, CultureConstants.CultureCodeEnglish);
             this.drinkName.StringReferenceIndex = ReusableIO.ReadInt32FromArray(drinkForSale, 8);
             this.cost = ReusableIO.ReadUInt32FromArray(drinkForSale, 12);
             this.alcoholicStrength = ReusableIO.ReadInt32FromArray(drinkForSale, 16);
@@ -110,7 +111,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Components
         /// <param name="output">Stream to write to</param>
         public void Write(Stream output)
         {
-            ReusableIO.WriteStringToStream(this.specialRumor.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.specialRumor.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteInt32ToStream(this.drinkName.StringReferenceIndex, output);
             ReusableIO.WriteUInt32ToStream(this.cost, output);
             ReusableIO.WriteInt32ToStream(this.alcoholicStrength, output);

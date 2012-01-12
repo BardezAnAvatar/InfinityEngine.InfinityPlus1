@@ -38,6 +38,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Win32", "Win32", "{2D9452D4
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Direct2D", "Native Code\DirectX\Direct2D\Direct2D.vcxproj", "{44208309-EFE3-4A6F-B0F8-9013A16B20DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{61DCF1C6-109C-4886-A10A-FEE95DE901CA}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Infinity + 1.vsmdi
@@ -185,6 +187,18 @@ Global
 		{44208309-EFE3-4A6F-B0F8-9013A16B20DF}.Release|Win32.ActiveCfg = Release|Win32
 		{44208309-EFE3-4A6F-B0F8-9013A16B20DF}.Release|Win32.Build.0 = Release|Win32
 		{44208309-EFE3-4A6F-B0F8-9013A16B20DF}.Release|x86.ActiveCfg = Release|Win32
+		{61DCF1C6-109C-4886-A10A-FEE95DE901CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61DCF1C6-109C-4886-A10A-FEE95DE901CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61DCF1C6-109C-4886-A10A-FEE95DE901CA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{61DCF1C6-109C-4886-A10A-FEE95DE901CA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{61DCF1C6-109C-4886-A10A-FEE95DE901CA}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{61DCF1C6-109C-4886-A10A-FEE95DE901CA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{61DCF1C6-109C-4886-A10A-FEE95DE901CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61DCF1C6-109C-4886-A10A-FEE95DE901CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61DCF1C6-109C-4886-A10A-FEE95DE901CA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{61DCF1C6-109C-4886-A10A-FEE95DE901CA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{61DCF1C6-109C-4886-A10A-FEE95DE901CA}.Release|Win32.ActiveCfg = Release|Any CPU
+		{61DCF1C6-109C-4886-A10A-FEE95DE901CA}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

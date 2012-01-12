@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.Enums;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components;
@@ -909,7 +910,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
             this.variableIncrementLaw = headerBody[689];
             this.variableIncrementLady = headerBody[690];
             this.variableIncrementMurder = headerBody[691];
-            this.MonstrousCompendiumEntry.Source = ReusableIO.ReadStringFromByteArray(headerBody, 692, Constants.CultureCodeEnglish, 32);
+            this.MonstrousCompendiumEntry.Source = ReusableIO.ReadStringFromByteArray(headerBody, 692, CultureConstants.CultureCodeEnglish, 32);
             this.dialogActivationRange = headerBody[724];
             this.selectionCircleSize = ReusableIO.ReadUInt16FromArray(headerBody, 725);
             this.countColors = headerBody[727];
@@ -1032,7 +1033,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Creature1_2
             output.WriteByte(this.variableIncrementLaw);
             output.WriteByte(this.variableIncrementLady);
             output.WriteByte(this.variableIncrementMurder);
-            ReusableIO.WriteStringToStream(this.MonstrousCompendiumEntry.Source, output, Constants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(this.MonstrousCompendiumEntry.Source, output, CultureConstants.CultureCodeEnglish, false, 32);
             output.WriteByte(this.dialogActivationRange);
             ReusableIO.WriteUInt16ToStream(this.selectionCircleSize, output);
             output.WriteByte(this.countColors);

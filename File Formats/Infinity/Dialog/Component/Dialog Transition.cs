@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.Enums;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Enums;
@@ -140,7 +141,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
             this.journalEntry.StringReferenceIndex = ReusableIO.ReadInt32FromArray(trans, 8);
             this.indexTrigger = ReusableIO.ReadInt32FromArray(trans, 12);
             this.indexAction = ReusableIO.ReadInt32FromArray(trans, 16);
-            this.nextDialog.ResRef = ReusableIO.ReadStringFromByteArray(trans, 20, Constants.CultureCodeEnglish);
+            this.nextDialog.ResRef = ReusableIO.ReadStringFromByteArray(trans, 20, CultureConstants.CultureCodeEnglish);
             this.indexState = ReusableIO.ReadInt32FromArray(trans, 28);
         }
 
@@ -153,7 +154,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Dialog.Component
             ReusableIO.WriteInt32ToStream(this.journalEntry.StringReferenceIndex, output);
             ReusableIO.WriteInt32ToStream(this.indexTrigger, output);
             ReusableIO.WriteInt32ToStream(this.indexAction, output);
-            ReusableIO.WriteStringToStream(this.nextDialog.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.nextDialog.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteInt32ToStream(this.indexState, output);
         }
         #endregion

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
 using Bardez.Projects.ReusableCode;
@@ -58,14 +59,14 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Biography
             this.Initialize();
 
             Byte[] bioBuffer = ReusableIO.BinaryRead(input, input.Length);
-            this.biography.Source = ReusableIO.ReadStringFromByteArray(bioBuffer, 0, Constants.CultureCodeEnglish, bioBuffer.Length);
+            this.biography.Source = ReusableIO.ReadStringFromByteArray(bioBuffer, 0, CultureConstants.CultureCodeEnglish, bioBuffer.Length);
         }
 
         /// <summary>This public method writes the file format to the output stream.</summary>
         /// <param name="output">Stream to write to</param>
         public void Write(Stream output)
         {
-            ReusableIO.WriteStringToStream(this.biography.Source, output, Constants.CultureCodeEnglish, true);
+            ReusableIO.WriteStringToStream(this.biography.Source, output, CultureConstants.CultureCodeEnglish, true);
         }
         #endregion
 

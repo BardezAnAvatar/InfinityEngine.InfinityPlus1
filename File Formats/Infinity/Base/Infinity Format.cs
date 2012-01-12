@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Base
@@ -45,8 +45,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Base
             //read signature
             Byte[] buffer = ReusableIO.BinaryRead(input, 8);   //header buffer
 
-            this.signature = ReusableIO.ReadStringFromByteArray(buffer, 0, Constants.CultureCodeEnglish, 4);
-            this.version = ReusableIO.ReadStringFromByteArray(buffer, 4, Constants.CultureCodeEnglish, 4);
+            this.signature = ReusableIO.ReadStringFromByteArray(buffer, 0, CultureConstants.CultureCodeEnglish, 4);
+            this.version = ReusableIO.ReadStringFromByteArray(buffer, 4, CultureConstants.CultureCodeEnglish, 4);
 
             this.ReadBody(input);
         }

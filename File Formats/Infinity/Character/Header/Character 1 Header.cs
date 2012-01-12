@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
-using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
@@ -113,7 +113,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             //read remiander
             Byte[] header = ReusableIO.BinaryRead(input, this.StructSize - 8);
 
-            this.Name.Value = ReusableIO.ReadStringFromByteArray(header, 0, Constants.CultureCodeEnglish, 32);
+            this.Name.Value = ReusableIO.ReadStringFromByteArray(header, 0, CultureConstants.CultureCodeEnglish, 32);
             this.offsetCreature = ReusableIO.ReadUInt32FromArray(header, 32);
             this.lengthCreature = ReusableIO.ReadUInt32FromArray(header, 36);
             this.quickWeaponSlotIndex1 = ReusableIO.ReadUInt16FromArray(header, 40);
@@ -124,9 +124,9 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             this.showQuickWeaponSlot2 = ReusableIO.ReadUInt16FromArray(header, 50);
             this.showQuickWeaponSlot3 = ReusableIO.ReadUInt16FromArray(header, 52);
             this.showQuickWeaponSlot4 = ReusableIO.ReadUInt16FromArray(header, 54);
-            this.quickSpell1.ResRef = ReusableIO.ReadStringFromByteArray(header, 56, Constants.CultureCodeEnglish);
-            this.quickSpell2.ResRef = ReusableIO.ReadStringFromByteArray(header, 64, Constants.CultureCodeEnglish);
-            this.quickSpell3.ResRef = ReusableIO.ReadStringFromByteArray(header, 72, Constants.CultureCodeEnglish);
+            this.quickSpell1.ResRef = ReusableIO.ReadStringFromByteArray(header, 56, CultureConstants.CultureCodeEnglish);
+            this.quickSpell2.ResRef = ReusableIO.ReadStringFromByteArray(header, 64, CultureConstants.CultureCodeEnglish);
+            this.quickSpell3.ResRef = ReusableIO.ReadStringFromByteArray(header, 72, CultureConstants.CultureCodeEnglish);
             this.quickItemSlotIndex1 = ReusableIO.ReadInt16FromArray(header, 80);
             this.quickItemSlotIndex2 = ReusableIO.ReadInt16FromArray(header, 82);
             this.quickItemSlotIndex3 = ReusableIO.ReadInt16FromArray(header, 84);
@@ -139,9 +139,9 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
         /// <param name="output">Output stream to write to</param>
         public override void Write(Stream output)
         {
-            ReusableIO.WriteStringToStream(this.signature, output, Constants.CultureCodeEnglish, false, 4);
-            ReusableIO.WriteStringToStream(this.version, output, Constants.CultureCodeEnglish, false, 4);
-            ReusableIO.WriteStringToStream(this.Name.Value, output, Constants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(this.signature, output, CultureConstants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.version, output, CultureConstants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.Name.Value, output, CultureConstants.CultureCodeEnglish, false, 32);
             ReusableIO.WriteUInt32ToStream(this.offsetCreature, output);
             ReusableIO.WriteUInt32ToStream(this.lengthCreature, output);
             ReusableIO.WriteUInt16ToStream(this.quickWeaponSlotIndex1, output);
@@ -152,9 +152,9 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             ReusableIO.WriteUInt16ToStream(this.showQuickWeaponSlot2, output);
             ReusableIO.WriteUInt16ToStream(this.showQuickWeaponSlot3, output);
             ReusableIO.WriteUInt16ToStream(this.showQuickWeaponSlot4, output);
-            ReusableIO.WriteStringToStream(this.quickSpell1.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSpell2.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSpell3.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSpell1.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSpell2.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSpell3.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteInt16ToStream(this.quickItemSlotIndex1, output);
             ReusableIO.WriteInt16ToStream(this.quickItemSlotIndex2, output);
             ReusableIO.WriteInt16ToStream(this.quickItemSlotIndex3, output);

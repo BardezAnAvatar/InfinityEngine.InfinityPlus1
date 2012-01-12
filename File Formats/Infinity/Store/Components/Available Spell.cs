@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Globals;
 using Bardez.Projects.ReusableCode;
@@ -76,7 +77,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Components
 
             Byte[] spellForSale = ReusableIO.BinaryRead(input, StructSize);
 
-            this.spell.ResRef = ReusableIO.ReadStringFromByteArray(spellForSale, 0, Constants.CultureCodeEnglish);
+            this.spell.ResRef = ReusableIO.ReadStringFromByteArray(spellForSale, 0, CultureConstants.CultureCodeEnglish);
             this.cost = ReusableIO.ReadUInt32FromArray(spellForSale, 8);
         }
 
@@ -84,7 +85,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Store.Components
         /// <param name="output">Stream to write to</param>
         public void Write(Stream output)
         {
-            ReusableIO.WriteStringToStream(this.spell.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.spell.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteUInt32ToStream(this.cost, output);
         }
         #endregion

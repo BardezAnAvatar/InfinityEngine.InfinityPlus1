@@ -1,4 +1,7 @@
 ﻿using System;
+
+using Bardez.Projects.InfinityPlus1.Files.Base;
+
 namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Globals
 {
     /// <summary>

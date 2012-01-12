@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Enums;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.Enums;
@@ -837,7 +838,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             //read remiander
             Byte[] header = ReusableIO.BinaryRead(input, StructSize - 8);
 
-            this.Name.Source = ReusableIO.ReadStringFromByteArray(header, 0, Constants.CultureCodeEnglish, 32);
+            this.Name.Source = ReusableIO.ReadStringFromByteArray(header, 0, CultureConstants.CultureCodeEnglish, 32);
             this.offsetCreature = ReusableIO.ReadUInt32FromArray(header, 32);
             this.lengthCreature = ReusableIO.ReadUInt32FromArray(header, 36);
             this.quickWeaponSlotIndex1 = ReusableIO.ReadUInt16FromArray(header, 40);
@@ -856,15 +857,15 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             this.usableQuickShieldSlot3 = ReusableIO.ReadInt16FromArray(header, 66);
             this.usableQuickWeaponSlot4 = ReusableIO.ReadInt16FromArray(header, 68);
             this.usableQuickShieldSlot4 = ReusableIO.ReadInt16FromArray(header, 70);
-            this.quickSpell1.ResRef = ReusableIO.ReadStringFromByteArray(header, 72, Constants.CultureCodeEnglish);
-            this.quickSpell2.ResRef = ReusableIO.ReadStringFromByteArray(header, 80, Constants.CultureCodeEnglish);
-            this.quickSpell3.ResRef = ReusableIO.ReadStringFromByteArray(header, 88, Constants.CultureCodeEnglish);
-            this.quickSpell4.ResRef = ReusableIO.ReadStringFromByteArray(header, 96, Constants.CultureCodeEnglish);
-            this.quickSpell5.ResRef = ReusableIO.ReadStringFromByteArray(header, 104, Constants.CultureCodeEnglish);
-            this.quickSpell6.ResRef = ReusableIO.ReadStringFromByteArray(header, 112, Constants.CultureCodeEnglish);
-            this.quickSpell7.ResRef = ReusableIO.ReadStringFromByteArray(header, 120, Constants.CultureCodeEnglish);
-            this.quickSpell8.ResRef = ReusableIO.ReadStringFromByteArray(header, 128, Constants.CultureCodeEnglish);
-            this.quickSpell9.ResRef = ReusableIO.ReadStringFromByteArray(header, 136, Constants.CultureCodeEnglish);
+            this.quickSpell1.ResRef = ReusableIO.ReadStringFromByteArray(header, 72, CultureConstants.CultureCodeEnglish);
+            this.quickSpell2.ResRef = ReusableIO.ReadStringFromByteArray(header, 80, CultureConstants.CultureCodeEnglish);
+            this.quickSpell3.ResRef = ReusableIO.ReadStringFromByteArray(header, 88, CultureConstants.CultureCodeEnglish);
+            this.quickSpell4.ResRef = ReusableIO.ReadStringFromByteArray(header, 96, CultureConstants.CultureCodeEnglish);
+            this.quickSpell5.ResRef = ReusableIO.ReadStringFromByteArray(header, 104, CultureConstants.CultureCodeEnglish);
+            this.quickSpell6.ResRef = ReusableIO.ReadStringFromByteArray(header, 112, CultureConstants.CultureCodeEnglish);
+            this.quickSpell7.ResRef = ReusableIO.ReadStringFromByteArray(header, 120, CultureConstants.CultureCodeEnglish);
+            this.quickSpell8.ResRef = ReusableIO.ReadStringFromByteArray(header, 128, CultureConstants.CultureCodeEnglish);
+            this.quickSpell9.ResRef = ReusableIO.ReadStringFromByteArray(header, 136, CultureConstants.CultureCodeEnglish);
             this.classQuickSpell1 = header[144];
             this.classQuickSpell2 = header[145];
             this.classQuickSpell3 = header[146];
@@ -881,24 +882,24 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             this.usableQuickItemSlot1 = ReusableIO.ReadInt16FromArray(header, 160);
             this.usableQuickItemSlot2 = ReusableIO.ReadInt16FromArray(header, 162);
             this.usableQuickItemSlot3 = ReusableIO.ReadInt16FromArray(header, 164);
-            this.quickInnate1.ResRef = ReusableIO.ReadStringFromByteArray(header, 166, Constants.CultureCodeEnglish);
-            this.quickInnate2.ResRef = ReusableIO.ReadStringFromByteArray(header, 174, Constants.CultureCodeEnglish);
-            this.quickInnate3.ResRef = ReusableIO.ReadStringFromByteArray(header, 182, Constants.CultureCodeEnglish);
-            this.quickInnate4.ResRef = ReusableIO.ReadStringFromByteArray(header, 190, Constants.CultureCodeEnglish);
-            this.quickInnate5.ResRef = ReusableIO.ReadStringFromByteArray(header, 198, Constants.CultureCodeEnglish);
-            this.quickInnate6.ResRef = ReusableIO.ReadStringFromByteArray(header, 206, Constants.CultureCodeEnglish);
-            this.quickInnate7.ResRef = ReusableIO.ReadStringFromByteArray(header, 214, Constants.CultureCodeEnglish);
-            this.quickInnate8.ResRef = ReusableIO.ReadStringFromByteArray(header, 222, Constants.CultureCodeEnglish);
-            this.quickInnate9.ResRef = ReusableIO.ReadStringFromByteArray(header, 230, Constants.CultureCodeEnglish);
-            this.quickSong1.ResRef = ReusableIO.ReadStringFromByteArray(header, 238, Constants.CultureCodeEnglish);
-            this.quickSong2.ResRef = ReusableIO.ReadStringFromByteArray(header, 246, Constants.CultureCodeEnglish);
-            this.quickSong3.ResRef = ReusableIO.ReadStringFromByteArray(header, 254, Constants.CultureCodeEnglish);
-            this.quickSong4.ResRef = ReusableIO.ReadStringFromByteArray(header, 262, Constants.CultureCodeEnglish);
-            this.quickSong5.ResRef = ReusableIO.ReadStringFromByteArray(header, 270, Constants.CultureCodeEnglish);
-            this.quickSong6.ResRef = ReusableIO.ReadStringFromByteArray(header, 278, Constants.CultureCodeEnglish);
-            this.quickSong7.ResRef = ReusableIO.ReadStringFromByteArray(header, 286, Constants.CultureCodeEnglish);
-            this.quickSong8.ResRef = ReusableIO.ReadStringFromByteArray(header, 294, Constants.CultureCodeEnglish);
-            this.quickSong9.ResRef = ReusableIO.ReadStringFromByteArray(header, 302, Constants.CultureCodeEnglish);
+            this.quickInnate1.ResRef = ReusableIO.ReadStringFromByteArray(header, 166, CultureConstants.CultureCodeEnglish);
+            this.quickInnate2.ResRef = ReusableIO.ReadStringFromByteArray(header, 174, CultureConstants.CultureCodeEnglish);
+            this.quickInnate3.ResRef = ReusableIO.ReadStringFromByteArray(header, 182, CultureConstants.CultureCodeEnglish);
+            this.quickInnate4.ResRef = ReusableIO.ReadStringFromByteArray(header, 190, CultureConstants.CultureCodeEnglish);
+            this.quickInnate5.ResRef = ReusableIO.ReadStringFromByteArray(header, 198, CultureConstants.CultureCodeEnglish);
+            this.quickInnate6.ResRef = ReusableIO.ReadStringFromByteArray(header, 206, CultureConstants.CultureCodeEnglish);
+            this.quickInnate7.ResRef = ReusableIO.ReadStringFromByteArray(header, 214, CultureConstants.CultureCodeEnglish);
+            this.quickInnate8.ResRef = ReusableIO.ReadStringFromByteArray(header, 222, CultureConstants.CultureCodeEnglish);
+            this.quickInnate9.ResRef = ReusableIO.ReadStringFromByteArray(header, 230, CultureConstants.CultureCodeEnglish);
+            this.quickSong1.ResRef = ReusableIO.ReadStringFromByteArray(header, 238, CultureConstants.CultureCodeEnglish);
+            this.quickSong2.ResRef = ReusableIO.ReadStringFromByteArray(header, 246, CultureConstants.CultureCodeEnglish);
+            this.quickSong3.ResRef = ReusableIO.ReadStringFromByteArray(header, 254, CultureConstants.CultureCodeEnglish);
+            this.quickSong4.ResRef = ReusableIO.ReadStringFromByteArray(header, 262, CultureConstants.CultureCodeEnglish);
+            this.quickSong5.ResRef = ReusableIO.ReadStringFromByteArray(header, 270, CultureConstants.CultureCodeEnglish);
+            this.quickSong6.ResRef = ReusableIO.ReadStringFromByteArray(header, 278, CultureConstants.CultureCodeEnglish);
+            this.quickSong7.ResRef = ReusableIO.ReadStringFromByteArray(header, 286, CultureConstants.CultureCodeEnglish);
+            this.quickSong8.ResRef = ReusableIO.ReadStringFromByteArray(header, 294, CultureConstants.CultureCodeEnglish);
+            this.quickSong9.ResRef = ReusableIO.ReadStringFromByteArray(header, 302, CultureConstants.CultureCodeEnglish);
             this.button1 = (UserInterfaceButton)ReusableIO.ReadUInt32FromArray(header, 310);
             this.button2 = (UserInterfaceButton)ReusableIO.ReadUInt32FromArray(header, 314);
             this.button3 = (UserInterfaceButton)ReusableIO.ReadUInt32FromArray(header, 318);
@@ -920,8 +921,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             this.levelSpell9 = header[356];
             this.unknown3 = header[357];
             Array.Copy(header, 358, this.unknown4, 0, 14);
-            this.soundSet.ResRef = ReusableIO.ReadStringFromByteArray(header, 372, Constants.CultureCodeEnglish);
-            this.SoundSetBiff.Source = ReusableIO.ReadStringFromByteArray(header, 380, Constants.CultureCodeEnglish, 32);
+            this.soundSet.ResRef = ReusableIO.ReadStringFromByteArray(header, 372, CultureConstants.CultureCodeEnglish);
+            this.SoundSetBiff.Source = ReusableIO.ReadStringFromByteArray(header, 380, CultureConstants.CultureCodeEnglish, 32);
             Array.Copy(header, 412, this.reserved, 0, 128);
         }
 
@@ -929,9 +930,9 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
         /// <param name="output">Output stream to write to</param>
         public override void Write(Stream output)
         {
-            ReusableIO.WriteStringToStream(this.signature, output, Constants.CultureCodeEnglish, false, 4);
-            ReusableIO.WriteStringToStream(this.version, output, Constants.CultureCodeEnglish, false, 4);
-            ReusableIO.WriteStringToStream(this.Name.Source, output, Constants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(this.signature, output, CultureConstants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.version, output, CultureConstants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.Name.Source, output, CultureConstants.CultureCodeEnglish, false, 32);
             ReusableIO.WriteUInt32ToStream(this.offsetCreature, output);
             ReusableIO.WriteUInt32ToStream(this.lengthCreature, output);
             ReusableIO.WriteUInt16ToStream(this.quickWeaponSlotIndex1, output);
@@ -950,15 +951,15 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             ReusableIO.WriteInt16ToStream(this.usableQuickShieldSlot3, output);
             ReusableIO.WriteInt16ToStream(this.usableQuickWeaponSlot4, output);
             ReusableIO.WriteInt16ToStream(this.usableQuickShieldSlot4, output);
-            ReusableIO.WriteStringToStream(this.quickSpell1.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSpell2.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSpell3.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSpell4.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSpell5.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSpell6.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSpell7.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSpell8.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSpell9.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSpell1.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSpell2.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSpell3.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSpell4.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSpell5.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSpell6.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSpell7.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSpell8.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSpell9.ResRef, output, CultureConstants.CultureCodeEnglish);
             output.WriteByte(this.classQuickSpell1);
             output.WriteByte(this.classQuickSpell2);
             output.WriteByte(this.classQuickSpell3);
@@ -975,24 +976,24 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             ReusableIO.WriteInt16ToStream(this.usableQuickItemSlot1, output);
             ReusableIO.WriteInt16ToStream(this.usableQuickItemSlot2, output);
             ReusableIO.WriteInt16ToStream(this.usableQuickItemSlot3, output);
-            ReusableIO.WriteStringToStream(this.quickInnate1.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickInnate2.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickInnate3.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickInnate4.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickInnate5.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickInnate6.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickInnate7.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickInnate8.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickInnate9.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSong1.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSong2.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSong3.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSong4.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSong5.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSong6.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSong7.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSong8.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.quickSong9.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickInnate1.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickInnate2.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickInnate3.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickInnate4.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickInnate5.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickInnate6.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickInnate7.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickInnate8.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickInnate9.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSong1.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSong2.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSong3.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSong4.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSong5.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSong6.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSong7.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSong8.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.quickSong9.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteUInt32ToStream((UInt32)this.button1, output);
             ReusableIO.WriteUInt32ToStream((UInt32)this.button2, output);
             ReusableIO.WriteUInt32ToStream((UInt32)this.button3, output);
@@ -1014,8 +1015,8 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Character.Header
             output.WriteByte(this.levelSpell9);
             output.WriteByte(this.unknown3);
             output.Write(this.unknown4, 0, 14);
-            ReusableIO.WriteStringToStream(this.soundSet.ResRef, output, Constants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.SoundSetBiff.Source, output, Constants.CultureCodeEnglish, false, 32);
+            ReusableIO.WriteStringToStream(this.soundSet.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.SoundSetBiff.Source, output, CultureConstants.CultureCodeEnglish, false, 32);
             output.Write(this.reserved, 0, 128);
         }
         #endregion

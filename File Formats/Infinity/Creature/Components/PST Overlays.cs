@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.Files.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Common.Enums;
 using Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Enums;
@@ -194,7 +195,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components
             //binary read
             Byte[] remainingBody = ReusableIO.BinaryRead(input, 40);
 
-            this.overlayBam.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 0, Constants.CultureCodeEnglish);
+            this.overlayBam.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 0, CultureConstants.CultureCodeEnglish);
             this.unknown1 = ReusableIO.ReadUInt32FromArray(remainingBody, 8);
             this.timing = ReusableIO.ReadUInt16FromArray(remainingBody, 12);
             this.type = ReusableIO.ReadUInt16FromArray(remainingBody, 14);
@@ -210,7 +211,7 @@ namespace Bardez.Projects.InfinityPlus1.Files.Infinity.Creature.Components
         /// <summary>This public method writes the file format to the output stream.</summary>
         public void Write(Stream output)
         {
-            ReusableIO.WriteStringToStream(this.overlayBam.ResRef, output, Constants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.overlayBam.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteUInt32ToStream(this.unknown1, output);
             ReusableIO.WriteUInt16ToStream(this.timing, output);
             ReusableIO.WriteUInt16ToStream(this.type, output);
