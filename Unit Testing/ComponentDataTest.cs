@@ -103,7 +103,6 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
         internal virtual ComponentData_Accessor<Int32> CreateComponentData_Accessor<Primitive>()
             where Primitive : struct
         {
-            // TODO: Instantiate an appropriate concrete class.
             ComponentData_Accessor<Int32> target = null;
             return target;
         }
@@ -112,9 +111,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
         [DeploymentItem("External Formats.dll")]
         public void UnZigZagTest()
         {
-            Assert.Inconclusive("No appropriate type parameter is found to satisfies the type constraint(s) of Pri" +
-                    "mitive. Please call UnZigZagTestHelper<Primitive>() with appropriate type parame" +
-                    "ters.");
+            Assert.Inconclusive("No appropriate type parameter is found to satisfies the type constraint(s) of " +
+                    "Primitive. Please call UnZigZagTestHelper<Primitive>() with appropriate type parameters.");
         }
     }
 }
