@@ -31,6 +31,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// <summary>Reads bits from an input stream</summary>
         /// <remarks>In practice, this should be shared through all HuffmanCoders</remarks>
         protected HuffmanBitReader huffmanBitReader;
+
+        /// <summary>Numerical value of bands read from an EOB value in progressive decoding.</summary>
+        /// <remarks>I'd like to not keep this, but when it comes to successive approximation, it is needed.</remarks>
+        protected Int32 EndOfBand { get; set; }
         #endregion
 
 
@@ -123,6 +127,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             this.huffVal = table.HuffVal;
         }
 
+        #region General decoding
         /// <summary>Decodes a single byte from the input stream.</summary>
         /// <param name="halt">
         ///     Reference flag set to false that, if set in this method, will percolate upwards indicating that the return value is possibly dirty,
@@ -184,7 +189,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 
         /// <summary>Extends the sign bit of a decoded value in v</summary>
         /// <param name="v">Passed in value</param>
-        /// <param name="t">Bits to shift. Theoreticaly ranges from 0 to 255. Realistically, should be 0 to 11.</param>
+        /// <param name="t">Bits to shift. Realistically, ranges should be 0 to 11.</param>
         /// <returns>The signed value</returns>
         protected Int32 Extend(Int32 v, Int32 t)
         {
@@ -198,7 +203,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 
             return v;
         }
+        #endregion
 
+        
+        #region Sequential decoding
         /// <summary>Runs the Decode procedures on a DC coefficient</summary>
         /// <param name="pred">Prediction of the DC</param>
         /// <param name="halt">
@@ -206,7 +214,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         ///     and the stack to be traversed upward, returning work done so far, but ultimately terminating the scan
         /// </param>
         /// <returns>The DC coefficient differential</returns>
-        public Int32 DecodeDC(ref Int32 pred, ref Boolean halt)
+        public Int32 DecodeSequentialDC(ref Int32 pred, ref Boolean halt)
         {
             Byte temp = this.Decode(ref halt);
             if (halt)
@@ -217,30 +225,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                 return -1;
 
             Diff = this.Extend(Diff, temp);
-            Int32 prevPred = pred;
-
-            //TODO: do I set the prediction to the difference + the previous prediction [ZZ(0)], or do I set it to the decoded Diff?
-            pred = Diff + prevPred;
+            pred += Diff;
 
             return pred;
-        }
-
-        /// <summary>Decodes a single AC coefficient from the Huffman bit stream</summary>
-        /// <param name="zz">Initialized coefficient block</param>
-        /// <param name="index">Index to decode</param>
-        /// <param name="ssss">Bits to shift</param>
-        /// <param name="halt">
-        ///     Reference flag set to false that, if set in this method, will percolate up the stack,
-        ///     returning work done so far, but ultimately terminating the scan
-        /// </param>
-        protected void DecodeZZ(Int32[] zz, Int32 index, Int32 ssss, ref Boolean halt)
-        {
-            Int32 receive = this.Receive(ssss, ref halt);
-            if (halt)   ///escape condition
-                return;
-
-            zz[index] = receive;
-            zz[index] = this.Extend(zz[index], ssss);
         }
 
         /// <summary>Decodes AC coefficients from the Huffman bit stream</summary>
@@ -285,56 +272,341 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             }
         }
 
-        /// <summary>Decodes AC coefficients from the Huffman bit stream</summary>
-        /// <param name="emptyBlock">Initialized coefficient block</param>
+        /// <summary>Decodes a single AC coefficient from the Huffman bit stream</summary>
+        /// <param name="zz">Initialized coefficient block</param>
+        /// <param name="index">Index to decode</param>
+        /// <param name="ssss">Bits to shift</param>
         /// <param name="halt">
         ///     Reference flag set to false that, if set in this method, will percolate up the stack,
         ///     returning work done so far, but ultimately terminating the scan
         /// </param>
-        /// <param name="count">Count of coefficients to read</param>
-        /// <returns>The count of 0-runs following this block</returns>
-        public Int32 DecodeProgressiveACs(Int32[] emptyBlock, ref Boolean halt, Int32 count)
+        protected void DecodeZZ(Int32[] zz, Int32 index, Int32 ssss, ref Boolean halt)
         {
-            Int32 k = 0, endOfBand = 0;
+            Int32 receive = this.Receive(ssss, ref halt);
+            if (halt)   ///escape condition
+                return;
 
-            while (true)
-            {
-                Int32 rs = this.Decode(ref halt);
-                if (halt)   //escape condition
-                    return 0;
+            zz[index] = this.Extend(receive, ssss);
+        }
+        #endregion
 
-                Int32 ssss = rs % 16;
-                Int32 rrrr = rs >> 4;
-                Int32 r = rrrr;
 
-                if (ssss == 0)
+        #region Progressive decoding
+        /// <summary>Runs the Decode procedures on a DC coefficient</summary>
+        /// <param name="pred">Prediction of the DC</param>
+        /// <param name="successiveApproximation">Number of bits to shift</param>
+        /// <param name="halt">
+        ///     Reference flag set to false that, if set in this method, will percolate upwards indicating that the return value is possibly dirty,
+        ///     and the stack to be traversed upward, returning work done so far, but ultimately terminating the scan
+        /// </param>
+        /// <returns>The DC coefficient differential</returns>
+        public Int32 DecodeFirstOrderDC(ref Int32 pred, Int32 successiveApproximation, ref Boolean halt)
+        {
+            Byte temp = this.Decode(ref halt);
+            if (halt)
+                return -1;
+
+            Int32 Diff = this.Receive(temp, ref halt);
+            if (halt)
+                return -1;
+
+            Diff = this.Extend(Diff, temp);
+            pred += Diff;
+
+            return pred << successiveApproximation;
+        }
+
+        /// <summary>Runs the Decode procedures on a DC coefficient</summary>
+        /// <param name="existing">Existing DC value</param>
+        /// <param name="successiveApproximation">Number of bits to shift</param>
+        /// <param name="halt">
+        ///     Reference flag set to false that, if set in this method, will percolate upwards indicating that the return value is possibly dirty,
+        ///     and the stack to be traversed upward, returning work done so far, but ultimately terminating the scan
+        /// </param>
+        /// <returns>The DC coefficient differential</returns>
+        public Int32 DecodeSuccessiveProgressiveDC(Int32 existing, Int32 successiveApproximation, ref Boolean halt)
+        {
+            UInt16 bit = this.huffmanBitReader.GetBits(1, ref halt);
+
+            if (!halt)  //indirect exception condition
+                existing += (bit << successiveApproximation);
+
+            return existing;
+        }
+
+        /// <summary>Decodes AC coefficients from the Huffman bit stream</summary>
+        /// <param name="existingBlock">Initialized 64-byte coefficient block</param>
+        /// <param name="halt">
+        ///     Reference flag set to false that, if set in this method, will percolate up the stack,
+        ///     returning work done so far, but ultimately terminating the scan
+        /// </param>
+        /// <param name="startSelector">First coefficient to read</param>
+        /// <param name="endSelector">Last coefficient to read</param>
+        /// <param name="successiveApproximation">Current shift to perform during successive approximation</param>
+        public void DecodeFirstOrderProgressiveACs(Int32[] existingBlock, ref Boolean halt, Int32 startSelector, Int32 endSelector, Int32 successiveApproximation)
+        {
+            Int32 k = startSelector;
+
+            if (this.EndOfBand == 0)
+                while (true)
                 {
-                    if (r == 15)
-                        k += 16;
-                    else    //This is, I think, where the End-of-Band comes into play
-                    {
-                        endOfBand = this.ReceiveEndOfBand(rrrr, ref halt) - 1;
-                        if (halt)   //escape condition
-                            return 0;
-
+                    Int32 rs = this.Decode(ref halt);
+                    if (halt)   //escape condition
                         break;
+
+                    Int32 ssss = rs % 16;
+                    Int32 rrrr = rs >> 4;
+                    Int32 r = rrrr;
+
+                    if (ssss == 0)
+                    {
+                        if (r == 15)
+                            k += 15;
+                        else    //This is, I think, where the End-of-Band comes into play
+                        {
+                            this.EndOfBand = this.ReceiveEndOfBand(rrrr, ref halt) - 1;
+                            //if (halt)   //escape condition
+                            //    break;
+
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        k += r;
+                        this.DecodeZZ(existingBlock, k, ssss, successiveApproximation, ref halt);
+                        if (halt)   //escape condition
+                            break;
+
+                        if (k >= endSelector)
+                            break;
+                        else
+                            ++k;
                     }
                 }
-                else
-                {
-                    k += r;
-                    this.DecodeZZ(emptyBlock, k, ssss, ref halt);
-                    if (halt)   //escape condition
-                        return 0;
+            else
+                --this.EndOfBand;
+        }
 
-                    if (k >= (count - 1))
+        /// <summary>Decodes AC coefficients' next order bits from the Huffman bit stream</summary>
+        /// <param name="existingBlock">Initialized 64-byte coefficient block</param>
+        /// <param name="halt">
+        ///     Reference flag set to false that, if set in this method, will percolate up the stack,
+        ///     returning work done so far, but ultimately terminating the scan
+        /// </param>
+        /// <param name="startSelector">First coefficient to read</param>
+        /// <param name="endSelector">Last coefficient to read</param>
+        /// <param name="successiveApproximation">Current shift to perform during successive approximation</param>
+        /// <returns>The count of 0-runs following this block</returns>
+        public void DecodeSuccessiveProgressiveACs(Int32[] existingBlock, ref Boolean halt, Int32 startSelector, Int32 endSelector, Int32 successiveApproximation)
+        {
+            Int32 k = startSelector;
+
+            if (this.EndOfBand == 0)
+                while (true)
+                {
+                    Int32 rs = this.Decode(ref halt);
+                    if (halt)   //escape condition
                         break;
-                    else
-                        ++k;
+
+                    Int32 ssss = rs % 16;
+                    Int32 rrrr = rs >> 4;
+                    Int32 r = rrrr;
+
+                    /* Normal processing */
+                    if (ssss == 0)
+                    {
+                        if (r == 15)    //ZRL in-block
+                        {
+                            this.ProcessZeroRun(existingBlock, ref k, 15, successiveApproximation, ref halt);
+                            ++k;
+
+                            if (halt)
+                                break;
+                        }
+                        else    //This is, I think, where the End-of-Band comes into play
+                        {
+                            this.EndOfBand = this.ReceiveEndOfBand(rrrr, ref halt);
+                            break;
+                        }
+                    }
+                    else    //process 0s
+                    {
+                        Int32 sign = this.huffmanBitReader.GetBits(1, ref halt);
+
+                        this.ProcessZeroRun(existingBlock, ref k, r, successiveApproximation, ref halt);
+
+                        //assign new history value
+                        existingBlock[k] = (1 << successiveApproximation) * (sign == 0 ? -1 : 1);
+
+
+                        if (halt)
+                            break;
+
+                        //if (existingBlock[k] > 0)
+                        //{
+
+                        //}
+                        //k += r;
+                        //this.DecodeZZ(existingBlock, k, ssss, successiveApproximation, ref halt);
+                        //if (halt)   //escape condition
+                        //    break;
+
+                        if (k >= endSelector)
+                            break;
+                        else
+                            ++k;
+                    }
+
+
+
+                    //If a zero history
+                    //if (existingBlock[k] == 0)
+                    //{
+                    //    if (ssss == 0)
+                    //    {
+                    //        if (r == 15)    //ZRL in-block
+                    //        {
+                    //            this.ProcessZeroRun(existingBlock, ref k, 16, successiveApproximation, ref halt);
+
+                    //            if (halt)
+                    //                break;
+
+                    //        }
+                    //        else    //This is, I think, where the End-of-Band comes into play
+                    //        {
+                    //            this.EndOfBand = this.ReceiveEndOfBand(rrrr, ref halt);
+                    //            break;
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        k += r;
+                    //        this.DecodeZZ(existingBlock, k, ssss, successiveApproximation, ref halt);
+                    //        if (halt)   //escape condition
+                    //            break;
+
+                    //        if (k >= endSelector)
+                    //            break;
+                    //        else
+                    //            ++k;
+                    //    }
+                    //}
+                    //else    //the existing block has a non-zero history and the DECODEd value is the bit to append
+                    //{
+                    //    UInt16 bit = this.huffmanBitReader.GetBits(1, ref halt);
+                    //    if (halt)   //escape condition
+                    //        break;
+
+                    //    existingBlock[k] += (bit << successiveApproximation);
+
+                    //    ++k;
+                    //    if (k == endSelector)
+                    //        break;
+                    //}
+                }
+
+            if (EndOfBand > 0)
+            {
+                this.ProcessNonZero(existingBlock, k, endSelector, successiveApproximation, ref halt);
+
+                --this.EndOfBand;
+            }
+        }
+
+        /// <summary>Consumes correction and sign bits during a run-length of 0.</summary>
+        /// <param name="existingBlock">Initialized 64-byte coefficient block</param>
+        /// <param name="currentPosition">Current position within the block</param>
+        /// <param name="zeroRunLength">Number to check for non-zero history</param>
+        /// <param name="successiveApproximation">Current shift to perform during successive approximation</param>
+        /// <param name="halt">
+        ///     Reference flag set to false that, if set in this method, will percolate up the stack,
+        ///     returning work done so far, but ultimately terminating the scan
+        /// </param>
+        protected void ProcessZeroRun(Int32[] existingBlock, ref Int32 currentPosition, Int32 zeroRunLength, Int32 successiveApproximation, ref Boolean halt)
+        {
+            //this way I can pass in an rrrr == 0 and an ssss == 1
+            do
+            {
+                //zero history, get sign and magnitude
+                if (existingBlock[currentPosition] == 0)
+                {
+                    //sign
+                    //Int32 sign = this.huffmanBitReader.GetBits(1, ref halt);
+                    //if (halt)
+                    //    break;
+
+                    //Int32 magnitude = this.huffmanBitReader.GetBits(1, ref halt);
+
+                    //if (halt)
+                    //    break;
+
+                    //existingBlock[currentPosition] = (this.Extend(sign, magnitude) << successiveApproximation);
+                    if (--zeroRunLength < 0)
+                        break;  //skip the last current position increment
+                }
+                else    //non-zero history, get magnitude
+                {
+                    //The following, I think, means get a bit, scale it and add (even if negative)
+                    //"added to the (scaled) decoded magnitude of the coefficient."
+                    Int32 magnitude = this.huffmanBitReader.GetBits(1, ref halt) * (existingBlock[currentPosition] < 0 ? -1 : 1);
+
+                    if (halt)
+                        break;
+
+                    existingBlock[currentPosition] += magnitude << successiveApproximation;
+
+                    //non-zero history are 'skipped over' during runs
+                }
+
+                ++currentPosition;
+            }
+            while (zeroRunLength > -1);
+        }
+
+        /// <summary>Consumes correction bits during an End of Band.</summary>
+        /// <param name="existingBlock">Initialized 64-byte coefficient block</param>
+        /// <param name="currentPosition">Current position within the block</param>
+        /// <param name="endPosition">End position within the block</param>
+        /// <param name="successiveApproximation">Current shift to perform during successive approximation</param>
+        /// <param name="halt">
+        ///     Reference flag set to false that, if set in this method, will percolate up the stack,
+        ///     returning work done so far, but ultimately terminating the scan
+        /// </param>
+        protected void ProcessNonZero(Int32[] existingBlock, Int32 currentPosition, Int32 endPosition, Int32 successiveApproximation, ref Boolean halt)
+        {
+            for (Int32 index = currentPosition; index < endPosition; ++index)
+            {
+                //non-zero history, get magnitude
+                if (existingBlock[index] != 0)
+                {
+                    //The following, I think, means get a bit, scale it and add (even if negative)
+                    //"added to the (scaled) decoded magnitude of the coefficient."
+                    Int32 magnitude = this.huffmanBitReader.GetBits(1, ref halt);
+
+                    if (halt)
+                        break;
+
+                    existingBlock[index] += magnitude << successiveApproximation;
                 }
             }
+        }
 
-            return endOfBand;
+        /// <summary>Decodes a single AC coefficient from the Huffman bit stream</summary>
+        /// <param name="zz">Initialized coefficient block</param>
+        /// <param name="index">Index to decode</param>
+        /// <param name="ssss">Bits to shift</param>
+        /// <param name="halt">
+        ///     Reference flag set to false that, if set in this method, will percolate up the stack,
+        ///     returning work done so far, but ultimately terminating the scan
+        /// </param>
+        protected void DecodeZZ(Int32[] zz, Int32 index, Int32 ssss, Int32 successiveApproximation, ref Boolean halt)
+        {
+            Int32 receive = this.Receive(ssss, ref halt);
+            if (halt)   ///escape condition
+                return;
+
+            zz[index] = this.Extend(receive, ssss) << successiveApproximation;
         }
 
         /// <summary>Places the next RRRR bits of the entropy-coded segment into the low order bits of the returned value</summary>
@@ -355,6 +627,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             }
             return receive;
         }
+        #endregion
         #endregion
 
 
@@ -415,10 +688,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         }
         #endregion
 
+
         /// <summary>Resets the coding bitstream to 0 bits read</summary>
         public void ResetCodingStream()
         {
             this.huffmanBitReader.ResetBuffer();
+            this.EndOfBand = 0;
         }
     }
 }

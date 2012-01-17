@@ -38,8 +38,8 @@ namespace Bardez.Projects.InfinityPlus1.Tester
 
                 Application.DoEvents();
 
-                jpeg.DecodeFloat();
-                Frame frame = jpeg.GetFrameFloat();
+                jpeg.Decode();
+                Frame frame = jpeg.GetFrame();
                 Byte[] data = frame.Pixels.GetPixelData(ExternalPixelEnums.PixelFormat.RGB_B8G8R8, ScanLineOrder.TopDown, 0, 0);
 
                 Int32 key = this.direct2dRenderControl1.AddFrameResource(frame);

@@ -51,8 +51,14 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             frame.Header = header;
             frame.ScanLines = frame.Header.Height;  //can be set to 0.
 
+            //attach the frame
+            jpeg.Frame = frame;
+
+            //set up component data
+            jpeg.PopulateComponents();
+
             //Read first scan
-            JpegParser.ReadScan(frame, input);
+            JpegParser.ReadScan(jpeg, frame, input);
 
             //after reading one, there's an optional DNL. If not DNL, either more scans or end of image
             switch (JpegParser.ReadMarker(input))
@@ -79,13 +85,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                         break;
                     default:
                         ReusableIO.SeekIfAble(input, -2, SeekOrigin.Current);   //back up and read another scan; if EOI, it will be caught in the read loop.
-                        JpegParser.ReadScan(frame, input);  //inappropriate markers will be read and caught inside the ReadScan code.
+                        JpegParser.ReadScan(jpeg, frame, input);  //inappropriate markers will be read and caught inside the ReadScan code.
                         break;
                 }
             }
-
-            //attach the frame
-            jpeg.Frame = frame;
         }
 
         /// <summary>Reas the JFIF header for a JPEG Frame and stores it</summary>

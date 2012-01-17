@@ -51,9 +51,14 @@
     <Compile Include="Image\JPEG\Component Data Float.cs" />
     <Compile Include="Image\JPEG\Component Data Integer.cs" />
     <Compile Include="Image\JPEG\Component Data.cs" />
+    <Compile Include="Image\JPEG\IJpegInterchange.cs" />
     <Compile Include="Image\JPEG\JPEG Parser.cs" />
     <Compile Include="Image\Mathematics\AC Predictive Smoothing.cs" />
-    <Compile Include="Image\Mathematics\Discrete Cosine Transformation.cs" />
+    <Compile Include="Image\Mathematics\DCT\Constants.cs" />
+    <Compile Include="Image\Mathematics\DCT\Loeffler Discrete Cosine Transformatio Integer.cs" />
+    <Compile Include="Image\Mathematics\DCT\Summation Discrete Cosine Transformation Integer.cs" />
+    <Compile Include="Image\Mathematics\DCT\Loeffler Discrete Cosine Transformatio Float.cs" />
+    <Compile Include="Image\Mathematics\DCT\Summation Discrete Cosine Transformation Float.cs" />
     <Compile Include="Image\JPEG\Generic Coding Table Segment.cs" />
     <Compile Include="Image\JPEG\ICoder.cs" />
     <Compile Include="Image\JPEG\Mimimum Coded Unit.cs" />

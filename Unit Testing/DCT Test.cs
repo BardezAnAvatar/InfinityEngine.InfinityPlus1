@@ -1,4 +1,4 @@
-﻿using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics;
+﻿using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics.DCT;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -81,7 +81,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             x.Add(0);       x.Add(0);   x.Add(0);   x.Add(0);   x.Add(0);   x.Add(0);   x.Add(0);  x.Add(0);
             x.Add(0);       x.Add(0);   x.Add(0);   x.Add(0);   x.Add(0);   x.Add(0);   x.Add(0);  x.Add(0);
 
-            DiscreteCosineTransformation.InverseDiscreteCosineTransformSlowFloat(x);
+            SummationDiscreteCosineTransformationFloat.InverseDiscreteCosineTransformFloat(x);
 
             Boolean matchesExpected =
                 (x[0] > -67 && x[0] < -65) &&
@@ -165,8 +165,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             //y = new Double[64];
             //Array.Copy(x, 0, y, 0, 64);
 
-            z = DiscreteCosineTransformation.ForwardDiscreteCosineTransformSlow(x);
-            a = DiscreteCosineTransformation.InverseDiscreteCosineTransformSlowFloat(z);
+            z = SummationDiscreteCosineTransformationFloat.ForwardDiscreteCosineTransformFloat(x);
+            a = SummationDiscreteCosineTransformationFloat.InverseDiscreteCosineTransformFloat(z);
 
             Boolean matchesExpected =
                 (x[0]  > -416 && x[0]  < -416) &&
@@ -234,14 +234,14 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             //y = new Double[64];
             //Array.Copy(x, 0, y, 0, 64);
 
-            z = DiscreteCosineTransformation.ForwardDiscreteCosineTransformSlow(x);
-            a = DiscreteCosineTransformation.InverseDiscreteCosineTransformSlowFloat(z);
+            z = SummationDiscreteCosineTransformationFloat.ForwardDiscreteCosineTransformFloat(x);
+            a = SummationDiscreteCosineTransformationFloat.InverseDiscreteCosineTransformFloat(z);
 
             List<Int32> fdct = new List<Int32>(), idctInt;
             for (Int32 i = 0; i < z.Count; ++i)
                 fdct.Add(Convert.ToInt32(z[i]));
 
-            idctInt = DiscreteCosineTransformation.InverseDiscreteCosineTransformFastInteger(fdct);
+            idctInt = LoefflerDiscreteCosineTransformationInteger.InverseDiscreteCosineTransformInteger(fdct);
 
 
             Boolean matchesExpected = false;

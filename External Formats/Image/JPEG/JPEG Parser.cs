@@ -113,8 +113,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         }
 
         /// <summary>Reads a minimum coded unit from the coded stream specified in scan's components</summary>
+        /// <param name="jpeg">IJpegInterchange containing Component data to optionally reference in successive progressive scans</param>
+        /// <param name="mcuIndex">IList of indecies of the current MCU being read</param>
         /// <param name="usesDCT">Boolean indicating if the compression is a DCT approach</param>
         /// <param name="isProgressive">Flag indicating whether the MCU will be for a progressive process</param>
+        /// <param name="isSuccessive">Flag initcating whether the scan is a successive scan</param>
         /// <param name="scan">Scan to add/read from</param>
         /// <param name="halt">
         ///     Reference flag set to false that, if set in this method, will percolate upwards indicating that the return value is possibly dirty,
@@ -122,10 +125,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// </param>
         /// <param name="zeroRunEndOfBand">Count of zero-run End of Band data units/MCUs to append to the data stream</param>
         /// <returns>The MinumumCodedUnit read</returns>
-        public static MimimumCodedUnit ReadMinimumCodedUnit(Boolean usesDCT, Boolean isProgressive, JpegScan scan, ref Boolean halt, out Int32 zeroRunEndOfBand)
+        public static MimimumCodedUnit ReadMinimumCodedUnit(IJpegInterchange jpeg, IList<Int32> mcuIndecies, Boolean usesDCT, Boolean isProgressive, Boolean isSuccessive, JpegScan scan, ref Boolean halt)
         {
             MimimumCodedUnit mcu = null;
-            zeroRunEndOfBand = 0;
 
             if (usesDCT) //read an interleave of blocks
             {
@@ -133,17 +135,38 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 
                 foreach (ScanComponentData component in scan.Components)
                 {
+                    Int32 mcuIndex = mcuIndecies[component.Identifier];
+
                     //read each component's data
                     for (Int32 componentDataUnit = 0; componentDataUnit < component.McuDataSize; ++componentDataUnit)
                     {
                         Int32[] dataUnit;
                         if (isProgressive)
-                            dataUnit = component.DecodeProgressiveBlock(ref halt, scan.Header.StartSelector, scan.Header.EndSelector, out zeroRunEndOfBand);
+                        {
+                            if (!isSuccessive && scan.Header.StartSelector == 0) //DC
+                                dataUnit = component.DecodeProgressiveDcBlock(ref halt, scan.Header.SuccessiveApproximationLow);
+                            else
+                            {
+                                //get the block
+                                Int32[] existingBlock = jpeg.ComponentData[component.Identifier].SourceData[mcuIndex % component.ContiguousBlockCountHorizontal, mcuIndex / component.ContiguousBlockCountHorizontal];
+                                dataUnit = null;
+
+                                if (isSuccessive)
+                                {
+                                    if (scan.Header.StartSelector == 0) //DC
+                                        component.RefineProgressiveDcBlock(existingBlock, ref halt, scan.Header.SuccessiveApproximationLow);
+                                    else    //AC
+                                        component.RefineProgressiveACs(existingBlock, ref halt, scan.Header.StartSelector, scan.Header.EndSelector, scan.Header.SuccessiveApproximationLow);
+                                }
+                                else if (scan.Header.StartSelector != 0) //AC
+                                    component.DecodeProgressiveACs(existingBlock, ref halt, scan.Header.StartSelector, scan.Header.EndSelector, scan.Header.SuccessiveApproximationLow);
+                            }
+                        }
                         else
                             dataUnit = component.DecodeSequentialBlock(ref halt);
 
                         dct.DataUnits.Add(dataUnit);
-                        //component.ComponentData.AddRange(dataUnit);
+                        ++mcuIndecies[component.Identifier];
 
                         if (halt)   //escape condition
                             return dct;
@@ -153,9 +176,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                 mcu = dct;
             }
             else                //read an interleave of samples
-            {
                 throw new NotImplementedException("DCT is the only currently supported method of JPEG coding.");
-            }
 
             return mcu;
         }
@@ -163,7 +184,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// <summary>Reads the tables an miscelaneous sub streams before a larger segment</summary>
         /// <param name="frame">JPEG Frame to add data to</param>
         /// <param name="input">Input stream to read from</param>
-        public static void ReadScan(JpegFrame frame, Stream input)
+        public static void ReadScan(IJpegInterchange jpeg, JpegFrame frame, Stream input)
         {
             //create a new scan
             JpegScan scan = new JpegScan();
@@ -202,22 +223,28 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             JpegParser.BuildDecoders(input, frame, scan);
 
             //read the entropy-coded segments
-            JpegParser.ReadScanDecodeEntropySegments(scan, intervalCount, frame.Header.UsesDCT, frame.Header.UsesProgressive, input);
+            JpegParser.ReadScanDecodeEntropySegments(jpeg, scan, intervalCount, frame.Header.UsesDCT, frame.Header.UsesProgressive, JpegParser.IsSuccessiveScan(frame, scan), input);
             frame.Scans.Add(scan);
+
+            //now that I have the scan read, copy it into the Frame's component data.
+            jpeg.MergeScanData(frame, scan);
         }
 
         /// <summary>Reads a scan's Entropy-coded segments</summary>
+        /// <param name="jpeg">IJpegInterchange containing Component data to optionally reference in successive progressive scans</param>
         /// <param name="scan">Scan to add to</param>
         /// <param name="intervalCount">Entropy-coded segment interval</param>
         /// <param name="isDct">Flag indicating whether the coding process was DCT</param>
         /// <param name="isProgressive">Flag indicating whether the MCU will be for a progressive process</param>
+        /// <param name="isSuccessive">Flag initcating whether the scan is a successive scan</param>
         /// <param name="input">Input stream to read from</param>
-        public static void ReadScanDecodeEntropySegments(JpegScan scan, Int32 intervalCount, Boolean isDct, Boolean isProgressive, Stream input)
+        public static void ReadScanDecodeEntropySegments(IJpegInterchange jpeg, JpegScan scan, Int32 intervalCount, Boolean isDct, Boolean isProgressive, Boolean isSuccessive, Stream input)
         {
             Boolean halt = false;   //shall we stop reading the scan?
+            Int32[] mcuIndecies = new Int32[5];     //keep track of which MCU we are reading. This is used to successive approximation.
 
             //prime and read
-            JpegParser.ReadEntropyCodedSegment(scan, intervalCount, isDct, isProgressive, ref halt);
+            JpegParser.ReadEntropyCodedSegment(jpeg, scan, intervalCount, mcuIndecies, isDct, isProgressive, isSuccessive, ref halt);
 
             while (!halt)
             {
@@ -227,34 +254,34 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                     break;
 
                 //read ECS
-                JpegParser.ReadEntropyCodedSegment(scan, intervalCount, isDct, isProgressive, ref halt);
+                JpegParser.ReadEntropyCodedSegment(jpeg, scan, intervalCount, mcuIndecies, isDct, isProgressive, isSuccessive, ref halt);
             }
         }
 
         /// <summary>Reads a single entropy-coded segment from the scan and adds its contents to the various scan destinations</summary>
+        /// <param name="jpeg">IJpegInterchange containing Component data to optionally reference in successive progressive scans</param>
         /// <param name="scan">Scan to add the data to</param>
         /// <param name="intervalCount">count of MCUs in the entropy-coded segment</param>
+        /// <param name="mcuIndecies">Array of index of the current MCU being read</param>
         /// <param name="isDct">Flag indicating whether the MCU will be for a DCT process</param>
         /// <param name="isProgressive">Flag indicating whether the MCU will be for a progressive process</param>
+        /// <param name="isSuccessive">Flag initcating whether the scan is a successive scan</param>
         /// <param name="halt">
         ///     Reference flag set to false that, if set in this method, will percolate up the stack,
         ///     returning work done so far, but ultimately terminating the scan
         /// </param>
-        public static void ReadEntropyCodedSegment(JpegScan scan, Int32 intervalCount, Boolean isDct, Boolean isProgressive, ref Boolean halt)
+        public static void ReadEntropyCodedSegment(IJpegInterchange jpeg, JpegScan scan, Int32 intervalCount, IList<Int32> mcuIndecies, Boolean isDct, Boolean isProgressive, Boolean isSuccessive, ref Boolean halt)
         {
             EntropyCodedSegment ecs = new EntropyCodedSegment();
 
             //reset component decoding DC predictions
             JpegParser.ResetScanComponentDecoderValues(scan);
 
-            Int32 zeroRun = 0;  //debug variable
-
             //read an entropy-coded segment
             for (Int32 intervalIndex = 0; intervalIndex < intervalCount; ++intervalIndex)
             {
                 //read an MCU
-                Int32 zeroRunEndOfBand = 0;
-                MimimumCodedUnit mcu = JpegParser.ReadMinimumCodedUnit(isDct, isProgressive, scan, ref halt, out zeroRunEndOfBand);
+                MimimumCodedUnit mcu = JpegParser.ReadMinimumCodedUnit(jpeg, mcuIndecies, isDct, isProgressive, isSuccessive, scan, ref halt);
 
                 ecs.MimimumCodedUnits.Add(mcu);
 
@@ -265,25 +292,25 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                     return;
                 }
 
-                zeroRun += zeroRunEndOfBand;
+                //zeroRun += zeroRunEndOfBand;
 
-                //if we encountered EOB > 0... it has to be an AC progressive by definition.
-                if (zeroRunEndOfBand > 0 && isProgressive && scan.Components.Count == 1 && scan.Header.StartSelector != 0)
-                {
-                    Int32 remainingMCUs = intervalCount - (intervalIndex + 1); //plus one because we just read one.
-                    zeroRunEndOfBand = zeroRunEndOfBand > remainingMCUs ? remainingMCUs : zeroRunEndOfBand; //Don't throw in too many MCUs; respect any upcoming restarts
+                ////if we encountered EOB > 0... it has to be an AC progressive by definition.
+                //if (zeroRunEndOfBand > 0 && isProgressive && scan.Components.Count == 1 && scan.Header.StartSelector != 0)
+                //{
+                //    Int32 remainingMCUs = intervalCount - (intervalIndex + 1); //plus one because we just read one.
+                //    zeroRunEndOfBand = zeroRunEndOfBand > remainingMCUs ? remainingMCUs : zeroRunEndOfBand; //Don't throw in too many MCUs; respect any upcoming restarts
 
-                    //add this many blank MCUs to the Entropy Coded Segment.
-                    for (Int32 runIndex = 0; runIndex < zeroRunEndOfBand; ++runIndex)
-                    {
-                        if (isDct)
-                            ecs.MimimumCodedUnits.Add(new DctMcu(scan.Header.StartSelector, scan.Header.EndSelector));
-                        else
-                            throw new ApplicationException("Not sure what to do in a non-DCT situation.");
-                    }
+                //    //add this many blank MCUs to the Entropy Coded Segment.
+                //    for (Int32 runIndex = 0; runIndex < zeroRunEndOfBand; ++runIndex)
+                //    {
+                //        if (isDct)
+                //            ecs.MimimumCodedUnits.Add(new DctMcu(scan.Header.StartSelector, scan.Header.EndSelector));
+                //        else
+                //            throw new ApplicationException("Not sure what to do in a non-DCT situation.");
+                //    }
 
-                    intervalIndex += zeroRunEndOfBand;
-                }
+                //    intervalIndex += zeroRunEndOfBand;
+                //}
             }
 
             //add segment
@@ -490,14 +517,48 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                 for (Int32 index = 0; index < scan.Components.Count; ++index)
                 {
                     Int32 dcTableIndex = scan.Components[index].IndexDC, acTableIndex = scan.Components[index].IndexAC;
-                    scan.Components[index].DcCoder = HuffmanCoder.BuildHuffmanDecoder(reader, frame.DcCodingTables[dcTableIndex] as HuffmanTable);
-                    scan.Components[index].AcCoder = HuffmanCoder.BuildHuffmanDecoder(reader, frame.AcCodingTables[acTableIndex] as HuffmanTable);
+
+                    //null check, since [AC] tables may not be read yet from the stream for Progressive DCTs
+                    if (frame.DcCodingTables[dcTableIndex] != null)
+                        scan.Components[index].DcCoder = HuffmanCoder.BuildHuffmanDecoder(reader, frame.DcCodingTables[dcTableIndex] as HuffmanTable);
+
+                    if (frame.AcCodingTables[acTableIndex] != null)
+                        scan.Components[index].AcCoder = HuffmanCoder.BuildHuffmanDecoder(reader, frame.AcCodingTables[acTableIndex] as HuffmanTable);
                 }
             }
             else
             {
                 throw new NotImplementedException("Arithmetic entropy decoding not yet supported.");
             }
+        }
+
+        /// <summary>Indicates whether the scan is of first order data or not (Progressive DCs or Sequential scan)</summary>
+        /// <param name="frame">Frame containing the type of image sequential or progressive DCT)</param>
+        /// <param name="scan">Scan to be examined</param>
+        /// <returns>True if it is a FO scan, false if it is a successive scan</returns>
+        private static Boolean IsSuccessiveScan(JpegFrame frame, JpegScan scan)
+        {
+            Boolean successive = false;
+
+            //first, error conditions
+            switch (frame.Header.Marker)
+            {
+                //sequential
+                case JpegInterchangeMarkerConstants.StartOfFrameHuffmanProgressiveDCT:
+                case JpegInterchangeMarkerConstants.StartOfFrameArithmeticProgressiveDCT:
+                    if (scan.Header.SuccessiveApproximationHigh != 0)
+                        successive = true;
+                    break;
+                case JpegInterchangeMarkerConstants.StartOfFrameHuffmanBaselineDCT:
+                case JpegInterchangeMarkerConstants.StartOfFrameHuffmanExtendedSequentialDCT:
+                case JpegInterchangeMarkerConstants.StartOfFrameArithmeticExtendedSequentialDCT:
+                    //successive = false;
+                    break;
+                default:
+                    throw new NotImplementedException("Decoding measures beside progressive and sequential are not currently implemented.");
+            }
+
+            return successive;
         }
         #endregion
     }

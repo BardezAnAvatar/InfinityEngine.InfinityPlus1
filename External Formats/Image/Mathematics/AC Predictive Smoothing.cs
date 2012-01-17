@@ -18,59 +18,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics
         ///     (K. Veeraswamy, S. Srinivas Kumar)
         ///     http://www.academypublisher.com/jmm/vol03/no01/jmm03011622.pdf
         /// </remarks>
-        public static void SmoothingPrediction(Int32 blockCountVertical, Int32 blockCountHorizontal, IList<Double> coefficientData, Boolean performOnBorders = false)
-        {
-            SmoothingPredictionMainBody(blockCountVertical, blockCountHorizontal, coefficientData);
-
-            #region Outliers
-            if (performOnBorders)
-            {
-                //now, do the four corners.
-                if (blockCountHorizontal > 1 && blockCountVertical > 1)
-                {
-                    //top left
-                    SmoothingPredictionTopLeftCorner(blockCountHorizontal, coefficientData);
-
-
-                    //top right
-                    SmoothingPredictionTopRightCorner(blockCountHorizontal, coefficientData);
-
-
-                    //bottom left
-                    SmoothingPredictionBottomLeftCorner(blockCountVertical, blockCountHorizontal, coefficientData);
-
-
-                    //bottom right
-                    SmoothingPredictionBottomRightCorner(blockCountVertical, blockCountHorizontal, coefficientData);
-                }
-
-                //now do top row
-                SmoothingPredictionTopmostRow(blockCountHorizontal, coefficientData);
-
-                //now do bottom row
-                SmoothingPredictionBottommostRow(blockCountVertical, blockCountHorizontal, coefficientData);
-
-                //now do left
-                SmoothingPredictionLeftmostColumn(blockCountVertical, blockCountHorizontal, coefficientData);
-
-                //now do right
-                SmoothingPredictionRightmostColumn(blockCountVertical, blockCountHorizontal, coefficientData);
-            }
-            #endregion
-        }
-
-        /// <summary>Attempts to implement JPEG specification §K.2.8.1</summary>
-        /// <param name="blockCountHorizontal">Horizontal block count</param>
-        /// <param name="blockCountVertical">Vertical block count</param>
-        /// <param name="coefficientData">Integer data to adjust in-position</param>
-        /// <param name="performOnBorders">Boolean flag indicating whether to perform the operation on corners and outer rows and columns</param>
-        /// <remarks>
-        ///     My thanks to the following, indicating another divide by 8 (see the IDCT fast implementation). I need to just start dividing by 8 when I get funny results.
-        ///     Adaptive AC-Coefficient Prediction for Image Compression and Blind Watermarking
-        ///     (K. Veeraswamy, S. Srinivas Kumar)
-        ///     http://www.academypublisher.com/jmm/vol03/no01/jmm03011622.pdf
-        /// </remarks>
-        public static void SmoothingPrediction(Int32 blockCountVertical, Int32 blockCountHorizontal, IList<Int32> coefficientData, Boolean performOnBorders = false)
+        public static void SmoothingPrediction(Int32 blockCountVertical, Int32 blockCountHorizontal, Double[,][] coefficientData, Boolean performOnBorders = false)
         {
             SmoothingPredictionMainBody(blockCountVertical, blockCountHorizontal, coefficientData);
 

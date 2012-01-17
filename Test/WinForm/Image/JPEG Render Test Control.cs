@@ -80,9 +80,9 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
                         using (FileStream fs = ReusableIO.OpenFile(path))
                             jpeg = JpegJfifParser.ParseJpegFromStream(fs);
 
-                        jpeg.DecodeFloat();
+                        jpeg.Decode();
 
-                        Int32 key = this.direct2dRenderControl.AddFrameResource(jpeg.GetFrameFloat());
+                        Int32 key = this.direct2dRenderControl.AddFrameResource(jpeg.GetFrame());
                         this.lstboxImages.Items.Add(new BitmapReference(path, key));
                     }
                 }

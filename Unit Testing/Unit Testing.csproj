@@ -51,7 +51,6 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComponentDataTest.cs" />
     <Compile Include="DCT Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -32,7 +32,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics.D
         ///     Also, see http://www.cmlab.csie.ntu.edu.tw/cml/dsp/training/coding/transform/fft.html.
         ///     It loses accuracy, but processes much more quickly.
         /// </remarks>
-        public static List<Double> InverseDiscreteCosineTransformFastFloat(IList<Double> fDctList)
+        public static List<Double> InverseDiscreteCosineTransformFloat(IList<Double> fDctList)
         {
             List<Double> idct = new List<Double>();
 
@@ -89,6 +89,77 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics.D
             }
 
             return idct;
+        }
+
+
+        /// <summary>Performs the inverse DCT on the list of FDCT values</summary>
+        /// <param name="fDctList">List of double-precision floating-point Forward DCT values</param>
+        /// <returns>A List of double-precision floating-point values of from the inverse DCT</returns>
+        /// <remarks>
+        ///     See JPEG specification, §A.3.3
+        ///     More to point, see http://ce.et.tudelft.nl/~george/publications/Conf/ProRISC02/DCT.pdf for my source of the 'fast' IDCT.
+        ///     http://www.google.com/url?sa=t&rct=j&q=modieifed%20loeffler%20algorithm&source=web&cd=6&ved=0CFYQFjAF&url=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fdownload%3Fdoi%3D10.1.1.157.9472%26rep%3Drep1%26type%3Dpdf&ei=470JT87TAY7eggeTyfGbAg&usg=AFQjCNG_PsMSUdzUPkfno6rfa6UPnyc7vQ&cad=rja
+        ///     Also, see http://www.cmlab.csie.ntu.edu.tw/cml/dsp/training/coding/transform/fft.html.
+        ///     It loses accuracy, but processes much more quickly.
+        /// </remarks>
+        public static void InverseDiscreteCosineTransformFloat(Double[,][] fDctList)
+        {
+            Int32 width = fDctList.GetLength(0), height = fDctList.GetLength(1);
+
+            //loop through each block
+            for (Int32 x = 0; x < width; ++x)
+                for (Int32 y = 0; y < height; ++y)
+                {
+                    Double[] fdct = fDctList[x, y];  //fewer de-referencing accessors?
+                    Double[] idctTemp = new Double[64];
+                    //do a frst pass on the row, then a second on the columns
+                    for (Int32 row = 0; row < 8; ++row)
+                    {
+                        Int32 rowBase = row * 8;
+                        //if 0...7 are all 0, all the cross addition/multiplication comes out to 0 anyway.
+                        if (fdct[rowBase] == 0 && fdct[rowBase + 1] == 0 && fdct[rowBase + 2] == 0 && fdct[rowBase + 3] == 0
+                            && fdct[rowBase + 4] == 0 && fdct[rowBase + 5] == 0 && fdct[rowBase + 6] == 0 && fdct[rowBase + 7] == 0)
+                            continue;   //idctTemp is already initialized to 0.
+                        else
+                        {
+                            LoefflerDiscreteCosineTransformationFloat.InverseDiscreteCosineTransformFastRowFloat(
+                                out idctTemp[rowBase], out idctTemp[rowBase + 1], out idctTemp[rowBase + 2], out idctTemp[rowBase + 3],
+                                out idctTemp[rowBase + 4], out idctTemp[rowBase + 5], out idctTemp[rowBase + 6], out idctTemp[rowBase + 7],
+                                fdct[rowBase], fdct[rowBase + 1], fdct[rowBase + 2], fdct[rowBase + 3],
+                                fdct[rowBase + 4], fdct[rowBase + 5], fdct[rowBase + 6], fdct[rowBase + 7]);
+                        }
+                    }
+
+                    //second pass on columns
+                    for (Int32 column = 0; column < 8; ++column)
+                    {
+                        Int32 row2 = column + 8, row3 = column + 16, row4 = column + 24, row5 = column + 32, row6 = column + 40, row7 = column + 48, row8 = column + 56;
+
+                        //if 0...7 are all 0, all the cross addition/multiplication comes out to 0 anyway.
+                        if (idctTemp[column] == 0 && idctTemp[row2] == 0 && idctTemp[row3] == 0 && idctTemp[row4] == 0
+                            && idctTemp[row5] == 0 && idctTemp[row6] == 0 && idctTemp[row7] == 0 && idctTemp[row8] == 0)
+                            continue;   //idctTemp is already initialized to 0.
+                        else
+                        {
+                            LoefflerDiscreteCosineTransformationFloat.InverseDiscreteCosineTransformFastRowFloat(
+                                out idctTemp[column], out idctTemp[row2], out idctTemp[row3], out idctTemp[row4],
+                                out idctTemp[row5], out idctTemp[row6], out idctTemp[row7], out idctTemp[row8],
+                                idctTemp[column], idctTemp[row2], idctTemp[row3], idctTemp[row4],
+                                idctTemp[row5], idctTemp[row6], idctTemp[row7], idctTemp[row8]);
+                        }
+                    }
+
+                    //third pass; the values need to be de-scaled by 8.
+                    //man, this took a while to figure out.
+                    //I can't tell if this is commonly left out in mathematical papers as obvious, nor
+                    //can I tell if it i a needed division of 1/(2*root(2)) after each pass, or if it is
+                    //a needed division of N=8.
+                    // Note: Later found out it is 1 / (2 root 2).
+                    for (Int32 descaleIndex = 0; descaleIndex < 64; ++descaleIndex)
+                        idctTemp[descaleIndex] /= 8.0;
+
+                    fDctList[x, y] = idctTemp;  //fewer de-referencing accessors?
+                }
         }
 
         /// <summary>Implementation of the 1-D modified Loeffler algoritm IDCT</summary>

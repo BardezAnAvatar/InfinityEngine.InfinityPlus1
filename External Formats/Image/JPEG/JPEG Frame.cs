@@ -79,7 +79,5 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             this.acCodingTables = new GenericCodingTable[] { null, null, null, null };
         }
         #endregion
-
-        //contains the Number of lines 
     }
 }

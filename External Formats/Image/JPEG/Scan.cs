@@ -53,28 +53,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         {
             get { return this.components; }
         }
-
-        /// <summary>Exposes the entropy-decoded data length of a single MCU.</summary>
-        [Obsolete("block for DCT, fix!")]
-        public Int32 MinimumCodedUnitSize
-        {
-            get
-            {
-                //if there is exactly one component, it is non-interleaved. Otherwise, it is interleaved.
-                Boolean interleaved = this.Header.ComponentNumbers > 1;
-                Int32 mcuSize = 64; //non-interleaved
-
-                if (interleaved)
-                {
-                    mcuSize = 0;    //reset
-
-                    foreach (ScanComponentData data in this.components)
-                        mcuSize += data.McuDataSize;
-                }
-
-                return mcuSize;
-            }
-        }
         #endregion
     }
 }

@@ -12,9 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration Handler", "Configuration Handler\Configuration Handler.csproj", "{6E1496AB-268A-4EA2-99B3-726162F019F1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{FF993C95-4FB4-4653-A7F8-35A918C5E59D}"
-	ProjectSection(SolutionItems) = preProject
-		Notes.txt = Notes.txt
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F94A577A-DE5E-44E6-8395-53C5CE9BEDE3}"
 	ProjectSection(SolutionItems) = preProject

@@ -45,16 +45,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 
         /// <summary>Previous DC coefficient, prediction from the previous block</summary>
         public Int32 DcPrediction { get; set; }
-
-        /// <summary>Represents the buffer of entropy-decoded data into Bytes for lossless, DCT, or heirarchal decoding</summary>
-        /// <value>Per §F.2.1.3 The coefficients are represented as two’s complement integers.</value>
-        public List<Int32> ComponentData { get; set; }
-
-        /// <summary>List of decoded component data as floating-precision values</summary>
-        public List<Double> ComponentDecodedDataFloat { get; set; }
-
-        /// <summary>List of decoded component data as integer values</summary>
-        public List<Int32> ComponentDecodedDataInteger { get; set; }
         #endregion
 
 
@@ -119,7 +109,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// <summary>Default constructor</summary>
         public ScanComponentData()
         {
-            this.ComponentData = new List<Int32>();
             this.DcPrediction = 0;
         }
         #endregion
@@ -151,20 +140,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             this.Height = Convert.ToInt32(Math.Ceiling(factor));
         }
 
-        ///// <summary>Reads a byte from the appropriate decoder, based off of the current reading block position</summary>
-        ///// <returns>The decoded Byte</returns>
-        //public Byte DecodeByte()
-        //{
-        //    //ICoder coder = (this.BlockPosition == 0) ? this.DcCoder : this.AcCoder;
-        //    ICoder coder = this.DcCoder;    //lossless (which uses samples/byte decoding) uses DC
-        //    Byte decoded = coder.Decode();
-        //    this.componentData.Add(decoded);
-        //    ++this.BlockPosition;
-        //    this.BlockPosition %= 64;   //reset to 0 if necessary
-
-        //    return decoded;
-        //}
-
         /// <summary>Decodes a quantized 8x8 block (sequential) or chunk thereof (progressive) of samples from the decoder(s).</summary>
         /// <param name="halt">
         ///     Reference flag set to false that, if set in this method, will percolate upwards indicating that the return value is possibly dirty,
@@ -176,7 +151,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             Int32[] zigZagChunk = new Int32[64];    //initialized to 0.
 
             Int32 pred = this.DcPrediction;
-            Int32 DcDiff = this.DcCoder.DecodeDC(ref pred, ref halt);  //get DC coefficient
+            Int32 DcDiff = this.DcCoder.DecodeSequentialDC(ref pred, ref halt);  //get DC coefficient
             if (halt)   //halt condition, just return
                 return zigZagChunk;
 
@@ -194,32 +169,64 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         ///     Reference flag set to false that, if set in this method, will percolate upwards indicating that the return value is possibly dirty,
         ///     and the stack to be traversed upward, returning work done so far, but ultimately terminating the scan
         /// </param>
-        /// <param name="startSelector">First coefficient to read</param>
-        /// <param name="endSelector">Last coefficient to read</param>
-        /// <param name="zeroRunCount">Number of 0 block to add after this one (already adjusted)</param>
+        /// <param name="successiveApproximation">Current shift to perform during successive approximation</param>
         /// <returns>A quantized Block</returns>
-        public Int32[] DecodeProgressiveBlock(ref Boolean halt, Int32 startSelector, Int32 endSelector, out Int32 zeroRunCount)
+        public Int32[] DecodeProgressiveDcBlock(ref Boolean halt, Int32 successiveApproximation)
         {
-            zeroRunCount = 0;
-            Int32 readWidth = (endSelector - startSelector) + 1;
+            Int32[] zigZagChunk = new Int32[64];    //initialized to 0.
+            Int32 pred = this.DcPrediction;
+            Int32 DcDiff = this.DcCoder.DecodeFirstOrderDC(ref pred, successiveApproximation, ref halt);  //get DC coefficient
+            if (halt)   //halt condition, just return
+                return zigZagChunk;
 
-            Int32[] zigZagChunk = new Int32[readWidth];    //initialized to 0.
+            this.DcPrediction = pred;
 
-            if (startSelector == 0)
-            {
-                Int32 pred = this.DcPrediction;
-                Int32 DcDiff = this.DcCoder.DecodeDC(ref pred, ref halt);  //get DC coefficient
-                if (halt)   //halt condition, just return
-                    return zigZagChunk;
-
-                this.DcPrediction = pred;
-
-                zigZagChunk[0] = DcDiff;
-            }
-            else
-                zeroRunCount = this.AcCoder.DecodeProgressiveACs(zigZagChunk, ref halt, readWidth);
+            zigZagChunk[0] = DcDiff;
 
             return zigZagChunk;
+        }
+
+        /// <summary>Decodes a quantized 8x8 block (sequential) or chunk thereof (progressive) of samples from the decoder(s).</summary>
+        /// <param name="existingBlock">Initialized 64-byte coefficient block</param>
+        /// <param name="halt">
+        ///     Reference flag set to false that, if set in this method, will percolate upwards indicating that the return value is possibly dirty,
+        ///     and the stack to be traversed upward, returning work done so far, but ultimately terminating the scan
+        /// </param>
+        /// <param name="successiveApproximation">Current shift to perform during successive approximation</param>
+        /// <returns>A quantized Block</returns>
+        public void RefineProgressiveDcBlock(Int32[] existingBlock, ref Boolean halt, Int32 successiveApproximation)
+        {
+            existingBlock[0] = this.DcCoder.DecodeSuccessiveProgressiveDC(existingBlock[0], successiveApproximation, ref halt);  //get DC coefficient
+        }
+
+        /// <summary>Decodes a quantized chunk of a 8x8 block of progressively-encoded samples from the decoder(s).</summary>
+        /// <param name="existingBlock">Initialized 64-byte coefficient block</param>
+        /// <param name="halt">
+        ///     Reference flag set to false that, if set in this method, will percolate upwards indicating that the return value is possibly dirty,
+        ///     and the stack to be traversed upward, returning work done so far, but ultimately terminating the scan
+        /// </param>
+        /// <param name="startSelector">First coefficient to read</param>
+        /// <param name="endSelector">Last coefficient to read</param>
+        /// <param name="successiveApproximation">Current shift to perform during successive approximation</param>
+        /// <returns>A quantized Block</returns>
+        public void DecodeProgressiveACs(Int32[] existingBlock, ref Boolean halt, Int32 startSelector, Int32 endSelector, Int32 successiveApproximation)
+        {
+            this.AcCoder.DecodeFirstOrderProgressiveACs(existingBlock, ref halt, startSelector, endSelector, successiveApproximation);
+        }
+
+        /// <summary>Refines a quantized chunk of a 8x8 block of progressively-encoded samples from the decoder(s).</summary>
+        /// <param name="existingBlock">Initialized 64-byte coefficient block</param>
+        /// <param name="halt">
+        ///     Reference flag set to false that, if set in this method, will percolate upwards indicating that the return value is possibly dirty,
+        ///     and the stack to be traversed upward, returning work done so far, but ultimately terminating the scan
+        /// </param>
+        /// <param name="startSelector">First coefficient to read</param>
+        /// <param name="endSelector">Last coefficient to read</param>
+        /// <param name="successiveApproximation">Current shift to perform during successive approximation</param>
+        /// <returns>A quantized Block</returns>
+        public void RefineProgressiveACs(Int32[] existingBlock, ref Boolean halt, Int32 startSelector, Int32 endSelector, Int32 successiveApproximation)
+        {
+            this.AcCoder.DecodeSuccessiveProgressiveACs(existingBlock, ref halt, startSelector, endSelector, successiveApproximation);
         }
         #endregion
     }

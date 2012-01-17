@@ -7,6 +7,35 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
     /// <typeparam name="Primitive">A primitive type, intended to be of Int32 or Double types</typeparam>
     public abstract class ComponentData<Primitive> where Primitive : struct, IConvertible
     {
+        #region UnzigZag lookup Table
+        /// <summary>Reference table to look up a block sample index for a given input zig-zag index</summary>
+        public static readonly Int32[] UnZigZagReference =
+        {
+            0,  1,  8,  16, 9,  2,  3,  10,
+            17, 24, 32, 25, 18, 11, 4,  5,
+            12, 19, 26, 33, 40, 48, 41, 34,
+            27, 20, 13, 6,  7,  14, 21, 28,
+            35, 42, 49, 56, 57, 50, 43, 36,
+            29, 22, 15, 23, 30, 37, 44, 51,
+            58, 59, 52, 45, 38, 31, 39, 46,
+            53, 60, 61, 54, 47, 55, 62, 63
+        };
+        
+        /// <summary>Reference table to look up a zig-zag index for a given input block sample index</summary>
+        public static readonly Int32[] ZigZagReference =
+        {
+            0,  1,  5,  6,  14, 15, 27, 28,
+            2,  4,  7,  13, 16, 26, 29, 42,
+            3,  8,  12, 17, 25, 30, 41, 43,
+            9,  11, 18, 24, 31, 40, 44, 53,
+            10, 19, 23, 32, 39, 45, 52, 54,
+            20, 22, 33, 38, 46, 51, 55, 60,
+            21, 34, 37, 47, 50, 56, 59, 61,
+            35, 36, 48, 49, 57, 58, 62, 63
+        };
+        #endregion
+
+
         #region Fields
         /// <summary>Height of the component data</summary>
         public Int32 Height { get; set; }
@@ -33,10 +62,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 
         /// <summary>Represents the buffer of entropy-decoded coefficient data into Bytes for lossless, DCT, or heirarchal decoding</summary>
         /// <value>Per §F.2.1.3 The coefficients are represented as two’s complement integers.</value>
-        public List<Int32> SourceData { get; set; }
+        public Int32[,][] SourceData { get; set; }
 
-        /// <summary>List of decoded component data values</summary>
-        public List<Primitive> SampleData { get; set; }
+        /// <summary>2D array of decoded component data blocks</summary>
+        public Primitive[,][] SampleData { get; set; }
         #endregion
 
 
@@ -102,13 +131,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         public void DecodeData(QuantizationTable qt, Int32 samplePrecision, Boolean doAcPrediction = false)
         {
             //re-order the blocks to fit the image grid
-            this.ReorderBlockData();
+            //this.ReorderBlockData();
 
             //De-quantize the coefficients to reconstruct an approximate collection of forward DCT coefficients
             this.Dequantize(qt);
 
             //Undo the zig-zag coefficient between dequantizing and IDCT. Block order does not matter.
-            this.UnZigZag();
+            //this.UnZigZag();
 
             //smooth blocks
             if (doAcPrediction)
@@ -118,71 +147,17 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             this.InverseDiscreteCosineTransform();
 
             //undo the 0-center shifting to restore back to 0 - 255 unsigned value range
-            this.UndoLevelShift(samplePrecision);
+            //this.UndoLevelShift(samplePrecision);
 
             //re-order the samples to form a true top-down image
             //this.ReorderBlockSampleData();
-            this.ReorderBlockSampleDataIndexed();
+            //this.ReorderBlockSampleDataIndexed();
         }
         #endregion
 
 
         #region Reordering
-        /// <summary>Reverses the zig-zag sampling order of JPEG blocks</summary>
-        /// <remarks>
-        ///     See JPEG specification, §4.3 and Figure 5.
-        ///     Performed on Sample Data.
-        /// </remarks>
-        protected void UnZigZag()
-        {
-            Primitive[] temp = new Primitive[64];
-
-            for (Int32 blockStart = 0; blockStart < this.SampleData.Count; blockStart += 64)
-            {
-                Int32 x = 0, y = 0;
-                Boolean incrementX = true;
-                for (Int32 index = 0; index < 64; ++index)
-                {
-                    temp[(8 * y) + x] = this.SampleData[blockStart + index];
-
-                    if (incrementX)
-                    {
-                        if (y > 0 && x < 7)
-                            --y;
-                        else
-                            incrementX = false;
-
-                        if (x == 7)
-                        {
-                            ++y;
-                            incrementX = false;
-                        }
-                        else
-                            ++x;
-                    }
-                    else
-                    {
-                        if (x > 0 && y < 7)
-                            --x;
-                        else
-                            incrementX = true;
-
-                        if (y == 7)
-                        {
-                            ++x;
-                            incrementX = true;
-                        }
-                        else
-                            ++y;
-                    }
-                }
-
-                //copy back
-                for (Int32 i = 0; i < 64; ++i)
-                    this.SampleData[blockStart + i] = temp[i];
-            }
-        }
-        
+        /*
         /// <summary>Reorders the component data 8x8 blocks based on multiple vertical sampling levels</summary>
         /// <param name="componentData">Component to unshuffle</param>
         /// <remarks>Performed on Source Data.</remarks>
@@ -228,7 +203,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 
             this.SourceData = output;
         }
+        */
         
+        /*
         /// <summary>Reorders the component data 8x8 blocks based on multiple vertical sampling levels</summary>
         /// <param name="componentData">Component to unshuffle</param>
         /// <remarks>Performed on Sample Data.</remarks>
@@ -269,11 +246,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 
             this.SampleData = unblocked;
         }
+        */
 
+        /*
         /// <summary>Reorders the component data 8x8 blocks based on multiple vertical sampling levels</summary>
-        /// <param name="componentData">Component to unshuffle</param>
-        /// <remarks>Performed on Sample Data.</remarks>
-        protected void ReorderBlockSampleDataIndexed()
+        /// <param name="samplePrecision">Sample precision to uncenter around 0 by.</param>
+        /// <remarks>Performed on Sample Data. Performs the level shifting during this process.</remarks>
+        protected void ReorderBlockSampleDataIndexed(Int32 samplePrecision)
         {
             Int32[,] blocks = new Int32[this.ContiguousBlockCountHorizontal, this.ContiguousBlockCountVertical];
             Int32 indexer = 0;
@@ -308,6 +287,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 
             this.SampleData = unblocked;
         }
+        */
         #endregion
 
 
@@ -316,17 +296,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// <param name="componentData">List of component data to de-quantize</param>
         /// <param name="quantizationElements">Quantization table elements to dequantize against</param>
         protected abstract void Dequantize(QuantizationTable qt);
-        /*
-        {
-            for (Int32 qDctIndex = 0; qDctIndex < this.SourceData.Count; ++qDctIndex)
-            {
-                //messy, required for the generic transition
-                Primitive dct = (Primitive)Convert.ChangeType((this.SourceData[qDctIndex] * qt.Elements[qDctIndex % 64]), typeof(Primitive));
-                SampleData[qDctIndex] = dct;
-            }
-        }
-        */
-
 
         /// <summary>Attempts to implement JPEG specification §K.2.8.1</summary>
         /// <param name="component">Component to smooth</param>
@@ -337,12 +306,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         ///     http://www.academypublisher.com/jmm/vol03/no01/jmm03011622.pdf
         /// </remarks>
         protected abstract void SmoothingPrediction();
-        /*
-        {
-            AmplitudeCoefficientPredictiveSmoothing.SmoothingPrediction(this.ContiguousBlockCountVertical, this.ContiguousBlockCountHorizontal, this.SampleData);
-        }
-        */
-
 
         /// <summary>Performs the inverse DCT on the list of FDCT values</summary>
         /// <param name="fDctList">List of integer Forward DCT values</param>
@@ -352,38 +315,15 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         ///     Captures a floating-point list of data, to preserve data when generating RGB values from YCbCr data.
         /// </remarks>
         protected abstract void InverseDiscreteCosineTransform();
-        /*
-        {
-            this.SampleData = DiscreteCosineTransformation.InverseDiscreteCosineTransformFastFloat(this.SampleData);
-        }
-        */
 
+        ///// <summary>Performs an unshift by adding the shift level to </summary>
+        ///// <param name="level">Sample bit precision</param>
+        ///// <param name="data">List of samples to unshift</param>
+        //protected abstract void UndoLevelShift(Int32 level);
 
-        /// <summary>Performs an unshift by adding the shift level to </summary>
-        /// <param name="level">Sample bit precision</param>
-        /// <param name="data">List of samples to unshift</param>
-        protected abstract void UndoLevelShift(Int32 level);
-        /*
-        {
-            Int32 shift;
-            switch (level)
-            {
-                case 8:
-                    shift = 128;
-                    break;
-                case 12:
-                    shift = 2048;
-                    break;
-                default:
-                    throw new ApplicationException(String.Format("Unexpected level shift size of {0}.", level));
-            }
-
-            for (Int32 index = 0; index < this.SampleData.Count; ++index)
-                this.SampleData[index] += shift;
-        }
-        */
-
-
+        /// <summary>Gets the output sample data, in sample order</summary>
+        /// <returns>a Byte array of sample data</returns>
+        public abstract Primitive[] GetSampleData();
         #endregion
     }
 }
