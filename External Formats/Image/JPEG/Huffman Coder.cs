@@ -169,20 +169,23 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// </param>
         /// <returns>The received value</returns>
         /// <remarks>Isn't this just getbits(x)?</remarks>
-        protected Int16 Receive(Int32 ssss, ref Boolean halt)
+        protected Int32 Receive(Int32 ssss, ref Boolean halt)
         {
-            Int16 v = 0;
+            Int32 v = 0;
 
-            for (Int32 i = 0; i < ssss; ++i)
-            {
-                v <<= 1;
-                Int16 nextBit = (Int16)this.huffmanBitReader.GetBits(1, ref halt);
+            //for (Int32 i = 0; i < ssss; ++i)
+            //{
+            //    v <<= 1;
+            //    Int16 nextBit = (Int16)this.huffmanBitReader.GetBits(1, ref halt);
 
-                if (halt)   //exception condition
-                    return v;
+            //    if (halt)   //exception condition
+            //        return v;
 
-                v += nextBit;
-            }
+            //    v += nextBit;
+            //}
+
+            if (ssss > 0)
+                v = this.huffmanBitReader.GetBits(ssss, ref halt);
 
             return v;
         }
@@ -283,7 +286,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         protected void DecodeZZ(Int32[] zz, Int32 index, Int32 ssss, ref Boolean halt)
         {
             Int32 receive = this.Receive(ssss, ref halt);
-            if (halt)   ///escape condition
+            if (halt)   //escape condition
                 return;
 
             zz[index] = this.Extend(receive, ssss);
@@ -531,17 +534,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                 //zero history, get sign and magnitude
                 if (existingBlock[currentPosition] == 0)
                 {
-                    //sign
-                    //Int32 sign = this.huffmanBitReader.GetBits(1, ref halt);
-                    //if (halt)
-                    //    break;
-
-                    //Int32 magnitude = this.huffmanBitReader.GetBits(1, ref halt);
-
-                    //if (halt)
-                    //    break;
-
-                    //existingBlock[currentPosition] = (this.Extend(sign, magnitude) << successiveApproximation);
                     if (--zeroRunLength < 0)
                         break;  //skip the last current position increment
                 }
@@ -603,7 +595,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         protected void DecodeZZ(Int32[] zz, Int32 index, Int32 ssss, Int32 successiveApproximation, ref Boolean halt)
         {
             Int32 receive = this.Receive(ssss, ref halt);
-            if (halt)   ///escape condition
+            if (halt)   //escape condition
                 return;
 
             zz[index] = this.Extend(receive, ssss) << successiveApproximation;

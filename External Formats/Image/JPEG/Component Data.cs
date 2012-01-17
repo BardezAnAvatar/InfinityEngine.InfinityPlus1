@@ -130,14 +130,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// <summary>Performs the mathematical transforms after de-coding from the input stream</summary>
         public void DecodeData(QuantizationTable qt, Int32 samplePrecision, Boolean doAcPrediction = false)
         {
-            //re-order the blocks to fit the image grid
-            //this.ReorderBlockData();
-
             //De-quantize the coefficients to reconstruct an approximate collection of forward DCT coefficients
             this.Dequantize(qt);
-
-            //Undo the zig-zag coefficient between dequantizing and IDCT. Block order does not matter.
-            //this.UnZigZag();
 
             //smooth blocks
             if (doAcPrediction)
@@ -145,149 +139,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 
             //perform the IDCT
             this.InverseDiscreteCosineTransform();
-
-            //undo the 0-center shifting to restore back to 0 - 255 unsigned value range
-            //this.UndoLevelShift(samplePrecision);
-
-            //re-order the samples to form a true top-down image
-            //this.ReorderBlockSampleData();
-            //this.ReorderBlockSampleDataIndexed();
         }
-        #endregion
-
-
-        #region Reordering
-        /*
-        /// <summary>Reorders the component data 8x8 blocks based on multiple vertical sampling levels</summary>
-        /// <param name="componentData">Component to unshuffle</param>
-        /// <remarks>Performed on Source Data.</remarks>
-        protected void ReorderBlockData()
-        {
-            //The way data comes in, 8x8 blocks are stored in a sampling zig-zag.
-            //See JPEG specification, §A.2.3.
-            List<Int32>[,] unzigged = new List<Int32>[this.ContiguousBlockCountHorizontal, this.ContiguousBlockCountVertical];
-            Int32 x = 0, y = 0;
-
-            for (Int32 blockIndex = 0; blockIndex < this.ContiguousBlockCount; blockIndex += this.McuDataSize)
-            {
-                for (Int32 mcuVerticalIndex = 0; mcuVerticalIndex < this.VerticalSamplingFactor; ++mcuVerticalIndex)
-                {
-                    for (Int32 mcuHorizontalIndex = 0; mcuHorizontalIndex < this.HorizontalSamplingFactor; ++mcuHorizontalIndex)
-                    {
-                        Int32 dataIndex = (blockIndex + (mcuVerticalIndex * this.HorizontalSamplingFactor) + mcuHorizontalIndex) * 64;
-                        List<Int32> block = this.SourceData.GetRange(dataIndex, 64);
-
-                        unzigged[(x + mcuHorizontalIndex), (y + mcuVerticalIndex)] = block;
-                    }
-                }
-
-                //increment my baseline indecies
-                x += this.HorizontalSamplingFactor;
-
-                if (x == this.ContiguousBlockCountHorizontal)
-                {
-                    x = 0;
-                    y += this.VerticalSamplingFactor;
-                }
-            }
-
-            //After the MCU order has been unshuffled, there remains the issue that data is stored in 8x8 blocks,
-            //rather than in sample order. We need to further loop through the data
-            //and re-arrange samples into the actual sample order. This has to be done *after* all block processing, however.
-            //In the interim, persist the reorganized blocks.
-            List<Int32> output = new List<Int32>(this.SourceData.Count);
-
-            for (y = 0; y < this.ContiguousBlockCountVertical; ++y)
-                for (x = 0; x < this.ContiguousBlockCountHorizontal; ++x)
-                    output.AddRange(unzigged[x, y]);
-
-            this.SourceData = output;
-        }
-        */
-        
-        /*
-        /// <summary>Reorders the component data 8x8 blocks based on multiple vertical sampling levels</summary>
-        /// <param name="componentData">Component to unshuffle</param>
-        /// <remarks>Performed on Sample Data.</remarks>
-        protected void ReorderBlockSampleData()
-        {
-            List<Primitive>[,] blocks = new List<Primitive>[this.ContiguousBlockCountHorizontal, this.ContiguousBlockCountVertical];
-            Int32 indexer = 0;
-            for (Int32 y = 0; y < this.ContiguousBlockCountVertical; ++y)
-            {
-                for (Int32 x = 0; x < this.ContiguousBlockCountHorizontal; ++x)
-                {
-                    blocks[x, y] = this.SampleData.GetRange(indexer, 64);
-                    indexer += 64;
-                }
-            }
-
-            //Application has the unzigged data. Now it shall un-block the samples.
-            List<Primitive> unblocked = new List<Primitive>();
-
-            for (Int32 y = 0; y < this.ContiguousBlockCountVertical; ++y)
-                for (Int32 blockScanline = 0; blockScanline < 8; ++blockScanline)
-                {
-                    Int32 scanLineBaseIndex = blockScanline * 8;
-                    for (Int32 x = 0; x < this.ContiguousBlockCountHorizontal; ++x)
-                    {
-                        //avoid addrange, getrange
-                        unblocked.Add(blocks[x, y][scanLineBaseIndex]);
-                        unblocked.Add(blocks[x, y][scanLineBaseIndex + 1]);
-                        unblocked.Add(blocks[x, y][scanLineBaseIndex + 2]);
-                        unblocked.Add(blocks[x, y][scanLineBaseIndex + 3]);
-                        unblocked.Add(blocks[x, y][scanLineBaseIndex + 4]);
-                        unblocked.Add(blocks[x, y][scanLineBaseIndex + 5]);
-                        unblocked.Add(blocks[x, y][scanLineBaseIndex + 6]);
-                        unblocked.Add(blocks[x, y][scanLineBaseIndex + 7]);
-                        //unblocked.AddRange(blocks[x, y].GetRange(blockScanline * 8, 8));
-                    }
-                }
-
-            this.SampleData = unblocked;
-        }
-        */
-
-        /*
-        /// <summary>Reorders the component data 8x8 blocks based on multiple vertical sampling levels</summary>
-        /// <param name="samplePrecision">Sample precision to uncenter around 0 by.</param>
-        /// <remarks>Performed on Sample Data. Performs the level shifting during this process.</remarks>
-        protected void ReorderBlockSampleDataIndexed(Int32 samplePrecision)
-        {
-            Int32[,] blocks = new Int32[this.ContiguousBlockCountHorizontal, this.ContiguousBlockCountVertical];
-            Int32 indexer = 0;
-            for (Int32 y = 0; y < this.ContiguousBlockCountVertical; ++y)
-            {
-                for (Int32 x = 0; x < this.ContiguousBlockCountHorizontal; ++x)
-                {
-                    blocks[x, y] = indexer;
-                    indexer += 64;
-                }
-            }
-
-            //Application has the unzigged data. Now it shall un-block the samples.
-            List<Primitive> unblocked = new List<Primitive>();
-
-            for (Int32 y = 0; y < this.ContiguousBlockCountVertical; ++y)
-                for (Int32 blockScanline = 0; blockScanline < 8; ++blockScanline)
-                {
-                    Int32 scanLineBaseIndex = blockScanline * 8;
-                    for (Int32 x = 0; x < this.ContiguousBlockCountHorizontal; ++x)
-                    {
-                        unblocked.Add(this.SampleData[blocks[x, y] + scanLineBaseIndex]);
-                        unblocked.Add(this.SampleData[blocks[x, y] + scanLineBaseIndex + 1]);
-                        unblocked.Add(this.SampleData[blocks[x, y] + scanLineBaseIndex + 2]);
-                        unblocked.Add(this.SampleData[blocks[x, y] + scanLineBaseIndex + 3]);
-                        unblocked.Add(this.SampleData[blocks[x, y] + scanLineBaseIndex + 4]);
-                        unblocked.Add(this.SampleData[blocks[x, y] + scanLineBaseIndex + 5]);
-                        unblocked.Add(this.SampleData[blocks[x, y] + scanLineBaseIndex + 6]);
-                        unblocked.Add(this.SampleData[blocks[x, y] + scanLineBaseIndex + 7]);
-                    }
-                }
-
-            this.SampleData = unblocked;
-        }
-        */
         #endregion
 
 
@@ -315,11 +167,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         ///     Captures a floating-point list of data, to preserve data when generating RGB values from YCbCr data.
         /// </remarks>
         protected abstract void InverseDiscreteCosineTransform();
-
-        ///// <summary>Performs an unshift by adding the shift level to </summary>
-        ///// <param name="level">Sample bit precision</param>
-        ///// <param name="data">List of samples to unshift</param>
-        //protected abstract void UndoLevelShift(Int32 level);
 
         /// <summary>Gets the output sample data, in sample order</summary>
         /// <returns>a Byte array of sample data</returns>

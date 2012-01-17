@@ -191,7 +191,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics.D
             LoefflerDiscreteCosineTransformationInteger.ButterflyInteger(out o0, out o1, reg0, reg1);
 
             //rotate 2, 6
-            LoefflerDiscreteCosineTransformationInteger.RotateInteger(out o2, out o3, reg2, reg3, Constants.RotateC6, Constants.RotateS6);
+            LoefflerDiscreteCosineTransformationInteger.RotateInteger(out o2, out o3, reg2, reg3, Constants.RotateC6I, Constants.RotateS6I);
             /* end phase 1 */
 
 
@@ -204,8 +204,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics.D
 
 
             /* phase 3, rotation, could be part of phase 2, still, I guess */
-            LoefflerDiscreteCosineTransformationInteger.RotateInteger(out o5, out o6, o5, o6, Constants.RotateC1, Constants.RotateS1);
-            LoefflerDiscreteCosineTransformationInteger.RotateInteger(out o4, out o7, o4, o7, Constants.RotateC3, Constants.RotateS3);
+            LoefflerDiscreteCosineTransformationInteger.RotateInteger(out o5, out o6, o5, o6, Constants.RotateC1I, Constants.RotateS1I);
+            LoefflerDiscreteCosineTransformationInteger.RotateInteger(out o4, out o7, o4, o7, Constants.RotateC3I, Constants.RotateS3I);
             /* end phase 3 */
 
 
@@ -235,10 +235,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics.D
         /// <param name="i1">Input bottom parameter</param>
         /// <param name="cos">Appropriate cosine constant value</param>
         /// <param name="sin">Appropriate sin constant value</param>
-        private static void RotateInteger(out Int32 o0, out Int32 o1, Int32 i0, Int32 i1, Double cos, Double sin)
+        /// <remarks>Utilizes a rounding that will pre-multiply the cosine and sine constants, then divides the result appropriately.</remarks>
+        private static void RotateInteger(out Int32 o0, out Int32 o1, Int32 i0, Int32 i1, Int32 cos, Int32 sin)
         {
-            o0 = Convert.ToInt32((i0 * cos) - (i1 * sin));
-            o1 = Convert.ToInt32((i0 * sin) + (i1 * cos));
+            o0 = ((i0 * cos) - (i1 * sin)) / Constants.RotateDivisor;
+            o1 = ((i0 * sin) + (i1 * cos)) / Constants.RotateDivisor;
         }
         #endregion
     }

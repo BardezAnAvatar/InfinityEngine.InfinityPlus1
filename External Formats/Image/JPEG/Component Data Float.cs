@@ -55,30 +55,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             LoefflerDiscreteCosineTransformationFloat.InverseDiscreteCosineTransformFloat(this.SampleData);
         }
 
-        /*
-        /// <summary>Performs an unshift by adding the shift level to </summary>
-        /// <param name="level">Sample bit precision</param>
-        /// <param name="data">List of samples to unshift</param>
-        protected override void UndoLevelShift(Int32 level)
-        {
-            Int32 shift;
-            switch (level)
-            {
-                case 8:
-                    shift = 128;
-                    break;
-                case 12:
-                    shift = 2048;
-                    break;
-                default:
-                    throw new ApplicationException(String.Format("Unexpected level shift size of {0}.", level));
-            }
-
-            for (Int32 index = 0; index < this.SampleData.Count; ++index)
-                this.SampleData[index] += shift;
-        }
-        */
-
         /// <summary>Gets the output sample data, in sample order</summary>
         /// <returns>a Byte array of sample data</returns>
         public override Double[] GetSampleData()

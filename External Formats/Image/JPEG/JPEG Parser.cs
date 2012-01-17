@@ -291,26 +291,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                     scan.EntropySegments.Add(ecs);
                     return;
                 }
-
-                //zeroRun += zeroRunEndOfBand;
-
-                ////if we encountered EOB > 0... it has to be an AC progressive by definition.
-                //if (zeroRunEndOfBand > 0 && isProgressive && scan.Components.Count == 1 && scan.Header.StartSelector != 0)
-                //{
-                //    Int32 remainingMCUs = intervalCount - (intervalIndex + 1); //plus one because we just read one.
-                //    zeroRunEndOfBand = zeroRunEndOfBand > remainingMCUs ? remainingMCUs : zeroRunEndOfBand; //Don't throw in too many MCUs; respect any upcoming restarts
-
-                //    //add this many blank MCUs to the Entropy Coded Segment.
-                //    for (Int32 runIndex = 0; runIndex < zeroRunEndOfBand; ++runIndex)
-                //    {
-                //        if (isDct)
-                //            ecs.MimimumCodedUnits.Add(new DctMcu(scan.Header.StartSelector, scan.Header.EndSelector));
-                //        else
-                //            throw new ApplicationException("Not sure what to do in a non-DCT situation.");
-                //    }
-
-                //    intervalIndex += zeroRunEndOfBand;
-                //}
             }
 
             //add segment

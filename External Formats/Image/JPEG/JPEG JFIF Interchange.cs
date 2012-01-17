@@ -17,12 +17,23 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
     /// </remarks>
     public class JpegJfifInterchange : IJpegInterchange
     {
+        #region Constants
+        /// <summary>Constant to pre-multiply the values by, then divide by, to approximate the decimal multiplcation.</summary>
+        /// <remarks>The average data loss of this approach is 0.015</remarks>
+        private const Int32 YCbCrShift = 14500;
+        private const Int32 CbGreen = 4990;     //0.34414 * 14500 = 4990.03
+        private const Int32 CbBLue = 25694;     //1.772 * 14500 =   25694
+        private const Int32 CrRed = 20329;      //1.402 * 14500 =   20329
+        private const Int32 CrGreen = 10355;    //0.71414 * 14500 = 10355.03
+        #endregion
+
+
         #region Fields
         /// <summary>Represents the Frame segment of the JPEG stream</summary>
         public JpegFrame Frame { get; set; }
 
         /// <summary>Represents the component data of the interchange, compiled from scans</summary>
-        public ComponentDataFloat[] ComponentData { get; set; }
+        public ComponentDataInteger[] ComponentData { get; set; }
         #endregion
 
 
@@ -58,18 +69,69 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             //scanComponents.Sort((a, b) => a.Identifier.CompareTo(b.Identifier));
 
             //resample all components to output size
-            List<List<Double>> scaledData = new List<List<Double>>();
-            foreach (ComponentDataFloat component in this.ComponentData)
+            List<IList<Int32>> scaledData = new List<IList<Int32>>();
+            foreach (ComponentDataInteger component in this.ComponentData)
                 if (component != null)
-                    scaledData.Add(Resize.BilinearResampleFloat(component.GetSampleData(), component.Height, component.Width, component.Height, component.Width, this.Frame.ScanLines, this.Frame.Header.Width));
+                {
+                    Int32[] sampleData = component.GetSampleData();
+                    IList<Int32> resized = Resize.BilinearResampleInteger(sampleData, component.Height, component.Width, component.Height, component.Width, this.Frame.ScanLines, this.Frame.Header.Width);
+                    scaledData.Add(resized);
+                }
 
             //the scaleData array should contain Y and probably Cb and Cr, in that order, all of the same scale.
-
             
             Int32 dataSize = this.Frame.ScanLines * this.Frame.Header.Width;
 
             //so, instantiate the data output
             Int32 outputPixelSize = dataSize;
+            return MergeSampleData(scaledData, outputPixelSize);
+        }
+
+        /// <summary>Merges the Lists of component sample data into a byte array of pixels</summary>
+        /// <param name="scaledData">List of List of Int32-value samples</param>
+        /// <param name="outputPixelSize">Height * width of the input data</param>
+        /// <returns>Byte array of newly merged data</returns>
+        private static Byte[] MergeSampleData(IList<IList<Int32>> scaledData, Int32 outputPixelSize)
+        {
+            Byte[] data = new Byte[3 * outputPixelSize];    //outputting to RGB, regardless of component count
+
+            //for each destination pixel, resample the source components together
+            for (Int32 i = 0; i < outputPixelSize; ++i)
+            {
+                Int32 indexBase = i * 3;    //OUTPUT components
+
+                //now, convert Y, Cb and Cr
+                Int32 red, green, blue;
+                red = green = blue = scaledData[0][i] * JpegJfifInterchange.YCbCrShift; //Y
+
+                if (scaledData.Count > 1)
+                {
+                    Int32 Cb = (scaledData[1][i] - 128);
+                    green -= Cb * JpegJfifInterchange.CbGreen;  //Cb
+                    blue += Cb * JpegJfifInterchange.CbBLue;    //Cb
+                }
+
+                if (scaledData.Count > 2)
+                {
+                    Int32 Cr = (scaledData[2][i] - 128);
+                    red += Cr * JpegJfifInterchange.CrRed;      //Cr
+                    green -= Cr * JpegJfifInterchange.CrGreen;  //Cr
+                }
+
+                data[indexBase] = JpegJfifInterchange.ConvertSampleToByte(blue);
+                data[indexBase + 1] = JpegJfifInterchange.ConvertSampleToByte(green);
+                data[indexBase + 2] = JpegJfifInterchange.ConvertSampleToByte(red);
+            }
+
+            return data;
+        }
+
+        /// <summary>Merges the Lists of component sample data into a byte array of pixels</summary>
+        /// <param name="scaledData">List of List of Double-value samples</param>
+        /// <param name="outputPixelSize">Height * width of the input data</param>
+        /// <returns>Byte array of newly merged data</returns>
+        private static Byte[] MergeSampleData(IList<IList<Double>> scaledData, Int32 outputPixelSize)
+        {
             Byte[] data = new Byte[3 * outputPixelSize];    //outputting to RGB, regardless of component count
 
             //for each destination pixel, resample the source components together
@@ -197,13 +259,22 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             return sample < 0.0 ? Byte.MinValue : sample > 255.0 ? Byte.MaxValue : Convert.ToByte(sample);
         }
 
+        /// <summary>Returns a Byte value from the sample provided</summary>
+        /// <param name="sample">Datum to convert</param>
+        /// <returns>Byte-clamped value of the sample provided</returns>
+        protected static Byte ConvertSampleToByte(Int32 sample)
+        {
+            Int32 shiftSample = sample / JpegJfifInterchange.YCbCrShift;
+            return shiftSample < 0 ? Byte.MinValue : shiftSample > 255 ? Byte.MaxValue : Convert.ToByte(shiftSample);
+        }
+
         /// <summary>Sets up and populates the non-sample data of the components</summary>
         public void PopulateComponents()
         {
             //set up component data
-            this.ComponentData = new ComponentDataFloat[this.Frame.Header.ComponentNumbers + 1];
+            this.ComponentData = new ComponentDataInteger[this.Frame.Header.ComponentNumbers + 1];
             for (Int32 index = 1; index < this.Frame.Header.ComponentNumbers + 1; ++index)
-                this.ComponentData[index] = new ComponentDataFloat();
+                this.ComponentData[index] = new ComponentDataInteger();
 
             Int32 hMax = this.Frame.Header.MaxHorizontalSamplingFactor, vMax = this.Frame.Header.MaxVerticalSamplingFactor;
 
@@ -282,7 +353,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// <summary>Performs primary decoding on component data</summary>
         public void Decode()
         {
-            foreach (ComponentDataFloat component in this.ComponentData)
+            foreach (ComponentDataInteger component in this.ComponentData)
                 if (component != null)
                     component.DecodeData(this.Frame.QuantizationTables[component.QuantizationTableIndex], 8);
         }

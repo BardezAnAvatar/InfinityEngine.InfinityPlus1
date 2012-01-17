@@ -196,7 +196,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics.D
             LoefflerDiscreteCosineTransformationFloat.ButterflyFloat(out o0, out o1, reg0, reg1);
 
             //rotate 2, 6
-            LoefflerDiscreteCosineTransformationFloat.RotateFloat(out o2, out o3, reg2, reg3, Constants.RotateC6, Constants.RotateS6);
+            LoefflerDiscreteCosineTransformationFloat.RotateFloat(out o2, out o3, reg2, reg3, Constants.RotateC6D, Constants.RotateS6D);
             /* end phase 1 */
 
 
@@ -209,8 +209,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics.D
 
 
             /* phase 3, rotation, could be part of phase 2, still, I guess */
-            LoefflerDiscreteCosineTransformationFloat.RotateFloat(out o5, out o6, o5, o6, Constants.RotateC1, Constants.RotateS1);
-            LoefflerDiscreteCosineTransformationFloat.RotateFloat(out o4, out o7, o4, o7, Constants.RotateC3, Constants.RotateS3);
+            LoefflerDiscreteCosineTransformationFloat.RotateFloat(out o5, out o6, o5, o6, Constants.RotateC1D, Constants.RotateS1D);
+            LoefflerDiscreteCosineTransformationFloat.RotateFloat(out o4, out o7, o4, o7, Constants.RotateC3D, Constants.RotateS3D);
             /* end phase 3 */
 
 

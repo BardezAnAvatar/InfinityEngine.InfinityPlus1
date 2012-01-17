@@ -15,10 +15,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// <remarks>Also un-zig-zags the sample data while populating it</remarks>
         protected override void Dequantize(QuantizationTable qt)
         {
-            this.SampleData = new Int32[this.ContiguousBlockCountHorizontal, this.ContiguousBlockCountHorizontal][];
+            this.SampleData = new Int32[this.ContiguousBlockCountHorizontal, this.ContiguousBlockCountVertical][];
 
             for (Int32 x = 0; x < this.ContiguousBlockCountHorizontal; ++x)
-                for (Int32 y = 0; y < this.ContiguousBlockCountHorizontal; ++y)
+                for (Int32 y = 0; y < this.ContiguousBlockCountVertical; ++y)
                 {
                     Int32[] temp = new Int32[64];
                     Int32[] source = this.SourceData[x, y];
@@ -55,30 +55,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             LoefflerDiscreteCosineTransformationInteger.InverseDiscreteCosineTransformInteger(this.SampleData);
         }
 
-        /*
-        /// <summary>Performs an unshift by adding the shift level to </summary>
-        /// <param name="level">Sample bit precision</param>
-        /// <param name="data">List of samples to unshift</param>
-        protected override void UndoLevelShift(Int32 level)
-        {
-            Int32 shift;
-            switch (level)
-            {
-                case 8:
-                    shift = 128;
-                    break;
-                case 12:
-                    shift = 2048;
-                    break;
-                default:
-                    throw new ApplicationException(String.Format("Unexpected level shift size of {0}.", level));
-            }
-
-            for (Int32 index = 0; index < this.SampleData.Count; ++index)
-                this.SampleData[index] += shift;
-        }
-        */
-
         /// <summary>Gets the output sample data, in sample order</summary>
         /// <returns>a Byte array of sample data</returns>
         public override Int32[] GetSampleData()
@@ -89,6 +65,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             for (Int32 y = 0; y < this.ContiguousBlockCountVertical; ++y)
                 for (Int32 blockScanline = 0; blockScanline < 8; ++blockScanline)
                 {
+                    if (yCur >= this.Height)
+                        break;
+
                     for (Int32 x = 0; x < this.ContiguousBlockCountHorizontal; ++x)
                         for (Int32 blockX = 0; (blockX < 8) && (xCur < this.Width); ++blockX)
                         {
