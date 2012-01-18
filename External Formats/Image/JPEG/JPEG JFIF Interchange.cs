@@ -69,12 +69,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             //scanComponents.Sort((a, b) => a.Identifier.CompareTo(b.Identifier));
 
             //resample all components to output size
-            List<IList<Int32>> scaledData = new List<IList<Int32>>();
+            List<Int32[]> scaledData = new List<Int32[]>();
             foreach (ComponentDataInteger component in this.ComponentData)
                 if (component != null)
                 {
                     Int32[] sampleData = component.GetSampleData();
-                    IList<Int32> resized = Resize.BilinearResampleInteger(sampleData, component.Height, component.Width, component.Height, component.Width, this.Frame.ScanLines, this.Frame.Header.Width);
+                    Int32[] resized = Resize.BilinearResampleInteger(sampleData, component.Height, component.Width, component.Height, component.Width, this.Frame.ScanLines, this.Frame.Header.Width);
                     scaledData.Add(resized);
                 }
 
@@ -91,7 +91,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// <param name="scaledData">List of List of Int32-value samples</param>
         /// <param name="outputPixelSize">Height * width of the input data</param>
         /// <returns>Byte array of newly merged data</returns>
-        private static Byte[] MergeSampleData(IList<IList<Int32>> scaledData, Int32 outputPixelSize)
+        private static Byte[] MergeSampleData(IList<Int32[]> scaledData, Int32 outputPixelSize)
         {
             Byte[] data = new Byte[3 * outputPixelSize];    //outputting to RGB, regardless of component count
 
@@ -265,7 +265,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         protected static Byte ConvertSampleToByte(Int32 sample)
         {
             Int32 shiftSample = sample / JpegJfifInterchange.YCbCrShift;
-            return shiftSample < 0 ? Byte.MinValue : shiftSample > 255 ? Byte.MaxValue : Convert.ToByte(shiftSample);
+
+            if (shiftSample < 0)
+                shiftSample = Byte.MinValue;
+            else if (shiftSample > Byte.MaxValue)
+                shiftSample = Byte.MaxValue;
+
+            return (Byte)shiftSample;
         }
 
         /// <summary>Sets up and populates the non-sample data of the components</summary>

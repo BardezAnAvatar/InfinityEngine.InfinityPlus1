@@ -63,21 +63,21 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             Int32 xCur = 0, yCur = 0;       //sampleData index calculation
 
             for (Int32 y = 0; y < this.ContiguousBlockCountVertical; ++y)
-                for (Int32 blockScanline = 0; blockScanline < 8; ++blockScanline)
+                for (Int32 blockScanline = 0; blockScanline < 64; blockScanline += 8)
                 {
-                    if (yCur >= this.Height)
+                    if (yCur >= sampleData.Length)
                         break;
 
                     for (Int32 x = 0; x < this.ContiguousBlockCountHorizontal; ++x)
                         for (Int32 blockX = 0; (blockX < 8) && (xCur < this.Width); ++blockX)
                         {
-                            sampleData[yCur * this.Width + xCur] = this.SampleData[x, y][blockScanline * 8 + blockX] + 128;
+                            sampleData[yCur + xCur] = this.SampleData[x, y][blockScanline + blockX] + 128;
 
                             ++xCur;
                             if (xCur == this.Width)
                             {
                                 xCur = 0;
-                                ++yCur;
+                                yCur += this.Width;
                                 goto NextScanLine;  //Curses! Need to break; twice, out of the X loop
                             }
                         }

@@ -57,7 +57,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// <returns>up to 16 bits, shifted to the least significant bit as the least significant bit in the return value</returns>
         public virtual UInt16 GetBits(Int32 bitCount, ref Boolean halt)
         {
-            Int32 remainingBits = bitCount;
             UInt16 value = 0;
 
             do
@@ -93,8 +92,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                     this.buffer = (Byte)byteTemp;
                 }
 
-                //read bits in byte.
-                Int32 bitsToRead = remainingBits < this.ByteBitsAvailable ? remainingBits : this.ByteBitsAvailable;
+                //read bits in byte. Usually 1
+                Int32 bitsToRead = bitCount;
+
+                if (bitsToRead > this.ByteBitsAvailable)
+                    bitsToRead = this.ByteBitsAvailable;
+
                 Int32 shift = 8 + this.bitBytePosition;
 
                 //isolate current bits remaining
@@ -109,13 +112,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                 value |= tempValue;
 
                 this.bitBytePosition += bitsToRead;     //increment the internal bit pointer.
-                remainingBits -= bitsToRead;            //bits left to read goes down
+                bitCount -= bitsToRead;                 //bits left to read goes down
 
                 //reset the Byte bit position
                 if (this.bitBytePosition > 7)
                     this.bitBytePosition = 0;
             }
-            while (remainingBits > 0);
+            while (bitCount > 0);
 
             return value;
         }

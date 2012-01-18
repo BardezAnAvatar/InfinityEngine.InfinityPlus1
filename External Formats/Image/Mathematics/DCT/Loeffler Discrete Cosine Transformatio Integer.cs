@@ -41,10 +41,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics.D
             {
                 Int32[] idctTemp = new Int32[64];
                 //do a frst pass on the row, then a second on the columns
-                for (Int32 row = 0; row < 8; ++row)
+                for (Int32 row = 0; row < 64; row += 8)
                 {
-                    Int32 rowBase = row * 8;
-                    Int32 sourceBase = baseIndex + rowBase;
+                    Int32 sourceBase = baseIndex + row;
                     //if 0...7 are all 0, all the cross addition/multiplication comes out to 0 anyway.
                     if (fDctList[sourceBase] == 0 && fDctList[sourceBase + 1] == 0 && fDctList[sourceBase + 2] == 0 && fDctList[sourceBase + 3] == 0
                         && fDctList[sourceBase + 4] == 0 && fDctList[sourceBase + 5] == 0 && fDctList[sourceBase + 6] == 0 && fDctList[sourceBase + 7] == 0)
@@ -52,8 +51,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics.D
                     else
                     {
                         LoefflerDiscreteCosineTransformationInteger.InverseDiscreteCosineTransformFastRowInteger(
-                            out idctTemp[rowBase], out idctTemp[rowBase + 1], out idctTemp[rowBase + 2], out idctTemp[rowBase + 3],
-                            out idctTemp[rowBase + 4], out idctTemp[rowBase + 5], out idctTemp[rowBase + 6], out idctTemp[rowBase + 7],
+                            out idctTemp[row], out idctTemp[row + 1], out idctTemp[row + 2], out idctTemp[row + 3],
+                            out idctTemp[row + 4], out idctTemp[row + 5], out idctTemp[row + 6], out idctTemp[row + 7],
                             fDctList[sourceBase], fDctList[sourceBase + 1], fDctList[sourceBase + 2], fDctList[sourceBase + 3],
                             fDctList[sourceBase + 4], fDctList[sourceBase + 5], fDctList[sourceBase + 6], fDctList[sourceBase + 7]);
                     }
@@ -111,20 +110,19 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics.D
                     Int32[] fdct = fDctList[x, y];  //fewer de-referencing accessors?
                     Int32[] idctTemp = new Int32[64];
                     //do a frst pass on the row, then a second on the columns
-                    for (Int32 row = 0; row < 8; ++row)
+                    for (Int32 row = 0; row < 64; row += 8)
                     {
-                        Int32 rowBase = row * 8;
                         //if 0...7 are all 0, all the cross addition/multiplication comes out to 0 anyway.
-                        if (fdct[rowBase] == 0 && fdct[rowBase + 1] == 0 && fdct[rowBase + 2] == 0 && fdct[rowBase + 3] == 0
-                            && fdct[rowBase + 4] == 0 && fdct[rowBase + 5] == 0 && fdct[rowBase + 6] == 0 && fdct[rowBase + 7] == 0)
+                        if (fdct[row] == 0 && fdct[row + 1] == 0 && fdct[row + 2] == 0 && fdct[row + 3] == 0
+                            && fdct[row + 4] == 0 && fdct[row + 5] == 0 && fdct[row + 6] == 0 && fdct[row + 7] == 0)
                             continue;   //idctTemp is already initialized to 0.
                         else
                         {
                             LoefflerDiscreteCosineTransformationInteger.InverseDiscreteCosineTransformFastRowInteger(
-                                out idctTemp[rowBase], out idctTemp[rowBase + 1], out idctTemp[rowBase + 2], out idctTemp[rowBase + 3],
-                                out idctTemp[rowBase + 4], out idctTemp[rowBase + 5], out idctTemp[rowBase + 6], out idctTemp[rowBase + 7],
-                                fdct[rowBase], fdct[rowBase + 1], fdct[rowBase + 2], fdct[rowBase + 3],
-                                fdct[rowBase + 4], fdct[rowBase + 5], fdct[rowBase + 6], fdct[rowBase + 7]);
+                                out idctTemp[row], out idctTemp[row + 1], out idctTemp[row + 2], out idctTemp[row + 3],
+                                out idctTemp[row + 4], out idctTemp[row + 5], out idctTemp[row + 6], out idctTemp[row + 7],
+                                fdct[row], fdct[row + 1], fdct[row + 2], fdct[row + 3],
+                                fdct[row + 4], fdct[row + 5], fdct[row + 6], fdct[row + 7]);
                         }
                     }
 
@@ -183,8 +181,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics.D
             Int32 reg0 = in0, reg1 = in4, reg2 = in2, reg3 = in6, reg4 = in7, reg5 = in3, reg6 = in5, reg7 = in1;
 
             /* phase 1, as some call it */
-            o7 = Convert.ToInt32(reg7 * Constants.RootHalf);
-            o4 = Convert.ToInt32(reg4 * Constants.RootHalf);
+            o7 = (reg7 * Constants.RootHalfI) / Constants.RootHalfShift;
+            o4 = (reg4 * Constants.RootHalfI) / Constants.RootHalfShift;
             LoefflerDiscreteCosineTransformationInteger.ButterflyInteger(out o7, out o4, o7, o4); //the butterfly right after is easy to miss in the Bukhari, Kuzmanov and Vassiliadis paper / PDF
 
             //butterfly

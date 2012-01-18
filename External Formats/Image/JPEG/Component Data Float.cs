@@ -66,7 +66,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             {
                 yCur = y * 8;
 
-                for (Int32 blockScanline = 0; blockScanline < 8; ++blockScanline)
+                for (Int32 blockScanline = 0; blockScanline < 64; blockScanline += 8)
                 {
                     if (yCur >= this.Height)
                         break;
@@ -74,7 +74,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                     for (Int32 x = 0; x < this.ContiguousBlockCountHorizontal; ++x)
                         for (Int32 blockX = 0; (blockX < 8) && (xCur < this.Width); ++blockX)
                         {
-                            sampleData[yCur * this.Width + xCur] = this.SampleData[x, y][blockScanline * 8 + blockX] + 128;
+                            sampleData[yCur * this.Width + xCur] = this.SampleData[x, y][blockScanline + blockX] + 128;
 
                             ++xCur;
                             if (xCur == this.Width)
