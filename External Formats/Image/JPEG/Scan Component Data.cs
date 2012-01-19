@@ -56,13 +56,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         }
 
         /// <summary>Gets the number of contiguous blocks in a horizontal line</summary>
-        public Int32 ContiguousBlockCountHorizontal
+        public Int32 ContiguousBlockCountHorizontalFactorPadded
         {
             get
             {
-                //must have height fit into a vertical muliple of VerticalSamplingFactor.
-                Int32 hBlocks = (this.Width / 8) + ((this.Width % 8) == 0 ? 0 : 1);
+                Int32 hBlocks = this.ContiguousBlockCountHorizontal;
 
+                //must have height fit into a vertical muliple of VerticalSamplingFactor.
                 if (hBlocks % this.HorizontalSamplingFactor != 0)
                     hBlocks = ((hBlocks / this.HorizontalSamplingFactor) + 1) * this.HorizontalSamplingFactor;
 
@@ -71,12 +71,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         }
 
         /// <summary>Gets the number of contiguous blocks in a vertical line</summary>
-        public Int32 ContiguousBlockCountVertical
+        public Int32 ContiguousBlockCountVerticalFactorPadded
         {
             get
             {
                 //must have height fit into a vertical muliple of VerticalSamplingFactor.
-                Int32 vBlocks = (this.Height / 8) + ((this.Height % 8) == 0 ? 0 : 1);
+                Int32 vBlocks = this.ContiguousBlockCountVertical;
 
                 if (vBlocks % this.VerticalSamplingFactor != 0)
                     vBlocks = ((vBlocks / this.VerticalSamplingFactor) + 1) * this.VerticalSamplingFactor;
@@ -85,22 +85,28 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             }
         }
 
+        /// <summary>Gets the number of contiguous blocks in a horizontal line</summary>
+        public Int32 ContiguousBlockCountHorizontal
+        {
+            get
+            {
+                return (this.Width / 8) + ((this.Width % 8) == 0 ? 0 : 1);
+            }
+        }
+
+        /// <summary>Gets the number of contiguous blocks in a vertical line</summary>
+        public Int32 ContiguousBlockCountVertical
+        {
+            get
+            {
+                return (this.Height / 8) + ((this.Height % 8) == 0 ? 0 : 1);
+            }
+        }
+
         /// <summary>Gets the number of contiguous blocks in a frame</summary>
-        public Int32 ContiguousBlockCount
+        public Int32 ContiguousBlockCountSamplingFactorPadded
         {
-            get { return this.ContiguousBlockCountHorizontal * this.ContiguousBlockCountVertical; }
-        }
-
-        /// <summary>Gets the number of contiguous block samples in a horizontal line</summary>
-        public Int32 ContiguousBlockWidth
-        {
-            get { return this.ContiguousBlockCountHorizontal * 8; }
-        }
-
-        /// <summary>Gets the number of contiguous block samples in a vertical line</summary>
-        public Int32 ContiguousBlockHeight
-        {
-            get { return this.ContiguousBlockCountVertical * 8; }
+            get { return this.ContiguousBlockCountHorizontalFactorPadded * this.ContiguousBlockCountVerticalFactorPadded; }
         }
         #endregion
 

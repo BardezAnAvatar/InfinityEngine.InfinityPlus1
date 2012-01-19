@@ -53,6 +53,34 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         {
             get { return this.components; }
         }
+
+        /// <summary>Gets the vertical maximum sampling factor of the scan</summary>
+        public Int32 MaxVerticalSamplingFactor
+        {
+            get
+            {
+                Int32 factor = 0;
+
+                foreach (ScanComponentData component in this.components)
+                    factor = factor < component.VerticalSamplingFactor ? component.VerticalSamplingFactor : factor;
+
+                return factor;
+            }
+        }
+
+        /// <summary>Gets the horizontal maximum sampling factor of the frame</summary>
+        public Int32 MaxHorizontalSamplingFactor
+        {
+            get
+            {
+                Int32 factor = 0;
+
+                foreach (ScanComponentData component in this.components)
+                    factor = factor < component.HorizontalSamplingFactor ? component.HorizontalSamplingFactor : factor;
+
+                return factor;
+            }
+        }
         #endregion
     }
 }

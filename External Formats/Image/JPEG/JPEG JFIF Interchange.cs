@@ -214,10 +214,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             {
                 //The way data comes in, 8x8 blocks are stored in a sampling zig-zag.
                 //See JPEG specification, §A.2.3.
-                Int32[,][] unzigged = new Int32[component.ContiguousBlockCountHorizontal, component.ContiguousBlockCountVertical][];
+                Int32[,][] unzigged = new Int32[component.ContiguousBlockCountHorizontalFactorPadded, component.ContiguousBlockCountVerticalFactorPadded][];
                 Int32 x = 0, y = 0;
 
-                for (Int32 blockIndex = 0; blockIndex < component.ContiguousBlockCount; blockIndex += component.McuDataSize)
+                for (Int32 blockIndex = 0; blockIndex < component.ContiguousBlockCountSamplingFactorPadded; blockIndex += component.McuDataSize)
                 {
                     for (Int32 mcuVerticalIndex = 0; mcuVerticalIndex < component.VerticalSamplingFactor; ++mcuVerticalIndex)
                     {
@@ -233,7 +233,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                     //increment my baseline indecies
                     x += component.HorizontalSamplingFactor;
 
-                    if (x == component.ContiguousBlockCountHorizontal)
+                    if (x == component.ContiguousBlockCountHorizontalFactorPadded)
                     {
                         x = 0;
                         y += component.VerticalSamplingFactor;

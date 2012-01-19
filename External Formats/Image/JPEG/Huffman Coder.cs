@@ -357,26 +357,22 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                     if (halt)   //escape condition
                         break;
 
-                    Int32 ssss = rs % 16;
+                    Int32 ssss = rs & 15;  //& faster than division (modulo %)?
                     Int32 rrrr = rs >> 4;
-                    Int32 r = rrrr;
 
                     if (ssss == 0)
                     {
-                        if (r == 15)
-                            k += 15;
+                        if (rrrr == 15)
+                            k += 16;
                         else    //This is, I think, where the End-of-Band comes into play
                         {
                             this.EndOfBand = this.ReceiveEndOfBand(rrrr, ref halt) - 1;
-                            //if (halt)   //escape condition
-                            //    break;
-
                             break;
                         }
                     }
                     else
                     {
-                        k += r;
+                        k += rrrr;
                         this.DecodeZZ(existingBlock, k, ssss, successiveApproximation, ref halt);
                         if (halt)   //escape condition
                             break;
@@ -412,14 +408,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                     if (halt)   //escape condition
                         break;
 
-                    Int32 ssss = rs % 16;
+                    Int32 ssss = rs & 15;  //&= faster than division (modulo %)?
                     Int32 rrrr = rs >> 4;
-                    Int32 r = rrrr;
 
                     /* Normal processing */
                     if (ssss == 0)
                     {
-                        if (r == 15)    //ZRL in-block
+                        if (rrrr == 15)    //ZRL in-block
                         {
                             this.ProcessZeroRun(existingBlock, ref k, 15, successiveApproximation, ref halt);
                             ++k;
@@ -436,83 +431,24 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                     else    //process 0s
                     {
                         Int32 sign = this.huffmanBitReader.GetBits(1, ref halt);
-
-                        this.ProcessZeroRun(existingBlock, ref k, r, successiveApproximation, ref halt);
+                        this.ProcessZeroRun(existingBlock, ref k, rrrr, successiveApproximation, ref halt);
 
                         //assign new history value
                         existingBlock[k] = (1 << successiveApproximation) * (sign == 0 ? -1 : 1);
 
-
                         if (halt)
                             break;
-
-                        //if (existingBlock[k] > 0)
-                        //{
-
-                        //}
-                        //k += r;
-                        //this.DecodeZZ(existingBlock, k, ssss, successiveApproximation, ref halt);
-                        //if (halt)   //escape condition
-                        //    break;
 
                         if (k >= endSelector)
                             break;
                         else
                             ++k;
                     }
-
-
-
-                    //If a zero history
-                    //if (existingBlock[k] == 0)
-                    //{
-                    //    if (ssss == 0)
-                    //    {
-                    //        if (r == 15)    //ZRL in-block
-                    //        {
-                    //            this.ProcessZeroRun(existingBlock, ref k, 16, successiveApproximation, ref halt);
-
-                    //            if (halt)
-                    //                break;
-
-                    //        }
-                    //        else    //This is, I think, where the End-of-Band comes into play
-                    //        {
-                    //            this.EndOfBand = this.ReceiveEndOfBand(rrrr, ref halt);
-                    //            break;
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        k += r;
-                    //        this.DecodeZZ(existingBlock, k, ssss, successiveApproximation, ref halt);
-                    //        if (halt)   //escape condition
-                    //            break;
-
-                    //        if (k >= endSelector)
-                    //            break;
-                    //        else
-                    //            ++k;
-                    //    }
-                    //}
-                    //else    //the existing block has a non-zero history and the DECODEd value is the bit to append
-                    //{
-                    //    UInt16 bit = this.huffmanBitReader.GetBits(1, ref halt);
-                    //    if (halt)   //escape condition
-                    //        break;
-
-                    //    existingBlock[k] += (bit << successiveApproximation);
-
-                    //    ++k;
-                    //    if (k == endSelector)
-                    //        break;
-                    //}
                 }
 
             if (EndOfBand > 0)
             {
                 this.ProcessNonZero(existingBlock, k, endSelector, successiveApproximation, ref halt);
-
                 --this.EndOfBand;
             }
         }
@@ -567,7 +503,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// </param>
         protected void ProcessNonZero(Int32[] existingBlock, Int32 currentPosition, Int32 endPosition, Int32 successiveApproximation, ref Boolean halt)
         {
-            for (Int32 index = currentPosition; index < endPosition; ++index)
+            for (Int32 index = currentPosition; index <= endPosition; ++index)  //allow 63 (or more precisely, the last one), so <=, not <
             {
                 //non-zero history, get magnitude
                 if (existingBlock[index] != 0)

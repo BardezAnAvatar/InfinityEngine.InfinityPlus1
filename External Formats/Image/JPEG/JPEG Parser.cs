@@ -148,7 +148,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                             else
                             {
                                 //get the block
-                                Int32[] existingBlock = jpeg.ComponentData[component.Identifier].SourceData[mcuIndex % component.ContiguousBlockCountHorizontal, mcuIndex / component.ContiguousBlockCountHorizontal];
+                                Int32[] existingBlock = jpeg.ComponentData[component.Identifier].SourceData[mcuIndex % component.ContiguousBlockCountHorizontalFactorPadded, mcuIndex / component.ContiguousBlockCountHorizontalFactorPadded];
                                 dataUnit = null;
 
                                 if (isSuccessive)
@@ -199,9 +199,27 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             header.Read(input);
             scan.Header = header;
 
+            //set up the entropy-decoding byte buffers per channel/component
+            foreach (ScanComponentParameter scanParam in header.Components)
+            {
+                ScanComponentData componentData = new ScanComponentData();
+                componentData.PopulateFields(scanParam, JpegParser.MatchScanComponent(scanParam.Identifier, frame.Header.Components), frame.Header);
+                scan.Components.Add(componentData);
+            }
+
+            //If there exists only 1 scan, do not perform samplefactor padding
+            if (scan.Components.Count == 1)
+            {
+                scan.Components[0].HorizontalSamplingFactor = 1;
+                scan.Components[0].VerticalSamplingFactor = 1;
+            }
+
+            //reset decoders.
+            JpegParser.BuildDecoders(input, frame, scan);
+
             //Read the entropy-coded segments.
             //If a restart interval is defined, inter-read the ECSs and restart intervals. Otherwise, read one very large entropy-coded segment
-            Int32 mcuCount = JpegParser.MinumumCodedUnitCount(header, frame.Header);
+            Int32 mcuCount = JpegParser.MinumumCodedUnitCount(scan, frame.Header);
             Int32 intervalCount = mcuCount > 0 ? mcuCount : Int32.MaxValue; //default value for ECS size
 
             //Retrieve the interval count
@@ -210,17 +228,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 
             if (scan.Restart != null)
                 intervalCount = scan.Restart.Interval;
-
-            //set up the entropy-decoding byte buffers per channel/component
-            foreach (ScanComponentParameter scanParam in header.Components)
-            {
-                ScanComponentData componentData = new ScanComponentData();
-                componentData.PopulateFields(scanParam, JpegParser.MatchScanComponent(scanParam, frame.Header.Components), frame.Header);
-                scan.Components.Add(componentData);
-            }
-
-            //reset decoders.
-            JpegParser.BuildDecoders(input, frame, scan);
 
             //read the entropy-coded segments
             JpegParser.ReadScanDecodeEntropySegments(jpeg, scan, intervalCount, frame.Header.UsesDCT, frame.Header.UsesProgressive, JpegParser.IsSuccessiveScan(frame, scan), input);
@@ -414,18 +421,17 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 
         #region Helper Methods
         /// <summary>Gets the number of MCUs in a given scan.</summary>
-        /// <param name="scanHeader">Scan's header</param>
+        /// <param name="scan">Scan to get the count for</param>
         /// <param name="frameHeader">Scan's frame header</param>
         /// <returns>The MCU count within the sca</returns>
-        private static Int32 MinumumCodedUnitCount(JpegScanHeader scanHeader, JpegFrameHeader frameHeader)
+        private static Int32 MinumumCodedUnitCount(JpegScan scan, JpegFrameHeader frameHeader)
         {
             //if there is exactly one component, it is non-interleaved. Otherwise, it is interleaved.
-            Boolean interleaved = scanHeader.ComponentNumbers > 1;
-            Int32 mcuCount = 0;
+            Int32 mcuCount;
 
-            if (interleaved)
+            if (scan.Header.ComponentNumbers > 1)    //if (interleaved)
             {
-                Int32 maxDensity = JpegParser.MaxSamplingFactorDensity(scanHeader, frameHeader);
+                Int32 maxDensity = JpegParser.MaxSamplingFactorDensity(scan.Header, frameHeader);
 
                 if (frameHeader.UsesDCT)
                     mcuCount = (frameHeader.ContiguousBlockCount / maxDensity) + ((frameHeader.ContiguousBlockCount % maxDensity) == 0 ? 0 : 1);
@@ -440,7 +446,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                 }
             }
             else    //non-interleaved; 8x8 grid is one MCU.
-                mcuCount = frameHeader.ContiguousBlockCountHorizontal * frameHeader.ContiguousBlockCountVertical;
+            {
+                //get the count of MCUs IN THIS COMPONENT, not packing for interleave
+                mcuCount = scan.Components[0].ContiguousBlockCountHorizontal * scan.Components[0].ContiguousBlockCountVertical;
+            }
 
             return mcuCount;
         }
@@ -456,7 +465,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             foreach (ScanComponentParameter component in scanHeader.Components)
             {
                 //get matching frame component
-                FrameComponentParameter frameComponent = JpegParser.MatchScanComponent(component, frameHeader.Components);
+                FrameComponentParameter frameComponent = JpegParser.MatchScanComponent(component.Identifier, frameHeader.Components);
                 Int32 newDensity = frameComponent.HorizontalSamplingFactor * frameComponent.VerticalSamplingFactor;
                 if (newDensity > density)
                     density = newDensity;
@@ -466,15 +475,15 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         }
 
         /// <summary>Gets the maximum sampling factor density of the frame (horizontal sampling factor times vertical sampling factor)</summary>
-        /// <param name="scanComponent">Scan component</param>
+        /// <param name="componentIdentifier">ID to match</param>
         /// <param name="frameComponents">Frame components list</param>
-        private static FrameComponentParameter MatchScanComponent(ScanComponentParameter scanComponent, List<FrameComponentParameter> frameComponents)
+        private static FrameComponentParameter MatchScanComponent(Int32 componentIdentifier, List<FrameComponentParameter> frameComponents)
         {
             FrameComponentParameter component = null;
 
             foreach (FrameComponentParameter fc in frameComponents)
             {
-                if (fc.Identifier == scanComponent.Identifier)
+                if (fc.Identifier == componentIdentifier)
                 {
                     component = fc;
                     break;
