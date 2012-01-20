@@ -192,7 +192,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             //read any miscellaneous tables, &ct.
             RestartInterval restart = scan.Restart;     //copy the interval reference
             UInt16 marker = JpegParser.ReadTablesAndMiscellaneous(input, scan.Miscellaneous, frame.QuantizationTables, frame.DcCodingTables, frame.AcCodingTables, ref restart);
-            frame.Restart = restart;                    //re-assign the interval
+            scan.Restart = restart;                     //re-assign the interval
+
+            if (restart != null)                        //re-assign the interval
+                frame.Restart = restart;
 
             //miscellaneous now read. Should have a Start of Scan (SOS) marker, now. This would be the scan header.
             JpegScanHeader header = new JpegScanHeader(marker);
@@ -223,10 +226,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             Int32 intervalCount = mcuCount > 0 ? mcuCount : Int32.MaxValue; //default value for ECS size
 
             //Retrieve the interval count
-            if (frame.Restart != null)
+            if (frame.Restart != null && frame.Restart.Interval > 0)    //0 condition from JPEG §B.4.4
                 intervalCount = frame.Restart.Interval;
 
-            if (scan.Restart != null)
+            if (scan.Restart != null && scan.Restart.Interval > 0)      //0 condition from JPEG §B.4.4
                 intervalCount = scan.Restart.Interval;
 
             //read the entropy-coded segments
