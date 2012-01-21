@@ -6,8 +6,6 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 using Bardez.Projects.DirectX.Direct2D;
@@ -16,17 +14,23 @@ using ExternalPixelEnums = Bardez.Projects.InfinityPlus1.FileFormats.External.Im
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Image;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Resize;
 using Bardez.Projects.InfinityPlus1.Output.Visual;
 
 namespace Bardez.Projects.InfinityPlus1.Tester
 {
+    /// <summary>Scratch Windows form to quickly test code</summary>
     public partial class Scratch : Form
     {
+        /// <summary>Default constructor</summary>
         public Scratch()
         {
             InitializeComponent();
         }
 
+        /// <summary>Form Load event handler</summary>
+        /// <param name="sender">Sending Object</param>
+        /// <param name="e">Event parameters</param>
         private void Scratch_Load(Object sender, EventArgs e)
         {
             try
@@ -34,7 +38,7 @@ namespace Bardez.Projects.InfinityPlus1.Tester
                 String bmpPath = ConfigurationManager.AppSettings["Test.JPEG.Path"];
                 JpegJfifInterchange jpeg;
                 using (FileStream fs = new FileStream(bmpPath, FileMode.Open, FileAccess.Read))
-                    jpeg = JpegJfifParser.ParseJpegFromStream(fs);
+                    jpeg = JpegJfifParser.ParseJpegFromStream(fs, new ResizeDelegateInteger(NearestNeighborIntegerSpace.NearestNeighborResampleInteger));
 
                 Application.DoEvents();
 
