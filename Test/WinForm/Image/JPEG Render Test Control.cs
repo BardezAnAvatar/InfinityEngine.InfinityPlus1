@@ -79,7 +79,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
                         //submit a bitap
                         JpegJfifInterchange jpeg;
                         using (FileStream fs = ReusableIO.OpenFile(path))
-                            jpeg = JpegJfifParser.ParseJpegFromStream(fs, new ResizeDelegateInteger(NearestNeighborIntegerSpace.NearestNeighborResampleInteger));
+                            jpeg = JpegJfifParser.ParseJpegFromStream(fs, new ResizeDelegateInteger(BilinearFloatSpace.BilinearResampleInteger));
 
                         jpeg.Decode();
 

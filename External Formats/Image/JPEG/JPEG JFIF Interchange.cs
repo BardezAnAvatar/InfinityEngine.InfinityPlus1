@@ -285,7 +285,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         {
             Int32 shiftSample = sample / JpegJfifInterchange.YCbCrShift;
 
-            if (shiftSample < 0)
+            if (shiftSample < Byte.MinValue)
                 shiftSample = Byte.MinValue;
             else if (shiftSample > Byte.MaxValue)
                 shiftSample = Byte.MaxValue;

@@ -64,22 +64,26 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             Int32[] sampleData = new Int32[this.Width * this.Height]; //instantiate a new data array
             Int32 xCur = 0, yCur = 0;       //sampleData index calculation
 
-            for (Int32 y = 0; y < this.ContiguousBlockCountVertical; ++y)
+            Int32 hBlockCount = this.ContiguousBlockCountHorizontal;    //store in a local variable, do not need to continually recompute
+            Int32 vBlockCount = this.ContiguousBlockCountVertical;
+            Int32 width = this.Width;
+
+            for (Int32 y = 0; y < vBlockCount; ++y)
                 for (Int32 blockScanline = 0; blockScanline < 64; blockScanline += 8)
                 {
                     if (yCur >= sampleData.Length)
                         break;
 
-                    for (Int32 x = 0; x < this.ContiguousBlockCountHorizontal; ++x)
-                        for (Int32 blockX = 0; (blockX < 8) && (xCur < this.Width); ++blockX)
+                    for (Int32 x = 0; x < hBlockCount; ++x)
+                        for (Int32 blockX = 0; (blockX < 8) && (xCur < width); ++blockX)
                         {
                             sampleData[yCur + xCur] = this.SampleData[x, y][blockScanline + blockX] + 128;
 
                             ++xCur;
-                            if (xCur == this.Width)
+                            if (xCur == width)
                             {
                                 xCur = 0;
-                                yCur += this.Width;
+                                yCur += width;
                                 goto NextScanLine;  //Curses! Need to break; twice, out of the X loop
                             }
                         }
