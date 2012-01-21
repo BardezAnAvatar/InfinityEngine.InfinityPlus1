@@ -88,7 +88,6 @@
     <Compile Include="Image\JPEG\Scan Header.cs" />
     <Compile Include="Image\JPEG\Scan.cs" />
     <Compile Include="Image\Pixels\Palette.cs" />
-    <Compile Include="Image\Pixels\Resize.cs" />
     <Compile Include="Image\Pixels\RGB Quad.cs" />
     <Compile Include="Image\Pixels\RGB Triplet.cs" />
     <Compile Include="Image\Pixels\Enums\PixelFormat.cs" />
@@ -97,6 +96,9 @@
     <Compile Include="Image\Pixels\Pixel Base.cs" />
     <Compile Include="Image\Pixels\Pixel Data.cs" />
     <Compile Include="Image\Pixels\YUV 444.cs" />
+    <Compile Include="Image\Resize\Bilinear Float Space.cs" />
+    <Compile Include="Image\Resize\Delegates.cs" />
+    <Compile Include="Image\Resize\Nearest Neighbor Integer Space.cs" />
     <Compile Include="RIFF\Component\ChunkType.cs" />
     <Compile Include="RIFF\Component\Riff Chunk Factory.cs" />
     <Compile Include="RIFF\Component\RIFF Chunk.cs" />

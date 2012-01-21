@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Resize;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Pixels;
 using Bardez.Projects.ReusableCode;
 
@@ -34,8 +35,25 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 
         /// <summary>Represents the component data of the interchange, compiled from scans</summary>
         public ComponentDataInteger[] ComponentData { get; set; }
+
+        public ResizeDelegateInteger ResizeDelegate { get; set; }
         #endregion
 
+
+        #region Construction
+        /// <summary>Default constructor</summary>
+        public JpegJfifInterchange()
+        {
+            this.ResizeDelegate = new ResizeDelegateInteger(NearestNeighborIntegerSpace.NearestNeighborResampleInteger);
+        }
+
+        /// <summary>Definition constructor</summary>
+        public JpegJfifInterchange(ResizeDelegateInteger function)
+        {
+            this.ResizeDelegate = function;
+        }
+        #endregion
+        
 
         #region Frame methods
         /// <summary>Gets a frame image from the pixel data already in place</summary>
@@ -55,9 +73,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         protected PixelData GetPixelData()
         {
             Byte[] data = this.MergeComponents();
-
             PixelData pd = new PixelData(data, Image.Enums.ScanLineOrder.TopDown, Pixels.Enums.PixelFormat.RGB_B8G8R8, this.Frame.ScanLines, this.Frame.Header.Width, 0, 0, 24);
-
             return pd;
         }
 
@@ -65,16 +81,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// <returns>An interwoven Byte array of pixel data</returns>
         protected Byte[] MergeComponents()
         {
-            ////sort by component number
-            //scanComponents.Sort((a, b) => a.Identifier.CompareTo(b.Identifier));
-
             //resample all components to output size
             List<Int32[]> scaledData = new List<Int32[]>();
             foreach (ComponentDataInteger component in this.ComponentData)
                 if (component != null)
                 {
                     Int32[] sampleData = component.GetSampleData();
-                    Int32[] resized = Resize.BilinearResampleInteger(sampleData, component.Height, component.Width, component.Height, component.Width, this.Frame.ScanLines, this.Frame.Header.Width);
+                    Int32[] resized = this.ResizeDelegate(sampleData, component.Height, component.Width, component.Height, component.Width, this.Frame.ScanLines, this.Frame.Header.Width);
                     scaledData.Add(resized);
                 }
 
@@ -212,9 +225,15 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             //reorder the coefficient blocks
             foreach (ScanComponentData component in scan.Components)
             {
+                //I need to make sure that the new array uses the fully padded component width, not just the possibly reset width
+                //HACK: These values should be persisted, really
+                FrameComponentParameter param = JpegParser.MatchScanComponent(component.Identifier, this.Frame.Header.Components);
+                Int32 horizPadding = component.GetContiguousBlockHorizontalCountPadded(param.HorizontalSamplingFactor);
+                Int32 vertPadding = component.GetContiguousBlockVerticalCountPadded(param.VerticalSamplingFactor);
+
                 //The way data comes in, 8x8 blocks are stored in a sampling zig-zag.
                 //See JPEG specification, §A.2.3.
-                Int32[,][] unzigged = new Int32[component.ContiguousBlockCountHorizontalFactorPadded, component.ContiguousBlockCountVerticalFactorPadded][];
+                Int32[,][] unzigged = new Int32[horizPadding, vertPadding][];
                 Int32 x = 0, y = 0;
 
                 for (Int32 blockIndex = 0; blockIndex < component.ContiguousBlockCountSamplingFactorPadded; blockIndex += component.McuDataSize)

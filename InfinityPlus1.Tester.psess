@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<VSPerformanceSession Version="1.00">
+  <Options>
+    <Solution>N:\Code\Infinity Engine\Infinity +1\Infinity + 1.sln</Solution>
+    <CollectionMethod>Sampling</CollectionMethod>
+    <AllocationMethod>None</AllocationMethod>
+    <LaunchRuntimeControl>true</LaunchRuntimeControl>
+    <AddReport>true</AddReport>
+    <ResourceBasedAnalysisSelected>false</ResourceBasedAnalysisSelected>
+    <ThreadBasedAnalysisSelected>false</ThreadBasedAnalysisSelected>
+    <UniqueReport>Timestamp</UniqueReport>
+    <SamplingMethod>Cycles</SamplingMethod>
+    <CycleCount>10000000</CycleCount>
+    <PageFaultCount>10</PageFaultCount>
+    <SysCallCount>10</SysCallCount>
+    <SamplingCounter Name="" ReloadValue="00000000000f4240" DisplayName="" />
+    <RelocateBinaries>false</RelocateBinaries>
+    <CollectOnHpcCluster>false</CollectOnHpcCluster>
+    <HPCSettings>
+      <NumberOfProcesses>0</NumberOfProcesses>
+      <TargetSelection>UnknownDisabled</TargetSelection>
+      <ProfileOnRank>0</ProfileOnRank>
+      <AdvancedProperties>
+        <Project>Tester</Project>
+        <CleanUp>true</CleanUp>
+        <MpiexecCommand>mpiexec.exe</MpiexecCommand>
+        <DeployCRT>true</DeployCRT>
+      </AdvancedProperties>
+    </HPCSettings>
+    <HardwareCounters EnableHWCounters="false" />
+    <EtwSettings />
+    <PdhSettings>
+      <PdhCountersEnabled>false</PdhCountersEnabled>
+      <PdhCountersRate>500</PdhCountersRate>
+      <PdhCounters>
+        <PdhCounter>\Memory\Pages/sec</PdhCounter>
+        <PdhCounter>\PhysicalDisk(_Total)\Avg. Disk Queue Length</PdhCounter>
+        <PdhCounter>\Processor(_Total)\% Processor Time</PdhCounter>
+      </PdhCounters>
+    </PdhSettings>
+  </Options>
+  <ExcludeSmallFuncs>true</ExcludeSmallFuncs>
+  <JScriptProfilingEnabled>false</JScriptProfilingEnabled>
+  <PreinstrumentEvent>
+    <InstrEventExclude>false</InstrEventExclude>
+  </PreinstrumentEvent>
+  <PostinstrumentEvent>
+    <InstrEventExclude>false</InstrEventExclude>
+  </PostinstrumentEvent>
+  <Binaries>
+    <ProjBinary>
+      <Path>N:\Code\Infinity Engine\Infinity +1\Tester\obj\Debug\InfinityPlus1.Tester.exe</Path>
+      <ArgumentTimestamp>01/01/0001 00:00:00</ArgumentTimestamp>
+      <Instrument>true</Instrument>
+      <Sample>true</Sample>
+      <ExternalWebsite>false</ExternalWebsite>
+      <InteractionProfilingEnabled>false</InteractionProfilingEnabled>
+      <IsLocalJavascript>false</IsLocalJavascript>
+      <LaunchProject>true</LaunchProject>
+      <OverrideProjectSettings>false</OverrideProjectSettings>
+      <LaunchMethod>Executable</LaunchMethod>
+      <ExecutablePath>N:\Code\Infinity Engine\Infinity +1\Tester\bin\Debug\InfinityPlus1.Tester.exe</ExecutablePath>
+      <StartupDirectory>N:\Code\Infinity Engine\Infinity +1\Tester\bin\Debug\</StartupDirectory>
+      <Arguments />
+      <NetAppHost>IIS</NetAppHost>
+      <NetBrowser>InternetExplorer</NetBrowser>
+      <ExcludeSmallFuncs>true</ExcludeSmallFuncs>
+      <JScriptProfilingEnabled>false</JScriptProfilingEnabled>
+      <PreinstrumentEvent>
+        <InstrEventExclude>false</InstrEventExclude>
+      </PreinstrumentEvent>
+      <PostinstrumentEvent>
+        <InstrEventExclude>false</InstrEventExclude>
+      </PostinstrumentEvent>
+      <ProjRef>{9BD4922B-BEC0-4140-8600-35571A479EB2}|Tester\Tester.csproj</ProjRef>
+      <ProjPath>N:\Code\Infinity Engine\Infinity +1\Tester\Tester.csproj</ProjPath>
+      <ProjName>Tester</ProjName>
+    </ProjBinary>
+  </Binaries>
+  <Reports>
+    <Report>
+      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120116.vsp</Path>
+    </Report>
+    <Report>
+      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120116(1).vsp</Path>
+    </Report>
+    <Report>
+      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120116(2).vsp</Path>
+    </Report>
+    <Report>
+      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120116(3).vsp</Path>
+    </Report>
+    <Report>
+      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120116(4).vsp</Path>
+    </Report>
+    <Report>
+      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120117.vsp</Path>
+    </Report>
+    <Report>
+      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120117(1).vsp</Path>
+    </Report>
+    <Report>
+      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120117(2).vsp</Path>
+    </Report>
+    <Report>
+      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120117(3).vsp</Path>
+    </Report>
+    <Report>
+      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120117(4).vsp</Path>
+    </Report>
+    <Report>
+      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120117(5).vsp</Path>
+    </Report>
+    <Report>
+      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120117(6).vsp</Path>
+    </Report>
+    <Report>
+      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120117(7).vsp</Path>
+    </Report>
+    <Report>
+      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120117(8).vsp</Path>
+    </Report>
+    <Report>
+      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120119.vsp</Path>
+    </Report>
+  </Reports>
+  <Launches>
+    <ProjBinary>
+      <Path>:PB:{9BD4922B-BEC0-4140-8600-35571A479EB2}|Tester\Tester.csproj</Path>
+    </ProjBinary>
+  </Launches>
+  <RuntimeMarks>
+    <MarkName>Mark One</MarkName>
+    <MarkName>Mark Two</MarkName>
+    <MarkName>Mark Three</MarkName>
+    <MarkName>Mark Four</MarkName>
+    <MarkName>Mark Five</MarkName>
+    <MarkName>Mark Six</MarkName>
+    <MarkName>Mark Seven</MarkName>
+    <MarkName>Mark Eight</MarkName>
+    <MarkName>Mark Nine</MarkName>
+    <MarkName>Mark Ten</MarkName>
+  </RuntimeMarks>
+</VSPerformanceSession>

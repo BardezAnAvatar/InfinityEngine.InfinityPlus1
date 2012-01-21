@@ -235,5 +235,30 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             this.AcCoder.DecodeSuccessiveProgressiveACs(existingBlock, ref halt, startSelector, endSelector, successiveApproximation);
         }
         #endregion
+
+
+        #region Helper methods
+        public Int32 GetContiguousBlockHorizontalCountPadded(Int32 padding)
+        {
+            Int32 hBlocks = this.ContiguousBlockCountHorizontal;
+
+            //must have height fit into a vertical muliple of VerticalSamplingFactor.
+            if (hBlocks % padding != 0)
+                hBlocks = ((hBlocks / padding) + 1) * padding;
+
+            return hBlocks;
+        }
+
+        public Int32 GetContiguousBlockVerticalCountPadded(Int32 padding)
+        {
+            //must have height fit into a vertical muliple of VerticalSamplingFactor.
+            Int32 vBlocks = this.ContiguousBlockCountVertical;
+
+            if (vBlocks % padding != 0)
+                vBlocks = ((vBlocks / padding) + 1) * padding;
+
+            return vBlocks;
+        }
+        #endregion
     }
 }

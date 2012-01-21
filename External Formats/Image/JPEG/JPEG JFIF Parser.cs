@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Resize;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
@@ -13,13 +14,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// <param name="input">Input stream to read from</param>
         /// <returns>A fully populated JPEG Interchange object</returns>
         /// <exception cref="System.ApplicationException">Thrown when there has been an error in the stream.</exception>
-        public static JpegJfifInterchange ParseJpegFromStream(Stream input)
+        public static JpegJfifInterchange ParseJpegFromStream(Stream input, ResizeDelegateInteger resizeDelegate)
         {
             UInt16 marker = JpegParser.ReadMarker(input);
             if (marker != JpegInterchangeMarkerConstants.StartOfImage)
                 throw new ApplicationException("File does not start with Start of Image marker.");
 
-            JpegJfifInterchange jpeg = new JpegJfifInterchange();
+            JpegJfifInterchange jpeg = new JpegJfifInterchange(resizeDelegate);
             JpegJfifParser.ReadFrame(jpeg, input);
 
             marker = JpegParser.ReadMarker(input);

@@ -22,8 +22,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                 {
                     Int32[] temp = new Int32[64];
                     Int32[] source = this.SourceData[x, y];
-                    for (Int32 sample = 0; sample < 64; ++sample)
-                        temp[ComponentDataInteger.UnZigZagReference[sample]] = source[sample] * qt.Elements[sample];
+
+                    if (source != null)
+                        for (Int32 sample = 0; sample < 64; ++sample)
+                            temp[ComponentDataInteger.UnZigZagReference[sample]] = source[sample] * qt.Elements[sample];
 
                     this.SampleData[x, y] = temp;
                 }

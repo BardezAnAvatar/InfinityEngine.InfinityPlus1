@@ -233,7 +233,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                 intervalCount = scan.Restart.Interval;
 
             //read the entropy-coded segments
-            JpegParser.ReadScanDecodeEntropySegments(jpeg, scan, intervalCount, frame.Header.UsesDCT, frame.Header.UsesProgressive, JpegParser.IsSuccessiveScan(frame, scan), input);
+            JpegParser.ReadScanDecodeEntropySegments(jpeg, scan, intervalCount, mcuCount, frame.Header.UsesDCT, frame.Header.UsesProgressive, JpegParser.IsSuccessiveScan(frame, scan), input);
             frame.Scans.Add(scan);
 
             //now that I have the scan read, copy it into the Frame's component data.
@@ -244,17 +244,19 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// <param name="jpeg">IJpegInterchange containing Component data to optionally reference in successive progressive scans</param>
         /// <param name="scan">Scan to add to</param>
         /// <param name="intervalCount">Entropy-coded segment interval</param>
+        /// <param name="mcuCount">Count of total MCUs to read</param>
         /// <param name="isDct">Flag indicating whether the coding process was DCT</param>
         /// <param name="isProgressive">Flag indicating whether the MCU will be for a progressive process</param>
         /// <param name="isSuccessive">Flag initcating whether the scan is a successive scan</param>
         /// <param name="input">Input stream to read from</param>
-        public static void ReadScanDecodeEntropySegments(IJpegInterchange jpeg, JpegScan scan, Int32 intervalCount, Boolean isDct, Boolean isProgressive, Boolean isSuccessive, Stream input)
+        public static void ReadScanDecodeEntropySegments(IJpegInterchange jpeg, JpegScan scan, Int32 intervalCount, Int32 mcuCount, Boolean isDct, Boolean isProgressive, Boolean isSuccessive, Stream input)
         {
             Boolean halt = false;   //shall we stop reading the scan?
             Int32[] mcuIndecies = new Int32[5];     //keep track of which MCU we are reading. This is used to successive approximation.
+            Int32 mcusRead = 0;
 
             //prime and read
-            JpegParser.ReadEntropyCodedSegment(jpeg, scan, intervalCount, mcuIndecies, isDct, isProgressive, isSuccessive, ref halt);
+            JpegParser.ReadEntropyCodedSegment(jpeg, scan, intervalCount, mcuIndecies, ref mcusRead, mcuCount, isDct, isProgressive, isSuccessive, ref halt);
 
             while (!halt)
             {
@@ -264,7 +266,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                     break;
 
                 //read ECS
-                JpegParser.ReadEntropyCodedSegment(jpeg, scan, intervalCount, mcuIndecies, isDct, isProgressive, isSuccessive, ref halt);
+                JpegParser.ReadEntropyCodedSegment(jpeg, scan, intervalCount, mcuIndecies, ref mcusRead, mcuCount, isDct, isProgressive, isSuccessive, ref halt);
             }
         }
 
@@ -273,6 +275,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// <param name="scan">Scan to add the data to</param>
         /// <param name="intervalCount">count of MCUs in the entropy-coded segment</param>
         /// <param name="mcuIndecies">Array of index of the current MCU being read</param>
+        /// <param name="mcusRead">Count of MCUs read so far</param>
+        /// <param name="mcusRead">Count of total MCUs to read</param>
         /// <param name="isDct">Flag indicating whether the MCU will be for a DCT process</param>
         /// <param name="isProgressive">Flag indicating whether the MCU will be for a progressive process</param>
         /// <param name="isSuccessive">Flag initcating whether the scan is a successive scan</param>
@@ -280,7 +284,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         ///     Reference flag set to false that, if set in this method, will percolate up the stack,
         ///     returning work done so far, but ultimately terminating the scan
         /// </param>
-        public static void ReadEntropyCodedSegment(IJpegInterchange jpeg, JpegScan scan, Int32 intervalCount, IList<Int32> mcuIndecies, Boolean isDct, Boolean isProgressive, Boolean isSuccessive, ref Boolean halt)
+        public static void ReadEntropyCodedSegment(IJpegInterchange jpeg, JpegScan scan, Int32 intervalCount, IList<Int32> mcuIndecies, ref Int32 mcusRead, Int32 mcuCount, Boolean isDct, Boolean isProgressive, Boolean isSuccessive, ref Boolean halt)
         {
             EntropyCodedSegment ecs = new EntropyCodedSegment();
 
@@ -288,7 +292,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             JpegParser.ResetScanComponentDecoderValues(scan);
 
             //read an entropy-coded segment
-            for (Int32 intervalIndex = 0; intervalIndex < intervalCount; ++intervalIndex)
+            for (Int32 intervalIndex = 0; (intervalIndex < intervalCount) && (mcusRead < mcuCount); ++intervalIndex)
             {
                 //read an MCU
                 MimimumCodedUnit mcu = JpegParser.ReadMinimumCodedUnit(jpeg, mcuIndecies, isDct, isProgressive, isSuccessive, scan, ref halt);
@@ -301,6 +305,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
                     scan.EntropySegments.Add(ecs);
                     return;
                 }
+
+                ++mcusRead;
             }
 
             //add segment
@@ -480,7 +486,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// <summary>Gets the maximum sampling factor density of the frame (horizontal sampling factor times vertical sampling factor)</summary>
         /// <param name="componentIdentifier">ID to match</param>
         /// <param name="frameComponents">Frame components list</param>
-        private static FrameComponentParameter MatchScanComponent(Int32 componentIdentifier, List<FrameComponentParameter> frameComponents)
+        public static FrameComponentParameter MatchScanComponent(Int32 componentIdentifier, IList<FrameComponentParameter> frameComponents)
         {
             FrameComponentParameter component = null;
 
