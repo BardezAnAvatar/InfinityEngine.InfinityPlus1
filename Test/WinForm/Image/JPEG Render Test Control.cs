@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Image;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Resize;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
@@ -78,7 +79,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
                         //submit a bitap
                         JpegJfifInterchange jpeg;
                         using (FileStream fs = ReusableIO.OpenFile(path))
-                            jpeg = JpegJfifParser.ParseJpegFromStream(fs);
+                            jpeg = JpegJfifParser.ParseJpegFromStream(fs, new ResizeDelegateInteger(NearestNeighborIntegerSpace.NearestNeighborResampleInteger));
 
                         jpeg.Decode();
 
