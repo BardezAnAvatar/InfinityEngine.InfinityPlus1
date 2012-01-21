@@ -177,27 +177,24 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics.D
             out Int32 o0, out Int32 o1, out Int32 o2, out Int32 o3, out Int32 o4, out Int32 o5, out Int32 o6, out Int32 o7,
             Int32 in0, Int32 in1, Int32 in2, Int32 in3, Int32 in4, Int32 in5, Int32 in6, Int32 in7)
         {
-            //temporary 'registers' to reorder the input
-            Int32 reg0 = in0, reg1 = in4, reg2 = in2, reg3 = in6, reg4 = in7, reg5 = in3, reg6 = in5, reg7 = in1;
-
             /* phase 1, as some call it */
-            o7 = (reg7 * Constants.RootHalfI) / Constants.RootHalfShift;
-            o4 = (reg4 * Constants.RootHalfI) / Constants.RootHalfShift;
+            o7 = (in1 * Constants.RootHalfI) / Constants.RootHalfShift;
+            o4 = (in7 * Constants.RootHalfI) / Constants.RootHalfShift;
             LoefflerDiscreteCosineTransformationInteger.ButterflyInteger(out o7, out o4, o7, o4); //the butterfly right after is easy to miss in the Bukhari, Kuzmanov and Vassiliadis paper / PDF
 
             //butterfly
-            LoefflerDiscreteCosineTransformationInteger.ButterflyInteger(out o0, out o1, reg0, reg1);
+            LoefflerDiscreteCosineTransformationInteger.ButterflyInteger(out o0, out o1, in0, in4);
 
             //rotate 2, 6
-            LoefflerDiscreteCosineTransformationInteger.RotateInteger(out o2, out o3, reg2, reg3, Constants.RotateC6I, Constants.RotateS6I);
+            LoefflerDiscreteCosineTransformationInteger.RotateInteger(out o2, out o3, in2, in6, Constants.RotateC6I, Constants.RotateS6I);
             /* end phase 1 */
 
 
             /* 'phase' 2 */
             LoefflerDiscreteCosineTransformationInteger.ButterflyInteger(out o0, out o3, o0, o3);
             LoefflerDiscreteCosineTransformationInteger.ButterflyInteger(out o1, out o2, o1, o2);
-            LoefflerDiscreteCosineTransformationInteger.ButterflyInteger(out o4, out o6, o4, reg6);
-            LoefflerDiscreteCosineTransformationInteger.ButterflyInteger(out o7, out o5, o7, reg5);
+            LoefflerDiscreteCosineTransformationInteger.ButterflyInteger(out o4, out o6, o4, in5);
+            LoefflerDiscreteCosineTransformationInteger.ButterflyInteger(out o7, out o5, o7, in3);
             /* end 'phase' 2 */
 
 
