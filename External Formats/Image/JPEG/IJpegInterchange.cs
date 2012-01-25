@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 {
@@ -15,6 +16,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         void MergeScanData(JpegFrame frame, JpegScan scan);
 
         /// <summary>Represents the component data of the interchange, compiled from scans</summary>
-        ComponentDataInteger[] ComponentData { get; set; }
+        Dictionary<Int32, ComponentDataInteger> ComponentData { get; set; }
     }
 }

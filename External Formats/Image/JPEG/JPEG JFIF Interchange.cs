@@ -34,7 +34,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         public JpegFrame Frame { get; set; }
 
         /// <summary>Represents the component data of the interchange, compiled from scans</summary>
-        public ComponentDataInteger[] ComponentData { get; set; }
+        public Dictionary<Int32, ComponentDataInteger> ComponentData { get; set; }
 
         public ResizeDelegateInteger ResizeDelegate { get; set; }
         #endregion
@@ -83,7 +83,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         {
             //resample all components to output size
             List<Int32[]> scaledData = new List<Int32[]>();
-            foreach (ComponentDataInteger component in this.ComponentData)
+            foreach (ComponentDataInteger component in this.ComponentData.Values)
                 if (component != null)
                 {
                     Int32[] sampleData = component.GetSampleData();
@@ -198,9 +198,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         public void MergeFirstOrderMcuData(JpegScan scan)
         {
             //prepare a location for the arrays
-            List<Int32[]>[] components = new List<Int32[]>[5];  //4 maximum, what is the problem with a few null references?
+            Dictionary<Int32, List<Int32[]>> components = new Dictionary<Int32, List<Int32[]>>();  //4 maximum, what is the problem with a few null references?
             foreach (ScanComponentData component in scan.Components)
-                components[component.Identifier] = new List<Int32[]>();
+                components.Add(component.Identifier, new List<Int32[]>());
 
 
             //source data should not exist in any measure, extract it from these MCUs
@@ -297,32 +297,32 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         public void PopulateComponents()
         {
             //set up component data
-            this.ComponentData = new ComponentDataInteger[this.Frame.Header.ComponentNumbers + 1];
-            for (Int32 index = 1; index < this.Frame.Header.ComponentNumbers + 1; ++index)
-                this.ComponentData[index] = new ComponentDataInteger();
+            this.ComponentData = new Dictionary<Int32, ComponentDataInteger>();
 
             Int32 hMax = this.Frame.Header.MaxHorizontalSamplingFactor, vMax = this.Frame.Header.MaxVerticalSamplingFactor;
 
-            for (Int32 componentIndex = 1; componentIndex < this.Frame.Header.ComponentNumbers + 1; ++componentIndex)
+            foreach (FrameComponentParameter fcp in this.Frame.Header.Components)
             {
-                FrameComponentParameter fcp = this.MatchComponentPrameter(componentIndex);
-
                 if (fcp != null)
                 {
-                    this.ComponentData[fcp.Identifier].Identifier = fcp.Identifier;
-                    this.ComponentData[fcp.Identifier].HorizontalSamplingFactor = fcp.HorizontalSamplingFactor;
-                    this.ComponentData[fcp.Identifier].VerticalSamplingFactor = fcp.VerticalSamplingFactor;
-                    this.ComponentData[fcp.Identifier].QuantizationTableIndex = fcp.QuantizationTableIndex;
+                    ComponentDataInteger tempComponent = new ComponentDataInteger();
+
+                    tempComponent.Identifier = fcp.Identifier;
+                    tempComponent.HorizontalSamplingFactor = fcp.HorizontalSamplingFactor;
+                    tempComponent.VerticalSamplingFactor = fcp.VerticalSamplingFactor;
+                    tempComponent.QuantizationTableIndex = fcp.QuantizationTableIndex;
 
                     //width; JPEG spec. §A.1.1
                     Decimal factor = Convert.ToDecimal(fcp.HorizontalSamplingFactor) / Convert.ToDecimal(hMax);
                     factor = Convert.ToDecimal(this.Frame.Header.Width) * factor;
-                    this.ComponentData[fcp.Identifier].Width = Convert.ToInt32(Math.Ceiling(factor));
+                    tempComponent.Width = Convert.ToInt32(Math.Ceiling(factor));
 
                     //height; JPEG spec. §A.1.1
                     factor = Convert.ToDecimal(fcp.VerticalSamplingFactor) / Convert.ToDecimal(vMax);
                     factor = Convert.ToDecimal(this.Frame.Header.Height) * factor;
-                    this.ComponentData[fcp.Identifier].Height = Convert.ToInt32(Math.Ceiling(factor));
+                    tempComponent.Height = Convert.ToInt32(Math.Ceiling(factor));
+
+                    this.ComponentData.Add(fcp.Identifier, tempComponent);
                 }
             }
         }
@@ -378,7 +378,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// <summary>Performs primary decoding on component data</summary>
         public void Decode()
         {
-            foreach (ComponentDataInteger component in this.ComponentData)
+            foreach (ComponentDataInteger component in this.ComponentData.Values)
                 if (component != null)
                     component.DecodeData(this.Frame.QuantizationTables[component.QuantizationTableIndex], 8);
         }

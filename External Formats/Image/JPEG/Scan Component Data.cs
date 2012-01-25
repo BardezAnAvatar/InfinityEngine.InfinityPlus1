@@ -125,7 +125,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// <param name="scanParam">Scan component parameter data</param>
         /// <param name="frameParam">Frame component parameter data</param>
         /// <param name="frameHeader">Frame header for original width, sampling factors, etc.</param>
-        public void PopulateFields(ScanComponentParameter scanParam, FrameComponentParameter frameParam, JpegFrameHeader frameHeader)
+        public void PopulateFields(ScanComponentParameter scanParam, FrameComponentParameter frameParam, JpegFrameHeader frameHeader, Int32 componentIndex)
         {
             Int32 hMax = frameHeader.MaxHorizontalSamplingFactor, vMax = frameHeader.MaxVerticalSamplingFactor;
             this.Identifier = scanParam.Identifier;

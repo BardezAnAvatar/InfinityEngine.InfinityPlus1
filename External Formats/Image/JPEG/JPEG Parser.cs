@@ -125,7 +125,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         /// </param>
         /// <param name="zeroRunEndOfBand">Count of zero-run End of Band data units/MCUs to append to the data stream</param>
         /// <returns>The MinumumCodedUnit read</returns>
-        public static MimimumCodedUnit ReadMinimumCodedUnit(IJpegInterchange jpeg, IList<Int32> mcuIndecies, Boolean usesDCT, Boolean isProgressive, Boolean isSuccessive, JpegScan scan, ref Boolean halt)
+        public static MimimumCodedUnit ReadMinimumCodedUnit(IJpegInterchange jpeg, Dictionary<Int32, Int32> mcuIndecies, Boolean usesDCT, Boolean isProgressive, Boolean isSuccessive, JpegScan scan, ref Boolean halt)
         {
             MimimumCodedUnit mcu = null;
 
@@ -203,10 +203,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             scan.Header = header;
 
             //set up the entropy-decoding byte buffers per channel/component
-            foreach (ScanComponentParameter scanParam in header.Components)
+            for (Int32 index = 0; index < header.Components.Count; ++index)
             {
                 ScanComponentData componentData = new ScanComponentData();
-                componentData.PopulateFields(scanParam, JpegParser.MatchScanComponent(scanParam.Identifier, frame.Header.Components), frame.Header);
+                componentData.PopulateFields(header.Components[index], JpegParser.MatchScanComponent(header.Components[index].Identifier, frame.Header.Components), frame.Header, index);
                 scan.Components.Add(componentData);
             }
 
@@ -252,7 +252,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         public static void ReadScanDecodeEntropySegments(IJpegInterchange jpeg, JpegScan scan, Int32 intervalCount, Int32 mcuCount, Boolean isDct, Boolean isProgressive, Boolean isSuccessive, Stream input)
         {
             Boolean halt = false;   //shall we stop reading the scan?
-            Int32[] mcuIndecies = new Int32[5];     //keep track of which MCU we are reading. This is used to successive approximation.
+            Dictionary<Int32, Int32> mcuIndecies = new Dictionary<Int32, Int32>();     //keep track of which MCU we are reading. This is used to successive approximation.
+            //populate the dictionary
+            foreach (ScanComponentParameter scp in scan.Header.Components)
+                mcuIndecies.Add(scp.Identifier, 0);
+
             Int32 mcusRead = 0;
 
             //prime and read
@@ -284,7 +288,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         ///     Reference flag set to false that, if set in this method, will percolate up the stack,
         ///     returning work done so far, but ultimately terminating the scan
         /// </param>
-        public static void ReadEntropyCodedSegment(IJpegInterchange jpeg, JpegScan scan, Int32 intervalCount, IList<Int32> mcuIndecies, ref Int32 mcusRead, Int32 mcuCount, Boolean isDct, Boolean isProgressive, Boolean isSuccessive, ref Boolean halt)
+        public static void ReadEntropyCodedSegment(IJpegInterchange jpeg, JpegScan scan, Int32 intervalCount, Dictionary<Int32, Int32> mcuIndecies, ref Int32 mcusRead, Int32 mcuCount, Boolean isDct, Boolean isProgressive, Boolean isSuccessive, ref Boolean halt)
         {
             EntropyCodedSegment ecs = new EntropyCodedSegment();
 
