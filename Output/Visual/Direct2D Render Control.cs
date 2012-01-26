@@ -258,6 +258,22 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
             result = bmpNew.EndDraw();
         }
 
+        /// <summary>Discards the current buffer and replaces it with a blank one.</summary>
+        protected void DiscardCurrentBuffer()
+        {
+            BitmapRenderTarget bmpNew;
+
+            // create a bitmap rendering target
+            ResultCode result = this.ctrlRenderTarget.CreateCompatibleRenderTarget(out bmpNew);
+            
+            bmpNew.BeginDraw();     //tell Direct2D to start the draw
+            this.FillBufferRenderTarget(bmpNew);    //flood fill
+            bmpNew.EndDraw();       //tell Direct2D that a paint operation is ending
+
+            //replace the old buffer
+            this.bmpRengerTarget = bmpNew;
+        }
+
         /// <summary>Fills the buffer render target with the background color</summary>
         /// <param name="renderTarget">Bitmap render target to fill</param>
         protected void FillBufferRenderTarget(BitmapRenderTarget renderTarget)
@@ -297,6 +313,8 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         {
             if (key > -1)
                 this.DrawBitmapToBuffer(Direct2dResourceManager.Instance.GetBitmapResource(key));
+            else
+                this.DiscardCurrentBuffer();
 
             this.currentFrameKey = key;
         }
