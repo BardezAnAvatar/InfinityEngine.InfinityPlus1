@@ -91,6 +91,7 @@
     <Compile Include="Infinity\ChitinKey\Key BIF Entry.cs" />
     <Compile Include="Infinity\ChitinKey\Key Header.cs" />
     <Compile Include="Infinity\ChitinKey\Key Enums.cs" />
+    <Compile Include="Infinity\Common\Color Entry.cs" />
     <Compile Include="Infinity\Common\Enums\ItemSpell Ability Damage Type.cs" />
     <Compile Include="Infinity\Common\Enums\ItemSpell Ability Depletion Behavior.cs" />
     <Compile Include="Infinity\Common\Enums\ItemSpell Ability Location.cs" />
@@ -181,6 +182,9 @@
     <Compile Include="Infinity\Item\Item2\Item Header 2.cs" />
     <Compile Include="Infinity\Item\Item1\Item Header 1.cs" />
     <Compile Include="Infinity\Item\Item Header.cs" />
+    <Compile Include="Infinity\MapOfScreen\MOS Header.cs" />
+    <Compile Include="Infinity\Common\Palette Entry.cs" />
+    <Compile Include="Infinity\MapOfScreen\Map Of Screen 1.cs" />
     <Compile Include="Infinity\Music\Playlist Entry.cs" />
     <Compile Include="Infinity\Music\Playlist.cs" />
     <Compile Include="Infinity\Store\Components\Available Spell.cs" />

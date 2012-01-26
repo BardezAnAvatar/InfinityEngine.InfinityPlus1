@@ -1,0 +1,226 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common;
+using Bardez.Projects.ReusableCode;
+
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen
+{
+    /// <summary>Represents an uncompressed MOS V1 file</summary>
+    public class MapOfScreen1 : IInfinityFormat
+    {
+        #region Constants
+        /// <summary>Represents the base dimension of a block</summary>
+        private const Int32 blockDimension = 8;
+        #endregion
+
+
+        #region Fields
+        /// <summary>Header of this MOS file</summary>
+        public MosHeader Header { get; set; }
+
+        /// <summary>List of Palettes in this MOS file</summary>
+        public List<PaletteEntry> Palettes { get; set; }
+
+        /// <summary>List of offsets within the MOS file to target tile data</summary>
+        public List<UInt32> TileOffsets { get; set; }
+
+        /// <summary>Two-dimensional array of tile palette index entries</summary>
+        public Byte[,][] TileData { get; set; }
+        #endregion
+
+
+        #region Properties
+        /// <summary>Exposes the size of the Palette entries and the data offset entries.</summary>
+        public Int32 PaletteSize
+        {
+            get { return (PaletteEntry.PaletteSize * ColorEntry.StructSize) + (this.Header.BlockCount * 4); }
+        }
+        #endregion
+
+
+        #region Construction
+        /// <summary>Instantiates reference types</summary>
+        public void Initialize()
+        {
+            this.Header = new MosHeader();
+            this.Palettes = new List<PaletteEntry>();
+            this.TileOffsets = new List<UInt32>();
+            //cannot know the needed size of TileData until the header is read
+        }
+
+        /// <summary>Initializes the two-dimensional array of paletted pixel data for the MOS file. Requires the header to have been read.</summary>
+        public void InitializeTileData()
+        {
+            this.TileData = new Byte[this.Header.Columns, this.Header.Rows][];
+        }
+        #endregion
+
+
+        #region IO method implemetations
+        /// <summary>This public method reads file format from the input stream. Reads the whole structure.</summary>
+        /// <param name="input">Input stream to read from</param>
+        public void Read(Stream input)
+        {
+            this.ReadBody(input);
+        }
+
+        /// <summary>This public method reads file format data structure from the input stream.</summary>
+        /// <param name="input">Stream to read from.</param>
+        /// <param name="fullRead">Boolean indicating whether to read the full stream or just everything after the identifying signature (and possibly version)</param>
+        public void Read(Stream input, Boolean fullRead)
+        {
+            if (fullRead)
+                this.Read(input);
+            else
+            {
+                this.Header = new MosHeader();
+                this.Header.Read(input, false);
+            }
+        }
+
+        /// <summary>This public method reads file format data structure from the input stream, after the signature has already been read.</summary>
+        /// <param name="input">Stream to read from</param>
+        public void ReadBody(Stream input)
+        {
+            this.Initialize();
+
+            //read the header
+            this.Header.Read(input);
+
+            //read palettes
+            ReusableIO.SeekIfAble(input, this.Header.PaletteOffset);   //seek to palettes
+            for (Int32 paletteIndex = 0; paletteIndex < this.Header.BlockCount; ++paletteIndex)
+            {
+                PaletteEntry pe = new PaletteEntry();
+                pe.Read(input);
+                this.Palettes.Add(pe);
+            }
+
+            //immediately follows palettes
+            Byte[] tileOffsets = ReusableIO.BinaryRead(input, 4 * this.Header.BlockCount); //do a single large read
+            for (Int32 tileIndex = 0; tileIndex < this.Header.BlockCount; ++tileIndex)
+                this.TileOffsets.Add(ReusableIO.ReadUInt32FromArray(tileOffsets, tileIndex * 4));
+
+            //read the tile data
+            this.InitializeTileData();  //instantiate the tile data
+            for (Int32 y = 0; y < this.Header.Rows; ++y)
+            {
+                Int32 height = this.SampleHeight(y);    //usually a block is 8x8 data, but, can be 1x1, depending on width and height.
+
+                for (Int32 x = 0; x < this.Header.Columns; ++x)
+                {
+                    Int32 width = this.SampleWidth(y);  //usually a block is 8x8 data, but, can be 1x1, depending on width and height.
+
+                    Int32 tileIndex = (y * this.Header.Columns) + x;
+                    ReusableIO.SeekIfAble(input, this.TileOffsets[tileIndex]);  //seek to the tile data
+                    Byte[] data = ReusableIO.BinaryRead(input, width * height);
+                    this.TileData[x, y] = data;
+                }
+            }
+        }
+
+        /// <summary>This public method writes the file format to the output stream.</summary>
+        /// <param name="output">Stream to write to</param>
+        public void Write(Stream output)
+        {
+            throw new NotImplementedException("Absurd level of complexity to avoid overwriting. Poop.");
+        }
+        #endregion
+
+        
+        #region Data Integrity
+        /// <summary>Maintains mimimal data integrity by not lying to the output data file.</summary>
+        protected void MaintainMinimalDataIntegrity()
+        {
+            if (this.Overlaps())
+            {
+                //reassign the offsets
+            }
+        }
+
+        /// <summary>Determines if any of the offset data sections would overlap one another.</summary>
+        /// <returns>A Boolean indicating whether or not any of them overlap</returns>
+        protected Boolean Overlaps()
+        {
+            Boolean overlaps = true;
+
+            overlaps = this.OverlapsDataOffsets(0, MosHeader.StructSize)
+            || this.OverlapsDataOffsets(this.Header.PaletteOffset, this.PaletteSize)
+            || IntExtension.Between(this.Header.PaletteOffset, this.PaletteSize, 0, MosHeader.StructSize)
+            || this.OverlapsDataOffsetsAny();
+
+            return overlaps;
+        }
+
+        /// <summary>Determines if provided offset and length overlap any data offset</summary>
+        /// <param name="start">Offset to test</param>
+        /// <param name="size">Size of data to test</param>
+        /// <returns>True if any of the offsets overlap, false if not</returns>
+        protected Boolean OverlapsDataOffsets(Int64 start, Int64 size)
+        {
+            Boolean overlaps = false;
+
+            for (Int32 i = 0; i < this.TileOffsets.Count && !overlaps; ++i)
+            {
+                Int32 compareSize = this.BlockSize(i);
+                overlaps |= IntExtension.Between(start, size, this.TileOffsets[i], this.TileOffsets[i] + compareSize);
+            }
+
+            return overlaps;
+        }
+
+        /// <summary>Determines if any data offsets overlap one another</summary>
+        /// <returns>True if any of the offsets overlap, false if not</returns>
+        protected Boolean OverlapsDataOffsetsAny()
+        {
+            Boolean overlaps = false;
+
+            for (Int32 i = 0; i < this.TileOffsets.Count && !overlaps; ++i)
+            {
+                Int32 sourceSize = this.BlockSize(i);
+
+                for (Int32 j = 0; j < this.TileOffsets.Count && !overlaps; ++j)
+                    if (i != j)
+                    {
+                        Int32 compareSize = this.BlockSize(j);
+                        overlaps |= IntExtension.Between(this.TileOffsets[j], compareSize, this.TileOffsets[i], this.TileOffsets[i] + sourceSize);
+                    }
+            }
+            return overlaps;
+        }
+        #endregion
+
+
+        #region Helper Methods
+        /// <summary>Gets the count of horizontal samples in one row, given a block number</summary>
+        /// <param name="block">Block number to identify the width of</param>
+        /// <returns>The count of horizontal row samples in the block</returns>
+        protected Int32 SampleWidth(Int32 block)
+        {
+            Int32 x = block % this.Header.Columns;
+            return (x == (this.Header.Columns - 1)) ? this.Header.Width % MapOfScreen1.blockDimension : MapOfScreen1.blockDimension;
+        }
+
+        /// <summary>Gets the count of vertical samples in one column, given a block number</summary>
+        /// <param name="block">Block number to identify the height of</param>
+        /// <returns>The count of vertical column samples in the block</returns>
+        protected Int32 SampleHeight(Int32 block)
+        {
+            Int32 y = block / this.Header.Rows;
+            return (y == (this.Header.Rows - 1)) ? this.Header.Height % MapOfScreen1.blockDimension : MapOfScreen1.blockDimension;
+        }
+
+        /// <summary>Gets the count of pixels in a block</summary>
+        /// <param name="block">Block number to identify the width of</param>
+        /// <returns>The number of pixels in the block</returns>
+        protected Int32 BlockSize(Int32 block)
+        {
+            return this.SampleHeight(block) * this.SampleWidth(block);
+        }
+        #endregion
+    }
+}
