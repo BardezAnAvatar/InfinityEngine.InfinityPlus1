@@ -53,9 +53,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
             this.ResizeDelegate = function;
         }
         #endregion
-        
 
-        #region Frame methods
+
+        #region IImage methods
         /// <summary>Gets a frame image from the pixel data already in place</summary>
         /// <returns>A frame containing the pixel data</returns>
         public Frame GetFrame()
@@ -67,7 +67,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
 
             return frame;
         }
+        #endregion
 
+
+        #region Frame methods
         /// <summary>Generates a Pixel data object containing the pixel data for this JPEG interchange</summary>
         /// <returns>A PixelData instance</returns>
         protected PixelData GetPixelData()
