@@ -42,7 +42,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         {
             try
             {
-                this.txtbxMessage.Text = this.lstvwLog.Items[this.lstvwLog.SelectedIndices[0]].SubItems[2].Text;
+                if (this.lstvwLog.SelectedIndices.Count > 0)
+                    this.txtbxMessage.Text = this.lstvwLog.Items[this.lstvwLog.SelectedIndices[0]].SubItems[2].Text;
             }
             catch { }
         }

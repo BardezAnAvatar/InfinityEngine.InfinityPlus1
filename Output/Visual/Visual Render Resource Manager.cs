@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Bardez.Projects.InfinityPlus1.FileFormats.External.Image;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 
 namespace Bardez.Projects.InfinityPlus1.Output.Visual
 {

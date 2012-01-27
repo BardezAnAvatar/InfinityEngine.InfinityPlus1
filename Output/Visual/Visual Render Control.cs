@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 
-using Bardez.Projects.InfinityPlus1.FileFormats.External.Image;
-using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Pixels;
-
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 
 namespace Bardez.Projects.InfinityPlus1.Output.Visual
 {

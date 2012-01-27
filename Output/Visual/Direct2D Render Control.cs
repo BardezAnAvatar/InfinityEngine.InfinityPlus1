@@ -3,10 +3,10 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using Direct2D = Bardez.Projects.DirectX.Direct2D;
-using ExternalPixelEnums = Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Pixels.Enums;
+using ExternalPixelEnums = Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
 using Bardez.Projects.DirectX.Direct2D;
-using Bardez.Projects.InfinityPlus1.FileFormats.External.Image;
-using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
 using Bardez.Projects.Win32;
 
 namespace Bardez.Projects.InfinityPlus1.Output.Visual

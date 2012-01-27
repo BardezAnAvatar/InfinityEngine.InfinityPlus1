@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 using Bardez.Projects.DirectX.Direct2D;
 using Direct2D = Bardez.Projects.DirectX.Direct2D;
-using ExternalPixelEnums = Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Pixels.Enums;
-using Bardez.Projects.InfinityPlus1.FileFormats.External.Image;
-using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Enums;
+using ExternalPixelEnums = Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG;
-using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Resize;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Resize;
 using Bardez.Projects.InfinityPlus1.Output.Visual;
 
 namespace Bardez.Projects.InfinityPlus1.Tester

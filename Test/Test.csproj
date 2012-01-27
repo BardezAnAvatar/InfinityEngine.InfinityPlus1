@@ -81,6 +81,7 @@
     <Compile Include="Harnesses\Item\Item Header 1_1 Test.cs" />
     <Compile Include="Harnesses\Item\Item Header 2 Test.cs" />
     <Compile Include="Harnesses\ITester.cs" />
+    <Compile Include="Harnesses\MapOfScreen\MOS Test.cs" />
     <Compile Include="Harnesses\Music\Playlist Test.cs" />
     <Compile Include="Harnesses\Output\DirectX\XAudio2 Render Test.cs" />
     <Compile Include="Harnesses\Output\DirectX\XAudio2 Test.cs" />
@@ -237,6 +238,9 @@
       <DependentUpon>LoggingControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WinForm\MOS\MOS Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WinForm\MUS\Music Playlist Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -311,6 +315,10 @@
     <ProjectReference Include="..\Infinity Formats\Infinity Formats.csproj">
       <Project>{3EE5137B-C08F-4337-B089-E20A502C2A0C}</Project>
       <Name>Infinity Formats</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Media Base\Media Base.csproj">
+      <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
+      <Name>Media Base</Name>
     </ProjectReference>
     <ProjectReference Include="..\Native Code\DirectX\XAudio2\XAudio2.vcxproj">
       <Project>{FE898E65-DAFF-435D-9A72-4C9D3306636A}</Project>
