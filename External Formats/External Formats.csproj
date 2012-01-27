@@ -87,18 +87,6 @@
     <Compile Include="Image\JPEG\Scan Component Parameter.cs" />
     <Compile Include="Image\JPEG\Scan Header.cs" />
     <Compile Include="Image\JPEG\Scan.cs" />
-    <Compile Include="Image\Pixels\Palette.cs" />
-    <Compile Include="Image\Pixels\RGB Quad.cs" />
-    <Compile Include="Image\Pixels\RGB Triplet.cs" />
-    <Compile Include="Image\Pixels\Enums\PixelFormat.cs" />
-    <Compile Include="Image\Enums\Scan Line Order.cs" />
-    <Compile Include="Image\Frame.cs" />
-    <Compile Include="Image\Pixels\Pixel Base.cs" />
-    <Compile Include="Image\Pixels\Pixel Data.cs" />
-    <Compile Include="Image\Pixels\YUV 444.cs" />
-    <Compile Include="Image\Resize\Bilinear Float Space.cs" />
-    <Compile Include="Image\Resize\Delegates.cs" />
-    <Compile Include="Image\Resize\Nearest Neighbor Integer Space.cs" />
     <Compile Include="RIFF\Component\ChunkType.cs" />
     <Compile Include="RIFF\Component\Riff Chunk Factory.cs" />
     <Compile Include="RIFF\Component\RIFF Chunk.cs" />
@@ -124,6 +112,10 @@
     <ProjectReference Include="..\Configuration Handler\Configuration Handler.csproj">
       <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
       <Name>Configuration Handler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Media Base\Media Base.csproj">
+      <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
+      <Name>Media Base</Name>
     </ProjectReference>
     <ProjectReference Include="..\ReusableCode\ReusableCode.csproj">
       <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>

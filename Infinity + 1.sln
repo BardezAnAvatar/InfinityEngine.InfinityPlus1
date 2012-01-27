@@ -52,9 +52,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infinity+ 1 Formats", "Infi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit Testing", "Unit Testing\Unit Testing.csproj", "{61DCF1C6-109C-4886-A10A-FEE95DE901CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Media Base", "Media Base\Media Base.csproj", "{31CA90A7-1628-493B-A99B-8B9F6899158F}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 16
+		SccNumberOfProjects = 17
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://bardezserver:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -118,6 +120,10 @@ Global
 		SccProjectTopLevelParentUniqueName15 = Infinity\u0020+\u00201.sln
 		SccProjectName15 = Unit\u0020Testing
 		SccLocalPath15 = Unit\u0020Testing
+		SccProjectUniqueName16 = Media\u0020Base\\Media\u0020Base.csproj
+		SccProjectTopLevelParentUniqueName16 = Infinity\u0020+\u00201.sln
+		SccProjectName16 = Media\u0020Base
+		SccLocalPath16 = Media\u0020Base
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Infinity + 1.vsmdi
@@ -313,6 +319,18 @@ Global
 		{61DCF1C6-109C-4886-A10A-FEE95DE901CA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{61DCF1C6-109C-4886-A10A-FEE95DE901CA}.Release|Win32.ActiveCfg = Release|Any CPU
 		{61DCF1C6-109C-4886-A10A-FEE95DE901CA}.Release|x86.ActiveCfg = Release|Any CPU
+		{31CA90A7-1628-493B-A99B-8B9F6899158F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31CA90A7-1628-493B-A99B-8B9F6899158F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31CA90A7-1628-493B-A99B-8B9F6899158F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{31CA90A7-1628-493B-A99B-8B9F6899158F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{31CA90A7-1628-493B-A99B-8B9F6899158F}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{31CA90A7-1628-493B-A99B-8B9F6899158F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{31CA90A7-1628-493B-A99B-8B9F6899158F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31CA90A7-1628-493B-A99B-8B9F6899158F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31CA90A7-1628-493B-A99B-8B9F6899158F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{31CA90A7-1628-493B-A99B-8B9F6899158F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{31CA90A7-1628-493B-A99B-8B9F6899158F}.Release|Win32.ActiveCfg = Release|Any CPU
+		{31CA90A7-1628-493B-A99B-8B9F6899158F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -333,5 +351,6 @@ Global
 		{4D2A899B-3674-4288-81A8-C8F11636C2DA} = {B48DC58F-AF29-427D-B363-0C7DFD067380}
 		{FA2C0C9A-6897-41DD-8A32-D29A96B555E6} = {B48DC58F-AF29-427D-B363-0C7DFD067380}
 		{F2085177-9356-43EE-9744-85AA2FFCACEE} = {B48DC58F-AF29-427D-B363-0C7DFD067380}
+		{31CA90A7-1628-493B-A99B-8B9F6899158F} = {B48DC58F-AF29-427D-B363-0C7DFD067380}
 	EndGlobalSection
 EndGlobal

@@ -48,6 +48,10 @@
       <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
       <Name>Configuration Handler</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Media Base\Media Base.csproj">
+      <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
+      <Name>Media Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReusableCode\ReusableCode.csproj">
       <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
       <Name>ReusableCode</Name>
