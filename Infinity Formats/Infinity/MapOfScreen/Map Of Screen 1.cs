@@ -127,7 +127,45 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen
         /// <param name="output">Stream to write to</param>
         public void Write(Stream output)
         {
-            throw new NotImplementedException("Absurd level of complexity to avoid overwriting. Poop.");
+            this.MaintainMinimalDataIntegrity();    //Ensure that the data does not corrupt itself
+
+            this.Header.Write(output);      //write header
+            this.WritePalettes(output);     //write the block palettes
+            this.WriteTileOffsets(output);  //write the tile offsets
+            this.WriteTileData(output);     //write the indecies to palettes
+        }
+
+        /// <summary>This public method writes the block palette to the output stream.</summary>
+        /// <param name="output">Stream to write to</param>
+        protected void WritePalettes(Stream output)
+        {
+            //seek
+            ReusableIO.SeekIfAble(output, this.Header.PaletteOffset);
+
+            foreach (PaletteEntry palette in this.Palettes)
+                palette.Write(output);
+        }
+
+        /// <summary>This public method writes the tile date offsets to the output stream.</summary>
+        /// <param name="output">Stream to write to</param>
+        protected void WriteTileOffsets(Stream output)
+        {
+            foreach (UInt32 offset in this.TileOffsets)
+                ReusableIO.WriteUInt32ToStream(offset, output);
+        }
+
+        /// <summary>This public method writes the tile binary data palette indecies to the output stream.</summary>
+        /// <param name="output">Stream to write to</param>
+        protected void WriteTileData(Stream output)
+        {
+            for (Int32 tile = 0; tile < this.TileOffsets.Count; ++tile)
+            {
+                ReusableIO.SeekIfAble(output, this.TileOffsets[tile]);
+
+                Byte[] data = this.TileData[tile % this.Header.Columns, tile / this.Header.Columns];
+                if (data != null)
+                    output.Write(data, 0, data.Length);
+            }
         }
         #endregion
 
@@ -139,6 +177,14 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen
             if (this.Overlaps())
             {
                 //reassign the offsets
+                this.Header.PaletteOffset = MosHeader.StructSize;
+                
+                UInt32 tileOffset = Convert.ToUInt32(this.Header.PaletteOffset + this.PaletteSize);    //start position
+                for (Int32 tile = 0; tile < this.TileOffsets.Count; ++tile)
+                {
+                    this.TileOffsets[tile] = tileOffset;
+                    tileOffset += Convert.ToUInt32(BlockSize(tile));
+                }
             }
         }
 
@@ -148,10 +194,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen
         {
             Boolean overlaps = true;
 
-            overlaps = this.OverlapsDataOffsets(0, MosHeader.StructSize)
-            || this.OverlapsDataOffsets(this.Header.PaletteOffset, this.PaletteSize)
-            || IntExtension.Between(this.Header.PaletteOffset, this.PaletteSize, 0, MosHeader.StructSize)
-            || this.OverlapsDataOffsetsAny();
+            overlaps = this.OverlapsDataOffsets(0, MosHeader.StructSize)    //header and data
+            || this.OverlapsDataOffsets(this.Header.PaletteOffset, this.PaletteSize) //palette and data
+            || IntExtension.Between(this.Header.PaletteOffset, this.PaletteSize, 0, MosHeader.StructSize) //palette and header
+            || this.OverlapsDataOffsetsAny();   //data and data
 
             return overlaps;
         }
@@ -220,6 +266,48 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen
         protected Int32 BlockSize(Int32 block)
         {
             return this.SampleHeight(block) * this.SampleWidth(block);
+        }
+        #endregion
+
+
+        #region Frame methods
+        /// <summary>Gets the pixel data array from the tiles' data</summary>
+        /// <returns>An BGRA array of pixels</returns>
+        protected Byte[] GetPixels()
+        {
+            //instantiate the return array
+            Byte[] pixels = new Byte[4 * this.Header.Width * this.Header.Height];
+
+            Int32 tileNumber = 0, pixelDataIndex = 0;
+            for (Int32 y = 0; y < this.Header.Rows; ++y)    //loop through vertical blocks
+            {
+                Int32 height = this.SampleHeight(tileNumber);
+                for (Int32 line = 0; line < height; ++line) //block-level
+                {
+                    tileNumber = y * this.Header.Columns;   //reset, so as to keep the value current
+
+                    for (Int32 x = 0; x < this.Header.Columns; ++x) //loop through horizontal blocks
+                    {
+                        Int32 width = this.SampleWidth(tileNumber);
+                        Int32 dataBase = height * width;
+
+                        for (Int32 horz = 0; horz < width; ++horz)  //loop through the values in this block-row (0-[1 to 8 max])
+                        {
+                            ColorEntry color = this.Palettes[tileNumber].Colors[this.TileData[x, y][dataBase + horz]];
+                            pixels[pixelDataIndex] = color.Blue;
+                            pixels[pixelDataIndex + 1] = color.Green;
+                            pixels[pixelDataIndex + 2] = color.Red;
+                            pixels[pixelDataIndex + 3] = Byte.MinValue;
+
+                            pixelDataIndex += 4;
+                        }
+
+                        ++tileNumber;
+                    }
+                }
+            }
+
+            return pixels;
         }
         #endregion
     }
