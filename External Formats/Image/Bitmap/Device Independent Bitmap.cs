@@ -39,12 +39,15 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap
         #endregion
 
 
+        #region Construction
         /// <summary>Instantiates reference types</summary>
         public virtual void Initialize()
         {
             this.FileHeader = new BitmapFileHeader();
             this.BitmapInfo = new BitmapInfoWrapper();
         }
+        #endregion
+
 
         #region Methods
         /// <summary>Gets the size, in bytes, of a logical row of pixels based off of the bits per pixel</summary>
@@ -378,6 +381,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap
         }
         #endregion
 
+
         #region IO Methods
         /// <summary>This public method reads file format from the input stream. Reads the whole structure.</summary>
         /// <param name="input">Input stream to read from</param>
@@ -400,6 +404,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap
         }
         #endregion
 
+
+        #region IImage methods
         /// <summary>Gets a frame image from the pixel data already in place</summary>
         /// <returns>A frame containing the pixel data</returns>
         public Frame GetFrame()
@@ -408,5 +414,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap
             frame.Pixels = this.PixelData;
             return frame;
         }
+        #endregion
     }
 }
