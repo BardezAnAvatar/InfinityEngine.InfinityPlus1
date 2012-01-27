@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics;
-using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Resize;
-using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Pixels;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Resize;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
@@ -16,7 +19,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
     ///     Does not work with JPEG/EXIF!
     ///     Kind of works with JPEG/JFIF/EXIF.
     /// </remarks>
-    public class JpegJfifInterchange : IJpegInterchange
+    public class JpegJfifInterchange : IJpegInterchange, IImage
     {
         #region Constants
         /// <summary>Constant to pre-multiply the values by, then divide by, to approximate the decimal multiplcation.</summary>
@@ -76,7 +79,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         protected PixelData GetPixelData()
         {
             Byte[] data = this.MergeComponents();
-            PixelData pd = new PixelData(data, Image.Enums.ScanLineOrder.TopDown, Pixels.Enums.PixelFormat.RGB_B8G8R8, this.Frame.ScanLines, this.Frame.Header.Width, 0, 0, 24);
+            PixelData pd = new PixelData(data, ScanLineOrder.TopDown, PixelFormat.RGB_B8G8R8, this.Frame.ScanLines, this.Frame.Header.Width, 0, 0, 24);
             return pd;
         }
 

@@ -5,12 +5,16 @@ using System.Text;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen
 {
     /// <summary>Represents an uncompressed MOS V1 file</summary>
-    public class MapOfScreen1 : IInfinityFormat
+    public class MapOfScreen1 : IInfinityFormat, IImage
     {
         #region Constants
         /// <summary>Represents the base dimension of a block</summary>
@@ -270,7 +274,25 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen
         #endregion
 
 
-        #region Frame methods
+        #region IImage methods
+        /// <summary>Gets a frame image from the pixel data already in place</summary>
+        /// <returns>A frame containing the pixel data</returns>
+        public Frame GetFrame()
+        {
+            Frame frame = new Frame();
+            frame.Pixels = this.GetPixelData();
+            return frame;
+        }
+
+        /// <summary>Builds a pixel data object from the MOS file</summary>
+        /// <returns>A new pixeldata object</returns>
+        protected PixelData GetPixelData()
+        {
+            Byte[] data = this.GetPixels();
+            PixelData pd = new PixelData(data, ScanLineOrder.TopDown, PixelFormat.RGBA_B8G8R8A8, null, this.Header.Height, this.Header.Width, 0, 0, 32);
+            return pd;
+        }
+
         /// <summary>Gets the pixel data array from the tiles' data</summary>
         /// <returns>An BGRA array of pixels</returns>
         protected Byte[] GetPixels()

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 
-using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap.Enums;
-using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Pixels;
-using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Pixels.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Resize;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap
@@ -16,7 +18,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap
     ///     For storage related data, see: http://msdn.microsoft.com/en-us/library/dd183391%28v=vs.85%29.aspx
     ///     For additional tehcnical info, see: http://en.wikipedia.org/wiki/BMP_file_format
     /// </remarks>
-    public class DeviceIndependentBitmap
+    public class DeviceIndependentBitmap : IImage
     {
         #region Properties
         /// <summary>contains information about the type, size, and layout of a DIB.</summary>
