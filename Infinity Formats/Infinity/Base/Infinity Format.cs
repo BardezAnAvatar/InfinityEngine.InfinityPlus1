@@ -51,7 +51,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base
             this.ReadBody(input);
         }
 
-        /// <summary>This public method reads file format from the output stream.</summary>
+        /// <summary>This public method reads file format from the input stream.</summary>
         /// <param name="input">Input stream to read from</param>
         /// <param name="fullRead">Boolean indicating whether to read the full stream or just everything after the identifying signature (and possibly version)</param>
         public virtual void Read(Stream input, Boolean fullRead)

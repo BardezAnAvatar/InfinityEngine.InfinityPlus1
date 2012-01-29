@@ -223,6 +223,10 @@
     <Compile Include="Infinity\TextLocationKey\TextLocationKey.cs" />
     <Compile Include="Infinity\TextLocationKey\TLK Enums.cs" />
     <Compile Include="Infinity\TextLocationKey\TLK Header.cs" />
+    <Compile Include="Infinity\TileSet\Tis1\Tile Set 1 Manager.cs" />
+    <Compile Include="Infinity\TileSet\Tis1\Tile Set 1.cs" />
+    <Compile Include="Infinity\TileSet\Tile Set Info.cs" />
+    <Compile Include="Infinity\TileSet\Tis1\Tile.cs" />
     <Compile Include="Infinity\TileSet\Tis1\Tis1Header.cs" />
     <Compile Include="Infinity\TwoDimensionalArray\2DA1\TwoDimensionalArray1.cs" />
     <Compile Include="Infinity\TwoDimensionalArray\Xor Encryption.cs" />
