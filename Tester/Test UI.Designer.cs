@@ -157,6 +157,12 @@
             this.bitmapRenderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.Image.BitmapRenderTestControl();
             this.tabpageImagesJpeg = new System.Windows.Forms.TabPage();
             this.jpegRenderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.Image.JpegRenderTestControl();
+            this.tabpageImagesMos = new System.Windows.Forms.TabPage();
+            this.tabctrlImagesMos = new System.Windows.Forms.TabControl();
+            this.tabpageImagesMosTest1 = new System.Windows.Forms.TabPage();
+            this.mosTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.DLG.MosTestControl();
+            this.tabpageImagesMosRender1 = new System.Windows.Forms.TabPage();
+            this.mosRenderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.Image.MosRenderTestControl();
             this.tabpageOutput = new System.Windows.Forms.TabPage();
             this.tabctrlOutput = new System.Windows.Forms.TabControl();
             this.tabpageXAudio2 = new System.Windows.Forms.TabPage();
@@ -171,11 +177,6 @@
             this.direct2DRenderTestControl1 = new Bardez.Projects.InfinityPlus1.Test.WinForm.Output.Direct2D.Direct2DRenderTestControl();
             this.tabpageReusableCode = new System.Windows.Forms.TabPage();
             this.bitStreamTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ReusableCode.BitStreamTestControl();
-            this.tabpageImagesMos = new System.Windows.Forms.TabPage();
-            this.tabctrlImagesMos = new System.Windows.Forms.TabControl();
-            this.tabpageImagesMosTest1 = new System.Windows.Forms.TabPage();
-            this.tabpageImagesMosRender1 = new System.Windows.Forms.TabPage();
-            this.mosTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.DLG.MosTestControl();
             this.tabctrlMain.SuspendLayout();
             this.tabpage2DA.SuspendLayout();
             this.tabpageAcm.SuspendLayout();
@@ -252,6 +253,10 @@
             this.tabctrlImages.SuspendLayout();
             this.tabpageImagesBitmap.SuspendLayout();
             this.tabpageImagesJpeg.SuspendLayout();
+            this.tabpageImagesMos.SuspendLayout();
+            this.tabctrlImagesMos.SuspendLayout();
+            this.tabpageImagesMosTest1.SuspendLayout();
+            this.tabpageImagesMosRender1.SuspendLayout();
             this.tabpageOutput.SuspendLayout();
             this.tabctrlOutput.SuspendLayout();
             this.tabpageXAudio2.SuspendLayout();
@@ -262,9 +267,6 @@
             this.tabctrlDirect2D.SuspendLayout();
             this.tabpageRenderTest.SuspendLayout();
             this.tabpageReusableCode.SuspendLayout();
-            this.tabpageImagesMos.SuspendLayout();
-            this.tabctrlImagesMos.SuspendLayout();
-            this.tabpageImagesMosTest1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabctrlMain
@@ -374,7 +376,7 @@
             this.acmHeaderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.acmHeaderTestControl.Location = new System.Drawing.Point(3, 3);
             this.acmHeaderTestControl.Name = "acmHeaderTestControl";
-            this.acmHeaderTestControl.Size = new System.Drawing.Size(807, 418);
+            this.acmHeaderTestControl.Size = new System.Drawing.Size(896, 418);
             this.acmHeaderTestControl.TabIndex = 0;
             // 
             // tabpageAcmFile
@@ -393,7 +395,7 @@
             this.acmFileTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.acmFileTestControl.Location = new System.Drawing.Point(3, 3);
             this.acmFileTestControl.Name = "acmFileTestControl";
-            this.acmFileTestControl.Size = new System.Drawing.Size(807, 418);
+            this.acmFileTestControl.Size = new System.Drawing.Size(896, 418);
             this.acmFileTestControl.TabIndex = 0;
             // 
             // tabpageWavc
@@ -1529,7 +1531,7 @@
             this.tabctrlImages.Location = new System.Drawing.Point(0, 0);
             this.tabctrlImages.Name = "tabctrlImages";
             this.tabctrlImages.SelectedIndex = 0;
-            this.tabctrlImages.Size = new System.Drawing.Size(916, 456);
+            this.tabctrlImages.Size = new System.Drawing.Size(192, 74);
             this.tabctrlImages.TabIndex = 0;
             // 
             // tabpageImagesBitmap
@@ -1539,7 +1541,7 @@
             this.tabpageImagesBitmap.Location = new System.Drawing.Point(4, 22);
             this.tabpageImagesBitmap.Name = "tabpageImagesBitmap";
             this.tabpageImagesBitmap.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpageImagesBitmap.Size = new System.Drawing.Size(908, 430);
+            this.tabpageImagesBitmap.Size = new System.Drawing.Size(184, 48);
             this.tabpageImagesBitmap.TabIndex = 0;
             this.tabpageImagesBitmap.Text = "BMP";
             // 
@@ -1548,7 +1550,7 @@
             this.bitmapRenderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bitmapRenderTestControl.Location = new System.Drawing.Point(3, 3);
             this.bitmapRenderTestControl.Name = "bitmapRenderTestControl";
-            this.bitmapRenderTestControl.Size = new System.Drawing.Size(902, 424);
+            this.bitmapRenderTestControl.Size = new System.Drawing.Size(178, 42);
             this.bitmapRenderTestControl.TabIndex = 0;
             // 
             // tabpageImagesJpeg
@@ -1558,7 +1560,7 @@
             this.tabpageImagesJpeg.Location = new System.Drawing.Point(4, 22);
             this.tabpageImagesJpeg.Name = "tabpageImagesJpeg";
             this.tabpageImagesJpeg.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpageImagesJpeg.Size = new System.Drawing.Size(908, 430);
+            this.tabpageImagesJpeg.Size = new System.Drawing.Size(184, 48);
             this.tabpageImagesJpeg.TabIndex = 1;
             this.tabpageImagesJpeg.Text = "JPEG";
             // 
@@ -1567,8 +1569,67 @@
             this.jpegRenderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.jpegRenderTestControl.Location = new System.Drawing.Point(3, 3);
             this.jpegRenderTestControl.Name = "jpegRenderTestControl";
-            this.jpegRenderTestControl.Size = new System.Drawing.Size(902, 424);
+            this.jpegRenderTestControl.Size = new System.Drawing.Size(186, 68);
             this.jpegRenderTestControl.TabIndex = 0;
+            // 
+            // tabpageImagesMos
+            // 
+            this.tabpageImagesMos.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageImagesMos.Controls.Add(this.tabctrlImagesMos);
+            this.tabpageImagesMos.Location = new System.Drawing.Point(4, 22);
+            this.tabpageImagesMos.Name = "tabpageImagesMos";
+            this.tabpageImagesMos.Size = new System.Drawing.Size(184, 48);
+            this.tabpageImagesMos.TabIndex = 2;
+            this.tabpageImagesMos.Text = "MOS";
+            // 
+            // tabctrlImagesMos
+            // 
+            this.tabctrlImagesMos.Controls.Add(this.tabpageImagesMosTest1);
+            this.tabctrlImagesMos.Controls.Add(this.tabpageImagesMosRender1);
+            this.tabctrlImagesMos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabctrlImagesMos.Location = new System.Drawing.Point(0, 0);
+            this.tabctrlImagesMos.Name = "tabctrlImagesMos";
+            this.tabctrlImagesMos.SelectedIndex = 0;
+            this.tabctrlImagesMos.Size = new System.Drawing.Size(192, 74);
+            this.tabctrlImagesMos.TabIndex = 0;
+            // 
+            // tabpageImagesMosTest1
+            // 
+            this.tabpageImagesMosTest1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageImagesMosTest1.Controls.Add(this.mosTestControl);
+            this.tabpageImagesMosTest1.Location = new System.Drawing.Point(4, 22);
+            this.tabpageImagesMosTest1.Name = "tabpageImagesMosTest1";
+            this.tabpageImagesMosTest1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageImagesMosTest1.Size = new System.Drawing.Size(184, 48);
+            this.tabpageImagesMosTest1.TabIndex = 0;
+            this.tabpageImagesMosTest1.Text = "MOS Test";
+            // 
+            // mosTestControl
+            // 
+            this.mosTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mosTestControl.Location = new System.Drawing.Point(3, 3);
+            this.mosTestControl.Name = "mosTestControl";
+            this.mosTestControl.Size = new System.Drawing.Size(178, 42);
+            this.mosTestControl.TabIndex = 0;
+            // 
+            // tabpageImagesMosRender1
+            // 
+            this.tabpageImagesMosRender1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageImagesMosRender1.Controls.Add(this.mosRenderTestControl);
+            this.tabpageImagesMosRender1.Location = new System.Drawing.Point(4, 22);
+            this.tabpageImagesMosRender1.Name = "tabpageImagesMosRender1";
+            this.tabpageImagesMosRender1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageImagesMosRender1.Size = new System.Drawing.Size(184, 48);
+            this.tabpageImagesMosRender1.TabIndex = 1;
+            this.tabpageImagesMosRender1.Text = "MOS Render";
+            // 
+            // mosRenderTestControl
+            // 
+            this.mosRenderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mosRenderTestControl.Location = new System.Drawing.Point(3, 3);
+            this.mosRenderTestControl.Name = "mosRenderTestControl";
+            this.mosRenderTestControl.Size = new System.Drawing.Size(894, 398);
+            this.mosRenderTestControl.TabIndex = 0;
             // 
             // tabpageOutput
             // 
@@ -1710,56 +1771,6 @@
             this.bitStreamTestControl.Size = new System.Drawing.Size(186, 68);
             this.bitStreamTestControl.TabIndex = 0;
             // 
-            // tabpageImagesMos
-            // 
-            this.tabpageImagesMos.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageImagesMos.Controls.Add(this.tabctrlImagesMos);
-            this.tabpageImagesMos.Location = new System.Drawing.Point(4, 22);
-            this.tabpageImagesMos.Name = "tabpageImagesMos";
-            this.tabpageImagesMos.Size = new System.Drawing.Size(908, 430);
-            this.tabpageImagesMos.TabIndex = 2;
-            this.tabpageImagesMos.Text = "MOS";
-            // 
-            // tabctrlImagesMos
-            // 
-            this.tabctrlImagesMos.Controls.Add(this.tabpageImagesMosTest1);
-            this.tabctrlImagesMos.Controls.Add(this.tabpageImagesMosRender1);
-            this.tabctrlImagesMos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabctrlImagesMos.Location = new System.Drawing.Point(0, 0);
-            this.tabctrlImagesMos.Name = "tabctrlImagesMos";
-            this.tabctrlImagesMos.SelectedIndex = 0;
-            this.tabctrlImagesMos.Size = new System.Drawing.Size(908, 430);
-            this.tabctrlImagesMos.TabIndex = 0;
-            // 
-            // tabpageImagesMosTest1
-            // 
-            this.tabpageImagesMosTest1.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageImagesMosTest1.Controls.Add(this.mosTestControl);
-            this.tabpageImagesMosTest1.Location = new System.Drawing.Point(4, 22);
-            this.tabpageImagesMosTest1.Name = "tabpageImagesMosTest1";
-            this.tabpageImagesMosTest1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpageImagesMosTest1.Size = new System.Drawing.Size(900, 404);
-            this.tabpageImagesMosTest1.TabIndex = 0;
-            this.tabpageImagesMosTest1.Text = "MOS Test";
-            // 
-            // tabpageImagesMosRender1
-            // 
-            this.tabpageImagesMosRender1.BackColor = System.Drawing.SystemColors.Control;
-            this.tabpageImagesMosRender1.Location = new System.Drawing.Point(4, 22);
-            this.tabpageImagesMosRender1.Name = "tabpageImagesMosRender1";
-            this.tabpageImagesMosRender1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpageImagesMosRender1.Size = new System.Drawing.Size(900, 404);
-            this.tabpageImagesMosRender1.TabIndex = 1;
-            this.tabpageImagesMosRender1.Text = "MOS Render";
-            // 
-            // mosTestControl
-            // 
-            this.mosTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mosTestControl.Location = new System.Drawing.Point(3, 3);
-            this.mosTestControl.Name = "mosTestControl";
-            this.mosTestControl.Size = new System.Drawing.Size(894, 398);
-            this.mosTestControl.TabIndex = 0;
-            // 
             // TestUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1845,6 +1856,10 @@
             this.tabctrlImages.ResumeLayout(false);
             this.tabpageImagesBitmap.ResumeLayout(false);
             this.tabpageImagesJpeg.ResumeLayout(false);
+            this.tabpageImagesMos.ResumeLayout(false);
+            this.tabctrlImagesMos.ResumeLayout(false);
+            this.tabpageImagesMosTest1.ResumeLayout(false);
+            this.tabpageImagesMosRender1.ResumeLayout(false);
             this.tabpageOutput.ResumeLayout(false);
             this.tabctrlOutput.ResumeLayout(false);
             this.tabpageXAudio2.ResumeLayout(false);
@@ -1855,9 +1870,6 @@
             this.tabctrlDirect2D.ResumeLayout(false);
             this.tabpageRenderTest.ResumeLayout(false);
             this.tabpageReusableCode.ResumeLayout(false);
-            this.tabpageImagesMos.ResumeLayout(false);
-            this.tabctrlImagesMos.ResumeLayout(false);
-            this.tabpageImagesMosTest1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2012,5 +2024,6 @@
         private System.Windows.Forms.TabPage tabpageImagesMosTest1;
         private Test.WinForm.DLG.MosTestControl mosTestControl;
         private System.Windows.Forms.TabPage tabpageImagesMosRender1;
+        private Test.WinForm.Image.MosRenderTestControl mosRenderTestControl;
     }
 }

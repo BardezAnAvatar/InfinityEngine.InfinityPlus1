@@ -5,7 +5,7 @@ using System.Threading;
 using System.Windows.Forms;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Resize;
 using Bardez.Projects.InfinityPlus1.Test.WinForm;
@@ -14,28 +14,28 @@ using Bardez.Projects.ReusableCode;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
 {
     /// <summary>Does primitive testing on the Direct2D render target, loading a list of bitmaps selectable for display</summary>
-    public partial class JpegRenderTestControl : UserControl
+    public partial class MosRenderTestControl : UserControl
     {
         #region Fields
         /// <summary>Object reference to lock on for the User Interface</summary>
         private Object interfaceLock;
 
         /// <summary>Constant key to look up in app.config</summary>
-        protected const String configKey = "Test.JPEG.Path";
+        protected const String configKey = "Test.MOS1.Path";
 
-        /// <summary>Collection of decoded JPEG paths and frame references</summary>
-        protected List<ImageReference> decodedJpegs { get; set; }
+        /// <summary>Collection of decoded image paths and frame references</summary>
+        protected List<ImageReference> imageList { get; set; }
 
-        /// <summary>Object reference to lock on for multithreaded decodeding of JPEGs</summary>
-        private Object jpegLock;
+        /// <summary>Object reference to lock on for multithreaded decoding of images</summary>
+        private Object mosCollectionLock;
         #endregion
 
         /// <summary>Default constructor</summary>
-        public JpegRenderTestControl()
+        public MosRenderTestControl()
         {
             InitializeComponent();
             this.interfaceLock = new Object();
-            this.jpegLock = new Object();
+            this.mosCollectionLock = new Object();
         }
 
         /// <summary>Click event handler for the Initialize button. Loads a list of displayable bitmaps from the config file.</summary>
@@ -46,7 +46,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
             lock (this.interfaceLock)
             {
                 if (this.lstboxImages.Items.Count < 1)
-                    ThreadPool.QueueUserWorkItem(new WaitCallback(this.LaunchJpegDecoding));
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(this.LaunchImageDecoding));
             }
         }
 
@@ -79,19 +79,19 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
             }
         }
 
-        /// <summary>Method that launches the decoding of the JPEG from the config file</summary>
+        /// <summary>Method that launches the decoding of the image from the config file</summary>
         /// <param name="stateInfo">WaitCallback state parameter</param>
-        protected void LaunchJpegDecoding(Object stateInfo)
+        protected void LaunchImageDecoding(Object stateInfo)
         {
             DateTime start = DateTime.Now, end;    //debg variables
 
             //load paths from the app.config
-            List<String> paths = ConfigurationHandlerMulti.GetSettingValues(JpegRenderTestControl.configKey);
-            this.decodedJpegs = new List<ImageReference>();
+            List<String> paths = ConfigurationHandlerMulti.GetSettingValues(MosRenderTestControl.configKey);
+            this.imageList = new List<ImageReference>();
 
             //spool up the strings
             foreach (String path in paths)
-                ThreadPool.QueueUserWorkItem(new WaitCallback(this.DecodeSingleJpeg), path);
+                ThreadPool.QueueUserWorkItem(new WaitCallback(this.DecodeSingleImage), path);
 
             //lock on the threads
             while (true)
@@ -100,8 +100,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
 
                 Boolean finished = false;
 
-                lock (this.jpegLock)
-                    finished = (this.decodedJpegs.Count == paths.Count);
+                lock (this.mosCollectionLock)
+                    finished = (this.imageList.Count == paths.Count);
 
                 if (finished)
                     break;
@@ -110,31 +110,29 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
             end = DateTime.Now;
             TimeSpan decodeTime = end - start;
 
-            //sort the jpegs
-            lock (this.jpegLock)    //lock, just to be safe
-                this.decodedJpegs.Sort(ImageReference.Compare);    //now sort, then add to the UI list
+            //sort the images
+            lock (this.mosCollectionLock)    //lock, just to be safe
+                this.imageList.Sort(ImageReference.Compare);    //now sort, then add to the UI list
 
             //load them into the UI
-            this.LoadDecodedJpegItems();
+            this.LoadDecodedImages();
         }
 
-        /// <summary>Method to decode a single JPEG file, in a multi-threaded environment</summary>
+        /// <summary>Method to decode a single image file, in a multi-threaded environment</summary>
         /// <param name="filePath">String of a filepath, casted as an Object for use by ThreadPool</param>
-        protected void DecodeSingleJpeg(Object filePath)
+        protected void DecodeSingleImage(Object filePath)
         {
             if (filePath is String)
             {
                 String path = filePath as String;
 
-                //read the JPEG
-                JpegJfifInterchange jpeg;
+                //read the image
+                MapOfScreen1 mos = new MapOfScreen1();
                 using (FileStream fs = ReusableIO.OpenFile(path))
-                    jpeg = JpegJfifParser.ParseJpegFromStream(fs, new ResizeDelegateInteger(BilinearFloatSpace.BilinearResampleInteger));
+                    mos.Read(fs);
 
-                //decode the JPEG, get its frame data
-                jpeg.Decode();
-                Frame frame = jpeg.GetFrame();
-                //dispose the JPEG container?
+                //decode the image, get its frame data
+                Frame frame = mos.GetFrame();
 
                 //submit a bitap
                 Int32 key;
@@ -142,20 +140,20 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
                     key = this.direct2dRenderControl.AddFrameResource(frame);
 
                 //add it to the collection
-                lock (this.jpegLock)
-                    this.decodedJpegs.Add(new ImageReference(path, key));
+                lock (this.mosCollectionLock)
+                    this.imageList.Add(new ImageReference(path, key));
             }
         }
 
         /// <summary>Abstract method to load harness items</summary>
-        protected virtual void LoadDecodedJpegItems()
+        protected virtual void LoadDecodedImages()
         {
             if (this.lstboxImages.InvokeRequired) //check if an invoke is required, call on UI thead
-                this.lstboxImages.Invoke(new VoidInvoke(this.LoadDecodedJpegItems));
+                this.lstboxImages.Invoke(new VoidInvoke(this.LoadDecodedImages));
             else    //good on existing thread
             {
-                lock (this.jpegLock)
-                    foreach (ImageReference reference in this.decodedJpegs)
+                lock (this.mosCollectionLock)
+                    foreach (ImageReference reference in this.imageList)
                         this.lstboxImages.Items.Add(reference);
             }
         }

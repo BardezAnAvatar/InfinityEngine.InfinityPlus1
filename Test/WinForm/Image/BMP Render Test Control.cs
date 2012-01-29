@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Image;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap;
+using Bardez.Projects.InfinityPlus1.Test.WinForm;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
@@ -13,39 +14,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
     /// <summary>Does primitive testing on the Direct2D render target, loading a list of bitmaps selectable for display</summary>
     public partial class BitmapRenderTestControl : UserControl
     {
-        /// <summary>Local class used for the ListBox control.</summary>
-        protected class BitmapReference
-        {
-            #region Fields
-            /// <summary>Exposes the path to the bitmap file</summary>
-            public String BitmapPath { get; set; }
-
-            /// <summary>Represents the unique key to the bitmap in device memory.</summary>
-            public Int32 RenderKey { get; set; }
-            #endregion
-
-            #region Construction
-            /// <summary>Default constructor</summary>
-            public BitmapReference() { }
-
-            /// <summary>Default constructor</summary>
-            public BitmapReference(String path, Int32 key)
-            {
-                this.BitmapPath = path;
-                this.RenderKey = key;
-            }
-            #endregion
-
-            #region Overridden Methods
-            /// <summary>Overrides the ToString() method, returning the file path.</summary>
-            /// <returns>BitmapPath</returns>
-            public override String ToString()
-            {
-                return this.BitmapPath;
-            }
-            #endregion
-        }
-
         #region Fields
         /// <summary>Object reference to lock on for the User Interface</summary>
         private Object interfaceLock;
@@ -81,7 +49,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
                             bitmap.Read(fs);
 
                         Int32 key = this.direct2dRenderControl.AddFrameResource(bitmap.GetFrame());
-                        this.lstboxImages.Items.Add(new BitmapReference(path, key));
+                        this.lstboxImages.Items.Add(new ImageReference(path, key));
                     }
                 }
             }
@@ -106,11 +74,11 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
         {
             lock (this.interfaceLock)
             {
-                BitmapReference bmpRef = this.lstboxImages.SelectedItem as BitmapReference;
+                ImageReference imgRef = this.lstboxImages.SelectedItem as ImageReference;
 
-                if (bmpRef != null)
+                if (imgRef != null)
                 {
-                    this.direct2dRenderControl.SetRenderFrame(bmpRef.RenderKey);
+                    this.direct2dRenderControl.SetRenderFrame(imgRef.RenderKey);
                     this.direct2dRenderControl.Render();
                 }
             }

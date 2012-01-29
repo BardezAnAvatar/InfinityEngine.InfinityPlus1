@@ -18,7 +18,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen
     {
         #region Constants
         /// <summary>Represents the base dimension of a block</summary>
-        private const Int32 blockDimension = 8;
+        private const Int32 blockDimension = 64;    //64x64, not 8x8
         #endregion
 
 
@@ -41,7 +41,17 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen
         /// <summary>Exposes the size of the Palette entries and the data offset entries.</summary>
         public Int32 PaletteSize
         {
-            get { return (PaletteEntry.PaletteSize * ColorEntry.StructSize) + (this.Header.BlockCount * 4); }
+            get 
+            {
+                Int32 paletteSize = (PaletteEntry.PaletteSize * ColorEntry.StructSize);
+                Int32 blockPointers = (this.Header.BlockCount * 4);
+                Int32 blockData = 0;
+                foreach (Int32 blockSize in this.TileOffsets)
+                    if (blockSize > blockData)
+                        blockData = blockSize;
+
+                return  + paletteSize + blockPointers + blockData + 4096;   //constant is 64*64 samples, lazy coding.
+            }
         }
         #endregion
 
@@ -109,18 +119,21 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen
             for (Int32 tileIndex = 0; tileIndex < this.Header.BlockCount; ++tileIndex)
                 this.TileOffsets.Add(ReusableIO.ReadUInt32FromArray(tileOffsets, tileIndex * 4));
 
+            //the tile data pointer (probably) immediately follows the offsets, so keep this position in memory
+            Int64 dataPointer = input.Position;
+
             //read the tile data
             this.InitializeTileData();  //instantiate the tile data
             for (Int32 y = 0; y < this.Header.Rows; ++y)
             {
-                Int32 height = this.SampleHeight(y);    //usually a block is 8x8 data, but, can be 1x1, depending on width and height.
+                Int32 height = this.RowSampleHeight(y);    //usually a block is 64x64 data, but, can be 1x1, depending on width and height.
 
                 for (Int32 x = 0; x < this.Header.Columns; ++x)
                 {
-                    Int32 width = this.SampleWidth(y);  //usually a block is 8x8 data, but, can be 1x1, depending on width and height.
+                    Int32 width = this.SampleWidth(x);  //usually a block is 8x8 data, but, can be 1x1, depending on width and height.
 
                     Int32 tileIndex = (y * this.Header.Columns) + x;
-                    ReusableIO.SeekIfAble(input, this.TileOffsets[tileIndex]);  //seek to the tile data
+                    ReusableIO.SeekIfAble(input, dataPointer + this.TileOffsets[tileIndex]);  //seek to the tile data
                     Byte[] data = ReusableIO.BinaryRead(input, width * height);
                     this.TileData[x, y] = data;
                 }
@@ -198,48 +211,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen
         {
             Boolean overlaps = true;
 
-            overlaps = this.OverlapsDataOffsets(0, MosHeader.StructSize)    //header and data
-            || this.OverlapsDataOffsets(this.Header.PaletteOffset, this.PaletteSize) //palette and data
-            || IntExtension.Between(this.Header.PaletteOffset, this.PaletteSize, 0, MosHeader.StructSize) //palette and header
-            || this.OverlapsDataOffsetsAny();   //data and data
+            overlaps = IntExtension.Between(this.Header.PaletteOffset, this.PaletteSize, 0, MosHeader.StructSize); //palette and header
 
-            return overlaps;
-        }
-
-        /// <summary>Determines if provided offset and length overlap any data offset</summary>
-        /// <param name="start">Offset to test</param>
-        /// <param name="size">Size of data to test</param>
-        /// <returns>True if any of the offsets overlap, false if not</returns>
-        protected Boolean OverlapsDataOffsets(Int64 start, Int64 size)
-        {
-            Boolean overlaps = false;
-
-            for (Int32 i = 0; i < this.TileOffsets.Count && !overlaps; ++i)
-            {
-                Int32 compareSize = this.BlockSize(i);
-                overlaps |= IntExtension.Between(start, size, this.TileOffsets[i], this.TileOffsets[i] + compareSize);
-            }
-
-            return overlaps;
-        }
-
-        /// <summary>Determines if any data offsets overlap one another</summary>
-        /// <returns>True if any of the offsets overlap, false if not</returns>
-        protected Boolean OverlapsDataOffsetsAny()
-        {
-            Boolean overlaps = false;
-
-            for (Int32 i = 0; i < this.TileOffsets.Count && !overlaps; ++i)
-            {
-                Int32 sourceSize = this.BlockSize(i);
-
-                for (Int32 j = 0; j < this.TileOffsets.Count && !overlaps; ++j)
-                    if (i != j)
-                    {
-                        Int32 compareSize = this.BlockSize(j);
-                        overlaps |= IntExtension.Between(this.TileOffsets[j], compareSize, this.TileOffsets[i], this.TileOffsets[i] + sourceSize);
-                    }
-            }
             return overlaps;
         }
         #endregion
@@ -252,7 +225,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen
         protected Int32 SampleWidth(Int32 block)
         {
             Int32 x = block % this.Header.Columns;
-            return (x == (this.Header.Columns - 1)) ? this.Header.Width % MapOfScreen1.blockDimension : MapOfScreen1.blockDimension;
+            Int32 width = MapOfScreen1.blockDimension;
+
+            if ((x == (this.Header.Columns - 1) && this.Header.Width % MapOfScreen1.blockDimension > 0))
+                width = this.Header.Width % MapOfScreen1.blockDimension;
+
+            return width;
         }
 
         /// <summary>Gets the count of vertical samples in one column, given a block number</summary>
@@ -260,8 +238,20 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen
         /// <returns>The count of vertical column samples in the block</returns>
         protected Int32 SampleHeight(Int32 block)
         {
-            Int32 y = block / this.Header.Rows;
-            return (y == (this.Header.Rows - 1)) ? this.Header.Height % MapOfScreen1.blockDimension : MapOfScreen1.blockDimension;
+            return this.RowSampleHeight(block / this.Header.Columns);
+        }
+
+        /// <summary>Gets the count of vertical samples in one column, given a block number</summary>
+        /// <param name="row">Block number to identify the height of</param>
+        /// <returns>The count of vertical column samples in the block</returns>
+        protected Int32 RowSampleHeight(Int32 row)
+        {
+            Int32 height = MapOfScreen1.blockDimension;
+
+            if (row == (this.Header.Rows - 1) && this.Header.Height % MapOfScreen1.blockDimension > 0)
+                height = this.Header.Height % MapOfScreen1.blockDimension;
+
+            return height;
         }
 
         /// <summary>Gets the count of pixels in a block</summary>
@@ -311,7 +301,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen
                     for (Int32 x = 0; x < this.Header.Columns; ++x) //loop through horizontal blocks
                     {
                         Int32 width = this.SampleWidth(tileNumber);
-                        Int32 dataBase = height * width;
+                        Int32 dataBase = line * width;
 
                         for (Int32 horz = 0; horz < width; ++horz)  //loop through the values in this block-row (0-[1 to 8 max])
                         {
@@ -319,7 +309,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen
                             pixels[pixelDataIndex] = color.Blue;
                             pixels[pixelDataIndex + 1] = color.Green;
                             pixels[pixelDataIndex + 2] = color.Red;
-                            pixels[pixelDataIndex + 3] = Byte.MinValue;
+                            pixels[pixelDataIndex + 3] = Byte.MaxValue; //opaque, and pre-multiplied
 
                             pixelDataIndex += 4;
                         }
