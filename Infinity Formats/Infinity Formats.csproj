@@ -227,7 +227,7 @@
     <Compile Include="Infinity\TileSet\Tis1\Tile Set 1.cs" />
     <Compile Include="Infinity\TileSet\Tile Set Info.cs" />
     <Compile Include="Infinity\TileSet\Tis1\Tile.cs" />
-    <Compile Include="Infinity\TileSet\Tis1\Tis1Header.cs" />
+    <Compile Include="Infinity\TileSet\Tis1\Tile Set 1 Header.cs" />
     <Compile Include="Infinity\TwoDimensionalArray\2DA1\TwoDimensionalArray1.cs" />
     <Compile Include="Infinity\TwoDimensionalArray\Xor Encryption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
