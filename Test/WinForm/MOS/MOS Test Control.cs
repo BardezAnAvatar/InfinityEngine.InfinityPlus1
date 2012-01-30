@@ -2,7 +2,7 @@
 
 using Bardez.Projects.InfinityPlus1.Test.Harnesses.MapOfScreen;
 
-namespace Bardez.Projects.InfinityPlus1.Test.WinForm.DLG
+namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MOS
 {
     /// <summary>User control for testing the MOS file class</summary>
     public class MosTestControl : HarnessFileBaseTestControlBase<MosTest>

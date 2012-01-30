@@ -1,4 +1,4 @@
-﻿namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
+﻿namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MOS
 {
     partial class MosRenderTestControl
     {

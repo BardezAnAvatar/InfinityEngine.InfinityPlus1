@@ -11,7 +11,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Resize;
 using Bardez.Projects.InfinityPlus1.Test.WinForm;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
+namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MOS
 {
     /// <summary>Does primitive testing on the Direct2D render target, loading a list of bitmaps selectable for display</summary>
     public partial class MosRenderTestControl : UserControl
