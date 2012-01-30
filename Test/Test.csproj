@@ -101,6 +101,7 @@
     <Compile Include="Harnesses\TextLocationKey\TextLocationKeyHeaderTest.cs" />
     <Compile Include="Harnesses\TextLocationKey\TextLocationKeyStringReferenceEntryTest.cs" />
     <Compile Include="Harnesses\TextLocationKey\TextLocationKeyTest.cs" />
+    <Compile Include="Harnesses\TileSet\Tis Header Test.cs" />
     <Compile Include="Harnesses\TwoDimensionalArray\TwoDinensionalArray1Test.cs" />
     <Compile Include="Test Event Arguments.cs" />
     <Compile Include="Message Event Arguments.cs" />
@@ -300,6 +301,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\Threading Delegates.cs" />
+    <Compile Include="WinForm\TIS\TIS Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WinForm\TLK\TLK Strref Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
