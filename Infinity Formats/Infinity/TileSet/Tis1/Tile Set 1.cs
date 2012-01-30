@@ -14,7 +14,7 @@ using Bardez.Projects.ReusableCode;
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1
 {
     /// <summary>Represents the version 1 tileset file</summary>
-    public class TileSet1 : IInfinityFormat
+    public class TileSet1 : IInfinityFormat, IImageSet
     {
         #region Fields
         /// <summary>Tileset header</summary>
@@ -107,6 +107,17 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1
         protected Boolean Overlaps()
         {
             return IntExtension.Between(this.Header.OffsetTileData, this.Header.TileDataSize, 0, Tis1Header.StructSize); //palette and header
+        }
+        #endregion
+
+
+        #region IImageSet methods
+        /// <summary>Returns the frame with the associated index in the tileset</summary>
+        /// <param name="index">Index of the frame to retrieve</param>
+        /// <returns>The frane at the associated index</returns>
+        public Frame GetFrame(Int32 index)
+        {
+            return this.Tiles[index].GetFrame();
         }
         #endregion
     }
