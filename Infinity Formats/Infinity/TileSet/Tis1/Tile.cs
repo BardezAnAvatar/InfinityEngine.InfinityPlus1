@@ -5,12 +5,16 @@ using System.IO;
 using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
+using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1
 {
     /// <summary>Represents a single tile from a tileset</summary>
-    public class Tile : IInfinityFormat
+    public class Tile : IInfinityFormat, IImage
     {
         #region Constants
         /// <summary>Default dimension of the tile</summary>
@@ -105,6 +109,19 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1
         #endregion
 
 
+        #region IImage methods
+        /// <summary>Gets a frame image from the pixel data already in place</summary>
+        /// <returns>A frame containing the pixel data</returns>
+        public Frame GetFrame()
+        {
+            Frame frame = new Frame();
+            frame.Pixels = this.GetPixelData();
+
+            return frame;
+        }
+        #endregion
+
+
         #region Frame support methods
         /// <summary>Expands the tile data from the palette indexed color to a fully BGRA pixel data array</summary>
         /// <returns>A fully decompressed pixel data Byte array</returns>
@@ -122,6 +139,16 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1
             }
 
             return pixels;
+        }
+
+        /// <summary>Gets the pixel data fro this tile.</summary>
+        /// <returns>The pixel data for this tile</returns>
+        protected PixelData GetPixelData()
+        {
+            Byte[] binData = this.GetExpandedData();
+            PixelData pd = new PixelData(binData, ScanLineOrder.TopDown, PixelFormat.RGBA_B8G8R8A8, this.Dimension, this.Dimension, 0, 0, 32);
+
+            return pd;
         }
         #endregion
     }
