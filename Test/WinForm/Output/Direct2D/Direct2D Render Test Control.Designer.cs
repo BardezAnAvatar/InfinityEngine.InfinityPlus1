@@ -36,7 +36,7 @@
             this.lstboxImages = new System.Windows.Forms.ListBox();
             this.lblListBoxDescriptor = new System.Windows.Forms.Label();
             this.direct2dRenderControl = new Bardez.Projects.InfinityPlus1.Output.Visual.Direct2dRenderControl();
-            this.lblOutputDescripor = new System.Windows.Forms.Label();
+            this.lblOutputDescriptor = new System.Windows.Forms.Label();
             this.tblMain.SuspendLayout();
             this.pnlTest.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerHarnessResults)).BeginInit();
@@ -106,7 +106,7 @@
             // splitContainerHarnessResults.Panel2
             // 
             this.splitContainerHarnessResults.Panel2.Controls.Add(this.direct2dRenderControl);
-            this.splitContainerHarnessResults.Panel2.Controls.Add(this.lblOutputDescripor);
+            this.splitContainerHarnessResults.Panel2.Controls.Add(this.lblOutputDescriptor);
             this.splitContainerHarnessResults.Size = new System.Drawing.Size(693, 417);
             this.splitContainerHarnessResults.SplitterDistance = 231;
             this.splitContainerHarnessResults.TabIndex = 12;
@@ -139,16 +139,16 @@
             this.direct2dRenderControl.Size = new System.Drawing.Size(454, 400);
             this.direct2dRenderControl.TabIndex = 82;
             // 
-            // lblOutputDescripor
+            // lblOutputDescriptor
             // 
-            this.lblOutputDescripor.AutoSize = true;
-            this.lblOutputDescripor.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblOutputDescripor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.lblOutputDescripor.Location = new System.Drawing.Point(0, 0);
-            this.lblOutputDescripor.Name = "lblOutputDescripor";
-            this.lblOutputDescripor.Size = new System.Drawing.Size(80, 13);
-            this.lblOutputDescripor.TabIndex = 81;
-            this.lblOutputDescripor.Text = "Render Output:";
+            this.lblOutputDescriptor.AutoSize = true;
+            this.lblOutputDescriptor.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblOutputDescriptor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lblOutputDescriptor.Location = new System.Drawing.Point(0, 0);
+            this.lblOutputDescriptor.Name = "lblOutputDescriptor";
+            this.lblOutputDescriptor.Size = new System.Drawing.Size(80, 13);
+            this.lblOutputDescriptor.TabIndex = 81;
+            this.lblOutputDescriptor.Text = "Render Output:";
             // 
             // Direct2DRenderTestControl
             // 
@@ -176,7 +176,7 @@
         protected System.Windows.Forms.Button btnInitialize;
         private System.Windows.Forms.SplitContainer splitContainerHarnessResults;
         protected System.Windows.Forms.Label lblListBoxDescriptor;
-        protected System.Windows.Forms.Label lblOutputDescripor;
+        protected System.Windows.Forms.Label lblOutputDescriptor;
         private System.Windows.Forms.ListBox lstboxImages;
         private InfinityPlus1.Output.Visual.Direct2dRenderControl direct2dRenderControl;
         protected System.Windows.Forms.Button btnClearDisplay;

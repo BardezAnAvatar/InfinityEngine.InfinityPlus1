@@ -151,6 +151,17 @@
             this.tlkHeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.TLK.TlkHeaderTestControl();
             this.tabpageTalkStrref = new System.Windows.Forms.TabPage();
             this.tlkStrrefTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.TLK.TlkStrrefTestControl();
+            this.tabpageWed = new System.Windows.Forms.TabPage();
+            this.tabctrlWed = new System.Windows.Forms.TabControl();
+            this.tabpageWedHeader = new System.Windows.Forms.TabPage();
+            this.wedHeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.WED.WedHeaderTestControl();
+            this.tabpageWedOverlay = new System.Windows.Forms.TabPage();
+            this.wedOverlayTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.WED.WedOverlayTestControl();
+            this.tabpageWedDoor = new System.Windows.Forms.TabPage();
+            this.wedDoorTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.WED.WedDoorTestControl();
+            this.tabpageWedPolygon = new System.Windows.Forms.TabPage();
+            this.wedPolygonHeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.WED.WedPolygonHeaderTestControl();
+            this.tabpageWedFile = new System.Windows.Forms.TabPage();
             this.tabpageImages = new System.Windows.Forms.TabPage();
             this.tabctrlImages = new System.Windows.Forms.TabControl();
             this.tabpageImagesBitmap = new System.Windows.Forms.TabPage();
@@ -168,6 +179,7 @@
             this.tabpageImagesTisHeader = new System.Windows.Forms.TabPage();
             this.tisHeaderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.TIS.TisHeaderTestControl();
             this.tabpageImagesTisRender = new System.Windows.Forms.TabPage();
+            this.tisRenderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.TIS.TisRenderTestControl();
             this.tabpageOutput = new System.Windows.Forms.TabPage();
             this.tabctrlOutput = new System.Windows.Forms.TabControl();
             this.tabpageXAudio2 = new System.Windows.Forms.TabPage();
@@ -182,6 +194,7 @@
             this.direct2DRenderTestControl1 = new Bardez.Projects.InfinityPlus1.Test.WinForm.Output.Direct2D.Direct2DRenderTestControl();
             this.tabpageReusableCode = new System.Windows.Forms.TabPage();
             this.bitStreamTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ReusableCode.BitStreamTestControl();
+            this.wedTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.WED.WedTestControl();
             this.tabctrlMain.SuspendLayout();
             this.tabpage2DA.SuspendLayout();
             this.tabpageAcm.SuspendLayout();
@@ -254,6 +267,13 @@
             this.tabpageTalkFile.SuspendLayout();
             this.tabpageTalkHeader.SuspendLayout();
             this.tabpageTalkStrref.SuspendLayout();
+            this.tabpageWed.SuspendLayout();
+            this.tabctrlWed.SuspendLayout();
+            this.tabpageWedHeader.SuspendLayout();
+            this.tabpageWedOverlay.SuspendLayout();
+            this.tabpageWedDoor.SuspendLayout();
+            this.tabpageWedPolygon.SuspendLayout();
+            this.tabpageWedFile.SuspendLayout();
             this.tabpageImages.SuspendLayout();
             this.tabctrlImages.SuspendLayout();
             this.tabpageImagesBitmap.SuspendLayout();
@@ -265,6 +285,7 @@
             this.tabpageImagesTis.SuspendLayout();
             this.tabctrlImagesTis.SuspendLayout();
             this.tabpageImagesTisHeader.SuspendLayout();
+            this.tabpageImagesTisRender.SuspendLayout();
             this.tabpageOutput.SuspendLayout();
             this.tabctrlOutput.SuspendLayout();
             this.tabpageXAudio2.SuspendLayout();
@@ -295,6 +316,7 @@
             this.tabctrlMain.Controls.Add(this.tabpageStore);
             this.tabctrlMain.Controls.Add(this.tabpageSrc);
             this.tabctrlMain.Controls.Add(this.tabpageTalk);
+            this.tabctrlMain.Controls.Add(this.tabpageWed);
             this.tabctrlMain.Controls.Add(this.tabpageImages);
             this.tabctrlMain.Controls.Add(this.tabpageOutput);
             this.tabctrlMain.Controls.Add(this.tabpageReusableCode);
@@ -1520,6 +1542,122 @@
             this.tlkStrrefTestControl.Size = new System.Drawing.Size(896, 418);
             this.tlkStrrefTestControl.TabIndex = 0;
             // 
+            // tabpageWed
+            // 
+            this.tabpageWed.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageWed.Controls.Add(this.tabctrlWed);
+            this.tabpageWed.Location = new System.Drawing.Point(4, 22);
+            this.tabpageWed.Name = "tabpageWed";
+            this.tabpageWed.Size = new System.Drawing.Size(916, 456);
+            this.tabpageWed.TabIndex = 19;
+            this.tabpageWed.Text = "WED";
+            // 
+            // tabctrlWed
+            // 
+            this.tabctrlWed.Controls.Add(this.tabpageWedHeader);
+            this.tabctrlWed.Controls.Add(this.tabpageWedOverlay);
+            this.tabctrlWed.Controls.Add(this.tabpageWedDoor);
+            this.tabctrlWed.Controls.Add(this.tabpageWedPolygon);
+            this.tabctrlWed.Controls.Add(this.tabpageWedFile);
+            this.tabctrlWed.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabctrlWed.Location = new System.Drawing.Point(0, 0);
+            this.tabctrlWed.Name = "tabctrlWed";
+            this.tabctrlWed.Padding = new System.Drawing.Point(3, 3);
+            this.tabctrlWed.SelectedIndex = 0;
+            this.tabctrlWed.Size = new System.Drawing.Size(916, 456);
+            this.tabctrlWed.TabIndex = 0;
+            // 
+            // tabpageWedHeader
+            // 
+            this.tabpageWedHeader.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageWedHeader.Controls.Add(this.wedHeaderTestControl);
+            this.tabpageWedHeader.Location = new System.Drawing.Point(4, 22);
+            this.tabpageWedHeader.Name = "tabpageWedHeader";
+            this.tabpageWedHeader.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageWedHeader.Size = new System.Drawing.Size(908, 430);
+            this.tabpageWedHeader.TabIndex = 0;
+            this.tabpageWedHeader.Text = "Header";
+            // 
+            // wedHeaderTestControl
+            // 
+            this.wedHeaderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wedHeaderTestControl.Location = new System.Drawing.Point(3, 3);
+            this.wedHeaderTestControl.Name = "wedHeaderTestControl";
+            this.wedHeaderTestControl.Padding = new System.Windows.Forms.Padding(3);
+            this.wedHeaderTestControl.Size = new System.Drawing.Size(902, 424);
+            this.wedHeaderTestControl.TabIndex = 0;
+            // 
+            // tabpageWedOverlay
+            // 
+            this.tabpageWedOverlay.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageWedOverlay.Controls.Add(this.wedOverlayTestControl);
+            this.tabpageWedOverlay.Location = new System.Drawing.Point(4, 22);
+            this.tabpageWedOverlay.Name = "tabpageWedOverlay";
+            this.tabpageWedOverlay.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageWedOverlay.Size = new System.Drawing.Size(184, 48);
+            this.tabpageWedOverlay.TabIndex = 2;
+            this.tabpageWedOverlay.Text = "Overlay";
+            // 
+            // wedOverlayTestControl
+            // 
+            this.wedOverlayTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wedOverlayTestControl.Location = new System.Drawing.Point(3, 3);
+            this.wedOverlayTestControl.Name = "wedOverlayTestControl";
+            this.wedOverlayTestControl.Padding = new System.Windows.Forms.Padding(3);
+            this.wedOverlayTestControl.Size = new System.Drawing.Size(902, 424);
+            this.wedOverlayTestControl.TabIndex = 0;
+            // 
+            // tabpageWedDoor
+            // 
+            this.tabpageWedDoor.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageWedDoor.Controls.Add(this.wedDoorTestControl);
+            this.tabpageWedDoor.Location = new System.Drawing.Point(4, 22);
+            this.tabpageWedDoor.Name = "tabpageWedDoor";
+            this.tabpageWedDoor.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageWedDoor.Size = new System.Drawing.Size(908, 430);
+            this.tabpageWedDoor.TabIndex = 3;
+            this.tabpageWedDoor.Text = "Door";
+            // 
+            // wedDoorTestControl
+            // 
+            this.wedDoorTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wedDoorTestControl.Location = new System.Drawing.Point(3, 3);
+            this.wedDoorTestControl.Name = "wedDoorTestControl";
+            this.wedDoorTestControl.Padding = new System.Windows.Forms.Padding(3);
+            this.wedDoorTestControl.Size = new System.Drawing.Size(902, 424);
+            this.wedDoorTestControl.TabIndex = 0;
+            // 
+            // tabpageWedPolygon
+            // 
+            this.tabpageWedPolygon.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageWedPolygon.Controls.Add(this.wedPolygonHeaderTestControl);
+            this.tabpageWedPolygon.Location = new System.Drawing.Point(4, 22);
+            this.tabpageWedPolygon.Name = "tabpageWedPolygon";
+            this.tabpageWedPolygon.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageWedPolygon.Size = new System.Drawing.Size(908, 430);
+            this.tabpageWedPolygon.TabIndex = 4;
+            this.tabpageWedPolygon.Text = "Polygon";
+            // 
+            // wedPolygonHeaderTestControl
+            // 
+            this.wedPolygonHeaderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wedPolygonHeaderTestControl.Location = new System.Drawing.Point(3, 3);
+            this.wedPolygonHeaderTestControl.Name = "wedPolygonHeaderTestControl";
+            this.wedPolygonHeaderTestControl.Padding = new System.Windows.Forms.Padding(3);
+            this.wedPolygonHeaderTestControl.Size = new System.Drawing.Size(902, 424);
+            this.wedPolygonHeaderTestControl.TabIndex = 0;
+            // 
+            // tabpageWedFile
+            // 
+            this.tabpageWedFile.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageWedFile.Controls.Add(this.wedTestControl);
+            this.tabpageWedFile.Location = new System.Drawing.Point(4, 22);
+            this.tabpageWedFile.Name = "tabpageWedFile";
+            this.tabpageWedFile.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageWedFile.Size = new System.Drawing.Size(908, 430);
+            this.tabpageWedFile.TabIndex = 1;
+            this.tabpageWedFile.Text = "File";
+            // 
             // tabpageImages
             // 
             this.tabpageImages.BackColor = System.Drawing.SystemColors.Control;
@@ -1540,7 +1678,7 @@
             this.tabctrlImages.Location = new System.Drawing.Point(0, 0);
             this.tabctrlImages.Name = "tabctrlImages";
             this.tabctrlImages.SelectedIndex = 0;
-            this.tabctrlImages.Size = new System.Drawing.Size(916, 456);
+            this.tabctrlImages.Size = new System.Drawing.Size(192, 74);
             this.tabctrlImages.TabIndex = 0;
             // 
             // tabpageImagesBitmap
@@ -1550,7 +1688,7 @@
             this.tabpageImagesBitmap.Location = new System.Drawing.Point(4, 22);
             this.tabpageImagesBitmap.Name = "tabpageImagesBitmap";
             this.tabpageImagesBitmap.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpageImagesBitmap.Size = new System.Drawing.Size(908, 430);
+            this.tabpageImagesBitmap.Size = new System.Drawing.Size(184, 48);
             this.tabpageImagesBitmap.TabIndex = 0;
             this.tabpageImagesBitmap.Text = "BMP";
             // 
@@ -1559,7 +1697,7 @@
             this.bitmapRenderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bitmapRenderTestControl.Location = new System.Drawing.Point(3, 3);
             this.bitmapRenderTestControl.Name = "bitmapRenderTestControl";
-            this.bitmapRenderTestControl.Size = new System.Drawing.Size(902, 424);
+            this.bitmapRenderTestControl.Size = new System.Drawing.Size(178, 42);
             this.bitmapRenderTestControl.TabIndex = 0;
             // 
             // tabpageImagesJpeg
@@ -1637,7 +1775,7 @@
             this.mosRenderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mosRenderTestControl.Location = new System.Drawing.Point(3, 3);
             this.mosRenderTestControl.Name = "mosRenderTestControl";
-            this.mosRenderTestControl.Size = new System.Drawing.Size(894, 398);
+            this.mosRenderTestControl.Size = new System.Drawing.Size(170, 16);
             this.mosRenderTestControl.TabIndex = 0;
             // 
             // tabpageImagesTis
@@ -1646,7 +1784,7 @@
             this.tabpageImagesTis.Controls.Add(this.tabctrlImagesTis);
             this.tabpageImagesTis.Location = new System.Drawing.Point(4, 22);
             this.tabpageImagesTis.Name = "tabpageImagesTis";
-            this.tabpageImagesTis.Size = new System.Drawing.Size(908, 430);
+            this.tabpageImagesTis.Size = new System.Drawing.Size(184, 48);
             this.tabpageImagesTis.TabIndex = 3;
             this.tabpageImagesTis.Text = "TIS";
             // 
@@ -1658,7 +1796,7 @@
             this.tabctrlImagesTis.Location = new System.Drawing.Point(0, 0);
             this.tabctrlImagesTis.Name = "tabctrlImagesTis";
             this.tabctrlImagesTis.SelectedIndex = 0;
-            this.tabctrlImagesTis.Size = new System.Drawing.Size(908, 430);
+            this.tabctrlImagesTis.Size = new System.Drawing.Size(192, 74);
             this.tabctrlImagesTis.TabIndex = 0;
             // 
             // tabpageImagesTisHeader
@@ -1668,7 +1806,7 @@
             this.tabpageImagesTisHeader.Location = new System.Drawing.Point(4, 22);
             this.tabpageImagesTisHeader.Name = "tabpageImagesTisHeader";
             this.tabpageImagesTisHeader.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpageImagesTisHeader.Size = new System.Drawing.Size(900, 404);
+            this.tabpageImagesTisHeader.Size = new System.Drawing.Size(184, 48);
             this.tabpageImagesTisHeader.TabIndex = 0;
             this.tabpageImagesTisHeader.Text = "Header";
             // 
@@ -1677,18 +1815,27 @@
             this.tisHeaderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tisHeaderTestControl.Location = new System.Drawing.Point(3, 3);
             this.tisHeaderTestControl.Name = "tisHeaderTestControl";
-            this.tisHeaderTestControl.Size = new System.Drawing.Size(894, 398);
+            this.tisHeaderTestControl.Size = new System.Drawing.Size(178, 42);
             this.tisHeaderTestControl.TabIndex = 0;
             // 
             // tabpageImagesTisRender
             // 
             this.tabpageImagesTisRender.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageImagesTisRender.Controls.Add(this.tisRenderTestControl);
             this.tabpageImagesTisRender.Location = new System.Drawing.Point(4, 22);
             this.tabpageImagesTisRender.Name = "tabpageImagesTisRender";
             this.tabpageImagesTisRender.Padding = new System.Windows.Forms.Padding(3);
             this.tabpageImagesTisRender.Size = new System.Drawing.Size(184, 48);
             this.tabpageImagesTisRender.TabIndex = 1;
             this.tabpageImagesTisRender.Text = "Render";
+            // 
+            // tisRenderTestControl
+            // 
+            this.tisRenderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tisRenderTestControl.Location = new System.Drawing.Point(3, 3);
+            this.tisRenderTestControl.Name = "tisRenderTestControl";
+            this.tisRenderTestControl.Size = new System.Drawing.Size(170, 16);
+            this.tisRenderTestControl.TabIndex = 0;
             // 
             // tabpageOutput
             // 
@@ -1830,6 +1977,15 @@
             this.bitStreamTestControl.Size = new System.Drawing.Size(186, 68);
             this.bitStreamTestControl.TabIndex = 0;
             // 
+            // wedTestControl
+            // 
+            this.wedTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wedTestControl.Location = new System.Drawing.Point(3, 3);
+            this.wedTestControl.Name = "wedTestControl";
+            this.wedTestControl.Padding = new System.Windows.Forms.Padding(3);
+            this.wedTestControl.Size = new System.Drawing.Size(902, 424);
+            this.wedTestControl.TabIndex = 0;
+            // 
             // TestUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1911,6 +2067,13 @@
             this.tabpageTalkFile.ResumeLayout(false);
             this.tabpageTalkHeader.ResumeLayout(false);
             this.tabpageTalkStrref.ResumeLayout(false);
+            this.tabpageWed.ResumeLayout(false);
+            this.tabctrlWed.ResumeLayout(false);
+            this.tabpageWedHeader.ResumeLayout(false);
+            this.tabpageWedOverlay.ResumeLayout(false);
+            this.tabpageWedDoor.ResumeLayout(false);
+            this.tabpageWedPolygon.ResumeLayout(false);
+            this.tabpageWedFile.ResumeLayout(false);
             this.tabpageImages.ResumeLayout(false);
             this.tabctrlImages.ResumeLayout(false);
             this.tabpageImagesBitmap.ResumeLayout(false);
@@ -1922,6 +2085,7 @@
             this.tabpageImagesTis.ResumeLayout(false);
             this.tabctrlImagesTis.ResumeLayout(false);
             this.tabpageImagesTisHeader.ResumeLayout(false);
+            this.tabpageImagesTisRender.ResumeLayout(false);
             this.tabpageOutput.ResumeLayout(false);
             this.tabctrlOutput.ResumeLayout(false);
             this.tabpageXAudio2.ResumeLayout(false);
@@ -2092,5 +2256,18 @@
         private System.Windows.Forms.TabPage tabpageImagesTisHeader;
         private Test.WinForm.TIS.TisHeaderTestControl tisHeaderTestControl;
         private System.Windows.Forms.TabPage tabpageImagesTisRender;
+        private Test.WinForm.TIS.TisRenderTestControl tisRenderTestControl;
+        private System.Windows.Forms.TabPage tabpageWed;
+        private System.Windows.Forms.TabControl tabctrlWed;
+        private System.Windows.Forms.TabPage tabpageWedHeader;
+        private System.Windows.Forms.TabPage tabpageWedFile;
+        private Test.WinForm.WED.WedHeaderTestControl wedHeaderTestControl;
+        private System.Windows.Forms.TabPage tabpageWedOverlay;
+        private Test.WinForm.WED.WedOverlayTestControl wedOverlayTestControl;
+        private System.Windows.Forms.TabPage tabpageWedDoor;
+        private Test.WinForm.WED.WedDoorTestControl wedDoorTestControl;
+        private System.Windows.Forms.TabPage tabpageWedPolygon;
+        private Test.WinForm.WED.WedPolygonHeaderTestControl wedPolygonHeaderTestControl;
+        private Test.WinForm.WED.WedTestControl wedTestControl;
     }
 }

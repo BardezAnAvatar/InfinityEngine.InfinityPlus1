@@ -7,10 +7,13 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
     {
         #region Fields
         /// <summary>Exposes the path to the bitmap file</summary>
-        public String ImagePath { get; set; }
+        public String ImageDescription { get; set; }
 
         /// <summary>Represents the unique key to the bitmap in device memory.</summary>
         public Int32 RenderKey { get; set; }
+
+        /// <summary>Represents an order to the collection when sorted</summary>
+        public Int32 Order { get; set; }
         #endregion
 
 
@@ -21,8 +24,14 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         /// <summary>Default constructor</summary>
         public ImageReference(String path, Int32 key)
         {
-            this.ImagePath = path;
+            this.ImageDescription = path;
             this.RenderKey = key;
+        }
+
+        /// <summary>Default constructor</summary>
+        public ImageReference(String path, Int32 key, Int32 order) : this (path, key)
+        {
+            this.Order = order;
         }
         #endregion
 
@@ -32,7 +41,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         /// <returns>BitmapPath</returns>
         public override String ToString()
         {
-            return this.ImagePath;
+            return this.ImageDescription;
         }
         #endregion
 
@@ -65,8 +74,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
                 comparison = -1;
             else if (right == null) //not both null
                 comparison = 1;
+            else if (left.Order == right.Order)
+                comparison = String.Compare(left.ImageDescription, right.ImageDescription);
             else
-                comparison = String.Compare(left.ImagePath, right.ImagePath);
+                comparison = left.Order < right.Order ? -1 : 1;
 
             return comparison;
         }

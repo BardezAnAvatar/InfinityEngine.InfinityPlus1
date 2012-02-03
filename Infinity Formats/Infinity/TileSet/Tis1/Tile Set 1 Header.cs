@@ -62,7 +62,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1
         #endregion
 
 
-        #region Public Methods
+        #region IO method implemetations
         /// <summary>This public method reads file format from the input stream, after the header has already been read.</summary>
         /// <param name="input">Input stream to read from</param>
         public override void ReadBody(Stream input)
@@ -93,17 +93,23 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1
             ReusableIO.WriteUInt32ToStream(this.OffsetTileData, output);        //Offset to tile data
             ReusableIO.WriteUInt32ToStream(this.DimensionTile, output);         //Dimension(s) of a single tile
         }
+        #endregion
 
+
+        #region Public Methods
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
+        /// <remarks>TIS header signatures can be null-terminated rather than have whitespace</remarks>
         public override String ToString()
         {
+            Char nulChar = (Char)0;
+
             StringBuilder builder = new StringBuilder();
             builder.Append("Tis1Header:");
             builder.Append(StringFormat.ToStringAlignment("Signature"));
-            builder.Append(String.Format("'{0}'", this.signature));
+            builder.Append(String.Format("'{0}'", this.signature.Replace(nulChar, ' ')));
             builder.Append(StringFormat.ToStringAlignment("Version"));
-            builder.Append(String.Format("'{0}'", this.version));
+            builder.Append(String.Format("'{0}'", this.version.Replace(nulChar, ' ')));
             builder.Append(StringFormat.ToStringAlignment("Tile Count"));
             builder.Append(this.CountTiles);
             builder.Append(StringFormat.ToStringAlignment("Single Tile Length"));

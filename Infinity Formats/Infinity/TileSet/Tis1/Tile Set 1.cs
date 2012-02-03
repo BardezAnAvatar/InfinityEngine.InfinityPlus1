@@ -25,11 +25,33 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1
         #endregion
 
 
+        #region Properties
+        /// <summary>Property exposing the count of frames in the Image Set</summary>
+        public Int64 FrameCount
+        {
+            get { return this.Header.CountTiles; }
+        }
+        #endregion
+
+
         #region Construction
         /// <summary>Instantiates reference types</summary>
         public void Initialize()
         {
+            this.InitializeHeader();
+            this.InitializeBody();
+        }
+
+        /// <summary>Instantiates header reference</summary>
+        public void InitializeHeader()
+        {
             this.Header = new Tis1Header();
+        }
+
+        /// <summary>Instantiates tiles collection reference</summary>
+        public void InitializeBody()
+        {
+            this.Tiles = new List<Tile>();
         }
         #endregion
 
@@ -37,8 +59,14 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1
         #region IO method implemetations
         /// <summary>This public method reads file format from the input stream. Reads the whole structure.</summary>
         /// <param name="input">Input stream to read from</param>
+        /// <remarks>
+        ///     Be aware that sometimes, a TIS file does not have a header outside of a BIFF archive.
+        ///     This is the case when a TIS is exported via Near Infinity, and there have been similar concerns
+        ///     when WeiDU is not used properly to add a TIS to a BIFF archive.
+        /// </remarks>
         public void Read(Stream input)
         {
+            this.ReadHeader(input);
             this.ReadBody(input);
         }
 
@@ -56,14 +84,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1
             }
         }
 
-        /// <summary>This public method reads file format data structure from the input stream, after the signature has already been read.</summary>
+        /// <summary>This public method reads file format data structure from the input stream.</summary>
         /// <param name="input">Stream to read from</param>
         public void ReadBody(Stream input)
         {
-            this.Initialize();
-
-            //read the header
-            this.Header.Read(input);
+            this.InitializeBody();
 
             //read palettes
             ReusableIO.SeekIfAble(input, this.Header.OffsetTileData);   //seek to tiles
@@ -71,7 +96,16 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1
             {
                 Tile tile = new Tile();
                 tile.Read(input);
+                this.Tiles.Add(tile);
             }
+        }
+
+        /// <summary>This public method reads file format's header data structure from the input stream.</summary>
+        /// <param name="input">Stream to read from</param>
+        public void ReadHeader(Stream input)
+        {
+            this.InitializeHeader();
+            this.Header.Read(input);
         }
 
         /// <summary>This public method writes the file format to the output stream.</summary>

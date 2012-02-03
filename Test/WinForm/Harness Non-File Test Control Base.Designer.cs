@@ -30,7 +30,7 @@
             this.tblMain = new System.Windows.Forms.TableLayoutPanel();
             this.pnlHarnessOutput = new System.Windows.Forms.Panel();
             this.logOutput = new Bardez.Projects.InfinityPlus1.Test.WinForm.LoggingControl();
-            this.lblOutputDescripor = new System.Windows.Forms.Label();
+            this.lblOutputDescriptor = new System.Windows.Forms.Label();
             this.pnlTest.SuspendLayout();
             this.tblMain.SuspendLayout();
             this.pnlHarnessOutput.SuspendLayout();
@@ -85,7 +85,7 @@
             // pnlHarnessOutput
             // 
             this.pnlHarnessOutput.Controls.Add(this.logOutput);
-            this.pnlHarnessOutput.Controls.Add(this.lblOutputDescripor);
+            this.pnlHarnessOutput.Controls.Add(this.lblOutputDescriptor);
             this.pnlHarnessOutput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlHarnessOutput.Location = new System.Drawing.Point(3, 43);
             this.pnlHarnessOutput.Name = "pnlHarnessOutput";
@@ -100,16 +100,16 @@
             this.logOutput.Size = new System.Drawing.Size(693, 404);
             this.logOutput.TabIndex = 60;
             // 
-            // lblOutputDescripor
+            // lblOutputDescriptor
             // 
-            this.lblOutputDescripor.AutoSize = true;
-            this.lblOutputDescripor.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblOutputDescripor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.lblOutputDescripor.Location = new System.Drawing.Point(0, 0);
-            this.lblOutputDescripor.Name = "lblOutputDescripor";
-            this.lblOutputDescripor.Size = new System.Drawing.Size(82, 13);
-            this.lblOutputDescripor.TabIndex = 50;
-            this.lblOutputDescripor.Text = "Harness output:";
+            this.lblOutputDescriptor.AutoSize = true;
+            this.lblOutputDescriptor.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblOutputDescriptor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lblOutputDescriptor.Location = new System.Drawing.Point(0, 0);
+            this.lblOutputDescriptor.Name = "lblOutputDescriptor";
+            this.lblOutputDescriptor.Size = new System.Drawing.Size(82, 13);
+            this.lblOutputDescriptor.TabIndex = 50;
+            this.lblOutputDescriptor.Text = "Harness output:";
             // 
             // HarnessNonFileBaseTestControlBase
             // 
@@ -134,6 +134,6 @@
         protected System.Windows.Forms.TableLayoutPanel tblMain;
         private System.Windows.Forms.Panel pnlHarnessOutput;
         protected LoggingControl logOutput;
-        protected System.Windows.Forms.Label lblOutputDescripor;
+        protected System.Windows.Forms.Label lblOutputDescriptor;
     }
 }
