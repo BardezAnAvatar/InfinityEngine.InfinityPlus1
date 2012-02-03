@@ -14,10 +14,10 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>%24/Infinity Engine/Infinity +1/Tester</SccProjectName>
-    <SccLocalPath>.</SccLocalPath>
-    <SccAuxPath>http://bardezserver:8080/tfs/defaultcollection</SccAuxPath>
-    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -73,6 +73,10 @@
     <ProjectReference Include="..\External Formats\External Formats.csproj">
       <Project>{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}</Project>
       <Name>External Formats</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infinity Formats\Infinity Formats.csproj">
+      <Project>{3EE5137B-C08F-4337-B089-E20A502C2A0C}</Project>
+      <Name>Infinity Formats</Name>
     </ProjectReference>
     <ProjectReference Include="..\Media Base\Media Base.csproj">
       <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>

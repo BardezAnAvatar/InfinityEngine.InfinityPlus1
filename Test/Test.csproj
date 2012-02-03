@@ -13,10 +13,10 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <SccProjectName>%24/Infinity Engine/Infinity +1/Test</SccProjectName>
-    <SccLocalPath>.</SccLocalPath>
-    <SccAuxPath>http://bardezserver:8080/tfs/defaultcollection</SccAuxPath>
-    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -101,8 +101,14 @@
     <Compile Include="Harnesses\TextLocationKey\TextLocationKeyHeaderTest.cs" />
     <Compile Include="Harnesses\TextLocationKey\TextLocationKeyStringReferenceEntryTest.cs" />
     <Compile Include="Harnesses\TextLocationKey\TextLocationKeyTest.cs" />
+    <Compile Include="Harnesses\TileSet\Tis Test.cs" />
     <Compile Include="Harnesses\TileSet\Tis Header Test.cs" />
     <Compile Include="Harnesses\TwoDimensionalArray\TwoDinensionalArray1Test.cs" />
+    <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Test.cs" />
+    <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Door Test.cs" />
+    <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Polygon Header Test.cs" />
+    <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Overlay Test.cs" />
+    <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Header Test.cs" />
     <Compile Include="Test Event Arguments.cs" />
     <Compile Include="Message Event Arguments.cs" />
     <Compile Include="Testing Delegates.cs" />
@@ -169,6 +175,12 @@
     <Compile Include="WinForm\DLG\Dialog Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="WinForm\Harness Image Collection Test Control Base.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness Image Collection Test Control Base.Designer.cs">
+      <DependentUpon>Harness Image Collection Test Control Base.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForm\Harness Non-File Test Control Base.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -181,6 +193,7 @@
     <Compile Include="WinForm\Harness File Test Control Base.Designer.cs">
       <DependentUpon>Harness File Test Control Base.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinForm\Image Collection Reference.cs" />
     <Compile Include="WinForm\Image Reference.cs" />
     <Compile Include="WinForm\Image\BMP Render Test Control.cs">
       <SubType>UserControl</SubType>
@@ -304,6 +317,9 @@
     <Compile Include="WinForm\TIS\TIS Header Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="WinForm\TIS\TIS Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WinForm\TLK\TLK Strref Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -311,6 +327,21 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\TLK\TLK Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\WED\WED Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\WED\WED Polygon Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\WED\WED Overlay Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\WED\WED Door Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\WED\WED Header Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -353,6 +384,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="WinForm\Harness Image Collection Test Control Base.resx">
+      <DependentUpon>Harness Image Collection Test Control Base.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Harness Non-File Test Control Base.resx">
       <DependentUpon>Harness Non-File Test Control Base.cs</DependentUpon>
     </EmbeddedResource>

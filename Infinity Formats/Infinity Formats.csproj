@@ -230,6 +230,20 @@
     <Compile Include="Infinity\TileSet\Tis1\Tile Set 1 Header.cs" />
     <Compile Include="Infinity\TwoDimensionalArray\2DA1\TwoDimensionalArray1.cs" />
     <Compile Include="Infinity\TwoDimensionalArray\Xor Encryption.cs" />
+    <Compile Include="Infinity\WalledEnvironmentDisplay\Components\Door Vertex Index Collections.cs" />
+    <Compile Include="Infinity\WalledEnvironmentDisplay\Components\Door Polygon Collections.cs" />
+    <Compile Include="Infinity\WalledEnvironmentDisplay\Components\Tileset Mapping Collection.cs" />
+    <Compile Include="Infinity\WalledEnvironmentDisplay\Enum\Polygon Properties.cs" />
+    <Compile Include="Infinity\WalledEnvironmentDisplay\Polygon.cs" />
+    <Compile Include="Infinity\WalledEnvironmentDisplay\Wall Group.cs" />
+    <Compile Include="Infinity\WalledEnvironmentDisplay\Vertex.cs" />
+    <Compile Include="Infinity\WalledEnvironmentDisplay\Tilemap.cs" />
+    <Compile Include="Infinity\WalledEnvironmentDisplay\Enum\WED Overlay Render.cs" />
+    <Compile Include="Infinity\WalledEnvironmentDisplay\WED Header.cs" />
+    <Compile Include="Infinity\WalledEnvironmentDisplay\Overlay.cs" />
+    <Compile Include="Infinity\WalledEnvironmentDisplay\Polygon Header.cs" />
+    <Compile Include="Infinity\WalledEnvironmentDisplay\Door.cs" />
+    <Compile Include="Infinity\WalledEnvironmentDisplay\WED 1.3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
