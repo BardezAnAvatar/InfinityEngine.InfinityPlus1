@@ -130,5 +130,33 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             return builder.ToString();
         }
         #endregion
+
+
+        #region Equality
+        /// <summary>Overridden (value) equality method</summary>
+        /// <param name="obj">Object to compare to</param>
+        /// <returns>Boolean indicating equality</returns>
+        public override Boolean Equals(Object obj)
+        {
+            Boolean equal = false;  //assume the worst
+
+            try
+            {
+                if (obj != null && obj is WallGroup)
+                {
+                    WallGroup compare = obj as WallGroup;
+
+                    Boolean structureEquality;
+                    structureEquality = (this.StartIndex == compare.StartIndex);
+                    structureEquality &= (this.PolygonCount == compare.PolygonCount);
+
+                    equal = structureEquality;
+                }
+            }
+            catch { equal = false; }    //per MSDN, must not throw exceptions
+
+            return equal;
+        }
+        #endregion
     }
 }

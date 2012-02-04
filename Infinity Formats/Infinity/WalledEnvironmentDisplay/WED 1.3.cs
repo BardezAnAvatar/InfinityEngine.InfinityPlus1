@@ -6,6 +6,7 @@ using System.Text;
 using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDisplay.Components;
+using Bardez.Projects.InfinityPlus1.Utility;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDisplay
@@ -842,6 +843,47 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             this.PolygonHeader.OffsetVertices = Convert.ToUInt32(position);
 
             //no need to logically consume vertices, since no data follows
+        }
+        #endregion
+
+
+        #region Equality
+        /// <summary>Overridden (value) equality method</summary>
+        /// <param name="obj">Object to compare to</param>
+        /// <returns>Boolean indicating equality</returns>
+        public override Boolean Equals(Object obj)
+        {
+            Boolean equal = false;  //assume the worst
+
+            try
+            {
+                if (obj != null && obj is Wed1_3)
+                {
+                    Wed1_3 compare = obj as Wed1_3;
+
+                    //short circuit the comparisons
+                    equal = this.Header.Equals(compare.Header);
+                    if (equal)
+                        equal = this.Overlays.Equals<Overlay>(compare.Overlays);
+                        if (equal)
+                            equal = this.PolygonHeader.Equals(compare.PolygonHeader);
+                            if (equal)
+                                equal = this.Doors.Equals<Door>(compare.Doors);
+                                if (equal)
+                                    equal = this.WallGroups.Equals<WallGroup>(compare.WallGroups);
+                                    if (equal)
+                                        equal = this.WallPolygons.Equals<Polygon>(compare.WallPolygons);
+                                        if (equal)
+                                            equal = this.WallPolygonLookupTable.Equals<Int16>(compare.WallPolygonLookupTable);
+                                            if (equal)
+                                                equal = this.DoorVertexLookupTable.Equals<DoorVertexIndexCollections>(compare.DoorVertexLookupTable);
+                                                if (equal)
+                                                    equal = this.Vertices.Equals<Vertex>(compare.Vertices);
+                }
+            }
+            catch { equal = false; }    //per MSDN, must not throw exceptions
+
+            return equal;
         }
         #endregion
     }

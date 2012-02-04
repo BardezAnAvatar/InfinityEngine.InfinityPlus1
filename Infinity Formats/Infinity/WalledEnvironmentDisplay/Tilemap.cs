@@ -157,5 +157,46 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
         }
         #endregion
+
+
+        #region Equality
+        /// <summary>Overridden (value) equality method</summary>
+        /// <param name="obj">Object to compare to</param>
+        /// <returns>Boolean indicating equality</returns>
+        public override Boolean Equals(Object obj)
+        {
+            Boolean equal = false;  //assume the worst
+
+            try
+            {
+                if (obj != null && obj is Tilemap)
+                {
+                    Tilemap compare = obj as Tilemap;
+
+                    Boolean structureEquality;
+                    structureEquality = (this.PrimaryStartIndex == compare.PrimaryStartIndex);
+                    structureEquality &= (this.PrimaryTileCount == compare.PrimaryTileCount);
+                    structureEquality &= (this.SecondaryStartIndex.Equals(compare.SecondaryStartIndex));
+                    structureEquality &= (this.RenderLayer == compare.RenderLayer);
+
+                    if (structureEquality)
+                    {
+                        Int32 index = 0;
+                        do
+                        {
+                            structureEquality &= this.Padding[index] == compare.Padding[index];
+                            ++index;
+                        }
+                        while (index < this.Padding.Length && structureEquality);
+                    }
+
+                    equal = structureEquality;
+                }
+            }
+            catch { equal = false; }    //per MSDN, must not throw exceptions
+
+            return equal;
+        }
+        #endregion
     }
 }

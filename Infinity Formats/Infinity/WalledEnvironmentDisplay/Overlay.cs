@@ -209,5 +209,42 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             return builder.ToString();
         }
         #endregion
+
+
+        #region Equality
+        /// <summary>Overridden (value) equality method</summary>
+        /// <param name="obj">Object to compare to</param>
+        /// <returns>Boolean indicating equality</returns>
+        public override Boolean Equals(Object obj)
+        {
+            Boolean equal = false;  //assume the worst
+
+            try
+            {
+                if (obj != null && obj is Overlay)
+                {
+                    Overlay compare = obj as Overlay;
+
+                    Boolean structureEquality;
+                    structureEquality = (this.TileWidth == compare.TileWidth);
+                    structureEquality &= (this.TileHeight == compare.TileHeight);
+                    structureEquality &= (this.TileSet.Equals(compare.TileSet));
+                    structureEquality &= (this.TileCount == compare.TileCount);
+                    structureEquality &= (this.Unknown == compare.Unknown);
+                    structureEquality &= (this.OffsetTilemap == compare.OffsetTilemap);
+                    structureEquality &= (this.OffsetTileIndeces == compare.OffsetTileIndeces);
+
+                    //short-circuit large equality tests
+                    if (structureEquality)
+                        structureEquality &= this.TileSetMapping.Equals(compare.TileSetMapping);
+
+                    equal = structureEquality;
+                }
+            }
+            catch { equal = false; }    //per MSDN, must not throw exceptions
+
+            return equal;
+        }
+        #endregion
     }
 }

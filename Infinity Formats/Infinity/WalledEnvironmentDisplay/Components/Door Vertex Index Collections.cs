@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Bardez.Projects.InfinityPlus1.Utility;
+
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDisplay.Components
 {
     /// <summary>Contains a list of polygons' vertex index collections for doors, both open and closed</summary>
@@ -21,6 +23,32 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
         {
             this.Open = new List<Int16>();
             this.Closed = new List<Int16>();
+        }
+        #endregion
+
+
+        #region Equality
+        /// <summary>Overridden (value) equality method</summary>
+        /// <param name="obj">Object to compare to</param>
+        /// <returns>Boolean indicating equality</returns>
+        public override Boolean Equals(Object obj)
+        {
+            Boolean equal = false;  //assume the worst
+
+            try
+            {
+                if (obj != null && obj is DoorVertexIndexCollections)
+                {
+                    DoorVertexIndexCollections compare = obj as DoorVertexIndexCollections;
+                    equal = this.Open.Equals<Int16>(compare.Open);
+                    
+                    if (equal)
+                        equal = this.Closed.Equals<Int16>(compare.Closed);
+                }
+            }
+            catch { equal = false; }    //per MSDN, must not throw exceptions
+
+            return equal;
         }
         #endregion
     }

@@ -22,7 +22,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
 
         #region Fields
         /// <summary>Represents the start vertex index of the polygon</summary>
-        public Int32 StartIndex { get; set; }
+        public UInt32 StartIndex { get; set; }
 
         /// <summary>Represents the count of vertices in the polygon</summary>
         public Int32 VertexCount { get; set; }
@@ -78,7 +78,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
 
             Byte[] data = ReusableIO.BinaryRead(input, Polygon.StructSize);
 
-            this.StartIndex = ReusableIO.ReadInt16FromArray(data, 0);
+            this.StartIndex = ReusableIO.ReadUInt16FromArray(data, 0);
             this.VertexCount = ReusableIO.ReadInt16FromArray(data, 4);
             this.Properties = (PolygonProperties)data[8];
             this.Unknown = data[9];
@@ -92,7 +92,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
         /// <param name="output">Stream to write to</param>
         public void Write(Stream output)
         {
-            ReusableIO.WriteInt32ToStream(this.StartIndex, output);
+            ReusableIO.WriteUInt32ToStream(this.StartIndex, output);
             ReusableIO.WriteInt32ToStream(this.VertexCount, output);
             output.WriteByte((Byte)this.Properties);
             output.WriteByte(this.Unknown);
@@ -193,6 +193,40 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
 
             String result = sb.ToString();
             return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
+        }
+        #endregion
+
+
+        #region Equality
+        /// <summary>Overridden (value) equality method</summary>
+        /// <param name="obj">Object to compare to</param>
+        /// <returns>Boolean indicating equality</returns>
+        public override Boolean Equals(Object obj)
+        {
+            Boolean equal = false;  //assume the worst
+
+            try
+            {
+                if (obj != null && obj is Polygon)
+                {
+                    Polygon compare = obj as Polygon;
+
+                    Boolean structureEquality;
+                    structureEquality = (this.StartIndex == compare.StartIndex);
+                    structureEquality &= (this.VertexCount == compare.VertexCount);
+                    structureEquality &= (this.Properties.Equals(compare.Properties));
+                    structureEquality &= (this.Unknown == compare.Unknown);
+                    structureEquality &= (this.BoundingRegionMinX == compare.BoundingRegionMinX);
+                    structureEquality &= (this.BoundingRegionMaxX == compare.BoundingRegionMaxX);
+                    structureEquality &= (this.BoundingRegionMinY == compare.BoundingRegionMinY);
+                    structureEquality &= (this.BoundingRegionMaxY == compare.BoundingRegionMaxY);
+
+                    equal = structureEquality;
+                }
+            }
+            catch { equal = false; }    //per MSDN, must not throw exceptions
+
+            return equal;
         }
         #endregion
     }

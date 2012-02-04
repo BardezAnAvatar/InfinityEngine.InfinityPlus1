@@ -251,6 +251,7 @@
     <Folder Include="External\Weidu\" />
     <Folder Include="Infinity\BiowareIndexFileFormat\BiffC1\" />
     <Folder Include="Infinity\BiowareIndexFileFormat\CBiff1\" />
+    <Folder Include="Infinity\BlackIsleAnimation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

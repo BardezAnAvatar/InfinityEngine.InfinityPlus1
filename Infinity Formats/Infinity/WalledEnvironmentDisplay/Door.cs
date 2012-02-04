@@ -6,6 +6,7 @@ using System.Text;
 using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDisplay.Components;
+using Bardez.Projects.InfinityPlus1.Utility;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDisplay
@@ -188,6 +189,48 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             builder.Append(this.OffsetPolygonsClosed);
 
             return builder.ToString();
+        }
+        #endregion
+
+
+        #region Equality
+        /// <summary>Overridden (value) equality method</summary>
+        /// <param name="obj">Object to compare to</param>
+        /// <returns>Boolean indicating equality</returns>
+        public override Boolean Equals( Object obj)
+        {
+            Boolean equal = false;  //assume the worst
+
+            try
+            {
+                if (obj != null && obj is Door)
+                {
+                    Door compare = obj as Door;
+
+                    Boolean structureEquality;
+                    structureEquality = (this.Name.Value == compare.Name.Value);
+                    structureEquality &= (this.Status == compare.Status);
+                    structureEquality &= (this.TileCellIndex == compare.TileCellIndex);
+                    structureEquality &= (this.TileCount == compare.TileCount);
+                    structureEquality &= (this.PolygonCountOpen == compare.PolygonCountOpen);
+                    structureEquality &= (this.PolygonCountClosed == compare.PolygonCountClosed);
+                    structureEquality &= (this.OffsetPolygonsOpen == compare.OffsetPolygonsOpen);
+                    structureEquality &= (this.OffsetPolygonsClosed == compare.OffsetPolygonsClosed);
+
+                    //short-circuit large equality tests
+                    if (structureEquality)
+                    {
+                        structureEquality &= this.TilemapIndeces.Equals<Int16>(compare.TilemapIndeces);
+                        if (structureEquality)
+                            structureEquality &= this.Polygons.Equals(compare.Polygons);
+                    }
+
+                    equal = structureEquality;
+                }
+            }
+            catch { equal = false; }    //per MSDN, must not throw exceptions
+
+            return equal;
         }
         #endregion
     }
