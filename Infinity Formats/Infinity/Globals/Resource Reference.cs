@@ -10,24 +10,21 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals
     /// </summary>
     public class ResourceReference
     {
+        #region Fields
         /// <summary>This member represents the resource reference string</summary>
-        private String resRef;
+        public String ResRef { get; set; }
 
         /// <summary>This member represents the type of resource referenced</summary>
         private ResourceType type;
+        #endregion
 
-        /// <summary>This public property gets or sets the resource reference string</summary>
-        public String ResRef
-        {
-            get { return this.resRef; }
-            set { this.resRef = value; }
-        }
 
+        #region Properties
         /// <summary>This public property gets or sets the NULL-terminated representation of the resource reference string</summary>
         public String ZResRef
         {
-            get { return ZString.GetZString(this.resRef); }
-            set { this.resRef = ZString.GetZString(value); }
+            get { return ZString.GetZString(this.ResRef); }
+            set { this.ResRef = ZString.GetZString(value); }
         }
 
         /// <summary>This member represents the type of resource1 referenced</summary>
@@ -36,5 +33,34 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals
             get { return this.type; }
             set { this.type = value; }
         }
+        #endregion
+
+
+        #region Equality
+        /// <summary>Overridden (value) equality method</summary>
+        /// <param name="obj">Object to compare to</param>
+        /// <returns>Boolean indicating equality</returns>
+        public override Boolean Equals(Object obj)
+        {
+            Boolean equal = false;  //assume the worst
+
+            try
+            {
+                if (obj != null && obj is ResourceReference)
+                {
+                    ResourceReference compare = obj as ResourceReference;
+
+                    Boolean structureEquality;
+                    structureEquality = (this.ZResRef == compare.ZResRef);
+                    structureEquality &= (this.Type == compare.Type);
+
+                    equal = structureEquality;
+                }
+            }
+            catch { equal = false; }    //per MSDN, must not throw exceptions
+
+            return equal;
+        }
+        #endregion
     }
 }
