@@ -64,8 +64,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG
         public Frame GetFrame()
         {
             Frame frame = new Frame();
-            frame.OriginX = 0UL;
-            frame.OriginY = 0UL;
             frame.Pixels = this.GetPixelData();
 
             return frame;
