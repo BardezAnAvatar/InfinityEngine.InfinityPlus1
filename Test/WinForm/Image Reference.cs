@@ -12,6 +12,12 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         /// <summary>Represents the unique key to the bitmap in device memory.</summary>
         public Int32 RenderKey { get; set; }
 
+        /// <summary>X coordinate to render at</summary>
+        public Int64 RenderOriginX { get; set; }
+
+        /// <summary>Y coordinate to render at</summary>
+        public Int64 RenderOriginY { get; set; }
+        
         /// <summary>Represents an order to the collection when sorted</summary>
         public Int32 Order { get; set; }
         #endregion
@@ -26,6 +32,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         {
             this.ImageDescription = path;
             this.RenderKey = key;
+            this.RenderOriginX = 0;
+            this.RenderOriginY = 0;
         }
 
         /// <summary>Default constructor</summary>
@@ -45,6 +53,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         }
         #endregion
 
+
+        #region Compare methods
         /// <summary>Compares this instance to any given Object</summary>
         /// <param name="comparable">Object reference to compare to</param>
         /// <returns>An Int32 comparison</returns>
@@ -81,5 +91,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 
             return comparison;
         }
+        #endregion
     }
 }
