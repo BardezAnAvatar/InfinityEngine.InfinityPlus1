@@ -91,7 +91,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common
         /// <summary>This method complements the default ToString() method, printing the member data line by line</summary>
         /// <param name="fast">Boolean indicating whether or not to display the hexidecimal representation of the color.</param>
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
-        public String ToString(Boolean fast)
+        public virtual String ToString(Boolean fast)
         {
             String output;
 
@@ -104,14 +104,14 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common
         }
 
         /// <summary>Returns the printable read-friendly version of the store format</summary>
-        protected String GetVersionString()
+        protected virtual String GetVersionString()
         {
             return "Color:";
         }
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
         /// <returns>A string, formatted largely for console, that describes the item's contents.</returns>
-        protected String GetStringRepresentation()
+        protected virtual String GetStringRepresentation()
         {
             StringBuilder builder = new StringBuilder();
             builder.Append(StringFormat.ToStringAlignment("Red"));
@@ -120,6 +120,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common
             builder.Append(this.Green);
             builder.Append(StringFormat.ToStringAlignment("Blue"));
             builder.Append(this.Blue);
+            builder.Append(StringFormat.ToStringAlignment("Hex"));
             builder.Append(this.GetHexStringRepresentation());
 
             return builder.ToString();
@@ -127,11 +128,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
         /// <returns>A string, formatted largely for console, that describes the item's contents.</returns>
-        protected String GetHexStringRepresentation()
+        protected virtual String GetHexStringRepresentation()
         {
             StringBuilder builder = new StringBuilder();
             builder.Append(StringFormat.ToStringAlignment("Hex"));
-            builder.Append(String.Format("#{0:2H}{1:2H}{2:2H}", this.Red, this.Green, this.Blue));
+            builder.Append(String.Format("#{0:X2}{1:X2}{2:X2}", this.Red, this.Green, this.Blue));
 
             return builder.ToString();
         }
