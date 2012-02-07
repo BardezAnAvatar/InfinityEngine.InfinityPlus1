@@ -200,14 +200,15 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
 
         /// <summary>Draws a Bitmap to the render buffer</summary>
         /// <param name="bmp">Direct2D bitmap to draw to the buffer.</param>
-        protected void DrawBitmapToBuffer(Direct2D.Bitmap bmp)
+        protected void DrawBitmapToBuffer(Direct2D.Bitmap bmp, Point2dF origin)
         {
             //Determine the copy rectangle
             Direct2D.SizeF bmpSize = bmp.GetSize();
             Single width = bmpSize.Width > this.bmpRengerTarget.Size.Width ? this.bmpRengerTarget.Size.Width : bmpSize.Width;
             Single height = bmpSize.Height > this.bmpRengerTarget.Size.Height ? this.bmpRengerTarget.Size.Height : bmpSize.Height;
 
-            Direct2D.RectangleF rect = new Direct2D.RectangleF(0, width, 0, height);
+            Direct2D.RectangleF destRect = new Direct2D.RectangleF(origin.X, origin.X + width, origin.Y, origin.Y + height);
+            Direct2D.RectangleF srcRect = new Direct2D.RectangleF(0.0F, width, 0.0F, height);
 
             //tell Direct2D to start the draw
             this.bmpRengerTarget.BeginDraw();
@@ -216,10 +217,17 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
             this.FillBufferRenderTarget(this.bmpRengerTarget);
 
             // do the actual draw
-            this.bmpRengerTarget.DrawBitmap(bmp, rect, 1.0F, BitmapInterpolationMode.Linear, rect);
+            this.bmpRengerTarget.DrawBitmap(bmp, destRect, 1.0F, BitmapInterpolationMode.Linear, srcRect);
 
             //tell Direct2D that a paint operation is ending
             ResultCode result = this.bmpRengerTarget.EndDraw();
+        }
+
+        /// <summary>Draws a Bitmap to the render buffer</summary>
+        /// <param name="bmp">Direct2D bitmap to draw to the buffer.</param>
+        protected void DrawBitmapToBuffer(Direct2D.Bitmap bmp)
+        {
+            this.DrawBitmapToBuffer(bmp, new Point2dF(0.0F, 0.0F));
         }
 
         /// <summary>Duplicates the bitmap behind the existing rendering target, and drawing it to a new one, discarding the current and setting the new.</summary>
@@ -311,8 +319,17 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         /// <param name="key">Frame key to set as current image</param>
         public override void SetRenderFrame(Int32 key)
         {
+            this.SetRenderFrame(key, 0, 0);
+        }
+
+        /// <summary>Sets the frame to be rendered to the User Control</summary>
+        /// <param name="key">Frame key to set as current image</param>
+        /// <param name="originX">X coordinate to start drawing from</param>
+        /// <param name="originY">Y coordinate to start drawing from</param>
+        public override void SetRenderFrame(Int32 key, Int64 originX, Int64 originY)
+        {
             if (key > -1)
-                this.DrawBitmapToBuffer(Direct2dResourceManager.Instance.GetBitmapResource(key));
+                this.DrawBitmapToBuffer(Direct2dResourceManager.Instance.GetBitmapResource(key), new Point2dF(Convert.ToSingle(originX), Convert.ToSingle(originY)));
             else
                 this.DiscardCurrentBuffer();
 
