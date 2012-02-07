@@ -19,7 +19,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common
 
         #region Fields
         /// <summary>Array of color entries</summary>
-        public ColorEntry[] Colors { get; set; }
+        public virtual ColorEntry[] Colors { get; set; }
         #endregion
 
 
