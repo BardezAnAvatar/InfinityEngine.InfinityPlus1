@@ -5,6 +5,7 @@ using System.IO;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDisplay;
 using Bardez.Projects.InfinityPlus1.Test;
+using Bardez.Projects.InfinityPlus1.Utility;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.WalledEnvironmentDisplay
@@ -57,6 +58,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.WalledEnvironmentDisplay
 
             using (FileStream dest = new FileStream(testArgs.Path + ".rewrite", FileMode.Create, FileAccess.Write))
                 this.TestWrite(dest);
+
+            Boolean matches = FileCompare.CompareFiles(testArgs.Path, testArgs.Path + ".rewrite");
+            if (!matches)
+                throw new ApplicationException("Rewrite failed.");
         }
 
         /// <summary>Writes the data structure back out to a destination stream</summary>

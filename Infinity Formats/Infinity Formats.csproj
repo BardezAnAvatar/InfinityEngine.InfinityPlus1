@@ -12,10 +12,14 @@
     <AssemblyName>Infinity Formats</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -81,6 +85,12 @@
     <Compile Include="Infinity\BiowareIndexFileFormat\Biff1\Biff1FileEntry.cs" />
     <Compile Include="Infinity\BiowareIndexFileFormat\Biff1\Biff1ResourceEntry.cs" />
     <Compile Include="Infinity\BiowareIndexFileFormat\Biff1\Biff1TilesetEntry.cs" />
+    <Compile Include="Infinity\BlackIsleAnimation\Blask Isle Animation 1.cs" />
+    <Compile Include="Infinity\BlackIsleAnimation\Component\Animation Entry.cs" />
+    <Compile Include="Infinity\BlackIsleAnimation\Component\BAM Header.cs" />
+    <Compile Include="Infinity\BlackIsleAnimation\Component\BAM Palette Entry.cs" />
+    <Compile Include="Infinity\BlackIsleAnimation\Component\Frame Data.cs" />
+    <Compile Include="Infinity\BlackIsleAnimation\Component\Frame Entry.cs" />
     <Compile Include="Infinity\Character\Biography\Biography 1.cs" />
     <Compile Include="Infinity\Character\Biography\Biography 2.cs" />
     <Compile Include="Infinity\Character\Enums\User Interface Button.cs" />
@@ -96,6 +106,7 @@
     <Compile Include="Infinity\ChitinKey\Key Header.cs" />
     <Compile Include="Infinity\ChitinKey\Key Enums.cs" />
     <Compile Include="Infinity\Common\Color Entry.cs" />
+    <Compile Include="Infinity\Common\Transparency Color Entry.cs" />
     <Compile Include="Infinity\Common\Enums\ItemSpell Ability Damage Type.cs" />
     <Compile Include="Infinity\Common\Enums\ItemSpell Ability Depletion Behavior.cs" />
     <Compile Include="Infinity\Common\Enums\ItemSpell Ability Location.cs" />
@@ -251,7 +262,6 @@
     <Folder Include="External\Weidu\" />
     <Folder Include="Infinity\BiowareIndexFileFormat\BiffC1\" />
     <Folder Include="Infinity\BiowareIndexFileFormat\CBiff1\" />
-    <Folder Include="Infinity\BlackIsleAnimation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

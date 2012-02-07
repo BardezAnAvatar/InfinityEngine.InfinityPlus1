@@ -13,10 +13,14 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -127,6 +131,9 @@
     <Compile Include="WinForm\ACM\WAVC Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="WinForm\BAM\BAM Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WinForm\BIFF\Uncompressed\Biff Archive Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -153,6 +160,13 @@
     </Compile>
     <Compile Include="WinForm\CHR\Character 9 Test Control.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Animation Collection Reference.cs" />
+    <Compile Include="WinForm\Harness Animation Collection Test Control Base.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness Animation Collection Test Control Base.Designer.cs">
+      <DependentUpon>Harness Animation Collection Test Control Base.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\CRE\Creature 1.2 Header Test Control.cs">
       <SubType>UserControl</SubType>
@@ -384,6 +398,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="WinForm\Harness Animation Collection Test Control Base.resx">
+      <DependentUpon>Harness Animation Collection Test Control Base.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Harness Image Collection Test Control Base.resx">
       <DependentUpon>Harness Image Collection Test Control Base.cs</DependentUpon>
     </EmbeddedResource>
