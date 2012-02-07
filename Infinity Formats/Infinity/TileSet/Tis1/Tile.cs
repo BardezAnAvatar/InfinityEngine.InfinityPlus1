@@ -131,11 +131,15 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1
 
             for (Int32 dataIndex = 0; dataIndex < this.TileData.Length; ++dataIndex)
             {
-                Int32 pixelOffset = dataIndex * 4;
-                pixels[pixelOffset] = this.Palette.Colors[this.TileData[dataIndex]].Blue;
-                pixels[pixelOffset + 1] = this.Palette.Colors[this.TileData[dataIndex]].Green;
-                pixels[pixelOffset + 2] = this.Palette.Colors[this.TileData[dataIndex]].Red;
-                pixels[pixelOffset + 3] = (this.TileData[dataIndex] == Byte.MinValue) ? Byte.MinValue: Byte.MaxValue;  //Index 0 is transparent, premultiplied; everything else is opaque
+                //pre-multiply; that means 0 if transparent (already set!) or else normal + 255 alpha
+                if (this.TileData[dataIndex] != Byte.MinValue)  //Index 0 is transparent, premultiplied; everything else is opaque
+                {
+                    Int32 pixelOffset = dataIndex * 4;
+                    pixels[pixelOffset] = this.Palette.Colors[this.TileData[dataIndex]].Blue;
+                    pixels[pixelOffset + 1] = this.Palette.Colors[this.TileData[dataIndex]].Green;
+                    pixels[pixelOffset + 2] = this.Palette.Colors[this.TileData[dataIndex]].Red;
+                    pixels[pixelOffset + 3] = Byte.MaxValue;  
+                }
             }
 
             return pixels;
