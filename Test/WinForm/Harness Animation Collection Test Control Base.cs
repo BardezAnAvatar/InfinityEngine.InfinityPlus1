@@ -272,13 +272,13 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         {
             this.RenderDisplay(renderKey, 0L, 0L);
         }
+
         /// <summary>Sets the render Frame key to -1 and calls the render methood to the UI</summary>
         /// <param name="renderKey">Frame key used to set the rendering image</param>
         /// <remarks>Any locking must be done outside this method</remarks>
         protected virtual void RenderDisplay(Int32 renderKey, Int64 renderX, Int64 renderY)
         {
-            this.direct2dRenderControl.SetRenderFrame(renderKey, renderX, renderY);
-            this.direct2dRenderControl.Render();
+            this.direct2dRenderControl.SetRenderFrameAndRender(renderKey, renderX, renderY);
         }
 
         /// <summary>Blanks out the rendering key to the control</summary>

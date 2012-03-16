@@ -40,8 +40,8 @@
             this.lblOutputDescriptor = new System.Windows.Forms.Label();
             this.tblMain = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTest = new System.Windows.Forms.Panel();
-            this.btnInitialize = new System.Windows.Forms.Button();
             this.btnChooseColor = new System.Windows.Forms.Button();
+            this.btnInitialize = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerHarnessResults)).BeginInit();
             this.splitContainerHarnessResults.Panel1.SuspendLayout();
             this.splitContainerHarnessResults.Panel2.SuspendLayout();
@@ -200,16 +200,6 @@
             this.pnlTest.Size = new System.Drawing.Size(693, 34);
             this.pnlTest.TabIndex = 11;
             // 
-            // btnInitialize
-            // 
-            this.btnInitialize.Location = new System.Drawing.Point(5, 3);
-            this.btnInitialize.Name = "btnInitialize";
-            this.btnInitialize.Size = new System.Drawing.Size(75, 30);
-            this.btnInitialize.TabIndex = 20;
-            this.btnInitialize.Text = "Initialize";
-            this.btnInitialize.UseVisualStyleBackColor = true;
-            this.btnInitialize.Click += new System.EventHandler(this.btnInitialize_Click);
-            // 
             // btnChooseColor
             // 
             this.btnChooseColor.Location = new System.Drawing.Point(182, 3);
@@ -219,6 +209,16 @@
             this.btnChooseColor.Text = "Background Color";
             this.btnChooseColor.UseVisualStyleBackColor = true;
             this.btnChooseColor.Click += new System.EventHandler(this.btnChooseColor_Click);
+            // 
+            // btnInitialize
+            // 
+            this.btnInitialize.Location = new System.Drawing.Point(5, 3);
+            this.btnInitialize.Name = "btnInitialize";
+            this.btnInitialize.Size = new System.Drawing.Size(75, 30);
+            this.btnInitialize.TabIndex = 20;
+            this.btnInitialize.Text = "Initialize";
+            this.btnInitialize.UseVisualStyleBackColor = true;
+            this.btnInitialize.Click += new System.EventHandler(this.btnInitialize_Click);
             // 
             // HarnessImageCollectionTestControlBase
             // 

@@ -216,8 +216,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         /// <remarks>Any locking must be done outside this method</remarks>
         protected virtual void RenderDisplay(Int32 renderKey)
         {
-            this.direct2dRenderControl.SetRenderFrame(renderKey);
-            this.direct2dRenderControl.Render();
+            this.direct2dRenderControl.SetRenderFrameAndRender(renderKey);
         }
 
         /// <summary>Gets the paths to test from the config file</summary>
