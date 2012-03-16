@@ -35,7 +35,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
         /// <returns>A string, formatted largely for console, that describes the item's contents.</returns>
-        protected String GetStringRepresentation()
+        protected override String GetStringRepresentation()
         {
             StringBuilder builder = new StringBuilder();
             builder.Append(StringFormat.ToStringAlignment("Red"));
@@ -54,7 +54,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
         /// <returns>A string, formatted largely for console, that describes the item's contents.</returns>
-        protected String GetHexStringRepresentation()
+        protected override String GetHexStringRepresentation()
         {
             StringBuilder builder = new StringBuilder();
             builder.Append(StringFormat.ToStringAlignment("Hex"));
