@@ -1,0 +1,13 @@
+﻿I am referencing an unpublished file known as "mve-fmt.txt" for all of this code. I received it in an e-mail from
+my old TeamBG days, when the community was paranoid about Interplay cracking skulls about this format, as well
+as ACM.
+
+Interplay is now more or less dead in its form compared to the previous one, which in some views might take away
+its teeth; my concern is more towards utility. MVE is outdated and unnecessary, very clamped down and its content
+is locked away in unremarkable containers. It's not like there's a set of DirectShow filters for playing MVEs,
+much less any probability of getting info from the likes of Interplay.
+
+So, hopefully I can crack open the can a little bit, expose some of the data and be able to export it to raw AVI
+or maybe even the likes of AviSynth in years to come.
+
+-Bardez

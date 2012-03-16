@@ -1,0 +1,23 @@
+﻿There are two IE *.MVE MVEs that have multiple create timer opcodes:
+* BG\BIOWBOTH.MVE
+* BG\INTRO.MVE
+
+Both use the same frame rate, so I can only really assume that these two movies were appended.
+While it scarily implies a variable framerate (not that scary, but I am thinking of exporting to
+*.avi, so it would be a problem), at least for the Infinity Engine, this can be bypassed.
+
+As for video data, there is a 1:1 relationship between the opcode that stores video frame data
+and the set decodeing map opcode. [Presumably, the map always comes first.] Past that, it would
+appear that each frame is stored as one single opcode pair, making for easy indexing.
+
+Audio and video match fairly closely, as the sum of audio samples uncompressed data length for a
+given channel, the sample width and the number of channels, is very close.
+
+i.e. video: 1711 frames / 15
+	= 114.06666666666666666666666666667 seconds
+i.e. audio: 9569528 sample length / 2 channels / 2 bytes pr sample / 22050 samples per second
+	= 108.49804988662131519274376417234 seconds
+
+video is actually off (multiplier is not 15 exactly), and more like:
+	1711 frames / 14.986212684330416017264117012349 frames per second
+	= 114.171608 seconds of video

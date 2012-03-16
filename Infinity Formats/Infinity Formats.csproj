@@ -12,14 +12,10 @@
     <AssemblyName>Infinity Formats</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,6 +48,10 @@
       <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
       <Name>Configuration Handler</Name>
     </ProjectReference>
+    <ProjectReference Include="..\External Formats\External Formats.csproj">
+      <Project>{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}</Project>
+      <Name>External Formats</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Media Base\Media Base.csproj">
       <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
       <Name>Media Base</Name>
@@ -79,6 +79,44 @@
     <Compile Include="External\Interplay\ACM\Packed Block.cs" />
     <Compile Include="External\Interplay\ACM\WAVC Audio File.cs" />
     <Compile Include="External\Interplay\ACM\WAVC Header.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Coding\Audio Coding.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Chunk Index.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Coding\Video Coding 16 Bit.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Coding\Video Coding 8 Bit.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Coding\Video Coding Base.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Coding\Video Opcode Stream.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Management\MVE Audio Channel Parameters.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Management\MVE Timer Parameters.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Management\MVE Video Frame.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Management\MVE Video Parameters.cs" />
+    <Compile Include="External\Interplay\MVE\Component\MVE Header.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Opcodes\Audio Stream Data.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Opcodes\Audio Stream.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Opcodes\Render Buffer V1.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Opcodes\Create Timer.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Opcodes\Initialize Audio Buffers V0.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Opcodes\Initialize Audio Buffers V1.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Opcodes\Initialize Audio Buffers.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Opcodes\Initialize Video Buffers V0.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Opcodes\Initialize Video Buffers V1.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Opcodes\Initialize Video Buffers V2.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Opcodes\Initialize Video Buffers.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Opcodes\Initialize Video Stream.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Opcodes\Opcode Data.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Opcodes\Opcode.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Opcodes\Render Buffer V0.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Opcodes\Set Decoding Map.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Opcodes\Set Palette.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Opcodes\Video Data.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Coding\Video Coding 8 Bit %28No Delta%29.cs" />
+    <Compile Include="External\Interplay\MVE\Enum\Audio Stream Channels.cs" />
+    <Compile Include="External\Interplay\MVE\Enum\Block Encoding Method.cs" />
+    <Compile Include="External\Interplay\MVE\Enum\Opcode Versions.cs" />
+    <Compile Include="External\Interplay\MVE\MVE Chunk Opcode Indexer.cs" />
+    <Compile Include="External\Interplay\MVE\Enum\Chunk Type.cs" />
+    <Compile Include="External\Interplay\MVE\Enum\Opcode Types.cs" />
+    <Compile Include="External\Interplay\MVE\MVE Chunk Indexer.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Management\MVE Manager.cs" />
     <Compile Include="Infinity\Base\Interface Infinity Format.cs" />
     <Compile Include="Infinity\BiowareIndexFileFormat\Biff1\Biff1Archive.cs" />
     <Compile Include="Infinity\BiowareIndexFileFormat\Biff1\Biff1Header.cs" />
@@ -258,10 +296,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="External\Interplay\MVE\" />
     <Folder Include="External\Weidu\" />
     <Folder Include="Infinity\BiowareIndexFileFormat\BiffC1\" />
     <Folder Include="Infinity\BiowareIndexFileFormat\CBiff1\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="External\Interplay\MVE\_Remarks.txt" />
+    <Content Include="External\Interplay\MVE\_Binary notes.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
