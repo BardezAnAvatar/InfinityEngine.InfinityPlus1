@@ -94,8 +94,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Output.Direct2D
         {
             lock (this.interfaceLock)
             {
-                this.direct2dRenderControl.SetRenderFrame(-1);
-                this.direct2dRenderControl.Render();
+                this.direct2dRenderControl.SetRenderFrameAndRender(-1);
             }
         }
 
@@ -109,10 +108,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Output.Direct2D
                 BitmapReference bmpRef = this.lstboxImages.SelectedItem as BitmapReference;
 
                 if (bmpRef != null)
-                {
-                    this.direct2dRenderControl.SetRenderFrame(bmpRef.RenderKey);
-                    this.direct2dRenderControl.Render();
-                }
+                    this.direct2dRenderControl.SetRenderFrameAndRender(bmpRef.RenderKey);
             }
         }
     }
