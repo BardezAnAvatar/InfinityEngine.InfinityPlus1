@@ -885,6 +885,25 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
 
             return equal;
         }
+
+        /// <summary>Override of GetHashCode</summary>
+        /// <returns>Computed hash</returns>
+        public override Int32 GetHashCode()
+        {
+            Int32 hash = base.GetHashCode();
+            hash ^= this.Header.GetHashCode();
+            hash ^= this.Overlays.GetHashCode();
+            hash ^= this.PolygonHeader.GetHashCode();
+            hash ^= this.Doors.GetHashCode();
+            hash ^= this.WallGroups.GetHashCode();
+            hash ^= this.WallPolygons.GetHashCode();
+            hash ^= this.WallPolygonLookupTable.GetHashCode();
+            hash ^= this.DoorVertexLookupTable.GetHashCode();
+            hash ^= this.Vertices.GetHashCode();
+            //offsets are unimportant when it comes to data value equivalence/equality
+
+            return hash;
+        }
         #endregion
     }
 }

@@ -133,8 +133,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BlackIsleAnimation.
                 {
                     BamHeader compare = obj as BamHeader;
 
-                    Boolean structureEquality;
-                    structureEquality = (this.CountFrames == compare.CountFrames);
+                    Boolean structureEquality = (this.CountFrames == compare.CountFrames);
                     structureEquality &= (this.CountAnimations == compare.CountAnimations);
                     structureEquality &= (this.RlePaletteIndex == compare.RlePaletteIndex);
 
@@ -145,6 +144,19 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BlackIsleAnimation.
             catch { equal = false; }    //per MSDN, must not throw exceptions
 
             return equal;
+        }
+
+        /// <summary>Override of GetHashCode</summary>
+        /// <returns>Computed hash</returns>
+        public override Int32 GetHashCode()
+        {
+            Int32 hash = base.GetHashCode();
+            hash ^= this.CountFrames.GetHashCode();
+            hash ^= this.CountAnimations.GetHashCode();
+            hash ^= this.RlePaletteIndex.GetHashCode();
+            //offsets are unimportant when it comes to data value equivalence/equality
+
+            return hash;
         }
         #endregion
     }

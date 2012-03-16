@@ -214,13 +214,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BlackIsleAnimation.
                 {
                     FrameEntry compare = obj as FrameEntry;
 
-                    Boolean structureEquality;
-                    structureEquality = (this.Width == compare.Width);
+                    Boolean structureEquality = (this.Width == compare.Width);
                     structureEquality &= (this.Height == compare.Height);
-                    structureEquality = (this.CenterX == compare.CenterX);
+                    structureEquality &= (this.CenterX == compare.CenterX);
                     structureEquality &= (this.CenterY == compare.CenterY);
+                    structureEquality &= (this.RunLengthEncoded == compare.RunLengthEncoded);
                     //offset does not qualify for data value equality
-                    structureEquality = (this.RunLengthEncoded == compare.RunLengthEncoded);
 
                     equal = structureEquality;
                 }
@@ -228,6 +227,20 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BlackIsleAnimation.
             catch { equal = false; }    //per MSDN, must not throw exceptions
 
             return equal;
+        }
+
+        /// <summary>Override of GetHashCode</summary>
+        /// <returns>Computed hash</returns>
+        public override Int32 GetHashCode()
+        {
+            Int32 hash = this.Width.GetHashCode();
+            hash ^= this.Height.GetHashCode();
+            hash ^= this.CenterX.GetHashCode();
+            hash ^= this.CenterY.GetHashCode();
+            hash ^= this.RunLengthEncoded.GetHashCode();
+            //offsets are unimportant when it comes to data value equivalence/equality
+
+            return hash;
         }
         #endregion
     }

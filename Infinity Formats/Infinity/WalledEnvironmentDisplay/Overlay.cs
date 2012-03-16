@@ -225,14 +225,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
                 {
                     Overlay compare = obj as Overlay;
 
-                    Boolean structureEquality;
-                    structureEquality = (this.TileWidth == compare.TileWidth);
+                    Boolean structureEquality = (this.TileWidth == compare.TileWidth);
                     structureEquality &= (this.TileHeight == compare.TileHeight);
                     structureEquality &= (this.TileSet.Equals(compare.TileSet));
                     structureEquality &= (this.TileCount == compare.TileCount);
                     structureEquality &= (this.Unknown == compare.Unknown);
-                    structureEquality &= (this.OffsetTilemap == compare.OffsetTilemap);
-                    structureEquality &= (this.OffsetTileIndeces == compare.OffsetTileIndeces);
+                    //offsets are unimportant when it comes to data value equivalence/equality
 
                     //short-circuit large equality tests
                     if (structureEquality)
@@ -244,6 +242,22 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             catch { equal = false; }    //per MSDN, must not throw exceptions
 
             return equal;
+        }
+
+        /// <summary>Override of GetHashCode</summary>
+        /// <returns>Computed hash</returns>
+        public override Int32 GetHashCode()
+        {
+            Int32 hash = base.GetHashCode();
+            hash ^= this.TileWidth.GetHashCode();
+            hash ^= this.TileHeight.GetHashCode();
+            hash ^= this.TileSet.GetHashCode();
+            hash ^= this.TileCount.GetHashCode();
+            hash ^= this.Unknown.GetHashCode();
+            hash ^= this.TileSetMapping.GetHashCode();
+            //offsets are unimportant when it comes to data value equivalence/equality
+
+            return hash;
         }
         #endregion
     }

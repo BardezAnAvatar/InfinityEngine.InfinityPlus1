@@ -5,6 +5,7 @@ using System.Text;
 using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDisplay.Enum;
+using Bardez.Projects.InfinityPlus1.Utility;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDisplay
@@ -173,22 +174,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
                 {
                     Tilemap compare = obj as Tilemap;
 
-                    Boolean structureEquality;
-                    structureEquality = (this.PrimaryStartIndex == compare.PrimaryStartIndex);
+                    Boolean structureEquality = (this.PrimaryStartIndex == compare.PrimaryStartIndex);
                     structureEquality &= (this.PrimaryTileCount == compare.PrimaryTileCount);
                     structureEquality &= (this.SecondaryStartIndex.Equals(compare.SecondaryStartIndex));
                     structureEquality &= (this.RenderLayer == compare.RenderLayer);
 
                     if (structureEquality)
-                    {
-                        Int32 index = 0;
-                        do
-                        {
-                            structureEquality &= this.Padding[index] == compare.Padding[index];
-                            ++index;
-                        }
-                        while (index < this.Padding.Length && structureEquality);
-                    }
+                        structureEquality &= this.Padding.Equals<Byte>(compare.Padding);
 
                     equal = structureEquality;
                 }
@@ -196,6 +188,21 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             catch { equal = false; }    //per MSDN, must not throw exceptions
 
             return equal;
+        }
+
+        /// <summary>Override of GetHashCode</summary>
+        /// <returns>Computed hash</returns>
+        public override Int32 GetHashCode()
+        {
+            Int32 hash = base.GetHashCode();
+            hash ^= this.PrimaryStartIndex.GetHashCode();
+            hash ^= this.PrimaryTileCount.GetHashCode();
+            hash ^= this.SecondaryStartIndex.GetHashCode();
+            hash ^= this.RenderLayer.GetHashCode();
+            hash ^= this.Padding.GetHashCode<Byte>();
+            //offsets are unimportant when it comes to data value equivalence/equality
+
+            return hash;
         }
         #endregion
     }

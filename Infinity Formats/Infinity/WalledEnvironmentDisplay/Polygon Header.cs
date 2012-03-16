@@ -148,8 +148,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
                 {
                     PolygonHeader compare = obj as PolygonHeader;
 
-                    Boolean structureEquality;
-                    structureEquality = (this.WallPolygonCount == compare.WallPolygonCount);
+                    Boolean structureEquality = (this.WallPolygonCount == compare.WallPolygonCount);
                     structureEquality &= (this.OffsetPolygons == compare.OffsetPolygons);
                     structureEquality &= (this.OffsetVertices.Equals(compare.OffsetVertices));
                     structureEquality &= (this.OffsetWalls == compare.OffsetWalls);
@@ -161,6 +160,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             catch { equal = false; }    //per MSDN, must not throw exceptions
 
             return equal;
+        }
+
+        /// <summary>Override of GetHashCode</summary>
+        /// <returns>Computed hash</returns>
+        public override Int32 GetHashCode()
+        {
+            return this.WallPolygonCount.GetHashCode();
         }
         #endregion
     }

@@ -146,8 +146,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
                 {
                     WallGroup compare = obj as WallGroup;
 
-                    Boolean structureEquality;
-                    structureEquality = (this.StartIndex == compare.StartIndex);
+                    Boolean structureEquality = (this.StartIndex == compare.StartIndex);
                     structureEquality &= (this.PolygonCount == compare.PolygonCount);
 
                     equal = structureEquality;
@@ -156,6 +155,18 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             catch { equal = false; }    //per MSDN, must not throw exceptions
 
             return equal;
+        }
+
+        /// <summary>Override of GetHashCode</summary>
+        /// <returns>Computed hash</returns>
+        public override Int32 GetHashCode()
+        {
+            Int32 hash = base.GetHashCode();
+            hash ^= this.StartIndex.GetHashCode();
+            hash ^= this.PolygonCount.GetHashCode();
+            //offsets are unimportant when it comes to data value equivalence/equality
+
+            return hash;
         }
         #endregion
     }

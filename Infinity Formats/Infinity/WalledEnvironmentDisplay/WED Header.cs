@@ -119,13 +119,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
                 {
                     WedHeader compare = obj as WedHeader;
 
-                    Boolean structureEquality;
-                    structureEquality = (this.CountOverlay == compare.CountOverlay);
+                    Boolean structureEquality = (this.CountOverlay == compare.CountOverlay);
                     structureEquality &= (this.CountDoor == compare.CountDoor);
-                    structureEquality &= (this.OffsetOverlays == compare.OffsetOverlays);
-                    structureEquality &= (this.OffsetPolygonHeader == compare.OffsetPolygonHeader);
-                    structureEquality &= (this.OffsetDoors == compare.OffsetDoors);
-                    structureEquality &= (this.OffsetDoorTileMapIndeces == compare.OffsetDoorTileMapIndeces);
+                    //offsets are unimportant when it comes to data value equivalence/equality
 
                     equal = structureEquality;
                 }
@@ -133,6 +129,18 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             catch { equal = false; }    //per MSDN, must not throw exceptions
 
             return equal;
+        }
+
+        /// <summary>Override of GetHashCode</summary>
+        /// <returns>Computed hash</returns>
+        public override Int32 GetHashCode()
+        {
+            Int32 hash = base.GetHashCode();
+            hash ^= this.CountOverlay.GetHashCode();
+            hash ^= this.CountDoor.GetHashCode();
+            //offsets are unimportant when it comes to data value equivalence/equality
+
+            return hash;
         }
         #endregion
     }

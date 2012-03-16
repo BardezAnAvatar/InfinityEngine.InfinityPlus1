@@ -146,8 +146,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BlackIsleAnimation.
                 {
                     AnimationEntry compare = obj as AnimationEntry;
 
-                    Boolean structureEquality;
-                    structureEquality = (this.FrameCount == compare.FrameCount);
+                    Boolean structureEquality = (this.FrameCount == compare.FrameCount);
                     structureEquality &= (this.StartFrame == compare.StartFrame);
 
                     equal = structureEquality;
@@ -156,6 +155,17 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BlackIsleAnimation.
             catch { equal = false; }    //per MSDN, must not throw exceptions
 
             return equal;
+        }
+
+        /// <summary>Override of GetHashCode</summary>
+        /// <returns>Computed hash</returns>
+        public override Int32 GetHashCode()
+        {
+            Int32 hash = this.FrameCount.GetHashCode();
+            hash ^= this.StartFrame.GetHashCode();
+            //offsets are unimportant when it comes to data value equivalence/equality
+
+            return hash;
         }
         #endregion
     }

@@ -211,8 +211,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
                 {
                     Polygon compare = obj as Polygon;
 
-                    Boolean structureEquality;
-                    structureEquality = (this.StartIndex == compare.StartIndex);
+                    Boolean structureEquality = (this.StartIndex == compare.StartIndex);
                     structureEquality &= (this.VertexCount == compare.VertexCount);
                     structureEquality &= (this.Properties.Equals(compare.Properties));
                     structureEquality &= (this.Unknown == compare.Unknown);
@@ -227,6 +226,24 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             catch { equal = false; }    //per MSDN, must not throw exceptions
 
             return equal;
+        }
+
+        /// <summary>Override of GetHashCode</summary>
+        /// <returns>Computed hash</returns>
+        public override Int32 GetHashCode()
+        {
+            Int32 hash = base.GetHashCode();
+            hash ^= this.StartIndex.GetHashCode();
+            hash ^= this.VertexCount.GetHashCode();
+            hash ^= this.Properties.GetHashCode();
+            hash ^= this.Unknown.GetHashCode();
+            hash ^= this.BoundingRegionMinX.GetHashCode();
+            hash ^= this.BoundingRegionMaxX.GetHashCode();
+            hash ^= this.BoundingRegionMinY.GetHashCode();
+            hash ^= this.BoundingRegionMaxY.GetHashCode();
+            //offsets are unimportant when it comes to data value equivalence/equality
+
+            return hash;
         }
         #endregion
     }

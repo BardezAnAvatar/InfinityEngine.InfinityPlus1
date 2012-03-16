@@ -207,8 +207,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
                 {
                     Door compare = obj as Door;
 
-                    Boolean structureEquality;
-                    structureEquality = (this.Name.Value == compare.Name.Value);
+                    Boolean structureEquality = (this.Name.Value == compare.Name.Value);
                     structureEquality &= (this.Status == compare.Status);
                     structureEquality &= (this.TileCellIndex == compare.TileCellIndex);
                     structureEquality &= (this.TileCount == compare.TileCount);
@@ -231,6 +230,22 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             catch { equal = false; }    //per MSDN, must not throw exceptions
 
             return equal;
+        }
+
+        /// <summary>Override of GetHashCode</summary>
+        /// <returns>Computed hash</returns>
+        public override Int32 GetHashCode()
+        {
+            Int32 hash = base.GetHashCode();
+            hash ^= this.Name.GetHashCode();
+            hash ^= this.Status.GetHashCode();
+            hash ^= this.TileCellIndex.GetHashCode();
+            hash ^= this.TileCount.GetHashCode();
+            hash ^= this.PolygonCountOpen.GetHashCode();
+            hash ^= this.PolygonCountClosed.GetHashCode();
+            //offsets are unimportant when it comes to data value equivalence/equality
+
+            return hash;
         }
         #endregion
     }
