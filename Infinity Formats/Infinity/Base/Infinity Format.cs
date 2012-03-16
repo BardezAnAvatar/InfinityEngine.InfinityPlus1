@@ -70,5 +70,15 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base
         /// <param name="output">Output stream to write to</param>
         public abstract void Write(Stream output);
         #endregion
+
+        /// <summary>Override of GetHashCode</summary>
+        /// <returns>Computed hash</returns>
+        public override Int32 GetHashCode()
+        {
+            Int32 hash = this.signature.GetHashCode();
+            hash ^= this.version.GetHashCode();
+
+            return hash;
+        }
     }
 }
