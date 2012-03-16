@@ -56,10 +56,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MOS
         protected void btnClearDisplay_Click(Object sender, EventArgs e)
         {
             lock (this.interfaceLock)
-            {
-                this.direct2dRenderControl.SetRenderFrame(-1);
-                this.direct2dRenderControl.Render();
-            }
+                this.direct2dRenderControl.SetRenderFrameAndRender(-1);
         }
 
         /// <summary>Event handler for when the selected index of the listbox changes. Sends a new bitmap index to the render target control.</summary>
@@ -72,10 +69,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MOS
                 ImageReference imgRef = this.lstboxImages.SelectedItem as ImageReference;
 
                 if (imgRef != null)
-                {
-                    this.direct2dRenderControl.SetRenderFrame(imgRef.RenderKey);
-                    this.direct2dRenderControl.Render();
-                }
+                    this.direct2dRenderControl.SetRenderFrameAndRender(imgRef.RenderKey);
             }
         }
 
