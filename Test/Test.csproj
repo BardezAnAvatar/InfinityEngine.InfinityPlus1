@@ -13,14 +13,10 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -75,6 +71,7 @@
     <Compile Include="Harnesses\Dialog\Dialog Test.cs" />
     <Compile Include="Harnesses\Effect\Effect 2 Test.cs" />
     <Compile Include="Harnesses\File Tester Base.cs" />
+    <Compile Include="Harnesses\IAudioTester.cs" />
     <Compile Include="Harnesses\Initialization\Ini Test.cs" />
     <Compile Include="Harnesses\Item\Item 1 Test.cs" />
     <Compile Include="Harnesses\Item\Item 1_1 Test.cs" />
@@ -86,6 +83,10 @@
     <Compile Include="Harnesses\Item\Item Header 2 Test.cs" />
     <Compile Include="Harnesses\ITester.cs" />
     <Compile Include="Harnesses\MapOfScreen\MOS Test.cs" />
+    <Compile Include="Harnesses\Movie\MVE Audio Playback Test.cs" />
+    <Compile Include="Harnesses\Movie\MVE Opcode Indexer Test.cs" />
+    <Compile Include="Harnesses\Movie\MVE Indexer Test.cs" />
+    <Compile Include="Harnesses\Audio Test Event Arguments.cs" />
     <Compile Include="Harnesses\Music\Playlist Test.cs" />
     <Compile Include="Harnesses\Output\DirectX\XAudio2 Render Test.cs" />
     <Compile Include="Harnesses\Output\DirectX\XAudio2 Test.cs" />
@@ -162,6 +163,18 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\Animation Collection Reference.cs" />
+    <Compile Include="WinForm\Harness Movie Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness Movie Test Control.Designer.cs">
+      <DependentUpon>Harness Movie Test Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Harness Video Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness Video Test Control.Designer.cs">
+      <DependentUpon>Harness Video Test Control.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForm\Harness Animation Collection Test Control Base.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -194,6 +207,12 @@
     </Compile>
     <Compile Include="WinForm\Harness Image Collection Test Control Base.Designer.cs">
       <DependentUpon>Harness Image Collection Test Control Base.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Harness Image Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness Image Test Control.Designer.cs">
+      <DependentUpon>Harness Image Test Control.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Harness Non-File Test Control Base.cs">
       <SubType>UserControl</SubType>
@@ -248,6 +267,12 @@
     <Compile Include="WinForm\ITM\Item 1.0 Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="WinForm\Harness Audio Collection Test Control Base.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness Audio Collection Test Control Base.Designer.cs">
+      <DependentUpon>Harness Audio Collection Test Control Base.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForm\KEY\Key Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -277,6 +302,21 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\MUS\Music Playlist Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\MVE\MVE Movie Playback Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\MVE\MVE Opcode Indexer Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\MVE\MVE Indexer Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\MVE\MVE Audio Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\MVE\MVE Video Playback Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\Output\Direct2D\Direct2D Render Test Control.cs">
@@ -398,11 +438,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="WinForm\Harness Movie Test Control.resx">
+      <DependentUpon>Harness Movie Test Control.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Harness Video Test Control.resx">
+      <DependentUpon>Harness Video Test Control.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Harness Animation Collection Test Control Base.resx">
       <DependentUpon>Harness Animation Collection Test Control Base.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Harness Image Collection Test Control Base.resx">
       <DependentUpon>Harness Image Collection Test Control Base.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Harness Image Test Control.resx">
+      <DependentUpon>Harness Image Test Control.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Harness Non-File Test Control Base.resx">
       <DependentUpon>Harness Non-File Test Control Base.cs</DependentUpon>
@@ -415,6 +464,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Image\JPEG Render Test Control.resx">
       <DependentUpon>JPEG Render Test Control.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Harness Audio Collection Test Control Base.resx">
+      <DependentUpon>Harness Audio Collection Test Control Base.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\LoggingControl.resx">
       <DependentUpon>LoggingControl.cs</DependentUpon>
