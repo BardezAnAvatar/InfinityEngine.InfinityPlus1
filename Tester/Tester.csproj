@@ -14,14 +14,10 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -75,6 +71,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Configuration Handler\Configuration Handler.csproj">
+      <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
+      <Name>Configuration Handler</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Exception Manager\Exception Handler.csproj">
       <Project>{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}</Project>
       <Name>Exception Handler</Name>
@@ -94,6 +94,10 @@
     <ProjectReference Include="..\Native Code\DirectX\Direct2D\Direct2D.vcxproj">
       <Project>{44208309-EFE3-4A6F-B0F8-9013A16B20DF}</Project>
       <Name>Direct2D</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Native Code\Win32 Structures\Win32 Structures.vcxproj">
+      <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
+      <Name>Win32 Structures</Name>
     </ProjectReference>
     <ProjectReference Include="..\Output\Output.csproj">
       <Project>{6ECA5199-A497-4BF2-B956-CEB3F0912C17}</Project>
