@@ -26,5 +26,9 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         /// <param name="data">Frame to add</param>
         /// <returns>A unique key for the frame data to be referenced</returns>
         public abstract Int32 AddFrameResource(Frame data);
+
+        /// <summary>Frees a Bitmap resource in the resource manager and Disposes of it.</summary>
+        /// <param name="frameKey">Direct2D Bitmap key to be Disposed.</param>
+        public abstract void FreeFrameResource(Int32 frameKey);
     }
 }
