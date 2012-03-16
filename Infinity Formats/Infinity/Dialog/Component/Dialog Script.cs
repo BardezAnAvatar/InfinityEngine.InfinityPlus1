@@ -145,7 +145,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Dialog.Component
         /// <summary>Maintains the data integrity of the instance</summary>
         public void MaintainMinimalDataIntegrity()
         {
-            Byte[] data = ReusableIO.WriteStringToByteArray(this.Script.Source, CultureConstants.CultureCodeEnglish);
+            Byte[] data = ReusableIO.GetStringByteArray(this.Script.Source, CultureConstants.CultureCodeEnglish);
             this.LengthScript = Convert.ToUInt32(data.Length);
         }
     }

@@ -286,7 +286,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
             for (Int32 i = 0; i < this.EntriesBif.Count; ++i)
             {
                 clone.EntriesBif[i].OffsetBifFileName = Convert.ToUInt32(Offset);
-                clone.EntriesBif[i].LengthBifFileName = Convert.ToUInt16(ReusableIO.WriteStringToByteArray(clone.EntriesBif[i].BifFileName.Source, "en-US").Length /*+ 1*/); //it already returns a NUL-padding
+                clone.EntriesBif[i].LengthBifFileName = Convert.ToUInt16(ReusableIO.GetStringByteArray(clone.EntriesBif[i].BifFileName.Source, "en-US").Length /*+ 1*/); //it already returns a NUL-padding
                 Offset += clone.EntriesBif[i].LengthBifFileName + padding;
             }
         }

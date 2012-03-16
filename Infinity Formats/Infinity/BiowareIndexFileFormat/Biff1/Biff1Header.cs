@@ -113,11 +113,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BiowareIndexFileFor
             Byte[] writeBytes;
 
             //signature
-            writeBytes = ReusableIO.WriteStringToByteArray(this.signature, 4);
+            writeBytes = ReusableIO.GetStringByteArray(this.signature, 4);
             output.Write(writeBytes, 0, writeBytes.Length);
 
             //version
-            writeBytes = ReusableIO.WriteStringToByteArray(this.version, 4);
+            writeBytes = ReusableIO.GetStringByteArray(this.version, 4);
             output.Write(writeBytes, 0, writeBytes.Length);
 
             //Number of resource1 entries

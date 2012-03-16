@@ -62,11 +62,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
             Byte[] writeBytes;
 
             //Signature
-            writeBytes = ReusableIO.WriteStringToByteArray(this.Signature, 4);
+            writeBytes = ReusableIO.GetStringByteArray(this.Signature, 4);
             output.Write(writeBytes, 0, writeBytes.Length);
 
             //Version
-            writeBytes = ReusableIO.WriteStringToByteArray(this.Version, 4);
+            writeBytes = ReusableIO.GetStringByteArray(this.Version, 4);
             output.Write(writeBytes, 0, writeBytes.Length);
 
             //Count of BIF entries
