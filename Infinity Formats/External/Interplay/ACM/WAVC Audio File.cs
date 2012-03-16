@@ -8,7 +8,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.ACM
 {
     /// <summary>Represents an ACM file with a WAVC header</summary>
     /// <remarks>This is literally just a WAVC header prepended to an ACM file stream; its ACM header exists after the WAVC header</remarks>
-    public class WavCAudioFile : AcmAudioFile
+    public class WavCAudioFile : AcmAudioFile, IWaveFormatEx
     {
         /// <summary>WAVC Header information</summary>
         public WavCHeader WavcHeader { get; set; }
