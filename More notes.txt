@@ -1,0 +1,5 @@
+Existing Infnity format issues
+
+TIS: allow oter compression, like PNG for tileset
+BAM: allow more than one palette, or PNG grouping
+WED: cannot have door + water overlay tiles
