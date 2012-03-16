@@ -50,6 +50,17 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
 
             return equal;
         }
+
+        /// <summary>Override of GetHashCode</summary>
+        /// <returns>Computed hash</returns>
+        public override Int32 GetHashCode()
+        {
+            Int32 hash = this.Open.GetHashCode<Int16>();
+            hash ^= this.Closed.GetHashCode<Int16>();
+            //offsets are unimportant when it comes to data value equivalence/equality
+
+            return hash;
+        }
         #endregion
     }
 }
