@@ -16,7 +16,7 @@ using Bardez.Projects.Win32.Audio;
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.ACM.AcmAudioFile class.</summary>
-    public class AcmFileTest : FileTesterBase
+    public class AcmFileTest : FileTesterBase, IAudioTester
     {
         #region Fields
         /// <summary>Constant key to look up in app.config</summary>

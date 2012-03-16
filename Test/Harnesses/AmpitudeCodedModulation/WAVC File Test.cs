@@ -17,7 +17,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.ACM.WavCAudioFile class.</summary>
     /// <remarks>Exteremely similar to AcmFileTest. Merge if further testing</remarks>
-    public class WavcFileTest : FileTesterBase
+    public class WavcFileTest : FileTesterBase, IAudioTester
     {
         #region Fields
         /// <summary>Constant key to look up in app.config</summary>
