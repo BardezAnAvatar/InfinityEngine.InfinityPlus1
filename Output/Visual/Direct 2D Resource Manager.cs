@@ -120,13 +120,18 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
             }
         }
 
-        //TODO: rethink the base resource manager class...
-        /// <summary>Posts a Frame resource to the resource manager and returns a unique key to access it.</summary>
-        /// <param name="resource">Frame to be posted.</param>
-        /// <returns>A unique Int32 key</returns>
-        public Int32 AddFrameResource(Frame resource)
+        /// <summary>Frees a Bitmap resource in the resource manager and Disposes of it.</summary>
+        /// <param name="frameKey">Direct2D Bitmap key to be Disposed.</param>
+        public virtual void FreeFrameResource(Int32 frameKey)
         {
-            throw new NotImplementedException("This is not implemented.");
+            lock (this.resourceLock)
+            {
+                if (this.renderResourceCollection[frameKey] != null)
+                {
+                    this.renderResourceCollection[frameKey].Dispose();
+                    this.renderResourceCollection[frameKey] = null;
+                }
+            }
         }
 
         /// <summary>Gets the bitmap resource from the specified key</summary>
