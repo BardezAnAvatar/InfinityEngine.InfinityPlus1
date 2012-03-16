@@ -13,7 +13,7 @@ namespace Bardez.Projects.InfinityPlus1.Tester
         [STAThread]
         internal static void Main(String[] args)
         {
-            ExceptionManager.AttachManagerForConsole();
+            ExceptionManager.AttachManagerForWinForms();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
