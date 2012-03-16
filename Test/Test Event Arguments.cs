@@ -2,7 +2,7 @@
 
 namespace Bardez.Projects.InfinityPlus1.Test
 {
-    /// <summary>Event Arguments containing a message to post</summary>
+    /// <summary>Event Arguments containing test event parameters</summary>
     public class TestEventArgs : EventArgs
     {
         /// <summary>Message to be posted to the event</summary>
