@@ -96,9 +96,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE
         /// <remarks>Meant to be a threaded background read.</remarks>
         public virtual void ReadChunkOpcodes(Stream input)
         {
-            //foreach (ChunkIndex chunk in this.ChunkIndexCollection)
-            //    chunk.ReadOpcodeCollection(input);
-
             for (Int32 index = 0; index < this.ChunkIndexCollection.Count; ++index)
                 this.ChunkIndexCollection[index].ReadOpcodeCollection(input);
         }
