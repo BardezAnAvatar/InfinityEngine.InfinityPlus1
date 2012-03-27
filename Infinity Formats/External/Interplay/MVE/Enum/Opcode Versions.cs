@@ -39,8 +39,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Enum
         [Description("Initialize Video Buffers with a size")]
         InitializeVideoBuffers1,
 
-        /// <summary>Initializes video buffers with a truecolor flag</summary>
-        [Description("Initialize Video Buffers with a truecolor flag")]
+        /// <summary>Initializes video buffers with a highcolor flag</summary>
+        [Description("Initialize Video Buffers with a highcolor flag")]
         InitializeVideoBuffers2,
 
         /// <summary>Sends the bufer to the display</summary>
