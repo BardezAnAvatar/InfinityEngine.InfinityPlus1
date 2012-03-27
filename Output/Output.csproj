@@ -38,8 +38,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
@@ -51,6 +49,9 @@
     <Compile Include="Audio\XAudio2 Output.cs" />
     <Compile Include="Audio\XAudio2 Voice Reference.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Timer\Win32 Multimedia Time Functions.cs" />
+    <Compile Include="Timer\Win32 Multimedia Time Structs.cs" />
+    <Compile Include="Timer\Win32 Multimedia Timer.cs" />
     <Compile Include="Visual\Direct 2D Resource Manager.cs" />
     <Compile Include="Visual\Direct2D Render Control.cs">
       <SubType>UserControl</SubType>
