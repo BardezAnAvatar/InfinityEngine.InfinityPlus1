@@ -22,7 +22,7 @@ namespace Bardez.Projects.InfinityPlus1.Test
         /// <summary>Protected event for raising a test case</summary>
         protected event TestItem TestInstance;
 
-        /// <summary>Externally exposed event for handling an output event</summary>
+        ///// <summary>Externally exposed event for handling an output event</summary>
         //public event PostOutputMessage PostMessage
         //{
         //    add { this.postMessage += value; }
