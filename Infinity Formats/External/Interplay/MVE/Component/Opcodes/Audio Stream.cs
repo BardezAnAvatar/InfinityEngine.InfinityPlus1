@@ -23,7 +23,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         /// <summary>Stream mask of the audio chunk (opcode?)</summary>
         public UInt16 StreamMask { get; set; }
 
-        /// <summary>Length of uncompresse audio sample data in this opcode</summary>
+        /// <summary>Length of uncompressed audio sample data in this opcode</summary>
         public UInt16 UncompressedSampleDataLength { get; set; }
         #endregion
 
@@ -41,8 +41,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
             get { return new Byte[this.UncompressedSampleDataLength]; }
         }
         #endregion
-
-
 
 
         #region IO method implemetations
