@@ -25,8 +25,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         /// <summary>Exposes the buffer length</summary>
         public abstract UInt16 BufferLength { get; }
 
-        /// <summary>Exposes the flag indicating true color?</summary>
-        public abstract UInt16 TrueColor { get; }
+        /// <summary>Exposes the flag indicating high (16-bit) color</summary>
+        public abstract UInt16 HighColor { get; }
         #endregion
 
 
@@ -43,7 +43,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
             builder.Append(StringFormat.ToStringAlignment("Buffer Length"));
             builder.Append(this.BufferLength);
             builder.Append(StringFormat.ToStringAlignment("True Color"));
-            builder.Append(this.TrueColor);
+            builder.Append(this.HighColor);
 
             return builder.ToString();
         }
@@ -68,7 +68,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
                     structureEquality &= (this.Width == compare.Width);
                     structureEquality &= (this.Height == compare.Height);
                     structureEquality &= (this.BufferLength == compare.BufferLength);
-                    structureEquality &= (this.TrueColor == compare.TrueColor);
+                    structureEquality &= (this.HighColor == compare.HighColor);
 
                     //offsets are unimportant when it comes to data value equivalence/equality
                     equal = structureEquality;
@@ -86,7 +86,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
             Int32 hash = base.GetHashCode();
             hash ^= this.Width.GetHashCode();
             hash ^= this.Height.GetHashCode();
-            hash ^= this.TrueColor.GetHashCode();
+            hash ^= this.HighColor.GetHashCode();
             hash ^= this.BufferLength.GetHashCode();
 
             return hash;

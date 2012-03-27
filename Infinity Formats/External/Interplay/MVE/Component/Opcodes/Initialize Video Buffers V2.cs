@@ -26,7 +26,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
 
         #region Properties
         /// <summary>Exposes the size of samples in the audio stream</summary>
-        public override UInt16 TrueColor
+        public override UInt16 HighColor
         {
             get { return this.trueColor; }
         }
