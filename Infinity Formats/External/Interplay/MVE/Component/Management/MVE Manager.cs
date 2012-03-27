@@ -163,6 +163,18 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
             this.VideoManager.InitializeVideoCoder();
         }
 
+        /// <summary>Initializes the audio coder object</summary>
+        public virtual void InitializeAudioCoder()
+        {
+            this.AudioManager.InitializeCoder();
+        }
+
+        /// <summary>Initializes the video coder object</summary>
+        public virtual void InitializeVideoCoder()
+        {
+            this.VideoManager.InitializeVideoCoder();
+        }
+
         /// <summary>Loops through indexed opcodes, storing the most recently found opcodes used to decode the video</summary>
         protected virtual void CollectOpcodesComposite()
         {
@@ -247,6 +259,20 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         public virtual void ReadData(Stream input)
         {
             this.AudioManager.ReadData(input);
+            this.VideoManager.ReadData(input);
+        }
+
+        /// <summary>Reads the audio data from the input stream into the storage opcodes indexed by the manager</summary>
+        /// <param name="input">Input stream to read from</param>
+        public virtual void ReadAudioData(Stream input)
+        {
+            this.AudioManager.ReadData(input);
+        }
+
+        /// <summary>Reads the video data from the input stream into the storage opcodes indexed by the manager</summary>
+        /// <param name="input">Input stream to read from</param>
+        public virtual void ReadVideoData(Stream input)
+        {
             this.VideoManager.ReadData(input);
         }
         #endregion
