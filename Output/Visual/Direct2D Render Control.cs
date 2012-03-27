@@ -68,13 +68,17 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         /// <remarks>Do not reference directly</remarks>
         private BitmapRenderTarget bmpRengerTarget;
 
+        /// <summary>Represents a drawing buffer, used solely to create bitmaps</summary>
+        /// <remarks>Do not reference directly</remarks>
+        private BitmapRenderTarget resourceBmpRengerTarget;
+
         /// <summary>Represents a buffer drawing command lock</summary>
         private Object controlBufferLock;
 
         /// <summary>Represents a paint/render drawing command lock</summary>
         private Object controlPaintRenderLock;
 
-        private Object direct2DLock;
+        private Object resourceLock;
 
         /// <summary>Represents the key to accessing the currently set key</summary>
         protected Int32 currentFrameKey;
@@ -103,6 +107,23 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
                 }
             }
         }
+
+        /// <summary>Exposes a wrapper for the bitmap render target</summary>
+        protected BitmapRenderTarget ResourceBmpRengerTarget
+        {
+            get { return this.resourceBmpRengerTarget; }
+            set
+            {
+                lock (this.resourceLock)
+                {
+                    if (this.resourceBmpRengerTarget != null)
+                        this.resourceBmpRengerTarget.Dispose();
+
+                    this.resourceBmpRengerTarget = value;
+                }
+            }
+        }
+
         /// <summary>Represents a Win32 HWND render target for Direct2D</summary>
         protected ControlRenderTarget CtrlRenderTarget
         {
@@ -127,7 +148,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         {
             this.controlBufferLock = new Object();
             this.controlPaintRenderLock = new Object();
-            this.direct2DLock = new Object();
+            this.resourceLock = new Object();
 
             this.currentFrameKey = -1;
             this.InitializeControlDirect2D();
@@ -156,6 +177,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
                 {
                     // create a bitmap rendering target
                     this.CtrlRenderTarget.CreateCompatibleRenderTarget(out this.bmpRengerTarget);
+                    this.CtrlRenderTarget.CreateCompatibleRenderTarget(out this.resourceBmpRengerTarget);
                 }
             }
         }
@@ -168,8 +190,9 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         /// <remarks>Dispose()</remarks>
         protected override void Dispose(Boolean disposing)
         {
-            this.BmpRengerTarget = null;    //property disposes
-            this.CtrlRenderTarget = null;   //property disposes
+            this.BmpRengerTarget = null;            //property disposes
+            this.CtrlRenderTarget = null;           //property disposes
+            this.ResourceBmpRengerTarget = null;    //property disposes
             base.Dispose(disposing);
         }
 
@@ -296,9 +319,9 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         /// <param name="bmp">Direct2D bitmap to draw to the buffer.</param>
         protected void DrawBitmapToBuffer(Direct2D.Bitmap bmp, Point2dF origin)
         {
-            lock (this.controlPaintRenderLock)
+            lock (this.controlBufferLock)
             {
-                lock (this.controlBufferLock)
+                lock (this.resourceLock)
                 {
                     //Determine the copy rectangle
                     Direct2D.SizeF bmpSize = bmp.GetSize();
@@ -372,22 +395,23 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         /// <summary>Discards the current buffer and replaces it with a blank one.</summary>
         protected void DiscardCurrentBuffer()
         {
-            lock (this.controlPaintRenderLock)
+            lock (this.controlBufferLock)
             {
-                lock (this.controlBufferLock)
+                BitmapRenderTarget bmpNew;
+
+                ResultCode result;
+                lock (this.controlPaintRenderLock)
                 {
-                    BitmapRenderTarget bmpNew;
-
                     // create a bitmap rendering target
-                    ResultCode result = this.CtrlRenderTarget.CreateCompatibleRenderTarget(out bmpNew);
-
-                    bmpNew.BeginDraw();             //tell Direct2D to start the draw
-                    this.FillBufferRenderTarget(bmpNew);    //flood fill
-                    result = bmpNew.EndDraw();      //tell Direct2D that a paint operation is ending
-
-                    //property locks, so no lock here
-                    this.BmpRengerTarget = bmpNew;  //replace the old buffer
+                    result = this.CtrlRenderTarget.CreateCompatibleRenderTarget(out bmpNew);
                 }
+
+                bmpNew.BeginDraw();             //tell Direct2D to start the draw
+                this.FillBufferRenderTarget(bmpNew);    //flood fill
+                result = bmpNew.EndDraw();      //tell Direct2D that a paint operation is ending
+
+                //property locks, so no lock here
+                this.BmpRengerTarget = bmpNew;  //replace the old buffer
             }
         }
 
@@ -413,22 +437,19 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         /// <returns>A unique Int32 key</returns>
         public override Int32 AddFrameResource(Frame resource)
         {
-            lock (this.controlBufferLock)
+            lock (this.resourceLock)
             {
                 //create the bitmap
                 BitmapProperties properties = new BitmapProperties(new PixelFormat(DXGI_ChannelFormat.FORMAT_B8G8R8A8_UNORM, AlphaMode.PreMultiplied), Direct2dResourceManager.Instance.Factory.GetDesktopDpi());
                 SizeU dimensions = new SizeU(Convert.ToUInt32(resource.Pixels.Metadata.Width), Convert.ToUInt32(resource.Pixels.Metadata.Height));
 
-                lock (this.controlBufferLock)
-                {
-                    Direct2D.Bitmap bmp = null;
-                    ResultCode result = this.BmpRengerTarget.CreateBitmap(dimensions, properties, out bmp);
+                Direct2D.Bitmap bmp = null;
+                ResultCode result = this.ResourceBmpRengerTarget.CreateBitmap(dimensions, properties, out bmp);
 
-                    Byte[] data = resource.Pixels.GetPixelData(ExternalPixelEnums.PixelFormat.RGBA_B8G8R8A8, ScanLineOrder.TopDown, 0, 0);
-                    result = bmp.CopyFromMemory(new RectangleU(dimensions), data, Convert.ToUInt32(resource.Pixels.Metadata.Width * 4));
+                Byte[] data = resource.Pixels.GetPixelData(ExternalPixelEnums.PixelFormat.RGBA_B8G8R8A8, ScanLineOrder.TopDown, 0, 0);
+                result = bmp.CopyFromMemory(new RectangleU(dimensions), data, Convert.ToUInt32(resource.Pixels.Metadata.Width * 4));
 
-                    return Direct2dResourceManager.Instance.AddFrameResource(bmp);
-                }
+                return Direct2dResourceManager.Instance.AddFrameResource(bmp);
             }
         }
 
@@ -436,13 +457,10 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         /// <param name="frameKey">Direct2D Bitmap key to be Disposed.</param>
         public override void FreeFrameResource(Int32 frameKey)
         {
-            lock (this.controlBufferLock)
+            lock (this.resourceLock)
             {
-                lock (this.controlPaintRenderLock)
-                {
-                    if (frameKey > -1)
-                        Direct2dResourceManager.Instance.FreeFrameResource(frameKey);
-                }
+                if (frameKey > -1)
+                    Direct2dResourceManager.Instance.FreeFrameResource(frameKey);
             }
         }
         #endregion
@@ -462,12 +480,15 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         /// <param name="originY">Y coordinate to start drawing from</param>
         public override void SetRenderFrame(Int32 key, Int64 originX, Int64 originY)
         {
-            if (key > -1)
-                this.DrawBitmapToBuffer(Direct2dResourceManager.Instance.GetBitmapResource(key), new Point2dF(Convert.ToSingle(originX), Convert.ToSingle(originY)));
-            else
-                this.DiscardCurrentBuffer();
+            lock (this.controlBufferLock)
+            {
+                if (key > -1)
+                    this.DrawBitmapToBuffer(Direct2dResourceManager.Instance.GetBitmapResource(key), new Point2dF(Convert.ToSingle(originX), Convert.ToSingle(originY)));
+                else
+                    this.DiscardCurrentBuffer();
 
-            this.currentFrameKey = key;
+                this.currentFrameKey = key;
+            }
         }
 
         /// <summary>This method invokes the rendering. For use by the appliation to tell the control to change images on demand.</summary>
@@ -513,16 +534,13 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         /// </param>
         public virtual void SetRenderFrameAndRender(Int32 key, Int64 originX, Int64 originY, Boolean freePreviousFrame)
         {
-            lock (this.direct2DLock)
-            {
-                Int32 previousFrameKey = this.currentFrameKey;
+            Int32 previousFrameKey = this.currentFrameKey;
 
-                this.SetRenderFrame(key, originX, originY);
-                this.Render();
+            this.SetRenderFrame(key, originX, originY);
+            this.Render();
 
-                if (freePreviousFrame)
-                    this.FreeFrameResource(previousFrameKey);
-            }
+            if (freePreviousFrame)
+                this.FreeFrameResource(previousFrameKey);
         }
         #endregion
 
