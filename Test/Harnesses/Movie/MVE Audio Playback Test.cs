@@ -97,7 +97,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Movie
         {
             this.DoPostMessage(new MessageEventArgs("Readying playback...", "Waiting", "Starting"));
 
-            this.mve.StartDecodingAudio();
+            this.mve.PreemptivelyStartDecodingAudio();
 
             this.Output = XAudio2Output.Instance;
             this.AudioBlockIndex = 0;
