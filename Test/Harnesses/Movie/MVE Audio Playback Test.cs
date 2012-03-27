@@ -29,7 +29,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Movie
         protected XAudio2Output Output { get; set; }
 
         /// <summary>Format instance to test</summary>
-        protected MveManager mve { get; set; }
+        protected MveManager mve;
 
         /// <summary>Unique key context for the output source</summary>
         protected Int32 OutputSoundKey { get; set; }
@@ -40,7 +40,24 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Movie
         /// <summary>Audio stream index to play back</summary>
         protected Int32 AudioBlockIndex { get; set; }
         #endregion
-        
+
+
+        #region Properties
+
+        /// <summary>Format instance to test</summary>
+        protected MveManager Mve
+        {
+            get { return this.mve; }
+            set
+            {
+                if (this.mve != null)
+                    this.mve.Dispose();
+                
+                this.mve = value;
+            }
+        }
+        #endregion
+
 
         #region Construction
         /// <summary>Default constructor</summary>
@@ -79,16 +96,18 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Movie
                 //read opcodes
                 mveIndexer.ReadChunkOpcodes(stream);
 
+                this.Mve = new MveManager(mveIndexer);
+
                 //collect opcode data
-                this.mve = new MveManager(mveIndexer);
-                this.mve.CollectOpcodeIndex();
+                this.Mve.CollectOpcodeIndex();
 
                 //read audio data
-                this.mve.ReadData(stream);
-
-                this.DoPostMessage(new MessageEventArgs("Finished reading MVE.", "Output", testArgs.Path));
-                this.TestPlayback();
+                this.Mve.ReadAudioData(stream);
+                this.Mve.InitializeAudioCoder();
             }
+
+            this.DoPostMessage(new MessageEventArgs("Finished reading MVE.", "Output", testArgs.Path));
+            this.TestPlayback();
         }
 
         #region Helper methods
@@ -97,13 +116,13 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Movie
         {
             this.DoPostMessage(new MessageEventArgs("Readying playback...", "Waiting", "Starting"));
 
-            this.mve.PreemptivelyStartDecodingAudio();
+            this.Mve.PreemptivelyStartDecodingAudio();
 
             this.Output = XAudio2Output.Instance;
             this.AudioBlockIndex = 0;
 
             //load up the initial Source voice
-            this.OutputSoundKey = Output.CreatePlayback(this.mve.WaveFormat);
+            this.OutputSoundKey = Output.CreatePlayback(this.Mve.WaveFormat);
 
             //Adjust callback(s)
             this.Output.AddSourceNeedDataEventhandler(this.OutputSoundKey, new AudioNeedsMoreDataHandler(this.NeedsMoreSamples));
@@ -120,10 +139,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Movie
         /// <summary>Callback event handler that sends more data to the output buffer</summary>
         public void NeedsMoreSamples()
         {
-            Byte[] samples = this.mve.GetAudioBlock(this.AudioBlockIndex, this.AudioStream);
+            Byte[] samples = this.Mve.GetAudioBlock(this.AudioBlockIndex, this.AudioStream);
             ++this.AudioBlockIndex;
 
-            this.Output.SubmitSubsequentData(samples, this.OutputSoundKey, this.AudioBlockIndex < this.mve.AudioBlockCount(this.AudioStream));
+            this.Output.SubmitSubsequentData(samples, this.OutputSoundKey, this.AudioBlockIndex < this.Mve.AudioBlockCount(this.AudioStream));
         }
 
         /// <summary>Method exposing a stop command</summary>
