@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 using Bardez.Projects.InfinityPlus1.UnitTesting.Control_Objects;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Interpretation;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Opcodes;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Enum;
 
@@ -92,8 +94,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd = new VideoData(0);
             vd.Data = new Byte[0];
             VideoOpcodeStream stream = new VideoOpcodeStream();
-            stream.AddOpcodeData(sdm);
-            stream.AddOpcodeData(vd);
+            MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
             VideoCoding8Bit_Accessor target = new VideoCoding8Bit_Accessor(8, 8, stream);
 
@@ -134,8 +135,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd = new VideoData(0);
             vd.Data = new Byte[0];
             VideoOpcodeStream stream = new VideoOpcodeStream();
-            stream.AddOpcodeData(sdm);
-            stream.AddOpcodeData(vd);
+            MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
             VideoCoding8Bit_Accessor target = new VideoCoding8Bit_Accessor(40, 40, stream);
 
@@ -176,8 +176,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd = new VideoData(0);
             vd.Data = new Byte[0];
             VideoOpcodeStream stream = new VideoOpcodeStream();
-            stream.AddOpcodeData(sdm);
-            stream.AddOpcodeData(vd);
+            MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
             VideoCoding8Bit_Accessor target = new VideoCoding8Bit_Accessor(40, 40, stream);
 
@@ -218,8 +217,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd = new VideoData(0);
             vd.Data = new Byte[0];
             VideoOpcodeStream stream = new VideoOpcodeStream();
-            stream.AddOpcodeData(sdm);
-            stream.AddOpcodeData(vd);
+            MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
             VideoCoding8Bit_Accessor target = new VideoCoding8Bit_Accessor(40, 40, stream);
 
@@ -260,8 +258,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd = new VideoData(0);
             vd.Data = new Byte[0];
             VideoOpcodeStream stream = new VideoOpcodeStream();
-            stream.AddOpcodeData(sdm);
-            stream.AddOpcodeData(vd);
+            MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
             VideoCoding8Bit_Accessor target = new VideoCoding8Bit_Accessor(64, 64, stream);
 
@@ -299,8 +296,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd = new VideoData(0);
             vd.Data = new Byte[0];
             VideoOpcodeStream stream = new VideoOpcodeStream();
-            stream.AddOpcodeData(sdm);
-            stream.AddOpcodeData(vd);
+            MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
             VideoCoding8Bit_Accessor target = new VideoCoding8Bit_Accessor(8, 8, stream);
 
@@ -341,8 +337,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd = new VideoData(0);
             vd.Data = new Byte[0];
             VideoOpcodeStream stream = new VideoOpcodeStream();
-            stream.AddOpcodeData(sdm);
-            stream.AddOpcodeData(vd);
+            MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
             VideoCoding8Bit_Accessor target = new VideoCoding8Bit_Accessor(8, 8, stream);
 
@@ -378,8 +373,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd2 = new VideoData(0);
             vd2.Data = new Byte[0];
             VideoOpcodeStream stream2 = new VideoOpcodeStream();
-            stream2.AddOpcodeData(sdm2);
-            stream2.AddOpcodeData(vd2);
+            MveVideoFrame frame2 = new MveVideoFrame(sdm2, vd2);
 
             VideoCoding8Bit_Accessor target2 = new VideoCoding8Bit_Accessor(8, 8, stream2);
 
@@ -415,8 +409,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd3 = new VideoData(0);
             vd3.Data = new Byte[0];
             VideoOpcodeStream stream3 = new VideoOpcodeStream();
-            stream3.AddOpcodeData(sdm3);
-            stream3.AddOpcodeData(vd3);
+            MveVideoFrame frame3 = new MveVideoFrame(sdm3, vd3);
 
             VideoCoding8Bit_Accessor target3 = new VideoCoding8Bit_Accessor(8, 8, stream3);
 
@@ -459,8 +452,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd1 = new VideoData(0);
             vd1.Data = new Byte[0];
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
-            stream1.AddOpcodeData(sdm1);
-            stream1.AddOpcodeData(vd1);
+            MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
             VideoCoding8Bit_Accessor target1 = new VideoCoding8Bit_Accessor(8, 8, stream1);
 
@@ -494,8 +486,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd2 = new VideoData(0);
             vd2.Data = new Byte[0];
             VideoOpcodeStream stream2 = new VideoOpcodeStream();
-            stream2.AddOpcodeData(sdm2);
-            stream2.AddOpcodeData(vd2);
+            MveVideoFrame frame2 = new MveVideoFrame(sdm2, vd2);
 
             VideoCoding8Bit_Accessor target2 = new VideoCoding8Bit_Accessor(8, 8, stream2);
 
@@ -529,8 +520,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd3 = new VideoData(0);
             vd3.Data = new Byte[0];
             VideoOpcodeStream stream3 = new VideoOpcodeStream();
-            stream3.AddOpcodeData(sdm3);
-            stream3.AddOpcodeData(vd3);
+            MveVideoFrame frame3 = new MveVideoFrame(sdm3, vd3);
 
             VideoCoding8Bit_Accessor target3 = new VideoCoding8Bit_Accessor(8, 8, stream3);
 
@@ -564,8 +554,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd4 = new VideoData(0);
             vd4.Data = new Byte[0];
             VideoOpcodeStream stream4 = new VideoOpcodeStream();
-            stream4.AddOpcodeData(sdm4);
-            stream4.AddOpcodeData(vd4);
+            MveVideoFrame frame4 = new MveVideoFrame(sdm4, vd4);
 
             VideoCoding8Bit_Accessor target4 = new VideoCoding8Bit_Accessor(8, 8, stream4);
 
@@ -603,8 +592,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd1 = new VideoData(0);
             vd1.Data = new Byte[0];
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
-            stream1.AddOpcodeData(sdm1);
-            stream1.AddOpcodeData(vd1);
+            MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
             VideoCoding8Bit_Accessor target1 = new VideoCoding8Bit_Accessor(8, 8, stream1);
 
@@ -642,8 +630,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd1 = new VideoData(0);
             vd1.Data = new Byte[0];
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
-            stream1.AddOpcodeData(sdm1);
-            stream1.AddOpcodeData(vd1);
+            MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
             VideoCoding8Bit_Accessor target1 = new VideoCoding8Bit_Accessor(8, 8, stream1);
 
@@ -681,8 +668,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd1 = new VideoData(0);
             vd1.Data = new Byte[0];
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
-            stream1.AddOpcodeData(sdm1);
-            stream1.AddOpcodeData(vd1);
+            MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
             VideoCoding8Bit_Accessor target1 = new VideoCoding8Bit_Accessor(8, 8, stream1);
 
@@ -720,8 +706,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd1 = new VideoData(0);
             vd1.Data = new Byte[0];
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
-            stream1.AddOpcodeData(sdm1);
-            stream1.AddOpcodeData(vd1);
+            MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
             VideoCoding8Bit_Accessor target1 = new VideoCoding8Bit_Accessor(8, 8, stream1);
 
@@ -762,8 +747,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd1 = new VideoData(0);
             vd1.Data = new Byte[0];
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
-            stream1.AddOpcodeData(sdm1);
-            stream1.AddOpcodeData(vd1);
+            MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
             VideoCoding8Bit_Accessor target1 = new VideoCoding8Bit_Accessor(8, 8, stream1);
 
@@ -798,8 +782,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd2 = new VideoData(0);
             vd2.Data = new Byte[0];
             VideoOpcodeStream stream2 = new VideoOpcodeStream();
-            stream2.AddOpcodeData(sdm2);
-            stream2.AddOpcodeData(vd2);
+            MveVideoFrame frame2 = new MveVideoFrame(sdm2, vd2);
 
             VideoCoding8Bit_Accessor target2 = new VideoCoding8Bit_Accessor(8, 8, stream2);
 
@@ -834,8 +817,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd3 = new VideoData(0);
             vd3.Data = new Byte[0];
             VideoOpcodeStream stream3 = new VideoOpcodeStream();
-            stream3.AddOpcodeData(sdm3);
-            stream3.AddOpcodeData(vd3);
+            MveVideoFrame frame3 = new MveVideoFrame(sdm3, vd3);
 
             VideoCoding8Bit_Accessor target3 = new VideoCoding8Bit_Accessor(8, 8, stream3);
 
@@ -876,8 +858,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd1 = new VideoData(0);
             vd1.Data = new Byte[0];
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
-            stream1.AddOpcodeData(sdm1);
-            stream1.AddOpcodeData(vd1);
+            MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
             VideoCoding8Bit_Accessor target1 = new VideoCoding8Bit_Accessor(8, 8, stream1);
 
@@ -909,8 +890,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd3 = new VideoData(0);
             vd3.Data = new Byte[0];
             VideoOpcodeStream stream3 = new VideoOpcodeStream();
-            stream3.AddOpcodeData(sdm3);
-            stream3.AddOpcodeData(vd3);
+            MveVideoFrame frame3 = new MveVideoFrame(sdm3, vd3);
 
             VideoCoding8Bit_Accessor target3 = new VideoCoding8Bit_Accessor(8, 8, stream3);
 

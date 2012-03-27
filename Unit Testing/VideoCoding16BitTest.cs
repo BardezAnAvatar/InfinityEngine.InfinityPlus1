@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 using Bardez.Projects.InfinityPlus1.UnitTesting.Control_Objects;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Interpretation;
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Opcodes;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Enum;
 
@@ -92,8 +94,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd = new VideoData(0);
             vd.Data = new Byte[0];
             VideoOpcodeStream stream = new VideoOpcodeStream();
-            stream.AddOpcodeData(sdm);
-            stream.AddOpcodeData(vd);
+            MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
             VideoCoding16Bit_Accessor target = new VideoCoding16Bit_Accessor(8, 8, stream);
 
@@ -134,8 +135,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd = new VideoData(0);
             vd.Data = new Byte[0];
             VideoOpcodeStream stream = new VideoOpcodeStream();
-            stream.AddOpcodeData(sdm);
-            stream.AddOpcodeData(vd);
+            MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
             VideoCoding16Bit_Accessor target = new VideoCoding16Bit_Accessor(40, 40, stream);
 
@@ -176,8 +176,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd = new VideoData(0);
             vd.Data = new Byte[0];
             VideoOpcodeStream stream = new VideoOpcodeStream();
-            stream.AddOpcodeData(sdm);
-            stream.AddOpcodeData(vd);
+            MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
             VideoCoding16Bit_Accessor target = new VideoCoding16Bit_Accessor(40, 40, stream);
 
@@ -218,8 +217,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd = new VideoData(0);
             vd.Data = new Byte[0];
             VideoOpcodeStream stream = new VideoOpcodeStream();
-            stream.AddOpcodeData(sdm);
-            stream.AddOpcodeData(vd);
+            MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
             VideoCoding16Bit_Accessor target = new VideoCoding16Bit_Accessor(40, 40, stream);
 
@@ -260,8 +258,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd = new VideoData(0);
             vd.Data = new Byte[0];
             VideoOpcodeStream stream = new VideoOpcodeStream();
-            stream.AddOpcodeData(sdm);
-            stream.AddOpcodeData(vd);
+            MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
             VideoCoding16Bit_Accessor target = new VideoCoding16Bit_Accessor(64, 64, stream);
 
@@ -299,8 +296,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd = new VideoData(0);
             vd.Data = new Byte[0];
             VideoOpcodeStream stream = new VideoOpcodeStream();
-            stream.AddOpcodeData(sdm);
-            stream.AddOpcodeData(vd);
+            MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
             VideoCoding16Bit_Accessor target = new VideoCoding16Bit_Accessor(8, 8, stream);
 
@@ -341,8 +337,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd = new VideoData(0);
             vd.Data = new Byte[0];
             VideoOpcodeStream stream = new VideoOpcodeStream();
-            stream.AddOpcodeData(sdm);
-            stream.AddOpcodeData(vd);
+            MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
             VideoCoding16Bit_Accessor target = new VideoCoding16Bit_Accessor(8, 8, stream);
 
@@ -376,8 +371,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd2 = new VideoData(0);
             vd2.Data = new Byte[0];
             VideoOpcodeStream stream2 = new VideoOpcodeStream();
-            stream2.AddOpcodeData(sdm2);
-            stream2.AddOpcodeData(vd2);
+            MveVideoFrame frame2 = new MveVideoFrame(sdm2, vd2);
 
             VideoCoding16Bit_Accessor target2 = new VideoCoding16Bit_Accessor(8, 8, stream2);
 
@@ -411,8 +405,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd3 = new VideoData(0);
             vd3.Data = new Byte[0];
             VideoOpcodeStream stream3 = new VideoOpcodeStream();
-            stream3.AddOpcodeData(sdm3);
-            stream3.AddOpcodeData(vd3);
+            MveVideoFrame frame3 = new MveVideoFrame(sdm3, vd3);
 
             VideoCoding16Bit_Accessor target3 = new VideoCoding16Bit_Accessor(8, 8, stream3);
 
@@ -455,8 +448,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd1 = new VideoData(0);
             vd1.Data = new Byte[0];
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
-            stream1.AddOpcodeData(sdm1);
-            stream1.AddOpcodeData(vd1);
+            MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
             VideoCoding16Bit_Accessor target1 = new VideoCoding16Bit_Accessor(8, 8, stream1);
 
@@ -490,8 +482,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd2 = new VideoData(0);
             vd2.Data = new Byte[0];
             VideoOpcodeStream stream2 = new VideoOpcodeStream();
-            stream2.AddOpcodeData(sdm2);
-            stream2.AddOpcodeData(vd2);
+            MveVideoFrame frame2 = new MveVideoFrame(sdm2, vd2);
 
             VideoCoding16Bit_Accessor target2 = new VideoCoding16Bit_Accessor(8, 8, stream2);
 
@@ -525,8 +516,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd3 = new VideoData(0);
             vd3.Data = new Byte[0];
             VideoOpcodeStream stream3 = new VideoOpcodeStream();
-            stream3.AddOpcodeData(sdm3);
-            stream3.AddOpcodeData(vd3);
+            MveVideoFrame frame3 = new MveVideoFrame(sdm3, vd3);
 
             VideoCoding16Bit_Accessor target3 = new VideoCoding16Bit_Accessor(8, 8, stream3);
 
@@ -560,8 +550,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd4 = new VideoData(0);
             vd4.Data = new Byte[0];
             VideoOpcodeStream stream4 = new VideoOpcodeStream();
-            stream4.AddOpcodeData(sdm4);
-            stream4.AddOpcodeData(vd4);
+            MveVideoFrame frame4 = new MveVideoFrame(sdm4, vd4);
 
             VideoCoding16Bit_Accessor target4 = new VideoCoding16Bit_Accessor(8, 8, stream4);
 
@@ -599,8 +588,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd1 = new VideoData(0);
             vd1.Data = new Byte[0];
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
-            stream1.AddOpcodeData(sdm1);
-            stream1.AddOpcodeData(vd1);
+            MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
             VideoCoding16Bit_Accessor target1 = new VideoCoding16Bit_Accessor(8, 8, stream1);
 
@@ -638,8 +626,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd1 = new VideoData(0);
             vd1.Data = new Byte[0];
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
-            stream1.AddOpcodeData(sdm1);
-            stream1.AddOpcodeData(vd1);
+            MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
             VideoCoding16Bit_Accessor target1 = new VideoCoding16Bit_Accessor(8, 8, stream1);
 
@@ -677,8 +664,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd1 = new VideoData(0);
             vd1.Data = new Byte[0];
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
-            stream1.AddOpcodeData(sdm1);
-            stream1.AddOpcodeData(vd1);
+            MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
             VideoCoding16Bit_Accessor target1 = new VideoCoding16Bit_Accessor(8, 8, stream1);
 
@@ -716,8 +702,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd1 = new VideoData(0);
             vd1.Data = new Byte[0];
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
-            stream1.AddOpcodeData(sdm1);
-            stream1.AddOpcodeData(vd1);
+            MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
             VideoCoding16Bit_Accessor target1 = new VideoCoding16Bit_Accessor(8, 8, stream1);
 
@@ -758,8 +743,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd1 = new VideoData(0);
             vd1.Data = new Byte[0];
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
-            stream1.AddOpcodeData(sdm1);
-            stream1.AddOpcodeData(vd1);
+            MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
             VideoCoding16Bit_Accessor target1 = new VideoCoding16Bit_Accessor(8, 8, stream1);
 
@@ -794,8 +778,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd2 = new VideoData(0);
             vd2.Data = new Byte[0];
             VideoOpcodeStream stream2 = new VideoOpcodeStream();
-            stream2.AddOpcodeData(sdm2);
-            stream2.AddOpcodeData(vd2);
+            MveVideoFrame frame2 = new MveVideoFrame(sdm2, vd2);
 
             VideoCoding16Bit_Accessor target2 = new VideoCoding16Bit_Accessor(8, 8, stream2);
 
@@ -830,8 +813,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd3 = new VideoData(0);
             vd3.Data = new Byte[0];
             VideoOpcodeStream stream3 = new VideoOpcodeStream();
-            stream3.AddOpcodeData(sdm3);
-            stream3.AddOpcodeData(vd3);
+            MveVideoFrame frame3 = new MveVideoFrame(sdm3, vd3);
 
             VideoCoding16Bit_Accessor target3 = new VideoCoding16Bit_Accessor(8, 8, stream3);
 
@@ -872,8 +854,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoData vd1 = new VideoData(0);
             vd1.Data = new Byte[0];
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
-            stream1.AddOpcodeData(sdm1);
-            stream1.AddOpcodeData(vd1);
+            MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
             VideoCoding16Bit_Accessor target1 = new VideoCoding16Bit_Accessor(8, 8, stream1);
 
@@ -886,35 +867,34 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
 
 
             /* 2x, 2y square rows*/
-            Byte[] test3 = new Byte[dataSize];
-            Byte[] control3 = new Byte[dataSize];
-            Byte[] data3 = this.CreateRandomSource(6);
-            data3[0] = 0;
-            data3[1] = 128;
-            Int32 x3 = 0, y3 = 0;
-            Int64 position3 = 0L;
-            Int32 dataRemain3 = data3.Length - (Int32)position3;
+            Byte[] test2 = new Byte[dataSize];
+            Byte[] control2 = new Byte[dataSize];
+            Byte[] data2 = this.CreateRandomSource(6);
+            data2[0] = 0;
+            data2[1] = 128;
+            Int32 x2 = 0, y2 = 0;
+            Int64 position2 = 0L;
+            Int32 dataRemain2 = data2.Length - (Int32)position2;
 
             //create and decode with control logic
             MveVideoCoder16SuppliedLogic controlLogic3 = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
-            controlLogic3.DecodeBlock(control3, 7, data3, ref dataRemain3, ref x3, ref y3);
+            controlLogic3.DecodeBlock(control2, 7, data2, ref dataRemain2, ref x2, ref y2);
 
             //create test object
-            SetDecodingMap sdm3 = new SetDecodingMap(1);
-            sdm3.BlockEncoding = new BlockEncodingMethod[1] { BlockEncodingMethod.BitField2PixelRowOr2Square };
-            VideoData vd3 = new VideoData(0);
-            vd3.Data = new Byte[0];
-            VideoOpcodeStream stream3 = new VideoOpcodeStream();
-            stream3.AddOpcodeData(sdm3);
-            stream3.AddOpcodeData(vd3);
+            SetDecodingMap sdm2 = new SetDecodingMap(1);
+            sdm2.BlockEncoding = new BlockEncodingMethod[1] { BlockEncodingMethod.BitField2PixelRowOr2Square };
+            VideoData vd2 = new VideoData(0);
+            vd2.Data = new Byte[0];
+            VideoOpcodeStream stream2 = new VideoOpcodeStream();
+            MveVideoFrame frame2 = new MveVideoFrame(sdm2, vd2);
 
-            VideoCoding16Bit_Accessor target3 = new VideoCoding16Bit_Accessor(8, 8, stream3);
+            VideoCoding16Bit_Accessor target3 = new VideoCoding16Bit_Accessor(8, 8, stream2);
 
             //test the test logic
-            target3.DecodeTwoToneIndecesRowOrSquare(0, 0, data3, ref position3, test3);
+            target3.DecodeTwoToneIndecesRowOrSquare(0, 0, data2, ref position2, test2);
 
             //evaluate
-            Assert.IsTrue(this.AreBinaryArraysEqual(test3, control3));
+            Assert.IsTrue(this.AreBinaryArraysEqual(test2, control2));
         }
 
 
