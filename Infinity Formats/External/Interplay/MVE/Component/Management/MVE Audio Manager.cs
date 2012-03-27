@@ -25,7 +25,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         protected AudioCoding AudioCoder { get; set; }
 
         /// <summary>Cache list that allows for the blocks to be decoded prior to access, but not slowing down playback</summary>
-        protected List<List<Byte[]>> AudioBlockCache { get; set; }
+        protected Byte[][][] AudioBlockCache { get; set; }
 
         /// <summary>Represents the last requested audio stream number (0 by default)</summary>
         protected Int32 LastRequestedAudioStream { get; set; }
@@ -153,15 +153,14 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         /// <summary>Decoding method to store blocks in a cache. Meant for a background thread.s</summary>
         protected virtual void CacheAudioData()
         {
-            this.AudioBlockCache = new List<List<Byte[]>>();
+            this.AudioBlockCache = new Byte[16][][];
 
             for (Int32 index = 0; index < 16; ++index)
-                this.AudioBlockCache.Add(new List<Byte[]>());
-
-            for (Int32 index = 0; index < 16; ++index)
+            {
+                this.AudioBlockCache[index] = new Byte[this.AudioChannels[index].Count][];
                 for (Int32 block = 0; block < this.AudioChannels[index].Count; ++block)
-                    lock (this.audioCacheLock)
-                        this.AudioBlockCache[index].Add(this.FetchAudioBlock(block, index));
+                    this.AudioBlockCache[index][block] = this.FetchAudioBlock(block, index);
+            }
         }
 
         /// <summary>Gets a block of audio from the appropriate data stream</summary>
@@ -197,11 +196,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
             this.LastRequestedAudioStream = streamNumber;
             Byte[] block = null;
 
-            lock (this.audioCacheLock)
-            {
-                if (blockNumber < this.AudioBlockCache[streamNumber].Count)
-                    block = this.AudioBlockCache[streamNumber][blockNumber];
-            }
+            if (blockNumber < this.AudioBlockCache[streamNumber].Length)
+                block = this.AudioBlockCache[streamNumber][blockNumber];
 
             return block;
         }
