@@ -29,10 +29,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
 
         #region Fields
         /// <summary>Reference to XAudio2 object</summary>
-        protected XAudio2Output Output { get; set; }
+        protected XAudio2Output AudioOutput { get; set; }
 
         /// <summary>Unique key context for the output source</summary>
-        protected Int32 OutputSoundKey { get; set; }
+        protected Int32 AudioOutputSoundKey { get; set; }
 
         /// <summary>Audio stream index to play back</summary>
         protected Int32 AudioStream { get; set; }
@@ -132,7 +132,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
         {
             base.btnInitialize_Click(sender, e);
 
-            this.Output = XAudio2Output.Instance;
+            this.AudioOutput = XAudio2Output.Instance;
             this.cboAudioStream.SelectedIndex = 0;   //select the first index, for precaution
         }
         #endregion
@@ -267,17 +267,20 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
         {
             Byte[] samples = this.VideoController.GetAudioBlock(this.AudioBlockIndex, this.AudioStream);
             if (samples == null)
+            {
                 this.StopAudioPlayback();
+                this.AudioBlockIndex = 0;
+            }
             else
             {
                 ++this.AudioBlockIndex;
 
                 if (this.RenderAudio)       //render audio
-                    this.Output.SubmitSubsequentData(samples, this.OutputSoundKey, this.AudioBlockIndex < this.VideoController.AudioBlockCount(this.AudioStream));
+                    this.AudioOutput.SubmitSubsequentData(samples, this.AudioOutputSoundKey, this.AudioBlockIndex < this.VideoController.AudioBlockCount(this.AudioStream));
                 else
                 {
                     samples = new Byte[samples.Length]; //HACK: create a new, blank audio array
-                    this.Output.SubmitSubsequentData(samples, this.OutputSoundKey, this.AudioBlockIndex < this.VideoController.AudioBlockCount(this.AudioStream));
+                    this.AudioOutput.SubmitSubsequentData(samples, this.AudioOutputSoundKey, this.AudioBlockIndex < this.VideoController.AudioBlockCount(this.AudioStream));
                 }
             }
         }
@@ -288,7 +291,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
         /// <summary>Halts audio playback</summary>
         protected override void StopAudioPlayback()
         {
-            this.Output.HaltPlayback();
+            this.AudioOutput.HaltPlayback();
             this.IsPlayingAudio = false;
         }
 
@@ -303,16 +306,16 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
                 this.AudioBlockIndex = 0;
 
                 //load up the initial Source voice
-                this.OutputSoundKey = Output.CreatePlayback(this.VideoController.GetWaveFormat());
+                this.AudioOutputSoundKey = AudioOutput.CreatePlayback(this.VideoController.GetWaveFormat());
 
                 //Adjust callback(s)
-                this.Output.AddSourceNeedDataEventhandler(this.OutputSoundKey, new AudioNeedsMoreDataHandler(this.NeedsMoreSamples));
+                this.AudioOutput.AddSourceNeedDataEventhandler(this.AudioOutputSoundKey, new AudioNeedsMoreDataHandler(this.NeedsMoreSamples));
 
                 //submit first data
                 this.NeedsMoreSamples();
 
                 //play audio & Let the sound play
-                this.Output.StartPlayback(this.OutputSoundKey);
+                this.AudioOutput.StartPlayback(this.AudioOutputSoundKey);
             }
         }
         #endregion
