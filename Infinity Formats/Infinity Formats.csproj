@@ -56,6 +56,10 @@
       <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
       <Name>Media Base</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Native Factories\Native Factories.csproj">
+      <Project>{1B2B86E7-2F10-42C1-B930-D62C8AC1634D}</Project>
+      <Name>Native Factories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReusableCode\ReusableCode.csproj">
       <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
       <Name>ReusableCode</Name>
@@ -84,11 +88,16 @@
     <Compile Include="External\Interplay\MVE\Component\Coding\Video Coding 16 Bit.cs" />
     <Compile Include="External\Interplay\MVE\Component\Coding\Video Coding 8 Bit.cs" />
     <Compile Include="External\Interplay\MVE\Component\Coding\Video Coding Base.cs" />
-    <Compile Include="External\Interplay\MVE\Component\Coding\Video Opcode Stream.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Interpretation\MVE Interpretable Chunk.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Interpretation\MVE Initialize Audio.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Interpretation\MVE Palette.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Interpretation\MVE Video Frame.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Interpretation\Video Opcode Stream.cs" />
     <Compile Include="External\Interplay\MVE\Component\Management\MVE Audio Channel Parameters.cs" />
     <Compile Include="External\Interplay\MVE\Component\Management\MVE Timer Parameters.cs" />
-    <Compile Include="External\Interplay\MVE\Component\Management\MVE Video Frame.cs" />
     <Compile Include="External\Interplay\MVE\Component\Management\MVE Video Parameters.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Management\MVE Video Manager.cs" />
+    <Compile Include="External\Interplay\MVE\Component\Management\MVE Audio Manager.cs" />
     <Compile Include="External\Interplay\MVE\Component\MVE Header.cs" />
     <Compile Include="External\Interplay\MVE\Component\Opcodes\Audio Stream Data.cs" />
     <Compile Include="External\Interplay\MVE\Component\Opcodes\Audio Stream.cs" />
