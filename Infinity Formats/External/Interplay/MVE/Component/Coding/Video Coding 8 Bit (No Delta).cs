@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Interpretation;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Opcodes;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Enum;

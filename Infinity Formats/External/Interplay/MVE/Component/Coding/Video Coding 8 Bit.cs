@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Interpretation;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Opcodes;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Enum;
@@ -49,25 +50,25 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
 
         #region Frame Exposure
         /// <summary>Gets the next frame from the video stream</summary>
+        /// <param name="mveFrame">MveVideoFrame to decode</param>
         /// <returns>A MediaBase Frame</returns>
-        public override Frame GetNextFrame()
+        public override Frame GetNextFrame(MveVideoFrame mveFrame)
         {
             Frame frame = null;
-            MveVideoFrame videoFrame = this.VideoStream.GetNextFrame();
 
-            if (videoFrame != null)
+            if (mveFrame != null)
             {
                 Byte[] previous = (this.RecentFrame != null) ? this.RecentFrame.NativeBinaryData : new Byte[this.BufferSize];
-                PixelData pd = this.GetNextImage(previous, videoFrame.DecodingMap.BlockEncoding, videoFrame.Data.Data, this.VideoStream.Palette, videoFrame.Data.DeltaFrame);
+                PixelData pd = this.GetNextImage(previous, mveFrame.DecodingMap.BlockEncoding, mveFrame.Data.Data, this.VideoStream.Palette, mveFrame.Data.DeltaFrame);
 
                 //remember the current pixel data for the next frame; otherwise the movie gets very blocky (but interrestingly you can see the delta regions)
-                if (videoFrame.Data.DeltaFrame)
-                    this.PivotFrame = this.RecentFrame;
+                if (mveFrame.Data.DeltaFrame)
+                    this.PivotFrame = this.RecentFrame.Clone();
 
                 this.RecentFrame = pd;
 
                 //DEBUG
-                //using (System.IO.FileStream fs = new System.IO.FileStream("\\Test Data\\Infinity Engine\\Problem\\MVE\\iep1\\iep1_" + frameNumber.ToString() + ".raw", System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.Write))
+                //using (System.IO.FileStream fs = new System.IO.FileStream("\\Test Data\\Infinity Engine\\Problem\\MVE\\iep1\\iep1_" + this.FrameNumber.ToString() + ".raw", System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.Write))
                 //    fs.Write(pd.NativeBinaryData, 0, pd.NativeBinaryData.Length);
                 
                 ++this.FrameNumber;

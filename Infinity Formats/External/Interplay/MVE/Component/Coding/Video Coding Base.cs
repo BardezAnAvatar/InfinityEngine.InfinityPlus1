@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Interpretation;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Opcodes;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Enum;
@@ -65,16 +66,16 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
 
         #region Frame Exposure
         /// <summary>Gets the next frame from the video stream</summary>
+        /// <param name="mveFrame">MveVideoFrame to decode</param>
         /// <returns>A MediaBase Frame</returns>
-        public virtual Frame GetNextFrame()
+        public virtual Frame GetNextFrame(MveVideoFrame mveFrame)
         {
             Frame frame = null;
-            MveVideoFrame videoFrame = this.VideoStream.GetNextFrame();
 
-            if (videoFrame != null)
+            if (mveFrame != null)
             {
                 Byte[] previous = (this.RecentFrame != null) ? this.RecentFrame.NativeBinaryData : new Byte[this.BufferSize];
-                PixelData pd = this.GetNextImage(previous, videoFrame.DecodingMap.BlockEncoding, videoFrame.Data.Data, this.VideoStream.Palette, videoFrame.Data.DeltaFrame);
+                PixelData pd = this.GetNextImage(previous, mveFrame.DecodingMap.BlockEncoding, mveFrame.Data.Data, this.VideoStream.Palette, mveFrame.Data.DeltaFrame);
                 
                 //remember the current pixel data for the next frame; otherwise the movie gets very blocky (but interrestingly you can see the delta regions)
                 this.RecentFrame = pd;
