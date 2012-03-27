@@ -42,6 +42,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
             {
                 MveChunkOpcodeIndexer mve = new MveChunkOpcodeIndexer();
 
+                //read the mve chunks
                 lock (this.abortLock)
                 {
                     if (filePath == this.currentMoviePath)
@@ -50,6 +51,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
                         goto BreakPoint;
                 }
 
+                //read the mve opcodes
                 lock (this.abortLock)
                 {
                     if (filePath == this.currentMoviePath)
@@ -58,8 +60,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
                         goto BreakPoint;
                 }
 
+                //instantiate a new MVE manager
                 MveManager manager = new MveManager(mve);
 
+                //collect manager's opcodes
                 lock (this.abortLock)
                 {
                     if (filePath == this.currentMoviePath)
@@ -68,6 +72,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
                         goto BreakPoint;
                 }
 
+                //read data for manager's opcodes
                 lock (this.abortLock)
                 {
                     if (filePath == this.currentMoviePath)
@@ -76,6 +81,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
                         goto BreakPoint;
                 }
 
+                //decode manager's video maps
                 lock (this.abortLock)
                 {
                     if (filePath == this.currentMoviePath)
@@ -84,6 +90,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
                         goto BreakPoint;
                 }
 
+                //initialize the manager's coders
                 lock (this.abortLock)
                 {
                     if (filePath == this.currentMoviePath)
@@ -92,12 +99,16 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
                         goto BreakPoint;
                 }
 
+                //dispose current coontroller and assign it manager
                 lock (this.abortLock)
                 {
                     if (filePath == this.currentMoviePath)
                     {
                         if (this.VideoController != null)
+                        {
                             this.VideoController.StopVideoPlayback();
+                            this.VideoController.Dispose();
+                        }
 
                         this.VideoController = manager;
                     }
@@ -105,7 +116,30 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
                         goto BreakPoint;
                 }
 
+                //start decoding audio and video
+                lock (this.abortLock)
+                {
+                    if (filePath == this.currentMoviePath)
+                    {
+                        if (this.VideoController != null)
+                        {
+                            this.VideoController.PreemptivelyStartDecodingAudio();
+                            this.VideoController.PreemptivelyStartDecodingVideo();
+                        }
+                    }
+                    else
+                        goto BreakPoint;
+                }
+
+                //skip the error-out condition
+                goto Finish;
+
+                //label for an error position that requires cleanup
             BreakPoint:
+                if (this.VideoController != null)
+                    this.VideoController.Dispose();
+
+            Finish:
                 ;
             }
         }

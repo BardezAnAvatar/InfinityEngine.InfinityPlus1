@@ -39,6 +39,9 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
 
         /// <summary>Audio stream index to play back</summary>
         protected Int32 AudioBlockIndex { get; set; }
+
+        /// <summary>Flag indicating whether audio is currently playing</summary>
+        protected volatile Boolean IsPlayingAudio;
         #endregion
 
 
@@ -53,17 +56,20 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
 
         #region Construction
         /// <summary>Default constructor</summary>
-        public MveMoviePlaybackTestControl() : base() { }
+        public MveMoviePlaybackTestControl() : base()
+        {
+            this.IsPlayingAudio = false;
+        }
 
         /// <summary>Overridden Initialize Component for added controls</summary>
         protected override void InitializeComponent()
         {
             base.InitializeComponent();
-            this.AddedInitializeComponent();
+            this.MveAudioAddedInitializeComponent();
         }
 
         /// <summary>Added Initialize Component logic for added controls</summary>
-        protected virtual void AddedInitializeComponent()
+        protected virtual void MveAudioAddedInitializeComponent()
         {
             this.lblStream = new Label();
             this.cboAudioStream = new ComboBox();
@@ -140,95 +146,116 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
         /// <param name="filePath">String of a filepath, casted as an Object for use by ThreadPool</param>
         protected override void DecodeSingleMovie(String filePath)
         {
-            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            lock (this.abortLock)
             {
-                //Read chunks
-                MveChunkOpcodeIndexer mve = new MveChunkOpcodeIndexer();
+                //periodically check whether the process is the valid one.
+                //Only assign and decode at the end, when you are fairly sure this is the correct MVE.
+                Boolean continueProcess = (filePath == this.currentMoviePath);
 
-                lock (this.abortLock)
+                Boolean assignedManagerToField = false;
+                
+                FileStream sourceFile = null;    //soource file to read from
+
+                try
                 {
-                    if (filePath == this.currentMoviePath)
-                        mve.Read(fs);
-                    else
-                        goto BreakPoint;
-                }
+                    MveManager manager = null;
+                    MveChunkOpcodeIndexer mve = null;
 
-                //read opcodes
-                lock (this.abortLock)
-                {
-                    if (filePath == this.currentMoviePath)
-                        mve.ReadChunkOpcodes(fs);
-                    else
-                        goto BreakPoint;
-                }
-
-                MveManager manager = new MveManager(mve);
-
-                //collect opcode data
-                lock (this.abortLock)
-                {
-                    if (filePath == this.currentMoviePath)
-                        manager.CollectOpcodeIndex();
-                    else
-                        goto BreakPoint;
-                }
-
-                //read audio data
-                lock (this.abortLock)
-                {
-                    if (filePath == this.currentMoviePath)
-                        manager.ReadData(fs);
-                    else
-                        goto BreakPoint;
-                }
-
-                //decode video maps
-                lock (this.abortLock)
-                {
-                    if (filePath == this.currentMoviePath)
-                        manager.DecodeVideoMaps();
-                    else
-                        goto BreakPoint;
-                }
-
-                //Initialize video coders
-                lock (this.abortLock)
-                {
-                    if (filePath == this.currentMoviePath)
-                        manager.InitializeCoders();
-                    else
-                        goto BreakPoint;
-                }
-
-                lock (this.abortLock)
-                {
-                    if (filePath == this.currentMoviePath)
+                    if (continueProcess = (filePath == this.currentMoviePath))
                     {
+                        //stop the existing manager. This method should not be invoked if already on the correct file.
                         if (this.VideoController != null)
                         {
                             this.StopAudioPlayback();
                             this.VideoController.StopVideoPlayback();
                         }
 
-                        this.VideoController = manager;
-                    }
-                    else
-                        goto BreakPoint;
-                }
+                        //open the file
+                        sourceFile = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 
-                lock (this.abortLock)
-                {
-                    if (filePath == this.currentMoviePath)
+                        //Read chunks
+                        mve = new MveChunkOpcodeIndexer();
+                        if (continueProcess = (filePath == this.currentMoviePath))
+                        {
+                            mve.Read(sourceFile);
+
+                            //read opcodes
+                            if (continueProcess = (filePath == this.currentMoviePath))
+                            {
+                                mve.ReadChunkOpcodes(sourceFile);
+
+                                //collect opcode data
+                                if (continueProcess = (filePath == this.currentMoviePath))
+                                {
+                                    manager = new MveManager(mve);
+                                    manager.CollectOpcodeIndex();
+
+                                    //read audio data
+                                    if (continueProcess = (filePath == this.currentMoviePath))
+                                    {
+                                        manager.ReadData(sourceFile);
+
+                                        //close the file since no longer needed
+                                        sourceFile.Dispose();
+                                        sourceFile = null;
+
+                                        //decode video maps
+                                        if (continueProcess = (filePath == this.currentMoviePath))
+                                        {
+                                            manager.DecodeVideoMaps();
+
+                                            //Initialize video coders
+                                            if (continueProcess = (filePath == this.currentMoviePath))
+                                            {
+                                                manager.InitializeCoders();
+
+                                                //attach audio event listeners
+                                                if (continueProcess = (filePath == this.currentMoviePath))
+                                                {
+                                                    manager.AudioStreamStarted += () => { this.ControlAction(this.lstboxFiles, this.StartAudioPlayback); };
+                                                    manager.AudioStreamStopped += this.StopAudioPlayback;
+                    
+                                                    //start decoding
+                                                    if (continueProcess = (filePath == this.currentMoviePath))
+                                                    {
+                                                        manager.PreemptivelyStartDecodingAudio();
+                                                        manager.PreemptivelyStartDecodingVideo();
+
+                                                        //assign the video controller
+                                                        if (continueProcess = (filePath == this.currentMoviePath))
+                                                        {
+                                                            this.VideoController = manager;
+                                                            assignedManagerToField = true;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    //clean up if we are aborting
+                    if (!continueProcess)
                     {
-                        if (this.VideoController != null)
-                            this.VideoController.StartDecodingAudio();
-                    }
-                    else
-                        goto BreakPoint;
-                }
+                        if (manager != null)
+                        {
+                            manager.Dispose();
+                            manager = null;
+                        }
 
-            BreakPoint:
-                ;
+                        if (assignedManagerToField)
+                            this.VideoController = null;
+                    }
+                }
+                finally
+                {
+                    //close the file if it is still open
+                    if (sourceFile != null)
+                        sourceFile.Dispose();
+                }
             }
         }
         #endregion
@@ -239,14 +266,19 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
         public virtual void NeedsMoreSamples()
         {
             Byte[] samples = this.VideoController.GetAudioBlock(this.AudioBlockIndex, this.AudioStream);
-            ++this.AudioBlockIndex;
-
-            if (this.RenderAudio)       //render audio
-                this.Output.SubmitSubsequentData(samples, this.OutputSoundKey, this.AudioBlockIndex < this.VideoController.AudioBlockCount(this.AudioStream));
+            if (samples == null)
+                this.StopAudioPlayback();
             else
             {
-                samples = new Byte[samples.Length]; //HACK: create a new, blank audio array
-                this.Output.SubmitSubsequentData(samples, this.OutputSoundKey, this.AudioBlockIndex < this.VideoController.AudioBlockCount(this.AudioStream));
+                ++this.AudioBlockIndex;
+
+                if (this.RenderAudio)       //render audio
+                    this.Output.SubmitSubsequentData(samples, this.OutputSoundKey, this.AudioBlockIndex < this.VideoController.AudioBlockCount(this.AudioStream));
+                else
+                {
+                    samples = new Byte[samples.Length]; //HACK: create a new, blank audio array
+                    this.Output.SubmitSubsequentData(samples, this.OutputSoundKey, this.AudioBlockIndex < this.VideoController.AudioBlockCount(this.AudioStream));
+                }
             }
         }
         #endregion
@@ -257,14 +289,16 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
         protected override void StopAudioPlayback()
         {
             this.Output.HaltPlayback();
+            this.IsPlayingAudio = false;
         }
 
         /// <summary>Starts audio playback</summary>
         protected override void StartAudioPlayback()
         {
-            if (this.lstboxFiles.SelectedItem != null)
+            if (!this.IsPlayingAudio)
             {
-                String item = this.lstboxFiles.SelectedItem as String;
+                this.IsPlayingAudio = true;
+
                 this.AudioStream = Int32.Parse(this.cboAudioStream.SelectedItem as String);
                 this.AudioBlockIndex = 0;
 
@@ -273,7 +307,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
 
                 //Adjust callback(s)
                 this.Output.AddSourceNeedDataEventhandler(this.OutputSoundKey, new AudioNeedsMoreDataHandler(this.NeedsMoreSamples));
-                
+
                 //submit first data
                 this.NeedsMoreSamples();
 

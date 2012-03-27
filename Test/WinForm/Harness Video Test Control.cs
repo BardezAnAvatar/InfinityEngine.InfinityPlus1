@@ -19,7 +19,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         /// <summary>Object reference to lock on for the User Interface</summary>
         private Object interfaceLock;
 
-        /// <summary>Object reference to abort decoding of</summary>
+        /// <summary>Object reference to lock around the decoding of an MVE selected</summary>
         /// <remarks>Since it is protected, be very careful about what it does...</remarks>
         protected Object abortLock;
 
@@ -33,7 +33,16 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         protected Int32 frameKey { get; set; }
 
         /// <summary>Thread-accessible variable indicating the current movie path</summary>
-        protected String currentMoviePath { get; set; }
+        protected volatile String currentMoviePath;
+
+        /// <summary>Datetime used to roughly measure playback FPS</summary>
+        protected DateTime previousTime { get; set; }
+
+        /// <summary>Frame number currently displayed</summary>
+        protected Int32 frameCountNumber { get; set; }
+
+        /// <summary>Reference to the thread that will be decoding the MVE</summary>
+        protected volatile Thread decodingThread;
         #endregion
 
 
@@ -61,6 +70,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
             this.frameKeyLock = new Object();
 
             this.frameKey = -1; //default of 0 will free the first frame sent in
+            this.previousTime = DateTime.MinValue;
+            this.frameCountNumber = 0;
         }
         #endregion
 
@@ -95,7 +106,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
             lock (this.interfaceLock)
             {
                 this.direct2dRenderControl.SetRenderFrameAndRender(-1, true);
-
                 this.frameKey = -1;
             }
         }
@@ -127,12 +137,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         protected virtual void btnStartPlayback_Click(Object sender, EventArgs e)
         {
             lock (this.interfaceLock)
-            {
-                while (this.VideoController == null)
-                    Thread.Sleep(100);
-
                 this.StartPlayback();
-            }
         }
 
         /// <summary>Resets the state of the video back to the start of the video</summary>
@@ -143,7 +148,12 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
             lock (this.interfaceLock)
             {
                 if (this.VideoController != null)
+                {
                     this.VideoController.ResetVideo();
+                    this.previousTime = DateTime.MinValue;
+                    this.frameCountNumber = 0;
+                    this.lblFrameNumberDisplay.Text = "n/a";
+                }
             }
         }
 
@@ -178,11 +188,17 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
                 {
                     this.pnlVideoControls.Visible = true;
 
-                    lock (this.abortLock)
-                        this.currentMoviePath = moviePath;
-                    
-                    //kick off a thread to decode the video file
-                    ThreadPool.QueueUserWorkItem(new WaitCallback((Object o) => { this.DecodeSingleMovie(moviePath); }));
+                    if (this.currentMoviePath != moviePath)
+                    {
+                        this.frameCountNumber = 0;
+                        this.lblFrameNumberDisplay.Text = "n/a";
+
+                        lock (this.abortLock)
+                            this.currentMoviePath = moviePath;
+
+                        //kick off a thread to decode the video file
+                        ThreadPool.QueueUserWorkItem(new WaitCallback((Object o) => { this.DecodeSingleMovie(moviePath); }));
+                    }
                 }
             }
         }
@@ -206,7 +222,15 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
             if (this.VideoController != null)
             {
                 Frame frame = this.VideoController.GetNextFrame();
+                this.ProcessNextVideoFrame(frame);
+            }
+        }
 
+        /// <summary>Processes the next video frame from the controller. Stops playback if the frame returned was null.</summary>
+        protected virtual void ProcessNextVideoFrame(Frame frame)
+        {
+            if (this.VideoController != null)
+            {
                 if (frame == null)
                     this.StopPlayback();
                 else
@@ -218,6 +242,20 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 
                         //render
                         this.direct2dRenderControl.SetRenderFrameAndRender(this.frameKey, true);
+
+                        //display
+                        DateTime now = DateTime.Now;
+                        if (this.previousTime != DateTime.MinValue)
+                        {
+                            TimeSpan ts = now - this.previousTime;
+                            Double fps = 1000.0 / ts.TotalMilliseconds;
+
+                            this.ControlAction(this.lblFrameRateDisplay, () => { this.lblFrameRateDisplay.Text = String.Format("{0} fps", fps); });
+                            this.ControlAction(this.lblFrameNumberDisplay, () => { this.lblFrameNumberDisplay.Text = this.frameCountNumber.ToString(); });
+                        }
+
+                        this.previousTime = now;
+                        this.frameCountNumber++;
                     }
                 }
             }
@@ -231,6 +269,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
                 this.VideoController.StopVideoPlayback();
                 this.VideoController.ClearTimerElapsed();
             }
+
+            this.previousTime = DateTime.MinValue;
         }
 
         /// <summary>Ceases video (and possibly audio) playback</summary>
@@ -238,7 +278,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         {
             if (this.VideoController != null)
             {
-                this.VideoController.TimerElapsed += new Action(this.FetchNextVideoFrame);
+                this.VideoController.PlayFrame += new Action<Frame>(this.ProcessNextVideoFrame);
                 this.VideoController.StartVideoPlayback();
             }
         }
