@@ -163,17 +163,14 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\Animation Collection Reference.cs" />
-    <Compile Include="WinForm\Harness Movie Test Control.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="WinForm\Harness Movie Test Control.Designer.cs">
-      <DependentUpon>Harness Movie Test Control.cs</DependentUpon>
-    </Compile>
     <Compile Include="WinForm\Harness Video Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\Harness Video Test Control.Designer.cs">
       <DependentUpon>Harness Video Test Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Harness Movie Test Control.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\Harness Animation Collection Test Control Base.cs">
       <SubType>UserControl</SubType>
@@ -438,9 +435,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="WinForm\Harness Movie Test Control.resx">
-      <DependentUpon>Harness Movie Test Control.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Harness Video Test Control.resx">
       <DependentUpon>Harness Video Test Control.cs</DependentUpon>
     </EmbeddedResource>
