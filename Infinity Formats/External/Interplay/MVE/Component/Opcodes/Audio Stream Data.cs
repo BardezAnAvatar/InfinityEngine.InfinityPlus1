@@ -31,7 +31,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         /// <summary>Exposes the audio stream data samples</summary>
         public override Byte[] Samples
         {
-            //TODO: write decompression routine
             get { return new Byte[this.UncompressedSampleDataLength]; }
         }
         #endregion
