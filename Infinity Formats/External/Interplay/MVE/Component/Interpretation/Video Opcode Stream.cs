@@ -6,23 +6,67 @@ using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Opcodes;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Coding
+namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Interpretation
 {
     /// <summary>Represents a 'Stream' of video data opcodes</summary>
     public class VideoOpcodeStream
     {
         #region Fields
-        /// <summary>Represents the stream of opcode data objects</summary>
-        protected List<OpcodeData> Stream { get; set; }
+        /// <summary>Represents the collection of Interpretable chunks and their opcodes</summary>
+        /// <remarks>Not to be confused with MVE format chunks. These are searate.</remarks>
+        protected List<MveInterpretableChunk> Chunks { get; set; }
 
-        /// <summary>Represents the index or position within the 'Stream' of video opcodes</summary>
-        protected Int32 Position { get; set; }
+        /// <summary>Represents the playback index or position within the 'Stream' of video frames</summary>
+        protected Int32 positionPlayback;
+
+        /// <summary>Represents the decoding index or position within the 'Stream' of video frames</summary>
+        protected Int32 positionDecoding;
+
+        /// <summary>Represents the current frame number in the decoding context</summary>
+        protected Int32 currentFrameDecoding;
+
+        /// <summary>Represents the current frame number in the decoding context</summary>
+        protected Int32 currentFramePlayback;
+
+        /// <summary>Flag indicating whether audio is playing. Set to false initially; video streams must activate audio.</summary>
+        protected Boolean AudioPlaying { get; set; }
 
         /// <summary>Palette for data reference</summary>
         public Palette Palette { get; set; }
 
-        /// <summary>Exposes the count of video data opcodes/frames in the stream</summary>
-        public Int32 Count { get; set; }
+        /// <summary>Local event to raise to whatever processor that the audio stream has been started, and to start fetching audio data</summary>
+        private event Action audioStreamStarted;
+
+        /// <summary>Exposes the count of video frames in the chunk stream</summary>
+        public Int32 FrameCount { get; set; }
+
+        /// <summary>Exposes the start frame of audio in this stream</summary>
+        public Int32 AudioStartFrame { get; set; }
+        #endregion
+
+
+        #region Properties
+        /// <summary>Exposes the current frame number in the decoding context</summary>
+        public Int32 CurrentFrameDecoding
+        {
+            get { return this.currentFrameDecoding; }
+        }
+
+        /// <summary>Exposes the current frame number in the playback context</summary>
+        public Int32 CurrentFramePlayback
+        {
+            get { return this.currentFramePlayback; }
+        }
+        #endregion
+
+
+        #region Events
+        /// <summary>Public-facing event indicating that the stream has read a start command</summary>
+        public event Action AudioStreamStarted
+        {
+            add { this.audioStreamStarted += value; }
+            remove { this.audioStreamStarted -= value; }
+        }
         #endregion
 
 
@@ -30,50 +74,64 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         /// <summary>Default constructor</summary>
         public VideoOpcodeStream()
         {
-            this.Stream = new List<OpcodeData>();
-            this.Position = 0;
-            this.Count = 0;
-            this.Palette = null;
+            this.Chunks = new List<MveInterpretableChunk>();
+            this.FrameCount = 0;
+            this.AudioStartFrame = -1;
+            this.ResetStream();
         }
         #endregion
 
 
         #region Public Interface
-        /// <summary>Adds an OpcodeData object to the end of the stream</summary>
-        /// <param name="opcodeData">Object to add to the stream</param>
-        public virtual void AddOpcodeData(OpcodeData opcodeData)
+        /// <summary>Gets the next pair of VideoData and SetDecodingMap opcode data to decode</summary>
+        /// <returns>MveVideoFrame instance, or null if no valid pairs remaining</returns>
+        public virtual MveVideoFrame FetchNextFrameDecode()
         {
-            this.Stream.Add(opcodeData);
+            return this.FetchNextFrame(ref this.positionDecoding, ref this.currentFrameDecoding, false);
         }
 
-        /// <summary>Gets the next pair of VideoData and SetDecodingMap opcode data</summary>
+        /// <summary>Gets the next pair of VideoData and SetDecodingMap opcode data to decode</summary>
         /// <returns>MveVideoFrame instance, or null if no valid pairs remaining</returns>
-        public virtual MveVideoFrame GetNextFrame()
+        public virtual MveVideoFrame FetchNextFrameOutput()
+        {
+            return this.FetchNextFrame(ref this.positionPlayback, ref this.currentFramePlayback, true);
+        }
+
+        /// <summary>Fetches the next MveVideoFrame from the stream</summary>
+        /// <param name="position">position variable for the stream</param>
+        /// <param name="currentFrame">The current frame counter to increment</param>
+        /// <param name="isOutput">Flag indcating whether the means is for output, indicating how to treat frame numbers and palettes</param>
+        /// <returns>MveVideoFrame instance, or null if no valid pairs remaining</returns>
+        protected virtual MveVideoFrame FetchNextFrame(ref Int32 position, ref Int32 currentFrame, Boolean isOutput)
         {
             //get our variables
             MveVideoFrame frame = null;
-            VideoData vidData = null;
-            SetDecodingMap decodingBlockMap = null;
 
-            //loops through stream until we find both a decoding map and a video data
-            while ( (this.Position < this.Stream.Count) && (vidData == null || decodingBlockMap == null) )
+            //do we do anything?
+            while (position < this.Chunks.Count)
             {
-                if (this.Stream[this.Position] is VideoData)
+                MveInterpretableChunk chunk = this.Chunks[position];
+
+                if (chunk is MveVideoFrame)
                 {
-                    vidData = this.Stream[this.Position] as VideoData;
-                    ++this.Count;
+                    frame = chunk as MveVideoFrame;
+                    ++currentFrame;
                 }
-                else if (this.Stream[this.Position] is SetDecodingMap)
-                    decodingBlockMap = this.Stream[this.Position] as SetDecodingMap;
-                else if (this.Stream[this.Position] is SetPalette)
-                    this.Palette = (this.Stream[this.Position] as SetPalette).GeneratePalette(this.Palette);
+                else if (chunk is MvePalette && !isOutput)
+                    this.Palette = (chunk as MvePalette).Palette.GeneratePalette(null);
+                else if (chunk is MveInitializeAudio && isOutput)
+                {
+                    if (this.audioStreamStarted != null)
+                        this.audioStreamStarted();
 
-                ++this.Position;
+                    this.AudioPlaying = true;
+                }
+
+                ++position;
+
+                if (frame != null)
+                    break;
             }
-
-            //instantiate the MveVideoFrame
-            if (!(vidData == null || decodingBlockMap == null))
-                frame = new MveVideoFrame(decodingBlockMap, vidData);
 
             return frame;
         }
@@ -82,23 +140,47 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         /// <param name="input">Input stream to read from</param>
         public virtual void ReadData(Stream input)
         {
-            foreach (OpcodeData opcode in this.Stream)
-                opcode.ReadData(input);
+            foreach (MveInterpretableChunk chunk in this.Chunks)
+            {
+                if (chunk is MveVideoFrame)
+                {
+                    (chunk as MveVideoFrame).DecodingMap.ReadData(input);
+                    (chunk as MveVideoFrame).Data.ReadData(input);
+                }
+                else if (chunk is MvePalette)
+                    (chunk as MvePalette).Palette.ReadData(input);
+            }
         }
 
         /// <summary>Decodes from binary data the decoding maps of the video stream</summary>
         public virtual void DecodeVideoMaps()
         {
-            foreach (OpcodeData opcode in this.Stream)
-                if (opcode is SetDecodingMap)
-                    (opcode as SetDecodingMap).DecodeMap();
+            foreach (MveInterpretableChunk chunk in this.Chunks)
+                if (chunk is MveVideoFrame)
+                    (chunk as MveVideoFrame).DecodingMap.DecodeMap();
         }
 
         /// <summary>Resets the video stream</summary>
         public virtual void ResetStream()
         {
-            this.Position = 0;
+            this.positionPlayback = 0;
+            this.positionDecoding = 0;
+            this.currentFrameDecoding = 0;
+            this.currentFramePlayback = 0;
             this.Palette = null;
+            this.AudioPlaying = false;
+        }
+
+        /// <summary>Adds a video chunk and its supporting opcodes to the stream</summary>
+        /// <param name="chunk">Interpretable data chunk to add to the stream</param>
+        public virtual void AddChunk(MveInterpretableChunk chunk)
+        {
+            this.Chunks.Add(chunk);
+
+            if (chunk is MveVideoFrame)
+                this.FrameCount++;
+            else if (chunk is MveInitializeAudio && this.AudioStartFrame == -1)
+                this.AudioStartFrame = this.FrameCount; //set it to the count, which is also effectively the next index
         }
         #endregion
     }
