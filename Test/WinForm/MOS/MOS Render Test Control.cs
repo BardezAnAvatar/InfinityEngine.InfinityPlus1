@@ -143,7 +143,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MOS
         protected virtual void LoadDecodedImages()
         {
             if (this.lstboxImages.InvokeRequired) //check if an invoke is required, call on UI thead
-                this.lstboxImages.Invoke(new VoidInvoke(this.LoadDecodedImages));
+                this.lstboxImages.Invoke(new Action(this.LoadDecodedImages));
             else    //good on existing thread
             {
                 lock (this.mosCollectionLock)
