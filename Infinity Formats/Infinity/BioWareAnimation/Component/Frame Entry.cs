@@ -5,7 +5,7 @@ using System.Text;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BlackIsleAnimation.Component
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareAnimation.Component
 {
     /// <summary>Represents a single entry in the BAM file for a frame, like a disjoint header</summary>
     public class FrameEntry : IInfinityFormat
@@ -46,7 +46,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BlackIsleAnimation.
         /// <summary>Exposes the offset to the frame binary data</summary>
         public UInt32 OffsetData
         {
-            get { return Convert.ToUInt32((this.DataField < 0) ? 0 - this.DataField : this.DataField); }
+            get { return Convert.ToUInt32(this.DataField & 0x7FFFFFFF); }
             set
             {
                 if (value > (UInt32.MaxValue >> 1))

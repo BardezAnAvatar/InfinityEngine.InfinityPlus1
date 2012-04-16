@@ -2,7 +2,7 @@
 
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BlackIsleAnimation.Component
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareAnimation.Component
 {
     /// <summary>Represents a BAM palette entry</summary>
     /// <remarks>

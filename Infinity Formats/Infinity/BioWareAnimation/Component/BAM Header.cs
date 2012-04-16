@@ -7,7 +7,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BlackIsleAnimation.Component
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareAnimation.Component
 {
     /// <summary>Represents a BAM file's header</summary>
     public class BamHeader : InfinityFormat
