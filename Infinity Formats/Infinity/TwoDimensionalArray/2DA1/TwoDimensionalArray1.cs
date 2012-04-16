@@ -6,6 +6,7 @@ using System.Text;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TwoDimensionalArray._2DA1
@@ -75,7 +76,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TwoDimensionalArray
                 this.values.Columns.Add(name, typeof(String));
         }
 
-        /// <summary>This public method reads file format from the output stream.</summary>
+        /// <summary>This public method reads file format from the input stream.</summary>
         /// <param name="input">Input stream to read from</param>
         public override void Read(Stream input)
         {
@@ -91,7 +92,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TwoDimensionalArray
             this.ReadBody(binData);
         }
 
-        /// <summary>This public method reads file format from the output stream, after the header has already been read.</summary>
+        /// <summary>This public method reads file format from the input stream, after the header has already been read.</summary>
         public override void ReadBody(Stream input)
         {
             this.ClearKeys();
