@@ -27,6 +27,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
             this.Harness.Logger.LogMessage += new LogMessageHandler(this.PostMessage);
             this.Harness.EndInitialize += new EndInitializeTestClass(this.EndHarnessInitialize);
             this.ToggleControls(false);
+            this.DoubleBuffered = true;
         }
         #endregion
 
@@ -35,7 +36,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         protected virtual void ToggleControls(Boolean enabled)
         {
             if (this.InvokeRequired)
-                this.Invoke(new VoidInvokeParameterBoolean(this.ToggleControls), new Object[] { enabled });
+                this.Invoke(new Action<Boolean>(this.ToggleControls), new Object[] { enabled });
             else
                 lock (this.toggleLock)
                 {
@@ -66,7 +67,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         protected virtual void LoadHarnessItems()
         {
             if (this.chklbTestItems.InvokeRequired) //check if an invoke is required, call on UI thead
-                this.chklbTestItems.Invoke(new VoidInvoke(this.LoadHarnessItems));
+                this.chklbTestItems.Invoke(new Action(this.LoadHarnessItems));
             else    //good on existing thread
             {
                 foreach (String path in this.Harness.FilePaths)

@@ -81,6 +81,7 @@
             this.btnChooseColor.TabIndex = 32;
             this.btnChooseColor.Text = "Background Color";
             this.btnChooseColor.UseVisualStyleBackColor = true;
+            this.btnChooseColor.Click += new System.EventHandler(this.btnChooseColor_Click);
             // 
             // btnClearDisplay
             // 
@@ -90,6 +91,7 @@
             this.btnClearDisplay.TabIndex = 31;
             this.btnClearDisplay.Text = "Clear Display";
             this.btnClearDisplay.UseVisualStyleBackColor = true;
+            this.btnClearDisplay.Click += new System.EventHandler(this.btnClearDisplay_Click);
             // 
             // btnInitialize
             // 
@@ -99,6 +101,7 @@
             this.btnInitialize.TabIndex = 20;
             this.btnInitialize.Text = "Initialize";
             this.btnInitialize.UseVisualStyleBackColor = true;
+            this.btnInitialize.Click += new System.EventHandler(this.btnInitialize_Click);
             // 
             // splitContainerHarnessResults
             // 
@@ -128,6 +131,7 @@
             this.lstboxImages.Name = "lstboxImages";
             this.lstboxImages.Size = new System.Drawing.Size(277, 375);
             this.lstboxImages.TabIndex = 62;
+            this.lstboxImages.SelectedIndexChanged += new System.EventHandler(this.lstboxImages_SelectedIndexChanged);
             // 
             // lblListBoxDescriptor
             // 

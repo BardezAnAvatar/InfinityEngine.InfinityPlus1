@@ -16,6 +16,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         public LoggingControl()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
         }
 
         /// <summary>Posts a message to this control</summary>
@@ -30,7 +31,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         protected virtual void AddMessageControl(LogItem logMessage)
         {
             if (this.InvokeRequired)
-                this.Invoke(new VoidLogItemParameterInvoke(this.AddMessageControl), new Object[] { logMessage });
+                this.Invoke(new Action<LogItem>(this.AddMessageControl), new Object[] { logMessage });
             else
                 this.lstvwLog.Items.Add(new ListViewItem(new String[] { logMessage.Description, logMessage.MessageContext, logMessage.Message }));
         }

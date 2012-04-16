@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
@@ -29,6 +30,13 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         #region Properties
         /// <summary>Exposes the configuration key to use to pull from the app.config or similar source</summary>
         protected abstract String ConfigKey { get; }
+
+        /// <summary>Rendering control background color</summary>
+        protected Color RenderBackgroundColor
+        {
+            get { return this.direct2dRenderControl.BackColor; }
+            set { this.direct2dRenderControl.BackColor = value; }
+        }
         #endregion
 
 
@@ -37,6 +45,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         public HarnessImageTestControl()
         {
             this.InitializeComponent();
+            this.DoubleBuffered = true;
+
             this.interfaceLock = new Object();
             this.imageCollectionLock = new Object();
         }
@@ -65,6 +75,18 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
             {
                 this.direct2dRenderControl.SetRenderFrameAndRender(-1);
             }
+        }
+
+        /// <summary>Event handler for when the Choose background color button is clicked</summary>
+        /// <param name="sender">Object senting the event</param>
+        /// <param name="e">Standard EventArgs parameter e</param>
+        protected virtual void btnChooseColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog cd = new ColorDialog();
+            cd.AllowFullOpen = true;
+            cd.AnyColor = true;
+            cd.ShowDialog();
+            this.RenderBackgroundColor = cd.Color;
         }
 
         /// <summary>Event handler for when the selected index of the listbox changes. Sends a new bitmap index to the render target control.</summary>
@@ -157,7 +179,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         protected virtual void LoadDecodedImages()
         {
             if (this.lstboxImages.InvokeRequired) //check if an invoke is required, call on UI thead
-                this.lstboxImages.Invoke(new VoidInvoke(this.LoadDecodedImages));
+                this.lstboxImages.Invoke(new Action(this.LoadDecodedImages));
             else    //good on existing thread
             {
                 lock (this.imageCollectionLock)

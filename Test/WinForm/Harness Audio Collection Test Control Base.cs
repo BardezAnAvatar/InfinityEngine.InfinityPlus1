@@ -35,6 +35,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
         public HarnessAudioCollectionTestControlBase()
         {
             this.InitializeComponent();
+            this.DoubleBuffered = true;
+
             this.interfaceLock = new Object();
         }
 
@@ -46,6 +48,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
         }
         #endregion
 
+
+        #region Event Handlers
         /// <summary>Click event handler for the Initialize button. Loads a list of playable audio files from the config file.</summary>
         /// <param name="sender">Object senting the event</param>
         /// <param name="e">Standard EventArgs parameter e</param>
@@ -90,6 +94,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
                 thread.Start();
             }
         }
+        #endregion
+
 
         /// <summary>Void method to raise the testing in a separate thread</summary>
         protected virtual void RunTestThread(String item, Int32 index)
