@@ -3,9 +3,9 @@ using System.IO;
 using System.Text;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BiowareIndexFileFormat.Biff1;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Biff1;
 
-namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.BiowareIndexFileFormat.Biff1
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.BioWareIndexFileFormat.Biff1
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BiowareIndexFileFormat.Biff1.Biff1Archive class.</summary>
     public class Biff1ArchiveTest : FileTesterBase

@@ -5,7 +5,7 @@ using System.Text;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BiowareIndexFileFormat.Biff1
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Biff1
 {
     /// <summary>This class describes a tileset entry within the BIFF archive</summary>
     /// <remarks>

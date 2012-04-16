@@ -2,7 +2,7 @@
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BiowareIndexFileFormat.Biff1
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Biff1
 {
     /// <summary>
     ///     This class is an abstract entity for shared members between the

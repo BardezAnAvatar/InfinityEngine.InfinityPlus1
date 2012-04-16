@@ -7,7 +7,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BiowareIndexFileFormat.Biff1
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Biff1
 {
     /// <summary>This class represents a BIFF version 1 file. It can extract resources.</summary>
     public class Biff1Archive
