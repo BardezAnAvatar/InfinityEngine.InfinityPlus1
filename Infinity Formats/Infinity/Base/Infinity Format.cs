@@ -68,7 +68,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base
 
         /// <summary>This public method writes the file format data structure to the output stream.</summary>
         /// <param name="output">Output stream to write to</param>
-        public abstract void Write(Stream output);
+        public virtual void Write(Stream output)
+        {
+            ReusableIO.WriteStringToStream(this.signature, output, CultureConstants.CultureCodeEnglish, false, 4);
+            ReusableIO.WriteStringToStream(this.version, output, CultureConstants.CultureCodeEnglish, false, 4);
+        }
         #endregion
 
         /// <summary>Override of GetHashCode</summary>
