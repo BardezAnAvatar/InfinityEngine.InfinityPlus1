@@ -15,7 +15,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals
         public String ResRef { get; set; }
 
         /// <summary>This member represents the type of resource referenced</summary>
-        private ResourceType type;
+        private ResourceType Type { get; set; }
         #endregion
 
 
@@ -26,12 +26,18 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals
             get { return ZString.GetZString(this.ResRef); }
             set { this.ResRef = ZString.GetZString(value); }
         }
+        #endregion
 
-        /// <summary>This member represents the type of resource1 referenced</summary>
-        public ResourceType Type
+
+        #region Construction
+        /// <summary>Default constructor</summary>
+        public ResourceReference() { }
+
+        /// <summary>Default constructor</summary>
+        /// <param name="type">Resource type of this resource</param>
+        public ResourceReference(ResourceType type)
         {
-            get { return this.type; }
-            set { this.type = value; }
+            this.Type = type;
         }
         #endregion
 
