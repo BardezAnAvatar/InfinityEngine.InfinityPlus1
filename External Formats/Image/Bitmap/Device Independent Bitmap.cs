@@ -86,7 +86,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap
 
             //read the pixel data, aligned to 4 bytes
             Int64 rowWidth = ((((UInt32)this.BitmapInfo.BitCount) * this.BitmapInfo.Width) / 32U) * 4U;
-            Int64 pixelDataSize = this.BitmapInfo.Header is BitmapInfoHeader_v3 ? this.BitmapInfo.Header3.SizeImage : rowWidth;
+            Int64 dataSize = rowWidth * this.BitmapInfo.Height;
+
+            Int64 pixelDataSize = this.BitmapInfo.Header is BitmapInfoHeader_v3 ? this.BitmapInfo.Header3.SizeImage : dataSize;
+            if (pixelDataSize == 0) //BI_RBG?
+                pixelDataSize = dataSize;
 
             Byte[] pixelBinData = ReusableIO.BinaryRead(input, pixelDataSize);
 
