@@ -81,32 +81,33 @@ namespace Bardez.Projects.Configuration
 
         /// <summary>Gets a boolean value for a string value passed in</summary>
         /// <param name="Value">String to evaluate</param>
-        /// <param name="Default">
+        /// <param name="defaultValue">
         ///     Boolean value to default to in the evnet that the string does not match
         ///     a Boolean value.
         /// </param>
         /// <returns>A Boolean value representing either the value, evaluated, or the default passed in</returns>
-        private static Boolean GetBoolValue(String Value, Boolean Default)
+        private static Boolean GetBoolValue(String Value, Boolean defaultValue)
         {
-            Boolean boolValue;
-            switch (Value.ToUpper())
-            {
-                case "TRUE":
-                case "ON":
-                case "1":
-                case "YES":
-                    boolValue = true;
-                    break;
-                case "FALSE":
-                case "OFF":
-                case "0":
-                case "NO":
-                    boolValue = false;
-                    break;
-                default:
-                    boolValue = Default;
-                    break;
-            }
+            Boolean boolValue = defaultValue;
+            if (Value != null)
+                switch (Value.ToUpper())
+                {
+                    case "TRUE":
+                    case "ON":
+                    case "1":
+                    case "YES":
+                        boolValue = true;
+                        break;
+                    case "FALSE":
+                    case "OFF":
+                    case "0":
+                    case "NO":
+                        boolValue = false;
+                        break;
+                    default:
+                        boolValue = defaultValue;
+                        break;
+                }
 
             return boolValue;
         }
