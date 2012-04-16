@@ -19,6 +19,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
     ///     This can't be 40 bytes, not 38; it has to be 36, as when I cast Balance in all Things AND
     ///     Guardian Mantle, both appeared one after another, taking up 36 bytes. There could be a
     ///     couple of trailing bytes, but maybe/maybe not. Anyway, for entries, this is now 36.
+    ///     
+    ///     4/5/2012 by Erik "Bardez" Frantz: Additional point of interest:
+    ///     Save game "000000056-obtained kewl stuffs" will crash due to a read of 40.
+    ///     Further evidence for length of 36.
     /// </remarks>
     public class PstOverlay : IInfinityFormat
     {
@@ -193,7 +197,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
             this.Initialize();
 
             //binary read
-            Byte[] remainingBody = ReusableIO.BinaryRead(input, 40);
+            Byte[] remainingBody = ReusableIO.BinaryRead(input, PstOverlay.StructSize);
 
             this.overlayBam.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 0, CultureConstants.CultureCodeEnglish);
             this.unknown1 = ReusableIO.ReadUInt32FromArray(remainingBody, 8);
