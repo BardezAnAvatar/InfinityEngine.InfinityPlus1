@@ -145,7 +145,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
         protected virtual void LoadDecodedJpegItems()
         {
             if (this.lstboxImages.InvokeRequired) //check if an invoke is required, call on UI thead
-                this.lstboxImages.Invoke(new VoidInvoke(this.LoadDecodedJpegItems));
+                this.lstboxImages.Invoke(new Action(this.LoadDecodedJpegItems));
             else    //good on existing thread
             {
                 lock (this.jpegLock)
