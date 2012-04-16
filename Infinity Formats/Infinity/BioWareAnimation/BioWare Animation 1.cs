@@ -5,14 +5,14 @@ using System.Text;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common;
-using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BlackIsleAnimation.Component;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareAnimation.Component;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BlackIsleAnimation
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareAnimation
 {
     public class BlaskIsleAnimation1 : IInfinityFormat, IImageSet, IAnimation
     {
