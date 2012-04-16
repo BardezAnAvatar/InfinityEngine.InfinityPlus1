@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BlackIsleAnimation;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareAnimation;
 using Bardez.Projects.InfinityPlus1.Test.WinForm;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.BAM
