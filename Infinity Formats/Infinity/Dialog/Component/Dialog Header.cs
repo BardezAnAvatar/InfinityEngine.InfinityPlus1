@@ -288,7 +288,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Dialog.Component
             return builder.ToString();
         }
 
-        /// <summary>Generates a human-readable multi-line string for console output that indicates which Storelags flags are set</summary>
+        /// <summary>Generates a human-readable multi-line string for console output that indicates which InterruptionFlagAction flags are set</summary>
         /// <returns>A multi-line string</returns>
         protected String GetInterruptionFlagString()
         {
