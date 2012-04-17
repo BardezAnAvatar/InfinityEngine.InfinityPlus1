@@ -521,7 +521,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         /// <param name="originY">Y coordinate to start drawing from</param>
         public virtual void SetRenderFrameAndRender(Int32 key, Int64 originX, Int64 originY)
         {
-            this.SetRenderFrameAndRender(key, originX, originX, false);
+            this.SetRenderFrameAndRender(key, originX, originY, false);
         }
 
         /// <summary>Sets the frame to be rendered to the User Control and then renders it</summary>
