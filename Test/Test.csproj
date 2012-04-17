@@ -139,7 +139,7 @@
     <Compile Include="Harnesses\Game\GAM Torment Test.cs" />
     <Compile Include="Harnesses\Game\GAM Baldur 2 Test.cs" />
     <Compile Include="Harnesses\Game\GAM Baldur Test.cs" />
-    <Compile Include="Harnesses\Save\GAM Baldur Test.cs" />
+    <Compile Include="Harnesses\Save\SAV Baldur Test.cs" />
     <Compile Include="Harnesses\Spell\Spell 1 Header Test.cs" />
     <Compile Include="Harnesses\Spell\Spell 1 Test.cs" />
     <Compile Include="Harnesses\Spell\Spell 2 Header Test.cs" />
