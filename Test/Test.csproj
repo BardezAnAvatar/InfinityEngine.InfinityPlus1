@@ -161,7 +161,7 @@
     <Compile Include="Harnesses\TileSet\Tis Header Test.cs" />
     <Compile Include="Harnesses\TwoDimensionalArray\TwoDinensionalArray1Test.cs" />
     <Compile Include="Harnesses\Variables\VAR Test.cs" />
-    <Compile Include="Harnesses\VectoredEffectVideoCell\VAVC Test.cs" />
+    <Compile Include="Harnesses\VectoredEffectVideoCell\VVC Test.cs" />
     <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Test.cs" />
     <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Door Test.cs" />
     <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Polygon Header Test.cs" />
