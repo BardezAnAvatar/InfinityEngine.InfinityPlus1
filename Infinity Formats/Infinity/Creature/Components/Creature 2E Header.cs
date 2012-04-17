@@ -15,9 +15,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
     /// <summary>Creature header with elements common to 2E structures</summary>
     public abstract class Creature2eHeader : CreatureHeader
     {
-        #region Members
+        #region Fields
         /// <summary>Unified 2E creature flags</summary>
-        protected Creature2eFlags flags;
+        public Creature2eFlags Flags { get; set; }
 
         /// <summary>Effective armor class</summary>
         /// <remarks>
@@ -25,456 +25,137 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
         ///     
         ///     ... It will be fun to do some Linq to objects comparison on this field.
         /// </remarks>
-        protected Int16 armorClassEffective;
-
+        public Int16 ArmorClassEffective { get; set; }
         /// <summary>Saving throw modifier vs. Death</summary>
-        protected Byte savingThrowDeath;
+        public Byte SavingThrowDeath { get; set; }
 
         /// <summary>Saving throw modifier vs. Wands</summary>
-        protected Byte savingThrowWands;
+        public Byte SavingThrowWands { get; set; }
 
         /// <summary>Saving throw modifier vs. Polymorph</summary>
-        protected Byte savingThrowPolymorph;
+        public Byte SavingThrowPolymorph { get; set; }
 
         /// <summary>Saving throw modifier vs. Breath attacks</summary>
-        protected Byte savingThrowBreathAttacks;
+        public Byte SavingThrowBreathAttacks { get; set; }
 
         /// <summary>Saving throw modifier vs. Spells</summary>
-        protected Byte savingThrowSpells;
+        public Byte SavingThrowSpells { get; set; }
 
         /// <summary>Detect illusions skill</summary>
-        protected Byte detectIllusions;
+        public Byte DetectIllusions { get; set; }
 
         /// <summary>Set traps skill</summary>
         /// <remarks>Unused in BG1, IWD, PS:T, no?</remarks>
-        protected Byte setTraps;
+        public Byte SetTraps { get; set; }
 
         /// <summary>Lore skill</summary>
-        protected Byte lore;
+        public Byte Lore { get; set; }
 
         /// <summary>Lock picking skill</summary>
-        protected Byte lockPicking;
+        public Byte LockPicking { get; set; }
 
         /// <summary>Stealth skill</summary>
-        protected Byte stealth;
+        public Byte Stealth { get; set; }
 
         /// <summary>Find/disarm traps skill</summary>
-        protected Byte findDisarmTraps;
+        public Byte FindDisarmTraps { get; set; }
 
         /// <summary>Pick pockets skill</summary>
-        protected Byte pickPockets;
-
-        //after meeting up for fatigue with base class, we move on to proficiencies. Some of these differ in position,
-        //  but can be shared declaratively. I will also include the common X unused proficiencies.
+        public Byte PickPockets { get; set; }
 
         /// <summary>Bow proficiency</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencyBow;
+        public Byte ProficiencyBow { get; set; }
 
         /// <summary>Axe proficiency</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencyAxe;
-
-        // stupid Baldur's Gate 1 not using proficiencies correctly...
+        public Byte ProficiencyAxe { get; set; }
 
         /// <summary>Unused proficiency #1</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencyUnused1;
+        public Byte ProficiencyUnused1 { get; set; }
 
         /// <summary>Unused proficiency #2</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencyUnused2;
+        public Byte ProficiencyUnused2 { get; set; }
 
         /// <summary>Unused proficiency #3</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencyUnused3;
+        public Byte ProficiencyUnused3 { get; set; }
 
         /// <summary>Unused proficiency #4</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencyUnused4;
+        public Byte ProficiencyUnused4 { get; set; }
 
         /// <summary>Unused proficiency #5</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencyUnused5;
+        public Byte ProficiencyUnused5 { get; set; }
 
         /// <summary>Unused proficiency #6</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencyUnused6;
+        public Byte ProficiencyUnused6 { get; set; }
 
         /// <summary>Tracking skill</summary>
-        protected Byte tracking;
+        public Byte Tracking { get; set; }
 
         /// <summary>32-byte range of unused data, probably nonweapon proficiencies</summary>
-        protected Byte[] reservedNonweaponProficiencies;
+        public Byte[] ReservedNonweaponProficiencies { get; set; }
 
         /// <summary>Current level in first class</summary>
-        protected Byte levelClass1;
+        public Byte LevelClass1 { get; set; }
 
         /// <summary>Current level in second class</summary>
-        protected Byte levelClass2;
+        public Byte LevelClass2 { get; set; }
 
         /// <summary>Current level in third class</summary>
-        protected Byte levelClass3;
+        public Byte LevelClass3 { get; set; }
 
         /// <summary>Gender of the creature</summary>
         /// <remarks>Checkable via the Sex stat in scripts</remarks>
         /// <value>Match to GENDER.IDS</value>
-        protected Byte sex;
+        public Byte Sex { get; set; }
 
         /// <summary>Strength % bonus ability score</summary>
-        protected Byte scoreStrengthBonus;
-        
-        /// <summary>Racial enemy</summary>
-        /// <value>Match to RACE.IDS</value>
-        protected Byte racialEnemy;
-
-        /// <summary>Kit flag</summary>
-        /// <remarks>
-        ///     Apparently, PS:T breaks this up into 2 shorts, one the kit, the other deity. See Near Infinity.
-        ///     
-        ///     Since I am lazy, and this is in the middle of already-abstracted code, I think I might just do
-        ///     a bit-shift for this value for PS:T -- no, that hurts my sensibility :(
-        /// </remarks>
-        protected Kit2e kit;
-
-        /// <summary>Class script</summary>
-        protected ResourceReference scriptClass;
-
-        /// <summary>Race script</summary>
-        protected ResourceReference scriptRace;
-
-        /// <summary>General script</summary>
-        protected ResourceReference scriptGeneral;
-
-        /// <summary>Default script</summary>
-        protected ResourceReference scriptDefault;
-
-        // Diversion point among the 2E structures.
-
-        /// <summary>Offset to known spells</summary>
-        protected UInt32 offsetKnownSpells;
-
-        /// <summary>Count of known spells</summary>
-        protected UInt32 countKnownSpells;
-
-        /// <summary>Offset to overlay memorization</summary>
-        protected UInt32 offsetSpellMemorization;
-
-        /// <summary>Count of overlay memorization entries</summary>
-        protected UInt32 countSpellMemorizations;
-
-        /// <summary>Offset to memorized spells</summary>
-        protected UInt32 offsetMemorizedSpells;
-
-        /// <summary>Count of memorized spells</summary>
-        protected UInt32 countMemorizedSpells;
-        #endregion
-
-        #region Properties
-        /// <summary>Unified 2E creature flags</summary>
-        public Creature2eFlags Flags
-        {
-            get { return this.flags; }
-            set { this.flags = value; }
-        }
-
-        /// <summary>Effective armor class</summary>
-        /// <remarks>
-        ///     Is this not superfluous? Most exaples appear to be equal to ArmorClassNatural
-        ///     
-        ///     ... It will be fun to do some Linq to objects comparison on this field.
-        /// </remarks>
-        public Int16 ArmorClassEffective
-        {
-            get { return this.armorClassEffective; }
-            set { this.armorClassEffective = value; }
-        }
-
-        /// <summary>Saving throw modifier vs. Death</summary>
-        public Byte SavingThrowDeath
-        {
-            get { return this.savingThrowDeath; }
-            set { this.savingThrowDeath = value; }
-        }
-
-        /// <summary>Saving throw modifier vs. Wands</summary>
-        public Byte SavingThrowWands
-        {
-            get { return this.savingThrowWands; }
-            set { this.savingThrowWands = value; }
-        }
-
-        /// <summary>Saving throw modifier vs. Polymorph</summary>
-        public Byte SavingThrowPolymorph
-        {
-            get { return this.savingThrowPolymorph; }
-            set { this.savingThrowPolymorph = value; }
-        }
-
-        /// <summary>Saving throw modifier vs. Breath attacks</summary>
-        public Byte SavingThrowBreathAttacks
-        {
-            get { return this.savingThrowBreathAttacks; }
-            set { this.savingThrowBreathAttacks = value; }
-        }
-
-        /// <summary>Saving throw modifier vs. Spells</summary>
-        public Byte SavingThrowSpells
-        {
-            get { return this.savingThrowSpells; }
-            set { this.savingThrowSpells = value; }
-        }
-
-        /// <summary>Detect illusions skill</summary>
-        public Byte DetectIllusions
-        {
-            get { return this.detectIllusions; }
-            set { this.detectIllusions = value; }
-        }
-
-        /// <summary>Set traps skill</summary>
-        /// <remarks>Unused in BG1, IWD, PS:T, no?</remarks>
-        public Byte SetTraps
-        {
-            get { return this.setTraps; }
-            set { this.setTraps = value; }
-        }
-
-        /// <summary>Lore skill</summary>
-        public Byte Lore
-        {
-            get { return this.lore; }
-            set { this.lore = value; }
-        }
-
-        /// <summary>Lock picking skill</summary>
-        public Byte LockPicking
-        {
-            get { return this.lockPicking; }
-            set { this.lockPicking = value; }
-        }
-
-        /// <summary>Stealth skill</summary>
-        public Byte Stealth
-        {
-            get { return this.stealth; }
-            set { this.stealth = value; }
-        }
-
-        /// <summary>Find/disarm traps skill</summary>
-        public Byte FindDisarmTraps
-        {
-            get { return this.findDisarmTraps; }
-            set { this.findDisarmTraps = value; }
-        }
-
-        /// <summary>Pick pockets skill</summary>
-        public Byte PickPockets
-        {
-            get { return this.pickPockets; }
-            set { this.pickPockets = value; }
-        }
-
-        /// <summary>Bow proficiency</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        public Byte ProficiencyBow
-        {
-            get { return this.proficiencyBow; }
-            set { this.proficiencyBow = value; }
-        }
-
-        /// <summary>Axe proficiency</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        public Byte ProficiencyAxe
-        {
-            get { return this.proficiencyAxe; }
-            set { this.proficiencyAxe = value; }
-        }
-
-        /// <summary>Unused proficiency #1</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        public Byte ProficiencyUnused1
-        {
-            get { return this.proficiencyUnused1; }
-            set { this.proficiencyUnused1 = value; }
-        }
-
-        /// <summary>Unused proficiency #2</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        public Byte ProficiencyUnused2
-        {
-            get { return this.proficiencyUnused2; }
-            set { this.proficiencyUnused2 = value; }
-        }
-
-        /// <summary>Unused proficiency #3</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        public Byte ProficiencyUnused3
-        {
-            get { return this.proficiencyUnused3; }
-            set { this.proficiencyUnused3 = value; }
-        }
-
-        /// <summary>Unused proficiency #4</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        public Byte ProficiencyUnused4
-        {
-            get { return this.proficiencyUnused4; }
-            set { this.proficiencyUnused4 = value; }
-        }
-
-        /// <summary>Unused proficiency #5</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        public Byte ProficiencyUnused5
-        {
-            get { return this.proficiencyUnused5; }
-            set { this.proficiencyUnused5 = value; }
-        }
-
-        /// <summary>Unused proficiency #6</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        public Byte ProficiencyUnused6
-        {
-            get { return this.proficiencyUnused6; }
-            set { this.proficiencyUnused6 = value; }
-        }
-
-        /// <summary>Tracking skill</summary>
-        public Byte Tracking
-        {
-            get { return this.tracking; }
-            set { this.tracking = value; }
-        }
-
-        /// <summary>32-byte range of unused data, probably nonweapon proficiencies</summary>
-        public Byte[] ReservedNonweaponProficiencies
-        {
-            get { return this.reservedNonweaponProficiencies; }
-            set { this.reservedNonweaponProficiencies = value; }
-        }
-
-        /// <summary>Current level in first class</summary>
-        public Byte LevelClass1
-        {
-            get { return this.levelClass1; }
-            set { this.levelClass1 = value; }
-        }
-
-        /// <summary>Current level in second class</summary>
-        public Byte LevelClass2
-        {
-            get { return this.levelClass2; }
-            set { this.levelClass2 = value; }
-        }
-
-        /// <summary>Current level in third class</summary>
-        public Byte LevelClass3
-        {
-            get { return this.levelClass3; }
-            set { this.levelClass3 = value; }
-        }
-
-        /// <summary>Gender of the creature</summary>
-        /// <remarks>Checkable via the Sex stat in scripts</remarks>
-        /// <value>Match to GENDER.IDS</value>
-        public Byte Sex
-        {
-            get { return this.sex; }
-            set { this.sex = value; }
-        }
-
-        /// <summary>Strength % bonus ability score</summary>
-        public Byte ScoreStrengthBonus
-        {
-            get { return this.scoreStrengthBonus; }
-            set { this.scoreStrengthBonus = value; }
-        }
+        public Byte ScoreStrengthBonus { get; set; }
 
         /// <summary>Racial enemy</summary>
         /// <value>Match to RACE.IDS</value>
-        public Byte RacialEnemy
-        {
-            get { return this.racialEnemy; }
-            set { this.racialEnemy = value; }
-        }
+        public Byte RacialEnemy { get; set; }
 
         /// <summary>Kit flag</summary>
-        public Kit2e Kit
-        {
-            get { return this.kit; }
-            set { this.kit = value; }
-        }
+        public Kit2e Kit { get; set; }
 
         /// <summary>Class script</summary>
-        public ResourceReference ScriptClass
-        {
-            get { return this.scriptClass; }
-            set { this.scriptClass = value; }
-        }
+        public ResourceReference ScriptClass { get; set; }
 
         /// <summary>Race script</summary>
-        public ResourceReference ScriptRace
-        {
-            get { return this.scriptRace; }
-            set { this.scriptRace = value; }
-        }
+        public ResourceReference ScriptRace { get; set; }
 
         /// <summary>General script</summary>
-        public ResourceReference ScriptGeneral
-        {
-            get { return this.scriptGeneral; }
-            set { this.scriptGeneral = value; }
-        }
+        public ResourceReference ScriptGeneral { get; set; }
 
         /// <summary>Default script</summary>
-        public ResourceReference ScriptDefault
-        {
-            get { return this.scriptDefault; }
-            set { this.scriptDefault = value; }
-        }
+        public ResourceReference ScriptDefault { get; set; }
 
         /// <summary>Offset to known spells</summary>
-        public UInt32 OffsetKnownSpells
-        {
-            get { return this.offsetKnownSpells; }
-            set { this.offsetKnownSpells = value; }
-        }
+        public Int32 OffsetKnownSpells { get; set; }
 
         /// <summary>Count of known spells</summary>
-        public UInt32 CountKnownSpells
-        {
-            get { return this.countKnownSpells; }
-            set { this.countKnownSpells = value; }
-        }
+        public UInt32 CountKnownSpells { get; set; }
 
         /// <summary>Offset to overlay memorization</summary>
-        public UInt32 OffsetSpellMemorization
-        {
-            get { return this.offsetSpellMemorization; }
-            set { this.offsetSpellMemorization = value; }
-        }
+        public Int32 OffsetSpellMemorization { get; set; }
 
         /// <summary>Count of overlay memorization entries</summary>
-        public UInt32 CountSpellMemorizations
-        {
-            get { return this.countSpellMemorizations; }
-            set { this.countSpellMemorizations = value; }
-        }
+        public UInt32 CountSpellMemorizations { get; set; }
 
         /// <summary>Offset to memorized spells</summary>
-        public UInt32 OffsetMemorizedSpells
-        {
-            get { return this.offsetMemorizedSpells; }
-            set { this.offsetMemorizedSpells = value; }
-        }
+        public Int32 OffsetMemorizedSpells { get; set; }
 
         /// <summary>Count of memorized spells</summary>
-        public UInt32 CountMemorizedSpells
-        {
-            get { return this.countMemorizedSpells; }
-            set { this.countMemorizedSpells = value; }
-        }
+        public UInt32 CountMemorizedSpells { get; set; }
         #endregion
+
 
         #region Construction
         /// <summary>Instantiates reference types</summary>
@@ -482,11 +163,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
         {
             base.Initialize();
 
-            this.reservedNonweaponProficiencies = new Byte[32];
-            this.scriptClass = new ResourceReference();
-            this.scriptRace = new ResourceReference();
-            this.scriptGeneral = new ResourceReference();
-            this.scriptDefault = new ResourceReference();
+            this.ReservedNonweaponProficiencies = new Byte[32];
+            this.ScriptClass = new ResourceReference();
+            this.ScriptRace = new ResourceReference();
+            this.ScriptGeneral = new ResourceReference();
+            this.ScriptDefault = new ResourceReference();
         }
 
         /// <summary>Initializes the soundset ordered dictionary</summary>
@@ -560,64 +241,65 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
         }
         #endregion
 
+
         #region IO method implemetations
         /// <summary>Reads the leading 102 bytes from the Creature 2E file</summary>
         /// <param name="remainingBody">Byte array to read from. Expected to be reading from index 0, size of at least 102 bytes.</param>
         protected void ReadBodyLeadingValues(Byte[] remainingBody)
         {
-            this.nameLong.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 0);
-            this.nameShort.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 4);
-            this.flags = (Creature2eFlags)ReusableIO.ReadUInt32FromArray(remainingBody, 8);
+            this.NameLong.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 0);
+            this.NameShort.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 4);
+            this.Flags = (Creature2eFlags)ReusableIO.ReadUInt32FromArray(remainingBody, 8);
             this.experienceValue = ReusableIO.ReadUInt32FromArray(remainingBody, 12);
             this.experienceTotal = ReusableIO.ReadUInt32FromArray(remainingBody, 16);
             this.gold = ReusableIO.ReadUInt32FromArray(remainingBody, 20);
             this.statusFlags = ReusableIO.ReadUInt32FromArray(remainingBody, 24);
-            this.hitPointsCurrent = ReusableIO.ReadUInt16FromArray(remainingBody, 28);
-            this.hitPointsMaximum = ReusableIO.ReadUInt16FromArray(remainingBody, 30);
+            this.HitPointsCurrent = ReusableIO.ReadUInt16FromArray(remainingBody, 28);
+            this.HitPointsMaximum = ReusableIO.ReadUInt16FromArray(remainingBody, 30);
             this.animationId = ReusableIO.ReadUInt32FromArray(remainingBody, 32);
-            this.colorIndexMetal = remainingBody[36];
-            this.colorIndexMinor = remainingBody[37];
-            this.colorIndexMajor = remainingBody[38];
-            this.colorIndexSkin = remainingBody[39];
-            this.colorIndexLeather = remainingBody[40];
-            this.colorIndexArmor = remainingBody[41];
-            this.colorIndexHair = remainingBody[42];
+            this.ColorIndexMetal = remainingBody[36];
+            this.ColorIndexMinor = remainingBody[37];
+            this.ColorIndexMajor = remainingBody[38];
+            this.ColorIndexSkin = remainingBody[39];
+            this.ColorIndexLeather = remainingBody[40];
+            this.ColorIndexArmor = remainingBody[41];
+            this.ColorIndexHair = remainingBody[42];
             this.useEffectStructureVersion2 = Convert.ToBoolean(remainingBody[43]);
-            this.portraitSmall.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 44, CultureConstants.CultureCodeEnglish);
-            this.portraitLarge.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 52, CultureConstants.CultureCodeEnglish);
+            this.PortraitSmall.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 44, CultureConstants.CultureCodeEnglish);
+            this.PortraitLarge.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 52, CultureConstants.CultureCodeEnglish);
             this.reputation = remainingBody[60];
             this.hideInShadows = remainingBody[61];
-            this.armorClassNatural = ReusableIO.ReadInt16FromArray(remainingBody, 62);
-            this.armorClassEffective = ReusableIO.ReadInt16FromArray(remainingBody, 64);
-            this.armorClassModifierCrushing = ReusableIO.ReadInt16FromArray(remainingBody, 66);
-            this.armorClassModifierMissile = ReusableIO.ReadInt16FromArray(remainingBody, 68);
-            this.armorClassModifierPiercing = ReusableIO.ReadInt16FromArray(remainingBody, 70);
-            this.armorClassModifierSlashing = ReusableIO.ReadInt16FromArray(remainingBody, 72);
-            this.attackBase = remainingBody[74];
-            this.attacksPerRound = remainingBody[75];
-            this.savingThrowDeath = remainingBody[76];
-            this.savingThrowWands = remainingBody[77];
-            this.savingThrowPolymorph = remainingBody[78];
-            this.savingThrowBreathAttacks = remainingBody[79];
-            this.savingThrowSpells = remainingBody[80];
-            this.resistFire = remainingBody[81];
-            this.resistCold = remainingBody[82];
-            this.resistElectricity = remainingBody[83];
-            this.resistAcid = remainingBody[84];
-            this.resistMagic = remainingBody[85];
-            this.resistFireMagic = remainingBody[86];
-            this.resistColdMagic = remainingBody[87];
-            this.resistPhysicalSlashing = remainingBody[88];
-            this.resistPhysicalCrushing = remainingBody[89];
-            this.resistPhysicalPiercing = remainingBody[90];
-            this.resistPhysicalMissile = remainingBody[91];
-            this.detectIllusions = remainingBody[92];
-            this.setTraps = remainingBody[93];
-            this.lore = remainingBody[94];
-            this.lockPicking = remainingBody[95];
-            this.stealth = remainingBody[96];
-            this.findDisarmTraps = remainingBody[97];
-            this.pickPockets = remainingBody[98];
+            this.ArmorClassNatural = ReusableIO.ReadInt16FromArray(remainingBody, 62);
+            this.ArmorClassEffective = ReusableIO.ReadInt16FromArray(remainingBody, 64);
+            this.ArmorClassModifierCrushing = ReusableIO.ReadInt16FromArray(remainingBody, 66);
+            this.ArmorClassModifierMissile = ReusableIO.ReadInt16FromArray(remainingBody, 68);
+            this.ArmorClassModifierPiercing = ReusableIO.ReadInt16FromArray(remainingBody, 70);
+            this.ArmorClassModifierSlashing = ReusableIO.ReadInt16FromArray(remainingBody, 72);
+            this.AttackBase = remainingBody[74];
+            this.AttacksPerRound = remainingBody[75];
+            this.SavingThrowDeath = remainingBody[76];
+            this.SavingThrowWands = remainingBody[77];
+            this.SavingThrowPolymorph = remainingBody[78];
+            this.SavingThrowBreathAttacks = remainingBody[79];
+            this.SavingThrowSpells = remainingBody[80];
+            this.ResistFire = remainingBody[81];
+            this.ResistCold = remainingBody[82];
+            this.ResistElectricity = remainingBody[83];
+            this.ResistAcid = remainingBody[84];
+            this.ResistMagic = remainingBody[85];
+            this.ResistFireMagic = remainingBody[86];
+            this.ResistColdMagic = remainingBody[87];
+            this.ResistPhysicalSlashing = remainingBody[88];
+            this.ResistPhysicalCrushing = remainingBody[89];
+            this.ResistPhysicalPiercing = remainingBody[90];
+            this.ResistPhysicalMissile = remainingBody[91];
+            this.DetectIllusions = remainingBody[92];
+            this.SetTraps = remainingBody[93];
+            this.Lore = remainingBody[94];
+            this.LockPicking = remainingBody[95];
+            this.Stealth = remainingBody[96];
+            this.FindDisarmTraps = remainingBody[97];
+            this.PickPockets = remainingBody[98];
             this.fatigue = remainingBody[99];
             this.intoxication = remainingBody[100];
             this.luck = remainingBody[101];
@@ -640,12 +322,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
         /// <param name="headerBodyArray">Byte array to read from. Expected to be reading from index 556, size of at least 616 bytes.</param>
         protected void ReadBodyCommonAfterSoundset(Byte[] remainingBody)
         {
-            this.levelClass1 = remainingBody[556];
-            this.levelClass2 = remainingBody[557];
-            this.levelClass3 = remainingBody[558];
-            this.sex = remainingBody[559];
+            this.LevelClass1 = remainingBody[556];
+            this.LevelClass2 = remainingBody[557];
+            this.LevelClass3 = remainingBody[558];
+            this.Sex = remainingBody[559];
             this.scoreStrength = remainingBody[560];
-            this.scoreStrengthBonus = remainingBody[561];
+            this.ScoreStrengthBonus = remainingBody[561];
             this.scoreIntelligence = remainingBody[562];
             this.scoreWisdom = remainingBody[563];
             this.scoreDexterity = remainingBody[564];
@@ -653,21 +335,21 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
             this.scoreCharisma = remainingBody[566];
             this.morale = remainingBody[567];
             this.moraleBreak = remainingBody[568];
-            this.racialEnemy = remainingBody[569];
+            this.RacialEnemy = remainingBody[569];
             this.moraleRecoveryTime = ReusableIO.ReadUInt16FromArray(remainingBody, 570);
             this.ReadKitValues(remainingBody);
             this.scriptOverride.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 576, CultureConstants.CultureCodeEnglish);
-            this.scriptClass.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 584, CultureConstants.CultureCodeEnglish);
-            this.scriptRace.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 592, CultureConstants.CultureCodeEnglish);
-            this.scriptGeneral.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 600, CultureConstants.CultureCodeEnglish);
-            this.scriptDefault.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 608, CultureConstants.CultureCodeEnglish);
+            this.ScriptClass.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 584, CultureConstants.CultureCodeEnglish);
+            this.ScriptRace.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 592, CultureConstants.CultureCodeEnglish);
+            this.ScriptGeneral.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 600, CultureConstants.CultureCodeEnglish);
+            this.ScriptDefault.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 608, CultureConstants.CultureCodeEnglish);
         }
 
         /// <summary>This method will read the kit variable to the output Stream</summary>
         /// <param name="dataArray">Byte array to read from. Expected to be reading from index 572 and reading 4 bytes.</param>
         protected virtual void ReadKitValues(Byte[] dataArray)
         {
-            this.kit = (Kit2e)ReusableIO.ReadUInt32FromArray(dataArray, 572);
+            this.Kit = (Kit2e)ReusableIO.ReadUInt32FromArray(dataArray, 572);
         }
         
         /// <summary>Reads the classification entries from the creature file</summary>
@@ -682,12 +364,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
             this.enumGlobal = ReusableIO.ReadInt16FromArray(remainingHeaderArray, offset);
             this.enumLocal = ReusableIO.ReadInt16FromArray(remainingHeaderArray, offset + 2);
             this.deathVariable.Source = ReusableIO.ReadStringFromByteArray(remainingHeaderArray, offset + 4, CultureConstants.CultureCodeEnglish, 32);
-            this.offsetKnownSpells = ReusableIO.ReadUInt32FromArray(remainingHeaderArray, offset + 36);
-            this.countKnownSpells = ReusableIO.ReadUInt32FromArray(remainingHeaderArray, offset + 40);
-            this.offsetSpellMemorization = ReusableIO.ReadUInt32FromArray(remainingHeaderArray, offset + 44);
-            this.countSpellMemorizations = ReusableIO.ReadUInt32FromArray(remainingHeaderArray, offset + 48);
-            this.offsetMemorizedSpells = ReusableIO.ReadUInt32FromArray(remainingHeaderArray, offset + 52);
-            this.countMemorizedSpells = ReusableIO.ReadUInt32FromArray(remainingHeaderArray, offset + 56);
+            this.OffsetKnownSpells = ReusableIO.ReadInt32FromArray(remainingHeaderArray, offset + 36);
+            this.CountKnownSpells = ReusableIO.ReadUInt32FromArray(remainingHeaderArray, offset + 40);
+            this.OffsetSpellMemorization = ReusableIO.ReadInt32FromArray(remainingHeaderArray, offset + 44);
+            this.CountSpellMemorizations = ReusableIO.ReadUInt32FromArray(remainingHeaderArray, offset + 48);
+            this.OffsetMemorizedSpells = ReusableIO.ReadInt32FromArray(remainingHeaderArray, offset + 52);
+            this.CountMemorizedSpells = ReusableIO.ReadUInt32FromArray(remainingHeaderArray, offset + 56);
             this.offsetItemSlots = ReusableIO.ReadUInt32FromArray(remainingHeaderArray, offset + 60);
             this.offsetItems = ReusableIO.ReadUInt32FromArray(remainingHeaderArray, offset + 64);
             this.countItems = ReusableIO.ReadUInt32FromArray(remainingHeaderArray, offset + 68);
@@ -704,7 +386,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
             ReusableIO.WriteStringToStream(this.version, output, CultureConstants.CultureCodeEnglish, false, 4);
             ReusableIO.WriteInt32ToStream(this.nameLong.StringReferenceIndex, output);
             ReusableIO.WriteInt32ToStream(this.nameShort.StringReferenceIndex, output);
-            ReusableIO.WriteUInt32ToStream((UInt32)this.flags, output);
+            ReusableIO.WriteUInt32ToStream((UInt32)this.Flags, output);
             ReusableIO.WriteUInt32ToStream(this.experienceValue, output);
             ReusableIO.WriteUInt32ToStream(this.experienceTotal, output);
             ReusableIO.WriteUInt32ToStream(this.gold, output);
@@ -724,19 +406,19 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
             ReusableIO.WriteStringToStream(this.portraitLarge.ResRef, output, CultureConstants.CultureCodeEnglish);
             output.WriteByte(this.reputation);
             output.WriteByte(this.hideInShadows);
-            ReusableIO.WriteInt16ToStream(this.armorClassNatural, output);
-            ReusableIO.WriteInt16ToStream(this.armorClassEffective, output);
-            ReusableIO.WriteInt16ToStream(this.armorClassModifierCrushing, output);
-            ReusableIO.WriteInt16ToStream(this.armorClassModifierMissile, output);
-            ReusableIO.WriteInt16ToStream(this.armorClassModifierPiercing, output);
-            ReusableIO.WriteInt16ToStream(this.armorClassModifierSlashing, output);
-            output.WriteByte(this.attackBase);
-            output.WriteByte(this.attacksPerRound);
-            output.WriteByte(this.savingThrowDeath);
-            output.WriteByte(this.savingThrowWands);
-            output.WriteByte(this.savingThrowPolymorph);
-            output.WriteByte(this.savingThrowBreathAttacks);
-            output.WriteByte(this.savingThrowSpells);
+            ReusableIO.WriteInt16ToStream(this.ArmorClassNatural, output);
+            ReusableIO.WriteInt16ToStream(this.ArmorClassEffective, output);
+            ReusableIO.WriteInt16ToStream(this.ArmorClassModifierCrushing, output);
+            ReusableIO.WriteInt16ToStream(this.ArmorClassModifierMissile, output);
+            ReusableIO.WriteInt16ToStream(this.ArmorClassModifierPiercing, output);
+            ReusableIO.WriteInt16ToStream(this.ArmorClassModifierSlashing, output);
+            output.WriteByte(this.AttackBase);
+            output.WriteByte(this.AttacksPerRound);
+            output.WriteByte(this.SavingThrowDeath);
+            output.WriteByte(this.SavingThrowWands);
+            output.WriteByte(this.SavingThrowPolymorph);
+            output.WriteByte(this.SavingThrowBreathAttacks);
+            output.WriteByte(this.SavingThrowSpells);
             output.WriteByte(this.resistFire);
             output.WriteByte(this.resistCold);
             output.WriteByte(this.resistElectricity);
@@ -748,13 +430,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
             output.WriteByte(this.resistPhysicalCrushing);
             output.WriteByte(this.resistPhysicalPiercing);
             output.WriteByte(this.resistPhysicalMissile);
-            output.WriteByte(this.detectIllusions);
-            output.WriteByte(this.setTraps);
-            output.WriteByte(this.lore);
-            output.WriteByte(this.lockPicking);
-            output.WriteByte(this.stealth);
-            output.WriteByte(this.findDisarmTraps);
-            output.WriteByte(this.pickPockets);
+            output.WriteByte(this.DetectIllusions);
+            output.WriteByte(this.SetTraps);
+            output.WriteByte(this.Lore);
+            output.WriteByte(this.LockPicking);
+            output.WriteByte(this.Stealth);
+            output.WriteByte(this.FindDisarmTraps);
+            output.WriteByte(this.PickPockets);
             output.WriteByte(this.fatigue);
             output.WriteByte(this.intoxication);
             output.WriteByte(this.luck);
@@ -776,12 +458,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
         /// <param name="output">Output stream to write to</param>
         protected void WriteBodyCommonAfterSoundset(Stream output)
         {
-            output.WriteByte(this.levelClass1);
-            output.WriteByte(this.levelClass2);
-            output.WriteByte(this.levelClass3);
-            output.WriteByte(this.sex);
+            output.WriteByte(this.LevelClass1);
+            output.WriteByte(this.LevelClass2);
+            output.WriteByte(this.LevelClass3);
+            output.WriteByte(this.Sex);
             output.WriteByte(this.scoreStrength);
-            output.WriteByte(this.scoreStrengthBonus);
+            output.WriteByte(this.ScoreStrengthBonus);
             output.WriteByte(this.scoreIntelligence);
             output.WriteByte(this.scoreWisdom);
             output.WriteByte(this.scoreDexterity);
@@ -789,21 +471,21 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
             output.WriteByte(this.scoreCharisma);
             output.WriteByte(this.morale);
             output.WriteByte(this.moraleBreak);
-            output.WriteByte(this.racialEnemy);
+            output.WriteByte(this.RacialEnemy);
             ReusableIO.WriteUInt16ToStream(this.moraleRecoveryTime, output);
             this.WriteKitValues(output);
             ReusableIO.WriteStringToStream(this.scriptOverride.ResRef, output, CultureConstants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.scriptClass.ResRef, output, CultureConstants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.scriptRace.ResRef, output, CultureConstants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.scriptGeneral.ResRef, output, CultureConstants.CultureCodeEnglish);
-            ReusableIO.WriteStringToStream(this.scriptDefault.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.ScriptClass.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.ScriptRace.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.ScriptGeneral.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteStringToStream(this.ScriptDefault.ResRef, output, CultureConstants.CultureCodeEnglish);
         }
 
         /// <summary>This method will write out the kit variable to the output Stream</summary>
         /// <param name="output">Output stream to write to</param>
         protected virtual void WriteKitValues(Stream output)
         {
-            ReusableIO.WriteUInt32ToStream((UInt32)this.kit, output);
+            ReusableIO.WriteUInt32ToStream((UInt32)this.Kit, output);
         }
 
         /// <summary>This method writes the classification values to the output stream</summary>
@@ -831,12 +513,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
             ReusableIO.WriteInt16ToStream(this.enumGlobal, output);
             ReusableIO.WriteInt16ToStream(this.enumLocal, output);
             ReusableIO.WriteStringToStream(this.deathVariable.Source, output, CultureConstants.CultureCodeEnglish, false, 32);
-            ReusableIO.WriteUInt32ToStream(this.offsetKnownSpells, output);
-            ReusableIO.WriteUInt32ToStream(this.countKnownSpells, output);
-            ReusableIO.WriteUInt32ToStream(this.offsetSpellMemorization, output);
-            ReusableIO.WriteUInt32ToStream(this.countSpellMemorizations, output);
-            ReusableIO.WriteUInt32ToStream(this.offsetMemorizedSpells, output);
-            ReusableIO.WriteUInt32ToStream(this.countMemorizedSpells, output);
+            ReusableIO.WriteInt32ToStream(this.OffsetKnownSpells, output);
+            ReusableIO.WriteUInt32ToStream(this.CountKnownSpells, output);
+            ReusableIO.WriteInt32ToStream(this.OffsetSpellMemorization, output);
+            ReusableIO.WriteUInt32ToStream(this.CountSpellMemorizations, output);
+            ReusableIO.WriteInt32ToStream(this.OffsetMemorizedSpells, output);
+            ReusableIO.WriteUInt32ToStream(this.CountMemorizedSpells, output);
             ReusableIO.WriteUInt32ToStream(this.offsetItemSlots, output);
             ReusableIO.WriteUInt32ToStream(this.offsetItems, output);
             ReusableIO.WriteUInt32ToStream(this.countItems, output);
@@ -846,6 +528,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
         }
         #endregion
 
+
         #region ToString() helpers
         /// <summary>Generates a human-readable multi-line string for console output that indicates which Creature2eFlags flags are set</summary>
         /// <returns>A multi-line string</returns>
@@ -853,32 +536,32 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
         {
             StringBuilder sb = new StringBuilder();
 
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.ShowLongName) == Creature2eFlags.ShowLongName, Creature2eFlags.ShowLongName.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.NoCorpse) == Creature2eFlags.NoCorpse, Creature2eFlags.NoCorpse.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.PermanentCorpse) == Creature2eFlags.PermanentCorpse, Creature2eFlags.PermanentCorpse.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.OriginalClassFighter) == Creature2eFlags.OriginalClassFighter, Creature2eFlags.OriginalClassFighter.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.OriginalClassMage) == Creature2eFlags.OriginalClassMage, Creature2eFlags.OriginalClassMage.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.OriginalClassCleric) == Creature2eFlags.OriginalClassCleric, Creature2eFlags.OriginalClassCleric.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.OriginalClassThief) == Creature2eFlags.OriginalClassThief, Creature2eFlags.OriginalClassThief.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.OriginalClassDruid) == Creature2eFlags.OriginalClassDruid, Creature2eFlags.OriginalClassDruid.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.OriginalClassRanger) == Creature2eFlags.OriginalClassRanger, Creature2eFlags.OriginalClassRanger.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.FallenPaladin) == Creature2eFlags.FallenPaladin, Creature2eFlags.FallenPaladin.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.FallenRanger) == Creature2eFlags.FallenRanger, Creature2eFlags.FallenRanger.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.Exportable) == Creature2eFlags.Exportable, Creature2eFlags.Exportable.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.HideInjuryStatusInTooltip) == Creature2eFlags.HideInjuryStatusInTooltip, Creature2eFlags.HideInjuryStatusInTooltip.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.QuestCritical) == Creature2eFlags.QuestCritical, Creature2eFlags.QuestCritical.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.ActivatesCannotBeUsedByNpcs) == Creature2eFlags.ActivatesCannotBeUsedByNpcs, Creature2eFlags.ActivatesCannotBeUsedByNpcs.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.BeenInParty) == Creature2eFlags.BeenInParty, Creature2eFlags.BeenInParty.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.RestoreItemInHand) == Creature2eFlags.RestoreItemInHand, Creature2eFlags.RestoreItemInHand.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.UnsetRestoreItemInHandFlag) == Creature2eFlags.UnsetRestoreItemInHandFlag, Creature2eFlags.UnsetRestoreItemInHandFlag.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.RandomWalkEnemyAlly) == Creature2eFlags.RandomWalkEnemyAlly, Creature2eFlags.RandomWalkEnemyAlly.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.RandomWalkGeneral) == Creature2eFlags.RandomWalkGeneral, Creature2eFlags.RandomWalkGeneral.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.RandomWalkRace) == Creature2eFlags.RandomWalkRace, Creature2eFlags.RandomWalkRace.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.RandomWalkClass) == Creature2eFlags.RandomWalkClass, Creature2eFlags.RandomWalkClass.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.RandomWalkSpecific) == Creature2eFlags.RandomWalkSpecific, Creature2eFlags.RandomWalkSpecific.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.RandomWalkGender) == Creature2eFlags.RandomWalkGender, Creature2eFlags.RandomWalkGender.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.RandomWalkAlignment) == Creature2eFlags.RandomWalkAlignment, Creature2eFlags.RandomWalkAlignment.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & Creature2eFlags.Uninterruptable) == Creature2eFlags.Uninterruptable, Creature2eFlags.Uninterruptable.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.ShowLongName) == Creature2eFlags.ShowLongName, Creature2eFlags.ShowLongName.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.NoCorpse) == Creature2eFlags.NoCorpse, Creature2eFlags.NoCorpse.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.PermanentCorpse) == Creature2eFlags.PermanentCorpse, Creature2eFlags.PermanentCorpse.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.OriginalClassFighter) == Creature2eFlags.OriginalClassFighter, Creature2eFlags.OriginalClassFighter.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.OriginalClassMage) == Creature2eFlags.OriginalClassMage, Creature2eFlags.OriginalClassMage.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.OriginalClassCleric) == Creature2eFlags.OriginalClassCleric, Creature2eFlags.OriginalClassCleric.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.OriginalClassThief) == Creature2eFlags.OriginalClassThief, Creature2eFlags.OriginalClassThief.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.OriginalClassDruid) == Creature2eFlags.OriginalClassDruid, Creature2eFlags.OriginalClassDruid.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.OriginalClassRanger) == Creature2eFlags.OriginalClassRanger, Creature2eFlags.OriginalClassRanger.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.FallenPaladin) == Creature2eFlags.FallenPaladin, Creature2eFlags.FallenPaladin.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.FallenRanger) == Creature2eFlags.FallenRanger, Creature2eFlags.FallenRanger.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.Exportable) == Creature2eFlags.Exportable, Creature2eFlags.Exportable.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.HideInjuryStatusInTooltip) == Creature2eFlags.HideInjuryStatusInTooltip, Creature2eFlags.HideInjuryStatusInTooltip.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.QuestCritical) == Creature2eFlags.QuestCritical, Creature2eFlags.QuestCritical.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.ActivatesCannotBeUsedByNpcs) == Creature2eFlags.ActivatesCannotBeUsedByNpcs, Creature2eFlags.ActivatesCannotBeUsedByNpcs.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.BeenInParty) == Creature2eFlags.BeenInParty, Creature2eFlags.BeenInParty.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.RestoreItemInHand) == Creature2eFlags.RestoreItemInHand, Creature2eFlags.RestoreItemInHand.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.UnsetRestoreItemInHandFlag) == Creature2eFlags.UnsetRestoreItemInHandFlag, Creature2eFlags.UnsetRestoreItemInHandFlag.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.RandomWalkEnemyAlly) == Creature2eFlags.RandomWalkEnemyAlly, Creature2eFlags.RandomWalkEnemyAlly.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.RandomWalkGeneral) == Creature2eFlags.RandomWalkGeneral, Creature2eFlags.RandomWalkGeneral.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.RandomWalkRace) == Creature2eFlags.RandomWalkRace, Creature2eFlags.RandomWalkRace.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.RandomWalkClass) == Creature2eFlags.RandomWalkClass, Creature2eFlags.RandomWalkClass.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.RandomWalkSpecific) == Creature2eFlags.RandomWalkSpecific, Creature2eFlags.RandomWalkSpecific.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.RandomWalkGender) == Creature2eFlags.RandomWalkGender, Creature2eFlags.RandomWalkGender.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.RandomWalkAlignment) == Creature2eFlags.RandomWalkAlignment, Creature2eFlags.RandomWalkAlignment.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & Creature2eFlags.Uninterruptable) == Creature2eFlags.Uninterruptable, Creature2eFlags.Uninterruptable.GetDescription());
 
             String result = sb.ToString();
             return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
@@ -899,7 +582,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
             builder.Append(StringFormat.ToStringAlignment("Short Name StrRef"));
             builder.Append(this.nameShort.StringReferenceIndex);
             builder.Append(StringFormat.ToStringAlignment("Creature Flags"));
-            builder.Append((UInt32)this.flags);
+            builder.Append((UInt32)this.Flags);
             builder.Append(StringFormat.ToStringAlignment("Creature Flags (enumerated)"));
             builder.Append(this.GetCreatureFlagsString());
             builder.Append(StringFormat.ToStringAlignment("Kill XP reward"));
@@ -943,33 +626,33 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
             builder.Append(StringFormat.ToStringAlignment("Hide in shadows"));
             builder.Append(this.hideInShadows);
             builder.Append(StringFormat.ToStringAlignment("Armor Class (Natural)"));
-            builder.Append(this.armorClassNatural);
+            builder.Append(this.ArmorClassNatural);
             builder.Append(StringFormat.ToStringAlignment("Armor Class (Effective)"));
-            builder.Append(this.armorClassEffective);
+            builder.Append(this.ArmorClassEffective);
             builder.Append(StringFormat.ToStringAlignment("Armor Class Modifier (Crushing)"));
-            builder.Append(this.armorClassModifierCrushing);
+            builder.Append(this.ArmorClassModifierCrushing);
             builder.Append(StringFormat.ToStringAlignment("Armor Class Modifier (Missile)"));
-            builder.Append(this.armorClassModifierMissile);
+            builder.Append(this.ArmorClassModifierMissile);
             builder.Append(StringFormat.ToStringAlignment("Armor Class Modifier (Piercing)"));
-            builder.Append(this.armorClassModifierPiercing);
+            builder.Append(this.ArmorClassModifierPiercing);
             builder.Append(StringFormat.ToStringAlignment("Armor Class Modifier (Slashing)"));
-            builder.Append(this.armorClassModifierSlashing);
+            builder.Append(this.ArmorClassModifierSlashing);
             builder.Append(StringFormat.ToStringAlignment("ThAC0"));
-            builder.Append(this.attackBase);
+            builder.Append(this.AttackBase);
             builder.Append(StringFormat.ToStringAlignment("Attacks per round (value)"));
-            builder.Append(this.attacksPerRound);
+            builder.Append(this.AttacksPerRound);
             builder.Append(StringFormat.ToStringAlignment("Attacks per round (actual)"));
-            builder.Append(this.attacksPerRound < 6 ? Convert.ToDecimal(this.attacksPerRound) : (this.attacksPerRound - 5) + 0.5M);
+            builder.Append(this.AttacksPerRound < 6 ? Convert.ToDecimal(this.attacksPerRound) : (this.attacksPerRound - 5) + 0.5M);
             builder.Append(StringFormat.ToStringAlignment("Saving Throw Modifier (Death)"));
-            builder.Append(this.savingThrowDeath);
+            builder.Append(this.SavingThrowDeath);
             builder.Append(StringFormat.ToStringAlignment("Saving Throw Modifier (Wands)"));
-            builder.Append(this.savingThrowWands);
+            builder.Append(this.SavingThrowWands);
             builder.Append(StringFormat.ToStringAlignment("Saving Throw Modifier (Polymorph)"));
-            builder.Append(this.savingThrowPolymorph);
+            builder.Append(this.SavingThrowPolymorph);
             builder.Append(StringFormat.ToStringAlignment("Saving Throw Modifier (Breath attacks)"));
-            builder.Append(this.savingThrowBreathAttacks);
+            builder.Append(this.SavingThrowBreathAttacks);
             builder.Append(StringFormat.ToStringAlignment("Saving Throw Modifier (Spells)"));
-            builder.Append(this.savingThrowSpells);
+            builder.Append(this.SavingThrowSpells);
             builder.Append(StringFormat.ToStringAlignment("Damage resistance (Fire)"));
             builder.Append(this.resistFire);
             builder.Append(StringFormat.ToStringAlignment("Damage resistance (Cold)"));
@@ -993,19 +676,19 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
             builder.Append(StringFormat.ToStringAlignment("Damage resistance (Missile)"));
             builder.Append(this.resistPhysicalMissile);
             builder.Append(StringFormat.ToStringAlignment("Detect illusions"));
-            builder.Append(this.detectIllusions);
+            builder.Append(this.DetectIllusions);
             builder.Append(StringFormat.ToStringAlignment("Set traps"));
-            builder.Append(this.setTraps);
+            builder.Append(this.SetTraps);
             builder.Append(StringFormat.ToStringAlignment("Lore"));
-            builder.Append(this.lore);
+            builder.Append(this.Lore);
             builder.Append(StringFormat.ToStringAlignment("Lock picking"));
-            builder.Append(this.lockPicking);
+            builder.Append(this.LockPicking);
             builder.Append(StringFormat.ToStringAlignment("Stealth"));
-            builder.Append(this.stealth);
+            builder.Append(this.Stealth);
             builder.Append(StringFormat.ToStringAlignment("Find/Disarm traps"));
-            builder.Append(this.findDisarmTraps);
+            builder.Append(this.FindDisarmTraps);
             builder.Append(StringFormat.ToStringAlignment("Pick pockets"));
-            builder.Append(this.pickPockets);
+            builder.Append(this.PickPockets);
             builder.Append(StringFormat.ToStringAlignment("Fatigue"));
             builder.Append(this.fatigue);
             builder.Append(StringFormat.ToStringAlignment("Intoxication"));
@@ -1031,17 +714,17 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
         protected void ToStringStatsAndScripts(StringBuilder builder)
         {
             builder.Append(StringFormat.ToStringAlignment("Level (first class)"));
-            builder.Append(this.levelClass1);
+            builder.Append(this.LevelClass1);
             builder.Append(StringFormat.ToStringAlignment("Level (second class)"));
-            builder.Append(this.levelClass2);
+            builder.Append(this.LevelClass2);
             builder.Append(StringFormat.ToStringAlignment("Level (third class)"));
-            builder.Append(this.levelClass3);
+            builder.Append(this.LevelClass3);
             builder.Append(StringFormat.ToStringAlignment("Sex"));
-            builder.Append(this.sex);
+            builder.Append(this.Sex);
             builder.Append(StringFormat.ToStringAlignment("Ability score (Strength)"));
             builder.Append(this.scoreStrength);
             builder.Append(StringFormat.ToStringAlignment("Ability score (Strength bonus)"));
-            builder.Append(this.scoreStrengthBonus);
+            builder.Append(this.ScoreStrengthBonus);
             builder.Append(StringFormat.ToStringAlignment("Ability score (Intelligence)"));
             builder.Append(this.scoreIntelligence);
             builder.Append(StringFormat.ToStringAlignment("Ability score (Wisdom)"));
@@ -1057,20 +740,20 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
             builder.Append(StringFormat.ToStringAlignment("Morale break point"));
             builder.Append(this.moraleBreak);
             builder.Append(StringFormat.ToStringAlignment("Racial Enemy"));
-            builder.Append(this.racialEnemy);
+            builder.Append(this.RacialEnemy);
             builder.Append(StringFormat.ToStringAlignment("Morale recovery time"));
             builder.Append(this.moraleRecoveryTime);
             this.ToStringKitValues(builder);
             builder.Append(StringFormat.ToStringAlignment("Script (Override)"));
             builder.Append(String.Format("'{0}'", this.scriptOverride.ZResRef));
             builder.Append(StringFormat.ToStringAlignment("Script (Class)"));
-            builder.Append(String.Format("'{0}'", this.scriptClass.ZResRef));
+            builder.Append(String.Format("'{0}'", this.ScriptClass.ZResRef));
             builder.Append(StringFormat.ToStringAlignment("Script (Race)"));
-            builder.Append(String.Format("'{0}'", this.scriptRace.ZResRef));
+            builder.Append(String.Format("'{0}'", this.ScriptRace.ZResRef));
             builder.Append(StringFormat.ToStringAlignment("Script (General)"));
-            builder.Append(String.Format("'{0}'", this.scriptGeneral.ZResRef));
+            builder.Append(String.Format("'{0}'", this.ScriptGeneral.ZResRef));
             builder.Append(StringFormat.ToStringAlignment("Script (Default)"));
-            builder.Append(String.Format("'{0}'", this.scriptDefault.ZResRef));
+            builder.Append(String.Format("'{0}'", this.ScriptDefault.ZResRef));
         }
 
         /// <summary>This method appends the kit variable(s) to the output StringBuilder</summary>
@@ -1078,9 +761,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
         protected virtual void ToStringKitValues(StringBuilder builder)
         {
             builder.Append(StringFormat.ToStringAlignment("Kit"));
-            builder.Append((UInt32)this.kit);
+            builder.Append((UInt32)this.Kit);
             builder.Append(StringFormat.ToStringAlignment("Kit (description)"));
-            builder.Append(this.kit.GetDescription());
+            builder.Append(this.Kit.GetDescription());
         }
 
         /// <summary>Generates a String representing the added Planescape: Torment values area of the creature data structure</summary>
@@ -1122,17 +805,17 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
             builder.Append(StringFormat.ToStringAlignment("Death variable"));
             builder.Append(StringFormat.ToStringAlignment(String.Format("'{0}'", this.deathVariable.Value), 2));
             builder.Append(StringFormat.ToStringAlignment("Known spells offset"));
-            builder.Append(this.offsetKnownSpells);
+            builder.Append(this.OffsetKnownSpells);
             builder.Append(StringFormat.ToStringAlignment("Known spells count"));
-            builder.Append(this.countKnownSpells);
+            builder.Append(this.CountKnownSpells);
             builder.Append(StringFormat.ToStringAlignment("Spell memorization offset"));
-            builder.Append(this.offsetSpellMemorization);
+            builder.Append(this.OffsetSpellMemorization);
             builder.Append(StringFormat.ToStringAlignment("Spell memorization count"));
-            builder.Append(this.countSpellMemorizations);
+            builder.Append(this.CountSpellMemorizations);
             builder.Append(StringFormat.ToStringAlignment("Memorized spells offset:"));
-            builder.Append(this.offsetMemorizedSpells);
+            builder.Append(this.OffsetMemorizedSpells);
             builder.Append(StringFormat.ToStringAlignment("Memorized spells count:"));
-            builder.Append(this.countMemorizedSpells);
+            builder.Append(this.CountMemorizedSpells);
             builder.Append(StringFormat.ToStringAlignment("Item slots offset"));
             builder.Append(this.offsetItemSlots);
             builder.Append(StringFormat.ToStringAlignment("Items offset"));

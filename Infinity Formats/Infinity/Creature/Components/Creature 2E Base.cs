@@ -15,100 +15,42 @@ using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
 {
+    /// <summary>Base class for any 2nd Edition Creature</summary>
     public abstract class Creature2EBase : IInfinityFormat
     {
         #region Members
         /// <summary>Creature header, most of the data</summary>
-        protected Creature2eHeader header;
+        protected Creature2eHeader Header2E { get; set; }
 
         /// <summary>List of known spells</summary>
-        protected List<Creature2EKnownSpell> knownSpells;
+        public List<Creature2EKnownSpell> KnownSpells { get; set; }
 
         /// <summary>List of available overlay memorization</summary>
         /// <remarks>Should always be 7 Priest, 9 Wizard, 1 Innate</remarks>
-        protected List<Creature2ESpellMemorization> spellMemorization;
+        public List<Creature2ESpellMemorization> SpellMemorization { get; set; }
 
         /// <summary>List of spels memorized and prepared for use</summary>
-        protected List<Creature2EMemorizedSpells> preparedSpells;
+        public List<Creature2EMemorizedSpells> PreparedSpells { get; set; }
 
         /// <summary>List of effects the creature has temporarily or permanently applied.</summary>
         /// <remarks>Can be a list of either Effect1 or Effect2, so using the base struct</remarks>
-        protected List<EffectWrapper> effects;
+        public List<EffectWrapper> Effects { get; set; }
 
         /// <summary>List of items the creature has in its inventory</summary>
-        protected List<ItemInstance> items;
+        public List<ItemInstance> Items { get; set; }
 
         /// <summary>The item slots of available to the creature</summary>
-        protected GenericOrderedDictionary<String, Int16> itemSlots;
+        public GenericOrderedDictionary<String, Int16> ItemSlots { get; set; }
 
         /// <summary>Index to items indicating the currently selected weapon</summary>
-        protected Int16 selectedWeapon;
+        public Int16 SelectedWeapon { get; set; }
 
         /// <summary>Index to the selected weapon's currently selected ability</summary>
-        protected Int16 selectedWeaponAbility;
+        public Int16 SelectedWeaponAbility { get; set; }
         #endregion
+
 
         #region Properties
-        #region Members
-        /// <summary>List of known spells</summary>
-        public List<Creature2EKnownSpell> KnownSpells
-        {
-            get { return this.knownSpells; }
-            set { this.knownSpells = value; }
-        }
-
-        /// <summary>List of available overlay memorization</summary>
-        /// <remarks>Should always be 7 Priest, 9 Wizard, 1 Innate</remarks>
-        public List<Creature2ESpellMemorization> SpellMemorization
-        {
-            get { return this.spellMemorization; }
-            set { this.spellMemorization = value; }
-        }
-
-        /// <summary>List of spels memorized and prepared for use</summary>
-        public List<Creature2EMemorizedSpells> PreparedSpells
-        {
-            get { return this.preparedSpells; }
-            set { this.preparedSpells = value; }
-        }
-
-        /// <summary>List of effects the creature has temporarily or permanently applied.</summary>
-        /// <remarks>Can be a list of either Effect1 or Effect2, so using the base struct</remarks>
-        public List<EffectWrapper> Effects
-        {
-            get { return this.effects; }
-            set { this.effects = value; }
-        }
-
-        /// <summary>List of items the creature has in its inventory</summary>
-        public List<ItemInstance> Items
-        {
-            get { return this.items; }
-            set { this.items = value; }
-        }
-
-        /// <summary>The item slots of available to the creature</summary>
-        public GenericOrderedDictionary<String, Int16> ItemSlots
-        {
-            get { return this.itemSlots; }
-            set { this.itemSlots = value; }
-        }
-
-        /// <summary>Index to items indicating the currently selected weapon</summary>
-        public Int16 SelectedWeapon
-        {
-            get { return this.selectedWeapon; }
-            set { this.selectedWeapon = value; }
-        }
-
-        /// <summary>Index to the selected weapon's currently selected ability</summary>
-        public Int16 SelectedWeaponAbility
-        {
-            get { return this.selectedWeaponAbility; }
-            set { this.selectedWeaponAbility = value; }
-        }
-        #endregion
-
         /// <summary>Gets the headline for the creature file</summary>
         public abstract String Headline
         {
@@ -124,20 +66,21 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
         /// <summary>Gets the size of the effects</summary>
         public Int32 EffectSize
         {
-            get { return this.header.UseEffectStructureVersion2 ? Effect2Wrapper.StructSize : Effect1.StructSize; }
+            get { return this.Header2E.UseEffectStructureVersion2 ? Effect2Wrapper.StructSize : Effect1.StructSize; }
         }
         #endregion
+
 
         #region Construction
         /// <summary>Instantiates reference types</summary>
         public virtual void Initialize()
         {
             this.InstantiateHeader();
-            this.knownSpells = new List<Creature2EKnownSpell>();
-            this.spellMemorization = new List<Creature2ESpellMemorization>();
-            this.preparedSpells = new List<Creature2EMemorizedSpells>();
-            this.effects = new List<EffectWrapper>();
-            this.items = new List<ItemInstance>();
+            this.KnownSpells = new List<Creature2EKnownSpell>();
+            this.SpellMemorization = new List<Creature2ESpellMemorization>();
+            this.PreparedSpells = new List<Creature2EMemorizedSpells>();
+            this.Effects = new List<EffectWrapper>();
+            this.Items = new List<ItemInstance>();
             this.InitializeItemSlots();
         }
 
@@ -147,6 +90,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
         /// <summary>Instantiates a new header</summary>
         protected abstract void InstantiateHeader();
         #endregion
+
 
         #region IO method implemetations
         /// <summary>This public method reads file format from the input stream. Reads the whole structure.</summary>
@@ -166,7 +110,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
             else
             {
                 this.InstantiateHeader();
-                this.header.Read(input, false);
+                this.Header2E.Read(input, false);
             }
         }
 
@@ -176,7 +120,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
         {
             this.Initialize();
 
-            this.header.Read(input);
+            this.Header2E.Read(input);
             this.ReadKnownSpells(input);
             this.ReadSpellPreparation(input);
             this.ReadPreparedSpells(input);
@@ -189,15 +133,18 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
         /// <param name="input">Stream to read from</param>
         protected void ReadKnownSpells(Stream input)
         {
-            if (input.Position != this.header.OffsetKnownSpells)
-                input.Seek(this.header.OffsetKnownSpells, SeekOrigin.Begin);
-
-            //read known spells
-            for (Int32 i = 0; i < this.header.CountKnownSpells; ++i)
+            if (this.Header2E.OffsetKnownSpells > 0)
             {
-                Creature2EKnownSpell spell = new Creature2EKnownSpell();
-                spell.Read(input);
-                this.knownSpells.Add(spell);
+                if (input.Position != this.Header2E.OffsetKnownSpells)
+                    input.Seek(this.Header2E.OffsetKnownSpells, SeekOrigin.Begin);
+
+                //read known spells
+                for (Int32 i = 0; i < this.Header2E.CountKnownSpells; ++i)
+                {
+                    Creature2EKnownSpell spell = new Creature2EKnownSpell();
+                    spell.Read(input);
+                    this.KnownSpells.Add(spell);
+                }
             }
         }
 
@@ -205,15 +152,18 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
         /// <param name="input">Stream to read from</param>
         protected void ReadSpellPreparation(Stream input)
         {
-            if (input.Position != this.header.OffsetSpellMemorization)
-                input.Seek(this.header.OffsetSpellMemorization, SeekOrigin.Begin);
-
-            //read overlay memorization table
-            for (Int32 i = 0; i < this.header.CountSpellMemorizations; ++i)
+            if (this.Header2E.OffsetSpellMemorization > 0)
             {
-                Creature2ESpellMemorization memorization = new Creature2ESpellMemorization();
-                memorization.Read(input);
-                this.spellMemorization.Add(memorization);
+                if (input.Position != this.Header2E.OffsetSpellMemorization)
+                    input.Seek(this.Header2E.OffsetSpellMemorization, SeekOrigin.Begin);
+
+                //read overlay memorization table
+                for (Int32 i = 0; i < this.Header2E.CountSpellMemorizations; ++i)
+                {
+                    Creature2ESpellMemorization memorization = new Creature2ESpellMemorization();
+                    memorization.Read(input);
+                    this.SpellMemorization.Add(memorization);
+                }
             }
         }
 
@@ -221,15 +171,18 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
         /// <param name="input">Stream to read from</param>
         protected void ReadPreparedSpells(Stream input)
         {
-            if (input.Position != this.header.OffsetMemorizedSpells)
-                input.Seek(this.header.OffsetMemorizedSpells, SeekOrigin.Begin);
-
-            //read prepared spells
-            for (Int32 i = 0; i < this.header.CountMemorizedSpells; ++i)
+            if (this.Header2E.OffsetMemorizedSpells > 0)
             {
-                Creature2EMemorizedSpells spell = new Creature2EMemorizedSpells();
-                spell.Read(input);
-                this.preparedSpells.Add(spell);
+                if (input.Position != this.Header2E.OffsetMemorizedSpells)
+                    input.Seek(this.Header2E.OffsetMemorizedSpells, SeekOrigin.Begin);
+
+                //read prepared spells
+                for (Int32 i = 0; i < this.Header2E.CountMemorizedSpells; ++i)
+                {
+                    Creature2EMemorizedSpells spell = new Creature2EMemorizedSpells();
+                    spell.Read(input);
+                    this.PreparedSpells.Add(spell);
+                }
             }
         }
 
@@ -237,21 +190,24 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
         /// <param name="input">Stream to read from</param>
         protected void ReadEffects(Stream input)
         {
-            if (input.Position != this.header.OffsetEffects)
-                input.Seek(this.header.OffsetEffects, SeekOrigin.Begin);
-
-            //read effects
-            for (Int32 i = 0; i < this.header.CountEffects; ++i)
+            if (this.Header2E.OffsetEffects > 0)
             {
-                EffectWrapper effect;
-                    
-                if (this.header.UseEffectStructureVersion2)
-                    effect = new Effect2Wrapper();
-                else
-                    effect = new Effect1Wrapper();
+                if (input.Position != this.Header2E.OffsetEffects)
+                    input.Seek(this.Header2E.OffsetEffects, SeekOrigin.Begin);
 
-                effect.Read(input);
-                this.effects.Add(effect);
+                //read effects
+                for (Int32 i = 0; i < this.Header2E.CountEffects; ++i)
+                {
+                    EffectWrapper effect;
+
+                    if (this.Header2E.UseEffectStructureVersion2)
+                        effect = new Effect2Wrapper();
+                    else
+                        effect = new Effect1Wrapper();
+
+                    effect.Read(input);
+                    this.Effects.Add(effect);
+                }
             }
         }
 
@@ -259,15 +215,18 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
         /// <param name="input">Stream to read from</param>
         protected void ReadItems(Stream input)
         {
-            if (input.Position != this.header.OffsetItems)
-                input.Seek(this.header.OffsetItems, SeekOrigin.Begin);
-
-            //read prepared spells
-            for (Int32 i = 0; i < this.header.CountItems; ++i)
+            if (this.Header2E.OffsetItems > 0)
             {
-                ItemInstance item = new ItemInstance();
-                item.Read(input);
-                this.items.Add(item);
+                if (input.Position != this.Header2E.OffsetItems)
+                    input.Seek(this.Header2E.OffsetItems, SeekOrigin.Begin);
+
+                //read prepared spells
+                for (Int32 i = 0; i < this.Header2E.CountItems; ++i)
+                {
+                    ItemInstance item = new ItemInstance();
+                    item.Read(input);
+                    this.Items.Add(item);
+                }
             }
         }
 
@@ -275,17 +234,20 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
         /// <param name="input">Stream to read from</param>
         protected void ReadItemSlots(Stream input)
         {
-            if (input.Position != this.header.OffsetItemSlots)
-                input.Seek(this.header.OffsetItemSlots, SeekOrigin.Begin);
+            if (this.Header2E.OffsetItemSlots > 0)
+            {
+                if (input.Position != this.Header2E.OffsetItemSlots)
+                    input.Seek(this.Header2E.OffsetItemSlots, SeekOrigin.Begin);
 
-            Byte[] data = ReusableIO.BinaryRead(input, 4 + (this.itemSlots.Count * 2 /* sizeof (UInt16) */));
+                Byte[] data = ReusableIO.BinaryRead(input, 4 + (this.ItemSlots.Count * 2 /* sizeof (UInt16) */));
 
-            for (Int32 i = 0; i < this.itemSlots.Count; ++i)
-                this.itemSlots[i] = ReusableIO.ReadInt16FromArray(data, i * 2);
+                for (Int32 i = 0; i < this.ItemSlots.Count; ++i)
+                    this.ItemSlots[i] = ReusableIO.ReadInt16FromArray(data, i * 2);
 
-            //Trailing two
-            this.selectedWeapon = ReusableIO.ReadInt16FromArray(data, this.itemSlots.Count * 2);
-            this.selectedWeaponAbility = ReusableIO.ReadInt16FromArray(data, (this.itemSlots.Count * 2) + 2);
+                //Trailing two
+                this.SelectedWeapon = ReusableIO.ReadInt16FromArray(data, this.ItemSlots.Count * 2);
+                this.SelectedWeaponAbility = ReusableIO.ReadInt16FromArray(data, (this.ItemSlots.Count * 2) + 2);
+            }
         }
 
         /// <summary>This public method writes the file format to the output stream.</summary>
@@ -294,7 +256,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
         {
             this.MaintainMinimalDataIntegrity();
 
-            this.header.Write(output);
+            this.Header2E.Write(output);
             this.WriteKnownSpells(output);
             this.WriteSpellPreparation(output);
             this.WritePreparedSpells(output);
@@ -307,86 +269,127 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
         /// <param name="output">Stream to write to</param>
         protected void WriteKnownSpells(Stream output)
         {
-            if (output.Position != this.header.OffsetKnownSpells)
-                output.Seek(this.header.OffsetKnownSpells, SeekOrigin.Begin);
+            if (this.Header2E.OffsetKnownSpells > 0)
+            {
+                if (output.Position != this.Header2E.OffsetKnownSpells)
+                    output.Seek(this.Header2E.OffsetKnownSpells, SeekOrigin.Begin);
 
-            //write known spells
-            foreach (Creature2EKnownSpell spell in this.knownSpells)
-                spell.Write(output);
+                //write known spells
+                foreach (Creature2EKnownSpell spell in this.KnownSpells)
+                    spell.Write(output);
+            }
         }
 
         /// <summary>Writes the list of overlay level preparation to the output stream</summary>
         /// <param name="output">Stream to write to</param>
         protected void WriteSpellPreparation(Stream output)
         {
-            if (output.Position != this.header.OffsetSpellMemorization)
-                output.Seek(this.header.OffsetSpellMemorization, SeekOrigin.Begin);
+            if (this.Header2E.OffsetSpellMemorization > 0)
+            {
+                if (output.Position != this.Header2E.OffsetSpellMemorization)
+                    output.Seek(this.Header2E.OffsetSpellMemorization, SeekOrigin.Begin);
 
-            //write overlay memorization
-            foreach (Creature2ESpellMemorization level in this.spellMemorization)
-                level.Write(output);
+                //write overlay memorization
+                foreach (Creature2ESpellMemorization level in this.SpellMemorization)
+                    level.Write(output);
+            }
         }
 
         /// <summary>Writes the list of prepared spells to the output stream</summary>
         /// <param name="output">Stream to write to</param>
         protected void WritePreparedSpells(Stream output)
         {
-            if (output.Position != this.header.OffsetMemorizedSpells)
-                output.Seek(this.header.OffsetMemorizedSpells, SeekOrigin.Begin);
+            if (this.Header2E.OffsetMemorizedSpells > 0)
+            {
+                if (output.Position != this.Header2E.OffsetMemorizedSpells)
+                    output.Seek(this.Header2E.OffsetMemorizedSpells, SeekOrigin.Begin);
 
-            //write overlay memorization
-            foreach (Creature2EMemorizedSpells spell in this.preparedSpells)
-                spell.Write(output);
+                //write overlay memorization
+                foreach (Creature2EMemorizedSpells spell in this.PreparedSpells)
+                    spell.Write(output);
+            }
         }
 
         /// <summary>Writes the list of effects to the output stream</summary>
         /// <param name="output">Stream to write to</param>
         protected void WriteEffects(Stream output)
         {
-            if (output.Position != this.header.OffsetEffects)
-                output.Seek(this.header.OffsetEffects, SeekOrigin.Begin);
+            if (this.Header2E.OffsetEffects > 0)
+            {
+                if (output.Position != this.Header2E.OffsetEffects)
+                    output.Seek(this.Header2E.OffsetEffects, SeekOrigin.Begin);
 
-            //write overlay memorization
-            foreach (EffectWrapper effect in this.effects)
-                effect.Write(output);
+                //write overlay memorization
+                foreach (EffectWrapper effect in this.Effects)
+                    effect.Write(output);
+            }
         }
 
         /// <summary>Writes the list of items to the output stream</summary>
         /// <param name="output">Stream to write to</param>
         protected void WriteItems(Stream output)
         {
-            if (output.Position != this.header.OffsetItems)
-                output.Seek(this.header.OffsetItems, SeekOrigin.Begin);
+            if (this.Header2E.OffsetItems > 0)
+            {
+                if (output.Position != this.Header2E.OffsetItems)
+                    output.Seek(this.Header2E.OffsetItems, SeekOrigin.Begin);
 
-            //write overlay memorization
-            foreach (ItemInstance item in this.items)
-                item.Write(output);
+                //write overlay memorization
+                foreach (ItemInstance item in this.Items)
+                    item.Write(output);
+            }
         }
 
         /// <summary>Writes the table of item slots to the output stream. Includes equipped weapon fields.</summary>
         /// <param name="output">Stream to write to</param>
         protected void WriteItemSlots(Stream output)
         {
-            if (output.Position != this.header.OffsetItemSlots)
-                output.Seek(this.header.OffsetItemSlots, SeekOrigin.Begin);
+            if (this.Header2E.OffsetItemSlots > 0)
+            {
+                if (output.Position != this.Header2E.OffsetItemSlots)
+                    output.Seek(this.Header2E.OffsetItemSlots, SeekOrigin.Begin);
 
-            for (Int32 i = 0; i < this.itemSlots.Count; ++i)
-                ReusableIO.WriteInt16ToStream(this.itemSlots[i], output);
+                for (Int32 i = 0; i < this.ItemSlots.Count; ++i)
+                    ReusableIO.WriteInt16ToStream(this.ItemSlots[i], output);
 
-            //Trailing two
-            ReusableIO.WriteInt16ToStream(this.selectedWeapon, output);
-            ReusableIO.WriteInt16ToStream(this.selectedWeaponAbility, output);
+                //Trailing two
+                ReusableIO.WriteInt16ToStream(this.SelectedWeapon, output);
+                ReusableIO.WriteInt16ToStream(this.SelectedWeaponAbility, output);
+            }
         }
         #endregion
+
 
         #region ToString() Helpers
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
         public override String ToString()
         {
+            return this.ToString(true);
+        }
+
+        /// <summary>This method complements the default ToString() method, printing the member data line by line</summary>
+        /// <param name="showType">Boolean indicating whether or not to display the leading description line.</param>
+        /// <returns>A string containing the values and descriptions of all values in this class</returns>
+        public String ToString(Boolean showType)
+        {
+            String representation = this.Headline;
+
+            if (showType)
+                representation += this.GetStringRepresentation();
+            else
+                representation = this.GetStringRepresentation();
+
+            return representation;
+        }
+            
+        /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
+        /// <returns>A string, formatted largely for console, that describes the data structure's contents.</returns>
+        protected virtual String GetStringRepresentation()
+        {
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine(this.Headline);
-            builder.AppendLine(this.header.ToString());
+
+            builder.AppendLine(this.Header2E.ToString());
             builder.AppendLine(this.GenerateKnownSpellsString());
             builder.AppendLine(this.GenerateSpellMemorizationString());
             builder.AppendLine(this.GeneratePreparedSpellsString());
@@ -403,8 +406,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
         {
             StringBuilder sb = new StringBuilder();
 
-            for (Int32 i = 0; i < this.knownSpells.Count; ++i)
-                sb.Append(this.knownSpells[i].ToString(i + 1));
+            for (Int32 i = 0; i < this.KnownSpells.Count; ++i)
+                sb.Append(this.KnownSpells[i].ToString(i + 1));
             
             return sb.ToString();
         }
@@ -415,8 +418,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
         {
             StringBuilder sb = new StringBuilder();
 
-            for (Int32 i = 0; i < this.spellMemorization.Count; ++i)
-                sb.Append(this.spellMemorization[i].ToString(i + 1));
+            for (Int32 i = 0; i < this.SpellMemorization.Count; ++i)
+                sb.Append(this.SpellMemorization[i].ToString(i + 1));
             
             return sb.ToString();
         }
@@ -427,8 +430,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
         {
             StringBuilder sb = new StringBuilder();
 
-            for (Int32 i = 0; i < this.preparedSpells.Count; ++i)
-                sb.Append(this.preparedSpells[i].ToString(i + 1));
+            for (Int32 i = 0; i < this.PreparedSpells.Count; ++i)
+                sb.Append(this.PreparedSpells[i].ToString(i + 1));
 
             return sb.ToString();
         }
@@ -439,8 +442,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
         {
             StringBuilder sb = new StringBuilder();
 
-            for (Int32 i = 0; i < this.effects.Count; ++i)
-                sb.Append(this.effects[i].ToString(i + 1));
+            for (Int32 i = 0; i < this.Effects.Count; ++i)
+                sb.Append(this.Effects[i].ToString(i + 1));
 
             return sb.ToString();
         }
@@ -451,8 +454,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
         {
             StringBuilder sb = new StringBuilder();
 
-            for (Int32 i = 0; i < this.items.Count; ++i)
-                sb.Append(this.items[i].ToString(i + 1));
+            for (Int32 i = 0; i < this.Items.Count; ++i)
+                sb.Append(this.Items[i].ToString(i + 1));
 
             return sb.ToString();
         }
@@ -464,15 +467,16 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
             StringBuilder sb = new StringBuilder();
             sb.Append("Item slots:");
 
-            foreach (String key in this.itemSlots.Keys)
+            foreach (String key in this.ItemSlots.Keys)
             {
                 sb.Append(StringFormat.ToStringAlignment("Item slot '" + key + "'"));
-                sb.Append(this.itemSlots[key]);
+                sb.Append(this.ItemSlots[key]);
             }
 
             return sb.ToString();
         }
         #endregion
+
 
         #region Data Integrity
         /// <summary>Maintains mimimal data integrity by not lying to the output data file.</summary>
@@ -481,20 +485,20 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
             if (this.Overlaps())
             {
                 //6 variables
-                Int32 knownSpellsSize = this.knownSpells.Count * Creature2EKnownSpell.StructSize;
-                Int32 spellMemorizationSlotsSize = this.spellMemorization.Count * Creature2ESpellMemorization.StructSize;
-                Int32 preparedSpellsSize = this.preparedSpells.Count * Creature2EMemorizedSpells.StructSize;
-                Int32 effectsSize = this.effects.Count * this.EffectSize;
-                Int32 itemsSize = this.items.Count * ItemInstance.StructSize;
-                Int32 itemSlotsSize = 4 /* trailing two selected indexes */ + (this.itemSlots.Count * 2 /* sizeof(UInt16) */);
+                Int32 knownSpellsSize = this.KnownSpells.Count * Creature2EKnownSpell.StructSize;
+                Int32 spellMemorizationSlotsSize = this.SpellMemorization.Count * Creature2ESpellMemorization.StructSize;
+                Int32 preparedSpellsSize = this.PreparedSpells.Count * Creature2EMemorizedSpells.StructSize;
+                Int32 effectsSize = this.Effects.Count * this.EffectSize;
+                Int32 itemsSize = this.Items.Count * ItemInstance.StructSize;
+                Int32 itemSlotsSize = 4 /* trailing two selected indexes */ + (this.ItemSlots.Count * 2 /* sizeof(UInt16) */);
 
                 //reset offsets
-                this.header.OffsetKnownSpells = Convert.ToUInt32(this.HeaderSize);
-                this.header.OffsetSpellMemorization = Convert.ToUInt32(this.header.OffsetKnownSpells + knownSpellsSize);
-                this.header.OffsetMemorizedSpells = Convert.ToUInt32(this.header.OffsetSpellMemorization + spellMemorizationSlotsSize);
-                this.header.OffsetEffects = Convert.ToUInt32(this.header.OffsetMemorizedSpells + preparedSpellsSize);
-                this.header.OffsetItems = Convert.ToUInt32(this.header.OffsetEffects + effectsSize);
-                this.header.OffsetItemSlots = Convert.ToUInt32(this.header.OffsetItems + itemsSize);
+                this.Header2E.OffsetKnownSpells = this.HeaderSize;
+                this.Header2E.OffsetSpellMemorization = this.Header2E.OffsetKnownSpells + knownSpellsSize;
+                this.Header2E.OffsetMemorizedSpells = Convert.ToInt32(this.Header2E.OffsetSpellMemorization + spellMemorizationSlotsSize);
+                this.Header2E.OffsetEffects = Convert.ToUInt32(this.Header2E.OffsetMemorizedSpells + preparedSpellsSize);
+                this.Header2E.OffsetItems = Convert.ToUInt32(this.Header2E.OffsetEffects + effectsSize);
+                this.Header2E.OffsetItemSlots = Convert.ToUInt32(this.Header2E.OffsetItems + itemsSize);
             }
         }
 
@@ -503,23 +507,23 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
         protected virtual Boolean Overlaps()
         {
             //6 variables
-            Int32 knownSpellsSize = this.knownSpells.Count * Creature2EKnownSpell.StructSize;
-            Int32 spellMemorizationSlotsSize = this.spellMemorization.Count * Creature2ESpellMemorization.StructSize;
-            Int32 preparedSpellsSize = this.preparedSpells.Count * Creature2EMemorizedSpells.StructSize;
-            Int32 effectsSize = this.effects.Count * this.EffectSize;
-            Int32 itemsSize = this.items.Count * ItemInstance.StructSize;
-            Int32 itemSlotsSize = 4 /* trailing two selected indexes */ + (this.itemSlots.Count * 2 /* sizeof(UInt16) */);
+            Int32 knownSpellsSize = this.KnownSpells.Count * Creature2EKnownSpell.StructSize;
+            Int32 spellMemorizationSlotsSize = this.SpellMemorization.Count * Creature2ESpellMemorization.StructSize;
+            Int32 preparedSpellsSize = this.PreparedSpells.Count * Creature2EMemorizedSpells.StructSize;
+            Int32 effectsSize = this.Effects.Count * this.EffectSize;
+            Int32 itemsSize = this.Items.Count * ItemInstance.StructSize;
+            Int32 itemSlotsSize = 4 /* trailing two selected indexes */ + (this.ItemSlots.Count * 2 /* sizeof(UInt16) */);
 
             Boolean overlaps = false;
 
             //technically, any of these 6 can follow the header in any order. Check for any overlaps.
             if (
-                IntExtension.Between(this.header.OffsetKnownSpells, knownSpellsSize, 0, this.HeaderSize)
-                || IntExtension.Between(this.header.OffsetSpellMemorization, spellMemorizationSlotsSize, 0, this.HeaderSize)
-                || IntExtension.Between(this.header.OffsetMemorizedSpells, preparedSpellsSize, 0, this.HeaderSize)
-                || IntExtension.Between(this.header.OffsetEffects, effectsSize, 0, this.HeaderSize)
-                || IntExtension.Between(this.header.OffsetItems, itemsSize, 0, this.HeaderSize)
-                || IntExtension.Between(this.header.OffsetItemSlots, itemSlotsSize, 0, this.HeaderSize)
+                IntExtension.Between(this.Header2E.OffsetKnownSpells, knownSpellsSize, 0, this.HeaderSize)
+                || IntExtension.Between(this.Header2E.OffsetSpellMemorization, spellMemorizationSlotsSize, 0, this.HeaderSize)
+                || IntExtension.Between(this.Header2E.OffsetMemorizedSpells, preparedSpellsSize, 0, this.HeaderSize)
+                || IntExtension.Between(this.Header2E.OffsetEffects, effectsSize, 0, this.HeaderSize)
+                || IntExtension.Between(this.Header2E.OffsetItems, itemsSize, 0, this.HeaderSize)
+                || IntExtension.Between(this.Header2E.OffsetItemSlots, itemSlotsSize, 0, this.HeaderSize)
                 )
                 overlaps = true;
 
@@ -529,47 +533,47 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
                 overlaps = 
                     (
                         false
-                       //|| IntExtension.Between(this.header.OffsetKnownSpells, knownSpellsSize, this.header.OffsetKnownSpells, this.header.OffsetKnownSpells + knownSpellsSize)
-                         || IntExtension.Between(this.header.OffsetKnownSpells, knownSpellsSize, this.header.OffsetSpellMemorization, this.header.OffsetSpellMemorization + spellMemorizationSlotsSize)
-                         || IntExtension.Between(this.header.OffsetKnownSpells, knownSpellsSize, this.header.OffsetMemorizedSpells, this.header.OffsetMemorizedSpells + preparedSpellsSize)
-                         || IntExtension.Between(this.header.OffsetKnownSpells, knownSpellsSize, this.header.OffsetEffects, this.header.OffsetEffects + effectsSize)
-                         || IntExtension.Between(this.header.OffsetKnownSpells, knownSpellsSize, this.header.OffsetItems, this.header.OffsetItems + itemsSize)
-                         || IntExtension.Between(this.header.OffsetKnownSpells, knownSpellsSize, this.header.OffsetItemSlots, this.header.OffsetItemSlots + itemSlotsSize)
+                       //|| IntExtension.Between(this.Header2E.OffsetKnownSpells, knownSpellsSize, this.Header2E.OffsetKnownSpells, this.Header2E.OffsetKnownSpells + knownSpellsSize)
+                         || IntExtension.Between(this.Header2E.OffsetKnownSpells, knownSpellsSize, this.Header2E.OffsetSpellMemorization, this.Header2E.OffsetSpellMemorization + spellMemorizationSlotsSize)
+                         || IntExtension.Between(this.Header2E.OffsetKnownSpells, knownSpellsSize, this.Header2E.OffsetMemorizedSpells, this.Header2E.OffsetMemorizedSpells + preparedSpellsSize)
+                         || IntExtension.Between(this.Header2E.OffsetKnownSpells, knownSpellsSize, this.Header2E.OffsetEffects, this.Header2E.OffsetEffects + effectsSize)
+                         || IntExtension.Between(this.Header2E.OffsetKnownSpells, knownSpellsSize, this.Header2E.OffsetItems, this.Header2E.OffsetItems + itemsSize)
+                         || IntExtension.Between(this.Header2E.OffsetKnownSpells, knownSpellsSize, this.Header2E.OffsetItemSlots, this.Header2E.OffsetItemSlots + itemSlotsSize)
 
-                         || IntExtension.Between(this.header.OffsetSpellMemorization, spellMemorizationSlotsSize, this.header.OffsetKnownSpells, this.header.OffsetKnownSpells + knownSpellsSize)
-                       //|| IntExtension.Between(this.header.OffsetSpellMemorization, spellMemorizationSlotsSize, this.header.OffsetSpellMemorization, this.header.OffsetSpellMemorization + spellMemorizationSlotsSize)
-                         || IntExtension.Between(this.header.OffsetSpellMemorization, spellMemorizationSlotsSize, this.header.OffsetMemorizedSpells, this.header.OffsetMemorizedSpells + preparedSpellsSize)
-                         || IntExtension.Between(this.header.OffsetSpellMemorization, spellMemorizationSlotsSize, this.header.OffsetEffects, this.header.OffsetEffects + effectsSize)
-                         || IntExtension.Between(this.header.OffsetSpellMemorization, spellMemorizationSlotsSize, this.header.OffsetItems, this.header.OffsetItems + itemsSize)
-                         || IntExtension.Between(this.header.OffsetSpellMemorization, spellMemorizationSlotsSize, this.header.OffsetItemSlots, this.header.OffsetItemSlots + itemSlotsSize)
+                         || IntExtension.Between(this.Header2E.OffsetSpellMemorization, spellMemorizationSlotsSize, this.Header2E.OffsetKnownSpells, this.Header2E.OffsetKnownSpells + knownSpellsSize)
+                       //|| IntExtension.Between(this.Header2E.OffsetSpellMemorization, spellMemorizationSlotsSize, this.Header2E.OffsetSpellMemorization, this.Header2E.OffsetSpellMemorization + spellMemorizationSlotsSize)
+                         || IntExtension.Between(this.Header2E.OffsetSpellMemorization, spellMemorizationSlotsSize, this.Header2E.OffsetMemorizedSpells, this.Header2E.OffsetMemorizedSpells + preparedSpellsSize)
+                         || IntExtension.Between(this.Header2E.OffsetSpellMemorization, spellMemorizationSlotsSize, this.Header2E.OffsetEffects, this.Header2E.OffsetEffects + effectsSize)
+                         || IntExtension.Between(this.Header2E.OffsetSpellMemorization, spellMemorizationSlotsSize, this.Header2E.OffsetItems, this.Header2E.OffsetItems + itemsSize)
+                         || IntExtension.Between(this.Header2E.OffsetSpellMemorization, spellMemorizationSlotsSize, this.Header2E.OffsetItemSlots, this.Header2E.OffsetItemSlots + itemSlotsSize)
 
-                         || IntExtension.Between(this.header.OffsetMemorizedSpells, preparedSpellsSize, this.header.OffsetKnownSpells, this.header.OffsetKnownSpells + knownSpellsSize)
-                         || IntExtension.Between(this.header.OffsetMemorizedSpells, preparedSpellsSize, this.header.OffsetSpellMemorization, this.header.OffsetSpellMemorization + spellMemorizationSlotsSize)
-                       //|| IntExtension.Between(this.header.OffsetMemorizedSpells, preparedSpellsSize, this.header.OffsetMemorizedSpells, this.header.OffsetMemorizedSpells + preparedSpellsSize)
-                         || IntExtension.Between(this.header.OffsetMemorizedSpells, preparedSpellsSize, this.header.OffsetEffects, this.header.OffsetEffects + effectsSize)
-                         || IntExtension.Between(this.header.OffsetMemorizedSpells, preparedSpellsSize, this.header.OffsetItems, this.header.OffsetItems + itemsSize)
-                         || IntExtension.Between(this.header.OffsetMemorizedSpells, preparedSpellsSize, this.header.OffsetItemSlots, this.header.OffsetItemSlots + itemSlotsSize)
+                         || IntExtension.Between(this.Header2E.OffsetMemorizedSpells, preparedSpellsSize, this.Header2E.OffsetKnownSpells, this.Header2E.OffsetKnownSpells + knownSpellsSize)
+                         || IntExtension.Between(this.Header2E.OffsetMemorizedSpells, preparedSpellsSize, this.Header2E.OffsetSpellMemorization, this.Header2E.OffsetSpellMemorization + spellMemorizationSlotsSize)
+                       //|| IntExtension.Between(this.Header2E.OffsetMemorizedSpells, preparedSpellsSize, this.Header2E.OffsetMemorizedSpells, this.Header2E.OffsetMemorizedSpells + preparedSpellsSize)
+                         || IntExtension.Between(this.Header2E.OffsetMemorizedSpells, preparedSpellsSize, this.Header2E.OffsetEffects, this.Header2E.OffsetEffects + effectsSize)
+                         || IntExtension.Between(this.Header2E.OffsetMemorizedSpells, preparedSpellsSize, this.Header2E.OffsetItems, this.Header2E.OffsetItems + itemsSize)
+                         || IntExtension.Between(this.Header2E.OffsetMemorizedSpells, preparedSpellsSize, this.Header2E.OffsetItemSlots, this.Header2E.OffsetItemSlots + itemSlotsSize)
 
-                         || IntExtension.Between(this.header.OffsetEffects, effectsSize, this.header.OffsetKnownSpells, this.header.OffsetKnownSpells + knownSpellsSize)
-                         || IntExtension.Between(this.header.OffsetEffects, effectsSize, this.header.OffsetSpellMemorization, this.header.OffsetSpellMemorization + spellMemorizationSlotsSize)
-                         || IntExtension.Between(this.header.OffsetEffects, effectsSize, this.header.OffsetMemorizedSpells, this.header.OffsetMemorizedSpells + preparedSpellsSize)
-                       //|| IntExtension.Between(this.header.OffsetEffects, effectsSize, this.header.OffsetEffects, this.header.OffsetEffects + effectsSize)
-                         || IntExtension.Between(this.header.OffsetEffects, effectsSize, this.header.OffsetItems, this.header.OffsetItems + itemsSize)
-                         || IntExtension.Between(this.header.OffsetEffects, effectsSize, this.header.OffsetItemSlots, this.header.OffsetItemSlots + itemSlotsSize)
+                         || IntExtension.Between(this.Header2E.OffsetEffects, effectsSize, this.Header2E.OffsetKnownSpells, this.Header2E.OffsetKnownSpells + knownSpellsSize)
+                         || IntExtension.Between(this.Header2E.OffsetEffects, effectsSize, this.Header2E.OffsetSpellMemorization, this.Header2E.OffsetSpellMemorization + spellMemorizationSlotsSize)
+                         || IntExtension.Between(this.Header2E.OffsetEffects, effectsSize, this.Header2E.OffsetMemorizedSpells, this.Header2E.OffsetMemorizedSpells + preparedSpellsSize)
+                       //|| IntExtension.Between(this.Header2E.OffsetEffects, effectsSize, this.Header2E.OffsetEffects, this.Header2E.OffsetEffects + effectsSize)
+                         || IntExtension.Between(this.Header2E.OffsetEffects, effectsSize, this.Header2E.OffsetItems, this.Header2E.OffsetItems + itemsSize)
+                         || IntExtension.Between(this.Header2E.OffsetEffects, effectsSize, this.Header2E.OffsetItemSlots, this.Header2E.OffsetItemSlots + itemSlotsSize)
 
-                         || IntExtension.Between(this.header.OffsetItems, itemsSize, this.header.OffsetKnownSpells, this.header.OffsetKnownSpells + knownSpellsSize)
-                         || IntExtension.Between(this.header.OffsetItems, itemsSize, this.header.OffsetSpellMemorization, this.header.OffsetSpellMemorization + spellMemorizationSlotsSize)
-                         || IntExtension.Between(this.header.OffsetItems, itemsSize, this.header.OffsetMemorizedSpells, this.header.OffsetMemorizedSpells + preparedSpellsSize)
-                         || IntExtension.Between(this.header.OffsetItems, itemsSize, this.header.OffsetEffects, this.header.OffsetEffects + effectsSize)
-                       //|| IntExtension.Between(this.header.OffsetItems, itemsSize, this.header.OffsetItems, this.header.OffsetItems + itemsSize)
-                         || IntExtension.Between(this.header.OffsetItems, itemsSize, this.header.OffsetItemSlots, this.header.OffsetItemSlots + itemSlotsSize)
+                         || IntExtension.Between(this.Header2E.OffsetItems, itemsSize, this.Header2E.OffsetKnownSpells, this.Header2E.OffsetKnownSpells + knownSpellsSize)
+                         || IntExtension.Between(this.Header2E.OffsetItems, itemsSize, this.Header2E.OffsetSpellMemorization, this.Header2E.OffsetSpellMemorization + spellMemorizationSlotsSize)
+                         || IntExtension.Between(this.Header2E.OffsetItems, itemsSize, this.Header2E.OffsetMemorizedSpells, this.Header2E.OffsetMemorizedSpells + preparedSpellsSize)
+                         || IntExtension.Between(this.Header2E.OffsetItems, itemsSize, this.Header2E.OffsetEffects, this.Header2E.OffsetEffects + effectsSize)
+                       //|| IntExtension.Between(this.Header2E.OffsetItems, itemsSize, this.Header2E.OffsetItems, this.Header2E.OffsetItems + itemsSize)
+                         || IntExtension.Between(this.Header2E.OffsetItems, itemsSize, this.Header2E.OffsetItemSlots, this.Header2E.OffsetItemSlots + itemSlotsSize)
 
-                         || IntExtension.Between(this.header.OffsetItemSlots, itemSlotsSize, this.header.OffsetKnownSpells, this.header.OffsetKnownSpells + knownSpellsSize)
-                         || IntExtension.Between(this.header.OffsetItemSlots, itemSlotsSize, this.header.OffsetSpellMemorization, this.header.OffsetSpellMemorization + spellMemorizationSlotsSize)
-                         || IntExtension.Between(this.header.OffsetItemSlots, itemSlotsSize, this.header.OffsetMemorizedSpells, this.header.OffsetMemorizedSpells + preparedSpellsSize)
-                         || IntExtension.Between(this.header.OffsetItemSlots, itemSlotsSize, this.header.OffsetEffects, this.header.OffsetEffects + effectsSize)
-                         || IntExtension.Between(this.header.OffsetItemSlots, itemSlotsSize, this.header.OffsetItems, this.header.OffsetItems + itemsSize)
-                       //|| IntExtension.Between(this.header.OffsetItemSlots, itemSlotsSize, this.header.OffsetItemSlots, this.header.OffsetItemSlots + itemSlotsSize)
+                         || IntExtension.Between(this.Header2E.OffsetItemSlots, itemSlotsSize, this.Header2E.OffsetKnownSpells, this.Header2E.OffsetKnownSpells + knownSpellsSize)
+                         || IntExtension.Between(this.Header2E.OffsetItemSlots, itemSlotsSize, this.Header2E.OffsetSpellMemorization, this.Header2E.OffsetSpellMemorization + spellMemorizationSlotsSize)
+                         || IntExtension.Between(this.Header2E.OffsetItemSlots, itemSlotsSize, this.Header2E.OffsetMemorizedSpells, this.Header2E.OffsetMemorizedSpells + preparedSpellsSize)
+                         || IntExtension.Between(this.Header2E.OffsetItemSlots, itemSlotsSize, this.Header2E.OffsetEffects, this.Header2E.OffsetEffects + effectsSize)
+                         || IntExtension.Between(this.Header2E.OffsetItemSlots, itemSlotsSize, this.Header2E.OffsetItems, this.Header2E.OffsetItems + itemsSize)
+                       //|| IntExtension.Between(this.Header2E.OffsetItemSlots, itemSlotsSize, this.Header2E.OffsetItemSlots, this.Header2E.OffsetItemSlots + itemSlotsSize)
                     );
             }
 

@@ -852,29 +852,29 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1_
         /// <param name="remainingBody">Byte array to read from</param>
         protected override void ReadBodyProficiencies(Byte[] remainingBody)
         {
-            this.proficiencyFist = remainingBody[102];
-            this.proficiencyEdged = remainingBody[103];
-            this.proficiencyHammer = remainingBody[104];
-            this.proficiencyAxe = remainingBody[105];
-            this.proficiencyClub = remainingBody[106];
-            this.proficiencyBow = remainingBody[107];
-            this.proficiencyUnused1 = remainingBody[108];
-            this.proficiencyUnused2 = remainingBody[109];
-            this.proficiencyUnused3 = remainingBody[110];
-            this.proficiencyUnused4 = remainingBody[111];
-            this.proficiencyUnused5 = remainingBody[112];
-            this.proficiencyUnused6 = remainingBody[113];
-            this.proficiencyUnused7 = remainingBody[114];
-            this.proficiencyUnused8 = remainingBody[115];
-            this.proficiencyUnused9 = remainingBody[116];
-            this.proficiencyUnused10 = remainingBody[117];
-            this.proficiencyUnused11 = remainingBody[118];
-            this.proficiencyUnused12 = remainingBody[119];
-            this.proficiencyUnused13 = remainingBody[120];
-            this.proficiencyUnused14 = remainingBody[121];
-            this.proficiencyUnused15 = remainingBody[122];
-            this.tracking = remainingBody[123];
-            Array.Copy(remainingBody, 124, this.reservedNonweaponProficiencies, 0, 32);
+            this.ProficiencyFist = remainingBody[102];
+            this.ProficiencyEdged = remainingBody[103];
+            this.ProficiencyHammer = remainingBody[104];
+            this.ProficiencyAxe = remainingBody[105];
+            this.ProficiencyClub = remainingBody[106];
+            this.ProficiencyBow = remainingBody[107];
+            this.ProficiencyUnused1 = remainingBody[108];
+            this.ProficiencyUnused2 = remainingBody[109];
+            this.ProficiencyUnused3 = remainingBody[110];
+            this.ProficiencyUnused4 = remainingBody[111];
+            this.ProficiencyUnused5 = remainingBody[112];
+            this.ProficiencyUnused6 = remainingBody[113];
+            this.ProficiencyUnused7 = remainingBody[114];
+            this.ProficiencyUnused8 = remainingBody[115];
+            this.ProficiencyUnused9 = remainingBody[116];
+            this.ProficiencyUnused10 = remainingBody[117];
+            this.ProficiencyUnused11 = remainingBody[118];
+            this.ProficiencyUnused12 = remainingBody[119];
+            this.ProficiencyUnused13 = remainingBody[120];
+            this.ProficiencyUnused14 = remainingBody[121];
+            this.ProficiencyUnused15 = remainingBody[122];
+            this.Tracking = remainingBody[123];
+            Array.Copy(remainingBody, 124, this.ReservedNonweaponProficiencies, 0, 32);
         }
 
         /// <summary>This method will read the kit variable to the output Stream</summary>
@@ -882,7 +882,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1_
         protected override void ReadKitValues(Byte[] dataArray)
         {
             this.deity = ReusableIO.ReadUInt16FromArray(dataArray, 572);
-            this.kit = (Kit2e)(ReusableIO.ReadUInt16FromArray(dataArray, 574) << 16);
+            this.Kit = (Kit2e)(ReusableIO.ReadUInt16FromArray(dataArray, 574) << 16);
         }
 
         /// <summary>Reads Planescape: Torment structure additions</summary>
@@ -974,29 +974,29 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1_
         /// <param name="output">Output stream to write to</param>
         protected override void WriteProficiencies(Stream output)
         {
-            output.WriteByte(this.proficiencyFist);
-            output.WriteByte(this.proficiencyEdged);
-            output.WriteByte(this.proficiencyHammer);
-            output.WriteByte(this.proficiencyAxe);
-            output.WriteByte(this.proficiencyClub);
-            output.WriteByte(this.proficiencyBow);
-            output.WriteByte(this.proficiencyUnused1);
-            output.WriteByte(this.proficiencyUnused2);
-            output.WriteByte(this.proficiencyUnused3);
-            output.WriteByte(this.proficiencyUnused4);
-            output.WriteByte(this.proficiencyUnused5);
-            output.WriteByte(this.proficiencyUnused6);
-            output.WriteByte(this.proficiencyUnused7);
-            output.WriteByte(this.proficiencyUnused8);
-            output.WriteByte(this.proficiencyUnused9);
-            output.WriteByte(this.proficiencyUnused10);
-            output.WriteByte(this.proficiencyUnused11);
-            output.WriteByte(this.proficiencyUnused12);
-            output.WriteByte(this.proficiencyUnused13);
-            output.WriteByte(this.proficiencyUnused14);
-            output.WriteByte(this.proficiencyUnused15);
-            output.WriteByte(this.tracking);
-            output.Write(this.reservedNonweaponProficiencies, 0, 32);
+            output.WriteByte(this.ProficiencyFist);
+            output.WriteByte(this.ProficiencyEdged);
+            output.WriteByte(this.ProficiencyHammer);
+            output.WriteByte(this.ProficiencyAxe);
+            output.WriteByte(this.ProficiencyClub);
+            output.WriteByte(this.ProficiencyBow);
+            output.WriteByte(this.ProficiencyUnused1);
+            output.WriteByte(this.ProficiencyUnused2);
+            output.WriteByte(this.ProficiencyUnused3);
+            output.WriteByte(this.ProficiencyUnused4);
+            output.WriteByte(this.ProficiencyUnused5);
+            output.WriteByte(this.ProficiencyUnused6);
+            output.WriteByte(this.ProficiencyUnused7);
+            output.WriteByte(this.ProficiencyUnused8);
+            output.WriteByte(this.ProficiencyUnused9);
+            output.WriteByte(this.ProficiencyUnused10);
+            output.WriteByte(this.ProficiencyUnused11);
+            output.WriteByte(this.ProficiencyUnused12);
+            output.WriteByte(this.ProficiencyUnused13);
+            output.WriteByte(this.ProficiencyUnused14);
+            output.WriteByte(this.ProficiencyUnused15);
+            output.WriteByte(this.Tracking);
+            output.Write(this.ReservedNonweaponProficiencies, 0, 32);
         }
 
         /// <summary>This method will write out the kit variable to the output Stream</summary>
@@ -1004,7 +1004,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1_
         protected override void WriteKitValues(Stream output)
         {
             ReusableIO.WriteUInt16ToStream(this.deity, output);
-            UInt16 _kit = (UInt16)((UInt32)this.kit >> 16);
+            UInt16 _kit = (UInt16)((UInt32)this.Kit >> 16);
             ReusableIO.WriteUInt16ToStream(_kit, output);
         }
 
@@ -1137,51 +1137,51 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1_
         protected override void ToStringProcifiencies(StringBuilder builder)
         {
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Fist)"));
-            builder.Append(this.proficiencyFist);
+            builder.Append(this.ProficiencyFist);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Edged)"));
-            builder.Append(this.proficiencyEdged);
+            builder.Append(this.ProficiencyEdged);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Hammer)"));
-            builder.Append(this.proficiencyHammer);
+            builder.Append(this.ProficiencyHammer);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Axe)"));
-            builder.Append(this.proficiencyAxe);
+            builder.Append(this.ProficiencyAxe);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Club)"));
-            builder.Append(this.proficiencyClub);
+            builder.Append(this.ProficiencyClub);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Bow)"));
-            builder.Append(this.proficiencyBow);
+            builder.Append(this.ProficiencyBow);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #1)"));
-            builder.Append(this.proficiencyUnused1);
+            builder.Append(this.ProficiencyUnused1);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #2)"));
-            builder.Append(this.proficiencyUnused2);
+            builder.Append(this.ProficiencyUnused2);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #3)"));
-            builder.Append(this.proficiencyUnused3);
+            builder.Append(this.ProficiencyUnused3);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #4)"));
-            builder.Append(this.proficiencyUnused4);
+            builder.Append(this.ProficiencyUnused4);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #5)"));
-            builder.Append(this.proficiencyUnused5);
+            builder.Append(this.ProficiencyUnused5);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #6)"));
-            builder.Append(this.proficiencyUnused6);
+            builder.Append(this.ProficiencyUnused6);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #7)"));
-            builder.Append(this.proficiencyUnused7);
+            builder.Append(this.ProficiencyUnused7);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #8)"));
-            builder.Append(this.proficiencyUnused8);
+            builder.Append(this.ProficiencyUnused8);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #9)"));
-            builder.Append(this.proficiencyUnused9);
+            builder.Append(this.ProficiencyUnused9);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #10)"));
-            builder.Append(this.proficiencyUnused10);
+            builder.Append(this.ProficiencyUnused10);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #11)"));
-            builder.Append(this.proficiencyUnused11);
+            builder.Append(this.ProficiencyUnused11);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #12)"));
-            builder.Append(this.proficiencyUnused12);
+            builder.Append(this.ProficiencyUnused12);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #13)"));
-            builder.Append(this.proficiencyUnused13);
+            builder.Append(this.ProficiencyUnused13);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #14)"));
-            builder.Append(this.proficiencyUnused14);
+            builder.Append(this.ProficiencyUnused14);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #15)"));
-            builder.Append(this.proficiencyUnused15);
+            builder.Append(this.ProficiencyUnused15);
             builder.Append(StringFormat.ToStringAlignment("Tracking"));
-            builder.Append(this.tracking);
+            builder.Append(this.Tracking);
             builder.Append(StringFormat.ToStringAlignment("Reserved non-weapon proficiencies"));
-            builder.Append(StringFormat.ByteArrayToHexString(this.reservedNonweaponProficiencies));
+            builder.Append(StringFormat.ByteArrayToHexString(this.ReservedNonweaponProficiencies));
         }
 
         /// <summary>This method appends the kit variable(s) to the output StringBuilder</summary>
@@ -1191,9 +1191,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1_
             builder.Append(StringFormat.ToStringAlignment("Deity"));
             builder.Append(this.deity);
             builder.Append(StringFormat.ToStringAlignment("Kit"));
-            builder.Append((UInt32)this.kit);
+            builder.Append((UInt32)this.Kit);
             builder.Append(StringFormat.ToStringAlignment("Kit (description)"));
-            builder.Append(this.kit.GetDescription());
+            builder.Append(this.Kit.GetDescription());
         }
 
         /// <summary>Generates a String representing the classifications area of the creature data structure</summary>

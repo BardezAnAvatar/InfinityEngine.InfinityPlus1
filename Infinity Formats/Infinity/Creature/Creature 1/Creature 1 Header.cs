@@ -15,169 +15,67 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1
     /// <summary>Creature header version 1</summary>
     public class Creature1Header : Creature2eHeader
     {
+        #region Constants
         /// <summary>Binary size of the struct on disk</summary>
         public const Int32 StructSize = 724;
-
-        #region Members
-        /// <summary>Large sword proficiency</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencyLargeSword;
-
-        /// <summary>Small swords proficiency</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencySmallSword;
-
-        /// <summary>Spear proficiency</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencySpear;
-
-        /// <summary>Blunt proficiency</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencyBlunt;
-
-        /// <summary>Spiked proficiency</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencySpiked;
-
-        /// <summary>Missile proficiency</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencyMissile;
-
-        /// <summary>Unused proficiency #7</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencyUnused7;
-
-        /// <summary>Unused proficiency #8</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencyUnused8;
-
-        /// <summary>Unused proficiency #9</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencyUnused9;
-
-        /// <summary>Unused proficiency #10</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencyUnused10;
-
-        /// <summary>Unused proficiency #11</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencyUnused11;
-
-        /// <summary>Unused proficiency #12</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencyUnused12;
-
-        /// <summary>Unused proficiency #13</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte proficiencyUnused13;
         #endregion
 
-        #region Properties
+
+        #region Fields
         /// <summary>Large sword proficiency</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte ProficiencyLargeSword
-        {
-            get { return this.proficiencyLargeSword; }
-            set { this.proficiencyLargeSword = value; }
-        }
+        protected Byte ProficiencyLargeSword { get; set; }
 
         /// <summary>Small swords proficiency</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte ProficiencySmallSword
-        {
-            get { return this.proficiencySmallSword; }
-            set { this.proficiencySmallSword = value; }
-        }
+        protected Byte ProficiencySmallSword { get; set; }
 
         /// <summary>Spear proficiency</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte ProficiencySpear
-        {
-            get { return this.proficiencySpear; }
-            set { this.proficiencySpear = value; }
-        }
+        protected Byte ProficiencySpear { get; set; }
 
         /// <summary>Blunt proficiency</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte ProficiencyBlunt
-        {
-            get { return this.proficiencyBlunt; }
-            set { this.proficiencyBlunt = value; }
-        }
+        protected Byte ProficiencyBlunt { get; set; }
 
         /// <summary>Spiked proficiency</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte ProficiencySpiked
-        {
-            get { return this.proficiencySpiked; }
-            set { this.proficiencySpiked = value; }
-        }
+        protected Byte ProficiencySpiked { get; set; }
 
         /// <summary>Missile proficiency</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte ProficiencyMissile
-        {
-            get { return this.proficiencyMissile; }
-            set { this.proficiencyMissile = value; }
-        }
+        protected Byte ProficiencyMissile { get; set; }
 
         /// <summary>Unused proficiency #7</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte ProficiencyUnused7
-        {
-            get { return this.proficiencyUnused7; }
-            set { this.proficiencyUnused7 = value; }
-        }
+        protected Byte ProficiencyUnused7 { get; set; }
 
         /// <summary>Unused proficiency #8</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte ProficiencyUnused8
-        {
-            get { return this.proficiencyUnused8; }
-            set { this.proficiencyUnused8 = value; }
-        }
+        protected Byte ProficiencyUnused8 { get; set; }
 
         /// <summary>Unused proficiency #9</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte ProficiencyUnused9
-        {
-            get { return this.proficiencyUnused9; }
-            set { this.proficiencyUnused9 = value; }
-        }
+        protected Byte ProficiencyUnused9 { get; set; }
 
         /// <summary>Unused proficiency #10</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte ProficiencyUnused10
-        {
-            get { return this.proficiencyUnused10; }
-            set { this.proficiencyUnused10 = value; }
-        }
+        protected Byte ProficiencyUnused10 { get; set; }
 
         /// <summary>Unused proficiency #11</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte ProficiencyUnused11
-        {
-            get { return this.proficiencyUnused11; }
-            set { this.proficiencyUnused11 = value; }
-        }
+        protected Byte ProficiencyUnused11 { get; set; }
 
         /// <summary>Unused proficiency #12</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte ProficiencyUnused12
-        {
-            get { return this.proficiencyUnused12; }
-            set { this.proficiencyUnused12 = value; }
-        }
+        protected Byte ProficiencyUnused12 { get; set; }
 
         /// <summary>Unused proficiency #13</summary>
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte ProficiencyUnused13
-        {
-            get { return this.proficiencyUnused13; }
-            set { this.proficiencyUnused13 = value; }
-        }
+        protected Byte ProficiencyUnused13 { get; set; }
         #endregion
         
+
         #region Constructor(s)
         /// <summary>Default constructor</summary>
         public Creature1Header()
@@ -294,6 +192,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1
         }
         #endregion
 
+
         #region IO method implemetations
         /// <summary>This public method reads file format data structure from the output stream, after the signature has already been read.</summary>
         /// <param name="input">Input stream to read from</param>
@@ -334,29 +233,29 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1
         /// <param name="remainingBody">Byte array to read from</param>
         protected override void ReadBodyProficiencies(Byte[] remainingBody)
         {
-            this.proficiencyLargeSword = remainingBody[102];
-            this.proficiencySmallSword = remainingBody[103];
-            this.proficiencyBow = remainingBody[104];
-            this.proficiencySpear = remainingBody[105];
-            this.proficiencyBlunt = remainingBody[106];
-            this.proficiencySpiked = remainingBody[107];
-            this.proficiencyAxe = remainingBody[108];
-            this.proficiencyMissile = remainingBody[109];
-            this.proficiencyUnused1 = remainingBody[110];
-            this.proficiencyUnused2 = remainingBody[111];
-            this.proficiencyUnused3 = remainingBody[112];
-            this.proficiencyUnused4 = remainingBody[113];
-            this.proficiencyUnused5 = remainingBody[114];
-            this.proficiencyUnused6 = remainingBody[115];
-            this.proficiencyUnused7 = remainingBody[116];
-            this.proficiencyUnused8 = remainingBody[117];
-            this.proficiencyUnused9 = remainingBody[118];
-            this.proficiencyUnused10 = remainingBody[119];
-            this.proficiencyUnused11 = remainingBody[120];
-            this.proficiencyUnused12 = remainingBody[121];
-            this.proficiencyUnused13 = remainingBody[122];
-            this.tracking = remainingBody[123];
-            Array.Copy(remainingBody, 124, this.reservedNonweaponProficiencies, 0, 32);
+            this.ProficiencyLargeSword = remainingBody[102];
+            this.ProficiencySmallSword = remainingBody[103];
+            this.ProficiencyBow = remainingBody[104];
+            this.ProficiencySpear = remainingBody[105];
+            this.ProficiencyBlunt = remainingBody[106];
+            this.ProficiencySpiked = remainingBody[107];
+            this.ProficiencyAxe = remainingBody[108];
+            this.ProficiencyMissile = remainingBody[109];
+            this.ProficiencyUnused1 = remainingBody[110];
+            this.ProficiencyUnused2 = remainingBody[111];
+            this.ProficiencyUnused3 = remainingBody[112];
+            this.ProficiencyUnused4 = remainingBody[113];
+            this.ProficiencyUnused5 = remainingBody[114];
+            this.ProficiencyUnused6 = remainingBody[115];
+            this.ProficiencyUnused7 = remainingBody[116];
+            this.ProficiencyUnused8 = remainingBody[117];
+            this.ProficiencyUnused9 = remainingBody[118];
+            this.ProficiencyUnused10 = remainingBody[119];
+            this.ProficiencyUnused11 = remainingBody[120];
+            this.ProficiencyUnused12 = remainingBody[121];
+            this.ProficiencyUnused13 = remainingBody[122];
+            this.Tracking = remainingBody[123];
+            Array.Copy(remainingBody, 124, this.ReservedNonweaponProficiencies, 0, 32);
         }
 
         /// <summary>This public method writes the file format to the output stream.</summary>
@@ -375,31 +274,32 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1
         /// <param name="output">Output stream to write to</param>
         protected override void WriteProficiencies(Stream output)
         {
-            output.WriteByte(this.proficiencyLargeSword);
-            output.WriteByte(this.proficiencySmallSword);
+            output.WriteByte(this.ProficiencyLargeSword);
+            output.WriteByte(this.ProficiencySmallSword);
             output.WriteByte(this.ProficiencyBow);
-            output.WriteByte(this.proficiencySpear);
-            output.WriteByte(this.proficiencyBlunt);
-            output.WriteByte(this.proficiencySpiked);
-            output.WriteByte(this.proficiencyAxe);
-            output.WriteByte(this.proficiencyMissile);
-            output.WriteByte(this.proficiencyUnused1);
-            output.WriteByte(this.proficiencyUnused2);
-            output.WriteByte(this.proficiencyUnused3);
-            output.WriteByte(this.proficiencyUnused4);
-            output.WriteByte(this.proficiencyUnused5);
-            output.WriteByte(this.proficiencyUnused6);
-            output.WriteByte(this.proficiencyUnused7);
-            output.WriteByte(this.proficiencyUnused8);
-            output.WriteByte(this.proficiencyUnused9);
-            output.WriteByte(this.proficiencyUnused10);
-            output.WriteByte(this.proficiencyUnused11);
-            output.WriteByte(this.proficiencyUnused12);
-            output.WriteByte(this.proficiencyUnused13);
-            output.WriteByte(this.tracking);
-            output.Write(this.reservedNonweaponProficiencies, 0, 32);
+            output.WriteByte(this.ProficiencySpear);
+            output.WriteByte(this.ProficiencyBlunt);
+            output.WriteByte(this.ProficiencySpiked);
+            output.WriteByte(this.ProficiencyAxe);
+            output.WriteByte(this.ProficiencyMissile);
+            output.WriteByte(this.ProficiencyUnused1);
+            output.WriteByte(this.ProficiencyUnused2);
+            output.WriteByte(this.ProficiencyUnused3);
+            output.WriteByte(this.ProficiencyUnused4);
+            output.WriteByte(this.ProficiencyUnused5);
+            output.WriteByte(this.ProficiencyUnused6);
+            output.WriteByte(this.ProficiencyUnused7);
+            output.WriteByte(this.ProficiencyUnused8);
+            output.WriteByte(this.ProficiencyUnused9);
+            output.WriteByte(this.ProficiencyUnused10);
+            output.WriteByte(this.ProficiencyUnused11);
+            output.WriteByte(this.ProficiencyUnused12);
+            output.WriteByte(this.ProficiencyUnused13);
+            output.WriteByte(this.Tracking);
+            output.Write(this.ReservedNonweaponProficiencies, 0, 32);
         }
         #endregion
+
 
         #region ToString() helpers
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>
@@ -431,51 +331,51 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1
         protected override void ToStringProcifiencies(StringBuilder builder)
         {
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Large Sword)"));
-            builder.Append(this.proficiencyLargeSword);
+            builder.Append(this.ProficiencyLargeSword);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Small Sword)"));
-            builder.Append(this.proficiencySmallSword);
+            builder.Append(this.ProficiencySmallSword);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Bow)"));
-            builder.Append(this.proficiencyBow);
+            builder.Append(this.ProficiencyBow);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Spear)"));
-            builder.Append(this.proficiencySpear);
+            builder.Append(this.ProficiencySpear);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Blunt)"));
-            builder.Append(this.proficiencyBlunt);
+            builder.Append(this.ProficiencyBlunt);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Spiked)"));
-            builder.Append(this.proficiencySpiked);
+            builder.Append(this.ProficiencySpiked);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Axe)"));
-            builder.Append(this.proficiencyAxe);
+            builder.Append(this.ProficiencyAxe);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Missile)"));
-            builder.Append(this.proficiencyMissile);
+            builder.Append(this.ProficiencyMissile);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #1)"));
-            builder.Append(this.proficiencyUnused1);
+            builder.Append(this.ProficiencyUnused1);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #2)"));
-            builder.Append(this.proficiencyUnused2);
+            builder.Append(this.ProficiencyUnused2);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #3)"));
-            builder.Append(this.proficiencyUnused3);
+            builder.Append(this.ProficiencyUnused3);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #4)"));
-            builder.Append(this.proficiencyUnused4);
+            builder.Append(this.ProficiencyUnused4);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #5)"));
-            builder.Append(this.proficiencyUnused5);
+            builder.Append(this.ProficiencyUnused5);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #6)"));
-            builder.Append(this.proficiencyUnused6);
+            builder.Append(this.ProficiencyUnused6);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #7)"));
-            builder.Append(this.proficiencyUnused7);
+            builder.Append(this.ProficiencyUnused7);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #8)"));
-            builder.Append(this.proficiencyUnused8);
+            builder.Append(this.ProficiencyUnused8);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #9)"));
-            builder.Append(this.proficiencyUnused9);
+            builder.Append(this.ProficiencyUnused9);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #10)"));
-            builder.Append(this.proficiencyUnused10);
+            builder.Append(this.ProficiencyUnused10);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #11)"));
-            builder.Append(this.proficiencyUnused11);
+            builder.Append(this.ProficiencyUnused11);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #12)"));
-            builder.Append(this.proficiencyUnused12);
+            builder.Append(this.ProficiencyUnused12);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #13)"));
-            builder.Append(this.proficiencyUnused13);
+            builder.Append(this.ProficiencyUnused13);
             builder.Append(StringFormat.ToStringAlignment("Tracking"));
-            builder.Append(this.tracking);
+            builder.Append(this.Tracking);
             builder.Append(StringFormat.ToStringAlignment("Reserved non-weapon proficiencies"));
-            builder.Append(StringFormat.ByteArrayToHexString(this.reservedNonweaponProficiencies));
+            builder.Append(StringFormat.ByteArrayToHexString(this.ReservedNonweaponProficiencies));
         }
         #endregion
     }

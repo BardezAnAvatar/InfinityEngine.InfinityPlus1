@@ -18,8 +18,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature9
         /// <summary>Creature header, most of the data</summary>
         public Creature9Header Header
         {
-            get { return this.header as Creature9Header; }
-            set { this.header = value; }
+            get { return this.Header2E as Creature9Header; }
+            set { this.Header2E = value; }
         }
 
         /// <summary>Gets the headline for the creature file</summary>
@@ -39,52 +39,52 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature9
         /// <summary>Instantiates a new header</summary>
         protected override void InstantiateHeader()
         {
-            this.header = new Creature9Header();
+            this.Header = new Creature9Header();
         }
 
         /// <summary>Initializes the item slots ordered dictionary</summary>
         protected override void InitializeItemSlots()
         {
-            this.itemSlots = new GenericOrderedDictionary<String, Int16>();
+            this.ItemSlots = new GenericOrderedDictionary<String, Int16>();
 
-            /* 01 */ this.itemSlots.Add("Helmet", 0);
-            /* 02 */ this.itemSlots.Add("Armor", 0);
-            /* 03 */ this.itemSlots.Add("Shield", 0);
-            /* 04 */ this.itemSlots.Add("Gloves", 0);
-            /* 05 */ this.itemSlots.Add("Left Ring", 0);
-            /* 06 */ this.itemSlots.Add("Right Ring", 0);
-            /* 07 */ this.itemSlots.Add("Amulet", 0);
-            /* 08 */ this.itemSlots.Add("Belt", 0);
-            /* 09 */ this.itemSlots.Add("Boots", 0);
-            /* 10 */ this.itemSlots.Add("Weapon 1", 0);
-            /* 11 */ this.itemSlots.Add("Weapon 2", 0);
-            /* 12 */ this.itemSlots.Add("Weapon 3", 0);
-            /* 13 */ this.itemSlots.Add("Weapon 4", 0);
-            /* 14 */ this.itemSlots.Add("Quiver 1", 0);
-            /* 15 */ this.itemSlots.Add("Quiver 2", 0);
-            /* 16 */ this.itemSlots.Add("Quiver 3", 0);
-            /* 17 */ this.itemSlots.Add("Quiver 4", 0);
-            /* 18 */ this.itemSlots.Add("Cloak", 0);
-            /* 19 */ this.itemSlots.Add("Quick item 1", 0);
-            /* 20 */ this.itemSlots.Add("Quick item 2", 0);
-            /* 21 */ this.itemSlots.Add("Quick item 3", 0);
-            /* 22 */ this.itemSlots.Add("Inventory 01", 0);
-            /* 23 */ this.itemSlots.Add("Inventory 02", 0);
-            /* 24 */ this.itemSlots.Add("Inventory 03", 0);
-            /* 25 */ this.itemSlots.Add("Inventory 04", 0);
-            /* 26 */ this.itemSlots.Add("Inventory 05", 0);
-            /* 27 */ this.itemSlots.Add("Inventory 06", 0);
-            /* 28 */ this.itemSlots.Add("Inventory 07", 0);
-            /* 29 */ this.itemSlots.Add("Inventory 08", 0);
-            /* 30 */ this.itemSlots.Add("Inventory 09", 0);
-            /* 31 */ this.itemSlots.Add("Inventory 10", 0);
-            /* 32 */ this.itemSlots.Add("Inventory 11", 0);
-            /* 33 */ this.itemSlots.Add("Inventory 12", 0);
-            /* 34 */ this.itemSlots.Add("Inventory 13", 0);
-            /* 35 */ this.itemSlots.Add("Inventory 14", 0);
-            /* 36 */ this.itemSlots.Add("Inventory 15", 0);
-            /* 37 */ this.itemSlots.Add("Inventory 16", 0);
-            /* 38 */ this.itemSlots.Add("Magic weapon", 0);
+            /* 01 */ this.ItemSlots.Add("Helmet", 0);
+            /* 02 */ this.ItemSlots.Add("Armor", 0);
+            /* 03 */ this.ItemSlots.Add("Shield", 0);
+            /* 04 */ this.ItemSlots.Add("Gloves", 0);
+            /* 05 */ this.ItemSlots.Add("Left Ring", 0);
+            /* 06 */ this.ItemSlots.Add("Right Ring", 0);
+            /* 07 */ this.ItemSlots.Add("Amulet", 0);
+            /* 08 */ this.ItemSlots.Add("Belt", 0);
+            /* 09 */ this.ItemSlots.Add("Boots", 0);
+            /* 10 */ this.ItemSlots.Add("Weapon 1", 0);
+            /* 11 */ this.ItemSlots.Add("Weapon 2", 0);
+            /* 12 */ this.ItemSlots.Add("Weapon 3", 0);
+            /* 13 */ this.ItemSlots.Add("Weapon 4", 0);
+            /* 14 */ this.ItemSlots.Add("Quiver 1", 0);
+            /* 15 */ this.ItemSlots.Add("Quiver 2", 0);
+            /* 16 */ this.ItemSlots.Add("Quiver 3", 0);
+            /* 17 */ this.ItemSlots.Add("Quiver 4", 0);
+            /* 18 */ this.ItemSlots.Add("Cloak", 0);
+            /* 19 */ this.ItemSlots.Add("Quick item 1", 0);
+            /* 20 */ this.ItemSlots.Add("Quick item 2", 0);
+            /* 21 */ this.ItemSlots.Add("Quick item 3", 0);
+            /* 22 */ this.ItemSlots.Add("Inventory 01", 0);
+            /* 23 */ this.ItemSlots.Add("Inventory 02", 0);
+            /* 24 */ this.ItemSlots.Add("Inventory 03", 0);
+            /* 25 */ this.ItemSlots.Add("Inventory 04", 0);
+            /* 26 */ this.ItemSlots.Add("Inventory 05", 0);
+            /* 27 */ this.ItemSlots.Add("Inventory 06", 0);
+            /* 28 */ this.ItemSlots.Add("Inventory 07", 0);
+            /* 29 */ this.ItemSlots.Add("Inventory 08", 0);
+            /* 30 */ this.ItemSlots.Add("Inventory 09", 0);
+            /* 31 */ this.ItemSlots.Add("Inventory 10", 0);
+            /* 32 */ this.ItemSlots.Add("Inventory 11", 0);
+            /* 33 */ this.ItemSlots.Add("Inventory 12", 0);
+            /* 34 */ this.ItemSlots.Add("Inventory 13", 0);
+            /* 35 */ this.ItemSlots.Add("Inventory 14", 0);
+            /* 36 */ this.ItemSlots.Add("Inventory 15", 0);
+            /* 37 */ this.ItemSlots.Add("Inventory 16", 0);
+            /* 38 */ this.ItemSlots.Add("Magic weapon", 0);
         }
         #endregion
     }

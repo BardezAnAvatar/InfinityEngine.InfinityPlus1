@@ -160,11 +160,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
             /* 15 */ this.itemSlots.Add("Shield 3", 0);
             /* 16 */ this.itemSlots.Add("Weapon 4", 0);
             /* 17 */ this.itemSlots.Add("Shield 4", 0);
-            /* 18 */ this.itemSlots.Add("Cloak", 0);
             /* 19 */ this.itemSlots.Add("Quiver 1", 0);
             /* 20 */ this.itemSlots.Add("Quiver 2", 0);
             /* 21 */ this.itemSlots.Add("Quiver 3", 0);
             /* 22 */ this.itemSlots.Add("Quiver 4", 0);
+            /* 18 */ this.itemSlots.Add("Cloak", 0);
             /* 23 */ this.itemSlots.Add("Quick item 1", 0);
             /* 24 */ this.itemSlots.Add("Quick item 2", 0);
             /* 25 */ this.itemSlots.Add("Quick item 3", 0);
@@ -545,8 +545,30 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
         public override String ToString()
         {
+            return this.ToString(true);
+        }
+
+        /// <summary>This method complements the default ToString() method, printing the member data line by line</summary>
+        /// <param name="showType">Boolean indicating whether or not to display the leading description line.</param>
+        /// <returns>A string containing the values and descriptions of all values in this class</returns>
+        public String ToString(Boolean showType)
+        {
+            String representation = this.Headline;
+
+            if (showType)
+                representation += this.GetStringRepresentation();
+            else
+                representation = this.GetStringRepresentation();
+
+            return representation;
+        }
+
+        /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
+        /// <returns>A string, formatted largely for console, that describes the data structure's contents.</returns>
+        protected virtual String GetStringRepresentation()
+        {
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine(this.Headline);
+
             builder.AppendLine(this.header.ToString());
             builder.AppendLine(this.GenerateKnownSpellsString());
             builder.AppendLine(this.GenerateItemsString());
