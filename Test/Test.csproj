@@ -36,6 +36,40 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\InfinityPlus1.Test.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\InfinityPlus1.Test.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -48,6 +82,10 @@
     <Compile Include="Harnesses\AmpitudeCodedModulation\ACM Header Test.cs" />
     <Compile Include="Harnesses\AmpitudeCodedModulation\Bit Block Test.cs" />
     <Compile Include="Harnesses\AmpitudeCodedModulation\WAVC File Test.cs" />
+    <Compile Include="Harnesses\Area\Baldur ARE Test.cs" />
+    <Compile Include="Harnesses\Area\Torment ARE Test.cs" />
+    <Compile Include="Harnesses\Area\Icewind 2 ARE Test.cs" />
+    <Compile Include="Harnesses\Area\Icewind ARE Test.cs" />
     <Compile Include="Harnesses\BiowareIndexFileFormat\Biff1\Biff1ArchiveTest.cs" />
     <Compile Include="Harnesses\BiowareIndexFileFormat\Biff1\Biff1HeaderTest.cs" />
     <Compile Include="Harnesses\BiowareIndexFileFormat\Biff1\Biff1ResourceEntryTest.cs" />
@@ -72,6 +110,7 @@
     <Compile Include="Harnesses\Effect\Effect 2 Test.cs" />
     <Compile Include="Harnesses\File Tester Base.cs" />
     <Compile Include="Harnesses\IAudioTester.cs" />
+    <Compile Include="Harnesses\Identifiers\Identifier v1 Test.cs" />
     <Compile Include="Harnesses\Initialization\Ini Test.cs" />
     <Compile Include="Harnesses\Item\Item 1 Test.cs" />
     <Compile Include="Harnesses\Item\Item 1_1 Test.cs" />
@@ -82,6 +121,7 @@
     <Compile Include="Harnesses\Item\Item Header 1_1 Test.cs" />
     <Compile Include="Harnesses\Item\Item Header 2 Test.cs" />
     <Compile Include="Harnesses\ITester.cs" />
+    <Compile Include="Harnesses\MapOfScreen\MOSC Test.cs" />
     <Compile Include="Harnesses\MapOfScreen\MOS Test.cs" />
     <Compile Include="Harnesses\Movie\MVE Audio Playback Test.cs" />
     <Compile Include="Harnesses\Movie\MVE Opcode Indexer Test.cs" />
@@ -90,8 +130,16 @@
     <Compile Include="Harnesses\Music\Playlist Test.cs" />
     <Compile Include="Harnesses\Output\DirectX\XAudio2 Render Test.cs" />
     <Compile Include="Harnesses\Output\DirectX\XAudio2 Test.cs" />
+    <Compile Include="Harnesses\PixelLocationTable\PLT Test.cs" />
+    <Compile Include="Harnesses\Projectile\PRO Test.cs" />
     <Compile Include="Harnesses\ReusableCode\BitStream Test.cs" />
     <Compile Include="Harnesses\Riff\Riff Test.cs" />
+    <Compile Include="Harnesses\Game\GAM Icewind 2 Test.cs" />
+    <Compile Include="Harnesses\Game\GAM Icewind Test.cs" />
+    <Compile Include="Harnesses\Game\GAM Torment Test.cs" />
+    <Compile Include="Harnesses\Game\GAM Baldur 2 Test.cs" />
+    <Compile Include="Harnesses\Game\GAM Baldur Test.cs" />
+    <Compile Include="Harnesses\Save\GAM Baldur Test.cs" />
     <Compile Include="Harnesses\Spell\Spell 1 Header Test.cs" />
     <Compile Include="Harnesses\Spell\Spell 1 Test.cs" />
     <Compile Include="Harnesses\Spell\Spell 2 Header Test.cs" />
@@ -102,6 +150,9 @@
     <Compile Include="Harnesses\Store\Store 1.1 Test.cs" />
     <Compile Include="Harnesses\Store\Store 9 Test.cs" />
     <Compile Include="Harnesses\StringReferenceCount\Src 1 Test.cs" />
+    <Compile Include="Harnesses\TalkOverride\Talk Override Test.cs" />
+    <Compile Include="Harnesses\TalkOverride\TOT Test.cs" />
+    <Compile Include="Harnesses\TalkOverride\TOH Test.cs" />
     <Compile Include="Harnesses\Tester Base.cs" />
     <Compile Include="Harnesses\TextLocationKey\TextLocationKeyHeaderTest.cs" />
     <Compile Include="Harnesses\TextLocationKey\TextLocationKeyStringReferenceEntryTest.cs" />
@@ -109,11 +160,14 @@
     <Compile Include="Harnesses\TileSet\Tis Test.cs" />
     <Compile Include="Harnesses\TileSet\Tis Header Test.cs" />
     <Compile Include="Harnesses\TwoDimensionalArray\TwoDinensionalArray1Test.cs" />
+    <Compile Include="Harnesses\Variables\VAR Test.cs" />
+    <Compile Include="Harnesses\VectoredEffectVideoCell\VAVC Test.cs" />
     <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Test.cs" />
     <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Door Test.cs" />
     <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Polygon Header Test.cs" />
     <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Overlay Test.cs" />
     <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Header Test.cs" />
+    <Compile Include="Harnesses\WaveEffect\WFX Test.cs" />
     <Compile Include="Test Event Arguments.cs" />
     <Compile Include="Message Event Arguments.cs" />
     <Compile Include="Testing Delegates.cs" />
@@ -132,7 +186,22 @@
     <Compile Include="WinForm\ACM\WAVC Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="WinForm\ARE\Baldur Area Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ARE\Torment Area Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ARE\Icewind 2 Area Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ARE\Icewind Area Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WinForm\BAM\BAM Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\BAM\BAMC Render Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\BIFF\Uncompressed\Biff Archive Test Control.cs">
@@ -163,6 +232,21 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\Animation Collection Reference.cs" />
+    <Compile Include="WinForm\GAM\Game Icewind 2 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\GAM\Game Torment Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\GAM\Game Icewind Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\GAM\Game Baldur 2 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\GAM\Game Baldur Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WinForm\Harness Video Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -222,6 +306,9 @@
     </Compile>
     <Compile Include="WinForm\Harness File Test Control Base.Designer.cs">
       <DependentUpon>Harness File Test Control Base.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\IDS\IDS File Test Control.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\Image Collection Reference.cs" />
     <Compile Include="WinForm\Image Reference.cs" />
@@ -289,6 +376,12 @@
       <DependentUpon>LoggingControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WinForm\MOS\MOSC Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\MOS\MOSC Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WinForm\MOS\MOS Render Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -328,10 +421,51 @@
     <Compile Include="WinForm\Output\XAudio2\XAudio2 Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="WinForm\PLT\Palette Reader.cs" />
+    <Compile Include="WinForm\PLT\Palette Selection.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\PLT\Palette Selection.Designer.cs">
+      <DependentUpon>Palette Selection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\PLT\Palette Selector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\PLT\Palette Selector.Designer.cs">
+      <DependentUpon>Palette Selector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\PLT\PLT Displayable.cs" />
+    <Compile Include="WinForm\PLT\PLT Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\PLT\PLT Render Test Control.Designer.cs">
+      <DependentUpon>PLT Render Test Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\PLT\PLT Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\PLT\Available Palette.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\PLT\Available Palette.Designer.cs">
+      <DependentUpon>Available Palette.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\PRO\PRO Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WinForm\ReusableCode\Bit Stream Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\RIFF\Riff Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\SAV\Saved Resource Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\SAV\Saved Resource Test Control.Designer.cs">
+      <DependentUpon>Saved Resource Test Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\SAV\Save Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\SPL\Spell Ability Effect Test Control.cs">
@@ -364,7 +498,9 @@
     <Compile Include="WinForm\STO\Store 1.0 Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WinForm\Threading Delegates.cs" />
+    <Compile Include="WinForm\TalkOverride\Talk Override Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WinForm\TIS\TIS Header Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -380,6 +516,18 @@
     <Compile Include="WinForm\TLK\TLK Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="WinForm\TOH\TOH Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\TOT\TOT Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\VAR\VAR Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\VVC\VVC Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WinForm\WED\WED Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -393,6 +541,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\WED\WED Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\WFX\WFX Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -470,6 +621,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Output\Direct2D\Direct2D Render Test Control.resx">
       <DependentUpon>Direct2D Render Test Control.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\PLT\Available Palette.resx">
+      <DependentUpon>Available Palette.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\PLT\Palette Selection.resx">
+      <DependentUpon>Palette Selection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\PLT\Palette Selector.resx">
+      <DependentUpon>Palette Selector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\PLT\PLT Render Test Control.resx">
+      <DependentUpon>PLT Render Test Control.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\SAV\Saved Resource Test Control.resx">
+      <DependentUpon>Saved Resource Test Control.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

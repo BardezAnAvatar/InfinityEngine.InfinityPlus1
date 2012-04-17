@@ -34,7 +34,44 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\Infinity Formats.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\Infinity Formats.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\Ionic.Zip.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.XML" />
@@ -126,24 +163,79 @@
     <Compile Include="External\Interplay\MVE\Enum\Opcode Types.cs" />
     <Compile Include="External\Interplay\MVE\MVE Chunk Indexer.cs" />
     <Compile Include="External\Interplay\MVE\Component\Management\MVE Manager.cs" />
+    <Compile Include="External\Zlib\ZlibHeader.cs" />
+    <Compile Include="Infinity\Area\Component\Actor.cs" />
+    <Compile Include="Infinity\Area\Component\Ambient.cs" />
+    <Compile Include="Infinity\Area\Component\Animation.cs" />
+    <Compile Include="Infinity\Area\Component\Area Header Base.cs" />
+    <Compile Include="Infinity\Area\Component\Common Area Header.cs" />
+    <Compile Include="Infinity\Area\Component\Common Spawn Point.cs" />
+    <Compile Include="Infinity\Area\Component\Container.cs" />
+    <Compile Include="Infinity\Area\Component\Projectile Trap.cs" />
+    <Compile Include="Infinity\Area\Component\Rest Interruption.cs" />
+    <Compile Include="Infinity\Area\Component\Song.cs" />
+    <Compile Include="Infinity\Area\Component\Torment Map Note.cs" />
+    <Compile Include="Infinity\Area\Component\Door.cs" />
+    <Compile Include="Infinity\Area\Component\Entrance.cs" />
+    <Compile Include="Infinity\Area\Component\Explored Bitmask.cs" />
+    <Compile Include="Infinity\Area\Component\Icewind2 Spawn Point.cs" />
+    <Compile Include="Infinity\Area\Component\Icewind2 Area Header.cs" />
+    <Compile Include="Infinity\Area\Component\Common Map Note.cs" />
+    <Compile Include="Infinity\Area\Component\Region.cs" />
+    <Compile Include="Infinity\Area\Component\Spawn Point Base.cs" />
+    <Compile Include="Infinity\Area\Component\Torment Area Header.cs" />
+    <Compile Include="Infinity\Area\Enums\Area Flags.cs" />
+    <Compile Include="Infinity\Area\Enums\Area Type Flags.cs" />
+    <Compile Include="Infinity\Area\Enums\Actor Flags.cs" />
+    <Compile Include="Infinity\Area\Enums\Container Types.cs" />
+    <Compile Include="Infinity\Area\Enums\Container Flags.cs" />
+    <Compile Include="Infinity\Area\Enums\Ambient Flags.cs" />
+    <Compile Include="Infinity\Area\Enums\Animation Flags.cs" />
+    <Compile Include="Infinity\Area\Enums\Torment Map Note Color.cs" />
+    <Compile Include="Infinity\Area\Enums\Icewind 2 Spawn Flags.cs" />
+    <Compile Include="Infinity\Area\Enums\Spawn Difficulty Flags.cs" />
+    <Compile Include="Infinity\Area\Enums\Map Note Color.cs" />
+    <Compile Include="Infinity\Area\Enums\Door Flags.cs" />
+    <Compile Include="Infinity\Area\Enums\Spawn Flags.cs" />
+    <Compile Include="Infinity\Area\Enums\Trigger Flags.cs" />
+    <Compile Include="Infinity\Area\Enums\Region Type.cs" />
+    <Compile Include="Infinity\Area\Enums\Schedule.cs" />
+    <Compile Include="Infinity\Area\Enums\Torment Area Type Flags.cs" />
+    <Compile Include="Infinity\Area\Enums\Icewind 2 Area Flags.cs" />
+    <Compile Include="Infinity\Area\Enums\Torment Area Rest Flags.cs" />
+    <Compile Include="Infinity\Area\Interfaces\ICursor.cs" />
+    <Compile Include="Infinity\Area\Interfaces\ILiving.cs" />
+    <Compile Include="Infinity\Area\Interfaces\ILockable.cs" />
+    <Compile Include="Infinity\Area\Interfaces\ISpawn.cs" />
+    <Compile Include="Infinity\Area\Interfaces\ITalkable.cs" />
+    <Compile Include="Infinity\Area\Interfaces\ITrappable.cs" />
+    <Compile Include="Infinity\Area\Version\Area Base.cs" />
+    <Compile Include="Infinity\Area\Version\Icewind 2 Area.cs" />
+    <Compile Include="Infinity\Area\Version\Baldur Area.cs" />
+    <Compile Include="Infinity\Area\Version\Icewind Area.cs" />
+    <Compile Include="Infinity\Area\Version\Torment Area.cs" />
     <Compile Include="Infinity\Base\Interface Infinity Format.cs" />
-    <Compile Include="Infinity\BiowareIndexFileFormat\Biff1\Biff1Archive.cs" />
-    <Compile Include="Infinity\BiowareIndexFileFormat\Biff1\Biff1Header.cs" />
-    <Compile Include="Infinity\BiowareIndexFileFormat\Biff1\Biff1FileEntry.cs" />
-    <Compile Include="Infinity\BiowareIndexFileFormat\Biff1\Biff1ResourceEntry.cs" />
-    <Compile Include="Infinity\BiowareIndexFileFormat\Biff1\Biff1TilesetEntry.cs" />
-    <Compile Include="Infinity\BlackIsleAnimation\Blask Isle Animation 1.cs" />
-    <Compile Include="Infinity\BlackIsleAnimation\Component\Animation Entry.cs" />
-    <Compile Include="Infinity\BlackIsleAnimation\Component\BAM Header.cs" />
-    <Compile Include="Infinity\BlackIsleAnimation\Component\BAM Palette Entry.cs" />
-    <Compile Include="Infinity\BlackIsleAnimation\Component\Frame Data.cs" />
-    <Compile Include="Infinity\BlackIsleAnimation\Component\Frame Entry.cs" />
+    <Compile Include="Infinity\BioWareIndexFileFormat\Biff1\Biff1Archive.cs" />
+    <Compile Include="Infinity\BioWareIndexFileFormat\Biff1\Biff1Header.cs" />
+    <Compile Include="Infinity\BioWareIndexFileFormat\Biff1\Biff1FileEntry.cs" />
+    <Compile Include="Infinity\BioWareIndexFileFormat\Biff1\Biff1ResourceEntry.cs" />
+    <Compile Include="Infinity\BioWareIndexFileFormat\Biff1\Biff1TilesetEntry.cs" />
+    <Compile Include="Infinity\BioWareAnimation\BioWare Animation 1.cs" />
+    <Compile Include="Infinity\BioWareAnimation\Component\Animation Entry.cs" />
+    <Compile Include="Infinity\BioWareAnimation\Component\BAM Header.cs" />
+    <Compile Include="Infinity\BioWareAnimation\Component\BAM Palette Entry.cs" />
+    <Compile Include="Infinity\BioWareAnimation\Component\Frame Data.cs" />
+    <Compile Include="Infinity\BioWareAnimation\Component\Frame Entry.cs" />
+    <Compile Include="Infinity\BioWareAnimation\BioWare Animation Compressed 1.cs" />
     <Compile Include="Infinity\Character\Biography\Biography 1.cs" />
     <Compile Include="Infinity\Character\Biography\Biography 2.cs" />
     <Compile Include="Infinity\Character\Enums\User Interface Button.cs" />
     <Compile Include="Infinity\Character\Header\Character 1 Header.cs" />
+    <Compile Include="Infinity\Character\Header\Character 1 Slots.cs" />
     <Compile Include="Infinity\Character\Header\Character 2.2 Header.cs" />
     <Compile Include="Infinity\Character\Header\Character Header Base.cs" />
+    <Compile Include="Infinity\Character\Header\Character Slots Base.cs" />
+    <Compile Include="Infinity\Character\Header\Character Torment Slots.cs" />
     <Compile Include="Infinity\Character\Version\Character 1.cs" />
     <Compile Include="Infinity\Character\Version\Character 9.cs" />
     <Compile Include="Infinity\Character\Version\Character 2.2.cs" />
@@ -153,6 +245,8 @@
     <Compile Include="Infinity\ChitinKey\Key Header.cs" />
     <Compile Include="Infinity\ChitinKey\Key Enums.cs" />
     <Compile Include="Infinity\Common\Color Entry.cs" />
+    <Compile Include="Infinity\Common\Point.cs" />
+    <Compile Include="Infinity\Common\Rectangle.cs" />
     <Compile Include="Infinity\Common\Transparency Color Entry.cs" />
     <Compile Include="Infinity\Common\Enums\ItemSpell Ability Damage Type.cs" />
     <Compile Include="Infinity\Common\Enums\ItemSpell Ability Depletion Behavior.cs" />
@@ -163,6 +257,7 @@
     <Compile Include="Infinity\Common\ItmSpl\ItemSpell Header 1.cs" />
     <Compile Include="Infinity\Common\ItmSpl\ItemSpell.cs" />
     <Compile Include="Infinity\Common\Resource Locator1.cs" />
+    <Compile Include="Infinity\Common\Xor Text Encryption.cs" />
     <Compile Include="Infinity\Creature\Components\Creature 2E Memorized Spells.cs" />
     <Compile Include="Infinity\Creature\Components\Creature D20 Spell Memorization.cs" />
     <Compile Include="Infinity\Creature\Components\Creature 2E Spell Memorization.cs" />
@@ -193,6 +288,7 @@
     <Compile Include="Infinity\Creature\Enums\Creature 2E Flags.cs" />
     <Compile Include="Infinity\Creature\Enums\D20 Feats 1.cs" />
     <Compile Include="Infinity\Creature\Enums\Kit 2E.cs" />
+    <Compile Include="Infinity\Creature\Enums\Special Flags E.cs" />
     <Compile Include="Infinity\Dialog\Component\Dialog Header.cs" />
     <Compile Include="Infinity\Dialog\Component\Dialog Script.cs" />
     <Compile Include="Infinity\Dialog\Component\Dialog Transition.cs" />
@@ -217,10 +313,46 @@
     <Compile Include="Infinity\Effect\Enums\Effect Target.cs" />
     <Compile Include="Infinity\Effect\Enums\Effect Resistance.cs" />
     <Compile Include="Infinity\Effect\Enums\Effect Saving Throw.cs" />
+    <Compile Include="Infinity\Game\Component\Header Baldur Icewind.cs" />
+    <Compile Include="Infinity\Game\Component\Character Info.cs" />
+    <Compile Include="Infinity\Game\Component\Familiar Info.cs" />
+    <Compile Include="Infinity\Game\Component\Journal Entry Base.cs" />
+    <Compile Include="Infinity\Game\Component\Journal Entry 2.cs" />
+    <Compile Include="Infinity\Game\Component\Journal Entry 1.cs" />
+    <Compile Include="Infinity\Game\Component\Stored Coordinate.cs" />
+    <Compile Include="Infinity\Game\Component\Torment Bestiary.cs" />
+    <Compile Include="Infinity\Game\Component\Torment Modron Maze.cs" />
+    <Compile Include="Infinity\Game\Component\Torment Modron Maze Entry.cs" />
+    <Compile Include="Infinity\Game\Component\Torment Modron Maze Header.cs" />
+    <Compile Include="Infinity\Game\Component\Tracked Icewind2 Character.cs" />
+    <Compile Include="Infinity\Game\Component\Tracked Icewind Character.cs" />
+    <Compile Include="Infinity\Game\Component\Tracked Torment Character.cs" />
+    <Compile Include="Infinity\Game\Component\Tracked Baldur Character.cs" />
+    <Compile Include="Infinity\Common\Variable.cs" />
+    <Compile Include="Infinity\Game\Enum\Character Flags.cs" />
+    <Compile Include="Infinity\Game\Enum\Expansion.cs" />
+    <Compile Include="Infinity\Game\Component\Formations.cs" />
+    <Compile Include="Infinity\Game\Component\Header Base.cs" />
+    <Compile Include="Infinity\Game\Component\Header Torment.cs" />
+    <Compile Include="Infinity\Game\Component\Tracked Playable Character Base.cs" />
+    <Compile Include="Infinity\Common\Enums\Direction.cs" />
+    <Compile Include="Infinity\Game\Enum\Journal Entry.cs" />
+    <Compile Include="Infinity\Game\Enum\Journal Location.cs" />
+    <Compile Include="Infinity\Game\Enum\Maze Walls.cs" />
+    <Compile Include="Infinity\Game\Enum\MazeTrap.cs" />
+    <Compile Include="Infinity\Game\Enum\User Interface Flags.cs" />
+    <Compile Include="Infinity\Game\Enum\Weather.cs" />
+    <Compile Include="Infinity\Game\Version\Game Icewind 2.cs" />
+    <Compile Include="Infinity\Game\Version\Game Baldur 2.cs" />
+    <Compile Include="Infinity\Game\Version\Game Icewind.cs" />
+    <Compile Include="Infinity\Game\Version\Game Torment.cs" />
+    <Compile Include="Infinity\Game\Version\Game Baldur.cs" />
     <Compile Include="Infinity\Globals\String Reference.cs" />
     <Compile Include="Infinity\Globals\Resource Reference.cs" />
     <Compile Include="Infinity\Globals\Resource Enum.cs" />
     <Compile Include="Infinity\Base\Infinity Format.cs" />
+    <Compile Include="Infinity\Identifiers\Identifier Entity.cs" />
+    <Compile Include="Infinity\Identifiers\Identifier.cs" />
     <Compile Include="Infinity\Initialization\Initialization Configuration.cs" />
     <Compile Include="Infinity\Item\Enums\Item Ability Attack Type.cs" />
     <Compile Include="Infinity\Item\Enums\Item Ability Projectile Type.cs" />
@@ -244,11 +376,28 @@
     <Compile Include="Infinity\Item\Item2\Item Header 2.cs" />
     <Compile Include="Infinity\Item\Item1\Item Header 1.cs" />
     <Compile Include="Infinity\Item\Item Header.cs" />
+    <Compile Include="Infinity\MapOfScreen\Map of Screen Compressed v1.cs" />
     <Compile Include="Infinity\MapOfScreen\MOS Header.cs" />
     <Compile Include="Infinity\Common\Palette Entry.cs" />
     <Compile Include="Infinity\MapOfScreen\Map Of Screen 1.cs" />
     <Compile Include="Infinity\Music\Playlist Entry.cs" />
     <Compile Include="Infinity\Music\Playlist.cs" />
+    <Compile Include="Infinity\PixelLocationTable\Component\Header.cs" />
+    <Compile Include="Infinity\PixelLocationTable\Component\Pixel.cs" />
+    <Compile Include="Infinity\PixelLocationTable\Manager\Pixel Table Manager.cs" />
+    <Compile Include="Infinity\PixelLocationTable\Version\Pixel Table.cs" />
+    <Compile Include="Infinity\Projectile\Components\Area of Effect.cs" />
+    <Compile Include="Infinity\Projectile\Components\Projectile Header.cs" />
+    <Compile Include="Infinity\Projectile\Components\Projectile Animation.cs" />
+    <Compile Include="Infinity\Projectile\Enums\Area of Effect Flags.cs" />
+    <Compile Include="Infinity\Projectile\Enums\Travel Flags.cs" />
+    <Compile Include="Infinity\Projectile\Enums\Spark Color.cs" />
+    <Compile Include="Infinity\Projectile\Enums\Sparkling Flags.cs" />
+    <Compile Include="Infinity\Projectile\Enums\Projectile Type.cs" />
+    <Compile Include="Infinity\Projectile\Version\Projectile.cs" />
+    <Compile Include="Infinity\Save\Save Manager.cs" />
+    <Compile Include="Infinity\Save\Save File.cs" />
+    <Compile Include="Infinity\Save\Saved Resource.cs" />
     <Compile Include="Infinity\Store\Components\Available Spell.cs" />
     <Compile Include="Infinity\Store\Components\Available Drink.cs" />
     <Compile Include="Infinity\Store\Components\Available Item.cs" />
@@ -263,6 +412,12 @@
     <Compile Include="Infinity\Store\Enums\Store Flags.cs" />
     <Compile Include="Infinity\StringReferenceCount\Emotion String Reference.cs" />
     <Compile Include="Infinity\StringReferenceCount\String Reference Count 1.cs" />
+    <Compile Include="Infinity\TalkOverride\Talk Override Table.cs" />
+    <Compile Include="Infinity\TalkOverride\Talk Override Header Entry.cs" />
+    <Compile Include="Infinity\TalkOverride\Talk Override Header Header.cs" />
+    <Compile Include="Infinity\TalkOverride\Talk Override Header.cs" />
+    <Compile Include="Infinity\TalkOverride\Talk Override Table Entry.cs" />
+    <Compile Include="Infinity\TalkOverride\Talk Override.cs" />
     <Compile Include="Infinity\TextLocationKey\TLK String Reference.cs" />
     <Compile Include="Infinity\Spell\Enums\Spell Header 2 Flags.cs" />
     <Compile Include="Infinity\Spell\Enums\Spell Nature.cs" />
@@ -287,7 +442,13 @@
     <Compile Include="Infinity\TileSet\Tis1\Tile.cs" />
     <Compile Include="Infinity\TileSet\Tis1\Tile Set 1 Header.cs" />
     <Compile Include="Infinity\TwoDimensionalArray\2DA1\TwoDimensionalArray1.cs" />
-    <Compile Include="Infinity\TwoDimensionalArray\Xor Encryption.cs" />
+    <Compile Include="Infinity\Variables\Variable Entry.cs" />
+    <Compile Include="Infinity\Variables\Variable Initial Values.cs" />
+    <Compile Include="Infinity\VectoredEffectVideoCell\Enums\Color Flags.cs" />
+    <Compile Include="Infinity\VectoredEffectVideoCell\Enums\Position Flags.cs" />
+    <Compile Include="Infinity\VectoredEffectVideoCell\Enums\Sequence Flags.cs" />
+    <Compile Include="Infinity\VectoredEffectVideoCell\Enums\DisplayFlags.cs" />
+    <Compile Include="Infinity\VectoredEffectVideoCell\Vectored Visual Effect.cs" />
     <Compile Include="Infinity\WalledEnvironmentDisplay\Components\Door Vertex Index Collections.cs" />
     <Compile Include="Infinity\WalledEnvironmentDisplay\Components\Door Polygon Collections.cs" />
     <Compile Include="Infinity\WalledEnvironmentDisplay\Components\Tileset Mapping Collection.cs" />
@@ -302,16 +463,21 @@
     <Compile Include="Infinity\WalledEnvironmentDisplay\Polygon Header.cs" />
     <Compile Include="Infinity\WalledEnvironmentDisplay\Door.cs" />
     <Compile Include="Infinity\WalledEnvironmentDisplay\WED 1.3.cs" />
+    <Compile Include="Infinity\WaveEffects\Sound Effect.cs" />
+    <Compile Include="Infinity\WaveEffects\Wave Effect Flag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="External\Weidu\" />
-    <Folder Include="Infinity\BiowareIndexFileFormat\BiffC1\" />
-    <Folder Include="Infinity\BiowareIndexFileFormat\CBiff1\" />
+    <Folder Include="Infinity\BioWareIndexFileFormat\BiffC1\" />
+    <Folder Include="Infinity\BioWareIndexFileFormat\CBiff1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="External\Interplay\MVE\_Remarks.txt" />
     <Content Include="External\Interplay\MVE\_Binary notes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Infinity\Character\Header\Character 2.2 Slots.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
