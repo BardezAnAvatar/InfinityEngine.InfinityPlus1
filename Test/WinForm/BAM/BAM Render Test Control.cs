@@ -9,7 +9,7 @@ using Bardez.Projects.InfinityPlus1.Test.WinForm;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.BAM
 {
     /// <summary>Rendering test animation control for BAM files</summary>
-    public class BamRenderTestControl : HarnessAnimationCollectionTestControlBase<BlaskIsleAnimation1>
+    public class BamRenderTestControl : HarnessAnimationCollectionTestControlBase<BioWareAnimation1>
     {
         #region Constants
         /// <summary>Constant key to look up in app.config</summary>
@@ -35,7 +35,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.BAM
         /// <param name="frame">ImageReference to set details for</param>
         /// <param name="container">ImageCollection format that contains animations and frames</param>
         /// <param name="frameIndex">Frame number setting the details for</param>
-        protected override void SetFrameDetails(ImageReference frame, BlaskIsleAnimation1 container, Int32 frameIndex)
+        protected override void SetFrameDetails(ImageReference frame, BioWareAnimation1 container, Int32 frameIndex)
         {
             frame.RenderOriginX = container.MaxCenterX + frame.RenderOriginX;
             frame.RenderOriginY = container.MaxCenterY + frame.RenderOriginY;
