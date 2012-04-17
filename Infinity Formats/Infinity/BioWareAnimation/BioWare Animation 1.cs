@@ -14,7 +14,8 @@ using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareAnimation
 {
-    public class BlaskIsleAnimation1 : IInfinityFormat, IImageSet, IAnimation
+    /// <summary>Wrapper class for a BAM file that is not Zlib-compressed</summary>
+    public class BioWareAnimation1 : IInfinityFormat, IImageSet, IAnimation
     {
         #region Fields
         /// <summary>Represents the BAM file header</summary>
