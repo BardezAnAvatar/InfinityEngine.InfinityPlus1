@@ -5,7 +5,7 @@ using System.Text;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Biff1
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Components
 {
     /// <summary>This class describes a resource1 entry within the BIFF archive</summary>
     /// <remarks>
@@ -23,65 +23,39 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
     /// </remarks>
     public class Biff1ResourceEntry : Biff1FileEntry
     {
-        /// <summary>This member defines the length of the resource1 data entry.</summary>
-        protected UInt32 sizeResource;
-
+        #region Fields
         /// <summary>This property exposes the length of the resource1 data entry.</summary>
-        new public UInt32 SizeResource
-        {
-            get { return this.sizeResource; }
-            set { this.sizeResource = value; }
-        }
+        public override UInt32 SizeResource { get; set; }
+        #endregion
 
-        /// <summary>This public method reads the 16-byte resource1 entry into the header record</summary>
+
+        #region IInfinityFormat I/O methods
+        /// <summary>This public method reads file format data structure from the input stream, after the signature has already been read.</summary>
         /// <param name="input">Stream object from which to read from</param>
-        public void Read(Stream input)
+        public override void ReadBody(Stream input)
         {
+            this.Initialize();
+
             Byte[] buffer = ReusableIO.BinaryRead(input, 16);   //data buffer
-            Byte[] temp = new Byte[4];
 
-            //Resource locator
-            this.resourceLocator.Locator = ReusableIO.ReadInt32FromArray(buffer, 0x0);
-
-            //Resource offset
-            this.offsetResource = ReusableIO.ReadUInt32FromArray(buffer, 0x4);
-
-            //Resource size
-            this.sizeResource = ReusableIO.ReadUInt32FromArray(buffer, 0x8);
-
-            //Resource type
-            this.typeResource = (ResourceType)ReusableIO.ReadInt16FromArray(buffer, 0xC);
-
-            //unknown / padding
-            this.unknownPadding = ReusableIO.ReadUInt16FromArray(buffer, 0xE);
+            this.ResourceLocator.Locator = ReusableIO.ReadInt32FromArray(buffer, 0x0);
+            this.OffsetResource = ReusableIO.ReadInt32FromArray(buffer, 0x4);
+            this.SizeResource = ReusableIO.ReadUInt32FromArray(buffer, 0x8);
+            this.TypeResource = (ResourceType)ReusableIO.ReadInt16FromArray(buffer, 0xC);
+            this.UnknownPadding = ReusableIO.ReadInt16FromArray(buffer, 0xE);
         }
 
         /// <summary>This public method writes the resource1 entry to an output stream</summary>
         /// <param name="output">Stream object into which to write to</param>
-        public void Write(Stream output)
+        public override void Write(Stream output)
         {
-            Byte[] writeBytes;
-
-            //Resource locator
-            writeBytes = BitConverter.GetBytes(this.resourceLocator.Locator);
-            output.Write(writeBytes, 0, writeBytes.Length);
-
-            //Resource offset
-            writeBytes = BitConverter.GetBytes(this.offsetResource);
-            output.Write(writeBytes, 0, writeBytes.Length);
-
-            //Resource Size
-            writeBytes = BitConverter.GetBytes(this.sizeResource);
-            output.Write(writeBytes, 0, writeBytes.Length);
-
-            //Resource Type
-            writeBytes = BitConverter.GetBytes((Int16)this.typeResource);
-            output.Write(writeBytes, 0, writeBytes.Length);
-
-            //binary padding
-            writeBytes = BitConverter.GetBytes(this.unknownPadding);
-            output.Write(writeBytes, 0, writeBytes.Length);
+            ReusableIO.WriteInt32ToStream(this.ResourceLocator.Locator, output);
+            ReusableIO.WriteInt32ToStream(this.OffsetResource, output);
+            ReusableIO.WriteUInt32ToStream(this.SizeResource, output);
+            ReusableIO.WriteInt16ToStream((Int16)this.TypeResource, output);
+            ReusableIO.WriteInt16ToStream(this.UnknownPadding, output);
         }
+        #endregion
 
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>
         /// <returns>A String containing the member data line by line</returns>
@@ -90,21 +64,21 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
             StringBuilder builder = new StringBuilder();
             builder.Append(StringFormat.ToStringAlignment("Biff1ResourceEntry", 0));
             builder.Append(StringFormat.ToStringAlignment("Resource Locator"));
-            builder.Append(this.resourceLocator.Locator);
+            builder.Append(this.ResourceLocator.Locator);
             builder.Append(StringFormat.ToStringAlignment("BIFF Index"));
-            builder.Append(this.resourceLocator.BifIndex);
+            builder.Append(this.ResourceLocator.BiffIndex);
             builder.Append(StringFormat.ToStringAlignment("BIFF Tileset Index"));
-            builder.Append(this.resourceLocator.TilesetIndex);
+            builder.Append(this.ResourceLocator.TilesetIndex);
             builder.Append(StringFormat.ToStringAlignment("BIFF Resource Index"));
-            builder.Append(this.resourceLocator.ResourceIndex);
+            builder.Append(this.ResourceLocator.ResourceIndex);
             builder.Append(StringFormat.ToStringAlignment("Offset"));
-            builder.Append(this.offsetResource);
+            builder.Append(this.OffsetResource);
             builder.Append(StringFormat.ToStringAlignment("Size"));
-            builder.Append(this.sizeResource);
+            builder.Append(this.SizeResource);
             builder.Append(StringFormat.ToStringAlignment("Type"));
-            builder.Append(this.typeResource.ToString("G"));
+            builder.Append(this.TypeResource.ToString("G"));
             builder.Append(StringFormat.ToStringAlignment("Type (hex)"));
-            builder.AppendLine(String.Format("0x{0:X4}",(Int16)this.typeResource));
+            builder.AppendLine(String.Format("0x{0:X4}",(Int16)this.TypeResource));
 
             return builder.ToString();
         }

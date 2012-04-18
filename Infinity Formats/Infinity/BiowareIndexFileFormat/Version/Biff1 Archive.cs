@@ -3,98 +3,139 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Components;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Interface;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Biff1
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Version
 {
     /// <summary>This class represents a BIFF version 1 file. It can extract resources.</summary>
-    public class Biff1Archive
+    public class Biff1Archive : IInfinityFormat, IBiff
     {
-        #region Members
+        #region Fields
         /// <summary>This member represents the BIFF version1 header.</summary>
-        protected Biff1Header header;
+        public Biff1Header Header;
 
         /// <summary>This member represents the collection of resource1 entries within the BIFF.</summary>
-        protected List<Biff1ResourceEntry> entriesResource;
+        public List<Biff1ResourceEntry> EntriesResource;
 
         /// <summary>This member represents the collection of tileset entries withing the version 1 BIFF.</summary>
-        protected List<Biff1TilesetEntry> entriesTileset;
+        public List<Biff1TilesetEntry> EntriesTileset;
 
         /// <summary>This member contains the filepath of the target BIFF archive.</summary>
-        protected String filePath;
+        public String FilePath;
 
         /// <summary>This member contains the collection of binary data of resources, if read and set appropriately</summary>
-        protected List<Byte[]> dataResource;
+        public List<Byte[]> DataResource;
 
         /// <summary>This member contains the collection of binary data of tilesets, if read and set appropriately</summary>
-        protected List<Byte[]> dataTileset;
+        public List<Byte[]> DataTileset;
 
         /// <summary>This member indicates whether or not to persist data of tilesets and resources during read and/or write</summary>
-        protected Boolean maintainData;
+        public Boolean MaintainData;
         #endregion
 
-        #region Constructor(s)
+
+        #region Construction
         /// <summary>Default constructor</summary>
         public Biff1Archive()
         {
-            this.ClearData();       //instantiate resources, entries and header
-            this.filePath = null;
-            this.maintainData = false;
+            this.MaintainData = false;
+        }
+
+        /// <summary>Partial definition constructor</summary>
+        public Biff1Archive(Boolean maintainBinaryData)
+        {
+            this.MaintainData = maintainBinaryData;
+        }
+
+        /// <summary>Instantiates reference types</summary>
+        public void Initialize()
+        {
+            this.Header = new Biff1Header();
+            this.EntriesResource = new List<Biff1ResourceEntry>();
+            this.EntriesTileset = new List<Biff1TilesetEntry>();
+            this.DataResource = new List<Byte[]>();
+            this.DataTileset = new List<Byte[]>();
         }
         #endregion
+        
+
+        #region IO method implemetations
+        /// <summary>This public method reads file format from the input stream. Reads the whole structure.</summary>
+        /// <param name="input">Input stream to read from</param>
+        public void Read(Stream input)
+        {
+            this.ReadBody(input);
+        }
+
+        /// <summary>This public method reads file format data structure from the input stream.</summary>
+        /// <param name="input">Stream to read from.</param>
+        /// <param name="fullRead">Boolean indicating whether to read the full stream or just everything after the identifying signature (and possibly version)</param>
+        public void Read(Stream input, Boolean fullRead)
+        {
+            if (fullRead)
+                this.Read(input);
+            else
+            {
+                this.Header = new Biff1Header();
+                this.Header.Read(input, false);
+            }
+        }
+
 
         /// <summary>Reads the BIFF archive file using incoming stream</summary>
         /// <param name="input">Stream opened to the BIFF archive data</param>
-        public void Read(Stream input)
+        public void ReadBody(Stream input)
         {
-            this.ClearData();       //wipe everything in place
+            this.Initialize();
 
-            this.header.Read(input);
+            this.Header.Read(input);
 
             //seek to offset
-            ReusableIO.SeekIfAble(input, this.header.OffsetResource, SeekOrigin.Begin);
+            ReusableIO.SeekIfAble(input, this.Header.OffsetResource, SeekOrigin.Begin);
 
-            for (Int32 i = 0; i < this.header.CountResource; ++i)
+            for (Int32 i = 0; i < this.Header.CountResource; ++i)
             {
                 Biff1ResourceEntry entry = new Biff1ResourceEntry();
                 entry.Read(input);
-                this.entriesResource.Add(entry);
+                this.EntriesResource.Add(entry);
             }
 
             //seek to offset
-            ReusableIO.SeekIfAble(input, this.header.OffsetTileset, SeekOrigin.Begin);
+            ReusableIO.SeekIfAble(input, this.Header.OffsetTileset, SeekOrigin.Begin);
 
-            for (Int32 i = 0; i < this.header.CountTileset; ++i)
+            for (Int32 i = 0; i < this.Header.CountTileset; ++i)
             {
                 Biff1TilesetEntry entry = new Biff1TilesetEntry();
                 entry.Read(input);
-                this.entriesTileset.Add(entry);
+                this.EntriesTileset.Add(entry);
             }
 
             //Read data is unnecessarily sizable with larger BIFF archives. Only read fully if distinctly directed to.
-            if (this.maintainData)
+            if (this.MaintainData)
             {
                 Byte[] data;
-                this.ClearResources();
 
                 //read each resource1
-                for (Int32 i = 0; i < this.header.CountResource; ++i)
+                for (Int32 i = 0; i < this.Header.CountResource; ++i)
                 {
                     //seek to offset
-                    ReusableIO.SeekIfAble(input, this.entriesResource[i].OffsetResource, SeekOrigin.Begin);
-                    data = ReusableIO.BinaryRead(input, this.entriesResource[i].SizeResource);
-                    this.dataResource.Add(data);
+                    ReusableIO.SeekIfAble(input, this.EntriesResource[i].OffsetResource, SeekOrigin.Begin);
+                    data = ReusableIO.BinaryRead(input, this.EntriesResource[i].SizeResource);
+                    this.DataResource.Add(data);
                 }
 
                 //read each tileset
-                for (Int32 i = 0; i < this.header.CountTileset; ++i)
+                for (Int32 i = 0; i < this.Header.CountTileset; ++i)
                 {
                     //seek to offset
-                    ReusableIO.SeekIfAble(input, this.entriesTileset[i].OffsetResource, SeekOrigin.Begin);
-                    data = ReusableIO.BinaryRead(input, this.entriesTileset[i].SizeResource);
-                    this.dataTileset.Add(data);
+                    ReusableIO.SeekIfAble(input, this.EntriesTileset[i].OffsetResource, SeekOrigin.Begin);
+                    data = ReusableIO.BinaryRead(input, this.EntriesTileset[i].SizeResource);
+                    this.DataTileset.Add(data);
                 }
             }
         }
@@ -103,8 +144,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         /// <param name="filePath">String describing the path to the BIFF archive file.</param>
         public void Read(String filePath)
         {
-            this.filePath = filePath;
-            using (FileStream input = ReusableIO.OpenFile(this.filePath, FileMode.Open, FileAccess.Read))
+            this.FilePath = filePath;
+            using (FileStream input = ReusableIO.OpenFile(this.FilePath, FileMode.Open, FileAccess.Read))
                 this.Read(input);
         }
 
@@ -113,41 +154,42 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         public void Write(Stream output)
         {
             //write header
-            this.header.Write(output);
+            this.Header.Write(output);
 
             //seek to offset
-            ReusableIO.SeekIfAble(output, this.header.OffsetResource, SeekOrigin.Begin);
-            for (Int32 i = 0; i < this.header.CountResource; ++i)
-                this.entriesResource[i].Write(output);
+            ReusableIO.SeekIfAble(output, this.Header.OffsetResource);
+            for (Int32 i = 0; i < this.Header.CountResource; ++i)
+                this.EntriesResource[i].Write(output);
 
             //seek to offset
-            ReusableIO.SeekIfAble(output, this.header.OffsetTileset, SeekOrigin.Begin);
-            for (Int32 i = 0; i < this.header.CountTileset; ++i)
-                this.entriesTileset[i].Write(output);
+            ReusableIO.SeekIfAble(output, this.Header.OffsetTileset);
+            for (Int32 i = 0; i < this.Header.CountTileset; ++i)
+                this.EntriesTileset[i].Write(output);
 
             //Read data is unnecessarily sizable with larger BIFF archives. Only read fully if distinctly directed to.
-            if (this.maintainData)
+            if (this.MaintainData)
             {
-                this.ClearResources();
-
                 //read each resource1
-                for (Int32 i = 0; i < this.header.CountResource; ++i)
+                for (Int32 i = 0; i < this.Header.CountResource; ++i)
                 {
                     //seek to offset
-                    ReusableIO.SeekIfAble(output, this.entriesResource[i].OffsetResource, SeekOrigin.Begin);
-                    output.Write(this.dataResource[i], 0, this.dataResource[i].Length);
+                    ReusableIO.SeekIfAble(output, this.EntriesResource[i].OffsetResource, SeekOrigin.Begin);
+                    output.Write(this.DataResource[i], 0, this.DataResource[i].Length);
                 }
 
                 //read each tileset
-                for (Int32 i = 0; i < this.header.CountTileset; ++i)
+                for (Int32 i = 0; i < this.Header.CountTileset; ++i)
                 {
                     //seek to offset
-                    ReusableIO.SeekIfAble(output, this.entriesTileset[i].OffsetResource, SeekOrigin.Begin);
-                    output.Write(this.dataTileset[i], 0, this.dataTileset[i].Length);
+                    ReusableIO.SeekIfAble(output, this.EntriesTileset[i].OffsetResource, SeekOrigin.Begin);
+                    output.Write(this.DataTileset[i], 0, this.DataTileset[i].Length);
                 }
             }
         }
-        
+        #endregion
+
+
+        #region IBiff
         /// <summary>Opens a file and extracts the resource1 to that file path</summary>
         /// <param name="resourcePath">File path to extract to. Must include file extension</param>
         /// <param name="resourceLocator">Resource locator to match upon</param>
@@ -178,7 +220,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         /// <param name="resourceIndex">Resource index to write</param>
         public void ExtractResource(Stream output, Int32 resourceIndex)
         {
-            Byte[] data = this.dataResource[resourceIndex];
+            Byte[] data = this.DataResource[resourceIndex];
             output.Write(data, 0, data.Length);
         }
 
@@ -197,21 +239,21 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         {
             MemoryStream data = null;
             //follow maintaindata and open if not
-            if (this.maintainData || this.dataResource[resourceIndex] == null)
+            if (this.MaintainData || this.DataResource[resourceIndex] == null)
             {
-                using (FileStream file = new FileStream(this.filePath, FileMode.Open, FileAccess.Read))
+                using (FileStream file = new FileStream(this.FilePath, FileMode.Open, FileAccess.Read))
                 {
-                    ReusableIO.SeekIfAble(file, this.entriesResource[resourceIndex].OffsetResource, SeekOrigin.Begin);
+                    ReusableIO.SeekIfAble(file, this.EntriesResource[resourceIndex].OffsetResource, SeekOrigin.Begin);
 
-                    Byte[] binData = ReusableIO.BinaryRead(file, this.entriesResource[resourceIndex].SizeResource);
-                    if (this.maintainData)
-                        this.dataResource[resourceIndex] = binData;
+                    Byte[] binData = ReusableIO.BinaryRead(file, this.EntriesResource[resourceIndex].SizeResource);
+                    if (this.MaintainData)
+                        this.DataResource[resourceIndex] = binData;
 
                     data = new MemoryStream();
                 }
             }
             else
-                data = new MemoryStream(this.dataResource[resourceIndex]);
+                data = new MemoryStream(this.DataResource[resourceIndex]);
             
             return data;
         }
@@ -231,7 +273,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         {
             Boolean found = false;
 
-            if (resourceIndex <= this.entriesResource.Count)
+            if (resourceIndex <= this.EntriesResource.Count)
                 found = true;
 
             return found;
@@ -267,7 +309,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         /// <param name="tilesetIndex">Tileset index to write</param>
         public void ExtractTileset(Stream output, Int32 tilesetIndex)
         {
-            Byte[] data = this.dataTileset[tilesetIndex];
+            Byte[] data = this.DataTileset[tilesetIndex];
             output.Write(data, 0, data.Length);
         }
 
@@ -288,25 +330,25 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
             Byte[] binData;
 
             //follow maintaindata and open if not maintained
-            if (this.maintainData || this.dataResource[tilesetIndex] == null)
+            if (this.MaintainData || this.DataResource[tilesetIndex] == null)
             {
-                using (FileStream file = new FileStream(this.filePath, FileMode.Open, FileAccess.Read))
+                using (FileStream file = new FileStream(this.FilePath, FileMode.Open, FileAccess.Read))
                 {
-                    ReusableIO.SeekIfAble(file, this.entriesTileset[tilesetIndex].OffsetResource, SeekOrigin.Begin);
-                    binData = ReusableIO.BinaryRead(file, this.entriesResource[tilesetIndex].SizeResource);
+                    ReusableIO.SeekIfAble(file, this.EntriesTileset[tilesetIndex].OffsetResource, SeekOrigin.Begin);
+                    binData = ReusableIO.BinaryRead(file, this.EntriesResource[tilesetIndex].SizeResource);
 
-                    if (this.maintainData)
-                        this.dataTileset[tilesetIndex] = binData;
+                    if (this.MaintainData)
+                        this.DataTileset[tilesetIndex] = binData;
                 }
             }
             else
-                binData = this.dataTileset[tilesetIndex];
+                binData = this.DataTileset[tilesetIndex];
 
             //Compile a header, then return the data stream.
             Tis1Header tilesetHeader = new Tis1Header();
             tilesetHeader.Signature = "TIS ";
             tilesetHeader.Version = "V1  ";
-            tilesetHeader.CountTiles = this.entriesTileset[tilesetIndex].CountTile;
+            tilesetHeader.CountTiles = this.EntriesTileset[tilesetIndex].CountTile;
             tilesetHeader.LengthSingleTileData = 5120;      //4-byte 256-index palette
             tilesetHeader.OffsetTileData = 0x18;            //size of a TIS1 header is 0x18 
             tilesetHeader.DimensionTile = 64;               //the dimension of all tiles is 64x64
@@ -335,27 +377,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         {
             Boolean found = false;
 
-            if (tilesetIndex <= this.entriesTileset.Count)
+            if (tilesetIndex <= this.EntriesTileset.Count)
                 found = true;
 
             return found;
         }
+        #endregion
 
-        /// <summary>This method resets the resource1 data, tileset data to blank Lists</summary>
-        protected void ClearResources()
-        {
-            this.dataResource = new List<Byte[]>();
-            this.dataTileset = new List<Byte[]>();
-        }
-
-        /// <summary>This method instantiates a new header, </summary>
-        protected void ClearData()
-        {
-            this.header = new Biff1Header();
-            this.entriesResource = new List<Biff1ResourceEntry>();
-            this.entriesTileset = new List<Biff1TilesetEntry>();
-            this.ClearResources();
-        }
 
         #region ToString(...)
         /// <summary>This method will write the entire BIFF archive to a String builder and return it</summary>
@@ -372,73 +400,73 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         {
             StringBuilder builder = new StringBuilder();
             builder.Append(StringFormat.ToStringAlignment("File path"));
-            builder.Append(this.filePath);
+            builder.Append(this.FilePath);
             builder.Append(StringFormat.ToStringAlignment("Maintain data"));
-            builder.AppendLine(this.maintainData.ToString());
+            builder.AppendLine(this.MaintainData.ToString());
 
-            builder.Append(this.header.ToString());
+            builder.Append(this.Header.ToString());
 
             builder.Append(StringFormat.ToStringAlignment("Resource Entries"));
             if (LongDefinition)
             {
-                for (Int32 i = 0; i < this.entriesResource.Count; ++i)
+                for (Int32 i = 0; i < this.EntriesResource.Count; ++i)
                 {
                     builder.Append(StringFormat.ToStringAlignment(String.Format("Index {0}", i)));
-                    builder.Append(this.entriesResource[i].ToString());
+                    builder.Append(this.EntriesResource[i].ToString());
                 }
             }
             else
             {
                 builder.Append(StringFormat.ToStringAlignment("Count"));
-                builder.AppendLine(this.entriesResource.Count.ToString());
+                builder.AppendLine(this.EntriesResource.Count.ToString());
             }
 
 
             builder.Append(StringFormat.ToStringAlignment("Tileset Entries"));
             if (LongDefinition)
             {
-                for (Int32 i = 0; i < this.entriesTileset.Count; ++i)
+                for (Int32 i = 0; i < this.EntriesTileset.Count; ++i)
                 {
                     builder.Append(StringFormat.ToStringAlignment(String.Format("Index {0}", i)));
-                    builder.Append(this.entriesTileset[i].ToString());
+                    builder.Append(this.EntriesTileset[i].ToString());
                 }
             }
             else
             {
                 builder.Append(StringFormat.ToStringAlignment("Count"));
-                builder.AppendLine(this.entriesTileset.Count.ToString());
+                builder.AppendLine(this.EntriesTileset.Count.ToString());
             }
 
 
             builder.Append(StringFormat.ToStringAlignment("Resource Data"));
-            if (LongDefinition && this.dataResource.Count > 0)
+            if (LongDefinition && this.DataResource.Count > 0)
             {
-                for (Int32 i = 0; i < this.dataResource.Count; ++i)
+                for (Int32 i = 0; i < this.DataResource.Count; ++i)
                 {
                     builder.Append(StringFormat.ToStringAlignment(String.Format("Index {0}", i)));
-                    builder.Append(this.dataResource[i].ToString());
+                    builder.Append(this.DataResource[i].ToString());
                 }
             }
             else
             {
                 builder.Append(StringFormat.ToStringAlignment("Count"));
-                builder.AppendLine(this.dataResource.Count.ToString());
+                builder.AppendLine(this.DataResource.Count.ToString());
             }
 
 
             builder.Append(StringFormat.ToStringAlignment("Tileset Data"));
-            if (LongDefinition && this.dataTileset.Count > 0)
+            if (LongDefinition && this.DataTileset.Count > 0)
             {
-                for (Int32 i = 0; i < this.dataTileset.Count; ++i)
+                for (Int32 i = 0; i < this.DataTileset.Count; ++i)
                 {
                     builder.Append(StringFormat.ToStringAlignment(String.Format("Index {0}", i)));
-                    builder.Append(this.dataTileset[i].ToString());
+                    builder.Append(this.DataTileset[i].ToString());
                 }
             }
             else
             {
                 builder.Append(StringFormat.ToStringAlignment("Count"));
-                builder.AppendLine(this.dataTileset.Count.ToString());
+                builder.AppendLine(this.DataTileset.Count.ToString());
             }
 
             return builder.ToString();

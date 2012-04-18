@@ -5,7 +5,7 @@ using System.Text;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Biff1
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Components
 {
     /// <summary>This class describes a tileset entry within the BIFF archive</summary>
     /// <remarks>
@@ -25,82 +25,58 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
     /// </remarks>
     public class Biff1TilesetEntry : Biff1FileEntry
     {
-        /// <summary>This member defines the count of tiles within the resource1 data.</summary>
-        protected UInt32 countTile;
+        #region Fields
+        /// <summary>Defines the count of tiles within the resource data.</summary>
+        public UInt32 CountTile { get; set; }
 
-        /// <summary>This member defines the length of each tile in the resource1 data.</summary>
-        protected UInt32 sizeTile;
+        /// <summary>Exposes the length of each tile in the resource data.</summary>
+        protected UInt32 SizeTile { get; set; }
+        #endregion
 
-        /// <summary>This property exposes the count of tiles within the resource1 data.</summary>
-        public UInt32 CountTile
-        {
-            get { return this.countTile; }
-            set { this.countTile = value; }
-        }
 
+        #region Properties
         /// <summary>This property exposes the length of each tile in the resource1 data.</summary>
         public override UInt32 SizeResource
         {
-            get { return this.sizeTile * this.countTile; }
+            get { return this.SizeTile * this.CountTile; }
+            set { throw new NotImplementedException("set Accessor for Biff1TilesetEntry.SizeResource is not"); }
         }
+        #endregion
 
-        /// <summary>This public method reads the 16-byte resource1 entry into the header record</summary>
+
+
+        #region IInfinityFormat I/O methods
+        /// <summary>This public method reads file format data structure from the input stream, after the signature has already been read.</summary>
         /// <param name="input">Stream object from which to read from</param>
-        public void Read(Stream input)
+        public override void ReadBody(Stream input)
         {
+            this.Initialize();
+
             Byte[] buffer = ReusableIO.BinaryRead(input, 20);   //data buffer
-            Byte[] temp = new Byte[4];
 
-            //Resource locator
-            this.resourceLocator.Locator = ReusableIO.ReadInt32FromArray(buffer, 0x0);
-
-            //Resource offset
-            this.offsetResource = ReusableIO.ReadUInt32FromArray(buffer, 0x4);
-
-            //Tile count
-            this.countTile = ReusableIO.ReadUInt32FromArray(buffer, 0x8);
-
-            //Tile size
-            this.sizeTile = ReusableIO.ReadUInt32FromArray(buffer, 0xC);
-
-            //Resource type
-            this.typeResource = (ResourceType)ReusableIO.ReadInt16FromArray(buffer, 0x10);
-
-            //unknown / padding
-            this.unknownPadding = ReusableIO.ReadUInt16FromArray(buffer, 0x12);
+            this.ResourceLocator.Locator = ReusableIO.ReadInt32FromArray(buffer, 0x0);
+            this.OffsetResource = ReusableIO.ReadInt32FromArray(buffer, 0x4);
+            this.CountTile = ReusableIO.ReadUInt32FromArray(buffer, 0x8);
+            this.SizeTile = ReusableIO.ReadUInt32FromArray(buffer, 0xC);
+            this.TypeResource = (ResourceType)ReusableIO.ReadInt16FromArray(buffer, 0x10);
+            this.UnknownPadding = ReusableIO.ReadInt16FromArray(buffer, 0x12);
         }
 
         /// <summary>This public method writes the resource1 entry to an output stream</summary>
         /// <param name="output">Stream object into which to write to</param>
-        public void Write(Stream output)
+        public override void Write(Stream output)
         {
-            Byte[] writeBytes;
-
-            //Resource locator
-            writeBytes = BitConverter.GetBytes(this.resourceLocator.Locator);
-            output.Write(writeBytes, 0, writeBytes.Length);
-
-            //Resource offset
-            writeBytes = BitConverter.GetBytes(this.offsetResource);
-            output.Write(writeBytes, 0, writeBytes.Length);
-
-            //Tile Count
-            writeBytes = BitConverter.GetBytes(this.countTile);
-            output.Write(writeBytes, 0, writeBytes.Length);
-
-            //Tile Size
-            writeBytes = BitConverter.GetBytes(this.sizeTile);
-            output.Write(writeBytes, 0, writeBytes.Length);
-
-            //Resource Type
-            writeBytes = BitConverter.GetBytes((Int16)this.typeResource);
-            output.Write(writeBytes, 0, writeBytes.Length);
-
-            //binary padding
-            writeBytes = BitConverter.GetBytes(this.unknownPadding);
-            output.Write(writeBytes, 0, writeBytes.Length);
+            ReusableIO.WriteInt32ToStream(this.ResourceLocator.Locator, output);
+            ReusableIO.WriteInt32ToStream(this.OffsetResource, output);
+            ReusableIO.WriteUInt32ToStream(this.CountTile, output);
+            ReusableIO.WriteUInt32ToStream(this.SizeTile, output);
+            ReusableIO.WriteInt16ToStream((Int16)this.TypeResource, output);
+            ReusableIO.WriteInt16ToStream(this.UnknownPadding, output);
         }
+        #endregion
 
+
+        #region ToString override
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>
         /// <returns>A String containing the member data line by line</returns>
         public override String ToString()
@@ -108,27 +84,28 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
             StringBuilder builder = new StringBuilder();
             builder.Append(StringFormat.ToStringAlignment("Biff1TilesetEntry", 0));
             builder.Append(StringFormat.ToStringAlignment("Resource Locator"));
-            builder.Append(this.resourceLocator.Locator);
+            builder.Append(this.ResourceLocator.Locator);
             builder.Append(StringFormat.ToStringAlignment("BIFF Index"));
-            builder.Append(this.resourceLocator.BifIndex);
+            builder.Append(this.ResourceLocator.BiffIndex);
             builder.Append(StringFormat.ToStringAlignment("BIFF Tileset Index"));
-            builder.Append(this.resourceLocator.TilesetIndex);
+            builder.Append(this.ResourceLocator.TilesetIndex);
             builder.Append(StringFormat.ToStringAlignment("BIFF Resource Index"));
-            builder.Append(this.resourceLocator.ResourceIndex);
+            builder.Append(this.ResourceLocator.ResourceIndex);
             builder.Append(StringFormat.ToStringAlignment("Offset"));
-            builder.Append(this.offsetResource);
+            builder.Append(this.OffsetResource);
             builder.Append(StringFormat.ToStringAlignment("Tile Count"));
-            builder.Append(this.countTile);
+            builder.Append(this.CountTile);
             builder.Append(StringFormat.ToStringAlignment("Tile Size"));
-            builder.Append(this.sizeTile);
+            builder.Append(this.SizeTile);
             builder.Append(StringFormat.ToStringAlignment("Size"));
             builder.Append(this.SizeResource);
             builder.Append(StringFormat.ToStringAlignment("Type"));
-            builder.Append(this.typeResource.ToString("G"));
+            builder.Append(this.TypeResource.ToString("G"));
             builder.Append(StringFormat.ToStringAlignment("Type (hex)"));
-            builder.AppendLine(String.Format("0x{0:X4}",(Int16)this.typeResource));
+            builder.AppendLine(String.Format("0x{0:X4}",(Int16)this.TypeResource));
 
             return builder.ToString();
         }
+        #endregion
     }
 }
