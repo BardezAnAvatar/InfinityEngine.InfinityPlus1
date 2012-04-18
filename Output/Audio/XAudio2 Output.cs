@@ -93,6 +93,21 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
             this.destinationVoices.Add(new XAudio2VoiceReference<Voice>(masteringVoice));
         }
 
+
+        #region Destruction
+        /// <summary>
+        ///     Public static disposal that does not first require an
+        ///     instance to be created via Instance to be disposed
+        /// </summary>
+        public static void DisposeInstance()
+        {
+            if (XAudio2Output.singleton != null)
+            {
+                XAudio2Output.singleton.Dispose();
+                XAudio2Output.singleton = null;
+            }
+        }
+
         /// <summary>Disposal code</summary>
         public void Dispose()
         {
@@ -144,6 +159,8 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
                 }
             }
         }
+        #endregion
+
 
         /// <summary>Creates an instance of the underlying/associated audio type and returns a unique identifier for re-reference</summary>
         /// <param name="inputData">PCM info describing the source</param>

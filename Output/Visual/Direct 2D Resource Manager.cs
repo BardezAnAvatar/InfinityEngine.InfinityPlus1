@@ -70,6 +70,19 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         #endregion
 
         #region Destruction
+        /// <summary>
+        ///     Public static disposal that does not first require an
+        ///     instance to be created via Instance to be disposed
+        /// </summary>
+        public static void DisposeInstance()
+        {
+            if (Direct2dResourceManager.singleton != null)
+            {
+                Direct2dResourceManager.singleton.Dispose();
+                Direct2dResourceManager.singleton = null;
+            }
+        }
+
         /// <summary>Disposal code</summary>
         /// <remarks>Dispose()</remarks>
         public void Dispose()
