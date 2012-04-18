@@ -30,7 +30,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
     ///     
     ///     Answer: For now, skip them.
     /// </remarks>
-    //TODO: Break out into two or three management sub-classes
+    //TODO: Change the first-indexing approch to a streaming approach
     public class MveManager : IMovie, IDisposable
     {
         #region Fields
