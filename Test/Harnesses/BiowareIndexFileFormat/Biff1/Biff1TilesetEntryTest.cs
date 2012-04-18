@@ -3,7 +3,8 @@ using System.IO;
 using System.Text;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Biff1;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Components;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Version;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.BioWareIndexFileFormat.Biff1
@@ -14,9 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.BioWareIndexFileFormat.Bi
         #region Fields
         /// <summary>Constant key to look up in app.config</summary>
         protected const String configKey = "Test.Biff1.BiffPath";
-
-        /// <summary>Constant key to look up in app.config</summary>
-        protected const String offsetConfigKey = "Test.Biff1.TilesetEntry.Offset";
         
         /// <summary>Class instance to test</summary>
         protected Biff1TilesetEntry TisEntry { get; set; }
@@ -45,8 +43,12 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.BioWareIndexFileFormat.Bi
         {
             using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
             {
+                Biff1Header header = new Biff1Header();
+                header.Read(stream);
+
+                //read the first tileset resource
+                ReusableIO.SeekIfAble(stream, header.OffsetTileset);
                 this.TisEntry = new Biff1TilesetEntry();
-                ReusableIO.SeekIfAble(stream, (Int32.Parse(ConfigurationHandler.GetSettingValue(Biff1TilesetEntryTest.offsetConfigKey))));
                 this.TisEntry.Read(stream);
 
                 this.DoPostMessage(new MessageEventArgs(this.TisEntry.ToString(), "Output", testArgs.Path));

@@ -351,7 +351,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
                 for (Int32 i = 0; i < this.EntriesBif.Count; ++i)
                 {
                     builder.Append(this.EntriesBif[i].ToString(false));
-                    Int32 count = this.EntriesResource.Where(x => x.ResourceLocator.BifIndex == i).Count();
+                    Int32 count = this.EntriesResource.Where(x => x.ResourceLocator.BiffIndex == i).Count();
                     builder.Append(StringFormat.ToStringAlignment("Resource count"));
                     builder.Append(count);
                 }

@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Biff1;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Components;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.BioWareIndexFileFormat.Biff1
@@ -15,12 +15,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.BioWareIndexFileFormat.Bi
         /// <summary>Constant key to look up in app.config</summary>
         protected const String configKey = "Test.Biff1.BiffPath";
 
-        /// <summary>Constant key to look up in app.config</summary>
-        protected const String offsetConfigKey = "Test.Biff1.ResourceEntry.Offset";
-
         /// <summary>Class instance to test</summary>
         protected Biff1ResourceEntry ResEntry { get; set; }
         #endregion
+
 
         #region Construction
         /// <summary>Default constructor</summary>
@@ -29,6 +27,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.BioWareIndexFileFormat.Bi
             this.InitializeInstance();
         }
         #endregion
+
 
         /// <summary>Initializes the test class data</summary>
         /// <param name="sender">Object sending/raising the request</param>
@@ -45,8 +44,12 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.BioWareIndexFileFormat.Bi
         {
             using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
             {
+                Biff1Header header = new Biff1Header();
+                header.Read(stream);
+
+                //read the first resource
+                ReusableIO.SeekIfAble(stream, header.OffsetResource);
                 this.ResEntry = new Biff1ResourceEntry();
-                ReusableIO.SeekIfAble(stream, (Int32.Parse(ConfigurationHandler.GetSettingValue(Biff1ResourceEntryTest.offsetConfigKey))));
                 this.ResEntry.Read(stream);
 
                 this.DoPostMessage(new MessageEventArgs(this.ResEntry.ToString(), "Output", testArgs.Path));

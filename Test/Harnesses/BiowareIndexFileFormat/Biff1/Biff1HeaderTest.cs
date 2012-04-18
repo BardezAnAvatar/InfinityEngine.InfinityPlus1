@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Biff1;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Components;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.BioWareIndexFileFormat.Biff1
 {

@@ -134,7 +134,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
             builder.Append(StringFormat.ToStringAlignment("Resource Locator"));
             builder.Append(this.resourceLocator.Locator);
             builder.Append(StringFormat.ToStringAlignment("BIFF Index", 2));
-            builder.Append(this.resourceLocator.BifIndex);
+            builder.Append(this.resourceLocator.BiffIndex);
             builder.Append(StringFormat.ToStringAlignment("BIFF Tileset Index", 2));
             builder.Append(this.resourceLocator.TilesetIndex);
             builder.Append(StringFormat.ToStringAlignment("BIFF Resource Index", 2));
