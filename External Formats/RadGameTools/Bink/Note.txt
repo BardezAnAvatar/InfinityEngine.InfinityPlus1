@@ -1,0 +1,9 @@
+﻿The more I look into this, the more I question just how much I want to implement a Bink decoder
+when FFMpeg should do the job just fine.
+
+I'm going to switch to investigating Platform Invoke or C++/CLI and using FFMPEG instead, since
+there are only 7 fudging files in total.
+
+Also, I want to support H.264/H.263 playback in iep1; persently abandoning this approach.
+
+Also, if P/Invoke goes well, I might just use libPNG, libGIF in a similar fashion
