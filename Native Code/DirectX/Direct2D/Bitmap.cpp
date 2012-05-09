@@ -28,21 +28,21 @@ Bardez::Projects::DirectX::Direct2D::Bitmap::Bitmap(ID2D1Bitmap* handle)
 
 
 #pragma region Destruction
-/// <summary>Destrutor</summary>
+/// <summary>Destructor</summary>
 /// <remarks>Dispose()</remarks>
 Bardez::Projects::DirectX::Direct2D::Bitmap::~Bitmap()
 {
 	this->DisposeUnmanaged();
 }
 
-/// <summary>Destrutor</summary>
+/// <summary>Destructor</summary>
 /// <remarks>Finalize()</remarks>
 Bardez::Projects::DirectX::Direct2D::Bitmap::!Bitmap()
 {
 	this->DisposeUnmanaged();
 }
 
-/// <summary>Destrutor logic, disposes the object</summary>
+/// <summary>Destructor logic, disposes the object</summary>
 void Bardez::Projects::DirectX::Direct2D::Bitmap::DisposeUnmanaged()
 {
 	// Dispose this rendering target
@@ -151,6 +151,31 @@ Bardez::Projects::Win32::ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap:
 
 /// <summary>Copies the specified region from memory into the current bitmap.</summary>
 /// <param name="area">Area rectangle of the Bitmap to read from. If null, the full source/destination area will be copied/written to.</param>
+/// <param name="source">Pointer to source data to read from. Cannot be Zero.</param>
+/// <param name="length">Length of the data pointed to.</param>
+/// <param name="pitch">
+///		The stride, or pitch, of the source bitmap stored in srcData. The stride is the byte count of
+///		a scanline (one row of pixels in memory). The stride can be computed from the following formula:
+///		pixel width * bytes per pixel + memory padding.
+/// </param>
+/// <returns>S_OK on success, otherwise an error code.</returns>
+/// <remarks>
+///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
+///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
+///</remarks>
+Bardez::Projects::Win32::ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromMemory(RectangleU^ area, System::IntPtr source, System::Int32 length, System::UInt32 pitch)
+{
+	if (source == System::IntPtr::Zero)
+		throw gcnew System::ArgumentNullException("Source data cannot be IntPtr.Zero.");
+
+	D2D_RECT_U* ptrRect = (area == nullptr ? NULL : &(area->ToUnmanaged()));
+	BYTE* data = reinterpret_cast<BYTE*>(source.ToPointer());
+
+	return (Bardez::Projects::Win32::ResultCode) this->BitmapPtr->CopyFromMemory(ptrRect, data, pitch);
+}
+
+/// <summary>Copies the specified region from memory into the current bitmap.</summary>
+/// <param name="area">Area rectangle of the Bitmap to read from. If null, the full source/destination area will be copied/written to.</param>
 /// <param name="source">Source data to read from. Cannot be null.</param>
 /// <param name="pitch">
 ///		The stride, or pitch, of the source bitmap stored in srcData. The stride is the byte count of
@@ -165,6 +190,25 @@ Bardez::Projects::Win32::ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap:
 Bardez::Projects::Win32::ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromMemory(System::Drawing::Rectangle area, array<System::Byte>^ source, System::UInt32 pitch)
 {
 	return this->CopyFromMemory(gcnew Bardez::Projects::DirectX::Direct2D::RectangleU(area), source, pitch);
+}
+
+/// <summary>Copies the specified region from memory into the current bitmap.</summary>
+/// <param name="area">Area rectangle of the Bitmap to read from. If null, the full source/destination area will be copied/written to.</param>
+/// <param name="source">Pointer to source data to read from. Cannot be Zero.</param>
+/// <param name="length">Length of the data pointed to.</param>
+/// <param name="pitch">
+///		The stride, or pitch, of the source bitmap stored in srcData. The stride is the byte count of
+///		a scanline (one row of pixels in memory). The stride can be computed from the following formula:
+///		pixel width * bytes per pixel + memory padding.
+/// </param>
+/// <returns>S_OK on success, otherwise an error code.</returns>
+/// <remarks>
+///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
+///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
+///</remarks>
+Bardez::Projects::Win32::ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromMemory(System::Drawing::Rectangle area, System::IntPtr source, System::Int32 length, System::UInt32 pitch)
+{
+	return this->CopyFromMemory(gcnew Bardez::Projects::DirectX::Direct2D::RectangleU(area), source, length, pitch);
 }
 
 /// <summary>Gets the dots per inch of the bitmap</summary>
