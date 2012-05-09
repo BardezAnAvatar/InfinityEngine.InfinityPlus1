@@ -61,21 +61,21 @@ LinearGradientBrush::LinearGradientBrush(ID2D1LinearGradientBrush* pointer) : Br
 
 
 #pragma region Destruction
-/// <summary>Destrutor</summary>
+/// <summary>Destructor</summary>
 /// <remarks>Dispose()</remarks>
 LinearGradientBrush::~LinearGradientBrush()
 {
 	this->DisposeUnmanaged();
 }
 
-/// <summary>Destrutor</summary>
+/// <summary>Destructor</summary>
 /// <remarks>Finalize()</remarks>
 LinearGradientBrush::!LinearGradientBrush()
 {
 	this->DisposeUnmanaged();
 }
 
-/// <summary>Destrutor logic, disposes the object</summary>
+/// <summary>Destructor logic, disposes the object</summary>
 void LinearGradientBrush::DisposeUnmanaged()
 {
 	// Dispose this Brush

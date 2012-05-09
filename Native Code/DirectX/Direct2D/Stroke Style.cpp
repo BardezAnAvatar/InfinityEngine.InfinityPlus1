@@ -77,21 +77,21 @@ StrokeStyle::StrokeStyle(ID2D1StrokeStyle* pointer)
 
 
 #pragma region Destruction
-/// <summary>Destrutor</summary>
+/// <summary>Destructor</summary>
 /// <remarks>Dispose()</remarks>
 StrokeStyle::~StrokeStyle()
 {
 	this->DisposeUnmanaged();
 }
 
-/// <summary>Destrutor</summary>
+/// <summary>Destructor</summary>
 /// <remarks>Finalize()</remarks>
 StrokeStyle::!StrokeStyle()
 {
 	this->DisposeUnmanaged();
 }
 
-/// <summary>Destrutor logic, disposes the object</summary>
+/// <summary>Destructor logic, disposes the object</summary>
 void StrokeStyle::DisposeUnmanaged()
 {
 	// Dispose this Brush

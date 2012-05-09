@@ -84,21 +84,21 @@ RadialGradientBrush::RadialGradientBrush(ID2D1RadialGradientBrush* pointer) : Br
 
 
 #pragma region Destruction
-/// <summary>Destrutor</summary>
+/// <summary>Destructor</summary>
 /// <remarks>Dispose()</remarks>
 RadialGradientBrush::~RadialGradientBrush()
 {
 	this->DisposeUnmanaged();
 }
 
-/// <summary>Destrutor</summary>
+/// <summary>Destructor</summary>
 /// <remarks>Finalize()</remarks>
 RadialGradientBrush::!RadialGradientBrush()
 {
 	this->DisposeUnmanaged();
 }
 
-/// <summary>Destrutor logic, disposes the object</summary>
+/// <summary>Destructor logic, disposes the object</summary>
 void RadialGradientBrush::DisposeUnmanaged()
 {
 	// Dispose this Brush

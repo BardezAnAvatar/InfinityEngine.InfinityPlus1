@@ -48,21 +48,21 @@ GradientStopCollection::GradientStopCollection(ID2D1GradientStopCollection* poin
 
 
 #pragma region Destruction
-/// <summary>Destrutor</summary>
+/// <summary>Destructor</summary>
 /// <remarks>Dispose()</remarks>
 GradientStopCollection::~GradientStopCollection()
 {
 	this->DisposeUnmanaged();
 }
 
-/// <summary>Destrutor</summary>
+/// <summary>Destructor</summary>
 /// <remarks>Finalize()</remarks>
 GradientStopCollection::!GradientStopCollection()
 {
 	this->DisposeUnmanaged();
 }
 
-/// <summary>Destrutor logic, disposes the object</summary>
+/// <summary>Destructor logic, disposes the object</summary>
 void GradientStopCollection::DisposeUnmanaged()
 {
 	// Dispose this Brush

@@ -75,21 +75,21 @@ BitmapBrush::BitmapBrush(ID2D1BitmapBrush* pointer) : Brush(pointer) { }
 
 
 #pragma region Destruction
-/// <summary>Destrutor</summary>
+/// <summary>Destructor</summary>
 /// <remarks>Dispose()</remarks>
 BitmapBrush::~BitmapBrush()
 {
 	this->DisposeUnmanaged();
 }
 
-/// <summary>Destrutor</summary>
+/// <summary>Destructor</summary>
 /// <remarks>Finalize()</remarks>
 BitmapBrush::!BitmapBrush()
 {
 	this->DisposeUnmanaged();
 }
 
-/// <summary>Destrutor logic, disposes the object</summary>
+/// <summary>Destructor logic, disposes the object</summary>
 void BitmapBrush::DisposeUnmanaged()
 {
 	// Dispose this Brush
