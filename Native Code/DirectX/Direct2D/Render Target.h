@@ -33,6 +33,7 @@
 #include "Solid Color Brush.h"
 #include "Stroke Style.h"
 
+using namespace System::Threading;
 using namespace Bardez::Projects::Win32;
 
 namespace Bardez
@@ -50,6 +51,10 @@ namespace Bardez
 				protected:
 					/// <summary>Represents a pointer to the native render target interface object</summary>
 					System::IntPtr renderPtr;
+
+				internal:
+					static Mutex^ RenderMutex = gcnew Mutex(false, "Bardez.Projects.DirectX.Direct2D.RenderTarget rendering Mutex");
+					static Mutex^ DrawMutex = gcnew Mutex(false, "Bardez.Projects.DirectX.Direct2D.RenderTarget drawing Mutex");
 				#pragma endregion
 
 
@@ -119,15 +124,15 @@ namespace Bardez
 
 				#pragma region Destruction
 				public:
-					/// <summary>Destrutor</summary>
+					/// <summary>Destructor</summary>
 					/// <remarks>Dispose()</remarks>
 					~RenderTarget();
 
-					/// <summary>Destrutor</summary>
+					/// <summary>Destructor</summary>
 					/// <remarks>Finalize()</remarks>
 					!RenderTarget();
 
-					/// <summary>Destrutor logic, disposes the object</summary>
+					/// <summary>Destructor logic, disposes the object</summary>
 					virtual void DisposeUnmanaged();
 				#pragma endregion
 
