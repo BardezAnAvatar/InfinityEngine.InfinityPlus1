@@ -43,7 +43,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Movie
 
 
         #region Properties
-
         /// <summary>Format instance to test</summary>
         protected MveManager Mve
         {
