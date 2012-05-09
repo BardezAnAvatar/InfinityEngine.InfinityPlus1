@@ -63,7 +63,8 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         private Direct2dResourceManager()
         {
             // Build a factory
-            this.factory = new Factory();
+            //TODO: make DebugLevel none.
+            this.factory = new Factory(FactoryType.MultiThreaded, DebugLevel.Information);
             this.renderResourceCollection = new List<Bitmap>();
             this.resourceLock = new Object();
         }
@@ -104,7 +105,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
                     this.renderResourceCollection = null;
                 }
 
-                //dispose the facotry
+                //dispose the factory
                 if (this.factory != null)
                 {
                     this.factory.Dispose();
