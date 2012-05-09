@@ -64,6 +64,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MUS
         protected virtual void btnInterruptPlayback_Click(Object sender, EventArgs e)
         {
             Thread thread = new Thread(new ThreadStart(this.RunInterruptThread));
+            thread.Name = "Interrupt thread";
             thread.Start();
         }
 

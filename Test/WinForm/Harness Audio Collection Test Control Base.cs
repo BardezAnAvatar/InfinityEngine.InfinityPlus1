@@ -91,6 +91,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
                 String item = this.lstboxFiles.SelectedItem as String;
                 Int32 streamNo = Int32.Parse(this.cboStream.SelectedItem as String);
                 Thread thread = new Thread(() => this.RunTestThread(item, streamNo));
+                thread.Name = "Test thread";
                 thread.Start();
             }
         }

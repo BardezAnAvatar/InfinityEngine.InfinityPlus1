@@ -80,6 +80,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
             this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Initialization started: {0}", DateTime.Now.ToShortTimeString()), "Initialization", "Started", this)));
             this.SuspendLayout();
             Thread thread = new Thread(new ThreadStart(this.RunInitializeThread));
+            thread.Name = "Initialize thread";
             thread.Start();
         }
 
@@ -96,6 +97,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         {
             this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Testing started: {0}", DateTime.Now.ToShortTimeString()), "Testing", "Started", this)));
             Thread thread = new Thread(new ThreadStart(this.RunTestThread));
+            thread.Name = "Test thread";
             thread.Start();
         }
 

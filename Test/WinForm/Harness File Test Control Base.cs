@@ -87,6 +87,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
             this.ToggleControls(false);
             this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Initialization started: {0}", DateTime.Now.ToShortTimeString()), "Initialization", "Started", this)));
             Thread thread = new Thread(new ThreadStart(this.RunInitializeThread));
+            thread.Name = "Initialize thread";
             thread.Start();
         }
 
