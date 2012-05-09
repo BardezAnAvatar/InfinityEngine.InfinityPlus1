@@ -305,7 +305,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
 
             this.PreemptivelyStartDecodingVideo();  //all the frames at 0 will be unset if we've played any length of video
         }
-        
+
         /// <summary>Decoding launcher to store frames in cache. Starts a background thread.</summary>
         public virtual void PreemptivelyStartDecodingVideo()
         {
@@ -319,6 +319,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         {
             Thread decoder = new Thread(() => this.CacheVideoData(frameCount));
             decoder.IsBackground = true;
+            decoder.Name = "MVE video decoder";
             decoder.Start();
         }
 

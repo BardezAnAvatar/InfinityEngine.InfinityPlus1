@@ -147,6 +147,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         {
             Thread decoder = new Thread(() => this.CacheAudioData());    //lambda
             decoder.IsBackground = true;
+            decoder.Name = "MVE audio decoder";
             decoder.Start();
         }
 
