@@ -52,6 +52,10 @@ namespace Bardez
 					/// <param name="size">System.Drawing struct containing size</param>
 					SizeF(System::Drawing::SizeF size);
 
+					/// <summary>Definition constructor</summary>
+					/// <param name="size">System.Drawing struct containing size</param>
+					SizeF(System::Drawing::Size size);
+
 				internal:
 					/// <summary>Unmanaged constructor</summary>
 					/// <param name="size">D2D_SIZE_F source structure</param>

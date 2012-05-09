@@ -27,6 +27,7 @@ void Bardez::Projects::DirectX::Direct2D::SizeF::Height::set(System::Single valu
 }
 #pragma endregion
 
+
 #pragma region Construction
 /// <summary>Definition constructor</summary>
 /// <param name="width">Width of the size, as a single-precision floating point value</param>
@@ -43,6 +44,14 @@ Bardez::Projects::DirectX::Direct2D::SizeF::SizeF(System::Drawing::SizeF size)
 {
 	this->width = size.Width;
 	this->height = size.Height;
+}
+
+/// <summary>Definition constructor</summary>
+/// <param name="size">System.Drawing struct containing size</param>
+Bardez::Projects::DirectX::Direct2D::SizeF::SizeF(System::Drawing::Size size)
+{
+	this->width = System::Convert::ToSingle(size.Width);
+	this->height = System::Convert::ToSingle(size.Height);
 }
 
 /// <summary>Unmanaged constructor</summary>
