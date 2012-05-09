@@ -116,21 +116,21 @@ RenderTarget::RenderTarget(ID2D1RenderTarget* handle)
 
 
 #pragma region Destruction
-/// <summary>Destrutor</summary>
+/// <summary>Destructor</summary>
 /// <remarks>Dispose()</remarks>
 RenderTarget::~RenderTarget()
 {
 	this->DisposeUnmanaged();
 }
 
-/// <summary>Destrutor</summary>
+/// <summary>Destructor</summary>
 /// <remarks>Finalize()</remarks>
 RenderTarget::!RenderTarget()
 {
 	this->DisposeUnmanaged();
 }
 
-/// <summary>Destrutor logic, disposes the object</summary>
+/// <summary>Destructor logic, disposes the object</summary>
 void RenderTarget::DisposeUnmanaged()
 {
 	// Dispose this rendering target

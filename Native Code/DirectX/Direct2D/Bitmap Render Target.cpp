@@ -29,21 +29,21 @@ BitmapRenderTarget::BitmapRenderTarget(ID2D1BitmapRenderTarget* handle) : Render
 
 
 #pragma region Destruction
-/// <summary>Destrutor</summary>
+/// <summary>Destructor</summary>
 /// <remarks>Dispose()</remarks>
 BitmapRenderTarget::~BitmapRenderTarget()
 {
 	this->DisposeUnmanaged();
 }
 
-/// <summary>Destrutor</summary>
+/// <summary>Destructor</summary>
 /// <remarks>Finalize()</remarks>
 BitmapRenderTarget::!BitmapRenderTarget()
 {
 	this->DisposeUnmanaged();
 }
 
-/// <summary>Destrutor logic, disposes the object</summary>
+/// <summary>Destructor logic, disposes the object</summary>
 void BitmapRenderTarget::DisposeUnmanaged()
 {
 	// Dispose this Bitmap rendering target
