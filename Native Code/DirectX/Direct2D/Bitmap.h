@@ -54,15 +54,15 @@ namespace Bardez
 
 
 				#pragma region Destruction
-					/// <summary>Destrutor</summary>
+					/// <summary>Destructor</summary>
 					/// <remarks>Dispose()</remarks>
 					~Bitmap();
 
-					/// <summary>Destrutor</summary>
+					/// <summary>Destructor</summary>
 					/// <remarks>Finalize()</remarks>
 					!Bitmap();
 
-					/// <summary>Destrutor logic, disposes the object</summary>
+					/// <summary>Destructor logic, disposes the object</summary>
 					virtual void DisposeUnmanaged();
 				#pragma endregion
 
@@ -79,7 +79,7 @@ namespace Bardez
 					///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
 					///</remarks>
 					virtual ResultCode CopyFromBitmap(Point2dU^ upperPoint, Bitmap^ source, RectangleU^ area);
-					
+
 					/// <summary>Copies the specified region from the specified bitmap into the current bitmap.</summary>
 					/// <param name="upperPoint">In the current bitmap, the upper-left corner of the area to which the data is copied. If null, [0,0] will be used</param>
 					/// <param name="source">Source bitmap to read from. Cannot be null.</param>
@@ -127,7 +127,23 @@ namespace Bardez
 					///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
 					///</remarks>
 					virtual ResultCode CopyFromMemory(RectangleU^ area, array<System::Byte>^ source, System::UInt32 pitch);
-					
+
+					/// <summary>Copies the specified region from memory into the current bitmap.</summary>
+					/// <param name="area">Area rectangle of the Bitmap to read from. If null, the full source/destination area will be copied/written to.</param>
+					/// <param name="source">Pointer to source data to read from. Cannot be Zero.</param>
+					/// <param name="length">Length of the data pointed to.</param>
+					/// <param name="pitch">
+					///		The stride, or pitch, of the source bitmap stored in srcData. The stride is the byte count of
+					///		a scanline (one row of pixels in memory). The stride can be computed from the following formula:
+					///		pixel width * bytes per pixel + memory padding.
+					/// </param>
+					/// <returns>S_OK on success, otherwise an error code.</returns>
+					/// <remarks>
+					///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
+					///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
+					///</remarks>
+					virtual ResultCode CopyFromMemory(RectangleU^ area, System::IntPtr source, System::Int32 length, System::UInt32 pitch);
+
 					/// <summary>Copies the specified region from memory into the current bitmap.</summary>
 					/// <param name="area">Area rectangle of the Bitmap to read from. If null, the full source/destination area will be copied/written to.</param>
 					/// <param name="source">Source data to read from. Cannot be null.</param>
@@ -143,26 +159,42 @@ namespace Bardez
 					///</remarks>
 					virtual ResultCode CopyFromMemory(System::Drawing::Rectangle area, array<System::Byte>^ source, System::UInt32 pitch);
 
+					/// <summary>Copies the specified region from memory into the current bitmap.</summary>
+					/// <param name="area">Area rectangle of the Bitmap to read from. If null, the full source/destination area will be copied/written to.</param>
+					/// <param name="source">Pointer to source data to read from. Cannot be Zero.</param>
+					/// <param name="length">Length of the data pointed to.</param>
+					/// <param name="pitch">
+					///		The stride, or pitch, of the source bitmap stored in srcData. The stride is the byte count of
+					///		a scanline (one row of pixels in memory). The stride can be computed from the following formula:
+					///		pixel width * bytes per pixel + memory padding.
+					/// </param>
+					/// <returns>S_OK on success, otherwise an error code.</returns>
+					/// <remarks>
+					///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
+					///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
+					///</remarks>
+					virtual ResultCode CopyFromMemory(System::Drawing::Rectangle area, System::IntPtr source, System::Int32 length, System::UInt32 pitch);
+
 					/// <summary>Gets the dots per inch of the bitmap</summary>
 					/// <returns>The DPI resolution of the bitmap.</returns>
 					virtual DpiResolution GetDpi();
-					
+
 					/// <summary>Gets the pixel data format of this bitmap</summary>
 					/// <returns>The pixel data format of this bitmap.</returns>
 					virtual PixelFormat^ GetPixelFormat();
-					
+
 					/// <summary>Gets the integer size of this bitmap</summary>
 					/// <returns>The integer size of this bitmap.</returns>
 					virtual SizeU^ GetPixelSize();
-					
+
 					/// <summary>Gets the integer size of this bitmap</summary>
 					/// <returns>The integer size of this bitmap.</returns>
 					virtual System::Drawing::Size GetPixelFrameworkSize();
-					
+
 					/// <summary>Gets the single-precision floating point size, in device-independent pixels (DIPs), of this bitmap</summary>
 					/// <returns>The single-precision floating point size of this bitmap.</returns>
 					virtual SizeF^ GetSize();
-					
+
 					/// <summary>Gets the single-precision floating point size, in device-independent pixels (DIPs), of this bitmap</summary>
 					/// <returns>The single-precision floating point size of this bitmap.</returns>
 					virtual System::Drawing::SizeF GetFrameworkSize();
