@@ -51,10 +51,6 @@ namespace Bardez
 				protected:
 					/// <summary>Represents a pointer to the native render target interface object</summary>
 					System::IntPtr renderPtr;
-
-				internal:
-					static Mutex^ RenderMutex = gcnew Mutex(false, "Bardez.Projects.DirectX.Direct2D.RenderTarget rendering Mutex");
-					static Mutex^ DrawMutex = gcnew Mutex(false, "Bardez.Projects.DirectX.Direct2D.RenderTarget drawing Mutex");
 				#pragma endregion
 
 
