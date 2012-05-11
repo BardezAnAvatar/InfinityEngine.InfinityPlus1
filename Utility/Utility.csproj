@@ -70,10 +70,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContainers\Array Data Container.cs" />
+    <Compile Include="DataContainers\IDataContainer.cs" />
+    <Compile Include="DataContainers\Stream Data Container.cs" />
     <Compile Include="File Compare.cs" />
     <Compile Include="Log Event Arguments.cs" />
     <Compile Include="Log Collector.cs" />
