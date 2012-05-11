@@ -8,8 +8,8 @@
     <ProjectGuid>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bardez.Projects.InfinityPlus1.Utility</RootNamespace>
-    <AssemblyName>InfinityPlus1.Utility</AssemblyName>
+    <RootNamespace>Bardez.Projects.Utility</RootNamespace>
+    <AssemblyName>Utility</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -80,12 +80,8 @@
     <Compile Include="Log Event Arguments.cs" />
     <Compile Include="Log Collector.cs" />
     <Compile Include="Log Item.cs" />
-    <Compile Include="UiInterceptor\Console Wrapper.cs" />
-    <Compile Include="UiInterceptor\Form Wrapper.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="IDeepClonable.cs" />
-    <Compile Include="UiInterceptor\Interceptor.cs" />
-    <Compile Include="UiInterceptor\IUserInterfaceInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
