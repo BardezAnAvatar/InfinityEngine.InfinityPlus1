@@ -94,16 +94,16 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.PLT
                 Int32 height = bitmap.PixelData.Metadata.Height;
                 Int32 position = 0;
                 Int32 width = bitmap.PixelData.Metadata.Width;
-                Byte[] nativeData = bitmap.PixelData.NativeBinaryData;
+                MemoryStream nativeData = bitmap.PixelData.NativeBinaryData;
 
                 for (Int32 rowIndex = 0; rowIndex < height; ++rowIndex)
                 {
                     List<PixelBase> pixels = new List<PixelBase>();
 
-                    for (Int32 pixel = 0; pixel < width; ++pixel)  //hardcoded known length
+                    for (Int32 pixel = 0; pixel < width; ++pixel)
                     {
                         //colors are stored backword at this point.
-                        RgbTriplet rgbTriplet = new RgbTriplet(nativeData[position + 2], nativeData[position + 1], nativeData[position]);
+                        RgbTriplet rgbTriplet = new RgbTriplet(nativeData.ReadByteAtOffset(position + 2), nativeData.ReadByteAtOffset(position + 1), nativeData.ReadByteAtOffset(position));
                         position += 3;
                         pixels.Add(rgbTriplet);
                     }
