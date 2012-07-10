@@ -83,7 +83,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
                     if (peek != null && peek.GetPresentationTimeSpan(this.VideoBuffer.TimeBase) < time)
                     {
                         peek = this.VideoBuffer.ConsumeFrame();
-                        Frame frame = this.BuildLibAvFrame(peek);
+                        Frame frame = this.BuildFrameFromLibAV(peek);
                         this.RaiseRenderVideo(frame);
                     }
                 }
@@ -107,11 +107,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
         /// <summary>Builds a MediaBase frame for passing to output</summary>
         /// <param name="frameData">LibAV frame to build a MediaBase frame from</param>
         /// <returns>A Built MediaBase frame</returns>
-        protected Frame BuildLibAvFrame(FrameBGRA frameData)
+        protected Frame BuildFrameFromLibAV(FrameBGRA frameData)
         {
-            //PixelData pd = new PixelData(frameData.Data, ScanLineOrder.TopDown, MediaBase.Video.Pixels.Enums.PixelFormat.RGBA_B8G8R8A8, frameData.Height, frameData.Width, 0, 0, 32);
-            //Frame genFrame = new Frame(pd);
-Frame genFrame = null;
+            PixelData pd = new PixelData(frameData.Data.ToArray(), ScanLineOrder.TopDown, PixelFormatExtender.FromLibAVPixelFormat(frameData.Detail.Format), frameData.Detail.Height, frameData.Detail.Width, 0, 0, 32);
+            Frame genFrame = new Frame(pd);
+            //Frame genFrame = null;
+
             return genFrame;
         }
         #endregion
