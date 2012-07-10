@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Utility.UiInterceptor
+namespace Bardez.Projects.Utility.UiInterceptor
 {
     /// <summary>Interface dictating a user interface output</summary>
     public interface IUserInterfaceInterceptor

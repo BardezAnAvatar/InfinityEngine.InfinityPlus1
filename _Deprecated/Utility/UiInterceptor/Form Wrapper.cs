@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Bardez.Projects.InfinityPlus1.Utility.UiInterceptor
+namespace Bardez.Projects.Utility.UiInterceptor
 {
     /// <summary>Wraps certain Console calls with more easily replacable alternatives</summary>
     public class FormWrapper : IUserInterfaceInterceptor

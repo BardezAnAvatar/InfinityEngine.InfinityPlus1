@@ -1,7 +1,7 @@
 ﻿using System;
 using Bardez.Projects.Configuration;
 
-namespace Bardez.Projects.InfinityPlus1.Utility.UiInterceptor
+namespace Bardez.Projects.Utility.UiInterceptor
 {
     /// <summary>Class to intercept certain UI calls</summary>
     public static class Interceptor
