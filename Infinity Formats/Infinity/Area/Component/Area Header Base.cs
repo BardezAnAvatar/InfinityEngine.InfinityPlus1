@@ -66,6 +66,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
         public Int16 ProbabilityLightning { get; set; }
 
         /// <summary>Unknown at offset 0x52 (probably weather effect)</summary>
+        /// <remarks>BGEE devs say this is base wind speed (no effect?)</remarks>
         public Int16 Unknown_0x0052 { get; set; }
 
         /// <summary>Offset within this file to actors</summary>
