@@ -61,7 +61,7 @@ namespace Bardez.Projects.InfinityPlus1.Tester
 
         private void ListFiles()
         {
-            DirectoryInfo dir = new DirectoryInfo(@"N:\Test Data\Infinity Engine\Example files\PRO");
+            DirectoryInfo dir = new DirectoryInfo(@"N:\Test Data\Infinity Engine\Example files\CBF");
             
             StringBuilder builder = new StringBuilder();
 
@@ -76,10 +76,10 @@ namespace Bardez.Projects.InfinityPlus1.Tester
 
             
             //post-processing
-            builder.Replace("N:", "<add key=\"Test.PRO.Path\" value=\"");
+            builder.Replace("N:", "<add key=\"Test.CBF.Path\" value=\"");
             builder.Replace("\r\n", "\" />\r\n");
 
-            using (TextWriter writer = new StreamWriter(@"\pro.txt"))
+            using (TextWriter writer = new StreamWriter(@"\cbf.txt"))
                 writer.Write(builder.ToString());
         }
 
@@ -151,7 +151,7 @@ namespace Bardez.Projects.InfinityPlus1.Tester
 
             foreach (FileInfo file in files)
             {
-                if (file.Extension.ToLower() == ".pro")
+                if (file.Extension.ToLower() == ".cbf")
                     builder.AppendLine(file.FullName);
             }
 
