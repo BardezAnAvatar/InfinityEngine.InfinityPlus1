@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Bardez.Projects.InfinityPlus1.Utility
+namespace Bardez.Projects.Utility
 {
     public static class Extension
     {

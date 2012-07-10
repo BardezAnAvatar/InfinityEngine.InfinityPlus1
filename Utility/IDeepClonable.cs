@@ -1,4 +1,4 @@
-﻿namespace Bardez.Projects.InfinityPlus1.Utility
+﻿namespace Bardez.Projects.Utility
 {
     public interface IDeepCloneable
     {

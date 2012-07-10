@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Bardez.Projects.InfinityPlus1.Utility
+namespace Bardez.Projects.Utility
 {
     /// <summary>Event to raise for testing a specific value</summary>
     /// <param name="sender">Object sending/raising the request</param>

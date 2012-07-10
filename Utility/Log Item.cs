@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Bardez.Projects.InfinityPlus1.Utility
+namespace Bardez.Projects.Utility
 {
     /// <summary>Enumerator describing an item level being logged</summary>
     public enum LogType

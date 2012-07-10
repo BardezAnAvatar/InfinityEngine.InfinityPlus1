@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Utility
+namespace Bardez.Projects.Utility
 {
     /// <summary>Event Arguments containing a log message to post</summary>
     public class LogEventArgs : EventArgs

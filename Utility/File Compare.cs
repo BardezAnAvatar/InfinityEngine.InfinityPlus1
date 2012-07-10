@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Bardez.Projects.InfinityPlus1.Utility
+namespace Bardez.Projects.Utility
 {
     /// <summary>Enum for result of comparing two files</summary>
     public enum FileCompareResult
