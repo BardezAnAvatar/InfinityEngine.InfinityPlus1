@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Interpretation;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management;
@@ -9,6 +10,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
+using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Coding
 {
@@ -58,8 +60,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
 
             if (mveFrame != null)
             {
-                Byte[] previous = (this.RecentFrame != null) ? this.RecentFrame.NativeBinaryData : new Byte[this.BufferSize];
-                PixelData pd = this.GetNextImage(previous, mveFrame.DecodingMap.BlockEncoding, mveFrame.Data.Data, this.VideoStream.Palette, mveFrame.Data.DeltaFrame);
+                MemoryStream previousData = (this.RecentFrame != null) ? this.RecentFrame.NativeBinaryData : null;
+                Byte[] previousBinary = (previousData != null) ? previousData.ToArray() : new Byte[this.BufferSize];
+                PixelData pd = this.GetNextImage(previousBinary, mveFrame.DecodingMap.BlockEncoding, mveFrame.Data.Data, this.VideoStream.Palette, mveFrame.Data.DeltaFrame);
 
                 //remember the current pixel data for the next frame; otherwise the movie gets very blocky (but interrestingly you can see the delta regions)
                 if (mveFrame.Data.DeltaFrame)
@@ -88,8 +91,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
             if (this.PivotFrame == null || !isDeltaFrame)
                 buffer = new Byte[this.BufferSize];
             else //PivotFrame != null && isDeltaFrame
-                buffer = this.PivotFrame.NativeBinaryData;
-                //buffer = this.RecentFrame.NativeBinaryData;
+                buffer = this.PivotFrame.NativeBinaryData.ToArray();
 
             return buffer;
         }

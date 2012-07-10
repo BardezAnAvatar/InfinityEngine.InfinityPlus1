@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Interpretation;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management;
@@ -64,8 +65,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
 
             if (mveFrame != null)
             {
-                Byte[] previous = (this.RecentFrame != null) ? this.RecentFrame.NativeBinaryData : new Byte[this.BufferSize];
-                PixelData pd = this.GetNextImage(previous, mveFrame.DecodingMap.BlockEncoding, mveFrame.Data.Data, null, mveFrame.Data.DeltaFrame);
+                MemoryStream previousData = (this.RecentFrame != null) ? this.RecentFrame.NativeBinaryData : null;
+                Byte[] previousBinary = (previousData != null) ? previousData.ToArray() : new Byte[this.BufferSize];
+                PixelData pd = this.GetNextImage(previousBinary, mveFrame.DecodingMap.BlockEncoding, mveFrame.Data.Data, null, mveFrame.Data.DeltaFrame);
 
                 //remember the current pixel data for the next frame; otherwise the movie gets very blocky (but interrestingly you can see the delta regions)
                 if (mveFrame.Data.DeltaFrame)
@@ -108,6 +110,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
             return new PixelData(newData, ScanLineOrder.TopDown, PixelFormat.RGB_B5G5R5X1, null, this.Height, this.Width, 0, 0, 16);
         }
 
+        //TODO: Switch Byte[] to Stream
         /// <summary>Gets a buffer for the next image being prepared</summary>
         /// <param name="isDeltaFrame">Flag indicating whether to reuse the pivot buffer or to create a new one</param>
         /// <returns>A Byte Array buffer</returns>
@@ -117,7 +120,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
             if (this.PivotFrame == null || !isDeltaFrame)
                 buffer = new Byte[this.BufferSize];
             else //PivotFrame != null && isDeltaFrame
-                buffer = this.PivotFrame.NativeBinaryData;
+                buffer = this.PivotFrame.NativeBinaryData.ToArray();
 
             return buffer;
         }
