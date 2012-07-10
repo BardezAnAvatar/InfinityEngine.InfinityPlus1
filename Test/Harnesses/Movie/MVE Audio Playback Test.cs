@@ -11,7 +11,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component
 using Bardez.Projects.InfinityPlus1.Output.Audio;
 using Bardez.Projects.InfinityPlus1.Test;
 using Bardez.Projects.InfinityPlus1.Test.Harnesses;
-using Bardez.Projects.InfinityPlus1.Utility;
+using Bardez.Projects.Utility;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Movie
 {

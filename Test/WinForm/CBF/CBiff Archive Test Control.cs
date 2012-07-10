@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using Bardez.Projects.InfinityPlus1.Test.Harnesses.BioWareIndexFileFormat.CBiff;
-using Bardez.Projects.InfinityPlus1.Utility;
+using Bardez.Projects.Utility;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.CBF
 {

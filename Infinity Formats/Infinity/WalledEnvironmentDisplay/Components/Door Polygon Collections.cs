@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Bardez.Projects.InfinityPlus1.Utility;
+using Bardez.Projects.Utility;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDisplay.Components
 {

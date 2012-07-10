@@ -10,7 +10,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Resize;
 using Bardez.Projects.InfinityPlus1.Test.Harnesses;
 using Bardez.Projects.InfinityPlus1.Test.WinForm;
-using Bardez.Projects.InfinityPlus1.Utility;
+using Bardez.Projects.Utility;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE

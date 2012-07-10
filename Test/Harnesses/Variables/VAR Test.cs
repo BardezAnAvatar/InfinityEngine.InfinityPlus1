@@ -5,7 +5,7 @@ using System.Threading;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Variables;
 using Bardez.Projects.InfinityPlus1.Test;
-using Bardez.Projects.InfinityPlus1.Utility;
+using Bardez.Projects.Utility;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Variables
 {

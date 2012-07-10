@@ -5,7 +5,7 @@ using System.IO;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDisplay;
 using Bardez.Projects.InfinityPlus1.Test;
-using Bardez.Projects.InfinityPlus1.Utility;
+using Bardez.Projects.Utility;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.WalledEnvironmentDisplay

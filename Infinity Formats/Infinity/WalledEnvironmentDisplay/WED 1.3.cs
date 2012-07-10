@@ -6,7 +6,7 @@ using System.Text;
 using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDisplay.Components;
-using Bardez.Projects.InfinityPlus1.Utility;
+using Bardez.Projects.Utility;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDisplay
@@ -705,6 +705,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             return builder.ToString();
         }
         #endregion
+
 
         #region Helper methods
         /// <summary>Reads tilemaps from the input stream and adds them to individual collections</summary>

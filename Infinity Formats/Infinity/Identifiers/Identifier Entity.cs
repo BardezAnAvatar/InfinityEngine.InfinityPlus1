@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Text;
 
-using Bardez.Projects.InfinityPlus1.Utility;
+using Bardez.Projects.Utility;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Identifiers
 {

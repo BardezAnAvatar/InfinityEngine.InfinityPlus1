@@ -8,7 +8,7 @@ using Bardez.Projects.DirectX.XAudio2;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Music;
 using Bardez.Projects.InfinityPlus1.Output.Audio;
 using Bardez.Projects.InfinityPlus1.Test;
-using Bardez.Projects.InfinityPlus1.Utility;
+using Bardez.Projects.Utility;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Music
 {

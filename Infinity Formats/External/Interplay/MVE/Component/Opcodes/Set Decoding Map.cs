@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Enum;
-using Bardez.Projects.InfinityPlus1.Utility;
+using Bardez.Projects.Utility;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Opcodes

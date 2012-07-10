@@ -3,7 +3,7 @@ using System.Threading;
 using System.Windows.Forms;
 
 using Bardez.Projects.InfinityPlus1.Test.Harnesses.Music;
-using Bardez.Projects.InfinityPlus1.Utility;
+using Bardez.Projects.Utility;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MUS
 {

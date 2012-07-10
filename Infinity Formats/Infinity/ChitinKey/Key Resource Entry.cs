@@ -6,7 +6,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
-using Bardez.Projects.InfinityPlus1.Utility;
+using Bardez.Projects.Utility;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey

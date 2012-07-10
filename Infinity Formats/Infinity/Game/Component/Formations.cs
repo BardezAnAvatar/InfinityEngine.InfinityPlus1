@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
-using Bardez.Projects.InfinityPlus1.Utility;
+using Bardez.Projects.Utility;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
