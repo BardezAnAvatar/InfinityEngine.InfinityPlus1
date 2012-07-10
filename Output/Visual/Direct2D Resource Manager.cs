@@ -6,9 +6,6 @@ using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 
 namespace Bardez.Projects.InfinityPlus1.Output.Visual
 {
-    //TODO: Add in a collection of Bitmaps (List) that provides a unique index back out.
-    //  This will allow the application to submit a Frame to the resource Manager
-
     /// <summary>Represents a resource gateway to Direct2D data</summary>
     public class Direct2dResourceManager : IDisposable
     {
