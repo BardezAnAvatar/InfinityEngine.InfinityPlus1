@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace Bardez.Projects.Utility
 {
-    public static class Extension
+    /// <summary>Extension class for the IList interface</summary>
+    public static class IListExtension
     {
         /// <summary>Extension method of System.Collections.Generic.List to clone all class, clonable references in the list.</summary>
         /// <typeparam name="T">Type of object that is a class and implements IDeepCloneable.</typeparam>
@@ -13,9 +14,7 @@ namespace Bardez.Projects.Utility
         {
             List<T> clone = new List<T>();
             foreach (T type in reference)
-            {
                 clone.Add(type.Clone() as T);
-            }
 
             return clone;
         }
