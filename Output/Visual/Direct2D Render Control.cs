@@ -8,7 +8,6 @@ using ExternalPixelEnums = Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.V
 using Bardez.Projects.DirectX.Direct2D;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
-using Bardez.Projects.Utility.DataContainers;
 using Bardez.Projects.Win32;
 using Bardez.Projects.ReusableCode;
 
