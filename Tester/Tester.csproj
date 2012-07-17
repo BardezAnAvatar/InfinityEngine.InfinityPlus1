@@ -89,12 +89,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Scratch Bitmap Loader.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Scratch Bitmap Loader.Designer.cs">
-      <DependentUpon>Scratch Bitmap Loader.cs</DependentUpon>
-    </Compile>
     <Compile Include="Scratch MVE.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,9 +167,6 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Scratch Bitmap Loader.resx">
-      <DependentUpon>Scratch Bitmap Loader.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scratch MVE.resx">
       <DependentUpon>Scratch MVE.cs</DependentUpon>
