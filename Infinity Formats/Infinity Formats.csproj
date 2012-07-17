@@ -215,11 +215,12 @@
     <Compile Include="Infinity\Area\Version\Icewind Area.cs" />
     <Compile Include="Infinity\Area\Version\Torment Area.cs" />
     <Compile Include="Infinity\Base\Interface Infinity Format.cs" />
-    <Compile Include="Infinity\BioWareIndexFileFormat\Biff1\Biff1Archive.cs" />
-    <Compile Include="Infinity\BioWareIndexFileFormat\Biff1\Biff1Header.cs" />
-    <Compile Include="Infinity\BioWareIndexFileFormat\Biff1\Biff1FileEntry.cs" />
-    <Compile Include="Infinity\BioWareIndexFileFormat\Biff1\Biff1ResourceEntry.cs" />
-    <Compile Include="Infinity\BioWareIndexFileFormat\Biff1\Biff1TilesetEntry.cs" />
+    <Compile Include="Infinity\BioWareIndexFileFormat\Interface\IBiff.cs" />
+    <Compile Include="Infinity\BioWareIndexFileFormat\Version\Biff1 Archive.cs" />
+    <Compile Include="Infinity\BioWareIndexFileFormat\Components\Biff Header.cs" />
+    <Compile Include="Infinity\BioWareIndexFileFormat\Components\Biff File Entry.cs" />
+    <Compile Include="Infinity\BioWareIndexFileFormat\Components\Biff Resource Entry.cs" />
+    <Compile Include="Infinity\BioWareIndexFileFormat\Components\Biff Tileset Entry.cs" />
     <Compile Include="Infinity\BioWareAnimation\BioWare Animation 1.cs" />
     <Compile Include="Infinity\BioWareAnimation\Component\Animation Entry.cs" />
     <Compile Include="Infinity\BioWareAnimation\Component\BAM Header.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="Infinity\BioWareAnimation\Component\Frame Data.cs" />
     <Compile Include="Infinity\BioWareAnimation\Component\Frame Entry.cs" />
     <Compile Include="Infinity\BioWareAnimation\BioWare Animation Compressed 1.cs" />
+    <Compile Include="Infinity\BioWareIndexFileFormat\Version\CBiff Archive.cs" />
     <Compile Include="Infinity\Character\Biography\Biography 1.cs" />
     <Compile Include="Infinity\Character\Biography\Biography 2.cs" />
     <Compile Include="Infinity\Character\Enums\User Interface Button.cs" />
@@ -470,7 +472,6 @@
   <ItemGroup>
     <Folder Include="External\Weidu\" />
     <Folder Include="Infinity\BioWareIndexFileFormat\BiffC1\" />
-    <Folder Include="Infinity\BioWareIndexFileFormat\CBiff1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="External\Interplay\MVE\_Remarks.txt" />

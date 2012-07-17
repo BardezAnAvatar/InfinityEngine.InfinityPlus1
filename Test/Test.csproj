@@ -86,10 +86,11 @@
     <Compile Include="Harnesses\Area\Torment ARE Test.cs" />
     <Compile Include="Harnesses\Area\Icewind 2 ARE Test.cs" />
     <Compile Include="Harnesses\Area\Icewind ARE Test.cs" />
-    <Compile Include="Harnesses\BiowareIndexFileFormat\Biff1\Biff1ArchiveTest.cs" />
-    <Compile Include="Harnesses\BiowareIndexFileFormat\Biff1\Biff1HeaderTest.cs" />
-    <Compile Include="Harnesses\BiowareIndexFileFormat\Biff1\Biff1ResourceEntryTest.cs" />
-    <Compile Include="Harnesses\BiowareIndexFileFormat\Biff1\Biff1TilesetEntryTest.cs" />
+    <Compile Include="Harnesses\BiowareIndexFileFormat\Biff1\Biff Header Test.cs" />
+    <Compile Include="Harnesses\BiowareIndexFileFormat\Biff1\Biff Resource Entry Test.cs" />
+    <Compile Include="Harnesses\BiowareIndexFileFormat\Biff1\Biff Tileset Entry Test.cs" />
+    <Compile Include="Harnesses\BiowareIndexFileFormat\Biff1\Biff1 Archive Test.cs" />
+    <Compile Include="Harnesses\BiowareIndexFileFormat\CBiff\CBiff Archive Test.cs" />
     <Compile Include="Harnesses\Character\Biography 1 Test.cs" />
     <Compile Include="Harnesses\Character\Biography 2 Test.cs" />
     <Compile Include="Harnesses\Character\Character 1 Test.cs" />
@@ -214,6 +215,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\BIFF\Uncompressed\Biff Tileset Entry Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CBF\CBiff Archive Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\CHR\Biography 1 Test Control.cs">
@@ -390,6 +394,12 @@
     </Compile>
     <Compile Include="WinForm\MOS\MOS Test Control.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Movie\Lib AV Movie Playback Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Movie\Lib AV Movie Playback Test Control.Designer.cs">
+      <DependentUpon>Lib AV Movie Playback Test Control.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\MUS\Music Playlist Test Control.cs">
       <SubType>UserControl</SubType>
@@ -619,6 +629,9 @@
     <EmbeddedResource Include="WinForm\MOS\MOS Render Test Control.resx">
       <DependentUpon>MOS Render Test Control.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Movie\Lib AV Movie Playback Test Control.resx">
+      <DependentUpon>Lib AV Movie Playback Test Control.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Output\Direct2D\Direct2D Render Test Control.resx">
       <DependentUpon>Direct2D Render Test Control.cs</DependentUpon>
     </EmbeddedResource>
@@ -640,7 +653,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="WinForm\BIFF\BIFFC\" />
-    <Folder Include="WinForm\BIFF\CBIFF\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="WinForm\CRE\Creature 1.0 Test Control.cs">

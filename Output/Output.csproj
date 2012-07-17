@@ -86,20 +86,16 @@
     <Compile Include="Timer\Win32 Multimedia Time Functions.cs" />
     <Compile Include="Timer\Win32 Multimedia Time Structs.cs" />
     <Compile Include="Timer\Win32 Multimedia Timer.cs" />
-    <Compile Include="Visual\Direct 2D Resource Manager.cs" />
     <Compile Include="Visual\Direct2D Render Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Visual\Direct2D Resource Manager.cs" />
     <Compile Include="Visual\Visual Render Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Visual\Visual Render Resource Manager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\External Formats\External Formats.csproj">
-      <Project>{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}</Project>
-      <Name>External Formats</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Media Base\Media Base.csproj">
       <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
       <Name>Media Base</Name>
@@ -115,6 +111,14 @@
     <ProjectReference Include="..\Native Code\Win32 Structures\Win32 Structures.vcxproj">
       <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
       <Name>Win32 Structures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReusableCode\ReusableCode.csproj">
+      <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
+      <Name>ReusableCode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
+      <Name>Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

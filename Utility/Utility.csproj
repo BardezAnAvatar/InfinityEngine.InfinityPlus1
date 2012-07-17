@@ -73,14 +73,11 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataContainers\Array Data Container.cs" />
-    <Compile Include="DataContainers\IDataContainer.cs" />
-    <Compile Include="DataContainers\Stream Data Container.cs" />
     <Compile Include="File Compare.cs" />
+    <Compile Include="IList Extension.cs" />
     <Compile Include="Log Event Arguments.cs" />
     <Compile Include="Log Collector.cs" />
     <Compile Include="Log Item.cs" />
-    <Compile Include="Extension.cs" />
     <Compile Include="IDeepClonable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -88,6 +85,10 @@
     <ProjectReference Include="..\Configuration Handler\Configuration Handler.csproj">
       <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
       <Name>Configuration Handler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReusableCode\ReusableCode.csproj">
+      <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
+      <Name>ReusableCode</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

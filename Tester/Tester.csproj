@@ -89,6 +89,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Scratch Bitmap Loader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Scratch Bitmap Loader.Designer.cs">
+      <DependentUpon>Scratch Bitmap Loader.cs</DependentUpon>
+    </Compile>
     <Compile Include="Scratch MVE.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +139,10 @@
       <Project>{44208309-EFE3-4A6F-B0F8-9013A16B20DF}</Project>
       <Name>Direct2D</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Native Code\ffmpeg\Lib AV\Lib AV.vcxproj">
+      <Project>{1F9B2E1A-E000-4076-8D38-D995A6A3922C}</Project>
+      <Name>Lib AV</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Native Code\Win32 Structures\Win32 Structures.vcxproj">
       <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
       <Name>Win32 Structures</Name>
@@ -140,6 +150,10 @@
     <ProjectReference Include="..\Output\Output.csproj">
       <Project>{6ECA5199-A497-4BF2-B956-CEB3F0912C17}</Project>
       <Name>Output</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReusableCode\ReusableCode.csproj">
+      <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
+      <Name>ReusableCode</Name>
     </ProjectReference>
     <ProjectReference Include="..\Test\Test.csproj">
       <Project>{E79833DB-B2D2-4781-B0FC-79E85DA95BE5}</Project>
@@ -159,6 +173,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scratch Bitmap Loader.resx">
+      <DependentUpon>Scratch Bitmap Loader.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scratch MVE.resx">
       <DependentUpon>Scratch MVE.cs</DependentUpon>
