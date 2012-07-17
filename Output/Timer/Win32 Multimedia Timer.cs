@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using System.Threading;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 
@@ -18,9 +17,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Timer
         #region Static fields
         /// <summary>Static reference to a capabilities null-typed reference</summary>
         private static Win32MultimediaTimerCapabilities? Capabilities { get; set; }
-
-        /// <summary>Static mutex for raising threads</summary>
-        private Mutex threadLock;
         #endregion
 
 
@@ -88,7 +84,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Timer
             this.Running = false;
             this.StartTime = TimeSpan.Zero;
             this.timerLock = new Object();
-            this.threadLock = new Mutex(false);
         }
 
         /// <summary>Partial definition constructor</summary>
@@ -108,7 +103,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Timer
             this.Running = false;
             this.StartTime = TimeSpan.Zero;
             this.timerLock = new Object();
-            this.threadLock = new Mutex(false);
         }
 
         /// <summary>Dispose method to clean up umanaged resources (Win32 timer)</summary>
@@ -191,8 +185,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Timer
                 Int32 upTimeMilliSec = (Int32)(uptime % 1000);
                 TimeSpan WinUpTime = new TimeSpan(0, 0, 0, upTimeSec, upTimeMilliSec);
                 raise = WinUpTime - this.StartTime;
-                this.RaiseTimer(raise);
             }
+
+            this.elapsed(raise);
         }
         #endregion
 
@@ -205,28 +200,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Timer
             Win32MultimediaTimerCapabilities caps;
             Win32MultimediaTimeFunctions.GetDeviceCapabilities(out caps, 8U);
             return caps;
-        }
-
-        /// <summary>Raises the timer elapse on a separate thread</summary>
-        /// <param name="elapsedTime">TimeSpan raised by the timer from the start time</param>
-        /// <remarks>Limit this to a certain number of threads</remarks>
-        protected void RaiseTimer(TimeSpan elapsedTime)
-        {
-            Thread timerEvent = new Thread(() => { this.RunThread(elapsedTime); });
-            timerEvent.IsBackground = true;
-            timerEvent.Name = "Timer callback";
-            timerEvent.Start();
-        }
-
-        /// <summary>Raises the timer on a separate thread</summary>
-        /// <param name="elapsedTime">TimeSpan raised by the timer from the start time</param>
-        protected void RunThread(TimeSpan elapsedTime)
-        {
-            if (this.threadLock.WaitOne(0))
-            {
-                this.elapsed(elapsedTime);
-                this.threadLock.ReleaseMutex();
-            }
         }
         #endregion
     }
