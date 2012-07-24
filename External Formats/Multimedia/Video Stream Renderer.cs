@@ -80,7 +80,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
                 if (this.VideoBuffer.Process)
                 {
                     FrameBGRA peek = this.VideoBuffer.PeekFrame();
-                    if (peek != null && peek.GetPresentationTimeSpan(this.VideoBuffer.TimeBase) < time)
+                    if (peek != null && peek.GetPresentationStartTimeSpan(this.VideoBuffer.TimeBase) < time)
                     {
                         peek = this.VideoBuffer.ConsumeFrame();
                         Frame frame = this.BuildFrameFromLibAV(peek);
@@ -111,8 +111,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
         {
             PixelData pd = new PixelData(frameData.Data.ToArray(), ScanLineOrder.TopDown, PixelFormatExtender.FromLibAVPixelFormat(frameData.Detail.Format), frameData.Detail.Height, frameData.Detail.Width, 0, 0, 32);
             Frame genFrame = new Frame(pd);
-            //Frame genFrame = null;
-
             return genFrame;
         }
         #endregion

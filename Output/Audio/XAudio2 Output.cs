@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 
 using Bardez.Projects.DirectX.XAudio2;
+using Bardez.Projects.Win32;
 using Bardez.Projects.Win32.Audio;
 using Bardez.Projects.InfinityPlus1.Output.Audio.Enums;
 
@@ -88,7 +89,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
             //also, register an output MasteringVoice, since to use it you will almost certainly always need one.
             //Also, you can be lame and assume that index 0 will always be a valid Mastering Voice
 
-            //this should probably use the default system rendering, and submisions submit sample rate transformations as needed, so void list of parameters
+            //this should probably use the default system rendering, and submissions submit sample rate transformations as needed, so void list of parameters
             MasteringVoice masteringVoice = this.XAudio2.CreateMasteringVoice();
             this.destinationVoices.Add(new XAudio2VoiceReference<Voice>(masteringVoice));
         }
@@ -164,9 +165,10 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
 
         /// <summary>Creates an instance of the underlying/associated audio type and returns a unique identifier for re-reference</summary>
         /// <param name="inputData">PCM info describing the source</param>
-        /// <returns>An Int64 usable to re-refernce the playback object</returns>
+        /// <param name="rendererIndex">Index to the rendering object this voice will supply</param>
+        /// <returns>An Int32 usable to re-reference the playback object</returns>
         /// <remarks>This methods assumes that the playback will be re-referenced.</remarks>
-        public override Int32 CreatePlayback(WaveFormatEx inputData)
+        public override Int32 CreatePlayback(WaveFormatEx inputData, Int32 rendererIndex)
         {
             Int32 sourceIndex = -1;
             lock (XAudio2Output.singletonLock)
@@ -174,79 +176,73 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
                 //register for callback
                 VoiceCallback callback = new VoiceCallback();
 
-                SourceVoice voice = this.XAudio2.CreateSourceVoice(inputData, 0U, 2.0f, callback);
+                SourceVoice sourceVoice = this.XAudio2.CreateSourceVoice(inputData, 0U, 2.0f, callback);
                 sourceIndex = this.sourceVoices.Count;
-                this.sourceVoices.Add(new XAudio2SourceVoiceReference<SourceVoice>(voice));
+                this.sourceVoices.Add(new XAudio2SourceVoiceReference<SourceVoice>(sourceVoice));
+
+                //set up the renderer
+                if (rendererIndex < 0 || this.destinationVoices.Count <= rendererIndex)
+                    throw new IndexOutOfRangeException(String.Format("The unique identifier for the destination Voice {0} is out of range", rendererIndex));
+
+                XAudio2VoiceReference<Voice> dstVoice = this.destinationVoices[rendererIndex];
+
+                if (dstVoice == null)
+                    throw new ArgumentException(String.Format("The unique identifier for the destination Voice {0} was null", rendererIndex));
+
+                sourceVoice.SetOutputVoices(new VoiceSendDescriptor[] { new VoiceSendDescriptor(0U, dstVoice.Reference) });
             }
+
             return sourceIndex;
         }
 
-        /// <summary>Submit data for immediate playback to the playback device, indicating whether or not it should finalize after playback</summary>
-        /// <param name="data">Data to submit</param>
-        /// <param name="source">Source to submit data to</param>
-        /// <param name="destination">Destination to output submission to</param>
-        /// <param name="expectMore">Flag indicating whether to expect more data</param>
-        /// <remarks>Does no looping or anything, but it is possible to set that all up.</remarks>
-        public override void SubmitData(Byte[] data, Int32 source, Int32 destination, Boolean expectMore = false)
+        /// <summary>Creates an audio rendering target</summary>
+        /// <param name="inputFormat">WaveFormatEx for output</param>
+        /// <returns>An Int32 usable to re-reference the playback object</returns>
+        public override Int32 CreateRenderer(WaveFormatEx inputFormat)
         {
+            Int32 masteringIndex = -1;
             lock (XAudio2Output.singletonLock)
             {
-                XAudio2SourceVoiceReference<SourceVoice> srcVoice = this.sourceVoices[source];
-                XAudio2VoiceReference<Voice> dstVoice = this.destinationVoices[destination];
-
-                //error checking
-                if (srcVoice == null)
-                    throw new ArgumentException(String.Format("The unique identifier for the source Voice {0} was null", source));
-
-                if (dstVoice == null)
-                    throw new ArgumentException(String.Format("The unique identifier for the destination Voice {0} was null", destination));
-
-                if (expectMore && (srcVoice.State == XAudio2VoiceState.InUseEnding || srcVoice.State == XAudio2VoiceState.Depleted))
-                    throw new InvalidOperationException("Cannot submit a buffer to a sealed source voice.");
-
-                //main processing
-                SourceVoice srcVoiceInstance = (srcVoice.Reference as SourceVoice);
-                srcVoiceInstance.SetOutputVoices(new VoiceSendDescriptor[] { new VoiceSendDescriptor(0U, dstVoice.Reference) });
-
-                if (!expectMore && srcVoice.State != XAudio2VoiceState.InUseEnding)
-                    srcVoice.State = XAudio2VoiceState.InUseEnding;
-                else if (expectMore && srcVoice.State == XAudio2VoiceState.NotSubmitted)
-                    srcVoice.State = XAudio2VoiceState.InUsePersisting;
-
-                AudioBuffer buffer = new AudioBuffer(expectMore ? 0 : XAudio2Output.EndOfStream, data, 0, 0, 0, 0, 0, new IntPtr(source));
-                srcVoiceInstance.SubmitSourceBuffer(buffer, null);
-
-                srcVoiceInstance.Start();
+                MasteringVoice masteringVoice = this.XAudio2.CreateMasteringVoice(inputFormat.NumberChannels, inputFormat.SamplesPerSec);
+                masteringIndex = this.destinationVoices.Count;
+                this.destinationVoices.Add(new XAudio2VoiceReference<Voice>(masteringVoice));
             }
+            return masteringIndex;
+        }
+
+        /// <summary>Gets the default audio renderer</summary>
+        /// <returns>An Int32 usable to re-reference the default playback rendering object</returns>
+        public override Int32 GetDefaultRenderer()
+        {
+            Int32 defaultMaseringVoiceIndex = -1;
+
+            if (this.destinationVoices != null && this.destinationVoices.Count > 0)
+                defaultMaseringVoiceIndex = 0;
+
+            return defaultMaseringVoiceIndex;
         }
 
         /// <summary>Submit data for playback to the playback device, indicating whether or not it should finalize after this buffer and whether or not to play immediately</summary>
         /// <param name="data">Data to submit</param>
         /// <param name="source">Source to submit data to</param>
-        /// <param name="destination">Destination to output submission to</param>
         /// <param name="expectMore">Flag indicating whether to expect more data</param>
         /// <param name="startPlayback">Flag indicating whether start playback</param>
         /// <remarks>Does no looping or anything, but it is possible to set that all up.</remarks>
-        public void SubmitData(Byte[] data, Int32 source, Int32 destination, Boolean expectMore = false, Boolean startPlayback = true)
+        public override void SubmitData(Byte[] data, Int32 source, Boolean expectMore = false, Boolean startPlayback = true)
         {
             lock (XAudio2Output.singletonLock)
             {
                 XAudio2SourceVoiceReference<SourceVoice> srcVoice = this.sourceVoices[source];
-                XAudio2VoiceReference<Voice> dstVoice = this.destinationVoices[destination];
 
                 //error checking
                 if (srcVoice == null)
                     throw new ArgumentException(String.Format("The unique identifier for the source Voice {0} was null", source));
-
-                if (dstVoice == null)
-                    throw new ArgumentException(String.Format("The unique identifier for the destination Voice {0} was null", destination));
 
                 if (expectMore && (srcVoice.State == XAudio2VoiceState.InUseEnding || srcVoice.State == XAudio2VoiceState.Depleted))
                     throw new InvalidOperationException("Cannot submit a buffer to a sealed source voice.");
 
                 //main processing
                 SourceVoice srcVoiceInstance = (srcVoice.Reference as SourceVoice);
-                srcVoiceInstance.SetOutputVoices(new VoiceSendDescriptor[] { new VoiceSendDescriptor(0U, dstVoice.Reference) });
 
                 if (!expectMore && srcVoice.State != XAudio2VoiceState.InUseEnding)
                     srcVoice.State = XAudio2VoiceState.InUseEnding;
@@ -254,20 +250,21 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
                     srcVoice.State = XAudio2VoiceState.InUsePersisting;
 
                 AudioBuffer buffer = new AudioBuffer(expectMore ? 0 : XAudio2Output.EndOfStream, data, 0, 0, 0, 0, 0, new IntPtr(source));
-                srcVoiceInstance.SubmitSourceBuffer(buffer, null);
+                ResultCode rc = srcVoiceInstance.SubmitSourceBuffer(buffer, null);
 
                 if (startPlayback)
                     srcVoiceInstance.Start();
             }
         }
 
+        /*
         /// <summary>Submit data for playback to the playback device, indicating whether or not it should finalize after this buffer and whether or not to play immediately</summary>
         /// <param name="data">Data to submit</param>
         /// <param name="source">Source to submit data to</param>
         /// <param name="expectMore">Flag indicating whether to expect more data</param>
         /// <param name="startPlayback">Flag indicating whether start playback</param>
         /// <remarks>Does no looping or anything, and intended to be used after a preliminary SubmitData(...) call</remarks>
-        public void SubmitSubsequentData(Byte[] data, Int32 source, Boolean expectMore = true, Boolean startPlayback = false)
+        public void SubmitSubsequentData(Byte[] data, Int32 source, Boolean expectMore, Boolean startPlayback)
         {
             lock (XAudio2Output.singletonLock)
             {
@@ -289,12 +286,13 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
                     srcVoice.State = XAudio2VoiceState.InUsePersisting;
 
                 AudioBuffer buffer = new AudioBuffer(expectMore ? 0 : XAudio2Output.EndOfStream, data, 0, 0, 0, 0, 0, new IntPtr(source));
-                srcVoiceInstance.SubmitSourceBuffer(buffer, null);
+                ResultCode rc = srcVoiceInstance.SubmitSourceBuffer(buffer, null);
 
                 if (startPlayback)
                     srcVoiceInstance.Start();
             }
         }
+        */
 
         /// <summary>Starts playback of the source voice</summary>
         /// <param name="source">Source to submit data to</param>
@@ -334,11 +332,19 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
 
         #region Callback Passthrough
         /// <summary>Adds an event handler to request further data</summary>
-        /// <param name="sourcKey">Source key of object to add data to</param>
+        /// <param name="sourceKey">Source key of object to add data to</param>
         /// <param name="handler">Delegate to add more data</param>
-        public override void AddSourceNeedDataEventhandler(Int32 sourcKey, AudioNeedsMoreDataHandler handler)
+        public override void AddSourceNeedsDataEventHandler(Int32 sourceKey, Action handler)
         {
-            this.sourceVoices[sourcKey].NeedMoreSampleData += handler;
+            this.sourceVoices[sourceKey].NeedMoreSampleData += handler;
+        }
+
+        /// <summary>Indicates whether or not the instance currently has a connection to a NeedMoreSampleData handler</summary>
+        /// <param name="sourceKey">source key to a audio source</param>
+        /// <returns>A Flag indicating whether the event handler has been set</returns>
+        public override Boolean HasSourceNeedsDataEventHandler(Int32 sourceKey)
+        {
+            return this.sourceVoices[sourceKey].HasNeedsMoreSampeDataAttached();
         }
         #endregion
 
@@ -362,6 +368,13 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
                     }
                 }
             }
+        }
+
+        /// <summary>Disposes of the playback mechanism created by <see cref="CreatePlayback"/> and referenced by the value it returned</summary>
+        /// <param name="playbackSource">Integer key created by <see cref="CreatePlayback"/></param>
+        public override void DisposePlayback(Int32 playbackSource)
+        {
+            this.DisposeSourceVoice(playbackSource);
         }
     }
 }

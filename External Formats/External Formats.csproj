@@ -120,7 +120,6 @@
     <Compile Include="Image\JPEG\Scan Header.cs" />
     <Compile Include="Image\JPEG\Scan.cs" />
     <Compile Include="Multimedia\Audio Stream Renderer.cs" />
-    <Compile Include="Multimedia\AVPicture Data Container.cs" />
     <Compile Include="Multimedia\Video Stream Renderer.cs" />
     <Compile Include="Multimedia\IStreamRenderManager.cs" />
     <Compile Include="Multimedia\Multimedia Movie.cs" />

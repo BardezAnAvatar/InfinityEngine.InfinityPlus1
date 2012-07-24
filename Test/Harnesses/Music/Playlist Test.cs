@@ -26,7 +26,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Music
         protected Playlist playlist { get; set; }
 
         /// <summary>Unique key context for the output source</summary>
-        protected Int32 OutputSoundKey;
+        protected Int32 OutputSoundSourceKey;
+
+        /// <summary>Unique key context for the output rendering destination</summary>
+        protected Int32 OutputSoundRenderingKey { get; set; }
         #endregion
 
         #region Construction
@@ -83,17 +86,20 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Music
 
             this.Output = XAudio2Output.Instance;
 
+            //keep track of the output rendering reference
+            this.OutputSoundRenderingKey = Output.GetDefaultRenderer();
+
             //load up the initial Source voice
-            this.OutputSoundKey = Output.CreatePlayback(this.playlist.WaveFormat);
+            this.OutputSoundSourceKey = Output.CreatePlayback(this.playlist.WaveFormat, this.OutputSoundRenderingKey);
 
             //Adjust callback(s)
-            this.Output.AddSourceNeedDataEventhandler(this.OutputSoundKey, new AudioNeedsMoreDataHandler(this.NeedsMoreSamples));
+            this.Output.AddSourceNeedsDataEventHandler(this.OutputSoundSourceKey, new Action(this.NeedsMoreSamples));
 
             //submit first data
             this.NeedsMoreSamples();
 
             //play audio & Let the sound play
-            this.Output.StartPlayback(this.OutputSoundKey);
+            this.Output.StartPlayback(this.OutputSoundSourceKey);
 
             this.DoPostMessage(new MessageEventArgs("Waiting for playlist interrupt...", "Waiting", this.playlist.PlaylistName));
         }
@@ -102,7 +108,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Music
         public void NeedsMoreSamples()
         {
             Byte[] samples = this.playlist.GetNext();
-            this.Output.SubmitSubsequentData(samples, this.OutputSoundKey, !this.playlist.Interrupted);
+            this.Output.SubmitData(samples, this.OutputSoundSourceKey, !this.playlist.Interrupted, false);
         }
 
         /// <summary>Waits for the playlist to finish playback buffer</summary>
@@ -112,7 +118,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Music
             Boolean isRunning = true;
             while (isRunning)
             {
-                VoiceState state = Output.GetSourceVoiceState(this.OutputSoundKey);
+                VoiceState state = Output.GetSourceVoiceState(this.OutputSoundSourceKey);
                 isRunning = (state != null) && (state.BuffersQueued > 0);
                 Thread.Sleep(10);
             }

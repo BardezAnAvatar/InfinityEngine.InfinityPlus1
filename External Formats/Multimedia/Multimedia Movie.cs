@@ -178,8 +178,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
             this.libavContainer.OpenMediaFile(path);
             this.libavContainer.ReadStreamInfo();
 
+            Int32 bufferSize = Int32.Parse(Configuration.ConfigurationHandlerMulti.GetSettingValue("LibAVStreamBufferSize"));
+
             IList<StreamInfo> streams = this.libavContainer.Streams;
-            this.buffers = new StreamBuffers(streams);
+            this.buffers = new StreamBuffers(streams, bufferSize);
 
             //copy a list of indeces to initialize
             Int32[] streamIndeces = new Int32[streams.Count];

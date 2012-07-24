@@ -19,10 +19,10 @@
             }
 
             if (disposing) 
-                if (this.VideoController != null)
+                if (this.MultimediaController != null)
                 {
-                    this.VideoController.Dispose();
-                    this.VideoController = null;
+                    this.MultimediaController.Dispose();
+                    this.MultimediaController = null;
                 }
 
             base.Dispose(disposing);

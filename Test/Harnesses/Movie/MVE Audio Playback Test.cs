@@ -32,7 +32,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Movie
         protected MveManager mve;
 
         /// <summary>Unique key context for the output source</summary>
-        protected Int32 OutputSoundKey { get; set; }
+        protected Int32 OutputSourceSoundKey { get; set; }
+
+        /// <summary>Unique key context for the output destination</summary>
+        protected Int32 OutputRenderingSoundKey { get; set; }
 
         /// <summary>Audio stream index to play back</summary>
         protected Int32 AudioStream { get; set; }
@@ -120,17 +123,20 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Movie
             this.Output = XAudio2Output.Instance;
             this.AudioBlockIndex = 0;
 
+            //keep track of the output rendering reference
+            this.OutputRenderingSoundKey = Output.GetDefaultRenderer();
+
             //load up the initial Source voice
-            this.OutputSoundKey = Output.CreatePlayback(this.Mve.WaveFormat);
+            this.OutputSourceSoundKey = Output.CreatePlayback(this.Mve.WaveFormat, this.OutputRenderingSoundKey);
 
             //Adjust callback(s)
-            this.Output.AddSourceNeedDataEventhandler(this.OutputSoundKey, new AudioNeedsMoreDataHandler(this.NeedsMoreSamples));
+            this.Output.AddSourceNeedsDataEventHandler(this.OutputSourceSoundKey, new Action(this.NeedsMoreSamples));
 
             //submit first data
             this.NeedsMoreSamples();
 
             //play audio & Let the sound play
-            this.Output.StartPlayback(this.OutputSoundKey);
+            this.Output.StartPlayback(this.OutputSourceSoundKey);
 
             this.DoPostMessage(new MessageEventArgs("Playing Audio...", "Playing", "Audio"));
         }
@@ -141,7 +147,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Movie
             Byte[] samples = this.Mve.GetAudioBlock(this.AudioBlockIndex, this.AudioStream);
             ++this.AudioBlockIndex;
 
-            this.Output.SubmitSubsequentData(samples, this.OutputSoundKey, this.AudioBlockIndex < this.Mve.AudioBlockCount(this.AudioStream));
+            this.Output.SubmitData(samples, this.OutputSourceSoundKey, this.AudioBlockIndex < this.Mve.AudioBlockCount(this.AudioStream), false);
         }
 
         /// <summary>Method exposing a stop command</summary>

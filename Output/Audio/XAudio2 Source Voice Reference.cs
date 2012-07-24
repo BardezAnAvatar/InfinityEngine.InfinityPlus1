@@ -17,10 +17,25 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
             this.RegisterCallbacks();
         }
 
+
         #region Events
         /// <summary>Public event handler for getting more sample data</summary>
-        public event AudioNeedsMoreDataHandler NeedMoreSampleData;
+        public event Action NeedMoreSampleData;
         #endregion
+
+        #region Event Control
+        public Boolean HasNeedsMoreSampeDataAttached()
+        {
+            return this.NeedMoreSampleData == null;
+        }
+
+        public void ClearNeedsMoreSampeDataAttached()
+        {
+            this.NeedMoreSampleData = null;
+        }
+        #endregion
+
+
 
         #region Callback
         /// <summary>Registers local handlers to callback events</summary>
@@ -79,7 +94,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
         internal virtual void ProcessingPassStartHandler(UInt32 bytesRequired)
         {
             if (bytesRequired > 0 && (this.State != XAudio2VoiceState.InUseEnding && this.State != XAudio2VoiceState.Depleted))
-                this.NeedMoreSampleData(); //Raise the event
+                this.RaiseNeedMore(); //Raise the event
         }
         #endregion
 
@@ -101,7 +116,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
 
         /// <summary>Adds an event handler to request further data</summary>
         /// <param name="handler">Delegate to add more data</param>
-        public void AddSourceNeedDataEventhandler(AudioNeedsMoreDataHandler handler)
+        public void AddSourceNeedDataEventhandler(Action handler)
         {
             this.NeedMoreSampleData += handler;
         }
@@ -125,7 +140,8 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
         /// <summary>Raises the NeedMore event</summary>
         public void RaiseNeedMore()
         {
-            this.NeedMoreSampleData();
+            if (this.NeedMoreSampleData != null)
+                this.NeedMoreSampleData();
         }
         #endregion
 

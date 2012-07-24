@@ -66,10 +66,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
         /// <param name="time">Time code to render by</param>
         public void AttemptRender(TimeSpan time)
         {
+            //TODO: lock around this
+
+
             if (this.AudioBuffer.Process)
             {
                 FrameAudioInt16 peek = this.AudioBuffer.PeekFrame();
-                if (peek != null && peek.GetPresentationTimeSpan(this.AudioBuffer.TimeBase) < time)
+                if (peek != null && peek.GetPresentationStartTimeSpan(this.AudioBuffer.TimeBase) < time)
                 {
                     peek = this.AudioBuffer.ConsumeFrame();
                     this.RaiseRenderAudio(time, peek.Data);
@@ -98,9 +101,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
         {
             WaveFormatEx waveFormat = new WaveFormatEx();
             waveFormat.NumberChannels = Convert.ToUInt16(this.AudioBuffer.Codec.ChannelCount);
-            waveFormat.FormatTag = (UInt16)DataFormat.PCM;
+            waveFormat.FormatTag = (UInt16)DataFormat.PCM;  //this may differ in very specific conditions.
             waveFormat.SamplesPerSec = Convert.ToUInt32(this.AudioBuffer.Codec.SampleRate);
+
+            //HACK: This is not guaranteed
             waveFormat.BitsPerSample = Convert.ToUInt16(16);
+
             waveFormat.BlockAlignment = Convert.ToUInt16((waveFormat.BitsPerSample / 8) * waveFormat.NumberChannels);
             waveFormat.AverageBytesPerSec = waveFormat.SamplesPerSec * waveFormat.BlockAlignment;
             waveFormat.Size = 0;    //no extra data; this is strictly a WaveFormatEx instance 

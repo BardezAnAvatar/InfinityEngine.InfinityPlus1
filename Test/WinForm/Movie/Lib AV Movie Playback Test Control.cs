@@ -11,6 +11,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.Output.Audio;
 using Bardez.Projects.ReusableCode;
+using Bardez.Projects.Win32.Audio;
 
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
@@ -50,8 +51,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
         /// <summary>Stream renderer for audio stream</summary>
         protected AudioStreamRenderManager AudioRenderManager { get; set; }
 
-        /// <summary>Acceses the video playback controller</summary>
-        protected MultimediaMovie VideoController { get; set; }
+        /// <summary>Acceses the multimedia playback controller</summary>
+        protected MultimediaMovie MultimediaController { get; set; }
 
         /// <summary>Represents the Direct2D controller unique key for the currently displayed video frame</summary>
         protected Int32 frameKey { get; set; }
@@ -62,11 +63,14 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
         /// <summary>Frame number currently displayed</summary>
         protected Int32 frameCountNumber { get; set; }
 
-        /// <summary>Reference to XAudio2 object</summary>
-        protected XAudio2Output AudioOutput { get; set; }
+        /// <summary>Reference to an AudioOutput instance</summary>
+        protected AudioOutput AudioOutputController { get; set; }
 
         /// <summary>Unique key context for the output source</summary>
-        protected Int32 AudioOutputSoundKey { get; set; }
+        protected Int32 AudioOutputSoundSourceKey { get; set; }
+
+        /// <summary>Unique key context for the output destination</summary>
+        protected Int32 AudioOutputSoundRenderingKey { get; set; }
 
         /// <summary>Audio stream index to play back</summary>
         protected Int32 AudioStream { get; set; }
@@ -111,6 +115,39 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
 
             this.RenderAudio = true;
             this.IsPlayingAudio = false;
+            this.AudioOutputSoundSourceKey = -1;
+        }
+
+        /// <summary>Initializes the XAudio2 playback</summary>
+        protected void InitializeAudio()
+        {
+            //get an instance for audio output
+            if (this.AudioOutputController == null)
+                this.AudioOutputController = XAudio2Output.Instance;    //could be OpenAL or whatever
+
+            //dispose of the current output context
+            if (this.AudioOutputSoundSourceKey > -1 && this.AudioOutputController != null)
+            {
+                this.AudioOutputController.DisposePlayback(this.AudioOutputSoundSourceKey);
+                this.AudioOutputSoundSourceKey = -1;
+            }
+
+            //create a new one
+            if (this.AudioRenderManager != null)
+            {
+                //get a reference to the wave format data
+                WaveFormatEx audioFormat = this.AudioRenderManager.GetWaveFormat();
+
+                //create renderer
+                this.AudioOutputSoundRenderingKey = this.AudioOutputController.GetDefaultRenderer();
+
+                //create source
+                this.AudioOutputSoundSourceKey = this.AudioOutputController.CreatePlayback(audioFormat, this.AudioOutputSoundRenderingKey);
+
+                //Adjust callback(s)
+                if (! this.AudioOutputController.HasSourceNeedsDataEventHandler(this.AudioOutputSoundSourceKey))
+                    this.AudioOutputController.AddSourceNeedsDataEventHandler(this.AudioOutputSoundSourceKey, new Action(this.NeedsMoreAudioSamples));
+            }
         }
         #endregion
 
@@ -184,9 +221,9 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
         {
             lock (this.interfaceLock)
             {
-                if (this.VideoController != null)
+                if (this.MultimediaController != null)
                 {
-                    this.VideoController.ResetVideo();
+                    this.MultimediaController.ResetVideo();
                     this.previousTime = DateTime.MinValue;
                     this.frameCountNumber = 0;
                     this.lblFrameNumberDisplay.Text = "n/a";
@@ -270,13 +307,13 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
                 if (continueProcess = (filePath == this.currentMoviePath))
                 {
                     //stop the existing manager. This method should not be invoked if already on the correct file.
-                    if (this.VideoController != null)
+                    if (this.MultimediaController != null)
                     {
                         this.StopPlayback();
 
                         //dispose and deallocate, hopefully
-                        this.VideoController.Dispose();
-                        this.VideoController = null;
+                        this.MultimediaController.Dispose();
+                        this.MultimediaController = null;
                         this.AudioRenderManager = null;
                         this.VideoRenderManager = null;
                     }
@@ -290,7 +327,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
                         //assign the video controller
                         if (continueProcess = (filePath == this.currentMoviePath))
                         {
-                            this.VideoController = movie;
+                            this.MultimediaController = movie;
                             assignedManagerToField = true;
 
                             //attach event listeners
@@ -323,7 +360,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
                     }
 
                     if (assignedManagerToField)
-                        this.VideoController = null;
+                        this.MultimediaController = null;
                 }
             }
         }
@@ -336,7 +373,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
         {
             lock (this.frameKeyLock)
             {
-                if (this.VideoController != null)
+                if (this.MultimediaController != null)
                 {
                     if (frame == null)
                         this.StopPlayback();
@@ -369,10 +406,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
         /// <summary>Pauses video (and possibly audio) playback</summary>
         protected virtual void PausePlayback()
         {
-            if (this.VideoController != null)
+            if (this.MultimediaController != null)
             {
-                this.VideoController.StopPlayback();
-                this.VideoController.ClearTimerElapsed();
+                this.MultimediaController.StopPlayback();
+                this.MultimediaController.ClearTimerElapsed();
             }
         }
 
@@ -386,8 +423,25 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
         /// <summary>Starts multimedia playback</summary>
         protected virtual void StartPlayback()
         {
-            if (this.VideoController != null)
-                this.VideoController.StartPlayback();
+            if (this.MultimediaController != null)
+                this.MultimediaController.StartPlayback();
+        }
+        #endregion
+
+
+        #region Audio Playback
+        /// <summary>Plays back an audio packet, adding it to the output controller's source</summary>
+        /// <param name="renderTime">Useless parameter?</param>
+        /// <param name="data">Audio data to output</param>
+        public void ProcessAudioPacket(TimeSpan renderTime, Byte[] data)
+        {
+            if (this.AudioOutputController != null)
+                this.AudioOutputController.SubmitData(data, this.AudioOutputSoundSourceKey, true); //true = leave open for subsequent submissions
+        }
+
+        public void NeedsMoreAudioSamples()
+        {
+            this.AudioRenderManager.AttemptRender(TimeSpan.MaxValue);
         }
         #endregion
 
@@ -410,17 +464,25 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
         /// <summary>Sets the appropriate rendering streams for the current LibAV multimedia format</summary>
         protected void SetRenderStreams()
         {
-            this.VideoRenderManager = this.VideoController.GetBestVideoStream();
+            this.VideoRenderManager = this.MultimediaController.GetBestVideoStream();
             this.VideoRenderManager.Render += this.ProcessNextVideoFrame;
             this.VideoRenderManager.Process = true;
-            //this.SetSelectedAudioStream();
+
+            //go off of selection
+            this.ControlAction(this.cboAudioStream, () => this.SetSelectedAudioStream());
+            // ... or pick 'the best' one
+            //this.AudioRenderManager = this.VideoController.GetBestAudioStream();
+
+            this.AudioRenderManager.Process = true;
+            this.InitializeAudio();
+            this.AudioRenderManager.Render += this.ProcessAudioPacket;
         }
 
         /// <summary>Sets the selected audio stream</summary>
         /// <param name="streamNumber">Number of the stream to set</param>
         protected void SetSelectedAudioStream(Int32 streamNumber)
         {
-            this.AudioRenderManager = this.VideoController.AudioStreamRenderers[streamNumber];
+            this.AudioRenderManager = this.MultimediaController.AudioStreamRenderers[streamNumber];
         }
 
         /// <summary>Sets the selected audio stream</summary>

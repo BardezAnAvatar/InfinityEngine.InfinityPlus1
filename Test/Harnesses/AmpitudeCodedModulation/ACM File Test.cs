@@ -120,14 +120,16 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
             WaveFormatEx waveFormat = file.GetWaveFormat();
             Byte[] sampleData = file.GetSampleData();
 
-            Int32 key = Output.CreatePlayback(waveFormat);
-            Output.SubmitData(sampleData, key, 0, false);
+            Int32 destinationKey = Output.GetDefaultRenderer();
+            Int32 sourceKey = Output.CreatePlayback(waveFormat, destinationKey);
+
+            Output.SubmitData(sampleData, sourceKey, false);
 
             //play audio & Let the sound play
             Boolean isRunning = true;
             while (isRunning)
             {
-                VoiceState state = Output.GetSourceVoiceState(key);
+                VoiceState state = Output.GetSourceVoiceState(sourceKey);
                 isRunning = (state != null) && (state.BuffersQueued > 0);
                 Thread.Sleep(10);
             }
@@ -152,38 +154,38 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
         {
             this.ReadFiles();
 
-            Int32 key = -1; //key to the source voice
             if (this.AudioFiles.Count > 0)
             {
                 //load up the initial Source voice
                 WaveFormatEx waveFormat = this.AudioFiles[0].AcmHeader.GetWaveFormat();
-                key = Output.CreatePlayback(waveFormat);
+                Int32 destinationKey = Output.GetDefaultRenderer(); //key to the destination output voice
+                Int32 sourceKey = Output.CreatePlayback(waveFormat, destinationKey); //key to the source voice
 
                 //prime before loop
                 Byte[] sampleData = this.AudioFiles[0].GetSampleData();
-                Output.SubmitData(sampleData, key, 0, true, false);
+                Output.SubmitData(sampleData, sourceKey, true, false);
 
                 //loop
                 for (Int32 index = 1; index < Math.Min(11, this.AudioFiles.Count); ++index)  //I counted 12 samples to sound out the main audio loop
                 {
                     sampleData = this.AudioFiles[index].GetSampleData();
-                    Output.SubmitSubsequentData(sampleData, key, (this.AudioFiles.Count - 1) > index);
+                    Output.SubmitData(sampleData, sourceKey, (this.AudioFiles.Count - 1) > index, false);
                 }
 
                 //final entry
                 if (this.AudioFiles.Count > 11)
                 {
                     sampleData = this.AudioFiles[11].GetSampleData();
-                    Output.SubmitSubsequentData(sampleData, key, false, false);
+                    Output.SubmitData(sampleData, sourceKey, false, false);
                 }
 
-                this.Output.StartPlayback(key);
+                this.Output.StartPlayback(sourceKey);
 
                 //play audio & Let the sound play
                 Boolean isRunning = true;
                 while (isRunning)
                 {
-                    VoiceState state = Output.GetSourceVoiceState(key);
+                    VoiceState state = Output.GetSourceVoiceState(sourceKey);
                     isRunning = (state != null) && (state.BuffersQueued > 0);
                     Thread.Sleep(10);
                 }
