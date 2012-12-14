@@ -41,8 +41,13 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
         public abstract void AddSourceNeedsDataEventHandler(Int32 sourcKey, Action handler);
 
         /// <summary>Indicates whether or not the instance currently has a connection to a NeedMoreSampleData handler</summary>
-        /// <param name="sourceKey">source key to a audio source</param>
+        /// <param name="sourceKey">Source key to an audio source</param>
         /// <returns>A Flag indicating whether the event handler has been set</returns>
         public abstract Boolean HasSourceNeedsDataEventHandler(Int32 sourceKey);
+
+        /// <summary>Gets a flag indicating whether the audio source is accepting input to its queue</summary>
+        /// <param name="sourceKey">Source key to an audio source</param>
+        /// <returns>A flag indicating whether the audio source is accepting input to its queue</returns>
+        public abstract Boolean CanSubmitBuffer(Int32 sourceKey);
     }
 }
