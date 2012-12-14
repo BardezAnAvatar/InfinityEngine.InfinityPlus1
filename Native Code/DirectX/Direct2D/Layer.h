@@ -5,7 +5,7 @@
 #include <D2D1.h>
 #include "SizeF.h"
 
-using namespace Bardez::Projects::Win32;
+using namespace Bardez::Projects::BasicStructures::Win32;
 
 namespace Bardez
 {

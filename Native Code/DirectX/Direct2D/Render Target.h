@@ -34,7 +34,7 @@
 #include "Stroke Style.h"
 
 using namespace System::Threading;
-using namespace Bardez::Projects::Win32;
+using namespace Bardez::Projects::BasicStructures::Win32;
 
 namespace Bardez
 {

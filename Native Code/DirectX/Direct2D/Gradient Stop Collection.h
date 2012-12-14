@@ -7,7 +7,7 @@
 #include "Gamma.h"
 #include "Gradient Stop.h"
 
-using namespace Bardez::Projects::Win32;
+using namespace Bardez::Projects::BasicStructures::Win32;
 
 namespace Bardez
 {

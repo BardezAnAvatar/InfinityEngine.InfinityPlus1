@@ -2,7 +2,7 @@
 #ifndef Bardez_Projects_DirectX_Direct2D_Geometry
 #define Bardez_Projects_DirectX_Direct2D_Geometry
 
-using namespace Bardez::Projects::Win32;
+using namespace Bardez::Projects::BasicStructures::Win32;
 
 namespace Bardez
 {

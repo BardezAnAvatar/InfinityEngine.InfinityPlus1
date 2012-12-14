@@ -18,7 +18,7 @@
 //used to force the linker to link to the correct library
 #pragma comment(lib, "D2D1.lib") //for C extern calls
 
-using namespace Bardez::Projects::Win32;
+using namespace Bardez::Projects::BasicStructures::Win32;
 
 namespace Bardez
 {

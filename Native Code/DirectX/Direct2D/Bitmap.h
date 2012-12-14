@@ -10,7 +10,7 @@
 #include "SizeU.h"
 #include "Type Declarations.h"
 
-using namespace Bardez::Projects::Win32;
+using namespace Bardez::Projects::BasicStructures::Win32;
 
 namespace Bardez
 {

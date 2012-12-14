@@ -5,7 +5,7 @@
 #include "Render Target.h"
 #include "Control State.h"
 
-using namespace Bardez::Projects::Win32;
+using namespace Bardez::Projects::BasicStructures::Win32;
 
 namespace Bardez
 {

@@ -7,7 +7,7 @@
 #include "Dash Style.h"
 #include "Line Joint.h"
 
-using namespace Bardez::Projects::Win32;
+using namespace Bardez::Projects::BasicStructures::Win32;
 
 namespace Bardez
 {
