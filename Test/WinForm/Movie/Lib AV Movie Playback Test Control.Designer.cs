@@ -51,14 +51,14 @@
             this.btnInitialize = new System.Windows.Forms.Button();
             this.btnClearDisplay = new System.Windows.Forms.Button();
             this.btnChooseColor = new System.Windows.Forms.Button();
+            this.chkbxRenderAudio = new System.Windows.Forms.CheckBox();
             this.splitContainerHarnessResults = new System.Windows.Forms.SplitContainer();
             this.lstboxFiles = new System.Windows.Forms.ListBox();
             this.lblListBoxDescriptor = new System.Windows.Forms.Label();
-            this.direct2dRenderControl = new Bardez.Projects.InfinityPlus1.Output.Visual.Direct2dRenderControl();
-            this.lblRenderResults = new System.Windows.Forms.Label();
-            this.chkbxRenderAudio = new System.Windows.Forms.CheckBox();
             this.lblStream = new System.Windows.Forms.Label();
             this.cboAudioStream = new System.Windows.Forms.ComboBox();
+            this.direct2dRenderControl = new Bardez.Projects.InfinityPlus1.Output.Visual.Direct2dRenderControl();
+            this.lblRenderResults = new System.Windows.Forms.Label();
             this.tblMain.SuspendLayout();
             this.pnlTest.SuspendLayout();
             this.pnlVideoControls.SuspendLayout();
@@ -106,9 +106,9 @@
             this.pnlVideoControls.Controls.Add(this.btnStopPlayback);
             this.pnlVideoControls.Controls.Add(this.btnStartPlayback);
             this.pnlVideoControls.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlVideoControls.Location = new System.Drawing.Point(287, 0);
+            this.pnlVideoControls.Location = new System.Drawing.Point(378, 0);
             this.pnlVideoControls.Name = "pnlVideoControls";
-            this.pnlVideoControls.Size = new System.Drawing.Size(726, 41);
+            this.pnlVideoControls.Size = new System.Drawing.Size(635, 41);
             this.pnlVideoControls.TabIndex = 40;
             this.pnlVideoControls.Visible = false;
             // 
@@ -230,6 +230,19 @@
             this.btnChooseColor.UseVisualStyleBackColor = true;
             this.btnChooseColor.Click += new System.EventHandler(this.btnChooseColor_Click);
             // 
+            // chkbxRenderAudio
+            // 
+            this.chkbxRenderAudio.AutoSize = true;
+            this.chkbxRenderAudio.Checked = true;
+            this.chkbxRenderAudio.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkbxRenderAudio.Location = new System.Drawing.Point(290, 11);
+            this.chkbxRenderAudio.Name = "chkbxRenderAudio";
+            this.chkbxRenderAudio.Size = new System.Drawing.Size(90, 17);
+            this.chkbxRenderAudio.TabIndex = 41;
+            this.chkbxRenderAudio.Text = "Render audio";
+            this.chkbxRenderAudio.UseVisualStyleBackColor = true;
+            this.chkbxRenderAudio.CheckedChanged += new System.EventHandler(this.chkbxRenderAudio_CheckedChanged);
+            // 
             // splitContainerHarnessResults
             // 
             this.splitContainerHarnessResults.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -258,7 +271,7 @@
             this.lstboxFiles.FormattingEnabled = true;
             this.lstboxFiles.Location = new System.Drawing.Point(0, 13);
             this.lstboxFiles.Name = "lstboxFiles";
-            this.lstboxFiles.Size = new System.Drawing.Size(333, 368);
+            this.lstboxFiles.Size = new System.Drawing.Size(333, 334);
             this.lstboxFiles.TabIndex = 110;
             this.lstboxFiles.SelectedIndexChanged += new System.EventHandler(this.lstboxFiles_SelectedIndexChanged);
             // 
@@ -271,6 +284,27 @@
             this.lblListBoxDescriptor.Size = new System.Drawing.Size(73, 13);
             this.lblListBoxDescriptor.TabIndex = 100;
             this.lblListBoxDescriptor.Text = "Loaded items:";
+            // 
+            // lblStream
+            // 
+            this.lblStream.AutoSize = true;
+            this.lblStream.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblStream.Location = new System.Drawing.Point(0, 347);
+            this.lblStream.Name = "lblStream";
+            this.lblStream.Size = new System.Drawing.Size(113, 13);
+            this.lblStream.TabIndex = 64;
+            this.lblStream.Text = "Audio Stream Number:";
+            // 
+            // cboAudioStream
+            // 
+            this.cboAudioStream.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.cboAudioStream.FormattingEnabled = true;
+            this.cboAudioStream.Items.AddRange(new object[] {
+            "0"});
+            this.cboAudioStream.Location = new System.Drawing.Point(0, 360);
+            this.cboAudioStream.Name = "cboAudioStream";
+            this.cboAudioStream.Size = new System.Drawing.Size(333, 21);
+            this.cboAudioStream.TabIndex = 63;
             // 
             // direct2dRenderControl
             // 
@@ -290,53 +324,19 @@
             this.lblRenderResults.TabIndex = 120;
             this.lblRenderResults.Text = "Render Output:";
             // 
-            // chkbxRenderAudio
-            // 
-            this.chkbxRenderAudio.AutoSize = true;
-            this.chkbxRenderAudio.Checked = true;
-            this.chkbxRenderAudio.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkbxRenderAudio.Location = new System.Drawing.Point(290, 11);
-            this.chkbxRenderAudio.Name = "chkbxRenderAudio";
-            this.chkbxRenderAudio.Size = new System.Drawing.Size(90, 17);
-            this.chkbxRenderAudio.TabIndex = 41;
-            this.chkbxRenderAudio.Text = "Render audio";
-            this.chkbxRenderAudio.UseVisualStyleBackColor = true;
-            this.chkbxRenderAudio.CheckedChanged += new System.EventHandler(this.chkbxRenderAudio_CheckedChanged);
-
-            // 
-            // lblStream
-            // 
-            this.lblStream.AutoSize = true;
-            this.lblStream.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lblStream.Location = new System.Drawing.Point(0, 379);
-            this.lblStream.Name = "lblStream";
-            this.lblStream.Size = new System.Drawing.Size(113, 13);
-            this.lblStream.TabIndex = 64;
-            this.lblStream.Text = "Audio Stream Number:";
-            // 
-            // cboStream
-            // 
-            this.cboAudioStream.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.cboAudioStream.FormattingEnabled = true;
-            this.cboAudioStream.Items.AddRange(new System.Object[] { "0", });  //default; I'll need to reset for each playback
-            this.cboAudioStream.Location = new System.Drawing.Point(0, 392);
-            this.cboAudioStream.Name = "cboAudioStream";
-            this.cboAudioStream.Size = new System.Drawing.Size(227, 21);
-            this.cboAudioStream.TabIndex = 63;
-
-            // 
-            // HarnessVideoTestControl
+            // LibAVMoviePlaybackTestControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tblMain);
-            this.Name = "HarnessVideoTestControl";
+            this.Name = "LibAVMoviePlaybackTestControl";
             this.Size = new System.Drawing.Size(1019, 438);
             this.tblMain.ResumeLayout(false);
             this.pnlTest.ResumeLayout(false);
             this.pnlVideoControls.ResumeLayout(false);
             this.pnlVideoControls.PerformLayout();
             this.pnlLeftButtons.ResumeLayout(false);
+            this.pnlLeftButtons.PerformLayout();
             this.splitContainerHarnessResults.Panel1.ResumeLayout(false);
             this.splitContainerHarnessResults.Panel1.PerformLayout();
             this.splitContainerHarnessResults.Panel2.ResumeLayout(false);

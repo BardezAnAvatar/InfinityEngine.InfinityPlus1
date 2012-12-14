@@ -145,7 +145,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
                 this.AudioOutputSoundSourceKey = this.AudioOutputController.CreatePlayback(audioFormat, this.AudioOutputSoundRenderingKey);
 
                 //Adjust callback(s)
-                if (! this.AudioOutputController.HasSourceNeedsDataEventHandler(this.AudioOutputSoundSourceKey))
+                if (this.AudioOutputController.HasSourceNeedsDataEventHandler(this.AudioOutputSoundSourceKey))
                     this.AudioOutputController.AddSourceNeedsDataEventHandler(this.AudioOutputSoundSourceKey, new Action(this.NeedsMoreAudioSamples));
             }
         }
@@ -193,7 +193,12 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
         {
             lock (this.interfaceLock)
                 if (this.VideoRenderManager != null)
+                {
                     this.VideoRenderManager.AttemptRender(TimeSpan.MaxValue);
+
+                    //set the controls
+                    this.ToggleResetVideo(true);
+                }
         }
 
         /// <summary>Stops playback of the video</summary>
@@ -251,6 +256,9 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
             lock (this.interfaceLock)
             {
                 String moviePath = this.lstboxFiles.SelectedItem as String;
+
+                //disable movie controls
+                this.ToggleMovieControlAvailability(false);
 
                 //once one is selected, set the visibility of video controls accordingly and start decoding
                 if (moviePath == null)
@@ -333,9 +341,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
                             //attach event listeners
                             if (continueProcess = (filePath == this.currentMoviePath))
                             {
-                                //movie.AudioStreamStarted += () => { this.ControlAction(this.lstboxFiles, this.StartAudioPlayback); };
-                                //movie.AudioStreamStopped += this.StopAudioPlayback;
-
                                 //attach events to the appropriate streams
                                 this.SetRenderStreams();
 
@@ -344,6 +349,9 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
                                 {
                                     //start atual ecoding
                                     movie.StartDecoding();
+
+                                    this.ToggleNextFrame(true);
+                                    this.ToggleStartPlayback(true);
                                 }
                             }
                         }
@@ -418,13 +426,26 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
         {
             this.PausePlayback();
             this.previousTime = DateTime.MinValue;
+
+            //set the controls
+            this.ToggleStartPlayback(true);
+            this.ToggleNextFrame(true);
+            this.ToggleStopPlayback(false);
         }
 
         /// <summary>Starts multimedia playback</summary>
         protected virtual void StartPlayback()
         {
             if (this.MultimediaController != null)
+            {
                 this.MultimediaController.StartPlayback();
+
+                //set the controls
+                this.ToggleStartPlayback(false);
+                this.ToggleNextFrame(false);
+                this.ToggleResetVideo(true);
+                this.ToggleStopPlayback(true);
+            }
         }
         #endregion
 
@@ -436,7 +457,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
         public void ProcessAudioPacket(TimeSpan renderTime, Byte[] data)
         {
             if (this.AudioOutputController != null)
-                this.AudioOutputController.SubmitData(data, this.AudioOutputSoundSourceKey, true); //true = leave open for subsequent submissions
+            {
+                if (this.AudioOutputController.CanSubmitBuffer(this.AudioOutputSoundSourceKey))
+                    this.AudioOutputController.SubmitData(data, this.AudioOutputSoundSourceKey, true); //true = leave open for subsequent submissions
+            }
         }
 
         public void NeedsMoreAudioSamples()
@@ -494,6 +518,47 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
                 index = this.cboAudioStream.SelectedIndex;
 
             this.SetSelectedAudioStream(index);
+        }
+        #endregion
+
+
+        #region Control availability
+        /// <summary>Toggles the availability of all the movie playback controls</summary>
+        /// <param name="available">Flag indicating whether they should be available</param>
+        protected void ToggleMovieControlAvailability(Boolean available)
+        {
+            this.ControlAction(this.btnResetVideo, () => { this.btnResetVideo.Enabled = available; });
+            this.ControlAction(this.btnNextFrame, () => { this.btnNextFrame.Enabled = available; });
+            this.ControlAction(this.btnStartPlayback, () => { this.btnStartPlayback.Enabled = available; });
+            this.ControlAction(this.btnStopPlayback, () => { this.btnStopPlayback.Enabled = available; });
+        }
+
+        /// <summary>Toggles the availability of the stop playback control</summary>
+        /// <param name="available">Flag indicating whether the control should be available</param>
+        protected void ToggleStopPlayback(Boolean available)
+        {
+            this.ControlAction(this.btnStopPlayback, () => { this.btnStopPlayback.Enabled = available; });
+        }
+
+        /// <summary>Toggles the availability of the reset video playback control</summary>
+        /// <param name="available">Flag indicating whether the control should be available</param>
+        protected void ToggleResetVideo(Boolean available)
+        {
+            this.ControlAction(this.btnResetVideo, () => { this.btnResetVideo.Enabled = available; });
+        }
+
+        /// <summary>Toggles the availability of the next frame playback control</summary>
+        /// <param name="available">Flag indicating whether the control should be available</param>
+        protected void ToggleNextFrame(Boolean available)
+        {
+            this.ControlAction(this.btnNextFrame, () => { this.btnNextFrame.Enabled = available; });
+        }
+
+        /// <summary>Toggles the availability of the start playback control</summary>
+        /// <param name="available">Flag indicating whether the control should be available</param>
+        protected void ToggleStartPlayback(Boolean available)
+        {
+            this.ControlAction(this.btnStartPlayback, () => { this.btnStartPlayback.Enabled = available; });
         }
         #endregion
     }
