@@ -26,7 +26,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
         #region Event Control
         public Boolean HasNeedsMoreSampeDataAttached()
         {
-            return this.NeedMoreSampleData == null;
+            return (this.NeedMoreSampleData == null);
         }
 
         public void ClearNeedsMoreSampeDataAttached()
@@ -93,8 +93,22 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
         /// <param name="bytesRequired">The number of bytes that need to be submitted to avoid voice starvation</param>
         internal virtual void ProcessingPassStartHandler(UInt32 bytesRequired)
         {
-            if (bytesRequired > 0 && (this.State != XAudio2VoiceState.InUseEnding && this.State != XAudio2VoiceState.Depleted))
-                this.RaiseNeedMore(); //Raise the event
+            //System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+            //sw.Start();
+
+            if (bytesRequired > 0)
+                switch (this.State)
+                {
+                    case XAudio2VoiceState.InUseEnding:
+                    case XAudio2VoiceState.Depleted:
+                        break;
+                    default:
+                        this.RaiseNeedMore(); //Raise the event
+                        break;
+                }
+
+            //sw.Stop();
+            //System.Diagnostics.Debug.WriteLine(String.Format("Time within XAudio2SourceVoiceReference<VoiceType>.ProcessingPassStartHandler(UInt32 bytesRequired): {0}", sw.Elapsed));
         }
         #endregion
 
