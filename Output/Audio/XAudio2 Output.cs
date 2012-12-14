@@ -89,7 +89,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
             //also, register an output MasteringVoice, since to use it you will almost certainly always need one.
             //Also, you can be lame and assume that index 0 will always be a valid Mastering Voice
 
-            //this should probably use the default system rendering, and submissions submit sample rate transformations as needed, so void list of parameters
+            //this should probably NOT use the default system rendering, and submissions submit sample rate transformations as needed, so void list of parameters IS BAD
             MasteringVoice masteringVoice = this.XAudio2.CreateMasteringVoice();
             this.destinationVoices.Add(new XAudio2VoiceReference<Voice>(masteringVoice));
         }
@@ -176,7 +176,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
                 //register for callback
                 VoiceCallback callback = new VoiceCallback();
 
-                SourceVoice sourceVoice = this.XAudio2.CreateSourceVoice(inputData, 0U, 2.0f, callback);
+                SourceVoice sourceVoice = this.XAudio2.CreateSourceVoice(inputData, XAudio2Interface.VoiceFlags.NoSampleRateConversion /* 0U */, 2.0f, callback);
                 sourceIndex = this.sourceVoices.Count;
                 this.sourceVoices.Add(new XAudio2SourceVoiceReference<SourceVoice>(sourceVoice));
 
@@ -244,6 +244,14 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
                 //main processing
                 SourceVoice srcVoiceInstance = (srcVoice.Reference as SourceVoice);
 
+                if (startPlayback)
+
+
+                //Start the buffer?
+                if (startPlayback)
+                    startPlayback = (srcVoice.State == XAudio2VoiceState.NotSubmitted);
+
+                //set the voice state
                 if (!expectMore && srcVoice.State != XAudio2VoiceState.InUseEnding)
                     srcVoice.State = XAudio2VoiceState.InUseEnding;
                 else if (expectMore && srcVoice.State == XAudio2VoiceState.NotSubmitted)
@@ -251,48 +259,11 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
 
                 AudioBuffer buffer = new AudioBuffer(expectMore ? 0 : XAudio2Output.EndOfStream, data, 0, 0, 0, 0, 0, new IntPtr(source));
                 ResultCode rc = srcVoiceInstance.SubmitSourceBuffer(buffer, null);
-
+                
                 if (startPlayback)
                     srcVoiceInstance.Start();
             }
         }
-
-        /*
-        /// <summary>Submit data for playback to the playback device, indicating whether or not it should finalize after this buffer and whether or not to play immediately</summary>
-        /// <param name="data">Data to submit</param>
-        /// <param name="source">Source to submit data to</param>
-        /// <param name="expectMore">Flag indicating whether to expect more data</param>
-        /// <param name="startPlayback">Flag indicating whether start playback</param>
-        /// <remarks>Does no looping or anything, and intended to be used after a preliminary SubmitData(...) call</remarks>
-        public void SubmitSubsequentData(Byte[] data, Int32 source, Boolean expectMore, Boolean startPlayback)
-        {
-            lock (XAudio2Output.singletonLock)
-            {
-                XAudio2SourceVoiceReference<SourceVoice> srcVoice = this.sourceVoices[source];
-
-                //error checking
-                if (srcVoice == null)
-                    throw new ArgumentException(String.Format("The unique identifier for the source Voice {0} was null", source));
-
-                if (expectMore && (srcVoice.State == XAudio2VoiceState.InUseEnding || srcVoice.State == XAudio2VoiceState.Depleted))
-                    throw new InvalidOperationException("Cannot submit a buffer to a sealed source voice.");
-
-                //main processing
-                SourceVoice srcVoiceInstance = (srcVoice.Reference as SourceVoice);
-
-                if (!expectMore && srcVoice.State != XAudio2VoiceState.InUseEnding)
-                    srcVoice.State = XAudio2VoiceState.InUseEnding;
-                else if (expectMore && srcVoice.State == XAudio2VoiceState.NotSubmitted)
-                    srcVoice.State = XAudio2VoiceState.InUsePersisting;
-
-                AudioBuffer buffer = new AudioBuffer(expectMore ? 0 : XAudio2Output.EndOfStream, data, 0, 0, 0, 0, 0, new IntPtr(source));
-                ResultCode rc = srcVoiceInstance.SubmitSourceBuffer(buffer, null);
-
-                if (startPlayback)
-                    srcVoiceInstance.Start();
-            }
-        }
-        */
 
         /// <summary>Starts playback of the source voice</summary>
         /// <param name="source">Source to submit data to</param>
@@ -340,7 +311,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
         }
 
         /// <summary>Indicates whether or not the instance currently has a connection to a NeedMoreSampleData handler</summary>
-        /// <param name="sourceKey">source key to a audio source</param>
+        /// <param name="sourceKey">source key to an audio source</param>
         /// <returns>A Flag indicating whether the event handler has been set</returns>
         public override Boolean HasSourceNeedsDataEventHandler(Int32 sourceKey)
         {
@@ -375,6 +346,19 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
         public override void DisposePlayback(Int32 playbackSource)
         {
             this.DisposeSourceVoice(playbackSource);
+        }
+
+        /// <summary>Gets a flag indicating whether the audio source is accepting input to its queue</summary>
+        /// <param name="sourceKey">Source key to an audio source</param>
+        /// <returns>A flag indicating whether the audio source is accepting input to its queue</returns>
+        public override Boolean CanSubmitBuffer(Int32 sourceKey)
+        {
+            lock (XAudio2Output.singletonLock)
+            {
+                XAudio2SourceVoiceReference<SourceVoice> voiceReference = this.sourceVoices[sourceKey];
+                VoiceState state = voiceReference.Reference.GetState();
+                return state.BuffersQueued < SourceVoice.MaximumBuffersQueued;
+            }
         }
     }
 }
