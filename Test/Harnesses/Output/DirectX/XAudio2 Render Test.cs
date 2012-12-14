@@ -3,13 +3,13 @@ using System.IO;
 using System.Text;
 using System.Threading;
 
+using Bardez.Projects.BasicStructures.Win32;
+using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.DirectX.XAudio2;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave;
 using Bardez.Projects.InfinityPlus1.Test;
-using Bardez.Projects.Win32;
-using Bardez.Projects.Win32.Audio;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Output.DirectX
 {
