@@ -19,6 +19,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
 
         /// <summary>Buffer and processing info for this audio stream</summary>
         protected StreamProcessingBuffer<FrameAudioInt16> AudioBuffer { get; set; }
+
+        /// <summary>Locking object to allow the audio renderer to de-couple from the video renderer</summary>
+        private Object renderLock;
         #endregion
 
 
@@ -54,6 +57,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
         public AudioStreamRenderManager(StreamProcessingBuffer<FrameAudioInt16> buffer)
         {
             this.AudioBuffer = buffer;
+            this.renderLock = new Object();
         }
         #endregion
 
@@ -66,16 +70,16 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
         /// <param name="time">Time code to render by</param>
         public void AttemptRender(TimeSpan time)
         {
-            //TODO: lock around this
-
-
-            if (this.AudioBuffer.Process)
+            lock (this.renderLock)
             {
-                FrameAudioInt16 peek = this.AudioBuffer.PeekFrame();
-                if (peek != null && peek.GetPresentationStartTimeSpan(this.AudioBuffer.TimeBase) < time)
+                if (this.AudioBuffer.Process)
                 {
-                    peek = this.AudioBuffer.ConsumeFrame();
-                    this.RaiseRenderAudio(time, peek.Data);
+                    FrameAudioInt16 peek = this.AudioBuffer.PeekFrame();
+                    if (peek != null && peek.GetPresentationStartTimeSpan(this.AudioBuffer.TimeBase) < time)
+                    {
+                        peek = this.AudioBuffer.ConsumeFrame();
+                        this.RaiseRenderAudio(time, peek.Data);
+                    }
                 }
             }
         }
