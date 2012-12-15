@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
+using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Coding;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Opcodes;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Enum;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave.Enums;
-using Bardez.Projects.Win32.Audio;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management
 {

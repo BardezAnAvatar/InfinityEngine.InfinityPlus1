@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Timers;
 
+using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave.Enums;
 using Bardez.Projects.MultiMedia.LibAV;
-using Bardez.Projects.Win32.Audio;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
 {

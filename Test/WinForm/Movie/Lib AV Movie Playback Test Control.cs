@@ -5,13 +5,13 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
+using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.Output.Audio;
 using Bardez.Projects.ReusableCode;
-using Bardez.Projects.Win32.Audio;
 
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie

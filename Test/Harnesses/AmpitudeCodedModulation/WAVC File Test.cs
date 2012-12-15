@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
+using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.DirectX.XAudio2;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.ACM;
@@ -11,7 +12,6 @@ using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave;
 using Bardez.Projects.InfinityPlus1.Output.Audio;
 using Bardez.Projects.InfinityPlus1.Test;
 using Bardez.Projects.ReusableCode;
-using Bardez.Projects.Win32.Audio;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation
 {

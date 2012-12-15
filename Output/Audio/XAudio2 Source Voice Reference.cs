@@ -1,8 +1,8 @@
 ﻿using System;
 
+using Bardez.Projects.BasicStructures.Win32;
 using Bardez.Projects.DirectX.XAudio2;
 using Bardez.Projects.InfinityPlus1.Output.Audio.Enums;
-using Bardez.Projects.Win32;
 
 namespace Bardez.Projects.InfinityPlus1.Output.Audio
 {

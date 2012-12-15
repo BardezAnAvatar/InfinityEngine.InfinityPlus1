@@ -3,10 +3,10 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
+using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management;
 using Bardez.Projects.InfinityPlus1.Output.Audio;
-using Bardez.Projects.Win32.Audio;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
 {

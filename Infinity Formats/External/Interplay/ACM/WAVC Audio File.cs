@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 
+using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.ReusableCode;
-using Bardez.Projects.Win32.Audio;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.ACM
 {

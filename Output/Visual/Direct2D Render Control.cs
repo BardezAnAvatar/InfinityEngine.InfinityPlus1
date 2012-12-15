@@ -5,10 +5,10 @@ using System.Windows.Forms;
 
 using Direct2D = Bardez.Projects.DirectX.Direct2D;
 using ExternalPixelEnums = Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
+using Bardez.Projects.BasicStructures.Win32;
 using Bardez.Projects.DirectX.Direct2D;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
-using Bardez.Projects.Win32;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Output.Visual

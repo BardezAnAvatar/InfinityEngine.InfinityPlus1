@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Timers;
 
+using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Coding;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Interpretation;
@@ -13,7 +14,6 @@ using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Enum;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
-using Bardez.Projects.Win32.Audio;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management
 {

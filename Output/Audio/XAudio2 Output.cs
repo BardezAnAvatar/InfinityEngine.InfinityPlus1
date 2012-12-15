@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Threading;
 
 using Bardez.Projects.DirectX.XAudio2;
-using Bardez.Projects.Win32;
-using Bardez.Projects.Win32.Audio;
+using Bardez.Projects.BasicStructures.Win32;
+using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.InfinityPlus1.Output.Audio.Enums;
 
 namespace Bardez.Projects.InfinityPlus1.Output.Audio

@@ -4,12 +4,12 @@ using System.IO;
 using System.Threading;
 using System.Timers;
 
+using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 using Bardez.Projects.InfinityPlus1.NativeFactories.Timer;
 using Bardez.Projects.MultiMedia.LibAV;
-using Bardez.Projects.Win32.Audio;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
 {
