@@ -48,10 +48,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Output.DirectX
         {
             using (FileStream stream = new FileStream(ConfigurationHandlerMulti.GetSettingValue(XAudio2RenderTest.configKey), FileMode.Open, FileAccess.Read))
             {
-                RiffFile riffFile = new RiffFile();
-                riffFile.Read(stream);
-                WaveFormatEx waveFormat = riffFile.GetWaveFormat();
-                Byte[] sampleData = this.GetWaveData(riffFile);
+                WaveRiffFile waveRiff = new WaveRiffFile(stream);
+                waveRiff.Read(stream);
+                WaveFormatEx waveFormat = waveRiff.GetWaveFormat();
+                Byte[] sampleData = this.GetWaveData(waveRiff);
 
                 using (this.XAudio = XAudio2Interface.NewInstance())
                 {
