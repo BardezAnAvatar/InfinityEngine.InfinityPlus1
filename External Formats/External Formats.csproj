@@ -12,10 +12,14 @@
     <AssemblyName>External Formats</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -132,6 +136,7 @@
     <Compile Include="RIFF\Component\RIFF Super Chunk.cs" />
     <Compile Include="RIFF\Wave\Enums\Data Format.cs" />
     <Compile Include="RIFF\Wave\Wave Format Chunk.cs" />
+    <Compile Include="RIFF\Wave\Wave RIFF File.cs" />
     <Compile Include="RIFF\Wave\Wave Sample Data Chunk.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -145,6 +150,10 @@
       <Project>{4D2A899B-3674-4288-81A8-C8F11636C2DA}</Project>
       <Name>Basic Formats</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Basic Structures\Basic Structures.csproj">
+      <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
+      <Name>Basic Structures</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Configuration Handler\Configuration Handler.csproj">
       <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
       <Name>Configuration Handler</Name>
@@ -155,7 +164,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Native Code\ffmpeg\Lib AV\Lib AV.vcxproj">
       <Project>{1F9B2E1A-E000-4076-8D38-D995A6A3922C}</Project>
-      <Name>Lib AV %28Native Projects\Win32 C++ CLI\Lib AV%29</Name>
+      <Name>Lib AV</Name>
     </ProjectReference>
     <ProjectReference Include="..\Native Factories\Native Factories.csproj">
       <Project>{1B2B86E7-2F10-42C1-B930-D62C8AC1634D}</Project>
@@ -168,10 +177,6 @@
     <ProjectReference Include="..\Utility\Utility.csproj">
       <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
       <Name>Utility</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Native Code\Win32 Structures\Win32 Structures.vcxproj">
-      <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
-      <Name>Win32 Structures</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

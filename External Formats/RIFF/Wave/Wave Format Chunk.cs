@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
 
+using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave.Enums;
 using Bardez.Projects.ReusableCode;
-using Bardez.Projects.Win32.Audio;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
 {
@@ -44,6 +44,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
         /// <value>For PCM, multiple of 8</value>
         protected UInt16 bitsPerSample;
         #endregion
+
 
         #region Properties
         /// <summary>Wave data type</summary>
@@ -98,18 +99,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
         }
         #endregion
 
+
         #region Construction
-        /// <summary>Default constructor</summary>
-        public WaveFormatChunk() : base() { }
-
-        /// <summary>Stream constructor</summary>
-        /// <param name="input">Stream to read from.</param>
-        public WaveFormatChunk(Stream input) : base(input) { }
-
-        /// <summary>Chunk Type constructor</summary>
-        /// <param name="type">Chunk id of the chunk</param>
-        public WaveFormatChunk(ChunkType type) : base(type) { }
-
         /// <summary>Chunk Type constructor</summary>
         /// <param name="type">Chunk id of the chunk</param>
         /// <param name="input">Stream to read from.</param>
@@ -130,13 +121,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
                 Size(18) = WAVEFORMATEX
                 Size(24+GUID = 24+16=40) = WAVEFORMATEXTENSIBLE
                 */
-                ReusableIO.SeekIfAble(this.dataStream, this.dataOffset);
-                this.dataType = (DataFormat)this.ReadUInt16();
-                this.numChannels = this.ReadUInt16();
-                this.sampleRate = this.ReadUInt32();
-                this.byteRate = this.ReadUInt32();
-                this.blockAlignment = this.ReadUInt16();
-                this.bitsPerSample = this.ReadUInt16();
+                ReusableIO.SeekIfAble(this.dataStream, this.DataOffset);
+                this.dataType = (DataFormat)RiffChunk.ReadUInt16(this.dataStream);
+                this.numChannels = RiffChunk.ReadUInt16(this.dataStream);
+                this.sampleRate = RiffChunk.ReadUInt32(this.dataStream);
+                this.byteRate = RiffChunk.ReadUInt32(this.dataStream);
+                this.blockAlignment = RiffChunk.ReadUInt16(this.dataStream);
+                this.bitsPerSample = RiffChunk.ReadUInt16(this.dataStream);
             }
             catch (Exception ex)
             {

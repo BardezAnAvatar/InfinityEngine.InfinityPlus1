@@ -8,10 +8,9 @@ using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
 {
+    //TODO: Remove this class. It is worthless.
     public class WaveSampleDataChunk : RiffChunk
     {
-        /// <summary>Chunk Type constructor</summary>
-        /// <param name="type">Chunk id of the chunk</param>
-        public WaveSampleDataChunk(ChunkType type) : base(type) { }
+        public WaveSampleDataChunk() : base(ChunkType.JUNK, null) { }
     }
 }

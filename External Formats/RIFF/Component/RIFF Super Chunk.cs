@@ -8,27 +8,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
     public class RiffSuperChunk : RiffChunk
     {
         /// <summary>List of sub-chunks</summary>
-        protected List<RiffSubChunk> subChunks;
-
-        /// <summary>List of sub-chunks</summary>
-        public List<RiffSubChunk> SubChunks
-        {
-            get { return this.subChunks; }
-            set { this.subChunks = value; }
-        }
+        public List<RiffSubChunk> SubChunks { get; set; }
 
         #region Construction
-        /// <summary>Default constructor</summary>
-        public RiffSuperChunk() : base() { }
-
-        /// <summary>Stream constructor</summary>
-        /// <param name="input">Stream to read from.</param>
-        public RiffSuperChunk(Stream input) : base(input) { }
-
-        /// <summary>Chunk Type constructor</summary>
-        /// <param name="type">Chunk id of the chunk</param>
-        public RiffSuperChunk(ChunkType type) : base(type) { }
-
         /// <summary>Chunk Type constructor</summary>
         /// <param name="type">Chunk id of the chunk</param>
         /// <param name="input">Stream to read from.</param>
@@ -37,7 +19,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
         /// <summary>Instantiates reference types</summary>
         protected override void Initialize()
         {
-            this.subChunks = new List<RiffSubChunk>();
+            this.SubChunks = new List<RiffSubChunk>();
         }
         #endregion
 
@@ -47,7 +29,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
             RiffSubChunk chunk = null;
 
             //search
-            foreach (RiffSubChunk subChunk in this.subChunks)
+            foreach (RiffSubChunk subChunk in this.SubChunks)
             {
                 if (subChunk.Chunk.ChunkId == fourCC)
                 {

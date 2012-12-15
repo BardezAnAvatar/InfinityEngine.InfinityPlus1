@@ -19,17 +19,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
         }
 
         #region Construction
-        /// <summary>Default constructor</summary>
-        public RiffThroneChunk() : base() { }
-
-        /// <summary>Stream constructor</summary>
-        /// <param name="input">Stream to read from.</param>
-        public RiffThroneChunk(Stream input) : base(input) { }
-
-        /// <summary>Chunk Type constructor</summary>
-        /// <param name="type">Chunk id of the chunk</param>
-        public RiffThroneChunk(ChunkType type) : base(type) { }
-
         /// <summary>Chunk Type constructor</summary>
         /// <param name="type">Chunk id of the chunk</param>
         /// <param name="input">Stream to read from.</param>
@@ -39,16 +28,16 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
         /// <summary>This public method reads the RIFF chunk from the data stream. Reads sub-chunks.</summary>
         public override void Read()
         {
-            if (this.size > 3U)
+            if (this.Size > 3U)
             {
                 //read extended data
-                ReusableIO.SeekIfAble(this.dataStream, this.dataOffset);
-                this.type = this.ReadFourCC();
+                ReusableIO.SeekIfAble(this.dataStream, this.DataOffset);
+                this.type = RiffChunk.ReadFourCC(this.dataStream);
 
                 //should be at first sub-chunk. Read chunks.
                 try
                 {
-                    while ((this.dataStream.Position + 4U) < this.size)
+                    while ((this.dataStream.Position + 4U) < this.Size)
                     {
                         //read the chunk
                         this.ReadSubChunk();
@@ -67,12 +56,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
             //read four bytes for a FourCC. If unable to read that much, an error has occurred, so don't sweat it too much. Maybe throw a descriptive exception, but that's it
             RiffSubChunk subChunk = new RiffSubChunk(this.dataStream.Position);
 
-            subChunk.Chunk = RiffChunkFactory.CreateChunk(this.ReadFourCC());
-            subChunk.Chunk.Size = this.ReadUInt32();
-            subChunk.Chunk.DataStream = dataStream;
+            subChunk.Chunk = RiffChunkFactory.CreateChunk(this.dataStream);
+            subChunk.Chunk.Size = RiffChunk.ReadUInt32(this.dataStream);
             subChunk.Chunk.DataOffset = dataStream.Position;
 
-            this.subChunks.Add(subChunk);
+            this.SubChunks.Add(subChunk);
 
             //seek to the next chunk, 16-bit aligned, so seek an additional byte if data is of odd/uneven length
             if ((subChunk.Chunk.Size & 1U) == 1U)
