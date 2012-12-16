@@ -13,6 +13,15 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
     [TestClass]
     public class RiffChunkTest
     {
+        #region Constants
+        /// <summary>Path to the test file for these Unit Tests</summary>
+        private const String TestFile = "";
+
+        /// <summary>Name of the FourCC test's virtual table name</summary>
+        private const String FourCC_Table = "";
+        #endregion
+
+
         #region TestContext
         private TestContext testContextInstance;
 
@@ -82,22 +91,27 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
         /// <summary>A test for ReadFourCC</summary>
         /// <remarks>Passes if a valid </remarks>
         [TestMethod]
+        [DataSource(Constants.XmlDataSource, @"\Code\Infinity Engine\Infinity +1\Unit Testing\Test Files\External Formats\RIFF\Component\Riff Chunk FourCC Test.xml", "FourCC", DataAccessMethod.Random)]
         public void RiffChunkReadFourCCTest()
         {
-            String filename = null;
-            filename = @"\Multi-Media\Audio\Asho.wav";
-            //filename = @"\Multi-Media\Audio\Bored.wav";
-            //filename = @"\Multi-Media\Audio\Gotcha Bitch.wav";
-            //filename = @"\Multi-Media\Audio\start [what is thy bidding].wav";
-            //filename = @"\Multi-Media\Audio\TORMS_DISS-04-THA_LONER.wav";
-            //filename = @"\Multi-Media\Audio\vaqueros02[1].wav";
-
-            filename = @"\Multi-Media\Audio\MacGyver Theme.ogg";
+            String filename = TestContext.DataRow["FilePath"] as String;
+            String expectedType = TestContext.DataRow["ExpectedFourCC"] as String;
+            String actual = null;
 
             using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
             {
-                ChunkType type = RiffChunk.ReadFourCC(fs);
+                try
+                {
+                    ChunkType type = RiffChunk.ReadFourCC(fs);
+                    actual = type.ToString();
+                }
+                catch
+                {
+                    actual = "Exception";
+                }
             }
+
+            Assert.AreEqual(expectedType, actual);
         }
     }
 }
