@@ -87,7 +87,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Output.DirectX
         /// <returns>Byte array of sample data</returns>
         protected virtual Byte[] GetWaveData(RiffFile riff)
         {
-            WaveSampleDataChunk wave = (riff.Header.FindFirstSubChunk(ChunkType.data).Chunk as WaveSampleDataChunk);
+            IRiffChunk wave = riff.RootChunk.FindFirstSubChunk(ChunkType.data).Chunk;
             return wave.Data;
         }
     }
