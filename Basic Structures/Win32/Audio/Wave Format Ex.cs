@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
 
+using Bardez.Projects.ReusableCode;
+
 namespace Bardez.Projects.BasicStructures.Win32.Audio
 {
     /// <summary>Managed representation of Win32 WAVEFORMATEX structure</summary>
@@ -98,34 +100,23 @@ namespace Bardez.Projects.BasicStructures.Win32.Audio
 	    /// <returns>A String representing the WaveFormatEx Object contents</returns>
         public virtual String ToDescriptionString()
         {
-	        String desc = null;
-
 	        StringBuilder builder = new StringBuilder();
-	        builder.Append("\tFormat tag:                        ");
+	        builder.Append(StringFormat.ToStringAlignment("Format tag"));
 	        builder.Append(this.formatTag);
-	        builder.AppendLine(String.Empty);
-	        builder.Append("\tNumber of Channels:                ");
+	        builder.Append(StringFormat.ToStringAlignment("Number of Channels"));
 	        builder.Append(this.numberChannels);
-	        builder.AppendLine(String.Empty);
-	        builder.Append("\tSamples per Second:                ");
+	        builder.Append(StringFormat.ToStringAlignment("Samples per Second"));
 	        builder.Append(this.samplesPerSec);
-	        builder.AppendLine(String.Empty);
-	        builder.Append("\tAverage # of Bytes per Second:     ");
+	        builder.Append(StringFormat.ToStringAlignment("Average # of Bytes per Second"));
 	        builder.Append(this.averageBytesPerSec);
-	        builder.AppendLine(String.Empty);
-	        builder.Append("\tBlock Alignment:                   ");
+	        builder.Append(StringFormat.ToStringAlignment("Block Alignment"));
 	        builder.Append(this.blockAlignment);
-	        builder.AppendLine(String.Empty);
-	        builder.Append("\tBits per Sample:                   ");
+	        builder.Append(StringFormat.ToStringAlignment("Bits per Sample"));
 	        builder.Append(this.bitsPerSample);
-	        builder.AppendLine(String.Empty);
-	        builder.Append("\tSize of extended data:             ");
+	        builder.Append(StringFormat.ToStringAlignment("Size of extended data"));
 	        builder.Append(this.size);
-	        builder.AppendLine(String.Empty);
-
-	        desc = builder.ToString();
 	
-	        return desc;
+	        return builder.ToString();
         }
 	    #endregion
     }
