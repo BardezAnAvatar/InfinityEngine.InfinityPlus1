@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 
-namespace Bardez.Projects.InfinityPlus1.UnitTesting
+namespace Bardez.Projects.InfinityPlus1.UnitTesting.ExternalFormats.Image.Mathematics.DCT
 {
     /// <summary>
     ///This is a test class for JpegJfifParserTest and is intended

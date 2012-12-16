@@ -86,7 +86,7 @@
   <ItemGroup>
     <Compile Include="Control Objects\Video Coder 16 supplied logic.cs" />
     <Compile Include="Control Objects\Video Coder 8 supplied logic.cs" />
-    <Compile Include="DCT Test.cs" />
+    <Compile Include="Test Classes\External Formats\Image\Mathematics\DCT\DCT Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test Classes\External Formats\RIFF\Component\RiffChunk Test.cs" />
     <Compile Include="Test Classes\Infinity Formats\External\Interplay\MVE\Component\Coding\VideoCoding16BitTest.cs" />
