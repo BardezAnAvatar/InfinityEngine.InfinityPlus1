@@ -84,6 +84,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="Control Objects\Video Coder 16 supplied logic.cs" />
     <Compile Include="Control Objects\Video Coder 8 supplied logic.cs" />
     <Compile Include="Test Classes\External Formats\Image\Mathematics\DCT\DCT Test.cs" />
@@ -155,7 +156,9 @@
     <Folder Include="Test Classes\ReusableCode\" />
     <Folder Include="Test Classes\Utility\" />
     <Folder Include="Test Classes\XAudio2\" />
-    <Folder Include="Test Files\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Test Files\External Formats\RIFF\Component\Riff Chunk FourCC Test.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

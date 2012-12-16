@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestData>
+	<FourCC>
+		<FilePath>\Multi-Media\Audio\01 Exactly Where I'm At.wma</FilePath>
+		<ExpectedFourCC>Exception</ExpectedFourCC>
+	</FourCC>
+	<FourCC>
+		<FilePath>\Multi-Media\Audio\01_Queen_Bohemian_Rhapsody.mp3</FilePath>
+		<ExpectedFourCC>Exception</ExpectedFourCC>
+	</FourCC>
+	<FourCC>
+		<FilePath>\Multi-Media\Audio\04 Useful Idiot.m4a</FilePath>
+		<ExpectedFourCC>Exception</ExpectedFourCC>
+	</FourCC>
+	<FourCC>
+		<FilePath>\Multi-Media\Audio\08 Flashpoint.m4a</FilePath>
+		<ExpectedFourCC>Exception</ExpectedFourCC>
+	</FourCC>
+	<FourCC>
+		<FilePath>\Multi-Media\Audio\Atlantis Theme.ac3</FilePath>
+		<ExpectedFourCC>Exception</ExpectedFourCC>
+	</FourCC>
+	<FourCC>
+		<FilePath>\Multi-Media\Audio\ChroniclesPFPC_PaizoconSpec_2012.mp3</FilePath>
+		<ExpectedFourCC>Exception</ExpectedFourCC>
+	</FourCC>
+	<FourCC>
+		<FilePath>\Multi-Media\Audio\faerghail.mid</FilePath>
+		<ExpectedFourCC>Exception</ExpectedFourCC>
+	</FourCC>
+	<FourCC>
+		<FilePath>\Multi-Media\Audio\LCARS - Hail.m4r</FilePath>
+		<ExpectedFourCC>Exception</ExpectedFourCC>
+	</FourCC>
+	<FourCC>
+		<FilePath>\Multi-Media\Audio\MacGyver Theme.ogg</FilePath>
+		<ExpectedFourCC>Exception</ExpectedFourCC>
+	</FourCC>
+	<FourCC>
+		<FilePath>\Multi-Media\Audio\mus_bat_aribeth.bmu</FilePath>
+		<ExpectedFourCC>Exception</ExpectedFourCC>
+	</FourCC>
+	<FourCC>
+		<FilePath>\Multi-Media\Audio\Asho.wav</FilePath>
+		<ExpectedFourCC>RIFF</ExpectedFourCC>
+	</FourCC>
+	<FourCC>
+		<FilePath>\Multi-Media\Audio\Bored.wav</FilePath>
+		<ExpectedFourCC>RIFF</ExpectedFourCC>
+	</FourCC>
+	<FourCC>
+		<FilePath>\Multi-Media\Audio\Gotcha Bitch.wav</FilePath>
+		<ExpectedFourCC>RIFF</ExpectedFourCC>
+	</FourCC>
+	<FourCC>
+		<FilePath>\Multi-Media\Audio\start [what is thy bidding].wav</FilePath>
+		<ExpectedFourCC>RIFF</ExpectedFourCC>
+	</FourCC>
+	<FourCC>
+		<FilePath>\Multi-Media\Audio\TORMS_DISS-04-THA_LONER.wav</FilePath>
+		<ExpectedFourCC>RIFF</ExpectedFourCC>
+	</FourCC>
+	<FourCC>
+		<FilePath>\Multi-Media\Audio\vaqueros02[1].wav</FilePath>
+		<ExpectedFourCC>RIFF</ExpectedFourCC>
+	</FourCC>
+</TestData>
