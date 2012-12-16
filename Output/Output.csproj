@@ -95,6 +95,10 @@
     <Compile Include="Visual\Visual Render Resource Manager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Basic Structures\Basic Structures.csproj">
+      <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
+      <Name>Basic Structures</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Media Base\Media Base.csproj">
       <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
       <Name>Media Base</Name>
@@ -106,10 +110,6 @@
     <ProjectReference Include="..\Native Code\DirectX\XAudio2\XAudio2.vcxproj">
       <Project>{FE898E65-DAFF-435D-9A72-4C9D3306636A}</Project>
       <Name>XAudio2</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Native Code\Win32 Structures\Win32 Structures.vcxproj">
-      <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
-      <Name>Win32 Structures</Name>
     </ProjectReference>
     <ProjectReference Include="..\ReusableCode\ReusableCode.csproj">
       <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>

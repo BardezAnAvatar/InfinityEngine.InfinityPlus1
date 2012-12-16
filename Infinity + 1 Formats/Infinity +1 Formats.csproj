@@ -88,10 +88,6 @@
       <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
       <Name>Utility</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Native Code\Win32 Structures\Win32 Structures.vcxproj">
-      <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
-      <Name>Win32 Structures</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
