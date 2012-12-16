@@ -89,8 +89,8 @@
     <Compile Include="DCT Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test Classes\External Formats\RIFF\Component\RiffChunk Test.cs" />
-    <Compile Include="VideoCoding16BitTest.cs" />
-    <Compile Include="VideoCoding8BitTest.cs" />
+    <Compile Include="Test Classes\Infinity Formats\External\Interplay\MVE\Component\Coding\VideoCoding16BitTest.cs" />
+    <Compile Include="Test Classes\Infinity Formats\External\Interplay\MVE\Component\Coding\VideoCoding8BitTest.cs" />
     <Compile Include="Test Classes\External Formats\RIFF\Wave\WaveRiffFile Test.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -147,7 +147,6 @@
     <Folder Include="Test Classes\Configuration Handler\" />
     <Folder Include="Test Classes\Direct2D\" />
     <Folder Include="Test Classes\Exception Handler\" />
-    <Folder Include="Test Classes\Infinity Formats\" />
     <Folder Include="Test Classes\Infinity Plus +1 Formats\" />
     <Folder Include="Test Classes\Lib AV\" />
     <Folder Include="Test Classes\Media Base\" />
@@ -156,6 +155,7 @@
     <Folder Include="Test Classes\ReusableCode\" />
     <Folder Include="Test Classes\Utility\" />
     <Folder Include="Test Classes\XAudio2\" />
+    <Folder Include="Test Files\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -8,16 +8,16 @@ using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Opcodes;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Enum;
 
-namespace Bardez.Projects.InfinityPlus1.UnitTesting
+namespace Bardez.Projects.InfinityPlus1.UnitTesting.InfinityFormats.External.Interplay.MVE.Component.Coding
 {
     
     
     /// <summary>
-    ///This is a test class for VideoCoding16BitTest and is intended
-    ///to contain all VideoCoding16BitTest Unit Tests
+    ///This is a test class for VideoCoding8BitTest and is intended
+    ///to contain all VideoCoding8BitTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class VideoCoding16BitTest
+    public class VideoCoding8BitTest
     {
 
 
@@ -75,17 +75,17 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
         ///</summary>
         [TestMethod()]
         [DeploymentItem("Infinity Formats.dll")]
-        public void DecodeCopyBlockTest16Bit()
+        public void DecodeCopyBlockTest()
         {
             Byte[] previousData = this.CreateRandomSource(8, 8);
-            Byte[] test = new Byte[128];
-            Byte[] control = new Byte[128];
+            Byte[] test = new Byte[64];
+            Byte[] control = new Byte[64];
             Byte[] data = new Byte[0];
             Int32 dataRemain = 0;
             Int32 x = 0, y = 0;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic = new MveVideoCoder8SuppliedLogic(8, 8, previousData);
             controlLogic.DecodeBlock(control, 0, data, ref dataRemain, ref x, ref y);
 
             //create test object
@@ -96,7 +96,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream = new VideoOpcodeStream();
             MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
-            VideoCoding16Bit_Accessor target = new VideoCoding16Bit_Accessor(8, 8, stream);
+            VideoCoding8Bit_Accessor target = new VideoCoding8Bit_Accessor(8, 8, stream);
 
             //test the test logic
             target.DecodeCopyBlock(0, 0, previousData, test);
@@ -110,9 +110,9 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
         ///</summary>
         [TestMethod()]
         [DeploymentItem("Infinity Formats.dll")]
-        public void DecodeCopyNewFrameBottomTest16Bit()
+        public void DecodeCopyNewFrameBottomTest()
         {
-            Int32 dataSize = 40 * 40 * 2;
+            Int32 dataSize = 40 * 40;
 
             Byte[] previousData = this.CreateRandomSource(40, 40);
             Byte[] test = new Byte[dataSize];
@@ -126,7 +126,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             Int32 dataRemain = data.Length - (Int32)position;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic = new MveVideoCoder16SuppliedLogic(40, 40, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic = new MveVideoCoder8SuppliedLogic(40, 40, previousData);
             controlLogic.DecodeBlock(control, 2, data, ref dataRemain, ref x, ref y);
 
             //create test object
@@ -137,7 +137,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream = new VideoOpcodeStream();
             MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
-            VideoCoding16Bit_Accessor target = new VideoCoding16Bit_Accessor(40, 40, stream);
+            VideoCoding8Bit_Accessor target = new VideoCoding8Bit_Accessor(40, 40, stream);
 
             //test the test logic
             target.DecodeCopyNewFrameBottom(2, 0, data, ref position, test);
@@ -151,9 +151,9 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
         ///</summary>
         [TestMethod()]
         [DeploymentItem("Infinity Formats.dll")]
-        public void DecodeCopyNewFrameTopTest16Bit()
+        public void DecodeCopyNewFrameTopTest()
         {
-            Int32 dataSize = 40 * 40 * 2;
+            Int32 dataSize = 40 * 40;
 
             Byte[] previousData = this.CreateRandomSource(40, 40);
             Byte[] test = new Byte[dataSize];
@@ -167,7 +167,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             Int32 dataRemain = data.Length - (Int32)position;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic = new MveVideoCoder16SuppliedLogic(40, 40, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic = new MveVideoCoder8SuppliedLogic(40, 40, previousData);
             controlLogic.DecodeBlock(control, 3, data, ref dataRemain, ref x, ref y);
 
             //create test object
@@ -178,7 +178,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream = new VideoOpcodeStream();
             MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
-            VideoCoding16Bit_Accessor target = new VideoCoding16Bit_Accessor(40, 40, stream);
+            VideoCoding8Bit_Accessor target = new VideoCoding8Bit_Accessor(40, 40, stream);
 
             //test the test logic
             target.DecodeCopyNewFrameTop(2, 1, data, ref position, test);
@@ -192,9 +192,9 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
         ///</summary>
         [TestMethod()]
         [DeploymentItem("Infinity Formats.dll")]
-        public void DecodeCopyPreviousFrameCloseTest16Bit()
+        public void DecodeCopyPreviousFrameCloseTest()
         {
-            Int32 dataSize = 40 * 40 * 2;
+            Int32 dataSize = 40 * 40;
 
             Byte[] previousData = this.CreateRandomSource(40, 40);
             Byte[] test = new Byte[dataSize];
@@ -208,7 +208,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             Int32 dataRemain = data.Length - (Int32)position;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic = new MveVideoCoder16SuppliedLogic(40, 40, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic = new MveVideoCoder8SuppliedLogic(40, 40, previousData);
             controlLogic.DecodeBlock(control, 4, data, ref dataRemain, ref x, ref y);
 
             //create test object
@@ -219,7 +219,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream = new VideoOpcodeStream();
             MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
-            VideoCoding16Bit_Accessor target = new VideoCoding16Bit_Accessor(40, 40, stream);
+            VideoCoding8Bit_Accessor target = new VideoCoding8Bit_Accessor(40, 40, stream);
 
             //test the test logic
             target.DecodeCopyPreviousFrameClose(3, 3, data, ref position, previousData, test);
@@ -233,9 +233,9 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
         ///</summary>
         [TestMethod()]
         [DeploymentItem("Infinity Formats.dll")]
-        public void DecodeCopyPreviousFrameDistantTest16Bit()
+        public void DecodeCopyPreviousFrameDistantTest()
         {
-            Int32 dataSize = 64 * 64 * 2;
+            Int32 dataSize = 64 * 64;
 
             Byte[] previousData = this.CreateRandomSource(64, 64);
             Byte[] test = new Byte[dataSize];
@@ -249,7 +249,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             Int32 dataRemain = data.Length - (Int32)position;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic = new MveVideoCoder16SuppliedLogic(64, 64, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic = new MveVideoCoder8SuppliedLogic(64, 64, previousData);
             controlLogic.DecodeBlock(control, 5, data, ref dataRemain, ref x, ref y);
 
             //create test object
@@ -260,7 +260,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream = new VideoOpcodeStream();
             MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
-            VideoCoding16Bit_Accessor target = new VideoCoding16Bit_Accessor(64, 64, stream);
+            VideoCoding8Bit_Accessor target = new VideoCoding8Bit_Accessor(64, 64, stream);
 
             //test the test logic
             target.DecodeCopyPreviousFrameDistant(3, 2, data, ref position, previousData, test);
@@ -274,20 +274,20 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
         ///</summary>
         [TestMethod()]
         [DeploymentItem("Infinity Formats.dll")]
-        public void DecodeDither2ColorsTest16Bit()
+        public void DecodeDither2ColorsTest()
         {
-            Int32 dataSize = 8 * 8 * 2;
+            Int32 dataSize = 8 * 8;
 
             Byte[] previousData = this.CreateRandomSource(8, 8);
             Byte[] test = new Byte[dataSize];
             Byte[] control = new Byte[dataSize];
-            Byte[] data = this.CreateRandomSource(4);
+            Byte[] data = this.CreateRandomSource(2);
             Int32 x = 0, y = 0;
             Int64 position = 0L;
             Int32 dataRemain = data.Length - (Int32)position;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic = new MveVideoCoder8SuppliedLogic(8, 8, previousData);
             controlLogic.DecodeBlock(control, 0x0F, data, ref dataRemain, ref x, ref y);
 
             //create test object
@@ -298,7 +298,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream = new VideoOpcodeStream();
             MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
-            VideoCoding16Bit_Accessor target = new VideoCoding16Bit_Accessor(8, 8, stream);
+            VideoCoding8Bit_Accessor target = new VideoCoding8Bit_Accessor(8, 8, stream);
 
             //test the test logic
             target.DecodeDither2Colors(0, 0, data, ref position, test);
@@ -312,23 +312,23 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
         ///</summary>
         [TestMethod()]
         [DeploymentItem("Infinity Formats.dll")]
-        public void DecodeFourColorIndecesQuadrantsOrHalvesTest16Bit()
+        public void DecodeFourColorIndecesQuadrantsOrHalvesTest()
         {
-            Int32 dataSize = 8 * 8 * 2;
-            Byte[] previousData = this.CreateRandomSource(8, 8);
-
             /* Quadrants */
+            Int32 dataSize = 8 * 8;
+
+            Byte[] previousData = this.CreateRandomSource(8, 8);
             Byte[] test = new Byte[dataSize];
             Byte[] control = new Byte[dataSize];
-            Byte[] data = this.CreateRandomSource(48);
-            data[0] = 0;
-            data[1] = 0;
+            Byte[] data = this.CreateRandomSource(32);
+            data[0] = 31;
+            data[1] = 120;
             Int32 x = 0, y = 0;
             Int64 position = 0L;
             Int32 dataRemain = data.Length - (Int32)position;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic = new MveVideoCoder8SuppliedLogic(8, 8, previousData);
             controlLogic.DecodeBlock(control, 0x0A, data, ref dataRemain, ref x, ref y);
 
             //create test object
@@ -339,7 +339,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream = new VideoOpcodeStream();
             MveVideoFrame frame = new MveVideoFrame(sdm, vd);
 
-            VideoCoding16Bit_Accessor target = new VideoCoding16Bit_Accessor(8, 8, stream);
+            VideoCoding8Bit_Accessor target = new VideoCoding8Bit_Accessor(8, 8, stream);
 
             //test the test logic
             target.DecodeFourColorIndecesQuadrantsOrHalves(0, 0, data, ref position, test);
@@ -351,18 +351,20 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             /* Vertical halves */
             Byte[] test2 = new Byte[dataSize];
             Byte[] control2 = new Byte[dataSize];
-            Byte[] data2 = this.CreateRandomSource(32);
-            data2[0] = 0;
-            data2[1] = 128;
-            data2[16] = 0;
-            data2[17] = 132;
+            Byte[] data2 = this.CreateRandomSource(24);
+            data2[0] = 123;
+            data2[1] = 0;
+            data2[2] = 33;
+            data2[3] = 120;
+            data2[12] = 123;
+            data2[13] = 0;
 
             Int32 x2 = 0, y2 = 0;
             Int64 position2 = 0L;
             Int32 dataRemain2 = data2.Length - (Int32)position2;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic2 = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic2 = new MveVideoCoder8SuppliedLogic(8, 8, previousData);
             controlLogic2.DecodeBlock(control2, 0x0A, data2, ref dataRemain2, ref x2, ref y2);
 
             //create test object
@@ -373,7 +375,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream2 = new VideoOpcodeStream();
             MveVideoFrame frame2 = new MveVideoFrame(sdm2, vd2);
 
-            VideoCoding16Bit_Accessor target2 = new VideoCoding16Bit_Accessor(8, 8, stream2);
+            VideoCoding8Bit_Accessor target2 = new VideoCoding8Bit_Accessor(8, 8, stream2);
 
             //test the test logic
             target2.DecodeFourColorIndecesQuadrantsOrHalves(0, 0, data2, ref position2, test2);
@@ -385,18 +387,20 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             /* Horizontal halves */
             Byte[] test3 = new Byte[dataSize];
             Byte[] control3 = new Byte[dataSize];
-            Byte[] data3 = this.CreateRandomSource(32);
-            data3[0] = 0;
-            data3[1] = 128;
-            data3[16] = 0;
-            data3[17] = 0;
+            Byte[] data3 = this.CreateRandomSource(24);
+            data3[0] = 123;
+            data3[1] = 0;
+            data3[2] = 0;
+            data3[3] = 120;
+            data3[12] = 0;
+            data3[13] = 123;
 
             Int32 x3 = 0, y3 = 0;
             Int64 position3 = 0L;
             Int32 dataRemain3 = data3.Length - (Int32)position3;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic3 = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic3 = new MveVideoCoder8SuppliedLogic(8, 8, previousData);
             controlLogic3.DecodeBlock(control3, 0x0A, data3, ref dataRemain3, ref x3, ref y3);
 
             //create test object
@@ -407,7 +411,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream3 = new VideoOpcodeStream();
             MveVideoFrame frame3 = new MveVideoFrame(sdm3, vd3);
 
-            VideoCoding16Bit_Accessor target3 = new VideoCoding16Bit_Accessor(8, 8, stream3);
+            VideoCoding8Bit_Accessor target3 = new VideoCoding8Bit_Accessor(8, 8, stream3);
 
             //test the test logic
             target3.DecodeFourColorIndecesQuadrantsOrHalves(0, 0, data3, ref position3, test3);
@@ -421,25 +425,25 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
         ///</summary>
         [TestMethod()]
         [DeploymentItem("Infinity Formats.dll")]
-        public void DecodeFourColorIndecesRowsOrRectanglesTest16Bit()
+        public void DecodeFourColorIndecesRowsOrRectanglesTest()
         {
-            Int32 dataSize = 8 * 8 * 2;
-            Byte[] previousData = this.CreateRandomSource(8, 8);
-
             /* 1x, 2y rectangle rows*/
+            Int32 dataSize = 8 * 8;
+
+            Byte[] previousData = this.CreateRandomSource(8, 8);
             Byte[] test1 = new Byte[dataSize];
             Byte[] control1 = new Byte[dataSize];
-            Byte[] data1 = this.CreateRandomSource(16);
-            data1[0] = 0;
-            data1[1] = 128;
-            data1[4] = 0;
-            data1[5] = 148;
+            Byte[] data1 = this.CreateRandomSource(12);
+            data1[0] = 33;
+            data1[1] = 0;
+            data1[2] = 35;
+            data1[3] = 34;
             Int32 x1 = 0, y1 = 0;
             Int64 position1 = 0L;
             Int32 dataRemain1 = data1.Length - (Int32)position1;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic1 = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic1 = new MveVideoCoder8SuppliedLogic(8, 8, previousData);
             controlLogic1.DecodeBlock(control1, 9, data1, ref dataRemain1, ref x1, ref y1);
 
             //create test object
@@ -450,7 +454,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
             MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
-            VideoCoding16Bit_Accessor target1 = new VideoCoding16Bit_Accessor(8, 8, stream1);
+            VideoCoding8Bit_Accessor target1 = new VideoCoding8Bit_Accessor(8, 8, stream1);
 
             //test the test logic
             target1.DecodeFourColorIndecesRowsOrRectangles(0, 0, data1, ref position1, test1);
@@ -463,17 +467,17 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             /* 2x, 1y rectangle rows*/
             Byte[] test2 = new Byte[dataSize];
             Byte[] control2 = new Byte[dataSize];
-            Byte[] data2 = this.CreateRandomSource(16);
-            data2[0] = 0;
-            data2[1] = 128;
-            data2[4] = 0;
-            data2[5] = 0;
+            Byte[] data2 = this.CreateRandomSource(12);
+            data2[0] = 33;
+            data2[1] = 0;
+            data2[2] = 120;
+            data2[3] = 121;
             Int32 x2 = 0, y2 = 0;
             Int64 position2 = 0L;
             Int32 dataRemain2 = data2.Length - (Int32)position2;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic2 = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic2 = new MveVideoCoder8SuppliedLogic(8, 8, previousData);
             controlLogic2.DecodeBlock(control2, 9, data2, ref dataRemain2, ref x2, ref y2);
 
             //create test object
@@ -484,7 +488,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream2 = new VideoOpcodeStream();
             MveVideoFrame frame2 = new MveVideoFrame(sdm2, vd2);
 
-            VideoCoding16Bit_Accessor target2 = new VideoCoding16Bit_Accessor(8, 8, stream2);
+            VideoCoding8Bit_Accessor target2 = new VideoCoding8Bit_Accessor(8, 8, stream2);
 
             //test the test logic
             target2.DecodeFourColorIndecesRowsOrRectangles(0, 0, data2, ref position2, test2);
@@ -497,17 +501,17 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             /* 2x, 2y square rows*/
             Byte[] test3 = new Byte[dataSize];
             Byte[] control3 = new Byte[dataSize];
-            Byte[] data3 = this.CreateRandomSource(12);
+            Byte[] data3 = this.CreateRandomSource(8);
             data3[0] = 0;
-            data3[1] = 0;
-            data3[4] = 0;
-            data3[5] = 136;
+            data3[1] = 123;
+            data3[2] = 35;
+            data3[3] = 33;
             Int32 x3 = 0, y3 = 0;
             Int64 position3 = 0L;
             Int32 dataRemain3 = data3.Length - (Int32)position3;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic3 = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic3 = new MveVideoCoder8SuppliedLogic(8, 8, previousData);
             controlLogic3.DecodeBlock(control3, 9, data3, ref dataRemain3, ref x3, ref y3);
 
             //create test object
@@ -518,30 +522,30 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream3 = new VideoOpcodeStream();
             MveVideoFrame frame3 = new MveVideoFrame(sdm3, vd3);
 
-            VideoCoding16Bit_Accessor target3 = new VideoCoding16Bit_Accessor(8, 8, stream3);
+            VideoCoding8Bit_Accessor target3 = new VideoCoding8Bit_Accessor(8, 8, stream3);
 
             //test the test logic
             target3.DecodeFourColorIndecesRowsOrRectangles(0, 0, data3, ref position3, test3);
 
             //evaluate
-            Assert.IsTrue(this.AreBinaryArraysEqual(test3, control3));
+            Assert.IsTrue(this.AreBinaryArraysEqualAccountForDisplacementBug(test3, control3));
 
 
 
             /* 1x, 1y square rows*/
             Byte[] test4 = new Byte[dataSize];
             Byte[] control4 = new Byte[dataSize];
-            Byte[] data4 = this.CreateRandomSource(24);
-            data4[0] = 0;
+            Byte[] data4 = this.CreateRandomSource(20);
+            data4[0] = 123;
             data4[1] = 0;
-            data4[4] = 0;
-            data4[5] = 4;
+            data4[2] = 0;
+            data4[3] = 120;
             Int32 x4 = 0, y4 = 0;
             Int64 position4 = 0L;
             Int32 dataRemain4 = data4.Length - (Int32)position4;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic4 = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic4 = new MveVideoCoder8SuppliedLogic(8, 8, previousData);
             controlLogic4.DecodeBlock(control4, 9, data4, ref dataRemain4, ref x4, ref y4);
 
             //create test object
@@ -552,7 +556,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream4 = new VideoOpcodeStream();
             MveVideoFrame frame4 = new MveVideoFrame(sdm4, vd4);
 
-            VideoCoding16Bit_Accessor target4 = new VideoCoding16Bit_Accessor(8, 8, stream4);
+            VideoCoding8Bit_Accessor target4 = new VideoCoding8Bit_Accessor(8, 8, stream4);
 
             //test the test logic
             target4.DecodeFourColorIndecesRowsOrRectangles(0, 0, data4, ref position4, test4);
@@ -566,20 +570,20 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
         ///</summary>
         [TestMethod()]
         [DeploymentItem("Infinity Formats.dll")]
-        public void DecodeRawIndecesTest16Bit()
+        public void DecodeRawIndecesTest()
         {
-            Int32 dataSize = 8 * 8 * 2;
+            Int32 dataSize = 8 * 8;
 
             Byte[] previousData = this.CreateRandomSource(8, 8);
             Byte[] test1 = new Byte[dataSize];
             Byte[] control1 = new Byte[dataSize];
-            Byte[] data1 = this.CreateRandomSource(128);
+            Byte[] data1 = this.CreateRandomSource(64);
             Int32 x1 = 0, y1 = 0;
             Int64 position1 = 0L;
             Int32 dataRemain1 = data1.Length - (Int32)position1;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic1 = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic1 = new MveVideoCoder8SuppliedLogic(8, 8, previousData);
             controlLogic1.DecodeBlock(control1, 0x0B, data1, ref dataRemain1, ref x1, ref y1);
 
             //create test object
@@ -590,7 +594,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
             MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
-            VideoCoding16Bit_Accessor target1 = new VideoCoding16Bit_Accessor(8, 8, stream1);
+            VideoCoding8Bit_Accessor target1 = new VideoCoding8Bit_Accessor(8, 8, stream1);
 
             //test the test logic
             target1.DecodeRawIndeces(0, 0, data1, ref position1, test1);
@@ -604,20 +608,20 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
         ///</summary>
         [TestMethod()]
         [DeploymentItem("Infinity Formats.dll")]
-        public void DecodeRawIndeces2PixelSquaresTest16Bit()
+        public void DecodeRawIndeces2PixelSquaresTest()
         {
-            Int32 dataSize = 8 * 8 * 2;
+            Int32 dataSize = 8 * 8;
 
             Byte[] previousData = this.CreateRandomSource(8, 8);
             Byte[] test1 = new Byte[dataSize];
             Byte[] control1 = new Byte[dataSize];
-            Byte[] data1 = this.CreateRandomSource(32);
+            Byte[] data1 = this.CreateRandomSource(16);
             Int32 x1 = 0, y1 = 0;
             Int64 position1 = 0L;
             Int32 dataRemain1 = data1.Length - (Int32)position1;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic1 = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic1 = new MveVideoCoder8SuppliedLogic(8, 8, previousData);
             controlLogic1.DecodeBlock(control1, 0x0C, data1, ref dataRemain1, ref x1, ref y1);
 
             //create test object
@@ -628,7 +632,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
             MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
-            VideoCoding16Bit_Accessor target1 = new VideoCoding16Bit_Accessor(8, 8, stream1);
+            VideoCoding8Bit_Accessor target1 = new VideoCoding8Bit_Accessor(8, 8, stream1);
 
             //test the test logic
             target1.DecodeRawIndeces2PixelSquares(0, 0, data1, ref position1, test1);
@@ -642,20 +646,20 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
         ///</summary>
         [TestMethod()]
         [DeploymentItem("Infinity Formats.dll")]
-        public void DecodeRawIndeces4PixelSquaresTest16Bit()
+        public void DecodeRawIndeces4PixelSquaresTest()
         {
-            Int32 dataSize = 8 * 8 * 2;
+            Int32 dataSize = 8 * 8;
 
             Byte[] previousData = this.CreateRandomSource(8, 8);
             Byte[] test1 = new Byte[dataSize];
             Byte[] control1 = new Byte[dataSize];
-            Byte[] data1 = this.CreateRandomSource(8);
+            Byte[] data1 = this.CreateRandomSource(4);
             Int32 x1 = 0, y1 = 0;
             Int64 position1 = 0L;
             Int32 dataRemain1 = data1.Length - (Int32)position1;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic1 = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic1 = new MveVideoCoder8SuppliedLogic(8, 8, previousData);
             controlLogic1.DecodeBlock(control1, 0x0D, data1, ref dataRemain1, ref x1, ref y1);
 
             //create test object
@@ -666,7 +670,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
             MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
-            VideoCoding16Bit_Accessor target1 = new VideoCoding16Bit_Accessor(8, 8, stream1);
+            VideoCoding8Bit_Accessor target1 = new VideoCoding8Bit_Accessor(8, 8, stream1);
 
             //test the test logic
             target1.DecodeRawIndeces4PixelSquares(0, 0, data1, ref position1, test1);
@@ -680,20 +684,20 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
         ///</summary>
         [TestMethod()]
         [DeploymentItem("Infinity Formats.dll")]
-        public void DecodeRawIndecesSolidColorTest16Bit()
+        public void DecodeRawIndecesSolidColorTest()
         {
-            Int32 dataSize = 8 * 8 * 2;
+            Int32 dataSize = 8 * 8;
 
             Byte[] previousData = this.CreateRandomSource(8, 8);
             Byte[] test1 = new Byte[dataSize];
             Byte[] control1 = new Byte[dataSize];
-            Byte[] data1 = this.CreateRandomSource(2);
+            Byte[] data1 = this.CreateRandomSource(1);
             Int32 x1 = 0, y1 = 0;
             Int64 position1 = 0L;
             Int32 dataRemain1 = data1.Length - (Int32)position1;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic1 = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic1 = new MveVideoCoder8SuppliedLogic(8, 8, previousData);
             controlLogic1.DecodeBlock(control1, 0x0E, data1, ref dataRemain1, ref x1, ref y1);
 
             //create test object
@@ -704,7 +708,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
             MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
-            VideoCoding16Bit_Accessor target1 = new VideoCoding16Bit_Accessor(8, 8, stream1);
+            VideoCoding8Bit_Accessor target1 = new VideoCoding8Bit_Accessor(8, 8, stream1);
 
             //test the test logic
             target1.DecodeRawIndecesSolidColor(0, 0, data1, ref position1, test1);
@@ -718,23 +722,23 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
         ///</summary>
         [TestMethod()]
         [DeploymentItem("Infinity Formats.dll")]
-        public void DecodeTwoToneIndecesQuadrantsOrHalvesTest16Bit()
+        public void DecodeTwoToneIndecesQuadrantsOrHalvesTest()
         {
-            Int32 dataSize = 8 * 8 * 2;
-            Byte[] previousData = this.CreateRandomSource(8, 8);
-
             /* Quadrants */
+            Int32 dataSize = 8 * 8;
+
+            Byte[] previousData = this.CreateRandomSource(8, 8);
             Byte[] test1 = new Byte[dataSize];
             Byte[] control1 = new Byte[dataSize];
-            Byte[] data1 = this.CreateRandomSource(24);
+            Byte[] data1 = this.CreateRandomSource(16);
             data1[0] = 0;
-            data1[1] = 0;
+            data1[1] = 33;
             Int32 x1 = 0, y1 = 0;
             Int64 position1 = 0L;
             Int32 dataRemain1 = data1.Length - (Int32)position1;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic1 = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic1 = new MveVideoCoder8SuppliedLogic(8, 8, previousData);
             controlLogic1.DecodeBlock(control1, 8, data1, ref dataRemain1, ref x1, ref y1);
 
             //create test object
@@ -745,7 +749,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
             MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
-            VideoCoding16Bit_Accessor target1 = new VideoCoding16Bit_Accessor(8, 8, stream1);
+            VideoCoding8Bit_Accessor target1 = new VideoCoding8Bit_Accessor(8, 8, stream1);
 
             //test the test logic
             target1.DecodeTwoToneIndecesQuadrantsOrHalves(0, 0, data1, ref position1, test1);
@@ -758,18 +762,18 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             /* Horizontalhalves */
             Byte[] test2 = new Byte[dataSize];
             Byte[] control2 = new Byte[dataSize];
-            Byte[] data2 = this.CreateRandomSource(16);
-            data2[0] = 0;
-            data2[1] = 128;
-            data2[8] = 0;
-            data2[9] = 0;
+            Byte[] data2 = this.CreateRandomSource(12);
+            data2[0] = 123;
+            data2[1] = 0;
+            data2[6] = 0;
+            data2[7] = 120;
 
             Int32 x2 = 0, y2 = 0;
             Int64 position2 = 0L;
             Int32 dataRemain2 = data2.Length - (Int32)position2;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic2 = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic2 = new MveVideoCoder8SuppliedLogic(8, 8, previousData);
             controlLogic2.DecodeBlock(control2, 8, data2, ref dataRemain2, ref x2, ref y2);
 
             //create test object
@@ -780,7 +784,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream2 = new VideoOpcodeStream();
             MveVideoFrame frame2 = new MveVideoFrame(sdm2, vd2);
 
-            VideoCoding16Bit_Accessor target2 = new VideoCoding16Bit_Accessor(8, 8, stream2);
+            VideoCoding8Bit_Accessor target2 = new VideoCoding8Bit_Accessor(8, 8, stream2);
 
             //test the test logic
             target2.DecodeTwoToneIndecesQuadrantsOrHalves(0, 0, data2, ref position2, test2);
@@ -793,18 +797,18 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             /* Vertical halves */
             Byte[] test3 = new Byte[dataSize];
             Byte[] control3 = new Byte[dataSize];
-            Byte[] data3 = this.CreateRandomSource(16);
-            data3[0] = 0;
-            data3[1] = 132;
-            data3[8] = 0;
-            data3[9] = 128;
+            Byte[] data3 = this.CreateRandomSource(12);
+            data3[0] = 123;
+            data3[1] = 0;
+            data3[6] = 1;
+            data3[7] = 0;
 
             Int32 x3 = 0, y3 = 0;
             Int64 position3 = 0L;
             Int32 dataRemain3 = data3.Length - (Int32)position3;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic3 = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic3 = new MveVideoCoder8SuppliedLogic(8, 8, previousData);
             controlLogic3.DecodeBlock(control3, 8, data3, ref dataRemain3, ref x3, ref y3);
 
             //create test object
@@ -815,7 +819,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream3 = new VideoOpcodeStream();
             MveVideoFrame frame3 = new MveVideoFrame(sdm3, vd3);
 
-            VideoCoding16Bit_Accessor target3 = new VideoCoding16Bit_Accessor(8, 8, stream3);
+            VideoCoding8Bit_Accessor target3 = new VideoCoding8Bit_Accessor(8, 8, stream3);
 
             //test the test logic
             target3.DecodeTwoToneIndecesQuadrantsOrHalves(0, 0, data3, ref position3, test3);
@@ -829,23 +833,23 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
         ///</summary>
         [TestMethod()]
         [DeploymentItem("Infinity Formats.dll")]
-        public void DecodeTwoToneIndecesRowOrSquareTest16Bit()
+        public void DecodeTwoToneIndecesRowOrSquareTest()
         {
             /* 1x, 1y rectangle rows*/
-            Int32 dataSize = 8 * 8 * 2;
-            Byte[] previousData = this.CreateRandomSource(8, 8);
+            Int32 dataSize = 8 * 8;
 
+            Byte[] previousData = this.CreateRandomSource(8, 8);
             Byte[] test1 = new Byte[dataSize];
             Byte[] control1 = new Byte[dataSize];
-            Byte[] data1 = this.CreateRandomSource(12);
-            data1[0] = 115;
-            data1[1] = 5;
+            Byte[] data1 = this.CreateRandomSource(10);
+            data1[0] = 52;
+            data1[1] = 250;
             Int32 x1 = 0, y1 = 0;
             Int64 position1 = 0L;
             Int32 dataRemain1 = data1.Length - (Int32)position1;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic1 = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
+            MveVideoCoder8SuppliedLogic controlLogic1 = new MveVideoCoder8SuppliedLogic(8, 8, previousData);
             controlLogic1.DecodeBlock(control1, 7, data1, ref dataRemain1, ref x1, ref y1);
 
             //create test object
@@ -856,7 +860,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
             VideoOpcodeStream stream1 = new VideoOpcodeStream();
             MveVideoFrame frame1 = new MveVideoFrame(sdm1, vd1);
 
-            VideoCoding16Bit_Accessor target1 = new VideoCoding16Bit_Accessor(8, 8, stream1);
+            VideoCoding8Bit_Accessor target1 = new VideoCoding8Bit_Accessor(8, 8, stream1);
 
             //test the test logic
             target1.DecodeTwoToneIndecesRowOrSquare(0, 0, data1, ref position1, test1);
@@ -867,44 +871,42 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
 
 
             /* 2x, 2y square rows*/
-            Byte[] test2 = new Byte[dataSize];
-            Byte[] control2 = new Byte[dataSize];
-            Byte[] data2 = this.CreateRandomSource(6);
-            data2[0] = 0;
-            data2[1] = 128;
-            Int32 x2 = 0, y2 = 0;
-            Int64 position2 = 0L;
-            Int32 dataRemain2 = data2.Length - (Int32)position2;
+            Byte[] test3 = new Byte[dataSize];
+            Byte[] control3 = new Byte[dataSize];
+            Byte[] data3 = this.CreateRandomSource(4);
+            data3[0] = 152;
+            data3[1] = 12;
+            Int32 x3 = 0, y3 = 0;
+            Int64 position3 = 0L;
+            Int32 dataRemain3 = data3.Length - (Int32)position3;
 
             //create and decode with control logic
-            MveVideoCoder16SuppliedLogic controlLogic3 = new MveVideoCoder16SuppliedLogic(8, 8, previousData);
-            controlLogic3.DecodeBlock(control2, 7, data2, ref dataRemain2, ref x2, ref y2);
+            MveVideoCoder8SuppliedLogic controlLogic3 = new MveVideoCoder8SuppliedLogic(8, 8, previousData);
+            controlLogic3.DecodeBlock(control3, 7, data3, ref dataRemain3, ref x3, ref y3);
 
             //create test object
-            SetDecodingMap sdm2 = new SetDecodingMap(1);
-            sdm2.BlockEncoding = new BlockEncodingMethod[1] { BlockEncodingMethod.BitField2PixelRowOr2Square };
-            VideoData vd2 = new VideoData(0);
-            vd2.Data = new Byte[0];
-            VideoOpcodeStream stream2 = new VideoOpcodeStream();
-            MveVideoFrame frame2 = new MveVideoFrame(sdm2, vd2);
+            SetDecodingMap sdm3 = new SetDecodingMap(1);
+            sdm3.BlockEncoding = new BlockEncodingMethod[1] { BlockEncodingMethod.BitField2PixelRowOr2Square };
+            VideoData vd3 = new VideoData(0);
+            vd3.Data = new Byte[0];
+            VideoOpcodeStream stream3 = new VideoOpcodeStream();
+            MveVideoFrame frame3 = new MveVideoFrame(sdm3, vd3);
 
-            VideoCoding16Bit_Accessor target3 = new VideoCoding16Bit_Accessor(8, 8, stream2);
+            VideoCoding8Bit_Accessor target3 = new VideoCoding8Bit_Accessor(8, 8, stream3);
 
             //test the test logic
-            target3.DecodeTwoToneIndecesRowOrSquare(0, 0, data2, ref position2, test2);
+            target3.DecodeTwoToneIndecesRowOrSquare(0, 0, data3, ref position3, test3);
 
             //evaluate
-            Assert.IsTrue(this.AreBinaryArraysEqual(test2, control2));
+            Assert.IsTrue(this.AreBinaryArraysEqualAccountForDisplacementBug(test3, control3));
         }
-
-
 
 
 
         #region Dummy objects generation
         protected Byte[] CreateRandomSource(Int32 height, Int32 width)
         {
-            Byte[] data = new Byte[height * width * 2];
+            Byte[] data = new Byte[height * width];
 
             Random randGen = new Random(DateTime.Now.Millisecond);
             randGen.NextBytes(data);
@@ -941,6 +943,31 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting
                         foundNotEqual = true;
                         break;
                     }
+
+                equal = !foundNotEqual;
+            }
+
+            return equal;
+        }
+
+        protected virtual Boolean AreBinaryArraysEqualAccountForDisplacementBug(Byte[] a, Byte[] b)
+        {
+            Boolean equal = false;
+
+            if (a == null && b == null)
+                equal = true;
+            else if (a.Length == b.Length)
+            {
+                Boolean foundNotEqual = false;
+
+                for (Int32 i = 0; i < a.Length; i += 4)
+                {
+                    if (a[i] != b[i] || a[i+1] != b[i+2] || a[i+2] != b[i+1] || a[i+3] != b[i+3])
+                    {
+                        foundNotEqual = true;
+                        break;
+                    }
+                }
 
                 equal = !foundNotEqual;
             }
