@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave;
 
-namespace Bardez.Projects.InfinityPlus1.UnitTesting
+namespace Bardez.Projects.InfinityPlus1.UnitTesting.ExternalFormats.RIFF.Wave
 {
     /// <summary>
     ///     This is a test class for WaveRiffFileTest and is intended

@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component;
 
-namespace Bardez.Projects.InfinityPlus1.UnitTesting
+namespace Bardez.Projects.InfinityPlus1.UnitTesting.ExternalFormats.RIFF.Component
 {
     /// <summary>
     ///     This is a test class for RiffChunkTest and is intended
