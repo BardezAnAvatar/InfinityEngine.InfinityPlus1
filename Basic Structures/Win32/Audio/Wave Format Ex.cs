@@ -6,118 +6,68 @@ using Bardez.Projects.ReusableCode;
 namespace Bardez.Projects.BasicStructures.Win32.Audio
 {
     /// <summary>Managed representation of Win32 WAVEFORMATEX structure</summary>
-    public class WaveFormatEx
+    public class WaveFormatEx : PcmWaveFormat
     {
-	    #region Members
-		/// <summary>Integer identifier of the format</summary>
-		protected UInt16 formatTag;
-
-		/// <summary>Number of audio channels</summary>
-		protected UInt16 numberChannels;
-
-		/// <summary>Audio sample rate</summary>
-		protected UInt32 samplesPerSec;
-
-		/// <summary>Bytes per second (possibly approximate)</summary>
-		protected UInt32 averageBytesPerSec;
-
-		/// <summary>Size in bytes of a sample block (all channels)</summary>
-		protected UInt16 blockAlignment;
-
-		/// <summary>Size in bits of a single per-channel sample</summary>
-		/// <remarks>16 bit is optimal for XAudio2, 32 bit following, then other formats.</remarks>
-		protected UInt16 bitsPerSample;
-
+	    #region Fields
 		/// <summary>
-		///		Bytes of extra data appended to this struct. Explains the length of bytes in addition to this struct,
-		///		essentially the extra size of child instances.
+		///		Size, in Bytes, of extra data appended to this struct.
+        ///		Explains which struct to use if larger (WAVEFORMATEXTENSIBLE or so on)
 		/// </summary>
-		protected UInt16 size;
-	    #endregion
-
-
-	    #region Properties
-		/// <summary>Integer identifier of the format</summary>
-		public UInt16 FormatTag
-		{
-            get { return this.formatTag; }
-            set { this.formatTag = value; }
-		}
-
-		/// <summary>Number of audio channels</summary>
-		public UInt16 NumberChannels
-		{
-            get { return this.numberChannels; }
-            set { this.numberChannels = value; }
-		}
-
-		/// <summary>Audio sample rate</summary>
-		public UInt32 SamplesPerSec
-		{
-            get { return this.samplesPerSec; }
-            set { this.samplesPerSec = value; }
-		}
-
-		/// <summary>Bytes per second (possibly approximate)</summary>
-		public UInt32 AverageBytesPerSec
-		{
-            get { return this.averageBytesPerSec; }
-            set { this.averageBytesPerSec = value; }
-		}
-
-		/// <summary>Size in bytes of a sample block (all channels)</summary>
-		public UInt16 BlockAlignment
-		{
-            get { return this.blockAlignment; }
-            set { this.blockAlignment = value; }
-		}
-
-		/// <summary>Size in bits of a single per-channel sample</summary>
-		/// <remarks>16 bit is optimal for XAudio2, 32 bit following, then other formats.</remarks>
-		public UInt16 BitsPerSample
-		{
-            get { return this.bitsPerSample; }
-            set { this.bitsPerSample = value; }
-		}
-
-		/// <summary>Bytes of extra data appended to this struct</summary>
-		public UInt16 Size
-        {
-            get { return this.size; }
-            set { this.size = value; }
-		}
+        public UInt16 Size { get; set; }
 	    #endregion
 
 
 	    #region Construction
 	    /// <summary>Default constructor</summary>
-	    public WaveFormatEx() { }
-	    #endregion
-
-
-	    #region Methods
-	    /// <summary>Generates a descriptive string (to be displayed to the end user)</summary>
-	    /// <returns>A String representing the WaveFormatEx Object contents</returns>
-        public virtual String ToDescriptionString()
+	    public WaveFormatEx() : base()
         {
-	        StringBuilder builder = new StringBuilder();
-	        builder.Append(StringFormat.ToStringAlignment("Format tag"));
-	        builder.Append(this.formatTag);
-	        builder.Append(StringFormat.ToStringAlignment("Number of Channels"));
-	        builder.Append(this.numberChannels);
-	        builder.Append(StringFormat.ToStringAlignment("Samples per Second"));
-	        builder.Append(this.samplesPerSec);
-	        builder.Append(StringFormat.ToStringAlignment("Average # of Bytes per Second"));
-	        builder.Append(this.averageBytesPerSec);
-	        builder.Append(StringFormat.ToStringAlignment("Block Alignment"));
-	        builder.Append(this.blockAlignment);
-	        builder.Append(StringFormat.ToStringAlignment("Bits per Sample"));
-	        builder.Append(this.bitsPerSample);
-	        builder.Append(StringFormat.ToStringAlignment("Size of extended data"));
-	        builder.Append(this.size);
-	
-	        return builder.ToString();
+            this.Size = 0;
+        }
+
+        /// <summary>Definition constructor</summary>
+        /// <param name="format">Integer identifier of the format</param>
+        /// <param name="channels">Number of audio channels</param>
+        /// <param name="sampleRate">Audio sample rate</param>
+        /// <param name="avgBytesPerSec">Bytes per second (possibly approximate)</param>
+        /// <param name="alignment">Size in bytes of a sample block (all channels)</param>
+        /// <param name="bitsPerSample">Size in bits of a single channel's sample</param>
+        /// <param name="size">Size (in Bytes) of data that follows past this structure, to indicate which sub-class to use</param>
+        public WaveFormatEx(UInt16 format, UInt16 channels, UInt32 sampleRate, UInt32 avgBytesPerSec, UInt16 alignment, UInt16 bitsPerSample, UInt16 size)
+            : base(format, channels, sampleRate, avgBytesPerSec, alignment, bitsPerSample)
+        {
+            this.Size = size;
+        }
+
+        /// <summary>Derivation constructor</summary>
+        /// <param name="format">More general WaveFormat structure to derive this instance from</param>
+        public WaveFormatEx(WaveFormat format) : base (format)
+        {
+            if (format is WaveFormatEx)
+                this.Size = (format as WaveFormatEx).Size;
+            else
+                this.Size = 0;
+        }
+
+        /// <summary>Derivation constructor</summary>
+        /// <param name="format">More general WaveFormat structure to derive this instance from</param>
+        /// <param name="size">Size (in Bytes) of data that follows past this structure, to indicate which sub-class to use</param>
+        public WaveFormatEx(PcmWaveFormat format, UInt16 size) : base(format)
+        {
+            this.Size = size;
         }
 	    #endregion
+
+
+        #region ToString() methods
+        /// <summary>This method prints a human-readable representation to the given StringBuilder</summary>
+        /// <param name="builder">StringBuilder to write to</param>
+        public override void WriteString(StringBuilder builder)
+        {
+            base.WriteString(builder);
+
+            StringFormat.ToStringAlignment("Size of extended data", builder);
+            builder.Append(this.Size);
+        }
+        #endregion
     }
 }
