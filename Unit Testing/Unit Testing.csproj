@@ -87,6 +87,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Control Objects\Video Coder 16 supplied logic.cs" />
     <Compile Include="Control Objects\Video Coder 8 supplied logic.cs" />
+    <Compile Include="Test Classes\External Formats\RIFF\Component\RiffFile Test.cs" />
     <Compile Include="Test Classes\External Formats\Image\Mathematics\DCT\DCT Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test Classes\External Formats\RIFF\Component\RiffChunk Test.cs" />
@@ -159,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Test Files\External Formats\RIFF\Component\Riff Chunk FourCC Test.xml" />
+    <Content Include="Test Files\External Formats\RIFF\Component\Riff File FourCC Test.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
