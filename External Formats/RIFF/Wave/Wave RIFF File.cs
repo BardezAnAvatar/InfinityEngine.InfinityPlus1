@@ -56,7 +56,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
         }
 
         /// <summary>Gets binary sample data from Riff file</summary>
-        /// <param name="riff">Riff file to read data from</param>
         /// <returns>Byte array of sample data</returns>
         public virtual Byte[] GetWaveData()
         {
