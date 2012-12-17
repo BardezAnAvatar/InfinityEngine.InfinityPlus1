@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestData>
+	<RIFF>
+		<FilePath>\Multi-Media\Audio\Asho.wav</FilePath>
+		<RiffFourCCType>WAVE</RiffFourCCType>
+	</RIFF>
+	<RIFF>
+		<FilePath>\Multi-Media\Audio\Bored.wav</FilePath>
+		<RiffFourCCType>WAVE</RiffFourCCType>
+	</RIFF>
+	<RIFF>
+		<FilePath>\Multi-Media\Audio\Gotcha Bitch.wav</FilePath>
+		<RiffFourCCType>WAVE</RiffFourCCType>
+	</RIFF>
+	<RIFF>
+		<FilePath>\Multi-Media\Audio\start [what is thy bidding].wav</FilePath>
+		<RiffFourCCType>WAVE</RiffFourCCType>
+	</RIFF>
+	<RIFF>
+		<FilePath>\Multi-Media\Audio\TORMS_DISS-04-THA_LONER.wav</FilePath>
+		<RiffFourCCType>WAVE</RiffFourCCType>
+	</RIFF>
+	<RIFF>
+		<FilePath>\Multi-Media\Audio\vaqueros02[1].wav</FilePath>
+		<RiffFourCCType>WAVE</RiffFourCCType>
+	</RIFF>
+	<RIFF>
+		<FilePath>\Multi-Media\Video\Alien [XviD 1.0.1 1399 2nd Pass] [AC3 448 5-Channel Main].avi</FilePath>
+		<RiffFourCCType>AVI </RiffFourCCType>
+	</RIFF>
+	<RIFF>
+		<FilePath>\Multi-Media\Video\Along Came Polly Trailer [XviD 1150 2nd Pass] [AC3 192 2-Channel].avi</FilePath>
+		<RiffFourCCType>AVI </RiffFourCCType>
+	</RIFF>
+	<RIFF>
+		<FilePath>\Multi-Media\Video\The Stereo - New Tokyo Is Calling.avi</FilePath>
+		<RiffFourCCType>AVI </RiffFourCCType>
+	</RIFF>
+</TestData>
