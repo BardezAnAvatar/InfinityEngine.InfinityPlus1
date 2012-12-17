@@ -3,7 +3,7 @@
   <Options>
     <Solution>N:\Code\Infinity Engine\Infinity +1\Infinity + 1.sln</Solution>
     <CollectionMethod>Sampling</CollectionMethod>
-    <AllocationMethod>None</AllocationMethod>
+    <AllocationMethod>Life</AllocationMethod>
     <LaunchRuntimeControl>true</LaunchRuntimeControl>
     <AddReport>true</AddReport>
     <ResourceBasedAnalysisSelected>false</ResourceBasedAnalysisSelected>
@@ -15,6 +15,8 @@
     <SysCallCount>10</SysCallCount>
     <SamplingCounter Name="" ReloadValue="00000000000f4240" DisplayName="" />
     <RelocateBinaries>false</RelocateBinaries>
+    <AdditionalArgruments />
+    <TargetCLRVersion>Automatic</TargetCLRVersion>
     <CollectOnHpcCluster>false</CollectOnHpcCluster>
     <HPCSettings>
       <NumberOfProcesses>0</NumberOfProcesses>
@@ -27,7 +29,7 @@
         <DeployCRT>true</DeployCRT>
       </AdvancedProperties>
     </HPCSettings>
-    <HardwareCounters EnableHWCounters="false" />
+    <HardwareCounters EnableHWCounters="true" />
     <EtwSettings />
     <PdhSettings>
       <PdhCountersEnabled>false</PdhCountersEnabled>
@@ -50,7 +52,8 @@
   <Binaries>
     <ProjBinary>
       <Path>N:\Code\Infinity Engine\Infinity +1\Tester\obj\Debug\InfinityPlus1.Tester.exe</Path>
-      <ArgumentTimestamp>01/01/0001 00:00:00</ArgumentTimestamp>
+      <TargetCLRVersion>Automatic</TargetCLRVersion>
+      <ArgumentTimestamp>07/10/2012 19:32:28</ArgumentTimestamp>
       <Instrument>true</Instrument>
       <Sample>true</Sample>
       <ExternalWebsite>false</ExternalWebsite>
@@ -77,38 +80,6 @@
       <ProjName>Tester</ProjName>
     </ProjBinary>
   </Binaries>
-  <Reports>
-    <Report>
-      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120313(1).vsp</Path>
-    </Report>
-    <Report>
-      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120313(2).vsp</Path>
-    </Report>
-    <Report>
-      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120313(3).vsp</Path>
-    </Report>
-    <Report>
-      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120313(4).vsp</Path>
-    </Report>
-    <Report>
-      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120313(5).vsp</Path>
-    </Report>
-    <Report>
-      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120313(6).vsp</Path>
-    </Report>
-    <Report>
-      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120313(7).vsp</Path>
-    </Report>
-    <Report>
-      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120313(8).vsp</Path>
-    </Report>
-    <Report>
-      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120314.vsp</Path>
-    </Report>
-    <Report>
-      <Path>N:\Code\Infinity Engine\Infinity +1\InfinityPlus1.Tester120316.vsp</Path>
-    </Report>
-  </Reports>
   <Launches>
     <ProjBinary>
       <Path>:PB:{9BD4922B-BEC0-4140-8600-35571A479EB2}|Tester\Tester.csproj</Path>
