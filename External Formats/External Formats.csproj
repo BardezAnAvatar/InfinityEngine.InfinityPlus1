@@ -124,16 +124,17 @@
     <Compile Include="Multimedia\IStreamRenderManager.cs" />
     <Compile Include="Multimedia\Multimedia Movie.cs" />
     <Compile Include="RIFF\Component\ChunkType.cs" />
+    <Compile Include="RIFF\Component\Interface RIFF Chunk.cs" />
+    <Compile Include="RIFF\Component\RIFF Chunk Extension Base.cs" />
     <Compile Include="RIFF\Component\Riff Chunk Factory.cs" />
     <Compile Include="RIFF\Component\RIFF Chunk.cs" />
     <Compile Include="RIFF\Component\RIFF File.cs" />
-    <Compile Include="RIFF\Component\RIFF Throne Chunk.cs" />
     <Compile Include="RIFF\Component\RIFF Sub Chunk.cs" />
     <Compile Include="RIFF\Component\RIFF Super Chunk.cs" />
+    <Compile Include="RIFF\Component\Software RIFF Chunk.cs" />
     <Compile Include="RIFF\Wave\Enums\Data Format.cs" />
     <Compile Include="RIFF\Wave\Wave Format Chunk.cs" />
     <Compile Include="RIFF\Wave\Wave RIFF File.cs" />
-    <Compile Include="RIFF\Wave\Wave Sample Data Chunk.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
