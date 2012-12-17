@@ -10,6 +10,8 @@ namespace Scratch
         [MTAThread]
         internal static void Main(String[] args)
         {
+            XAudio2_reimp test = new XAudio2_reimp();
+            test.TestSomeXAudio2Stuff();
         }
     }
 }
