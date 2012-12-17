@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component;
@@ -14,9 +15,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
     ///     I will need to re-think how the factory works. Or, maybe have an object for
     ///     extended data inside this class?
     /// </remarks>
-    public class WaveFormatChunk : RiffChunk, IWaveFormatEx
+    public class WaveFormatChunk : RiffChunkExtensionBase, IWaveFormatEx
     {
-        #region Members
+        #region Fields
         /// <summary>Wave data type</summary>
         protected DataFormat dataType;
 
@@ -101,14 +102,18 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
 
 
         #region Construction
-        /// <summary>Chunk Type constructor</summary>
-        /// <param name="type">Chunk id of the chunk</param>
-        /// <param name="input">Stream to read from.</param>
-        public WaveFormatChunk(ChunkType type, Stream input) : base(type, input) { }
+        /// <summary>Chunk constructor</summary>
+        /// <param name="baseChunk">Chunk already read that contains basic details for this chunk</param>
+        public WaveFormatChunk(IRiffChunk baseChunk) : base(baseChunk)
+        {
+            this.Read();
+        }
         #endregion
 
+
+        #region Read method
         /// <summary>This public method reads the RIFF chunk from the data stream. Reads sub-chunks.</summary>
-        public override void Read()
+        public void Read()
         {
             //should be at first sub-chunk. Read chunks.
             try
@@ -121,20 +126,23 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
                 Size(18) = WAVEFORMATEX
                 Size(24+GUID = 24+16=40) = WAVEFORMATEXTENSIBLE
                 */
-                ReusableIO.SeekIfAble(this.dataStream, this.DataOffset);
-                this.dataType = (DataFormat)RiffChunk.ReadUInt16(this.dataStream);
-                this.numChannels = RiffChunk.ReadUInt16(this.dataStream);
-                this.sampleRate = RiffChunk.ReadUInt32(this.dataStream);
-                this.byteRate = RiffChunk.ReadUInt32(this.dataStream);
-                this.blockAlignment = RiffChunk.ReadUInt16(this.dataStream);
-                this.bitsPerSample = RiffChunk.ReadUInt16(this.dataStream);
+                ReusableIO.SeekIfAble(this.DataStream, this.DataOffset);
+                this.dataType = (DataFormat)ReusableIO.ReadUInt16FromStream(this.DataStream);
+                this.numChannels = ReusableIO.ReadUInt16FromStream(this.DataStream);
+                this.sampleRate = ReusableIO.ReadUInt32FromStream(this.DataStream);
+                this.byteRate = ReusableIO.ReadUInt32FromStream(this.DataStream);
+                this.blockAlignment = ReusableIO.ReadUInt16FromStream(this.DataStream);
+                this.bitsPerSample = ReusableIO.ReadUInt16FromStream(this.DataStream);
             }
             catch (Exception ex)
             {
                 throw new Exception("Error occurred while reading WAVE format chunk data.", ex);
             }
         }
+        #endregion
 
+
+        #region IWaveFormatEx
         /// <summary>Returns a WaveFormatEx instance from this header data</summary>
         /// <returns>A WaveFormatEx instance to submit to API calls</returns>
         public WaveFormatEx GetWaveFormat()
@@ -151,5 +159,28 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
 
             return waveEx;
         }
+        #endregion
+
+
+        #region ToString() methods
+        /// <summary>This method overrides the default ToString() method, printing a human-readable representation</summary>
+        /// <returns>A string containing the values and descriptions of all values in this class</returns>
+        public override String ToString()
+        {
+            StringBuilder builder = new StringBuilder();
+
+            this.WriteString(builder);
+
+            return builder.ToString();
+        }
+
+        /// <summary>This method prints a human-readable representation to the given StringBuilder</summary>
+        /// <param name="builder">StringBuilder to write to</param>
+        public override void WriteString(StringBuilder builder)
+        {
+            base.WriteString(builder);
+            builder.Append(this.GetWaveFormat().ToDescriptionString());
+        }
+        #endregion
     }
 }
