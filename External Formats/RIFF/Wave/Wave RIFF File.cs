@@ -37,8 +37,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.Append(this.GetWaveFormat().ToDescriptionString());
-            builder.Append(base.ToString());
+            this.WriteString(builder);
 
             return builder.ToString();
         }
@@ -47,8 +46,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
         /// <param name="builder">StringBuilder to write to</param>
         public void WriteString(StringBuilder builder)
         {
-            WaveFormatEx format = this.GetWaveFormat();
-            builder
+            WaveFormatChunk format = (this.RootChunk.FindFirstSubChunk(ChunkType.fmt).Chunk as WaveFormatChunk);
+            format.WaveFormatData.WriteString(builder);
+            base.WriteString(builder);
         }
         #endregion
     }
