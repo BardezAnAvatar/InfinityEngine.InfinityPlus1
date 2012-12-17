@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component;
@@ -75,7 +76,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.ExternalFormats.RIFF.Compone
             String actual = null;
             
             //HACK: generate a RIFF Report
-            String chunkReport = null;
+            StringBuilder chunkReport = new StringBuilder();
 
             using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
             {
@@ -83,7 +84,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.ExternalFormats.RIFF.Compone
                 target.Read(fs);
                 actual = target.ContainerTypeName;
 
-                chunkReport = target.ToString();
+                target.WriteString(chunkReport);
             }
 
             //writer takes ownership of report, so do not dispose.
