@@ -18,86 +18,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
     public class WaveFormatChunk : RiffChunkExtensionBase, IWaveFormatEx
     {
         #region Fields
-        /// <summary>Wave data type</summary>
-        protected DataFormat dataType;
-
-        /// <summary>Number of channels in this wave file</summary>
-        protected UInt16 numChannels;
-
-        /// <summary>Number of wave samples per second</summary>
-        /// <remarks>
-        ///     As a display of personal stupidity, I just made the connection of digitized
-        ///     waveform sound to calculus, and then to digitization in general (i.e. scanning). Wow.
-        ///     I should have gotten that a lot sooner.
-        /// </remarks>
-        protected UInt32 sampleRate;
-
-        /// <summary>Number of bytes to push through per second</summary>
-        /// <value>= SampleRate * NumChannels * BitsPerSample/8</value>
-        /// <remarks>Seems redundant and superfluous, honestly. Maybe relevant for compressed data?</remarks>
-        protected UInt32 byteRate;
-
-        /// <summary>Number of bytes for a single sample of all channels</summary>
-        /// <value>= NumChannels * BitsPerSample/8</value>
-        protected UInt16 blockAlignment;
-
-        /// <summary>Indicates the number of bits per sample</summary>
-        /// <value>For PCM, multiple of 8</value>
-        protected UInt16 bitsPerSample;
-        #endregion
-
-
-        #region Properties
-        /// <summary>Wave data type</summary>
-        public DataFormat DataType
-        {
-            get { return this.dataType; }
-            set { this.dataType = value; }
-        }
-
-        /// <summary>Number of channels in this wave file</summary>
-        public UInt16 NumChannels
-        {
-            get { return this.numChannels; }
-            set { this.numChannels = value; }
-        }
-
-        /// <summary>Number of wave samples per second</summary>
-        /// <remarks>
-        ///     As a display of personal stupidity, I just made the connection of digitized
-        ///     waveform sound to calculus, and then to digitization in general (i.e. scanning). Wow.
-        ///     I should have gotten that a lot sooner.
-        /// </remarks>
-        public UInt32 SampleRate
-        {
-            get { return this.sampleRate; }
-            set { this.sampleRate = value; }
-        }
-
-        /// <summary>Number of bytes to push through per second</summary>
-        /// <value>= SampleRate * NumChannels * BitsPerSample/8</value>
-        /// <remarks>Seems redundant and superfluous, honestly. Maybe relevant for compressed data?</remarks>
-        public UInt32 ByteRate
-        {
-            get { return this.byteRate; }
-            set { this.byteRate = value; }
-        }
-
-        /// <summary>Number of bytes for a single sample of all channels</summary>
-        /// <value>= NumChannels * BitsPerSample/8</value>
-        public UInt16 BlockAlignment
-        {
-            get { return this.blockAlignment; }
-            set { this.blockAlignment = value; }
-        }
-
-        /// <summary>Indicates the number of bits per sample</summary>
-        /// <value>For PCM, multiple of 8</value>
-        public UInt16 BitsPerSample
-        {
-            get { return this.bitsPerSample; }
-            set { this.bitsPerSample = value; }
-        }
+        /// <summary>Represents playback info for wave sample data</summary>
+        public WaveFormat WaveFormatData { get; set; }
         #endregion
 
 
@@ -115,7 +37,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
         /// <summary>This public method reads the RIFF chunk from the data stream. Reads sub-chunks.</summary>
         protected void Read()
         {
-            //should be at first sub-chunk. Read chunks.
             try
             {
                 /*
@@ -126,13 +47,45 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
                 Size(18) = WAVEFORMATEX
                 Size(24+GUID = 24+16=40) = WAVEFORMATEXTENSIBLE
                 */
+
                 ReusableIO.SeekIfAble(this.DataStream, this.DataOffset);
-                this.dataType = (DataFormat)ReusableIO.ReadUInt16FromStream(this.DataStream);
-                this.numChannels = ReusableIO.ReadUInt16FromStream(this.DataStream);
-                this.sampleRate = ReusableIO.ReadUInt32FromStream(this.DataStream);
-                this.byteRate = ReusableIO.ReadUInt32FromStream(this.DataStream);
-                this.blockAlignment = ReusableIO.ReadUInt16FromStream(this.DataStream);
-                this.bitsPerSample = ReusableIO.ReadUInt16FromStream(this.DataStream);
+
+                //WAVEFORMAT fields
+                //DataFormat formatTag = (DataFormat)ReusableIO.ReadUInt16FromStream(this.DataStream);
+                UInt16 formatTag = ReusableIO.ReadUInt16FromStream(this.DataStream);
+                UInt16 numberChannels = ReusableIO.ReadUInt16FromStream(this.DataStream);
+                UInt32 sampleRate = ReusableIO.ReadUInt32FromStream(this.DataStream);
+                UInt32 averageBytesPerSec = ReusableIO.ReadUInt32FromStream(this.DataStream);
+                UInt16 blockAlignment = ReusableIO.ReadUInt16FromStream(this.DataStream);
+
+                this.WaveFormatData = new WaveFormat(formatTag, numberChannels, sampleRate, averageBytesPerSec, blockAlignment);
+
+                if (this.Size > 14) //Size(14) = WAVEFORMAT
+                {
+                    UInt16 bitsPerSample = ReusableIO.ReadUInt16FromStream(this.DataStream);
+                    this.WaveFormatData = new PcmWaveFormat(this.WaveFormatData, bitsPerSample);
+
+                    if (this.Size > 16) //Size(16) = pcmwaveformat_tag
+                    {
+                        UInt16 size = ReusableIO.ReadUInt16FromStream(this.DataStream);
+                        this.WaveFormatData = new WaveFormatEx(this.WaveFormatData as PcmWaveFormat, size);
+
+                        if (this.Size > 18) //Size(18) = WAVEFORMATEX
+                        {
+                            UInt16 union = ReusableIO.ReadUInt16FromStream(this.DataStream);
+                            SpeakerPositions channelMask = (SpeakerPositions)(ReusableIO.ReadUInt32FromStream(this.DataStream));
+                            Byte[] guidData = ReusableIO.BinaryRead(this.DataStream, 16);
+                            Guid specificFormat = new Guid(guidData);
+
+                            this.WaveFormatData = new WaveFormatExtensible(this.WaveFormatData as WaveFormatEx, union, channelMask, specificFormat);
+
+                            if (this.Size > 40) //Size(24+GUID = 24+16=40) = WAVEFORMATEXTENSIBLE
+                            {
+                                //custom format...
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -147,17 +100,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
         /// <returns>A WaveFormatEx instance to submit to API calls</returns>
         public WaveFormatEx GetWaveFormat()
         {
-            WaveFormatEx waveEx = new WaveFormatEx();
-
-            waveEx.AverageBytesPerSec = this.SampleRate * 2U /*sizeof(short)*/ * this.numChannels /* sizeof(usort) */;
-            waveEx.BitsPerSample = 16; /* sizeof(short) */
-            waveEx.BlockAlignment = Convert.ToUInt16(2U * this.numChannels);
-            waveEx.FormatTag = 1;   //1 for PCM
-            waveEx.NumberChannels = this.numChannels; //designating 1 causes errors
-            waveEx.SamplesPerSec = this.sampleRate;
-            waveEx.Size = 0;    //no extra data; this is strictly a WaveFormatEx instance 
-
-            return waveEx;
+            return new WaveFormatEx(this.WaveFormatData);   //ensure that it is transformed into a WaveFormatEx from, say, waveformat_tag or pcmwaveformat_tag
         }
         #endregion
 
@@ -179,7 +122,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
         public override void WriteString(StringBuilder builder)
         {
             base.WriteString(builder);
-            builder.Append(this.GetWaveFormat().ToDescriptionString());
+            this.WaveFormatData.WriteString(builder);
         }
         #endregion
     }
