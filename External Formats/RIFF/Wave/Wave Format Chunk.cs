@@ -113,7 +113,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
 
         #region Read method
         /// <summary>This public method reads the RIFF chunk from the data stream. Reads sub-chunks.</summary>
-        public void Read()
+        protected void Read()
         {
             //should be at first sub-chunk. Read chunks.
             try
