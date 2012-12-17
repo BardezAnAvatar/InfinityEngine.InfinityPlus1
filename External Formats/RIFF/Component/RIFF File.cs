@@ -62,7 +62,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
 
         /// <summary>This method prints a human-readable representation to the given StringBuilder</summary>
         /// <param name="builder">StringBuilder to write to</param>
-        public void WriteString(StringBuilder builder)
+        public virtual void WriteString(StringBuilder builder)
         {
             builder.Append("RIFF File:");
             StringFormat.ToStringAlignment("Chunks", builder);

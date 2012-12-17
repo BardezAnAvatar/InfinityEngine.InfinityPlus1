@@ -44,7 +44,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
 
         /// <summary>This method prints a human-readable representation to the given StringBuilder</summary>
         /// <param name="builder">StringBuilder to write to</param>
-        public void WriteString(StringBuilder builder)
+        public override void WriteString(StringBuilder builder)
         {
             WaveFormatChunk format = (this.RootChunk.FindFirstSubChunk(ChunkType.fmt).Chunk as WaveFormatChunk);
             format.WaveFormatData.WriteString(builder);
