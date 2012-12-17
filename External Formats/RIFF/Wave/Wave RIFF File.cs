@@ -29,7 +29,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
             WaveFormatEx waveEx = new WaveFormatEx();
             //WaveFormatExtensible waveExtensible = new WaveFormatExtensible();
 
-            WaveFormatChunk format = (this.Header.FindFirstSubChunk(ChunkType.fmt).Chunk as WaveFormatChunk);
+            WaveFormatChunk format = (this.RootChunk.FindFirstSubChunk(ChunkType.fmt).Chunk as WaveFormatChunk);
             format.Read();
 
             waveEx.AverageBytesPerSec = format.ByteRate;
@@ -60,13 +60,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
         /// <returns>Byte array of sample data</returns>
         public virtual Byte[] GetWaveData()
         {
-            WaveSampleDataChunk wave = (this.Header.FindFirstSubChunk(ChunkType.data).Chunk as WaveSampleDataChunk);
+            IRiffChunk wave = this.RootChunk.FindFirstSubChunk(ChunkType.data).Chunk;
             return wave.Data;
-        }
-
-        public static Boolean IsWaveFile(Stream dataStream)
-        {
-            return false;
         }
     }
 }
