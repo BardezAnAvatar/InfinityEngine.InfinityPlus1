@@ -1,46 +1,64 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
 {
     /// <summary>Base class for RIFF chunks. Contains the chunk type/id/name, size and offset to data, as well as the data stream to read from</summary>
-    public class RiffChunk
+    public class RiffChunk : IRiffChunk
     {
-        #region Members
+        #region Fields
+        /// <summary>Leading four byte character code of the chunk</summary>
+        private ChunkType chunkId;
+
+        /// <summary>Unsigned 32-bit interger indicating the chunk size</summary>
+        private UInt32 size;
+
+        /// <summary>Position within the stream where this chunk starts</summary>
+        private Int64 chunkOffset;
+
         /// <summary>Stream object containing the RIFF data to read from.</summary>
-        protected Stream dataStream;
+        private Stream dataStream;
         #endregion
 
 
         #region Properties
         /// <summary>Leading four byte character code of the chunk</summary>
-        public ChunkType ChunkId { get; set; }
+        public ChunkType ChunkId
+        {
+            get { return this.chunkId; }
+        }
 
         /// <summary>Exposes the name of the chunk type. Preserves spaces in the name.</summary>
         public String ChunkName
         {
-            get
-            {
-                return GetFourCCName((UInt32)this.ChunkId);
-            }
+            get { return RiffChunk.GetFourCCName((UInt32)this.ChunkId); }
         }
 
         /// <summary>Unsigned 32-bit interger indicating the chunk size</summary>
-        public UInt32 Size { get; set; }
+        public UInt32 Size
+        {
+            get { return this.size; }
+        }        
 
         /// <summary>Unsigned 32-bit interger indicating the chunk size</summary>
+        /// <remarks>
+        ///     The spec. defines this as a byte array. However, the problem with this is that, in the example of raw audio-video interleave,
+        ///     the data chunk may be so incredibly large as to surpass RAM, in which case reading the data is foolish. Instead, open the file
+        ///     and read the stream, seeking as appropriate, storing offsets and reading on-demand.
+        /// </remarks>
         public Byte[] Data
         {
             get
             {
                 Byte[] data = null;
 
-                if (this.dataStream != null && this.dataStream.CanSeek)
+                if (this.DataStream != null && this.DataStream.CanSeek)
                 {
-                    ReusableIO.SeekIfAble(this.dataStream, this.DataOffset);
-                    data = ReusableIO.BinaryRead(this.dataStream, this.Size);
+                    ReusableIO.SeekIfAble(this.DataStream, this.DataOffset);
+                    data = ReusableIO.BinaryRead(this.DataStream, this.Size);
                 }
 
                 return data;
@@ -48,27 +66,54 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
         }
 
         /// <summary>Unsigned offset to the data</summary>
-        /// <remarks>
-        ///     The spec. defines this as a byte array. However, the problem with this is that, in the example of raw audio-video interleave,
-        ///     the data chunk may be so incredibly large as to surpass RAM, in which case reading the data is foolish. Instead, open the file
-        ///     and read the stream, seeking as appropriate, storing offsets and reading on-demand.
-        /// </remarks>
-        public Int64 DataOffset { get; set; }
+        public Int64 DataOffset
+        {
+            get { return this.ChunkOffset + 8L; }
+        }
+
+        /// <summary>Position within the stream where this chunk starts</summary>
+        public Int64 ChunkOffset
+        {
+            get { return this.chunkOffset; }
+        }
+        
+        /// <summary>Stream object containing the RIFF data to read from.</summary>
+        public Stream DataStream
+        {
+            get { return this.dataStream; }
+        }
         #endregion
 
 
         #region Construction
-        /// <summary>Chunk Type constructor</summary>
-        /// <param name="type">Chunk id of the chunk</param>
+        /// <summary>Read constructor</summary>
         /// <param name="input">Stream to read from.</param>
-        public RiffChunk(ChunkType type, Stream input)
+        public RiffChunk(Stream input)
         {
-            this.ChunkId = type;
-            this.dataStream = input;
+            this.Initialize(input);
+            this.ReadChunkHeader();
+        }
+
+        /// <summary>Write constructor</summary>
+        /// <param name="type">Chunk id of the chunk</param>
+        /// <param name="size">Size of the chunk data</param>
+        /// <param name="data">Stream to read from.</param>
+        public RiffChunk(ChunkType type, UInt32 size, Stream data)
+        {
+            this.Initialize(data);
+            this.chunkId = type;
+            this.size = size;
         }
 
         /// <summary>Instantiates reference types</summary>
-        protected virtual void Initialize() { }
+        private void Initialize(Stream input)
+        {
+            if (input == null)
+                throw new ApplicationException("RIFF Chunk's source stream cannot be null.");
+
+            this.chunkOffset = input.Position;
+            this.dataStream = input;
+        }
         #endregion
 
 
@@ -79,20 +124,19 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
         /// <summary>This public method reads the RIFF chunk from the data stream. Reads sub-chunks.</summary>
         public virtual void ReadChunkHeader()
         {
-            this.ChunkId = ReadFourCC(this.dataStream);
-            this.Size = ReadUInt32(this.dataStream);
-            this.DataOffset = this.dataStream.Position;
+            this.chunkId = RiffChunk.ReadFourCC(this.DataStream);
+            this.size = ReusableIO.ReadUInt32FromStream(this.DataStream);
         }
 
         /// <summary>Reads the fourcc at the current index of the stream</summary>
         /// <returns>ChunkType describing the FourCC</returns>
         public static ChunkType ReadFourCC(Stream dataStream)
         {
-            UInt32 marker = RiffChunk.ReadUInt32(dataStream);
+            UInt32 marker = ReusableIO.ReadUInt32FromStream(dataStream);
 
-            //check validity
-            if (!RiffChunk.IsKnownFourCC(marker))
-                throw new ApplicationException(String.Format("Could not convert value \"{0:X8}\" (\"{1}\") into a RIFF ChunkType.", marker, RiffChunk.GetFourCCName(marker)));
+            ////check validity
+            //if (!RiffChunk.IsKnownFourCC(marker))
+            //    System.Diagnostics.Debug.Print("Could not convert value \"{0:X8}\" (\"{1}\") into a RIFF ChunkType.", marker, RiffChunk.GetFourCCName(marker));
 
             return (ChunkType)marker;
         }
@@ -114,6 +158,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
                 case ChunkType.hdrl:
                 case ChunkType.idx1:
                 case ChunkType.INFO:
+                case ChunkType.ISFT:    //generating software
                 case ChunkType.JUNK:
                 case ChunkType.LIST:
                 case ChunkType.movi:
@@ -134,7 +179,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
         /// <summary>Gets the String representation of memory for a suspected UInt32 fourCC code</summary>
         /// <param name="fourCC">UInt32 provided to attempt to render as a fourCC string of characters</param>
         /// <returns>String representation for the suspected UInt32 fourCC code</returns>
-        protected static String GetFourCCName(UInt32 fourCC)
+        public static String GetFourCCName(UInt32 fourCC)
         {
             Byte[] binary = BitConverter.GetBytes(fourCC);
             return ReusableIO.ReadStringFromByteArray(binary, 0, "en-US", 4);
@@ -142,21 +187,33 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Component
         #endregion
 
 
-        #region Data primitive read methods
-        /// <summary>Reads the chunk size at the current index of the stream</summary>
-        /// <returns>UInt32 at the current position in the datastream</returns>
-        protected static UInt32 ReadUInt32(Stream dataStream)
+        #region Write Methods
+        //TODO: allow a write(stream datasource) method that will wrte out to the datastream. So the chunk will read any data from the provided out to the DataSTream?
+        #endregion
+
+
+        #region ToString() methods
+        /// <summary>This method overrides the default ToString() method, printing a human-readable representation</summary>
+        /// <returns>A string containing the values and descriptions of all values in this class</returns>
+        public override String ToString()
         {
-            Byte[] bin = ReusableIO.BinaryRead(dataStream, 4);
-            return ReusableIO.ReadUInt32FromArray(bin, 0);
+            StringBuilder builder = new StringBuilder();
+
+            this.WriteString(builder);
+
+            return builder.ToString();
         }
 
-        /// <summary>Reads the chunk size at the current index of the stream</summary>
-        /// <returns>UInt16 at the current position in the datastream</returns>
-        protected static UInt16 ReadUInt16(Stream dataStream)
+        /// <summary>This method prints a human-readable representation to the given StringBuilder</summary>
+        /// <param name="builder">StringBuilder to write to</param>
+        public virtual void WriteString(StringBuilder builder)
         {
-            Byte[] bin = ReusableIO.BinaryRead(dataStream, 2);
-            return ReusableIO.ReadUInt16FromArray(bin, 0);
+            StringFormat.ToStringAlignment("Chunk Type", builder);
+            builder.Append(this.ChunkName);
+            StringFormat.ToStringAlignment("Size", builder);
+            builder.Append(this.Size);
+            StringFormat.ToStringAlignment("Position of Data", builder);
+            builder.Append(this.DataOffset);
         }
         #endregion
     }
