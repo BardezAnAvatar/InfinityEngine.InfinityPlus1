@@ -12,6 +12,7 @@ namespace Scratch
         {
             XAudio2_reimp test = new XAudio2_reimp();
             test.TestSomeXAudio2Stuff();
+            test.XAudio2_ThreeeeeeDeeeeeeee_test();
         }
     }
 }
