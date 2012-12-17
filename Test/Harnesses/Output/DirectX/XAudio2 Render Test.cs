@@ -48,7 +48,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Output.DirectX
         {
             using (FileStream stream = new FileStream(ConfigurationHandlerMulti.GetSettingValue(XAudio2RenderTest.configKey), FileMode.Open, FileAccess.Read))
             {
-                WaveRiffFile waveRiff = new WaveRiffFile(stream);
+                WaveRiffFile waveRiff = new WaveRiffFile();
                 waveRiff.Read(stream);
                 WaveFormatEx waveFormat = waveRiff.GetWaveFormat();
                 Byte[] sampleData = this.GetWaveData(waveRiff);
