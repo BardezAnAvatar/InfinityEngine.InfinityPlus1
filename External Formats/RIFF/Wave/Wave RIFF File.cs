@@ -30,17 +30,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave
             //WaveFormatExtensible waveExtensible = new WaveFormatExtensible();
 
             WaveFormatChunk format = (this.RootChunk.FindFirstSubChunk(ChunkType.fmt).Chunk as WaveFormatChunk);
-            format.Read();
 
-            waveEx.AverageBytesPerSec = format.ByteRate;
-            waveEx.BitsPerSample = format.BitsPerSample;
-            waveEx.BlockAlignment = format.BlockAlignment;
-            waveEx.FormatTag = (UInt16)format.DataType;
-            waveEx.NumberChannels = format.NumChannels;
-            waveEx.SamplesPerSec = format.SampleRate;
-            waveEx.Size = 0; //Convert.ToUInt16(format.Size);
-
-            return waveEx;
+            return format.GetWaveFormat();
         }
 
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>
