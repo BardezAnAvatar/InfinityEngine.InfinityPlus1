@@ -135,7 +135,7 @@ namespace Scratch
 
                 DspSettings settings = new DspSettings(format.NumberChannels, format.NumberChannels);
 
-                X3DAudioCalculationFlags calcFlags = X3DAudioCalculationFlags.Matrix|X3DAudioCalculationFlags.Reverberation|X3DAudioCalculationFlags.Doppler|X3DAudioCalculationFlags.LowPassFilterDirect|X3DAudioCalculationFlags.LowPassFilterReverberation;
+                X3DAudioCalculationFlags calcFlags = X3DAudioCalculationFlags.Matrix | X3DAudioCalculationFlags.Reverberation | X3DAudioCalculationFlags.Doppler | X3DAudioCalculationFlags.LowPassFilterDirect | X3DAudioCalculationFlags.LowPassFilterReverberation;
                 X3DAudio.CalculateAudio(x3daListener, x3daEmitter, calcFlags, settings);
 
                 //Try playback
