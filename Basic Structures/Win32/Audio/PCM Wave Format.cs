@@ -19,7 +19,10 @@ namespace Bardez.Projects.BasicStructures.Win32.Audio
         /// <summary>Default constructor</summary>
         public PcmWaveFormat() : base()
         {
-            this.BitsPerSample = Convert.ToUInt16((this.AverageBytesPerSec / this.NumberChannels) * 8U);
+            if (this.NumberChannels > 0)
+                this.BitsPerSample = Convert.ToUInt16((this.AverageBytesPerSec / this.NumberChannels) * 8U);
+            else
+                this.BitsPerSample = 0;
         }
 
         /// <summary>Definition constructor</summary>
@@ -42,8 +45,10 @@ namespace Bardez.Projects.BasicStructures.Win32.Audio
         {
             if (format is PcmWaveFormat)
                 this.BitsPerSample = (format as PcmWaveFormat).BitsPerSample;
-            else
+            else if (this.NumberChannels > 0)
                 this.BitsPerSample = Convert.ToUInt16((this.AverageBytesPerSec / this.NumberChannels) * 8U);
+            else
+                this.BitsPerSample = 0;
         }
 
         /// <summary>Derivation constructor</summary>
