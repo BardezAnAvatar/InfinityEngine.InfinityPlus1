@@ -49,7 +49,7 @@ namespace Bardez.Projects.BasicStructures.Win32.Audio
             this.NumberChannels = channels;
             this.SamplesPerSec = sampleRate;
             this.AverageBytesPerSec = avgBytesPerSec;
-            this.BlockAlignment = BlockAlignment;
+            this.BlockAlignment = alignment;
         }
         #endregion
 
