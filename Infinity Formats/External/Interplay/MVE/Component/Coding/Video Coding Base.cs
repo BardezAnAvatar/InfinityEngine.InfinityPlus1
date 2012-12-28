@@ -10,6 +10,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
+using Bardez.Projects.MultiMedia.MediaBase.Video;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Coding
@@ -70,24 +71,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         /// <summary>Gets the next frame from the video stream</summary>
         /// <param name="mveFrame">MveVideoFrame to decode</param>
         /// <returns>A MediaBase Frame</returns>
-        public virtual Frame GetNextFrame(MveVideoFrame mveFrame)
-        {
-            Frame frame = null;
-
-            if (mveFrame != null)
-            {
-                MemoryStream previousData = (this.RecentFrame != null) ? this.RecentFrame.NativeBinaryData : null;
-                Byte[] previousBinary = (previousData != null) ? previousData.ToArray() : new Byte[this.BufferSize];
-                PixelData pd = this.GetNextImage(previousBinary, mveFrame.DecodingMap.BlockEncoding, mveFrame.Data.Data, this.VideoStream.Palette, mveFrame.Data.DeltaFrame);
-                
-                //remember the current pixel data for the next frame; otherwise the movie gets very blocky (but interrestingly you can see the delta regions)
-                this.RecentFrame = pd;
-
-                frame = new Frame(pd);
-            }
-
-            return frame;
-        }
+        public abstract IMultimediaVideoFrame GetNextFrame(MveVideoFrame mveFrame);
 
         /// <summary>Gets the next decoded frame, in 32-bit color</summary>
         /// <param name="previousFrame">Previous frame, for delta-reference</param>
