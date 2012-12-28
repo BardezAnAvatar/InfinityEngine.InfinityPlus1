@@ -3,6 +3,7 @@ using System.Windows.Forms;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
+using Bardez.Projects.MultiMedia.MediaBase.Video;
 
 namespace Bardez.Projects.InfinityPlus1.Output.Visual
 {
@@ -25,7 +26,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         /// <summary>Adds a renderable frame to be resources manager for the User Control</summary>
         /// <param name="data">Frame to add</param>
         /// <returns>A unique key for the frame data to be referenced</returns>
-        public abstract Int32 AddFrameResource(Frame data);
+        public abstract Int32 AddFrameResource(IMultimediaVideoFrame data);
 
         /// <summary>Frees a Bitmap resource in the resource manager and Disposes of it.</summary>
         /// <param name="frameKey">Direct2D Bitmap key to be Disposed.</param>

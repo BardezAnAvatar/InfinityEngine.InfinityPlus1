@@ -9,6 +9,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Resize;
 using Bardez.Projects.InfinityPlus1.Test.WinForm;
+using Bardez.Projects.MultiMedia.MediaBase.Video;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
@@ -127,7 +128,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Image
 
                 //decode the JPEG, get its frame data
                 jpeg.Decode();
-                Frame frame = jpeg.GetFrame();
+                IMultimediaVideoFrame frame = jpeg.GetFrame();
                 //dispose the JPEG container?
 
                 //submit a bitap

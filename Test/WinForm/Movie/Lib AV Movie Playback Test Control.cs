@@ -12,7 +12,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.Output.Audio;
 using Bardez.Projects.ReusableCode;
-
+using Bardez.Projects.MultiMedia.MediaBase.Video;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
 {
@@ -377,7 +377,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
 
         #region Video display
         /// <summary>Processes the next video frame from the controller. Stops playback if the frame returned was null.</summary>
-        protected virtual void ProcessNextVideoFrame(Frame frame)
+        protected virtual void ProcessNextVideoFrame(IMultimediaVideoFrame frame)
         {
             lock (this.frameKeyLock)
             {
