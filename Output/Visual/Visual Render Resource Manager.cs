@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
+using Bardez.Projects.MultiMedia.MediaBase.Video;
 
 namespace Bardez.Projects.InfinityPlus1.Output.Visual
 {
@@ -13,6 +13,6 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         /// <summary>Posts a Frame resource to the resource manager and returns a unique key to access it.</summary>
         /// <param name="resource">Frame to be posted.</param>
         /// <returns>A unique Int32 key</returns>
-        public abstract Int32 AddFrameResource(Frame resource);
+        public abstract Int32 AddFrameResource(IMultimediaVideoFrame resource);
     }
 }
