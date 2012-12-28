@@ -10,6 +10,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
+using Bardez.Projects.MultiMedia.MediaBase.Video;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareAnimation
@@ -314,15 +315,15 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareAnimation
         /// <summary>Returns the frame with the associated index in the tileset</summary>
         /// <param name="index">Index of the frame to retrieve</param>
         /// <returns>The frane at the associated index</returns>
-        public Frame GetFrame(Int32 index)
+        public IMultimediaVideoFrame GetFrame(Int32 index)
         {
             FrameEntry frame = this.FrameEntries[index];
             Byte[] data = this.GetExpandedData(frame);
-            
-            Frame getFrame = new Frame();
-            getFrame.Pixels = new PixelData(data, ScanLineOrder.TopDown, PixelFormat.RGBA_B8G8R8A8, frame.Height, frame.Width, 0, 0, 32);
-            getFrame.OriginX = this.FrameEntries[index].RenderOriginX;
-            getFrame.OriginY = this.FrameEntries[index].RenderOriginY;
+
+            Int64 oX = this.FrameEntries[index].RenderOriginX;
+            Int64 oY = this.FrameEntries[index].RenderOriginY;
+            PixelData pd = new PixelData(data, ScanLineOrder.TopDown, PixelFormat.RGBA_B8G8R8A8, frame.Height, frame.Width, 0, 0, 32, oX, oY);
+            IMultimediaVideoFrame getFrame = new BasicVideoFrame(pd);
 
             return getFrame;
         }
