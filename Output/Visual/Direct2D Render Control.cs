@@ -9,6 +9,8 @@ using Bardez.Projects.BasicStructures.Win32;
 using Bardez.Projects.DirectX.Direct2D;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
+using Bardez.Projects.MultiMedia.MediaBase.Video;
+using Bardez.Projects.MultiMedia.MediaBase.Video.Pixels;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Output.Visual
@@ -407,13 +409,13 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         /// <summary>Posts a Frame resource to the resource manager and returns a unique key to access it.</summary>
         /// <param name="resource">Frame to be posted.</param>
         /// <returns>A unique Int32 key</returns>
-        public override Int32 AddFrameResource(Frame resource)
+        public override Int32 AddFrameResource(IMultimediaVideoFrame resource)
         {
             lock (this.controlBufferLock)
             {
                 //create the bitmap
                 BitmapProperties properties = new BitmapProperties(new PixelFormat(DXGI_ChannelFormat.FORMAT_B8G8R8A8_UNORM, AlphaMode.PreMultiplied), Direct2dResourceManager.Instance.Factory.GetDesktopDpi());
-                SizeU dimensions = new SizeU(Convert.ToUInt32(resource.Pixels.Metadata.Width), Convert.ToUInt32(resource.Pixels.Metadata.Height));
+                SizeU dimensions = new SizeU(Convert.ToUInt32(resource.Metadata.Width), Convert.ToUInt32(resource.Metadata.Height));
 
                 Direct2D.Bitmap bmp = null;
                 ResultCode result = this.BmpRenderTarget.CreateBitmap(dimensions, properties, out bmp);
@@ -422,11 +424,12 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
                     throw new ApplicationException(String.Format("Error creating a Direct2D Bitmap: {0}", result.ToString()));
 
                 //get data and read to Byte array
-                MemoryStream data = resource.Pixels.GetPixelData(ExternalPixelEnums.PixelFormat.RGBA_B8G8R8A8, ScanLineOrder.TopDown, 0, 0);
+                IPixelConverter converter = new BasicPixelConverter();
+                MemoryStream data = resource.GetFormattedData(converter, ExternalPixelEnums.PixelFormat.RGBA_B8G8R8A8, ScanLineOrder.TopDown, 0, 0);
                 Byte[] binData = data.ToArray();
 
                 //submit byte array
-                result = bmp.CopyFromMemory(new RectangleU(dimensions), binData, Convert.ToUInt32(resource.Pixels.Metadata.Width * 4));
+                result = bmp.CopyFromMemory(new RectangleU(dimensions), binData, Convert.ToUInt32(resource.Metadata.Width * 4));
 
                 if (result != ResultCode.Success_OK)
                     throw new ApplicationException(String.Format("Error creating a Direct2D Bitmap: {0}", result.ToString()));
