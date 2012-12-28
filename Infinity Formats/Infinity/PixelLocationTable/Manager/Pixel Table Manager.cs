@@ -7,6 +7,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
+using Bardez.Projects.MultiMedia.MediaBase.Video;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PixelLocationTable.Manager
 {
@@ -44,10 +45,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PixelLocationTable.
         #region IImage methods
         /// <summary>Gets a frame image from the pixel data already in place</summary>
         /// <returns>A frame containing the pixel data</returns>
-        public Frame GetFrame()
+        public IMultimediaVideoFrame GetFrame()
         {
-            Frame frame = new Frame();
-            frame.Pixels = this.GetPixelData();
+            IMultimediaVideoFrame frame = new BasicVideoFrame(this.GetPixelData());
             return frame;
         }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Opcodes;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Enum;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
+using Bardez.Projects.MultiMedia.MediaBase.Video;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Interpretation
 {
@@ -19,7 +20,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         public VideoData Data { get; set; }
 
         /// <summary>Buffer to hold a decoded frame from the buffer</summary>
-        public Frame FrameBuffer { get; set; }
+        public IMultimediaVideoFrame FrameBuffer { get; set; }
 
         public Int32 FrameNumber;
         #endregion
