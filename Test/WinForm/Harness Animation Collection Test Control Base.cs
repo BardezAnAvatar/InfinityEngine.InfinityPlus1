@@ -10,6 +10,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Resize;
 using Bardez.Projects.InfinityPlus1.Test.WinForm;
+using Bardez.Projects.MultiMedia.MediaBase.Video;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm
@@ -203,8 +204,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
                 //loop through the frames in the image set
                 for (Int32 frameIndex = 0; frameIndex < image.FrameCount; ++frameIndex)
                 {
-                    //et its frame data
-                    Frame frame = image.GetFrame(frameIndex);
+                    //Get its frame data
+                    IMultimediaVideoFrame frame = image.GetFrame(frameIndex);
 
                     //submit a bitap
                     Int32 key;
@@ -215,8 +216,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 
                     //create the ImageReference and add
                     ImageReference imgRef = new ImageReference(imageName, key, frameIndex);
-                    imgRef.RenderOriginX = frame.OriginX;
-                    imgRef.RenderOriginY = frame.OriginY;
+                    imgRef.RenderOriginX = frame.Metadata.OriginX;
+                    imgRef.RenderOriginY = frame.Metadata.OriginY;
                     this.SetFrameDetails(imgRef, image, frameIndex);    //allow for easy override with less intervention
                     col.FrameList.Add(imgRef);
                 }
