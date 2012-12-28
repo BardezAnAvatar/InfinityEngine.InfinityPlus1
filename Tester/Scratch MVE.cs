@@ -23,6 +23,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Resize;
 using Bardez.Projects.InfinityPlus1.Output.Visual;
+using Bardez.Projects.MultiMedia.MediaBase.Video;
 
 namespace Bardez.Projects.InfinityPlus1.Tester
 {
@@ -173,12 +174,12 @@ namespace Bardez.Projects.InfinityPlus1.Tester
         {
             if (this.MVE != null)
             {
-                Frame frame = this.MVE.GetNextFrame();
+                IMultimediaVideoFrame frame = this.MVE.GetNextFrame();
                 this.ProcessNextVideoFrame(frame);
             }
         }
 
-        protected virtual void ProcessNextVideoFrame(Frame frame)
+        protected virtual void ProcessNextVideoFrame(IMultimediaVideoFrame frame)
         {
             if (this.MVE != null)
             {
@@ -204,16 +205,16 @@ namespace Bardez.Projects.InfinityPlus1.Tester
         protected virtual void StopPlayback()
         {
             this.MVE.StopVideoPlayback();
-            this.MVE.PlayFrame -= new Action<Frame>(this.ProcessNextVideoFrame);
+            this.MVE.PlayFrame -= new Action<IMultimediaVideoFrame>(this.ProcessNextVideoFrame);
         }
 
         protected virtual void btnPlay_Click(Object sender, EventArgs e)
         {
-            this.MVE.PlayFrame += new Action<Frame>(this.ProcessNextVideoFrame);
+            this.MVE.PlayFrame += new Action<IMultimediaVideoFrame>(this.ProcessNextVideoFrame);
             this.MVE.StartVideoPlayback();
         }
 
-        protected virtual void TimerExpired(Frame frame)
+        protected virtual void TimerExpired(IMultimediaVideoFrame frame)
         {
             this.FetchNextVideoFrame();
         }
