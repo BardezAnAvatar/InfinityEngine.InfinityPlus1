@@ -9,6 +9,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
 using Bardez.Projects.MultiMedia.LibAV;
+using Bardez.Projects.MultiMedia.MediaBase.Video;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
 {
@@ -20,7 +21,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
     {
         #region Fields
         /// <summary>Event to raise for rendering video output.</summary>
-        protected event Action<Frame> render;
+        protected event Action<IMultimediaVideoFrame> render;
 
         /// <summary>Buffer and processing info for this video stream</summary>
         protected StreamProcessingBuffer<FrameBGRA> VideoBuffer { get; set; }
@@ -48,7 +49,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
 
         #region Exposed Events
         /// <summary>Event to raise for rendering video output.</summary>
-        public event Action<Frame> Render
+        public event Action<IMultimediaVideoFrame> Render
         {
             add { this.render += value; }
             remove { this.render -= value; }
@@ -83,7 +84,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
                     if (peek != null && peek.GetPresentationStartTimeSpan(this.VideoBuffer.TimeBase) < time)
                     {
                         peek = this.VideoBuffer.ConsumeFrame();
-                        Frame frame = this.BuildFrameFromLibAV(peek);
+                        IMultimediaVideoFrame frame = this.BuildFrameFromLibAV(peek);
                         this.RaiseRenderVideo(frame);
                     }
                 }
@@ -95,7 +96,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
         #region Event control
         /// <summary>Raises the render audio event</summary>
         /// <param name="frame">Frame to pass to renderer</param>
-        protected void RaiseRenderVideo(Frame frame)
+        protected void RaiseRenderVideo(IMultimediaVideoFrame frame)
         {
             if (this.render != null)
                 this.render(frame);
@@ -107,10 +108,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
         /// <summary>Builds a MediaBase frame for passing to output</summary>
         /// <param name="frameData">LibAV frame to build a MediaBase frame from</param>
         /// <returns>A Built MediaBase frame</returns>
-        protected Frame BuildFrameFromLibAV(FrameBGRA frameData)
+        protected IMultimediaVideoFrame BuildFrameFromLibAV(FrameBGRA frameData)
         {
             PixelData pd = new PixelData(frameData.Data.ToArray(), ScanLineOrder.TopDown, PixelFormatExtender.FromLibAVPixelFormat(frameData.Detail.Format), frameData.Detail.Height, frameData.Detail.Width, 0, 0, 32);
-            Frame genFrame = new Frame(pd);
+            IMultimediaVideoFrame genFrame = new BasicVideoFrame(pd);
             return genFrame;
         }
         #endregion
