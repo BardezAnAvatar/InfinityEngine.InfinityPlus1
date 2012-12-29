@@ -119,10 +119,6 @@
     <Compile Include="Image\JPEG\Scan Component Parameter.cs" />
     <Compile Include="Image\JPEG\Scan Header.cs" />
     <Compile Include="Image\JPEG\Scan.cs" />
-    <Compile Include="Multimedia\Audio Stream Renderer.cs" />
-    <Compile Include="Multimedia\Video Stream Renderer.cs" />
-    <Compile Include="Multimedia\IStreamRenderManager.cs" />
-    <Compile Include="Multimedia\Multimedia Movie.cs" />
     <Compile Include="RIFF\Component\ChunkType.cs" />
     <Compile Include="RIFF\Component\Interface RIFF Chunk.cs" />
     <Compile Include="RIFF\Component\RIFF Chunk Extension Base.cs" />
@@ -139,8 +135,6 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Basic Formats\Basic Formats.csproj">
@@ -158,14 +152,6 @@
     <ProjectReference Include="..\Media Base\Media Base.csproj">
       <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
       <Name>Media Base</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Native Code\ffmpeg\Lib AV\Lib AV.vcxproj">
-      <Project>{1F9B2E1A-E000-4076-8D38-D995A6A3922C}</Project>
-      <Name>Lib AV</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Native Factories\Native Factories.csproj">
-      <Project>{1B2B86E7-2F10-42C1-B930-D62C8AC1634D}</Project>
-      <Name>Native Factories</Name>
     </ProjectReference>
     <ProjectReference Include="..\ReusableCode\ReusableCode.csproj">
       <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
