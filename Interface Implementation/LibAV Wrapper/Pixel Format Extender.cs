@@ -3,7 +3,7 @@
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
 using Bardez.Projects.MultiMedia.LibAV;
 
-namespace Bardez.Projects.MultiMedia.LibAV.Wrapper
+namespace Bardez.Projects.Multimedia.LibAV.Wrapper
 {
     /// <summary>Extension class for converting the PixelFormat enum to other destination pixel format enumerators</summary>
     public static class PixelFormatExtender
