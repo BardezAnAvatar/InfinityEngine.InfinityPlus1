@@ -5,7 +5,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
 using Bardez.Projects.MultiMedia.LibAV;
 using Bardez.Projects.MultiMedia.MediaBase.Video.Pixels;
 
-namespace Bardez.Projects.MultiMedia.LibAV.Wrapper
+namespace Bardez.Projects.Multimedia.LibAV.Wrapper
 {
     public class LibAVPixelConverter : IPixelConverter
     {
