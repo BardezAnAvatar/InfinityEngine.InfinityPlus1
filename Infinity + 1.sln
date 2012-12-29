@@ -73,7 +73,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibAV Wrapper", "Interface 
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 20
+		SccNumberOfProjects = 21
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://bardezserver:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -152,6 +152,10 @@ Global
 		SccProjectTopLevelParentUniqueName19 = Infinity\u0020+\u00201.sln
 		SccProjectName19 = Tester
 		SccLocalPath19 = Tester
+		SccProjectUniqueName20 = Interface\u0020Implementation\\LibAV\u0020Wrapper\\LibAV\u0020Wrapper.csproj
+		SccProjectTopLevelParentUniqueName20 = Infinity\u0020+\u00201.sln
+		SccProjectName20 = Interface\u0020Implementation/LibAV\u0020Wrapper
+		SccLocalPath20 = Interface\u0020Implementation\\LibAV\u0020Wrapper
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Infinity + 1.vsmdi
