@@ -5,12 +5,12 @@ using System.Text;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Zlib;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
-using Bardez.Projects.MultiMedia.MediaBase.Video;
+using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.ReusableCode;
 
 using Ionic.Zlib;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Mosaic
 {
     /// <summary>Represents a compressed wrapper for a MOS asset</summary>
     /// <remarks>
@@ -103,9 +103,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen
         #region IImage methods
         /// <summary>Gets a frame image from the pixel data already in place</summary>
         /// <returns>A frame containing the pixel data</returns>
-        public IMultimediaVideoFrame GetFrame()
+        public IMultimediaImageFrame GetFrame()
         {
-            IMultimediaVideoFrame frame = null;
+            IMultimediaImageFrame frame = null;
 
             if (this.File != null)
                 frame = this.File.GetFrame();

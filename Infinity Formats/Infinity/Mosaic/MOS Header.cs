@@ -6,7 +6,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Mosaic
 {
     /// <summary>Represents the 24-byte MOS file header</summary>
     /// <remarks>It is of some significance that this is so similar to JPEG. I am not sure how much, though.</remarks>
