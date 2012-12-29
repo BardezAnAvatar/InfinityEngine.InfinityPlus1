@@ -7,12 +7,12 @@ using System.Windows.Forms;
 
 using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.Output.Audio;
+using Bardez.Projects.Multimedia.LibAV.Wrapper;
+using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.ReusableCode;
-using Bardez.Projects.MultiMedia.MediaBase.Video;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
 {
@@ -37,13 +37,13 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
         private Object frameKeyLock;
 
         /// <summary>Thread-accessible variable indicating the current movie path</summary>
-        protected volatile String currentMoviePath;
+        protected String currentMoviePath;
 
         /// <summary>Reference to the thread that will be decoding the MVE</summary>
-        protected volatile Thread decodingThread;
+        protected Thread decodingThread;
 
         /// <summary>Flag indicating whether audio is currently playing</summary>
-        protected volatile Boolean IsPlayingAudio;
+        protected Boolean IsPlayingAudio;
 
         /// <summary>Stream renderer for video stream</summary>
         protected VideoStreamRenderManager VideoRenderManager { get; set; }
@@ -377,7 +377,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.Movie
 
         #region Video display
         /// <summary>Processes the next video frame from the controller. Stops playback if the frame returned was null.</summary>
-        protected virtual void ProcessNextVideoFrame(IMultimediaVideoFrame frame)
+        protected virtual void ProcessNextVideoFrame(IMultimediaImageFrame frame)
         {
             lock (this.frameKeyLock)
             {
