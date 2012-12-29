@@ -32,10 +32,25 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="LibAV Pixel Converter.cs" />
+    <Compile Include="Multimedia\Audio Stream Renderer.cs" />
+    <Compile Include="Multimedia\Multimedia Movie.cs" />
+    <Compile Include="Multimedia\Video Stream Renderer.cs" />
     <Compile Include="Pixel Format Extender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Basic Structures\Basic Structures.csproj">
+      <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
+      <Name>Basic Structures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Configuration Handler\Configuration Handler.csproj">
+      <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
+      <Name>Configuration Handler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\External Formats\External Formats.csproj">
+      <Project>{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}</Project>
+      <Name>External Formats</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Media Base\Media Base.csproj">
       <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
       <Name>Media Base</Name>
@@ -43,6 +58,10 @@
     <ProjectReference Include="..\..\Native Code\ffmpeg\Lib AV\Lib AV.vcxproj">
       <Project>{1F9B2E1A-E000-4076-8D38-D995A6A3922C}</Project>
       <Name>Lib AV</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Native Factories\Native Factories.csproj">
+      <Project>{1B2B86E7-2F10-42C1-B930-D62C8AC1634D}</Project>
+      <Name>Native Factories</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
