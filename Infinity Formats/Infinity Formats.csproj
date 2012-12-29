@@ -378,10 +378,10 @@
     <Compile Include="Infinity\Item\Item2\Item Header 2.cs" />
     <Compile Include="Infinity\Item\Item1\Item Header 1.cs" />
     <Compile Include="Infinity\Item\Item Header.cs" />
-    <Compile Include="Infinity\MapOfScreen\Map of Screen Compressed v1.cs" />
-    <Compile Include="Infinity\MapOfScreen\MOS Header.cs" />
     <Compile Include="Infinity\Common\Palette Entry.cs" />
-    <Compile Include="Infinity\MapOfScreen\Map Of Screen 1.cs" />
+    <Compile Include="Infinity\Mosaic\MOS Header.cs" />
+    <Compile Include="Infinity\Mosaic\Mosaic Compressed v1.cs" />
+    <Compile Include="Infinity\Mosaic\Mosaic v1.cs" />
     <Compile Include="Infinity\Music\Playlist Entry.cs" />
     <Compile Include="Infinity\Music\Playlist.cs" />
     <Compile Include="Infinity\PixelLocationTable\Component\Header.cs" />
