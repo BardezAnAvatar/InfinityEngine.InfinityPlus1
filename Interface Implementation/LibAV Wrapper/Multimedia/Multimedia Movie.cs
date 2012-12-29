@@ -11,7 +11,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 using Bardez.Projects.InfinityPlus1.NativeFactories.Timer;
 using Bardez.Projects.MultiMedia.LibAV;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
+namespace Bardez.Projects.Multimedia.LibAV.Wrapper
 {
     /// <summary>Represents a controller for LibAV playback of audio + video</summary>
     public class MultimediaMovie

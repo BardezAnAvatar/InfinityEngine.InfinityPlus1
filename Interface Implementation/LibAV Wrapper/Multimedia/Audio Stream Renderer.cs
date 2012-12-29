@@ -4,14 +4,15 @@ using System.Timers;
 using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave.Enums;
 using Bardez.Projects.MultiMedia.LibAV;
+using Bardez.Projects.Multimedia.MediaBase.Render;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
+namespace Bardez.Projects.Multimedia.LibAV.Wrapper
 {
     /// <summary>
     ///     This class represents a LibAV audio stream's audio render manager, which exports audio chunks
     ///     when its attempt render method is successful
     /// </summary>
-    public class AudioStreamRenderManager : IStreamRenderManager, IWaveFormatEx
+    public class AudioStreamRenderManager : IAVStreamRenderManager, IWaveFormatEx
     {
         #region Fields
         /// <summary>Event to raise for rendering audio output.</summary>
