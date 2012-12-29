@@ -110,13 +110,6 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
                 }
             }
         }
-
-        /// <summary>Disposal</summary>
-        /// <remarks>Finalize()</remarks>
-        ~Direct2dResourceManager()
-        {
-            this.Dispose();
-        }
         #endregion
 
         /// <summary>Posts a Bitmap resource to the resource manager and returns a unique key to access it.</summary>
