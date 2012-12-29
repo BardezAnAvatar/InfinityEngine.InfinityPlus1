@@ -10,7 +10,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
-using Bardez.Projects.MultiMedia.MediaBase.Video;
+using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Coding
@@ -71,7 +71,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         /// <summary>Gets the next frame from the video stream</summary>
         /// <param name="mveFrame">MveVideoFrame to decode</param>
         /// <returns>A MediaBase Frame</returns>
-        public abstract IMultimediaVideoFrame GetNextFrame(MveVideoFrame mveFrame);
+        public abstract IMultimediaImageFrame GetNextFrame(MveVideoFrame mveFrame);
 
         /// <summary>Gets the next decoded frame, in 32-bit color</summary>
         /// <param name="previousFrame">Previous frame, for delta-reference</param>

@@ -9,7 +9,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
-using Bardez.Projects.MultiMedia.MediaBase.Video;
+using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1
@@ -150,7 +150,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1
         /// <summary>Returns the frame with the associated index in the tileset</summary>
         /// <param name="index">Index of the frame to retrieve</param>
         /// <returns>The frane at the associated index</returns>
-        public IMultimediaVideoFrame GetFrame(Int32 index)
+        public IMultimediaImageFrame GetFrame(Int32 index)
         {
             return this.Tiles[index].GetFrame();
         }

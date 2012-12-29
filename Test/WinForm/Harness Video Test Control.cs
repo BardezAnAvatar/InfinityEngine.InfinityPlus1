@@ -8,7 +8,8 @@ using System.Windows.Forms;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
-using Bardez.Projects.MultiMedia.MediaBase.Video;
+using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
+using Bardez.Projects.Multimedia.MediaBase.Frame.Video;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm
@@ -222,13 +223,13 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         {
             if (this.VideoController != null)
             {
-                IMultimediaVideoFrame frame = this.VideoController.GetNextFrame();
+                IMultimediaImageFrame frame = this.VideoController.GetNextFrame();
                 this.ProcessNextVideoFrame(frame);
             }
         }
 
         /// <summary>Processes the next video frame from the controller. Stops playback if the frame returned was null.</summary>
-        protected virtual void ProcessNextVideoFrame(IMultimediaVideoFrame frame)
+        protected virtual void ProcessNextVideoFrame(IMultimediaImageFrame frame)
         {
             if (this.VideoController != null)
             {
@@ -279,7 +280,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         {
             if (this.VideoController != null)
             {
-                this.VideoController.PlayFrame += new Action<IMultimediaVideoFrame>(this.ProcessNextVideoFrame);
+                this.VideoController.PlayFrame += new Action<IMultimediaImageFrame>(this.ProcessNextVideoFrame);
                 this.VideoController.StartVideoPlayback();
             }
         }

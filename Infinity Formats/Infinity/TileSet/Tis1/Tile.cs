@@ -9,7 +9,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
-using Bardez.Projects.MultiMedia.MediaBase.Video;
+using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1
@@ -113,9 +113,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1
         #region IImage methods
         /// <summary>Gets a frame image from the pixel data already in place</summary>
         /// <returns>A frame containing the pixel data</returns>
-        public IMultimediaVideoFrame GetFrame()
+        public IMultimediaImageFrame GetFrame()
         {
-            IMultimediaVideoFrame frame = new BasicVideoFrame(this.GetPixelData());
+            IMultimediaImageFrame frame = new BasicImageFrame(this.GetPixelData());
             return frame;
         }
         #endregion

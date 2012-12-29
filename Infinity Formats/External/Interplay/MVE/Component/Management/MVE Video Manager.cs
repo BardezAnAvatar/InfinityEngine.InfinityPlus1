@@ -8,7 +8,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 using Bardez.Projects.InfinityPlus1.NativeFactories.Timer;
-using Bardez.Projects.MultiMedia.MediaBase.Video;
+using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management
 {
@@ -35,7 +35,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         protected ITimer timer { get; set; }
 
         /// <summary>Exposes the event for timer elapse</summary>
-        protected event Action<IMultimediaVideoFrame> timerElapsed;
+        protected event Action<IMultimediaImageFrame> timerElapsed;
 
         /// <summary>Local event to raise to whatever processor that the audio stream has been started, and to start fetching audio data</summary>
         private event Action audioStreamStarted;
@@ -56,7 +56,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
 
         #region Events
         /// <summary>Exposes the event for timer elapse</summary>
-        public event Action<IMultimediaVideoFrame> PlayFrame
+        public event Action<IMultimediaImageFrame> PlayFrame
         {
             add { this.timerElapsed += value; }
             remove { this.timerElapsed -= value; }
@@ -234,7 +234,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
                         //loop to catch up as necessary
                         if (frameNum != this.videoStream.CurrentFramePlayback)
                         {
-                            IMultimediaVideoFrame frame = null;
+                            IMultimediaImageFrame frame = null;
                             while (frameNum != this.videoStream.CurrentFramePlayback)
                                 frame = this.GetNextFrame();
 
@@ -255,19 +255,19 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
 
         /// <summary>Fetches the next MediaBase Frame for output</summary>
         /// <returns>A MediaBase Frame for output</returns>
-        public virtual IMultimediaVideoFrame GetNextFrame()
+        public virtual IMultimediaImageFrame GetNextFrame()
         {
-            IMultimediaVideoFrame frame = this.FetchAndReturnMveFrame();
+            IMultimediaImageFrame frame = this.FetchAndReturnMveFrame();
             this.LaunchCacheVideoDataThread(1);
             return frame;
         }
 
         /// <summary>Fetches the next frame from the stream and passes it to the decoder, storing the result</summary>
         /// <returns>A MediaBase Frame reference</returns>
-        protected virtual IMultimediaVideoFrame FetchAndDecodeMveFrame()
+        protected virtual IMultimediaImageFrame FetchAndDecodeMveFrame()
         {
             MveVideoFrame mveFrame = this.videoStream.FetchNextFrameDecode();
-            IMultimediaVideoFrame frame = null;
+            IMultimediaImageFrame frame = null;
 
             if (mveFrame != null)
             {
@@ -280,10 +280,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
 
         /// <summary>Fetches the next frame from the playback stream returns it</summary>
         /// <returns>A MediaBase Frame reference</returns>
-        protected virtual IMultimediaVideoFrame FetchAndReturnMveFrame()
+        protected virtual IMultimediaImageFrame FetchAndReturnMveFrame()
         {
             MveVideoFrame mveFrame = this.videoStream.FetchNextFrameOutput();
-            IMultimediaVideoFrame frame = null;
+            IMultimediaImageFrame frame = null;
 
             if (mveFrame != null)   //swap variables
             {
@@ -336,7 +336,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
                 //cache frames of video
                 for (Int32 i = start; i < end; ++i)
                 {
-                    IMultimediaVideoFrame decoded = this.FetchAndDecodeMveFrame();
+                    IMultimediaImageFrame decoded = this.FetchAndDecodeMveFrame();
                     if (decoded == null)
                         break;
                 }

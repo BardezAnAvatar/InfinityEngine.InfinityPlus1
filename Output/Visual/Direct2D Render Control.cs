@@ -9,7 +9,7 @@ using Bardez.Projects.BasicStructures.Win32;
 using Bardez.Projects.DirectX.Direct2D;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
-using Bardez.Projects.MultiMedia.MediaBase.Video;
+using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.MultiMedia.MediaBase.Video.Pixels;
 using Bardez.Projects.ReusableCode;
 
@@ -409,7 +409,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
         /// <summary>Posts a Frame resource to the resource manager and returns a unique key to access it.</summary>
         /// <param name="resource">Frame to be posted.</param>
         /// <returns>A unique Int32 key</returns>
-        public override Int32 AddFrameResource(IMultimediaVideoFrame resource)
+        public override Int32 AddFrameResource(IMultimediaImageFrame resource)
         {
             lock (this.controlBufferLock)
             {

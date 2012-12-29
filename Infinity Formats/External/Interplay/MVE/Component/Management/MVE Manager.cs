@@ -14,7 +14,8 @@ using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Enum;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
-using Bardez.Projects.MultiMedia.MediaBase.Video;
+using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
+using Bardez.Projects.Multimedia.MediaBase.Frame.Video;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management
 {
@@ -45,7 +46,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         protected MveAudioManager AudioManager { get; set; }
 
         /// <summary>Exposes the event for timer elapse</summary>
-        protected event Action<IMultimediaVideoFrame> outputFrame;
+        protected event Action<IMultimediaImageFrame> outputFrame;
 
         /// <summary>Local event to raise to whatever processor that the audio stream has been started, and to start fetching audio data</summary>
         private event Action audioStreamStarted;
@@ -57,7 +58,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
 
         #region Events
         /// <summary>Exposes the event for timer elapse</summary>
-        public event Action<IMultimediaVideoFrame> PlayFrame
+        public event Action<IMultimediaImageFrame> PlayFrame
         {
             add { this.outputFrame += value; }
             remove { this.outputFrame -= value; }
@@ -336,7 +337,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
 
         /// <summary>Fetches the next MediaBase Frame for output</summary>
         /// <returns>A MediaBase Frame for output</returns>
-        public virtual IMultimediaVideoFrame GetNextFrame()
+        public virtual IMultimediaImageFrame GetNextFrame()
         {
             return this.VideoManager.GetNextFrame();
         }
@@ -377,7 +378,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         }
 
         /// <summary>Event raising method for displaying a frame</summary>
-        protected virtual void RaisePlayFrame(IMultimediaVideoFrame frame)
+        protected virtual void RaisePlayFrame(IMultimediaImageFrame frame)
         {
             if (this.outputFrame != null)
                 this.outputFrame(frame);

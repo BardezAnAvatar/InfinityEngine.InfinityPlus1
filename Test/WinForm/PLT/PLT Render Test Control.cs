@@ -11,7 +11,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PixelLocationTable.Vers
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 using Bardez.Projects.InfinityPlus1.Test.WinForm;
-using Bardez.Projects.MultiMedia.MediaBase.Video;
+using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.PLT
@@ -205,7 +205,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.PLT
                 imgRef.Manager.Palettes = this.paletteSelction.Palettes;
 
                 //decode the image, get its frame data
-                IMultimediaVideoFrame frame = imgRef.Manager.GetFrame();
+                IMultimediaImageFrame frame = imgRef.Manager.GetFrame();
 
                 //submit a bitap
                 Int32 key;

@@ -9,7 +9,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Resize;
 using Bardez.Projects.InfinityPlus1.Test.WinForm;
-using Bardez.Projects.MultiMedia.MediaBase.Video;
+using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MOS
@@ -127,7 +127,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MOS
                     mos.Read(fs);
 
                 //decode the image, get its frame data
-                IMultimediaVideoFrame frame = mos.GetFrame();
+                IMultimediaImageFrame frame = mos.GetFrame();
 
                 //submit a bitap
                 Int32 key;

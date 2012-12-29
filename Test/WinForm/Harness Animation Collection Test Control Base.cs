@@ -10,7 +10,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Resize;
 using Bardez.Projects.InfinityPlus1.Test.WinForm;
-using Bardez.Projects.MultiMedia.MediaBase.Video;
+using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm
@@ -205,7 +205,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
                 for (Int32 frameIndex = 0; frameIndex < image.FrameCount; ++frameIndex)
                 {
                     //Get its frame data
-                    IMultimediaVideoFrame frame = image.GetFrame(frameIndex);
+                    IMultimediaImageFrame frame = image.GetFrame(frameIndex);
 
                     //submit a bitap
                     Int32 key;

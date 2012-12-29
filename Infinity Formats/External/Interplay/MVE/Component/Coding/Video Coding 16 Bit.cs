@@ -10,7 +10,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
-using Bardez.Projects.MultiMedia.MediaBase.Video;
+using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Coding
@@ -60,9 +60,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         /// <summary>Gets the next frame from the video stream</summary>
         /// <param name="mveFrame">MveVideoFrame to decode</param>
         /// <returns>A MediaBase Frame</returns>
-        public override IMultimediaVideoFrame GetNextFrame(MveVideoFrame mveFrame)
+        public override IMultimediaImageFrame GetNextFrame(MveVideoFrame mveFrame)
         {
-            IMultimediaVideoFrame frame = null;
+            IMultimediaImageFrame frame = null;
 
             if (mveFrame != null)
             {
@@ -82,7 +82,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
 
                 ++this.FrameNumber;
 
-                frame = new BasicVideoFrame(pd);
+                frame = new BasicImageFrame(pd);
             }
 
             return frame;

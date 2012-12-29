@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
-using Bardez.Projects.MultiMedia.MediaBase.Video;
+using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm
@@ -163,7 +163,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
                     image.Read(fs);
 
                 //decode the image, get its frame data
-                IMultimediaVideoFrame frame = image.GetFrame();
+                IMultimediaImageFrame frame = image.GetFrame();
 
                 //submit a bitap
                 Int32 key;
