@@ -9,19 +9,20 @@ using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
 using Bardez.Projects.MultiMedia.LibAV;
-using Bardez.Projects.MultiMedia.MediaBase.Video;
+using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
+using Bardez.Projects.Multimedia.MediaBase.Render;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
+namespace Bardez.Projects.Multimedia.LibAV.Wrapper
 {
     /// <summary>
     ///     This class represents a LibAV video stream's video render manager, which exports video chunks
     ///     when its attempt render method is successful
     /// </summary>
-    public class VideoStreamRenderManager : IStreamRenderManager
+    public class VideoStreamRenderManager : IAVStreamRenderManager
     {
         #region Fields
         /// <summary>Event to raise for rendering video output.</summary>
-        protected event Action<IMultimediaVideoFrame> render;
+        protected event Action<IMultimediaImageFrame> render;
 
         /// <summary>Buffer and processing info for this video stream</summary>
         protected StreamProcessingBuffer<FrameBGRA> VideoBuffer { get; set; }
@@ -49,7 +50,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
 
         #region Exposed Events
         /// <summary>Event to raise for rendering video output.</summary>
-        public event Action<IMultimediaVideoFrame> Render
+        public event Action<IMultimediaImageFrame> Render
         {
             add { this.render += value; }
             remove { this.render -= value; }
@@ -84,7 +85,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
                     if (peek != null && peek.GetPresentationStartTimeSpan(this.VideoBuffer.TimeBase) < time)
                     {
                         peek = this.VideoBuffer.ConsumeFrame();
-                        IMultimediaVideoFrame frame = this.BuildFrameFromLibAV(peek);
+                        IMultimediaImageFrame frame = this.BuildFrameFromLibAV(peek);
                         this.RaiseRenderVideo(frame);
                     }
                 }
@@ -96,7 +97,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
         #region Event control
         /// <summary>Raises the render audio event</summary>
         /// <param name="frame">Frame to pass to renderer</param>
-        protected void RaiseRenderVideo(IMultimediaVideoFrame frame)
+        protected void RaiseRenderVideo(IMultimediaImageFrame frame)
         {
             if (this.render != null)
                 this.render(frame);
@@ -108,10 +109,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Multimedia
         /// <summary>Builds a MediaBase frame for passing to output</summary>
         /// <param name="frameData">LibAV frame to build a MediaBase frame from</param>
         /// <returns>A Built MediaBase frame</returns>
-        protected IMultimediaVideoFrame BuildFrameFromLibAV(FrameBGRA frameData)
+        protected IMultimediaImageFrame BuildFrameFromLibAV(FrameBGRA frameData)
         {
             PixelData pd = new PixelData(frameData.Data.ToArray(), ScanLineOrder.TopDown, PixelFormatExtender.FromLibAVPixelFormat(frameData.Detail.Format), frameData.Detail.Height, frameData.Detail.Width, 0, 0, 32);
-            IMultimediaVideoFrame genFrame = new BasicVideoFrame(pd);
+            IMultimediaImageFrame genFrame = new BasicImageFrame(pd);
             return genFrame;
         }
         #endregion
