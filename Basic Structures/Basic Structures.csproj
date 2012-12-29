@@ -39,6 +39,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Math\Rational.cs" />
     <Compile Include="ThreeDimensional\Vector.cs" />
     <Compile Include="Win32\Audio\IWaveFormatEx.cs" />
     <Compile Include="Win32\Audio\PCM Wave Format.cs" />
