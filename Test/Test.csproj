@@ -570,6 +570,10 @@
       <Project>{3EE5137B-C08F-4337-B089-E20A502C2A0C}</Project>
       <Name>Infinity Formats</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Interface Implementation\LibAV Wrapper\LibAV Wrapper.csproj">
+      <Project>{1816E1F1-8765-4AEA-BEF4-0E80E50C8399}</Project>
+      <Name>LibAV Wrapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Media Base\Media Base.csproj">
       <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
       <Name>Media Base</Name>
@@ -663,6 +667,9 @@
     <Compile Include="WinForm\EFF\Effect 2.0 Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
