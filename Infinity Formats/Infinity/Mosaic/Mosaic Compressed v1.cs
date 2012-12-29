@@ -19,14 +19,14 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Mosaic
     ///     It is a break from "do it all yourself", but, It would be so much redundant effort that
     ///     I would feel slightly shamed, and the license is liberal, and I tnd to write less efficient code than years-old open source.
     /// </remarks>
-    public class MapOfScreenCompressed_v1 : IInfinityFormat, IImage
+    public class MosaicCompressed_v1 : IInfinityFormat, IImage
     {
         #region Fields
         /// <summary>Compressed header of the MOS file</summary>
         public ZlibHeader Header { get; set; }
 
         /// <summary>Decompressed MOS file asset</summary>
-        public MapOfScreen1 File { get; set; }
+        public Mosaic_v1 File { get; set; }
         #endregion
 
 
@@ -35,7 +35,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Mosaic
         public void Initialize()
         {
             this.Header = new ZlibHeader();
-            this.File = new MapOfScreen1();
+            this.File = new Mosaic_v1();
         }
         #endregion
 

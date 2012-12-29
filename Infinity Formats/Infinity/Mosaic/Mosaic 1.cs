@@ -15,7 +15,7 @@ using Bardez.Projects.ReusableCode;
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Mosaic
 {
     /// <summary>Represents an uncompressed MOS V1 file</summary>
-    public class MapOfScreen1 : IInfinityFormat, IImage
+    public class Mosaic_v1 : IInfinityFormat, IImage
     {
         #region Constants
         /// <summary>Represents the base dimension of a block</summary>
@@ -226,10 +226,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Mosaic
         protected Int32 SampleWidth(Int32 block)
         {
             Int32 x = block % this.Header.Columns;
-            Int32 width = MapOfScreen1.blockDimension;
+            Int32 width = Mosaic_v1.blockDimension;
 
-            if ((x == (this.Header.Columns - 1) && this.Header.Width % MapOfScreen1.blockDimension > 0))
-                width = this.Header.Width % MapOfScreen1.blockDimension;
+            if ((x == (this.Header.Columns - 1) && this.Header.Width % Mosaic_v1.blockDimension > 0))
+                width = this.Header.Width % Mosaic_v1.blockDimension;
 
             return width;
         }
@@ -247,10 +247,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Mosaic
         /// <returns>The count of vertical column samples in the block</returns>
         protected Int32 RowSampleHeight(Int32 row)
         {
-            Int32 height = MapOfScreen1.blockDimension;
+            Int32 height = Mosaic_v1.blockDimension;
 
-            if (row == (this.Header.Rows - 1) && this.Header.Height % MapOfScreen1.blockDimension > 0)
-                height = this.Header.Height % MapOfScreen1.blockDimension;
+            if (row == (this.Header.Rows - 1) && this.Header.Height % Mosaic_v1.blockDimension > 0)
+                height = this.Header.Height % Mosaic_v1.blockDimension;
 
             return height;
         }
