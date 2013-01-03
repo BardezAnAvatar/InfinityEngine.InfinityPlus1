@@ -1,7 +1,7 @@
 ﻿using System;
 
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
 using Bardez.Projects.MultiMedia.LibAV;
+using Bardez.Projects.Multimedia.MediaBase.Data.Pixels.Enums;
 
 namespace Bardez.Projects.Multimedia.LibAV.Wrapper
 {
