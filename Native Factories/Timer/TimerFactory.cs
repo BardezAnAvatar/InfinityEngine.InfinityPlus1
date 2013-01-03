@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
+using Bardez.Projects.Multimedia.MediaBase.Management;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Timer;
 
 namespace Bardez.Projects.InfinityPlus1.NativeFactories.Timer

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
+using Bardez.Projects.Multimedia.MediaBase.Management;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Timer
 {
