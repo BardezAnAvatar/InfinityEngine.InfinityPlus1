@@ -5,10 +5,10 @@ using System.Threading;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Coding;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Interpretation;
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 using Bardez.Projects.InfinityPlus1.NativeFactories.Timer;
 using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
+using Bardez.Projects.Multimedia.MediaBase.Management;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management
 {
