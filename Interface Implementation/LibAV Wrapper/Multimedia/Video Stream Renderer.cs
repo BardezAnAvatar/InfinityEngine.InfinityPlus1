@@ -4,11 +4,9 @@ using System.IO;
 using System.Threading;
 using System.Timers;
 
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
 using Bardez.Projects.Multimedia.LibAV;
 using Bardez.Projects.MultiMedia.LibAV;
+using Bardez.Projects.Multimedia.MediaBase.Data.Pixels;
 using Bardez.Projects.Multimedia.MediaBase.Data.Pixels.Enums;
 using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.Multimedia.MediaBase.Render;

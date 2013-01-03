@@ -7,8 +7,8 @@ using Direct2D = Bardez.Projects.DirectX.Direct2D;
 using ExternalPixelEnums = Bardez.Projects.Multimedia.MediaBase.Data.Pixels.Enums;
 using Bardez.Projects.BasicStructures.Win32;
 using Bardez.Projects.DirectX.Direct2D;
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
+using Bardez.Projects.Multimedia.MediaBase.Data.Pixels;
+using Bardez.Projects.Multimedia.MediaBase.Data.Pixels.Enums;
 using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.MultiMedia.MediaBase.Video.Pixels;
 using Bardez.Projects.ReusableCode;
@@ -142,7 +142,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
             this.SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
 
             // Build options on the Control render target
-            PixelFormat format = new PixelFormat(DXGI_ChannelFormat.FORMAT_B8G8R8A8_UNORM, AlphaMode.Unknown);  //32-bit color, pure alpha
+            Direct2D.PixelFormat format = new Direct2D.PixelFormat(DXGI_ChannelFormat.FORMAT_B8G8R8A8_UNORM, AlphaMode.Unknown);  //32-bit color, pure alpha
             DpiResolution res = Direct2dResourceManager.Instance.Factory.GetDesktopDpi();
             RenderTargetProperties rtProp = new RenderTargetProperties(RenderTargetType.Default, format, res, RenderTargetUsage.GdiCompatible, DirectXVersion.DirectX9);
 
@@ -414,7 +414,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
             lock (this.controlBufferLock)
             {
                 //create the bitmap
-                BitmapProperties properties = new BitmapProperties(new PixelFormat(DXGI_ChannelFormat.FORMAT_B8G8R8A8_UNORM, AlphaMode.PreMultiplied), Direct2dResourceManager.Instance.Factory.GetDesktopDpi());
+                BitmapProperties properties = new BitmapProperties(new Direct2D.PixelFormat(DXGI_ChannelFormat.FORMAT_B8G8R8A8_UNORM, AlphaMode.PreMultiplied), Direct2dResourceManager.Instance.Factory.GetDesktopDpi());
                 SizeU dimensions = new SizeU(Convert.ToUInt32(resource.Metadata.Width), Convert.ToUInt32(resource.Metadata.Height));
 
                 Direct2D.Bitmap bmp = null;

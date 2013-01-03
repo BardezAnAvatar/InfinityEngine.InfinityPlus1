@@ -14,9 +14,6 @@ using Direct2D = Bardez.Projects.DirectX.Direct2D;
 using ExternalPixelEnums = Bardez.Projects.Multimedia.MediaBase.Data.Pixels.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Save;
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Resize;
 using Bardez.Projects.InfinityPlus1.Output.Visual;
 
 namespace Bardez.Projects.InfinityPlus1.Tester

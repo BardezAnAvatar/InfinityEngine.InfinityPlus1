@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Resize;
+using Bardez.Projects.Multimedia.MediaBase.Data.Resize;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG

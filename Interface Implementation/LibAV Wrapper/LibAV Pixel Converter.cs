@@ -2,6 +2,7 @@
 using System.IO;
 
 using Bardez.Projects.MultiMedia.LibAV;
+using Bardez.Projects.Multimedia.MediaBase.Data.Pixels;
 using Bardez.Projects.Multimedia.MediaBase.Data.Pixels.Enums;
 using Bardez.Projects.MultiMedia.MediaBase.Video.Pixels;
 

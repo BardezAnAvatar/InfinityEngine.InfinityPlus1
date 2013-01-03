@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
+using Bardez.Projects.Multimedia.MediaBase.Data.Pixels;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.PLT
 {

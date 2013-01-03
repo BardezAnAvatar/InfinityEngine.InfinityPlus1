@@ -5,8 +5,7 @@ using System.Text;
 
 using Bardez.Projects.Configuration;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap;
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
+using Bardez.Projects.Multimedia.MediaBase.Data.Pixels;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.PLT
