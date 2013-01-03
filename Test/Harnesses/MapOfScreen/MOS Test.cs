@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Mosaic;
 using Bardez.Projects.InfinityPlus1.Test;
 using Bardez.Projects.Utility;
 
@@ -21,7 +21,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.MapOfScreen
 
         #region Fields
         /// <summary>Format instance to test</summary>
-        protected MapOfScreen1 mos { get; set; }
+        protected Mosaic_v1 mos { get; set; }
         #endregion
 
 
@@ -50,7 +50,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.MapOfScreen
         {
             using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
             {
-                this.mos = new MapOfScreen1();
+                this.mos = new Mosaic_v1();
                 this.DoPostMessage(new MessageEventArgs("Reading MOS file...", "Reading", testArgs.Path));
                 this.mos.Read(stream);
                 this.DoPostMessage(new MessageEventArgs(this.mos.ToString(), "Output", testArgs.Path));

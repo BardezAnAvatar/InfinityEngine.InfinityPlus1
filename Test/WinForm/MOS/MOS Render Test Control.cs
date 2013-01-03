@@ -5,7 +5,7 @@ using System.Threading;
 using System.Windows.Forms;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Mosaic;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Resize;
 using Bardez.Projects.InfinityPlus1.Test.WinForm;
@@ -31,6 +31,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MOS
         private Object mosCollectionLock;
         #endregion
 
+
+        #region Construction
         /// <summary>Default constructor</summary>
         public MosRenderTestControl()
         {
@@ -38,7 +40,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MOS
             this.interfaceLock = new Object();
             this.mosCollectionLock = new Object();
         }
+        #endregion
 
+
+        #region Event reaction
         /// <summary>Click event handler for the Initialize button. Loads a list of displayable bitmaps from the config file.</summary>
         /// <param name="sender">Object senting the event</param>
         /// <param name="e">Standard EventArgs parameter e</param>
@@ -73,7 +78,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MOS
                     this.direct2dRenderControl.SetRenderFrameAndRender(imgRef.RenderKey);
             }
         }
+        #endregion
 
+
+        #region Helper methods
         /// <summary>Method that launches the decoding of the image from the config file</summary>
         /// <param name="stateInfo">WaitCallback state parameter</param>
         protected void LaunchImageDecoding(Object stateInfo)
@@ -122,7 +130,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MOS
                 String path = filePath as String;
 
                 //read the image
-                MapOfScreen1 mos = new MapOfScreen1();
+                Mosaic_v1 mos = new Mosaic_v1();
                 using (FileStream fs = ReusableIO.OpenFile(path))
                     mos.Read(fs);
 
@@ -152,5 +160,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MOS
                         this.lstboxImages.Items.Add(reference);
             }
         }
+        #endregion
     }
 }
