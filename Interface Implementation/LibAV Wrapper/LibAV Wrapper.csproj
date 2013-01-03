@@ -39,7 +39,6 @@
     <Compile Include="Multimedia\Audio Stream Renderer.cs" />
     <Compile Include="Multimedia\Multimedia Movie.cs" />
     <Compile Include="Multimedia\Video Stream Renderer.cs" />
-    <Compile Include="Pixel Format Extender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
