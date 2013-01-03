@@ -7,8 +7,9 @@ using System.Timers;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels;
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
+using Bardez.Projects.Multimedia.LibAV;
 using Bardez.Projects.MultiMedia.LibAV;
+using Bardez.Projects.Multimedia.MediaBase.Data.Pixels.Enums;
 using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.Multimedia.MediaBase.Render;
 
@@ -111,7 +112,7 @@ namespace Bardez.Projects.Multimedia.LibAV.Wrapper
         /// <returns>A Built MediaBase frame</returns>
         protected IMultimediaImageFrame BuildFrameFromLibAV(FrameBGRA frameData)
         {
-            PixelData pd = new PixelData(frameData.Data.ToArray(), ScanLineOrder.TopDown, PixelFormatExtender.FromLibAVPixelFormat(frameData.Detail.Format), frameData.Detail.Height, frameData.Detail.Width, 0, 0, 32);
+            PixelData pd = new PixelData(frameData.Data.ToArray(), ScanLineOrder.TopDown, frameData.Detail.Format.ToPixelFormat(), frameData.Detail.Height, frameData.Detail.Width, 0, 0, 32);
             IMultimediaImageFrame genFrame = new BasicImageFrame(pd);
             return genFrame;
         }

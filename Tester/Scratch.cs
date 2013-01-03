@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 using Bardez.Projects.DirectX.Direct2D;
 using Direct2D = Bardez.Projects.DirectX.Direct2D;
-using ExternalPixelEnums = Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
+using ExternalPixelEnums = Bardez.Projects.Multimedia.MediaBase.Data.Pixels.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Image.JPEG;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Save;
 using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video;

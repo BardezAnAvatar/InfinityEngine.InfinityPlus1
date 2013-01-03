@@ -1,12 +1,13 @@
 ﻿using System;
 using System.IO;
 
-using Bardez.Projects.InfinityPlus1.FileFormats.MediaBase.Video.Pixels.Enums;
 using Bardez.Projects.MultiMedia.LibAV;
+using Bardez.Projects.Multimedia.MediaBase.Data.Pixels.Enums;
 using Bardez.Projects.MultiMedia.MediaBase.Video.Pixels;
 
 namespace Bardez.Projects.Multimedia.LibAV.Wrapper
 {
+    /// <summary>Pixel converter that utilizes SWScale from LibAV</summary>
     public class LibAVPixelConverter : IPixelConverter
     {
         /// <summary>Converts data from the current format to another specified format</summary>
