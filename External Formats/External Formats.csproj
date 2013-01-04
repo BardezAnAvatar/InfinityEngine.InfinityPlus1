@@ -128,7 +128,6 @@
     <Compile Include="RIFF\Component\RIFF Sub Chunk.cs" />
     <Compile Include="RIFF\Component\RIFF Super Chunk.cs" />
     <Compile Include="RIFF\Component\Software RIFF Chunk.cs" />
-    <Compile Include="RIFF\Wave\Enums\Data Format.cs" />
     <Compile Include="RIFF\Wave\Wave Format Chunk.cs" />
     <Compile Include="RIFF\Wave\Wave RIFF File.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
