@@ -11,7 +11,6 @@ using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Interpretation;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Opcodes;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Enum;
-using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave.Enums;
 using Bardez.Projects.Multimedia.MediaBase.Data.Pixels;
 using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.Multimedia.MediaBase.Frame.Video;

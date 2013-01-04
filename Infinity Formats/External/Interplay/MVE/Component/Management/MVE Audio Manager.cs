@@ -7,7 +7,6 @@ using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Coding;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Opcodes;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Enum;
-using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave.Enums;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management
 {
@@ -212,7 +211,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         {
             WaveFormatEx waveFormat = new WaveFormatEx();
             waveFormat.NumberChannels = Convert.ToUInt16(this.AudioParameters.Channels);
-            waveFormat.FormatTag = (UInt16)DataFormat.PCM;
+            waveFormat.FormatTag = (UInt16)AudioDataFormat.PCM;
             waveFormat.SamplesPerSec = Convert.ToUInt32(this.AudioParameters.SampleRate);
             waveFormat.BitsPerSample = Convert.ToUInt16(this.AudioParameters.SampleSize);
             waveFormat.BlockAlignment = Convert.ToUInt16((waveFormat.BitsPerSample / 8) * waveFormat.NumberChannels);
