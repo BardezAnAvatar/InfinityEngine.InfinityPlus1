@@ -135,6 +135,5 @@ namespace Bardez.Projects.BasicStructures.Win32.Audio
             builder.Append(this.SubFormat.ToString());
         }
         #endregion
-
     }
 }
