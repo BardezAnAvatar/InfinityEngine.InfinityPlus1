@@ -2,7 +2,6 @@
 using System.Timers;
 
 using Bardez.Projects.BasicStructures.Win32.Audio;
-using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave.Enums;
 using Bardez.Projects.MultiMedia.LibAV;
 using Bardez.Projects.Multimedia.MediaBase.Render;
 
@@ -106,7 +105,7 @@ namespace Bardez.Projects.Multimedia.LibAV.Wrapper
         {
             WaveFormatEx waveFormat = new WaveFormatEx();
             waveFormat.NumberChannels = Convert.ToUInt16(this.AudioBuffer.Codec.ChannelCount);
-            waveFormat.FormatTag = (UInt16)DataFormat.PCM;  //this may differ in very specific conditions.
+            waveFormat.FormatTag = (UInt16)AudioDataFormat.PCM;  //this may differ in very specific conditions.
             waveFormat.SamplesPerSec = Convert.ToUInt32(this.AudioBuffer.Codec.SampleRate);
 
             //HACK: This is not guaranteed
