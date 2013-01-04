@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave.Enums
+namespace Bardez.Projects.BasicStructures.Win32.Audio
 {
     /// <summary>Enmerator indicating the type of audio data (typically PCM)</summary>
     /// <remarks>Non-PCM values taken from http://www.signalogic.com/index.pl?page=ms_waveform</remarks>
-    public enum DataFormat : ushort /* UInt16 */
+    public enum AudioDataFormat : ushort /* UInt16 */
     {
         Unknown = 0,
 
