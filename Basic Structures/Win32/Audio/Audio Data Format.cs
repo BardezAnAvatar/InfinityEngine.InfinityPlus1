@@ -6,6 +6,7 @@ namespace Bardez.Projects.BasicStructures.Win32.Audio
     /// <remarks>Non-PCM values taken from http://www.signalogic.com/index.pl?page=ms_waveform</remarks>
     public enum AudioDataFormat : ushort /* UInt16 */
     {
+        /// <summary>Placeholder indicating a nonexistant value</summary>
         Unknown = 0,
 
         /// <summary>Linear PCM/uncompressed</summary>
