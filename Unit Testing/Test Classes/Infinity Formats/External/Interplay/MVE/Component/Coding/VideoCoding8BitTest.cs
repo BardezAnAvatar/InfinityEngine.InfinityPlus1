@@ -10,23 +10,19 @@ using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Enum;
 
 namespace Bardez.Projects.InfinityPlus1.UnitTesting.InfinityFormats.External.Interplay.MVE.Component.Coding
 {
-    
-    
     /// <summary>
-    ///This is a test class for VideoCoding8BitTest and is intended
-    ///to contain all VideoCoding8BitTest Unit Tests
-    ///</summary>
-    [TestClass()]
+    ///     This is a test class for VideoCoding8BitTest and is intended
+    ///     to contain all VideoCoding8BitTest Unit Tests
+    /// </summary>
+    [TestClass]
     public class VideoCoding8BitTest
     {
-
-
         private TestContext testContextInstance;
 
         /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
+        ///     Gets or sets the test context which provides
+        ///     information about and functionality for the current test run.
+        /// </summary>
         public TestContext TestContext
         {
             get
@@ -70,10 +66,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.InfinityFormats.External.Int
         #endregion
 
 
-        /// <summary>
-        ///A test for DecodeCopyBlock
-        ///</summary>
-        [TestMethod()]
+        /// <summary>A test for DecodeCopyBlock</summary>
+        [TestMethod]
         [DeploymentItem("Infinity Formats.dll")]
         public void DecodeCopyBlockTest()
         {
@@ -105,10 +99,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.InfinityFormats.External.Int
             Assert.IsTrue(this.AreBinaryArraysEqual(test, control));
         }
 
-        /// <summary>
-        ///A test for DecodeCopyNewFrameBottom
-        ///</summary>
-        [TestMethod()]
+        /// <summary>A test for DecodeCopyNewFrameBottom</summary>
+        [TestMethod]
         [DeploymentItem("Infinity Formats.dll")]
         public void DecodeCopyNewFrameBottomTest()
         {
@@ -146,10 +138,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.InfinityFormats.External.Int
             Assert.IsTrue(this.AreBinaryArraysEqual(test, control));
         }
 
-        /// <summary>
-        ///A test for DecodeCopyNewFrameTop
-        ///</summary>
-        [TestMethod()]
+        /// <summary>A test for DecodeCopyNewFrameTop</summary>
+        [TestMethod]
         [DeploymentItem("Infinity Formats.dll")]
         public void DecodeCopyNewFrameTopTest()
         {
@@ -187,10 +177,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.InfinityFormats.External.Int
             Assert.IsTrue(this.AreBinaryArraysEqual(test, control));
         }
 
-        /// <summary>
-        ///A test for DecodeCopyPreviousFrameClose
-        ///</summary>
-        [TestMethod()]
+        /// <summary>A test for DecodeCopyPreviousFrameClose</summary>
+        [TestMethod]
         [DeploymentItem("Infinity Formats.dll")]
         public void DecodeCopyPreviousFrameCloseTest()
         {
@@ -228,10 +216,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.InfinityFormats.External.Int
             Assert.IsTrue(this.AreBinaryArraysEqual(test, control));
         }
 
-        /// <summary>
-        ///A test for DecodeCopyPreviousFrameDistant
-        ///</summary>
-        [TestMethod()]
+        /// <summary>A test for DecodeCopyPreviousFrameDistant</summary>
+        [TestMethod]
         [DeploymentItem("Infinity Formats.dll")]
         public void DecodeCopyPreviousFrameDistantTest()
         {
@@ -269,10 +255,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.InfinityFormats.External.Int
             Assert.IsTrue(this.AreBinaryArraysEqual(test, control));
         }
 
-        /// <summary>
-        ///A test for DecodeDither2Colors
-        ///</summary>
-        [TestMethod()]
+        /// <summary>A test for DecodeDither2Colors</summary>
+        [TestMethod]
         [DeploymentItem("Infinity Formats.dll")]
         public void DecodeDither2ColorsTest()
         {
@@ -307,10 +291,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.InfinityFormats.External.Int
             Assert.IsTrue(this.AreBinaryArraysEqual(test, control));
         }
 
-        /// <summary>
-        ///A test for DecodeFourColorIndecesQuadrantsOrHalves
-        ///</summary>
-        [TestMethod()]
+        /// <summary>A test for DecodeFourColorIndecesQuadrantsOrHalves</summary>
+        [TestMethod]
         [DeploymentItem("Infinity Formats.dll")]
         public void DecodeFourColorIndecesQuadrantsOrHalvesTest()
         {
@@ -420,10 +402,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.InfinityFormats.External.Int
             Assert.IsTrue(this.AreBinaryArraysEqual(test3, control3));
         }
 
-        /// <summary>
-        ///A test for DecodeFourColorIndecesRowsOrRectangles
-        ///</summary>
-        [TestMethod()]
+        /// <summary>A test for DecodeFourColorIndecesRowsOrRectangles</summary>
+        [TestMethod]
         [DeploymentItem("Infinity Formats.dll")]
         public void DecodeFourColorIndecesRowsOrRectanglesTest()
         {
@@ -565,10 +545,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.InfinityFormats.External.Int
             Assert.IsTrue(this.AreBinaryArraysEqual(test4, control4));
         }
 
-        /// <summary>
-        ///A test for DecodeRawIndeces
-        ///</summary>
-        [TestMethod()]
+        /// <summary>A test for DecodeRawIndeces</summary>
+        [TestMethod]
         [DeploymentItem("Infinity Formats.dll")]
         public void DecodeRawIndecesTest()
         {
@@ -603,10 +581,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.InfinityFormats.External.Int
             Assert.IsTrue(this.AreBinaryArraysEqual(test1, control1));
         }
 
-        /// <summary>
-        ///A test for DecodeRawIndeces2PixelSquares
-        ///</summary>
-        [TestMethod()]
+        /// <summary>A test for DecodeRawIndeces2PixelSquares</summary>
+        [TestMethod]
         [DeploymentItem("Infinity Formats.dll")]
         public void DecodeRawIndeces2PixelSquaresTest()
         {
@@ -641,10 +617,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.InfinityFormats.External.Int
             Assert.IsTrue(this.AreBinaryArraysEqual(test1, control1));
         }
 
-        /// <summary>
-        ///A test for DecodeRawIndeces4PixelSquares
-        ///</summary>
-        [TestMethod()]
+        /// <summary>A test for DecodeRawIndeces4PixelSquares</summary>
+        [TestMethod]
         [DeploymentItem("Infinity Formats.dll")]
         public void DecodeRawIndeces4PixelSquaresTest()
         {
@@ -679,10 +653,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.InfinityFormats.External.Int
             Assert.IsTrue(this.AreBinaryArraysEqual(test1, control1));
         }
 
-        /// <summary>
-        ///A test for DecodeRawIndecesSolidColor
-        ///</summary>
-        [TestMethod()]
+        /// <summary>A test for DecodeRawIndecesSolidColor</summary>
+        [TestMethod]
         [DeploymentItem("Infinity Formats.dll")]
         public void DecodeRawIndecesSolidColorTest()
         {
@@ -717,10 +689,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.InfinityFormats.External.Int
             Assert.IsTrue(this.AreBinaryArraysEqual(test1, control1));
         }
 
-        /// <summary>
-        ///A test for DecodeTwoToneIndecesQuadrantsOrHalves
-        ///</summary>
-        [TestMethod()]
+        /// <summary>A test for DecodeTwoToneIndecesQuadrantsOrHalves</summary>
+        [TestMethod]
         [DeploymentItem("Infinity Formats.dll")]
         public void DecodeTwoToneIndecesQuadrantsOrHalvesTest()
         {
@@ -828,10 +798,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.InfinityFormats.External.Int
             Assert.IsTrue(this.AreBinaryArraysEqual(test3, control3));
         }
 
-        /// <summary>
-        ///A test for DecodeTwoToneIndecesRowOrSquare
-        ///</summary>
-        [TestMethod()]
+        /// <summary>A test for DecodeTwoToneIndecesRowOrSquare</summary>
+        [TestMethod]
         [DeploymentItem("Infinity Formats.dll")]
         public void DecodeTwoToneIndecesRowOrSquareTest()
         {
@@ -900,7 +868,6 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.InfinityFormats.External.Int
             //evaluate
             Assert.IsTrue(this.AreBinaryArraysEqualAccountForDisplacementBug(test3, control3));
         }
-
 
 
         #region Dummy objects generation

@@ -174,10 +174,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         /// <param name="outputData">New frame's binary data</param>
         protected abstract void DecodeCopyBlock(Int32 blockX, Int32 blockY, Byte[] previousFrame, Byte[] outputData);
 
-        ///<remarks>Read source is the new frame</remarks>
+        /// <summary>Read source is the new frame</summary>
         protected abstract void DecodeCopyNewFrameBottom(Int32 blockX, Int32 blockY, Byte[] data, ref Int64 dataPosition, Byte[] outputData);
 
-        ///<remarks>Read source is the new frame</remarks>
+        /// <summary>Read source is the new frame</summary>
         protected abstract void DecodeCopyNewFrameTop(Int32 blockX, Int32 blockY, Byte[] data, ref Int64 dataPosition, Byte[] outputData);
 
         protected abstract void DecodeCopyPreviousFrameClose(Int32 blockX, Int32 blockY, Byte[] data, ref Int64 dataPosition, Byte[] previousFrame, Byte[] outputData);

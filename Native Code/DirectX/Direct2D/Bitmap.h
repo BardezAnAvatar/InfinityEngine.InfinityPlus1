@@ -77,7 +77,7 @@ namespace Bardez
 					/// <remarks>
 					///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
 					///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
-					///</remarks>
+					/// </remarks>
 					virtual ResultCode CopyFromBitmap(Point2dU^ upperPoint, Bitmap^ source, RectangleU^ area);
 
 					/// <summary>Copies the specified region from the specified bitmap into the current bitmap.</summary>
@@ -88,7 +88,7 @@ namespace Bardez
 					/// <remarks>
 					///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
 					///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
-					///</remarks>
+					/// </remarks>
 					virtual ResultCode CopyFromBitmap(System::Drawing::Point upperPoint, Bitmap^ source, System::Drawing::Rectangle area);
 
 					/// <summary>Copies the specified region from the specified rendering target into the current bitmap.</summary>
@@ -99,7 +99,7 @@ namespace Bardez
 					/// <remarks>
 					///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
 					///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
-					///</remarks>
+					/// </remarks>
 					virtual ResultCode CopyFromRenderTarget(Point2dU^ upperPoint, RenderTarget^ source, RectangleU^ area);
 
 					/// <summary>Copies the specified region from the specified rendering target into the current bitmap.</summary>
@@ -110,7 +110,7 @@ namespace Bardez
 					/// <remarks>
 					///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
 					///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
-					///</remarks>
+					/// </remarks>
 					virtual ResultCode CopyFromRenderTarget(System::Drawing::Point upperPoint, RenderTarget^ source, System::Drawing::Rectangle area);
 
 					/// <summary>Copies the specified region from memory into the current bitmap.</summary>
@@ -125,7 +125,7 @@ namespace Bardez
 					/// <remarks>
 					///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
 					///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
-					///</remarks>
+					/// </remarks>
 					virtual ResultCode CopyFromMemory(RectangleU^ area, array<System::Byte>^ source, System::UInt32 pitch);
 
 					/// <summary>Copies the specified region from memory into the current bitmap.</summary>
@@ -141,7 +141,7 @@ namespace Bardez
 					/// <remarks>
 					///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
 					///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
-					///</remarks>
+					/// </remarks>
 					virtual ResultCode CopyFromMemory(RectangleU^ area, System::IntPtr source, System::Int32 length, System::UInt32 pitch);
 
 					/// <summary>Copies the specified region from memory into the current bitmap.</summary>
@@ -156,7 +156,7 @@ namespace Bardez
 					/// <remarks>
 					///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
 					///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
-					///</remarks>
+					/// </remarks>
 					virtual ResultCode CopyFromMemory(System::Drawing::Rectangle area, array<System::Byte>^ source, System::UInt32 pitch);
 
 					/// <summary>Copies the specified region from memory into the current bitmap.</summary>
@@ -172,7 +172,7 @@ namespace Bardez
 					/// <remarks>
 					///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
 					///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
-					///</remarks>
+					/// </remarks>
 					virtual ResultCode CopyFromMemory(System::Drawing::Rectangle area, System::IntPtr source, System::Int32 length, System::UInt32 pitch);
 
 					/// <summary>Gets the dots per inch of the bitmap</summary>

@@ -124,14 +124,14 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
                 Array.Copy(previousFrame, ((y * this.Width) + srcX), outputData, ((y * this.Width) + srcX), 8);
         }
 
-        ///<remarks>Read source is the new frame</remarks>
+        /// <summary>Read source is the new frame</summary>
         /// <remarks>Opcode 2</remarks>
         protected override void DecodeCopyNewFrameBottom(Int32 blockX, Int32 blockY, Byte[] data, ref Int64 dataPosition, Byte[] outputData)
         {
             this.HelperDecpdeCopyNewFrameRelative(blockX, blockY, data, ref dataPosition, outputData, 1);
         }
 
-        ///<remarks>Read source is the new frame</remarks>
+        /// <summary>Read source is the new frame</summary>
         /// <remarks>Opcode 3</remarks>
         protected override void DecodeCopyNewFrameTop(Int32 blockX, Int32 blockY, Byte[] data, ref Int64 dataPosition, Byte[] outputData)
         {

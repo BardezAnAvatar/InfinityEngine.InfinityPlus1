@@ -68,7 +68,7 @@ void Bardez::Projects::DirectX::Direct2D::Bitmap::DisposeUnmanaged()
 /// <remarks>
 ///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
 ///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
-///</remarks>
+/// </remarks>
 ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromBitmap(Bardez::Projects::DirectX::Direct2D::Point2dU^ upperPoint, Bardez::Projects::DirectX::Direct2D::Bitmap^ source, Bardez::Projects::DirectX::Direct2D::RectangleU^ area)
 {
 	if (source == nullptr)
@@ -88,7 +88,7 @@ ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromBitmap(Bardez::P
 /// <remarks>
 ///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
 ///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
-///</remarks>
+/// </remarks>
 ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromBitmap(System::Drawing::Point upperPoint, Bitmap^ source, System::Drawing::Rectangle area)
 {
 	return this->CopyFromBitmap(gcnew Bardez::Projects::DirectX::Direct2D::Point2dU(upperPoint), source, gcnew Bardez::Projects::DirectX::Direct2D::RectangleU(area));
@@ -102,7 +102,7 @@ ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromBitmap(System::D
 /// <remarks>
 ///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
 ///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
-///</remarks>
+/// </remarks>
 ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromRenderTarget(Bardez::Projects::DirectX::Direct2D::Point2dU^ upperPoint, Bardez::Projects::DirectX::Direct2D::RenderTarget^ source, Bardez::Projects::DirectX::Direct2D::RectangleU^ area)
 {
 	if (source == nullptr)
@@ -122,7 +122,7 @@ ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromRenderTarget(Bar
 /// <remarks>
 ///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
 ///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
-///</remarks>
+/// </remarks>
 ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromRenderTarget(System::Drawing::Point upperPoint, Bardez::Projects::DirectX::Direct2D::RenderTarget^ source, System::Drawing::Rectangle area)
 {
 	return this->CopyFromRenderTarget(gcnew Bardez::Projects::DirectX::Direct2D::Point2dU(upperPoint), source, gcnew Bardez::Projects::DirectX::Direct2D::RectangleU(area));
@@ -140,7 +140,7 @@ ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromRenderTarget(Sys
 /// <remarks>
 ///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
 ///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
-///</remarks>
+/// </remarks>
 ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromMemory(Bardez::Projects::DirectX::Direct2D::RectangleU^ area, array<System::Byte>^ source, System::UInt32 pitch)
 {
 	if (source == nullptr)
@@ -166,7 +166,7 @@ ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromMemory(Bardez::P
 /// <remarks>
 ///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
 ///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
-///</remarks>
+/// </remarks>
 ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromMemory(RectangleU^ area, System::IntPtr source, System::Int32 length, System::UInt32 pitch)
 {
 	if (source == System::IntPtr::Zero)
@@ -190,7 +190,7 @@ ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromMemory(Rectangle
 /// <remarks>
 ///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
 ///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
-///</remarks>
+/// </remarks>
 ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromMemory(System::Drawing::Rectangle area, array<System::Byte>^ source, System::UInt32 pitch)
 {
 	return this->CopyFromMemory(gcnew Bardez::Projects::DirectX::Direct2D::RectangleU(area), source, pitch);
@@ -209,7 +209,7 @@ ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromMemory(System::D
 /// <remarks>
 ///		This method does not update the size of the current bitmap. If the contents of the source bitmap do not fit in the current bitmap,
 ///		this method fails. Also, note that this method does not perform format conversion, and will fail if the bitmap formats do not match.
-///</remarks>
+/// </remarks>
 ResultCode Bardez::Projects::DirectX::Direct2D::Bitmap::CopyFromMemory(System::Drawing::Rectangle area, System::IntPtr source, System::Int32 length, System::UInt32 pitch)
 {
 	return this->CopyFromMemory(gcnew Bardez::Projects::DirectX::Direct2D::RectangleU(area), source, length, pitch);

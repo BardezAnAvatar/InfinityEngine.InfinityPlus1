@@ -6,9 +6,9 @@ using System.Collections.Generic;
 namespace Bardez.Projects.InfinityPlus1.UnitTesting.ExternalFormats.Image.Mathematics.DCT
 {
     /// <summary>
-    ///This is a test class for JpegJfifParserTest and is intended
-    ///to contain all JpegJfifParserTest Unit Tests
-    ///</summary>
+    ///     This is a test class for JpegJfifParserTest and is intended
+    ///     to contain all JpegJfifParserTest Unit Tests
+    /// </summary>
     [TestClass()]
     public class JpegJfifParserTest
     {
@@ -17,9 +17,9 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.ExternalFormats.Image.Mathem
         private TestContext testContextInstance;
 
         /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
+        ///     Gets or sets the test context which provides
+        ///     information about and functionality for the current test run.
+        /// </summary>
         public TestContext TestContext
         {
             get
@@ -63,10 +63,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.ExternalFormats.Image.Mathem
         #endregion
 
 
-        /// <summary>
-        ///A test for InverseDiscreteCosineTransformSlow
-        ///</summary>
-        [TestMethod()]
+        /// <summary>A test for InverseDiscreteCosineTransformSlow</summary>
+        [TestMethod]
         [DeploymentItem("InfinityPlus1.Files.dll")]
         public void InverseDiscreteCosineTransformSlowTest()
         {
@@ -101,10 +99,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.ExternalFormats.Image.Mathem
         }
 
 
-        /// <summary>
-        ///A test for InverseDiscreteCosineTransformSlow
-        ///</summary>
-        [TestMethod()]
+        /// <summary>A test for InverseDiscreteCosineTransformSlow</summary>
+        [TestMethod]
         [DeploymentItem("InfinityPlus1.Files.dll")]
         public void ForwardDiscreteCosineTransformSlowTest()
         {
@@ -187,10 +183,8 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.ExternalFormats.Image.Mathem
 
 
 
-        /// <summary>
-        ///A test for InverseDiscreteCosineTransformSlow
-        ///</summary>
-        [TestMethod()]
+        /// <summary>A test for InverseDiscreteCosineTransformSlow</summary>
+        [TestMethod]
         [DeploymentItem("InfinityPlus1.Files.dll")]
         public void IDCTFastTest()
         {
