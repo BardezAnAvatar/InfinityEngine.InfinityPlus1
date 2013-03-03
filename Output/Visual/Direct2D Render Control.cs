@@ -10,7 +10,7 @@ using Bardez.Projects.DirectX.Direct2D;
 using Bardez.Projects.Multimedia.MediaBase.Data.Pixels;
 using Bardez.Projects.Multimedia.MediaBase.Data.Pixels.Enums;
 using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
-using Bardez.Projects.MultiMedia.MediaBase.Video.Pixels;
+using Bardez.Projects.Multimedia.MediaBase.Video.Pixels;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Output.Visual
@@ -415,7 +415,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
             {
                 //create the bitmap
                 BitmapProperties properties = new BitmapProperties(new Direct2D.PixelFormat(DXGI_ChannelFormat.FORMAT_B8G8R8A8_UNORM, AlphaMode.PreMultiplied), Direct2dResourceManager.Instance.Factory.GetDesktopDpi());
-                SizeU dimensions = new SizeU(Convert.ToUInt32(resource.Metadata.Width), Convert.ToUInt32(resource.Metadata.Height));
+                SizeU dimensions = new SizeU(Convert.ToUInt32(resource.MetadataImage.Width), Convert.ToUInt32(resource.MetadataImage.Height));
 
                 Direct2D.Bitmap bmp = null;
                 ResultCode result = this.BmpRenderTarget.CreateBitmap(dimensions, properties, out bmp);
@@ -429,7 +429,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Visual
                 Byte[] binData = data.ToArray();
 
                 //submit byte array
-                result = bmp.CopyFromMemory(new RectangleU(dimensions), binData, Convert.ToUInt32(resource.Metadata.Width * 4));
+                result = bmp.CopyFromMemory(new RectangleU(dimensions), binData, Convert.ToUInt32(resource.MetadataImage.Width * 4));
 
                 if (result != ResultCode.Success_OK)
                     throw new ApplicationException(String.Format("Error creating a Direct2D Bitmap: {0}", result.ToString()));
