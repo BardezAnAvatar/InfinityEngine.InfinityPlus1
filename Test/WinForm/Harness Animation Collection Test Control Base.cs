@@ -214,8 +214,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 
                     //create the ImageReference and add
                     ImageReference imgRef = new ImageReference(imageName, key, frameIndex);
-                    imgRef.RenderOriginX = frame.Metadata.OriginX;
-                    imgRef.RenderOriginY = frame.Metadata.OriginY;
+                    imgRef.RenderOriginX = frame.MetadataImage.OriginX;
+                    imgRef.RenderOriginY = frame.MetadataImage.OriginY;
                     this.SetFrameDetails(imgRef, image, frameIndex);    //allow for easy override with less intervention
                     col.FrameList.Add(imgRef);
                 }
