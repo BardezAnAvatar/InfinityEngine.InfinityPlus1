@@ -5,7 +5,7 @@ using System.Threading;
 using System.Timers;
 
 using Bardez.Projects.Multimedia.LibAV;
-using Bardez.Projects.MultiMedia.LibAV;
+using Bardez.Projects.Multimedia.LibAV;
 using Bardez.Projects.Multimedia.MediaBase.Data.Pixels;
 using Bardez.Projects.Multimedia.MediaBase.Data.Pixels.Enums;
 using Bardez.Projects.Multimedia.MediaBase.Frame.Image;

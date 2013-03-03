@@ -2,7 +2,7 @@
 using System.Timers;
 
 using Bardez.Projects.BasicStructures.Win32.Audio;
-using Bardez.Projects.MultiMedia.LibAV;
+using Bardez.Projects.Multimedia.LibAV;
 using Bardez.Projects.Multimedia.MediaBase.Render;
 
 namespace Bardez.Projects.Multimedia.LibAV.Wrapper
