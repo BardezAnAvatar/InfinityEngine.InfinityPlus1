@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="Audio\Audio Output.cs" />
     <Compile Include="Audio\Renderers\Raw Sample File Writer Audio Renderer.cs" />
+    <Compile Include="Audio\Renderers\XAudio2AudioRenderer.cs" />
     <Compile Include="Audio\XAudio2 Source Voice Reference.cs" />
     <Compile Include="Audio\Enums\XAudio2VoiceState.cs" />
     <Compile Include="Audio\XAudio2 Output.cs" />
