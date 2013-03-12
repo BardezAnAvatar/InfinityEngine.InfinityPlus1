@@ -15,6 +15,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
     ///     simultaneously, etc. I may work on a different disposal approach in the future, but for now, Dispose of this object
     ///     if ever referenced.
     /// </remarks>
+    [Obsolete("This class is deprecated since it is both a wrapper around existing content and it requires a single disposal call.")]
     public class XAudio2Output : AudioOutput, IDisposable
     {
         #region Fields
