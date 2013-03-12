@@ -96,8 +96,8 @@ namespace Scratch
 
 
             //Apply Some vectors
-            Vector<Single> playing = new Vector<float>(15.0F, 15.0F, 15.0F);
-            Vector<Single> listener = new Vector<float>(0.0F, 0.0F, 0.0F);
+            Vector<Single> playing = new Vector<Single>(15.0F, 15.0F, 15.0F);
+            Vector<Single> listener = new Vector<Single>(0.0F, 0.0F, 0.0F);
 
 
             //3D Calculations
@@ -126,7 +126,7 @@ namespace Scratch
 
 
                 //set up X3DAudio
-                X3DAudio.Initialize((UInt32)positions);
+                X3DAudio audio3D = new X3DAudio((UInt32)positions);
                 Listener x3daListener = new Listener();
                 x3daListener.Position = listener;
 
@@ -136,7 +136,7 @@ namespace Scratch
                 DspSettings settings = new DspSettings(format.NumberChannels, format.NumberChannels);
 
                 X3DAudioCalculationFlags calcFlags = X3DAudioCalculationFlags.Matrix | X3DAudioCalculationFlags.Reverberation | X3DAudioCalculationFlags.Doppler | X3DAudioCalculationFlags.LowPassFilterDirect | X3DAudioCalculationFlags.LowPassFilterReverberation;
-                X3DAudio.CalculateAudio(x3daListener, x3daEmitter, calcFlags, settings);
+                audio3D.CalculateAudio(x3daListener, x3daEmitter, calcFlags, settings);
 
                 //Try playback
 
