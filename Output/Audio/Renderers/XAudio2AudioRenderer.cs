@@ -35,12 +35,15 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio.Renderers
 
         /// <summary>Contains the details of the audio format</summary>
         protected WaveFormatEx AudioFormat;
+
+        /// <summary>Destination speaker configuration</summary>
+        protected SpeakerConfiguration OutputConfiguration;
         #endregion
 
 
         #region Properties
         /// <summary>Position of speakers for this renderer</summary>
-        protected SpeakerPositions SpeakerPositions
+        protected SpeakerPositions SourceSpeakerPositions
         {
             get
             {
@@ -95,7 +98,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio.Renderers
         }
 
         /// <summary>Finalize()</summary>
-        public ~XAudio2AudioRenderer()
+        ~XAudio2AudioRenderer()
         {
             this.Disposal();
         }
@@ -130,13 +133,21 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio.Renderers
 
         #region IAudioRenderer Events
         /// <summary>Event that occurs when the renderer has finished rendering the provided data stream(s). Used to signal expiration and ready for disposal.</summary>
-        public event EventHandler FinishedRendering;
+        public event EventHandler FinishedRendering
+        {
+            add { this.finishedRendering += value; }
+            remove { this.finishedRendering -= value; }
+        }
 
         /// <summary>
         ///     Event that occurs when the renderer has processed all provided data and requires additional data
         ///     if the behavior specified is to continue rendering
         /// </summary>
-        public event EventHandler RequestAdditionalData;
+        public event EventHandler RequestAdditionalData
+        {
+            add { this.requestAdditionalData += value; }
+            remove { this.requestAdditionalData -= value; }
+        }
         #endregion
 
 
@@ -156,13 +167,25 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio.Renderers
         #region IAudioRenderer Methods
         /// <summary>Initializes this audio renderer to use the settings provided</summary>
         /// <param name="audioInfo">Collection of data that indicates what the format of the source audio is</param>
-        public void Initialize(WaveFormatEx audioInfo)
+        /// <param name="destinationConfiguration">Configuration of audio channels for rendering output</param>
+        /// <param name="behavior">Behavior with which to render audio</param>
+        public void Initialize(WaveFormatEx audioInfo, SpeakerConfiguration destinationConfiguration, AudioRenderStyle behavior)
         {
+            if (audioInfo == null)
+                throw new NullReferenceException("The parameter \"audioInfo\" was null.");
+            else if (destinationConfiguration == null)
+                throw new NullReferenceException("The parameter \"destinationConfiguration\" was null.");
+
+            //initialize XAudio2
             if (this.MasteringVoice != null)
                 throw new InvalidOperationException("This audio renderer is already Initialized.");
 
             this.MasteringVoice = this.XAudio2.CreateMasteringVoice(audioInfo.NumberChannels, audioInfo.SamplesPerSec, XAudio2Interface.VoiceFlags.NoSampleRateConversion, 0U);
             this.SourceVoice = this.XAudio2.CreateSourceVoice(audioInfo);
+
+            //copy behavior references
+            this.Behavior = behavior;
+            this.OutputConfiguration = destinationConfiguration;
         }
 
         /// <summary>Submits data for rendering</summary>
@@ -170,16 +193,19 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio.Renderers
         public void SubmitSampleData(Byte[] data)
         {
             AudioBuffer buffer = new AudioBuffer(XAudio2Interface.VoiceFlags.EndOfStream, data, 0, 0, 0, 0, 0, IntPtr.Zero);
+
+            if (this.Behavior == AudioRenderStyle.Loop)
+            {
+                buffer.LoopLength = Convert.ToUInt32(data.Length);
+                buffer.LoopCount = AudioBuffer.XAUDIO2_LOOP_INFINITE;
+            }
+            
             this.SourceVoice.SubmitSourceBuffer(buffer, null);
         }
 
         /// <summary>Command to start rendering audio</summary>
-        /// <param name="behavior">Behavior with which to render audio</param>
-        public void StartRendering(AudioRenderStyle behavior)
+        public void StartRendering()
         {
-            if (behavior == AudioRenderStyle.Loop)
-                throw new InvalidOperationException("Looping at the start of rendering not supported by XAudio2.");
-
             //error checking
             if (this.SourceVoice == null)
                 throw new NullReferenceException("The Source Voice for this renderer is null.");
@@ -191,27 +217,19 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio.Renderers
         /// <param name="detail">Rendering context details to set</param>
         public void SetRenderDetails(AudioSourceParams detail)
         {
-            this.X3DAudio = new X3DAudio((UInt32)(this.SpeakerPositions));
+            this.X3DAudio = new X3DAudio((UInt32)(this.OutputConfiguration.Positions));
 
-            //TODO: shouldn't the XAudio2 Listener & Emitter objects be populated from properties of detail?
-            DirectX.X3DAudio.Listener x3daListener = new DirectX.X3DAudio.Listener();
-            x3daListener.Position = new Vector<Single>(0.0F, 0.0F, 0.0F);
-
-            DirectX.X3DAudio.Emitter x3daEmitter = new DirectX.X3DAudio.Emitter((UInt32)(this.SpeakerPositions));
-            x3daEmitter.Position = detail.Position;
-            x3daEmitter.Velocity = detail.Velocity;
-            x3daEmitter.ChannelAzimuths = detail.ChannelPositionAzimuths.ToArray();
-            x3daEmitter.ChannelRadius = detail.RadiusChannels;
-            x3daEmitter.OrientFront = detail.Orientation;
+            DirectX.X3DAudio.Listener x3daListener = new DirectX.X3DAudio.Listener(detail.Listener);
+            DirectX.X3DAudio.Emitter x3daEmitter = new DirectX.X3DAudio.Emitter(detail.Emitter);
             //TODO: Figure out what  detail.MuffleSound would be used for, and where
 
-            DspSettings settings = new DspSettings(this.AudioFormat.NumberChannels, detail.CountChannels);
+            DspSettings settings = new DspSettings(this.AudioFormat.NumberChannels, this.OutputConfiguration.Count);
 
             X3DAudioCalculationFlags calcFlags = X3DAudioCalculationFlags.Matrix | X3DAudioCalculationFlags.Reverberation | X3DAudioCalculationFlags.Doppler | X3DAudioCalculationFlags.LowPassFilterDirect | X3DAudioCalculationFlags.LowPassFilterReverberation;
             this.X3DAudio.CalculateAudio(x3daListener, x3daEmitter, calcFlags, settings);
 
             //X3DAudio effects:
-            this.SourceVoice.SetOutputMatrix(this.MasteringVoice, this.AudioFormat.NumberChannels, detail.CountChannels, settings.CoefficientsMatrix, 0);
+            this.SourceVoice.SetOutputMatrix(this.MasteringVoice, this.AudioFormat.NumberChannels, this.OutputConfiguration.Count, settings.CoefficientsMatrix, 0);
             this.SourceVoice.SetFrequencyRatio(settings.DopplerFactor, 0);
         }
 

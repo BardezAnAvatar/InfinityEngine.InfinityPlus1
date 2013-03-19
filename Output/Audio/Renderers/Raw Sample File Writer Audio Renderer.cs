@@ -175,9 +175,13 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
         #region IAudioRenderer Methods
         /// <summary>Initializes this audio renderer to use the settings provided</summary>
         /// <param name="audioInfo">Collection of data that indicates what the format of the source audio is</param>
-        public void Initialize(WaveFormatEx audioInfo)
+        /// <param name="destinationConfiguration">Configuration of audio channels for rendering output</param>
+        /// <param name="behavior">Behavior with which to render audio</param>
+        public void Initialize(WaveFormatEx audioInfo, SpeakerConfiguration destinationConfiguration, AudioRenderStyle behavior)
         {
-            //A raw sample file writer does not care about this. An MP3 container would, a sound card driver would, but not a raw-sample file writer.
+            this.RenderingStyle = behavior;
+
+            //A raw sample file writer does not care about wave data format. An MP3 container would, a sound card driver would, a *.wav file container would, but not a raw-sample file writer.
         }
 
         /// <summary>Submits data for rendering</summary>
@@ -189,11 +193,9 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
         }
 
         /// <summary>Command to start rendering audio</summary>
-        /// <param name="behavior">Behavior with which to render audio</param>
-        public void StartRendering(AudioRenderStyle behavior)
+        public void StartRendering()
         {
             this.ExitThread = false;
-            this.RenderingStyle = behavior;
 
             if (this.writingThread == null)
             {
