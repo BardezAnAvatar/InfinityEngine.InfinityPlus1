@@ -44,6 +44,7 @@
     <Compile Include="Win32\Audio\Audio Data Format.cs" />
     <Compile Include="Win32\Audio\IWaveFormatEx.cs" />
     <Compile Include="Win32\Audio\PCM Wave Format.cs" />
+    <Compile Include="Win32\Audio\Speaker Configuration.cs" />
     <Compile Include="Win32\Audio\Speaker Positions.cs" />
     <Compile Include="Win32\Audio\Wave Format Ex.cs" />
     <Compile Include="Win32\Audio\Wave Format Extensible.cs" />
