@@ -32,11 +32,11 @@ namespace Scratch
             Int64 length = ((sampleData.Length * 1000) / format.SamplesPerSec) + 1;
             TimeSpan ts = new TimeSpan(0, 0, 0, 0, Convert.ToInt32(length));
 
-            using (FileStream dest = File.Open(String.Format("{0}.dump.raw", riffFile), FileMode.Create, FileAccess.Write))
-            {
-                dest.Write(sampleData, 0, sampleData.Length);
-                dest.Flush();
-            }
+            //using (FileStream dest = File.Open(String.Format("{0}.dump.raw", riffFile), FileMode.Create, FileAccess.Write))
+            //{
+            //    dest.Write(sampleData, 0, sampleData.Length);
+            //    dest.Flush();
+            //}
 
             //chilling with my samples...
             using (XAudio2Interface xaudio2 = XAudio2Interface.NewInstance())
@@ -56,7 +56,7 @@ namespace Scratch
                 using (MasteringVoice master = xaudio2.CreateMasteringVoice(format.NumberChannels, format.SamplesPerSec, 0U, 0U))
                 {
                     //create a source voice; again, do not allow conversion
-                    using (SourceVoice source = xaudio2.CreateSourceVoice(format, XAudio2Interface.VoiceFlags.NoSampleRateConversion))
+                    using (SourceVoice source = xaudio2.CreateSourceVoice(format, 0U))
                     {
                         source.SetOutputVoices(new VoiceSendDescriptor[] { new VoiceSendDescriptor(0U, master) });
 
