@@ -5,7 +5,6 @@ using System.Threading;
 using System.Timers;
 
 using Bardez.Projects.BasicStructures.Win32.Audio;
-using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave.Enums;
 using Bardez.Projects.InfinityPlus1.NativeFactories.Timer;
 using Bardez.Projects.Multimedia.LibAV;
 using Bardez.Projects.Multimedia.MediaBase.Data.Pixels;
@@ -60,7 +59,7 @@ namespace Bardez.Projects.Multimedia.LibAV.Wrapper
             {
                 TimeSpan length = TimeSpan.Zero;
                 
-                Double ticks = (this.libavContainer.TimeBase.Value * this.libavContainer.Duration) * 10000000.0; //microseconds = 10^-6, I want 10^-7 (100 nanoseconds)
+                Double ticks = (this.libavContainer.TimeBase.ValueDouble * this.libavContainer.Duration) * 10000000.0; //microseconds = 10^-6, I want 10^-7 (100 nanoseconds)
                 length = new TimeSpan(Convert.ToInt64(ticks));
 
                 return length;
