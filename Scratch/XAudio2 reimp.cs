@@ -41,7 +41,7 @@ namespace Scratch
             //chilling with my samples...
             using (XAudio2Interface xaudio2 = XAudio2Interface.NewInstance())
             {
-                UInt32 deviceCount = xaudio2.GetDeviceCount() + 1U;
+                UInt32 deviceCount = xaudio2.GetDeviceCount();
 
                 DeviceDetails [] devices = new DeviceDetails[deviceCount];
                 for (UInt32 index = 0; index < deviceCount; ++index)
@@ -53,7 +53,7 @@ namespace Scratch
                 //Try playback
 
                 //Try to force the mastering voice to use a different sample rate
-                using (MasteringVoice master = xaudio2.CreateMasteringVoice(format.NumberChannels, format.SamplesPerSec, XAudio2Interface.VoiceFlags.NoSampleRateConversion, 0U))
+                using (MasteringVoice master = xaudio2.CreateMasteringVoice(format.NumberChannels, format.SamplesPerSec, 0U, 0U))
                 {
                     //create a source voice; again, do not allow conversion
                     using (SourceVoice source = xaudio2.CreateSourceVoice(format, XAudio2Interface.VoiceFlags.NoSampleRateConversion))
@@ -141,7 +141,7 @@ namespace Scratch
                 //Try playback
 
                 //Try to force the mastering voice to use a different sample rate
-                using (MasteringVoice master = xaudio2.CreateMasteringVoice(format.NumberChannels, format.SamplesPerSec, XAudio2Interface.VoiceFlags.NoSampleRateConversion, 0U))
+                using (MasteringVoice master = xaudio2.CreateMasteringVoice(format.NumberChannels, format.SamplesPerSec, 0U, 0U))
                 {
                     //create a source voice; again, do not allow conversion
                     using (SourceVoice source = xaudio2.CreateSourceVoice(format, XAudio2Interface.VoiceFlags.NoSampleRateConversion))
