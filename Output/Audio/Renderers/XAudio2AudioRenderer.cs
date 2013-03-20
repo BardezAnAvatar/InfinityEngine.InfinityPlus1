@@ -7,6 +7,7 @@ using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.Multimedia.MediaBase.Render.Audio;
 using Bardez.Projects.DirectX.X3DAudio;
 using Bardez.Projects.DirectX.XAudio2;
+using Bardez.Projects.DirectX.XAudio2.XAPO;
 
 namespace Bardez.Projects.InfinityPlus1.Output.Audio.Renderers
 {
@@ -15,6 +16,8 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio.Renderers
     //TODO: Should the XAudio2 interface be singleton or should it be a singleton to access? I do not know.
     //  per MSDN: "You can create instances of XAudio2 multiple times within a single process."
     //  http://msdn.microsoft.com/en-us/library/windows/desktop/ee415764%28v=vs.85%29.aspx
+    //TODO: Support reverberation (XAudio2FX.h - see XAudio2Sound3D sample project)
+
     public class XAudio2AudioRenderer : IAudioRenderer
     {
         #region Fields
@@ -27,8 +30,16 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio.Renderers
         /// <summary>Instance of the XAudio2 interface to access</summary>
         protected XAudio2Interface XAudio2;
 
-        /// <summary>Instace of the X3DAudio data & methods</summary>
+        /// <summary>Instance of the X3DAudio data & methods</summary>
         protected X3DAudio X3DAudio;
+
+        /// <summary>Reference to a reverberation parameter</summary>
+        /// <remarks>
+        ///     Per MSDN, this must not be freed immediately.
+        ///     I will release it when it is overwritten.
+        ///     This may lead to unexpected behavior if it is *rapidly* set, which I do not expect to be the case.
+        /// </remarks>
+        protected EffectParameterBase ReverbParameter;
 
         /// <summary>Explains the expected style of behavior for this audio renderer</summary>
         protected AudioRenderStyle Behavior;
@@ -38,29 +49,6 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio.Renderers
 
         /// <summary>Destination speaker configuration</summary>
         protected SpeakerConfiguration OutputConfiguration;
-        #endregion
-
-
-        #region Properties
-        /// <summary>Position of speakers for this renderer</summary>
-        protected SpeakerPositions SourceSpeakerPositions
-        {
-            get
-            {
-                SpeakerPositions pos = BasicStructures.Win32.Audio.SpeakerPositions.SPEAKER_ALL;
-
-                if (this.AudioFormat is WaveFormatExtensible)
-                    pos = (this.AudioFormat as WaveFormatExtensible).ChannelMask;
-                else if (this.AudioFormat.NumberChannels == 1)
-                    pos = BasicStructures.Win32.Audio.SpeakerPositions.SPEAKER_FRONT_CENTER;
-                else if (this.AudioFormat.NumberChannels == 2)
-                    pos = BasicStructures.Win32.Audio.SpeakerPositions.SPEAKER_FRONT_LEFT | BasicStructures.Win32.Audio.SpeakerPositions.SPEAKER_FRONT_RIGHT;
-                else
-                    pos = BasicStructures.Win32.Audio.SpeakerPositions.SPEAKER_ALL;
-
-                return pos;
-            }
-        }
         #endregion
 
 
@@ -169,7 +157,8 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio.Renderers
         /// <param name="audioInfo">Collection of data that indicates what the format of the source audio is</param>
         /// <param name="destinationConfiguration">Configuration of audio channels for rendering output</param>
         /// <param name="behavior">Behavior with which to render audio</param>
-        public void Initialize(WaveFormatEx audioInfo, SpeakerConfiguration destinationConfiguration, AudioRenderStyle behavior)
+        /// <param name="targetDeviceName">Name of the target device to be rendered to. If null or not found, system will use the system default device, if appropriate</param>
+        public void Initialize(WaveFormatEx audioInfo, SpeakerConfiguration destinationConfiguration, AudioRenderStyle behavior, String targetDeviceName)
         {
             if (audioInfo == null)
                 throw new NullReferenceException("The parameter \"audioInfo\" was null.");
@@ -180,7 +169,20 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio.Renderers
             if (this.MasteringVoice != null)
                 throw new InvalidOperationException("This audio renderer is already Initialized.");
 
-            this.MasteringVoice = this.XAudio2.CreateMasteringVoice(audioInfo.NumberChannels, audioInfo.SamplesPerSec, XAudio2Interface.VoiceFlags.NoSampleRateConversion, 0U);
+            //go through devices to find the target
+            UInt32 deviceCount = this.XAudio2.GetDeviceCount() + 1U;
+
+            DeviceDetails[] devices = new DeviceDetails[deviceCount];
+            for (UInt32 i = 0; i < deviceCount; ++i)
+                devices[i] = this.XAudio2.GetDeviceDetails(i);
+
+            UInt32 renderingDeviceIndex = 0;
+            for (UInt32 i = 0U; i < deviceCount; ++i)
+                if (devices[i] != null && devices[i].DisplayName == targetDeviceName)
+                    renderingDeviceIndex = i;
+
+            //initialize the voices for rendering
+            this.MasteringVoice = this.XAudio2.CreateMasteringVoice(audioInfo.NumberChannels, audioInfo.SamplesPerSec, 0U /* no SRC crashes, don't know why */, renderingDeviceIndex);
             this.SourceVoice = this.XAudio2.CreateSourceVoice(audioInfo);
 
             //copy behavior references
@@ -217,20 +219,26 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio.Renderers
         /// <param name="detail">Rendering context details to set</param>
         public void SetRenderDetails(AudioSourceParams detail)
         {
-            this.X3DAudio = new X3DAudio((UInt32)(this.OutputConfiguration.Positions));
+            if (detail == null || detail.Emitter == null || detail.Listener == null)
+                //TODO: figure out how to disable 3D sound
+                throw new NotImplementedException("How do I turn off 3D effects?");
+            else
+            {
+                this.X3DAudio = new X3DAudio((UInt32)(this.OutputConfiguration.Positions));
 
-            DirectX.X3DAudio.Listener x3daListener = new DirectX.X3DAudio.Listener(detail.Listener);
-            DirectX.X3DAudio.Emitter x3daEmitter = new DirectX.X3DAudio.Emitter(detail.Emitter);
-            //TODO: Figure out what  detail.MuffleSound would be used for, and where
+                DirectX.X3DAudio.Listener x3daListener = new DirectX.X3DAudio.Listener(detail.Listener);
+                DirectX.X3DAudio.Emitter x3daEmitter = new DirectX.X3DAudio.Emitter(detail.Emitter);
+                //TODO: Figure out what  detail.MuffleSound would be used for, and where
 
-            DspSettings settings = new DspSettings(this.AudioFormat.NumberChannels, this.OutputConfiguration.Count);
+                DspSettings settings = new DspSettings(this.AudioFormat.NumberChannels, this.OutputConfiguration.Count);
 
-            X3DAudioCalculationFlags calcFlags = X3DAudioCalculationFlags.Matrix | X3DAudioCalculationFlags.Reverberation | X3DAudioCalculationFlags.Doppler | X3DAudioCalculationFlags.LowPassFilterDirect | X3DAudioCalculationFlags.LowPassFilterReverberation;
-            this.X3DAudio.CalculateAudio(x3daListener, x3daEmitter, calcFlags, settings);
+                X3DAudioCalculationFlags calcFlags = X3DAudioCalculationFlags.Matrix | X3DAudioCalculationFlags.Reverberation | X3DAudioCalculationFlags.Doppler | X3DAudioCalculationFlags.LowPassFilterDirect | X3DAudioCalculationFlags.LowPassFilterReverberation;
+                this.X3DAudio.CalculateAudio(x3daListener, x3daEmitter, calcFlags, settings);
 
-            //X3DAudio effects:
-            this.SourceVoice.SetOutputMatrix(this.MasteringVoice, this.AudioFormat.NumberChannels, this.OutputConfiguration.Count, settings.CoefficientsMatrix, 0);
-            this.SourceVoice.SetFrequencyRatio(settings.DopplerFactor, 0);
+                //X3DAudio effects:
+                this.SourceVoice.SetOutputMatrix(this.MasteringVoice, this.AudioFormat.NumberChannels, this.OutputConfiguration.Count, settings.CoefficientsMatrix, 0);
+                this.SourceVoice.SetFrequencyRatio(settings.DopplerFactor, 0);
+            }
         }
 
         /// <summary>Pauses audio playback. Buffers will pick up where left off if rendering resumed</summary>
