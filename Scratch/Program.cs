@@ -11,8 +11,9 @@ namespace Scratch
         internal static void Main(String[] args)
         {
             XAudio2_reimp test = new XAudio2_reimp();
-            test.TestSomeXAudio2Stuff();
-            test.XAudio2_ThreeeeeeDeeeeeeee_test();
+            //test.TestSomeXAudio2Stuff();
+            //test.XAudio2_ThreeeeeeDeeeeeeee_test();
+            test.TestXAudio2IRenderer();
         }
     }
 }

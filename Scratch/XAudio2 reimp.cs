@@ -2,25 +2,30 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 using Bardez.Projects.BasicStructures.ThreeDimensional;
 using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.DirectX.X3DAudio;
 using Bardez.Projects.DirectX.XAudio2;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave;
+using Bardez.Projects.InfinityPlus1.Output.Audio.Renderers;
+using Bardez.Projects.Multimedia.MediaBase.Render.Audio;
 
 namespace Scratch
 {
     internal class XAudio2_reimp
     {
+        #region Constants
+        protected static readonly String AudioRiffFile = @"\Multi-Media\Audio\vaqueros02[1].wav";
+        #endregion
+
         internal void TestSomeXAudio2Stuff()
         {
-            String riffFile = @"\Multi-Media\Audio\vaqueros02[1].wav";
-
             Byte[] sampleData = null;
             WaveFormatEx format = null;
 
-            using (FileStream fs = File.Open(riffFile, FileMode.Open, FileAccess.Read))
+            using (FileStream fs = File.Open(XAudio2_reimp.AudioRiffFile, FileMode.Open, FileAccess.Read))
             {
                 WaveRiffFile wave = new WaveRiffFile();
                 wave.Read(fs);
@@ -77,12 +82,10 @@ namespace Scratch
 
         internal void XAudio2_ThreeeeeeDeeeeeeee_test()
         {
-            String riffFile = @"\Multi-Media\Audio\vaqueros02[1].wav";
-
             Byte[] sampleData = null;
             WaveFormatEx format = null;
 
-            using (FileStream fs = File.Open(riffFile, FileMode.Open, FileAccess.Read))
+            using (FileStream fs = File.Open(XAudio2_reimp.AudioRiffFile, FileMode.Open, FileAccess.Read))
             {
                 WaveRiffFile wave = new WaveRiffFile();
                 wave.Read(fs);
@@ -127,10 +130,10 @@ namespace Scratch
 
                 //set up X3DAudio
                 X3DAudio audio3D = new X3DAudio((UInt32)positions);
-                Listener x3daListener = new Listener();
+                Bardez.Projects.DirectX.X3DAudio.Listener x3daListener = new Bardez.Projects.DirectX.X3DAudio.Listener();
                 x3daListener.Position = listener;
 
-                Emitter x3daEmitter = new Emitter((UInt32)positions);
+                Bardez.Projects.DirectX.X3DAudio.Emitter x3daEmitter = new Bardez.Projects.DirectX.X3DAudio.Emitter((UInt32)positions);
                 x3daEmitter.Position = playing;
 
                 DspSettings settings = new DspSettings(format.NumberChannels, format.NumberChannels);
@@ -144,7 +147,7 @@ namespace Scratch
                 using (MasteringVoice master = xaudio2.CreateMasteringVoice(format.NumberChannels, format.SamplesPerSec, 0U, 0U))
                 {
                     //create a source voice; again, do not allow conversion
-                    using (SourceVoice source = xaudio2.CreateSourceVoice(format, XAudio2Interface.VoiceFlags.NoSampleRateConversion))
+                    using (SourceVoice source = xaudio2.CreateSourceVoice(format, 0U))
                     {
                         source.SetOutputVoices(new VoiceSendDescriptor[] { new VoiceSendDescriptor(0U, master) });
 
@@ -165,6 +168,35 @@ namespace Scratch
                         System.Threading.Thread.Sleep(ts);
                     }
                 }
+            }
+        }
+
+        internal void TestXAudio2IRenderer()
+        {
+            Byte[] sampleData = null;
+            WaveFormatEx format = null;
+
+            using (FileStream fs = File.Open(XAudio2_reimp.AudioRiffFile, FileMode.Open, FileAccess.Read))
+            {
+                WaveRiffFile wave = new WaveRiffFile();
+                wave.Read(fs);
+
+                sampleData = wave.GetWaveData();
+                format = wave.GetWaveFormat();
+            }
+
+            Int64 length = ((sampleData.Length * 1000) / format.SamplesPerSec) + 1;
+            TimeSpan ts = new TimeSpan(0, 0, 0, 0, Convert.ToInt32(length));
+
+            //chilling with my samples...
+            using (IAudioRenderer renderer = new XAudio2AudioRenderer())
+            {
+                renderer.Initialize(format, new SpeakerConfiguration(format.NumberChannels, format.ChannelMask), AudioRenderStyle.PreBuffered);
+                renderer.SubmitSampleData(sampleData);
+
+                //now begin playback. Wave is what? 22 seconds? so sleep until done.
+                renderer.StartRendering();
+                Thread.Sleep(ts);
             }
         }
     }
