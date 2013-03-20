@@ -37,7 +37,7 @@ namespace Bardez.Projects.BasicStructures.Win32.Audio
 		}
 
 		/// <summary>Positions of the audio channels</summary>
-        public SpeakerPositions ChannelMask { get; set; }
+        public override SpeakerPositions ChannelMask { get; set; }
 
 		/// <summary>Format identifier GUID</summary>
         public Guid SubFormat { get; set; }

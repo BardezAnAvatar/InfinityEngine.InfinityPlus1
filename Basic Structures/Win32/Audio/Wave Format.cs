@@ -26,6 +26,32 @@ namespace Bardez.Projects.BasicStructures.Win32.Audio
         #endregion
 
 
+        #region Properties
+        /// <summary>Exposes inferred channel mask based on the channel count.</summary>
+        /// <remarks>A data field later down the inheritance hierarchy has an actual data slot for this</remarks>
+        public virtual SpeakerPositions ChannelMask
+        {
+            get
+            {
+                SpeakerPositions pos = BasicStructures.Win32.Audio.SpeakerPositions.SPEAKER_ALL;
+
+                if (this.NumberChannels == 1)
+                    pos = BasicStructures.Win32.Audio.SpeakerPositions.SPEAKER_FRONT_CENTER;
+                else if (this.NumberChannels == 2)
+                    pos = BasicStructures.Win32.Audio.SpeakerPositions.SPEAKER_STEREO; //left & right
+                else
+                    pos = BasicStructures.Win32.Audio.SpeakerPositions.SPEAKER_ALL;
+
+                return pos;
+            }
+            set
+            {
+                throw new NotSupportedException("No data storage exists for this property unless using the WaveFormatExtensible data structure.");
+            }
+        }
+        #endregion
+
+
         #region Construction
         /// <summary>Default constructor</summary>
         public WaveFormat()
