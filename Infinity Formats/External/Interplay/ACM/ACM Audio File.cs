@@ -114,7 +114,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.ACM
         {
             WaveFormatEx waveEx = new WaveFormatEx();
 
-            waveEx.AverageBytesPerSec = this.AcmHeader.SampleRate * 2U /*sizeof(short)*/ * this.AcmHeader.ChannelsCount /* sizeof(usort) */;
+            waveEx.AverageBytesPerSec = this.AcmHeader.SampleRate * 2U /*sizeof(short)*/ * this.AcmHeader.ChannelsCount /* sizeof(ushort) */;
             waveEx.BitsPerSample = 16; /* sizeof(short) */
             waveEx.BlockAlignment = Convert.ToUInt16(2U * this.AcmHeader.ChannelsCount);
             waveEx.FormatTag = 1;   //1 for PCM
