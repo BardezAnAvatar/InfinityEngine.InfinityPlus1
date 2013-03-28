@@ -39,7 +39,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio.Renderers
         ///     I will release it when it is overwritten.
         ///     This may lead to unexpected behavior if it is *rapidly* set, which I do not expect to be the case.
         /// </remarks>
-        protected EffectParameterBase ReverbParameter;
+        protected IEffectParameter ReverbParameter;
 
         /// <summary>Explains the expected style of behavior for this audio renderer</summary>
         protected AudioRenderStyle Behavior;
