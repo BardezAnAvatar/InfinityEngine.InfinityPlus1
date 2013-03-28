@@ -5,9 +5,12 @@ using System.Text;
 using System.Threading;
 
 using Bardez.Projects.BasicStructures.ThreeDimensional;
+using Bardez.Projects.BasicStructures.Win32;
 using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.DirectX.X3DAudio;
 using Bardez.Projects.DirectX.XAudio2;
+using Bardez.Projects.DirectX.XAudio2.FX;
+using Bardez.Projects.DirectX.XAudio2.XAPO;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.RIFF.Wave;
 using Bardez.Projects.InfinityPlus1.Output.Audio.Renderers;
 using Bardez.Projects.Multimedia.MediaBase.Render.Audio;
@@ -17,7 +20,8 @@ namespace Scratch
     internal class XAudio2_reimp
     {
         #region Constants
-        protected static readonly String AudioRiffFile = @"\Multi-Media\Audio\vaqueros02[1].wav";
+        //protected static readonly String AudioRiffFile = @"\Multi-Media\Audio\vaqueros02[1].wav";
+        protected static readonly String AudioRiffFile = @"\Multi-Media\Audio\start [what is thy bidding].wav";
         #endregion
 
         internal void TestSomeXAudio2Stuff()
@@ -34,8 +38,7 @@ namespace Scratch
                 format = wave.GetWaveFormat();
             }
 
-            Int64 length = ((sampleData.Length * 1000) / format.SamplesPerSec) + 1;
-            TimeSpan ts = new TimeSpan(0, 0, 0, 0, Convert.ToInt32(length));
+            TimeSpan ts = this.GetSampleLength(sampleData, format);
 
             //using (FileStream dest = File.Open(String.Format("{0}.dump.raw", riffFile), FileMode.Create, FileAccess.Write))
             //{
@@ -94,8 +97,7 @@ namespace Scratch
                 format = wave.GetWaveFormat();
             }
 
-            Int64 length = ((sampleData.Length * 1000) / format.SamplesPerSec) + 1;
-            TimeSpan ts = new TimeSpan(0, 0, 0, 0, Convert.ToInt32(length));
+            TimeSpan ts = this.GetSampleLength(sampleData, format);
 
 
             //Apply Some vectors
@@ -171,6 +173,7 @@ namespace Scratch
             }
         }
 
+        /*
         internal void TestXAudio2IRenderer()
         {
             Byte[] sampleData = null;
@@ -184,9 +187,8 @@ namespace Scratch
                 sampleData = wave.GetWaveData();
                 format = wave.GetWaveFormat();
             }
-
-            Int64 length = ((sampleData.Length * 1000) / format.SamplesPerSec) + 1;
-            TimeSpan ts = new TimeSpan(0, 0, 0, 0, Convert.ToInt32(length));
+        
+            TimeSpan ts = this.GetSampleLength(sampleData, format);
 
             //chilling with my samples...
             using (IAudioRenderer renderer = new XAudio2AudioRenderer())
@@ -198,6 +200,87 @@ namespace Scratch
                 renderer.StartRendering();
                 Thread.Sleep(ts);
             }
+        }
+        */
+
+        internal void TestXAudio2Reverb()
+        {
+            Byte[] sampleData = null;
+            WaveFormatEx format = null;
+
+            using (FileStream fs = File.Open(XAudio2_reimp.AudioRiffFile, FileMode.Open, FileAccess.Read))
+            {
+                WaveRiffFile wave = new WaveRiffFile();
+                wave.Read(fs);
+
+                sampleData = wave.GetWaveData();
+                format = wave.GetWaveFormat();
+            }
+            
+            TimeSpan ts = this.GetSampleLength(sampleData, format);
+
+            //Create XAudio2
+            using (XAudio2Interface xaudio2 = XAudio2Interface.NewInstance())
+            {
+                UInt32 deviceCount = xaudio2.GetDeviceCount();
+
+                DeviceDetails[] devices = new DeviceDetails[deviceCount];
+                for (UInt32 index = 0; index < deviceCount; ++index)
+                    devices[index] = xaudio2.GetDeviceDetails(index);
+
+
+                //so now I have an interface with a lot of device details & format info.
+
+                //resample the rate for a reverb
+                UInt32 sampleRate = format.SamplesPerSec;
+                while (sampleRate < 20000)
+                    sampleRate *= 2;   //alt: shift right one bit
+
+                //Try to force the mastering voice to use a different sample rate
+                using (MasteringVoice master = xaudio2.CreateMasteringVoice(format.NumberChannels, sampleRate, 0U, 0U))
+                {
+                    EnvironmentalReverbEffect envReverbEffect = new EnvironmentalReverbEffect();
+                    EnvironmentalReverbParameters envReverbParams = EnvironmentalReverbParameters.SewerPipe;
+                    List<EffectDescriptor> effectChain = new List<EffectDescriptor>() { new EffectDescriptor(envReverbEffect, true, format.NumberChannels) };
+
+                    //create a submix for the reverb, using a recomputed sample rate
+                    using (SubmixVoice submix = xaudio2.CreateSubmixVoice(format.NumberChannels, sampleRate, 0U, 0U, new VoiceSendDescriptor[] { new VoiceSendDescriptor(0U, master) }))
+                    {
+                        //set the output sends for Submix
+                        submix.SetOutputVoices(new VoiceSendDescriptor[] { new VoiceSendDescriptor(0U, master) });
+                        ResultCode result = submix.SetEffectChain(effectChain);
+
+                        //create a source voice; again, do not allow conversion
+                        using (SourceVoice source = xaudio2.CreateSourceVoice(format, 0U))
+                        {
+                            source.SetOutputVoices(new VoiceSendDescriptor[] { new VoiceSendDescriptor(0U, submix) });
+                            submix.SetEffectParameters(0U, envReverbParams, 0U);
+
+                            //should be wired up. Try to submit data
+                            AudioBuffer buffer = new AudioBuffer(XAudio2Interface.VoiceFlags.EndOfStream, sampleData, 0, 0, 0, 0, 0, IntPtr.Zero);
+
+                            source.SubmitSourceBuffer(buffer, null);
+
+                            //now begin playback. Wave is what? 22 seconds? so sleep for 25
+
+                            source.Start();
+                            System.Threading.Thread.Sleep(ts);
+                        }
+                    }
+                }
+            }
+            
+            return; //just to give me a clue in the Lisp-like brace nightmare I've created
+        }
+
+        /// <summary>Gets the Length of the audio samples as a TimeSpan</summary>
+        /// <param name="sampleData">Sample day to analyze</param>
+        /// <param name="format">Wave format</param>
+        /// <returns>The length of the sample data</returns>
+        protected TimeSpan GetSampleLength(Byte[] sampleData, WaveFormatEx format)
+        {
+            Int64 length = ((sampleData.Length * 1000) / format.SamplesPerSec / format.NumberChannels / (format.BitsPerSample / 8)) + 1;
+            return new TimeSpan(0, 0, 0, 0, Convert.ToInt32(length));
         }
     }
 }
