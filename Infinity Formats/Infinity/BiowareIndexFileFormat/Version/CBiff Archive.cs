@@ -9,8 +9,8 @@ using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Version
 {
-    /// <summary>Represents a *.CBF archive for IWD, essentailly a BIFF inside a *.SAV file</summary>
-    public class CBiffArchive : IInfinityFormat, IBiff
+    /// <summary>Represents a *.CBF archive for IWD, essentially a BIFF inside a *.SAV file</summary>
+    public class CBiffArchive : IBiff
     {
         #region Fields
         /// <summary>BIFF archive of the data</summary>
