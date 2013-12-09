@@ -5,10 +5,10 @@ using System.Text;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common;
-using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PixelLocationTable.Component;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PackedLayeredTexture.Component;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PixelLocationTable.Version
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PackedLayeredTexture.Version
 {
     /// <summary>Represents a PLT file</summary>
     public class PixelTable : IInfinityFormat

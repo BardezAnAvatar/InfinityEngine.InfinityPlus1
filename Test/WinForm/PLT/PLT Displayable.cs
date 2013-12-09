@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PixelLocationTable.Manager;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PackedLayeredTexture.Manager;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.PLT
 {

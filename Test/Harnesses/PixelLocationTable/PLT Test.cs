@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PixelLocationTable.Version;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PackedLayeredTexture.Version;
 using Bardez.Projects.InfinityPlus1.Test;
 using Bardez.Projects.Utility;
 

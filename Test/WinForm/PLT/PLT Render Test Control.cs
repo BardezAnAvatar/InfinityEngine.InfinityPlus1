@@ -6,8 +6,8 @@ using System.Threading;
 using System.Windows.Forms;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PixelLocationTable.Manager;
-using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PixelLocationTable.Version;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PackedLayeredTexture.Manager;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PackedLayeredTexture.Version;
 using Bardez.Projects.InfinityPlus1.Test.WinForm;
 using Bardez.Projects.Multimedia.MediaBase.Data.Pixels;
 using Bardez.Projects.Multimedia.MediaBase.Frame.Image;

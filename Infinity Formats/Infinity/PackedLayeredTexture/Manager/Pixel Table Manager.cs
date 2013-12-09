@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PixelLocationTable.Component;
-using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PixelLocationTable.Version;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PackedLayeredTexture.Component;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PackedLayeredTexture.Version;
 using Bardez.Projects.Multimedia.MediaBase.Data.Pixels;
 using Bardez.Projects.Multimedia.MediaBase.Data.Pixels.Enums;
 using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PixelLocationTable.Manager
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.PackedLayeredTexture.Manager
 {
     /// <summary>Manager class that exposes the IImage formats for a PLT file, since its palette must be set, and it does not store a palette</summary>
     public class PixelTableManager : IImage
