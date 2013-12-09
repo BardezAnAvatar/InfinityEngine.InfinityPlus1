@@ -122,7 +122,7 @@
       <Project>{3EE5137B-C08F-4337-B089-E20A502C2A0C}</Project>
       <Name>Infinity Formats</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Infinity Logic\Infinity Logic.csproj">
+    <ProjectReference Include="..\Game Logic\Infinity Logic\Infinity Logic.csproj">
       <Project>{5BE80D35-FD72-4814-954D-0E5BDB5CC34B}</Project>
       <Name>Infinity Logic</Name>
     </ProjectReference>

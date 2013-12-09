@@ -107,11 +107,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Infinity Formats\Infinity Formats.csproj">
+    <ProjectReference Include="..\..\Infinity Formats\Infinity Formats.csproj">
       <Project>{3EE5137B-C08F-4337-B089-E20A502C2A0C}</Project>
       <Name>Infinity Formats</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Infinity Logic\Infinity Logic.csproj">
+    <ProjectReference Include="..\..\Game Logic\Infinity Logic\Infinity Logic.csproj">
       <Project>{5BE80D35-FD72-4814-954D-0E5BDB5CC34B}</Project>
       <Name>Infinity Logic</Name>
     </ProjectReference>
@@ -119,7 +119,7 @@
       <Project>{227032EB-05D9-4BD3-A587-6B07C538F7B8}</Project>
       <Name>Tool Application Controllers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utility\Utility.csproj">
+    <ProjectReference Include="..\..\Utility\Utility.csproj">
       <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
       <Name>Utility</Name>
     </ProjectReference>

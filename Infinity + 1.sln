@@ -79,13 +79,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factories", "Factories\Fact
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mod Tools", "Mod Tools", "{7947C2F2-4B8F-43D0-8589-C6E37A8B6A7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Approaching Infinity", "Approaching Infinity\Approaching Infinity.csproj", "{931BC78E-E697-42EB-8CD0-711B2377E228}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Approaching Infinity", "Mod Tools\Approaching Infinity\Approaching Infinity.csproj", "{931BC78E-E697-42EB-8CD0-711B2377E228}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game Logic", "Game Logic", "{631A75AC-221C-4428-B217-AD233A91499A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infinity Logic", "Infinity Logic\Infinity Logic.csproj", "{5BE80D35-FD72-4814-954D-0E5BDB5CC34B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infinity Logic", "Game Logic\Infinity Logic\Infinity Logic.csproj", "{5BE80D35-FD72-4814-954D-0E5BDB5CC34B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tool Application Controllers", "Tool Application Controllers\Tool Application Controllers.csproj", "{227032EB-05D9-4BD3-A587-6B07C538F7B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tool Application Controllers", "Mod Tools\Tool Application Controllers\Tool Application Controllers.csproj", "{227032EB-05D9-4BD3-A587-6B07C538F7B8}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
