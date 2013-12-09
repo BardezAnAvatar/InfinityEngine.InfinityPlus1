@@ -11,8 +11,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Basic
         /// <summary>ZString string being stored</summary>
         public String Value
         {
-            get { return GetZString(this.Source); }
-            set { this.Source = GetZString(value); }
+            get { return ZString.GetZString(this.Source); }
+            set { this.Source = ZString.GetZString(value); }
         }
 
         /// <summary>Truncates the string at the first found NULL character</summary>
@@ -36,6 +36,18 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Basic
             }
 
             return output;
+        }
+
+        /// <summary>NULL-terminates the input string and returns it</summary>
+        /// <param name="input">Input string to null-terminate</param>
+        /// <returns>The new ZString</returns>
+        public static ZString FromString(String input)
+        {
+            ZString zstring = new ZString();
+
+            zstring.Source = String.Concat(input, Char.MinValue);
+
+            return zstring;
         }
 
         /// <summary>Overridden ToString() representation of the String</summary>
