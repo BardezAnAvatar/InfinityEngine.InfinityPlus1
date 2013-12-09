@@ -10,7 +10,6 @@ using Bardez.Projects.DirectX.Direct2D;
 using Bardez.Projects.Multimedia.MediaBase.Data.Pixels;
 using Bardez.Projects.Multimedia.MediaBase.Data.Pixels.Enums;
 using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
-using Bardez.Projects.Multimedia.MediaBase.Video.Pixels;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Output.Visual

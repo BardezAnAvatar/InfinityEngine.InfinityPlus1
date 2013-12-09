@@ -377,6 +377,11 @@ namespace Bardez
 					/// <param name="solidColorBrush">When this method returns, contains a pointer to a pointer to the new brush. This parameter is passed uninitialized.</param>
 					/// <returns>S_OK on success, otherwise an error code.</returns>
 					virtual ResultCode CreateSolidColorBrush(ColorF^ color, [System::Runtime::InteropServices::Out] SolidColorBrush^ %solidColorBrush);
+					
+					/// <summary>Creates a new SolidColorBrush that has the specified color and opacity.</summary>
+					/// <param name="color">The red, green, blue, and alpha values of the brush's color.</param>
+					/// <returns>When this method returns, contains a pointer to a pointer to the new brush.</returns>
+					virtual SolidColorBrush^ CreateSolidColorBrush(ColorF^ color);
 
 					/// <summary>Draws the specified bitmap after scaling it to the size of the specified rectangle.</summary>
 					/// <param name="bitmap">The bitmap to render.</param>

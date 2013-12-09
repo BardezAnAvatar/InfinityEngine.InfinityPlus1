@@ -601,6 +601,23 @@ ResultCode RenderTarget::CreateSolidColorBrush(ColorF^ color, [System::Runtime::
 	return result;
 }
 
+/// <summary>Creates a new SolidColorBrush that has the specified color and opacity.</summary>
+/// <param name="color">The red, green, blue, and alpha values of the brush's color.</param>
+/// <returns>When this method returns, contains a pointer to a pointer to the new brush.</returns>
+SolidColorBrush^ RenderTarget::CreateSolidColorBrush(ColorF^ color)
+{
+	//output pointer
+	ID2D1SolidColorBrush* sldBrshPtr;
+	ResultCode result = (ResultCode)(this->RenderPtr->CreateSolidColorBrush(color->ToUnmanaged(), &sldBrshPtr));
+
+	if (result != ResultCode::Success_OK)
+		throw gcnew System::ApplicationException(System::String::Format("Encountered an error when creating a Solid Color Brush on the rendering target: received ResultCode of {0} with a label of \"{1}\".", (System::Int32)(result), result.ToString()));
+
+	SolidColorBrush^ solidColorBrush = gcnew SolidColorBrush(sldBrshPtr);
+
+	return solidColorBrush;
+}
+
 /// <summary>Draws the specified bitmap after scaling it to the size of the specified rectangle.</summary>
 /// <param name="bitmap">The bitmap to render.</param>
 /// <param name="destinationRectangle">

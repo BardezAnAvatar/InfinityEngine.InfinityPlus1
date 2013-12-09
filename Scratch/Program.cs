@@ -14,7 +14,7 @@ namespace Scratch
             //test.TestSomeXAudio2Stuff();
             //test.XAudio2_ThreeeeeeDeeeeeeee_test();
             //test.TestXAudio2IRenderer();
-            test.TestXAudio2Reverb();
+            test.TestXAudio2DirectPlusReverb();
         }
     }
 }

@@ -8,7 +8,7 @@
     <ProjectGuid>{3AF99109-1895-41C3-A070-1D004E5A40EB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bardez.Projects.InfinityPlus1.Factories</RootNamespace>
+    <RootNamespace>Bardez.Projects.Factories</RootNamespace>
     <AssemblyName>Factories</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -38,9 +38,14 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPixelConverter Factory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Media Base\Media Base.csproj">
+      <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
+      <Name>Media Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Native Code\ffmpeg\Lib AV\Lib AV.vcxproj">
       <Project>{1F9B2E1A-E000-4076-8D38-D995A6A3922C}</Project>
       <Name>Lib AV</Name>

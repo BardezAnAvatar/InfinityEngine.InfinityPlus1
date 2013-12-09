@@ -21,7 +21,10 @@ namespace Scratch
     {
         #region Constants
         //protected static readonly String AudioRiffFile = @"\Multi-Media\Audio\vaqueros02[1].wav";
-        protected static readonly String AudioRiffFile = @"\Multi-Media\Audio\start [what is thy bidding].wav";
+        //protected static readonly String AudioRiffFile = @"\Multi-Media\Audio\start [what is thy bidding].wav";
+        //protected static readonly String AudioRiffFile = @"\Multi-Media\Audio\misc\LRMonoPhaset4.wav";
+        protected static readonly String AudioRiffFile = @"\Multi-Media\Audio\Wave Samples\thisIsATest.wav";
+        //protected static readonly String AudioRiffFile = @"\Multi-Media\Audio\Wave Samples\8_Channel_ID.wav";   //won't play back
         #endregion
 
         internal void TestSomeXAudio2Stuff()
@@ -240,7 +243,8 @@ namespace Scratch
                 using (MasteringVoice master = xaudio2.CreateMasteringVoice(format.NumberChannels, sampleRate, 0U, 0U))
                 {
                     EnvironmentalReverbEffect envReverbEffect = new EnvironmentalReverbEffect();
-                    EnvironmentalReverbParameters envReverbParams = EnvironmentalReverbParameters.SewerPipe;
+                    ReverbSettings reverb = ReverbSettings.Presets.EAX.City;
+                    EnvironmentalReverbParameters envReverbParams = new EnvironmentalReverbParameters(reverb);
                     List<EffectDescriptor> effectChain = new List<EffectDescriptor>() { new EffectDescriptor(envReverbEffect, true, format.NumberChannels) };
 
                     //create a submix for the reverb, using a recomputed sample rate
@@ -273,13 +277,85 @@ namespace Scratch
             return; //just to give me a clue in the Lisp-like brace nightmare I've created
         }
 
+        internal void TestXAudio2DirectPlusReverb()
+        {
+            Byte[] sampleData = null;
+            WaveFormatEx format = null;
+
+            using (FileStream fs = File.Open(XAudio2_reimp.AudioRiffFile, FileMode.Open, FileAccess.Read))
+            {
+                WaveRiffFile wave = new WaveRiffFile();
+                wave.Read(fs);
+
+                sampleData = wave.GetWaveData();
+                format = wave.GetWaveFormat();
+            }
+
+            TimeSpan ts = this.GetSampleLength(sampleData, format);
+
+            //Create XAudio2
+            using (XAudio2Interface xaudio2 = XAudio2Interface.NewInstance())
+            {
+                UInt32 deviceCount = xaudio2.GetDeviceCount();
+
+                DeviceDetails[] devices = new DeviceDetails[deviceCount];
+                for (UInt32 index = 0; index < deviceCount; ++index)
+                    devices[index] = xaudio2.GetDeviceDetails(index);
+
+
+                //so now I have an interface with a lot of device details & format info.
+
+                //resample the rate for a reverb
+                UInt32 sampleRate = format.SamplesPerSec;
+                while (sampleRate < 20000)
+                    sampleRate *= 2;   //alt: shift right one bit
+
+                //Try to force the mastering voice to use a different sample rate
+                using (MasteringVoice master = xaudio2.CreateMasteringVoice(format.NumberChannels, sampleRate, 0U, 0U))
+                {
+                    EnvironmentalReverbEffect envReverbEffect = new EnvironmentalReverbEffect();
+                    ReverbSettings reverb = ReverbSettings.Presets.EAX.Dizzy;
+                    EnvironmentalReverbParameters envReverbParams = new EnvironmentalReverbParameters(reverb);
+                    List<EffectDescriptor> effectChain = new List<EffectDescriptor>() { new EffectDescriptor(envReverbEffect, true, format.NumberChannels) };
+
+                    //create a submix for the reverb, using a recomputed sample rate
+                    using (SubmixVoice submix = xaudio2.CreateSubmixVoice(format.NumberChannels, sampleRate))
+                    {
+                        //set the output sends for Submix
+                        submix.SetOutputVoices(new VoiceSendDescriptor[] { new VoiceSendDescriptor(0U, master) });
+                        ResultCode result = submix.SetEffectChain(effectChain);
+
+                        //create a source voice; again, do not allow conversion
+                        using (SourceVoice source = xaudio2.CreateSourceVoice(format, 0U))
+                        {
+                            //set two outputs. One direct, one reverb
+                            source.SetOutputVoices(new VoiceSendDescriptor[] { new VoiceSendDescriptor(0U, submix), new VoiceSendDescriptor(0U, master) });
+                            submix.SetEffectParameters(0U, envReverbParams, 0U);
+
+                            //should be wired up. Try to submit data
+                            AudioBuffer buffer = new AudioBuffer(XAudio2Interface.VoiceFlags.EndOfStream, sampleData, 0, 0, 0, 0, 0, IntPtr.Zero);
+
+                            source.SubmitSourceBuffer(buffer, null);
+
+                            //now begin playback. Wave is what? 22 seconds? so sleep for 25
+
+                            source.Start();
+                            System.Threading.Thread.Sleep(ts);
+                        }
+                    }
+                }
+            }
+
+            return; //just to give me a clue in the Lisp-like brace nightmare I've created
+        }
+
         /// <summary>Gets the Length of the audio samples as a TimeSpan</summary>
         /// <param name="sampleData">Sample day to analyze</param>
         /// <param name="format">Wave format</param>
         /// <returns>The length of the sample data</returns>
         protected TimeSpan GetSampleLength(Byte[] sampleData, WaveFormatEx format)
         {
-            Int64 length = ((sampleData.Length * 1000) / format.SamplesPerSec / format.NumberChannels / (format.BitsPerSample / 8)) + 1;
+            Int64 length = ((Convert.ToInt64(sampleData.Length) * 1000) / format.SamplesPerSec / format.NumberChannels / (format.BitsPerSample / 8)) + 1;
             return new TimeSpan(0, 0, 0, 0, Convert.ToInt32(length));
         }
     }

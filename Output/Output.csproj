@@ -78,7 +78,10 @@
   <ItemGroup>
     <Compile Include="Audio\Audio Output.cs" />
     <Compile Include="Audio\Renderers\Raw Sample File Writer Audio Renderer.cs" />
-    <Compile Include="Audio\Renderers\XAudio2AudioRenderer.cs" />
+    <Compile Include="Audio\Renderers\XAudio2\XAudio2 Audio Renderer.cs" />
+    <Compile Include="Audio\Renderers\XAudio2\Direct Voice Graph.cs" />
+    <Compile Include="Audio\Renderers\XAudio2\IVoiceGraph.cs" />
+    <Compile Include="Audio\Renderers\XAudio2\Reverb Voice Graph.cs" />
     <Compile Include="Audio\XAudio2 Source Voice Reference.cs" />
     <Compile Include="Audio\Enums\XAudio2VoiceState.cs" />
     <Compile Include="Audio\XAudio2 Output.cs" />
@@ -91,6 +94,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Visual\Direct2D Resource Manager.cs" />
+    <Compile Include="Visual\Renderers\Direct2D\Direct2D Renderer User Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Visual\Visual Render Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -100,6 +106,10 @@
     <ProjectReference Include="..\Basic Structures\Basic Structures.csproj">
       <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
       <Name>Basic Structures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Factories\Factories.csproj">
+      <Project>{3AF99109-1895-41C3-A070-1D004E5A40EB}</Project>
+      <Name>Factories %28Factories\Factories%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\Media Base\Media Base.csproj">
       <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
