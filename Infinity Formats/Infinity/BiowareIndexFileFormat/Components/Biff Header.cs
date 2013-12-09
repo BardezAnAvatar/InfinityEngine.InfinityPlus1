@@ -28,13 +28,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
 
 
         #region Fields
-        /// <summary>This proerty exposes the count of non-tileset resources in this archive.</summary>
+        /// <summary>This property exposes the count of non-tileset resources in this archive.</summary>
         public Int32 CountResource { get; set; }
 
-        /// <summary>This proerty exposes the count of tileset resources in this archive.</summary>
+        /// <summary>This property exposes the count of tileset resources in this archive.</summary>
         public Int32 CountTileset { get; set; }
 
-        /// <summary>This proerty exposes the offset from the beginning of the file to the non-tileset resources entries in this archive.</summary>
+        /// <summary>This property exposes the offset from the beginning of the file to the non-tileset resources entries in this archive.</summary>
         public Int32 OffsetResource { get; set; }
         #endregion
 
