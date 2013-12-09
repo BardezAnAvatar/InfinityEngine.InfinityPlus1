@@ -70,6 +70,7 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -87,6 +88,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Control Objects\Video Coder 16 supplied logic.cs" />
     <Compile Include="Control Objects\Video Coder 8 supplied logic.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="Test Classes\External Formats\RIFF\Component\RiffFile Test.cs" />
     <Compile Include="Test Classes\External Formats\Image\Mathematics\DCT\DCT Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,6 +96,10 @@
     <Compile Include="Test Classes\Infinity Formats\External\Interplay\MVE\Component\Coding\VideoCoding16BitTest.cs" />
     <Compile Include="Test Classes\Infinity Formats\External\Interplay\MVE\Component\Coding\VideoCoding8BitTest.cs" />
     <Compile Include="Test Classes\External Formats\RIFF\Wave\WaveRiffFile Test.cs" />
+    <Compile Include="Test Classes\Infinity Formats\Infinity\Common\Resource Locator Test.cs" />
+    <Compile Include="Test Classes\Infinity Logic\Assets\Asset Locator Test.cs" />
+    <Compile Include="Test Classes\Infinity Logic\Assets\Asset Reference Test.cs" />
+    <Compile Include="Test Classes\Infinity Logic\Assets\Infinity Asset Manager Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Basic Formats\Basic Formats.csproj">
@@ -115,6 +121,10 @@
     <ProjectReference Include="..\Infinity Formats\Infinity Formats.csproj">
       <Project>{3EE5137B-C08F-4337-B089-E20A502C2A0C}</Project>
       <Name>Infinity Formats</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infinity Logic\Infinity Logic.csproj">
+      <Project>{5BE80D35-FD72-4814-954D-0E5BDB5CC34B}</Project>
+      <Name>Infinity Logic</Name>
     </ProjectReference>
     <ProjectReference Include="..\Media Base\Media Base.csproj">
       <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
@@ -161,6 +171,13 @@
   <ItemGroup>
     <Content Include="Test Files\External Formats\RIFF\Component\Riff Chunk FourCC Test.xml" />
     <Content Include="Test Files\External Formats\RIFF\Component\Riff File FourCC Test.xml" />
+    <Content Include="Test Files\Infinity Formats\Infinity\Common\Resource Locator Test Data.xml" />
+    <Content Include="Test Files\Infinity Logic\Asset\Asset Locator.xml" />
+    <Content Include="Test Files\Infinity Logic\Asset\Asset Reference.xml" />
+    <Content Include="Test Files\Infinity Logic\Resource Mapper\Application Directories.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Shadow Include="Test References\Infinity Logic.accessor" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
