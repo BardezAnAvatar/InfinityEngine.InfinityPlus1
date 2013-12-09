@@ -9,7 +9,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
 {
     /// <summary>
     ///     This class is an abstract entity for shared members between the
-    ///     tileset resource1 entry and the regular resource1 entry.
+    ///     tileset resource entry and the regular resource entry.
     /// </summary>
     public abstract class Biff1FileEntry : IInfinityFormat
     {
