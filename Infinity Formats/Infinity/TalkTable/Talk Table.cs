@@ -6,15 +6,16 @@ using System.Text;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TextLocationKey
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable
 {
     /// <summary>Class representing the contents of a TLK file</summary>
-    public class TextLocationKey : IInfinityFormat
+    public class TalkTable : IInfinityFormat
     {
         #region Protected Members
         /// <summary>An array of stringReference objects</summary>
         protected List<TextLocationKeyStringReference> stringReferences;
         #endregion
+
 
         #region Public Properties
         /// <summary>This contains the header information of the TLK file</summary>
@@ -42,13 +43,14 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TextLocationKey
         public Boolean StoreStringsInMemory { get; set; }
         #endregion
 
+
         #region Constructor(s)
         /// <summary>Default constructor</summary>
-        public TextLocationKey() : this(true) { }
+        public TalkTable() : this(true) { }
 
         /// <summary>Constructor setting storeStringsInMemory</summary>
         /// <param name="storeInMemory">Boolean indicating whether or not to store strings in memory when TLK file is read</param>
-        public TextLocationKey(Boolean storeInMemory)
+        public TalkTable(Boolean storeInMemory)
         {
             this.stringReferences = null;
             this.StoreStringsInMemory = storeInMemory;
@@ -58,8 +60,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TextLocationKey
         public void Initialize()
         {
             this.stringReferences = new List<TextLocationKeyStringReference>();
+            this.Header = new TextLocationKeyHeader();
         }
         #endregion
+
 
         #region IO method implemetations
         /// <summary>This public method reads file format from the output stream. Reads the whole structure.</summary>
@@ -99,6 +103,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TextLocationKey
             for (Int32 i = 0; i < this.Header.StringReferenceCount; ++i)
             {
                 TextLocationKeyStringReference strref = new TextLocationKeyStringReference(this.Header.CultureReference);
+                strref.Initialize();
                 strref.ReadStringReferenceEntry(input);
                 stringReferences.Add(strref);
             }
@@ -142,6 +147,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TextLocationKey
         }
         #endregion
 
+
         #region Public Methods
         /// <summary>Adds a String Regerence to the TLK file</summary>
         /// <param name="StringReference">String reference to add to the TLK file</param>
@@ -154,9 +160,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TextLocationKey
 
         /// <summary>This public method copies all relevant data and returns it in an identical, separate instance of a TextLocationKey object</summary>
         /// <returns>A TextLocationKey clone object</returns>
-        public TextLocationKey Clone()
+        public TalkTable Clone()
         {
-            TextLocationKey retval = new TextLocationKey();
+            TalkTable retval = new TalkTable();
             retval.Header = this.Header;
             retval.StoreStringsInMemory = this.StoreStringsInMemory;
             retval.stringReferences = new List<TextLocationKeyStringReference>(this.stringReferences);
@@ -164,6 +170,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TextLocationKey
             return retval;
         }
         #endregion
+
 
         #region Overridden Methods
         /// <summary>This method will write the entire friggin' TLK file to a String builder and return it</summary>
@@ -213,26 +220,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TextLocationKey
             }
 
             return builder.ToString();
-        }
-        #endregion
-
-        #region Protected Methods
-        /// <summary>This protected method will read a specific string reference from the TLK file specified in this object</summary>
-        /// <param name="stringReferenceIndex">Integer representing the stringreference index that needs to be read.</param>
-        [Obsolete("Deprecated code from reading strings independently")]
-        protected void ReadStringReferenceFromTLK(Int32 stringReferenceIndex)
-        {
-            if (stringReferenceIndex < stringReferences.Count)
-            {
-                //use a "using" block to dispose of the stream
-                //using (Stream fileStream = ReusableIO.OpenFile(this.TlkPath))
-                using (Stream fileStream = ReusableIO.OpenFile(String.Empty))
-                {
-                    TextLocationKeyStringReference strref = stringReferences[stringReferenceIndex];
-                    strref.ReadStringReferenced(fileStream, this.Header.StringsReferenceOffset);    //read
-                    stringReferences[stringReferenceIndex] = strref;                                //re-assign
-                }
-            }
         }
         #endregion
     }

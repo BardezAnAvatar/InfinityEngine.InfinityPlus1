@@ -7,7 +7,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TextLocationKey
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable
 {
     /// <summary>This public struct is the entry for a string reference within the TLK file</summary>
     /// <remarks>
@@ -71,6 +71,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TextLocationKey
         public String CultureCode { get; set; }
         #endregion
 
+
         #region Consruction
         /// <summary>Localization constructor</summary>
         /// <param name="cultureCode">String representing the culture code to use when reading strings</param>
@@ -86,6 +87,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TextLocationKey
             this.SoundResourceReference = new ResourceReference();
         }
         #endregion
+
 
         #region IO method implemetations
         /// <summary>This public method reads file format from the output stream. Reads the whole structure.</summary>
@@ -126,6 +128,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TextLocationKey
             ReusableIO.WriteInt32ToStream(this.StringLength, output);
         }
         #endregion
+
 
         #region Public Methods
         /// <summary>This method reads a fullString reference</summary>

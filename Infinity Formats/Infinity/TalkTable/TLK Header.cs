@@ -6,7 +6,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TextLocationKey
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable
 {
     /// <summary>This struct is the header to a dialog.tlk file</summary>
     /// <remarks>
@@ -80,17 +80,15 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TextLocationKey
         /// <param name="input">Stream to read from</param>
         public override void ReadBody(Stream input)
         {
-            Byte[] buffer = ReusableIO.BinaryRead(input, 18);   //header buffer
+            //InfinityFormat should have read the signature and version.
+            //In all Infinity Engine cases the signature should be 'TLK '.
+            //In all Infinity Engine cases the version should be 'V1  '.
 
-            //In all Infinity Engine cases it should be 'TLK '.
-            this.signature = ReusableIO.ReadStringFromByteArray(buffer, 0, CultureConstants.CultureCodeEnglish, 4);
+            Byte[] header = ReusableIO.BinaryRead(input, TextLocationKeyHeader.StructSize - 8); //header buffer
 
-            //In all Infinity Engine cases it should be 'V1  '.
-            this.version = ReusableIO.ReadStringFromByteArray(buffer, 4, CultureConstants.CultureCodeEnglish, 4);
-
-            this.languageID = ReusableIO.ReadInt16FromArray(buffer, 8);
-            this.StringReferenceCount = ReusableIO.ReadInt32FromArray(buffer, 10);
-            this.StringsReferenceOffset = ReusableIO.ReadInt32FromArray(buffer, 14);
+            this.languageID = ReusableIO.ReadInt16FromArray(header, 0);
+            this.StringReferenceCount = ReusableIO.ReadInt32FromArray(header, 2);
+            this.StringsReferenceOffset = ReusableIO.ReadInt32FromArray(header, 6);
         }
 
         /// <summary>This public method writes the header to an output stream</summary>
