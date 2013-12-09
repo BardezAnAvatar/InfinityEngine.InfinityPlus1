@@ -96,10 +96,10 @@
     <Compile Include="Harnesses\Character\Character 1 Test.cs" />
     <Compile Include="Harnesses\Character\Character 2.2 Test.cs" />
     <Compile Include="Harnesses\Character\Character 9 Test.cs" />
-    <Compile Include="Harnesses\ChitinKey\ChitinKey1BifEntry.cs" />
-    <Compile Include="Harnesses\ChitinKey\ChitinKey1HeaderTest.cs" />
-    <Compile Include="Harnesses\ChitinKey\ChitinKey1ResourceEntryTest.cs" />
-    <Compile Include="Harnesses\ChitinKey\ChitinKey1Test.cs" />
+    <Compile Include="Harnesses\KeyTable\KeyTable1BifEntry.cs" />
+    <Compile Include="Harnesses\KeyTable\KeyTable1HeaderTest.cs" />
+    <Compile Include="Harnesses\KeyTable\KeyTable1ResourceEntryTest.cs" />
+    <Compile Include="Harnesses\KeyTable\KeyTable1Test.cs" />
     <Compile Include="Harnesses\Creature\Creature 1 Test.cs" />
     <Compile Include="Harnesses\Creature\Creature 1.2 Test.cs" />
     <Compile Include="Harnesses\Creature\Creature 2.2 Test.cs" />
