@@ -16,12 +16,16 @@ namespace Bardez.Projects.Configuration.Ini
     /// </remarks>
     public class IniConfiguration
     {
+        #region Fields
         /// <summary>List of sections</summary>
         protected List<IniSection> sections;
 
         /// <summary>Culture expected to read ini files from</summary>
         protected CultureInfo culture;
+        #endregion
 
+
+        #region Properties
         /// <summary>List of sections</summary>
         public List<IniSection> SectionsList
         {
@@ -41,6 +45,8 @@ namespace Bardez.Projects.Configuration.Ini
         {
             get { return this.NormalizeSections(); }
         }
+        #endregion
+
 
         #region Construction
         /// <summary>Default constructor</summary>
@@ -79,6 +85,7 @@ namespace Bardez.Projects.Configuration.Ini
             this.sections = new List<IniSection>();
         }
         #endregion
+
 
         #region Read
         /// <summary>Reads the *.ini file from the input stream</summary>
@@ -161,6 +168,8 @@ namespace Bardez.Projects.Configuration.Ini
         }
         #endregion
 
+
+        #region Command & Control
         /// <summary>Normalizes the underlaying sections and Line items to a dictionary of IniPropertyLines</summary>
         /// <returns>A dictionary of IniPropertyLines</returns>
         public Dictionary<String, Dictionary<String, IniPropertyLine>> NormalizeSections()
@@ -183,8 +192,10 @@ namespace Bardez.Projects.Configuration.Ini
 
             return dict;
         }
+        #endregion
 
 
+        #region Static methods
         /// <summary>Determines if the line should be parsed as a comment</summary>
         /// <param name="line">String to be evaluated</param>
         /// <returns>A Boolean indicating whether the line looks like a comment</returns>
@@ -226,5 +237,6 @@ namespace Bardez.Projects.Configuration.Ini
 
             return section;
         }
+        #endregion
     }
 }
