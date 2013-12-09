@@ -25,6 +25,15 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
     /// </remarks>
     public class Biff1TilesetEntry : Biff1FileEntry
     {
+        #region Constants
+        /// <summary>Represents the size of this structure on disk</summary>
+        public const Int32 StructSize = 20;
+
+        /// <summary>Magic precomputed number representing a 4-Byte 256 palette + 64*64 palette references</summary>
+        public static readonly UInt32 TileSize = 5120;
+        #endregion
+
+
         #region Fields
         /// <summary>Defines the count of tiles within the resource data.</summary>
         public UInt32 CountTile { get; set; }
@@ -44,7 +53,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         #endregion
 
 
-
         #region IInfinityFormat I/O methods
         /// <summary>This public method reads file format data structure from the input stream, after the signature has already been read.</summary>
         /// <param name="input">Stream object from which to read from</param>
@@ -54,7 +62,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
 
             Byte[] buffer = ReusableIO.BinaryRead(input, 20);   //data buffer
 
-            this.ResourceLocator.Locator = ReusableIO.ReadInt32FromArray(buffer, 0x0);
+            this.ResourceLocator.Locator = ReusableIO.ReadUInt32FromArray(buffer, 0x0);
             this.OffsetResource = ReusableIO.ReadInt32FromArray(buffer, 0x4);
             this.CountTile = ReusableIO.ReadUInt32FromArray(buffer, 0x8);
             this.SizeTile = ReusableIO.ReadUInt32FromArray(buffer, 0xC);
@@ -66,7 +74,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         /// <param name="output">Stream object into which to write to</param>
         public override void Write(Stream output)
         {
-            ReusableIO.WriteInt32ToStream(this.ResourceLocator.Locator, output);
+            ReusableIO.WriteUInt32ToStream(this.ResourceLocator.Locator, output);
             ReusableIO.WriteInt32ToStream(this.OffsetResource, output);
             ReusableIO.WriteUInt32ToStream(this.CountTile, output);
             ReusableIO.WriteUInt32ToStream(this.SizeTile, output);

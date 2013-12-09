@@ -23,6 +23,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
     /// </remarks>
     public class Biff1ResourceEntry : Biff1FileEntry
     {
+        #region Constants
+        /// <summary>Represents the size of this structure on disk</summary>
+        public const Int32 StructSize = 16;
+        #endregion
+
+
         #region Fields
         /// <summary>This property exposes the length of the resource1 data entry.</summary>
         public override UInt32 SizeResource { get; set; }
@@ -38,7 +44,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
 
             Byte[] buffer = ReusableIO.BinaryRead(input, 16);   //data buffer
 
-            this.ResourceLocator.Locator = ReusableIO.ReadInt32FromArray(buffer, 0x0);
+            this.ResourceLocator.Locator = ReusableIO.ReadUInt32FromArray(buffer, 0x0);
             this.OffsetResource = ReusableIO.ReadInt32FromArray(buffer, 0x4);
             this.SizeResource = ReusableIO.ReadUInt32FromArray(buffer, 0x8);
             this.TypeResource = (ResourceType)ReusableIO.ReadInt16FromArray(buffer, 0xC);
@@ -49,7 +55,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         /// <param name="output">Stream object into which to write to</param>
         public override void Write(Stream output)
         {
-            ReusableIO.WriteInt32ToStream(this.ResourceLocator.Locator, output);
+            ReusableIO.WriteUInt32ToStream(this.ResourceLocator.Locator, output);
             ReusableIO.WriteInt32ToStream(this.OffsetResource, output);
             ReusableIO.WriteUInt32ToStream(this.SizeResource, output);
             ReusableIO.WriteInt16ToStream((Int16)this.TypeResource, output);
