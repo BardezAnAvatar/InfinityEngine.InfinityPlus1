@@ -54,7 +54,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
         public override void Initialize()
         {
             base.Initialize();
-            this.MapImage = new ResourceReference(ResourceType.Mos);
+            this.MapImage = new ResourceReference(ResourceType.Mosaic);
         }
         #endregion
 
