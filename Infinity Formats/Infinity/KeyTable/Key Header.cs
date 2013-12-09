@@ -7,7 +7,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 using Bardez.Projects.Utility;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
 {
     /// <summary>This class is the header to a chitin.key file</summary>
     /// <remarks>
@@ -20,6 +20,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
     ///     0x000c 	    4 (dword) 	        Count of resource1 entries
     ///     0x0010 	    4 (dword) 	        Offset (from start of file) to BIF entries
     ///     0x0014 	    4 (dword) 	        Offset (from start of file) to resource1 entries
+    ///     
+    ///     One astonishingly interesting gem I came across while reading the Aurora Engine devlopers' documents is that the Aurora Engine
+    ///     insists that it also uses Key version 1. The reason that this is interesting is that BioWare claims this format is consistent.
+    ///     Well, with Infinity, the value at 0x8 is always 0x18, immediately after this header. Aurora's key indicates that at this offset, there is an
+    ///     addtional 40 bytes, 4 for the build years since 1900, 4 for the days since january 1, and 32 reserved bytes; if this format was
+    ///     in fact the same, then they just overwrote these values at 0x18 when generating the key file, [or BioWare could not version anything properly ;)]
     /// </remarks>
     public class ChitinKeyHeader : InfinityFormat, IDeepCloneable
     {

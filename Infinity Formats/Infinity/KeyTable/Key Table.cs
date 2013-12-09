@@ -8,10 +8,10 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.Utility;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
 {
-    /// <summary>This class is a representation of the Chitin.key file</summary>
-    public class ChitinKey1 : IDeepCloneable, IInfinityFormat
+    /// <summary>This class is a representation of the Chitin.key, xp1.key, etc. file</summary>
+    public class KeyTable : IDeepCloneable, IInfinityFormat
     {
         #region Fields
         /// <summary>This property exposes the chitin.key Header information.</summary>
@@ -27,13 +27,14 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
         public Boolean StoreBifNamesInMemory { get; set; }
         #endregion
 
+
         #region Construction
         /// <summary>Default constructor</summary>
-        public ChitinKey1() : this(true) { }
+        public KeyTable() : this(true) { }
 
         /// <summary>Constructor setting whether to store BIFF names in memory</summary>
         /// <param name="StoreInMemory">Boolean indicating whether or not to store BIF name strings in memory when read</param>
-        public ChitinKey1(Boolean StoreInMemory)
+        public KeyTable(Boolean StoreInMemory)
         {
             this.Header = null;
             this.EntriesBif = null;
@@ -49,6 +50,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
             this.EntriesResource = new List<ChitinKeyResourceEntry>();
         }
         #endregion
+
 
         #region IO method implemetations
         /// <summary>Reads the chitin.key file using the provided stream</summary>
@@ -119,7 +121,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
         /// <param name="Offset">Int64 holding the current offset within the file, increased by the string sizes and string padding after call</param>
         /// <param name="padding">Number of bytes with skip forward after each string is written</param>
         /// <param name="sectionPadding">Number of bytes to skip forward before writing the strings</param>
-        protected void WriteBifNames(Stream Output, ChitinKey1 clone, ref Int64 Offset, UInt32 padding, UInt32 sectionPadding)
+        protected void WriteBifNames(Stream Output, KeyTable clone, ref Int64 Offset, UInt32 padding, UInt32 sectionPadding)
         {
             Offset += sectionPadding;
 
@@ -132,7 +134,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
             }
         }
 
-        /// <summary>This method clones the current ChitinKey object and writes it to the destination file, maintaining the structure targeting reverse compatability.</summary>
+        /// <summary>This method clones the current ChitinKey object and writes it to the destination stream, maintaining the structure targeting reverse compatability.</summary>
         /// <param name="output">Stream to write to</param>
         public virtual void Write(Stream output)
         {
@@ -140,7 +142,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
             this.Write(output, ChitinKeyBifStringsLocation.BetweenBifAndResource, 0U, 0U);
         }
 
-        /// <summary>This method clones the current ChitinKey object and writes it to the destination file.</summary>
+        /// <summary>This method clones the current ChitinKey object and writes it to the destination stream.</summary>
         /// <param name="output">Stream to write to</param>
         /// <param name="bifNameLocation">Enumerator describing where to write the BIF name strings</param>
         /// <param name="bifStringPadding">Unsigned integer describing the number of bytes worth of padding between BIF name strings</param>
@@ -148,7 +150,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
         public virtual void Write(Stream output, ChitinKeyBifStringsLocation bifNameLocation, UInt32 bifStringPadding, UInt32 sectionPadding)
         {
             //Clone key file to write to disk
-            ChitinKey1 clone = this.Clone() as ChitinKey1;
+            KeyTable clone = this.Clone() as KeyTable;
 
             //a logical first pass, to calculate offsets
             Int64 Offset = this.ComputeChitinKeyOffsets(clone, bifNameLocation, bifStringPadding, sectionPadding);
@@ -170,7 +172,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
         /// <param name="bifNameLocation">Enumerator describing where to write the BIF name strings</param>
         /// <param name="bifStringPadding">Unsigned integer describing the number of bytes worth of padding between BIF name strings</param>
         /// <param name="sectionPadding">Unsigned integer describing the number of bytes worth of padding between KEY sections</param>
-        protected virtual void WriteChitinKeyToBuffer(Stream buffer, ChitinKey1 clone, ChitinKeyBifStringsLocation bifNameLocation, UInt32 bifStringPadding, UInt32 sectionPadding)
+        protected virtual void WriteChitinKeyToBuffer(Stream buffer, KeyTable clone, ChitinKeyBifStringsLocation bifNameLocation, UInt32 bifStringPadding, UInt32 sectionPadding)
         {
             //write cloned Header
             clone.Header.Write(buffer);
@@ -220,6 +222,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
         }
         #endregion
 
+
         #region Helpers
         /// <summary>This method clears the Header, the BIF entries and the resource1 entries</summary>
         public void Clear()
@@ -235,7 +238,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
         /// <param name="bifStringPadding">Unsigned integer describing the number of bytes worth of padding between BIF name strings</param>
         /// <param name="sectionPadding">Unsigned integer describing the number of bytes worth of padding between KEY sections</param>
         /// <returns>An Int64 containing the destination file length, after all offsets have been updated.</returns>
-        protected Int64 ComputeChitinKeyOffsets(ChitinKey1 clone, ChitinKeyBifStringsLocation bifNameLocation, UInt32 bifStringPadding, UInt32 sectionPadding)
+        protected Int64 ComputeChitinKeyOffsets(KeyTable clone, ChitinKeyBifStringsLocation bifNameLocation, UInt32 bifStringPadding, UInt32 sectionPadding)
         {
             //logically write Header
             Int64 Offset = 24;
@@ -278,7 +281,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
         /// <param name="Offset">Int64 holding the current logical offset within the file, increased by the string sizes and string padding after call</param>
         /// <param name="padding">Number of bytes with which to append to the offset after each string's offset is computed</param>
         /// <param name="sectionPadding">Number of bytes to prepend to the offset before writing the strings</param>
-        protected void ComputeBifNameOffsets(ChitinKey1 clone, ref Int64 Offset, UInt32 padding, UInt32 sectionPadding)
+        protected void ComputeBifNameOffsets(KeyTable clone, ref Int64 Offset, UInt32 padding, UInt32 sectionPadding)
         {
             Offset += sectionPadding;
 
@@ -295,7 +298,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
         /// <returns>A deeply copied separate instance clone of the insance called from.</returns>
         public IDeepCloneable Clone()
         {
-            ChitinKey1 clone = new ChitinKey1();
+            KeyTable clone = new KeyTable();
             clone.Header = this.Header.Clone() as ChitinKeyHeader;
             clone.EntriesBif = this.EntriesBif.Clone<ChitinKeyBifEntry>();
             clone.EntriesResource = this.EntriesResource.Clone<ChitinKeyResourceEntry>();
@@ -304,6 +307,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
             return clone;
         }
         #endregion
+
 
         #region ToString(...)
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>

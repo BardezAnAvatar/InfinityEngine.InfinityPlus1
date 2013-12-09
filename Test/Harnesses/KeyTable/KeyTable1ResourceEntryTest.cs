@@ -1,28 +1,27 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 
 using Bardez.Projects.Configuration;
-using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable;
 using Bardez.Projects.InfinityPlus1.Test;
 using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.ChitinKey
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey.ChitinKey1 class.</summary>
-    public class ChitinKey1Test : FileTesterBase
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey.ChitinKeyResourceEntry class.</summary>
+    public class ChitinKey1ResourceEntryTest : FileTesterBase
     {
         #region Fields
         /// <summary>Constant key to look up in app.config</summary>
         protected const String configKey = "Test.Key.Key1Path";
 
         /// <summary>Format instance to test</summary>
-        protected ChitinKey1 keyFile { get; set; }
+        protected ChitinKeyResourceEntry Entry { get; set; }
         #endregion
 
         #region Construction
         /// <summary>Default constructor</summary>
-        public ChitinKey1Test()
+        public ChitinKey1ResourceEntryTest()
         {
             this.InitializeInstance();
         }
@@ -33,7 +32,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.ChitinKey
         /// <param name="e">Specific initialization event parameters</param>
         protected override void InitializeTestData(Object sender, EventArgs e)
         {
-            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(ChitinKey1Test.configKey);
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(ChitinKey1ResourceEntryTest.configKey);
         }
 
         /// <summary>Event to raise for testing instance(s)</summary>
@@ -43,11 +42,17 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.ChitinKey
         {
             using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
             {
-                this.keyFile = new ChitinKey1(true);
-                this.keyFile.Read(stream);
-            }
+                ChitinKeyHeader header = new ChitinKeyHeader();
+                header.Read(stream);
 
-            this.DoPostMessage(new MessageEventArgs(this.keyFile.ToString(false), "Output", testArgs.Path));
+                this.Entry = new ChitinKeyResourceEntry();
+
+                //used to be just an abstract offset, for a specifickey file. Just read the first resource entry
+                ReusableIO.SeekIfAble(stream, header.OffsetResource);
+                this.Entry.Read(stream);
+
+                this.DoPostMessage(new MessageEventArgs(this.Entry.ToString(), "Output", testArgs.Path));
+            }
 
             using (FileStream dest = new FileStream(testArgs.Path + ".rewrite", FileMode.Create, FileAccess.Write))
                 this.TestWrite(dest);
@@ -57,7 +62,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.ChitinKey
         /// <param name="destination">Stream to write output to</param>
         protected virtual void TestWrite(Stream destination)
         {
-            this.keyFile.Write(destination);
+            this.Entry.Write(destination);
         }
     }
 }

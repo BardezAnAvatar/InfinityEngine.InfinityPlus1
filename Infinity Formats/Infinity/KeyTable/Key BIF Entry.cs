@@ -7,7 +7,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.Utility;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
 {
     /// <summary>This class is an entry in the BIF entries table in a chitin.key file</summary>
     /// <remarks>
@@ -41,6 +41,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
         protected ChitinKeyBifLocationEnum bifLocationFlags; 
         #endregion
 
+
         #region Properties
         /// <summary>This four-byte value indicates the (expected) length of the BIF file</summary>
         public UInt32 LengthBifFile
@@ -73,10 +74,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
             set { this.bifLocationFlags = value; }
         }
 
-        public Boolean LocationData
+        public Boolean LocationInstallDirectory
         {
-            get { return (ChitinKeyBifLocationEnum.Data & this.bifLocationFlags) == ChitinKeyBifLocationEnum.Data; }
-            set { this.bifLocationFlags |= ChitinKeyBifLocationEnum.Data; }
+            get { return (ChitinKeyBifLocationEnum.HardDrive & this.bifLocationFlags) == ChitinKeyBifLocationEnum.HardDrive; }
+            set { this.bifLocationFlags |= ChitinKeyBifLocationEnum.HardDrive; }
         }
 
         public Boolean LocationCache
@@ -122,13 +123,32 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
         }
         #endregion
 
+
         #region Construction
+        /// <summary>Default constructor</summary>
+        public ChitinKeyBifEntry() { }
+
+        /// <summary>Definition constructor</summary>
+        /// <param name="length">The (expected) length of the BIF file</param>
+        /// <param name="offsetName">Offset to the filename of the BIF file</param>
+        /// <param name="name">Name of this BIFF archive</param>
+        /// <param name="locations">Flags indicating the location(s) of the BIF file within the engine</param>
+        public ChitinKeyBifEntry(UInt32 length, UInt32 offsetName, String name, ChitinKeyBifLocationEnum locations)
+        {
+            this.lengthBifFile = length;
+            this.offsetBifFileName = offsetName;
+            this.BifFileName = ZString.FromString(name);
+            this.lengthBifFileName = Convert.ToUInt16(this.BifFileName.Source.Length);
+            this.bifLocationFlags = locations;
+        }
+
         /// <summary>Instantiates reference types</summary>
         public virtual void Initialize()
         {
             this.BifFileName = new ZString();
         }
         #endregion
+
 
         #region Public Methods
         /// <summary>This public method reads the 18-byte header into the header record</summary>
@@ -214,7 +234,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
             builder.Append(StringFormat.ToStringAlignment("BIF Location Flags Value"));
             builder.Append((Int16)this.bifLocationFlags);
             builder.Append(StringFormat.ToStringAlignment("Data Directory", 2));
-            builder.Append(this.LocationData);
+            builder.Append(this.LocationInstallDirectory);
             builder.Append(StringFormat.ToStringAlignment("Cache Directory", 2));
             builder.Append(this.LocationCache);
             builder.Append(StringFormat.ToStringAlignment("Disc 1", 2));

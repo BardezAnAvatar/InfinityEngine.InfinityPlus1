@@ -9,7 +9,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 using Bardez.Projects.Utility;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
 {
     /// <summary>This class is a resource1 netry within a chitin.key file</summary>
     /// <remarks>
@@ -18,9 +18,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
     ///     Offset      Size (data type)  	Description
     ///     0x0000 	    8 (resref) 	        Resource name
     ///     0x0008 	    2 (word) 	        Resource type
-    ///     0x000a 	    4 (dword) 	        Resource locator. The IE resource1 manager uses 32-bit values
-    ///                                         as a 'resource1 index', which codifies the source of the
-    ///                                         resource1 as well as which source it refers to. The layout
+    ///     0x000a 	    4 (dword) 	        Resource locator. The IE resource manager uses 32-bit values
+    ///                                         as a 'resource index', which codifies the source of the
+    ///                                         resource as well as which source it refers to. The layout
     ///                                         of this value is below.
     ///                                     * bits 31-20: source index (the ordinal value giving the index of the
     ///                                         corresponding BIF entry)
@@ -30,46 +30,48 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
     /// </remarks>
     public class ChitinKeyResourceEntry : IInfinityFormat, IDeepCloneable
     {
-        #region Protected members
-        /// <summary>This member contains the Int32 value dictating the type of the resource1.</summary>
-        protected ResourceType resourceType;
-
-        /// <summary>
-        ///     This member contains is a bitfield indicating the resource1 location, with three data values:
-        ///     the BIF index, the BIF tileset index and the BIF resource1 index.
-        /// </summary>
-        protected ResourceLocator1 resourceLocator; 
-        #endregion
-
-        #region Properties
+        #region Fields
         /// <summary>This property represents the name of the resource1.</summary>
         public ZString ResourceName { get; set; }
 
         /// <summary>This property represents the Int16 value dictating the type of the resource1.</summary>
-        public ResourceType ResourceType
-        {
-            get { return this.resourceType; }
-            set { this.resourceType = value; }
-        }
+        public ResourceType ResourceType { get; set; }
 
         /// <summary>
         ///     This property represents the bitfield indicating the resource1 location, with three data values:
         ///     the BIF index, the BIF tileset index and the BIF resource1 index.
         /// </summary>
-        public ResourceLocator1 ResourceLocator
-        {
-            get { return this.resourceLocator; }
-            set { this.resourceLocator = value; }
-        }
+        public ResourceLocator1 ResourceLocator { get; set; }
         #endregion
 
+
         #region Construction
+        /// <summary>Default constructor</summary>
+        public ChitinKeyResourceEntry()
+        {
+            this.ResourceName = null;
+            this.ResourceLocator = null;
+        }
+
+        /// <summary>Definition constructor</summary>
+        /// <param name="name">Name of the resource</param>
+        /// <param name="type">Type of the resource</param>
+        /// <param name="locator">Locator for the resource</param>
+        public ChitinKeyResourceEntry(String name, ResourceType type, ResourceLocator1 locator)
+        {
+            this.ResourceName = ZString.FromString(name);
+            this.ResourceType = type;
+            this.ResourceLocator = locator;
+        }
+
         /// <summary>Instantiates reference types</summary>
         public void Initialize()
         {
             this.ResourceName = new ZString();
+            this.ResourceLocator = new ResourceLocator1();
         }
         #endregion
+
 
         #region Public Methods
         /// <summary>This public method reads the 18-byte header into the header record</summary>
@@ -99,10 +101,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
             this.ResourceName.Source = ReusableIO.ReadStringFromByteArray(buffer, 0, CultureConstants.CultureCodeEnglish);
 
             //Resource Type
-            this.resourceType = (ResourceType)ReusableIO.ReadInt16FromArray(buffer, 0x8);
+            this.ResourceType = (ResourceType)ReusableIO.ReadInt16FromArray(buffer, 0x8);
 
             //Resource Locator
-            this.resourceLocator.Locator = ReusableIO.ReadInt32FromArray(buffer, 0xA);
+            this.ResourceLocator.Locator = ReusableIO.ReadUInt32FromArray(buffer, 0xA);
         }
 
         /// <summary>This public method writes the header to an output stream</summary>
@@ -113,10 +115,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
             ReusableIO.WriteStringToStream(this.ResourceName.Source, output, CultureConstants.CultureCodeEnglish);
 
             //Resource Type
-            ReusableIO.WriteInt16ToStream((Int16)this.resourceType, output);
+            ReusableIO.WriteInt16ToStream((Int16)this.ResourceType, output);
 
             //Resource Locator
-            ReusableIO.WriteInt32ToStream(this.resourceLocator.Locator, output);
+            ReusableIO.WriteUInt32ToStream(this.ResourceLocator.Locator, output);
         }
 
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>
@@ -128,17 +130,17 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey
             builder.Append(StringFormat.ToStringAlignment("Resource Name"));
             builder.Append(String.Format("'{0}'", this.ResourceName.Value));
             builder.Append(StringFormat.ToStringAlignment("Resource Type"));
-            builder.Append(this.resourceType.ToString("G"));
+            builder.Append(this.ResourceType.ToString("G"));
             builder.Append(StringFormat.ToStringAlignment("Resource Type Value"));
-            builder.Append(((Int16)this.resourceType).ToString("X"));
+            builder.Append(((Int16)this.ResourceType).ToString("X"));
             builder.Append(StringFormat.ToStringAlignment("Resource Locator"));
-            builder.Append(this.resourceLocator.Locator);
+            builder.Append(this.ResourceLocator.Locator);
             builder.Append(StringFormat.ToStringAlignment("BIFF Index", 2));
-            builder.Append(this.resourceLocator.BiffIndex);
+            builder.Append(this.ResourceLocator.BiffIndex);
             builder.Append(StringFormat.ToStringAlignment("BIFF Tileset Index", 2));
-            builder.Append(this.resourceLocator.TilesetIndex);
+            builder.Append(this.ResourceLocator.TilesetIndex);
             builder.Append(StringFormat.ToStringAlignment("BIFF Resource Index", 2));
-            builder.Append(this.resourceLocator.ResourceIndex);
+            builder.Append(this.ResourceLocator.ResourceIndex);
 
             return builder.ToString();
         }
