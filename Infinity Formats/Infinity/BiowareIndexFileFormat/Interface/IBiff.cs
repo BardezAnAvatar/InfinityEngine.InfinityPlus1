@@ -1,13 +1,14 @@
 ﻿using System;
 using System.IO;
 
-
-using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Components;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Interface
 {
-    public interface IBiff
+    /// <summary>Represents common archive actions for a Biff archive</summary>
+    public interface IBiff : IInfinityFormat
     {
         #region Extraction
         /// <summary>Opens a file and extracts the resource1 to that file path</summary>
