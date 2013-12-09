@@ -82,7 +82,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
         public override String ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("Tis1Header:");
+            builder.Append("WED1Header:");
             builder.Append(StringFormat.ToStringAlignment("Signature"));
             builder.Append(String.Format("'{0}'", this.signature));
             builder.Append(StringFormat.ToStringAlignment("Version"));
