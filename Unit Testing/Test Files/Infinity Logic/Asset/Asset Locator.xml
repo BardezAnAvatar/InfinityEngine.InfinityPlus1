@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TestData>
+	<AssetLocatorFileSystem>
+		<param_location>HD0</param_location>
+		<param_path>portraits\DM044L.bmp</param_path>
+		<param_type>ImageBitmap</param_type>
+		<result_location>HD0</result_location>
+		<result_path>portraits\DM044L.bmp</result_path>
+		<result_keyFile />
+		<result_locator />
+		<result_type>ImageBitmap</result_type>
+	</AssetLocatorFileSystem>
+	<AssetLocatorFileSystem>
+		<param_location>ApplicationDirectory</param_location>
+		<param_path>dialog.tlk</param_path>
+		<param_type>Talk</param_type>
+		<result_location>ApplicationDirectory</result_location>
+		<result_path>dialog.tlk</result_path>
+		<result_keyFile />
+		<result_locator />
+		<result_type>Talk</result_type>
+	</AssetLocatorFileSystem>
+	<AssetLocatorFileSystem>
+		<param_location>CD2</param_location>
+		<param_path>Movies\Movies.Bif</param_path>
+		<param_type>Biff</param_type>
+		<result_location>CD2</result_location>
+		<result_path>Movies\Movies.Bif</result_path>
+		<result_keyFile />
+		<result_locator />
+		<result_type>Biff</result_type>
+	</AssetLocatorFileSystem>
+	<AssetLocatorKeyFile>
+		<param_keyFile>chitin.key</param_keyFile>
+		<param_keyresource_name>AR2600N</param_keyresource_name>
+		<param_keyresource_type>Tileset</param_keyresource_type>
+		<param_keyresource_locator_biff>1</param_keyresource_locator_biff>
+		<param_keyresource_locator_resource>0</param_keyresource_locator_resource>
+		<param_keyresource_locator_tileset>53</param_keyresource_locator_tileset>
+		<result_location>LookUp</result_location>
+		<result_path />
+		<result_keyFile>chitin.key</result_keyFile>
+		<result_keyresource_locator_biff>1</result_keyresource_locator_biff>
+		<result_keyresource_locator_resource>0</result_keyresource_locator_resource>
+		<result_keyresource_locator_tileset>53</result_keyresource_locator_tileset>
+		<result_type>Tileset</result_type>
+	</AssetLocatorKeyFile>
+	<AssetLocatorKeyFile>
+		<param_keyFile>chitin.key</param_keyFile>
+		<param_keyresource_name>SW1H06</param_keyresource_name>
+		<param_keyresource_type>Item</param_keyresource_type>
+		<param_keyresource_locator_biff>53</param_keyresource_locator_biff>
+		<param_keyresource_locator_resource>16</param_keyresource_locator_resource>
+		<param_keyresource_locator_tileset>0</param_keyresource_locator_tileset>
+		<result_location>LookUp</result_location>
+		<result_path />
+		<result_keyFile>chitin.key</result_keyFile>
+		<result_keyresource_locator_biff>53</result_keyresource_locator_biff>
+		<result_keyresource_locator_resource>16</result_keyresource_locator_resource>
+		<result_keyresource_locator_tileset>0</result_keyresource_locator_tileset>
+		<result_type>Item</result_type>
+	</AssetLocatorKeyFile>
+	<AssetLocatorKeyFile>
+		<param_keyFile>chitin.key</param_keyFile>
+		<param_keyresource_name>SPWI203</param_keyresource_name>
+		<param_keyresource_type>Spell</param_keyresource_type>
+		<param_keyresource_locator_biff>42</param_keyresource_locator_biff>
+		<param_keyresource_locator_resource>123</param_keyresource_locator_resource>
+		<param_keyresource_locator_tileset>0</param_keyresource_locator_tileset>
+		<result_location>LookUp</result_location>
+		<result_path />
+		<result_keyFile>chitin.key</result_keyFile>
+		<result_keyresource_locator_biff>42</result_keyresource_locator_biff>
+		<result_keyresource_locator_resource>123</result_keyresource_locator_resource>
+		<result_keyresource_locator_tileset>0</result_keyresource_locator_tileset>
+		<result_type>Spell</result_type>
+	</AssetLocatorKeyFile>
+	<AssetLocatorKeyFile>
+		<param_keyFile>xp1patch.key</param_keyFile>
+		<param_keyresource_name>UDDUER01</param_keyresource_name>
+		<param_keyresource_type>Dialog</param_keyresource_type>
+		<param_keyresource_locator_biff>555</param_keyresource_locator_biff>
+		<param_keyresource_locator_resource>1000</param_keyresource_locator_resource>
+		<param_keyresource_locator_tileset>0</param_keyresource_locator_tileset>
+		<result_location>LookUp</result_location>
+		<result_path />
+		<result_keyFile>xp1patch.key</result_keyFile>
+		<result_keyresource_locator_biff>555</result_keyresource_locator_biff>
+		<result_keyresource_locator_resource>1000</result_keyresource_locator_resource>
+		<result_keyresource_locator_tileset>0</result_keyresource_locator_tileset>
+		<result_type>Dialog</result_type>
+	</AssetLocatorKeyFile>
+</TestData>

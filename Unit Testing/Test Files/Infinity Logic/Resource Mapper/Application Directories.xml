@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TestData>
+  <Game>
+    <Directory>\Test Data\Infinity Engine\Installs\Baldur's Gate (v. 1.1.4315)</Directory>
+    <IsEnhanced>False</IsEnhanced>
+    <UserDirectory />
+  </Game>
+  <Game>
+    <Directory>\Test Data\Infinity Engine\Installs\BG2EE v 1.2.0000 (2013-11-14)</Directory>
+    <IsEnhanced>True</IsEnhanced>
+    <UserDirectory>Baldur's Gate II - Enhanced Edition</UserDirectory>
+</Game>
+  <Game>
+    <Directory>\Test Data\Infinity Engine\Installs\BGEE\Patch 1.2</Directory>
+    <IsEnhanced>True</IsEnhanced>
+    <UserDirectory>Baldur's Gate - Enhanced Edition</UserDirectory>
+  </Game>
+  <Game>
+    <Directory>\Test Data\Infinity Engine\Installs\BGII - SoA (ToB)  (v. 2.5.26499)</Directory>
+    <IsEnhanced>False</IsEnhanced>
+    <UserDirectory />
+</Game>
+  <Game>
+    <Directory>\Test Data\Infinity Engine\Installs\Icewind Dale (HoW-TotL) (v. 1.42)</Directory>
+    <IsEnhanced>False</IsEnhanced>
+    <UserDirectory />
+  </Game>
+  <Game>
+    <Directory>\Test Data\Infinity Engine\Installs\Icewind Dale II (v. 2.01.1016 beta 2)</Directory>
+    <IsEnhanced>False</IsEnhanced>
+    <UserDirectory />
+  </Game>
+  <Game>
+    <Directory>\Test Data\Infinity Engine\Installs\Torment (v. 1.1.0000)</Directory>
+    <IsEnhanced>False</IsEnhanced>
+    <UserDirectory />
+  </Game>
+</TestData>
