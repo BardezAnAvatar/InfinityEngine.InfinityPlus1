@@ -13,7 +13,7 @@ using Bardez.Projects.ReusableCode;
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Version
 {
     /// <summary>This class represents a BIFF version 1 file. It can extract resources.</summary>
-    public class Biff1Archive : IInfinityFormat, IBiff
+    public class Biff1Archive : IBiff
     {
         #region Fields
         /// <summary>This member represents the BIFF version1 header.</summary>
@@ -153,6 +153,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         /// <param name="output">Stream object into which to write to</param>
         public void Write(Stream output)
         {
+            if (this.MaintainData)
+                this.MaintainMinimalDataIntegrity();
+
             //write header
             this.Header.Write(output);
 
@@ -173,7 +176,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
                 for (Int32 i = 0; i < this.Header.CountResource; ++i)
                 {
                     //seek to offset
-                    ReusableIO.SeekIfAble(output, this.EntriesResource[i].OffsetResource, SeekOrigin.Begin);
+                    ReusableIO.SeekIfAble(output, this.EntriesResource[i].OffsetResource);
                     output.Write(this.DataResource[i], 0, this.DataResource[i].Length);
                 }
 
@@ -181,7 +184,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
                 for (Int32 i = 0; i < this.Header.CountTileset; ++i)
                 {
                     //seek to offset
-                    ReusableIO.SeekIfAble(output, this.EntriesTileset[i].OffsetResource, SeekOrigin.Begin);
+                    ReusableIO.SeekIfAble(output, this.EntriesTileset[i].OffsetResource);
                     output.Write(this.DataTileset[i], 0, this.DataTileset[i].Length);
                 }
             }
@@ -195,7 +198,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         /// <param name="resourceLocator">Resource locator to match upon</param>
         public void ExtractResource(String resourcePath, ResourceLocator1 resourceLocator)
         {
-            this.ExtractResource(resourcePath, resourceLocator.ResourceIndex);
+            this.ExtractResource(resourcePath, Convert.ToInt32(resourceLocator.ResourceIndex));
         }
 
         /// <summary>Extracts the resource1 to the output stream</summary>
@@ -203,7 +206,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         /// <param name="resourceLocator">Resource locator to match upon</param>
         public void ExtractResource(Stream output, ResourceLocator1 resourceLocator)
         {
-            this.ExtractResource(output, resourceLocator.ResourceIndex);
+            this.ExtractResource(output, Convert.ToInt32(resourceLocator.ResourceIndex));
         }
 
         /// <summary>Opens a file and extracts the resource1 to that file path</summary>
@@ -229,7 +232,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         /// <returns>A MemoryStrteam of the binary data (for read and the like)</returns>
         public MemoryStream ExtractResource(ResourceLocator1 resourceLocator)
         {
-            return this.ExtractResource(resourceLocator.ResourceIndex);
+            Int32 index = Convert.ToInt32(resourceLocator.ResourceIndex);
+            return this.ExtractResource(index);
         }
 
         /// <summary>Extracts the resource1 and returns it in a memorystream</summary>
@@ -263,7 +267,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         /// <returns>A Boolean existing whether the index is populated</returns>
         public Boolean ResourceExists(ResourceLocator1 resourceLocator)
         {
-            return this.ResourceExists(resourceLocator.ResourceIndex);
+            Int32 index = Convert.ToInt32(resourceLocator.TilesetIndex);
+            return this.ResourceExists(index);
         }
 
         /// <summary>Check whether the resource1 index exists in the BIFF header</summary>
@@ -284,7 +289,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         /// <param name="tilesetLocator">Tileset locator to match upon</param>
         public void ExtractTileset(String tilesetPath, ResourceLocator1 tilesetLocator)
         {
-            this.ExtractTileset(tilesetPath, tilesetLocator.TilesetIndex);
+            this.ExtractTileset(tilesetPath, Convert.ToInt32(tilesetLocator.TilesetIndex));
         }
 
         /// <summary>Extracts the tileset to the output stream</summary>
@@ -292,7 +297,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         /// <param name="tilesetLocator">Tileset locator to match upon</param>
         public void ExtractTileset(Stream output, ResourceLocator1 tilesetLocator)
         {
-            this.ExtractTileset(output, tilesetLocator.TilesetIndex);
+            this.ExtractTileset(output, Convert.ToInt32(tilesetLocator.TilesetIndex));
         }
 
         /// <summary>Opens a file and extracts the tileset to that file path</summary>
@@ -318,7 +323,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         /// <returns>A MemoryStrteam of the binary data (for read and the like)</returns>
         public MemoryStream ExtractTileset(ResourceLocator1 tilesetLocator)
         {
-            return this.ExtractTileset(tilesetLocator.TilesetIndex);
+            Int32 index = Convert.ToInt32(tilesetLocator.TilesetIndex);
+            return this.ExtractTileset(index);
         }
 
         /// <summary>Extracts the tileset and returns it in a memorystream</summary>
@@ -367,7 +373,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
         /// <returns>A Boolean existing whether the index is populated</returns>
         public Boolean TilesetExists(ResourceLocator1 tilesetLocator)
         {
-            return this.TilesetExists(tilesetLocator.TilesetIndex);
+            return this.TilesetExists(Convert.ToInt32(tilesetLocator.TilesetIndex));
         }
 
         /// <summary>Check whether the tileset index exists in the BIFF header</summary>
@@ -470,6 +476,40 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFor
             }
 
             return builder.ToString();
+        }
+        #endregion
+
+
+        #region Data integrity
+        /// <summary>Maintains mimimal data integrity by not lying to the output data file.</summary>
+        protected void MaintainMinimalDataIntegrity()
+        {
+            Int32 headerSize = Biff1Header.StructSize;
+
+            //recreate counts
+            this.Header.CountResource = this.EntriesResource.Count;
+            this.Header.CountTileset = this.EntriesTileset.Count;
+
+            //reset the resource offsets, possibly
+            if (this.Header.OffsetResource < headerSize)
+                this.Header.OffsetResource = headerSize;
+
+            //calculate the size of the resources & the tilesets
+            Int32 entriesSize = (Biff1ResourceEntry.StructSize * this.Header.CountResource) + (Biff1TilesetEntry.StructSize * this.Header.CountTileset);
+
+            
+            //I'm too lazy to really check everything since each entry has an offset. So, just set every offset.
+            Int64 offset = this.Header.OffsetResource + entriesSize;
+            foreach (Biff1ResourceEntry resource in this.EntriesResource)
+            {
+                resource.OffsetResource = Convert.ToInt32(offset);
+                offset += resource.SizeResource;
+            }
+            foreach (Biff1TilesetEntry tileset in this.EntriesTileset)
+            {
+                tileset.OffsetResource = Convert.ToInt32(offset);
+                offset += tileset.SizeResource;
+            }
         }
         #endregion
     }
