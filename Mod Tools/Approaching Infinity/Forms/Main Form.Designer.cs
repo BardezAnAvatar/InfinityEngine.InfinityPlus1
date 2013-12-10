@@ -1,4 +1,4 @@
-﻿namespace Bardez.Projects.InfinityPlus1.Tools.ApproachingInfinity
+﻿namespace Bardez.Projects.InfinityPlus1.Tools.ApproachingInfinity.Forms
 {
     partial class MainForm
     {
@@ -48,18 +48,18 @@
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resourceTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.overrideResourcesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showAllResourceInstancesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewAssetsOverriddenGroupedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewAssetsByTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewAssetsByLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewAssetsOverriddenByLocationAndTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewAllAssetsByLocationAndTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.treeViewAssets = new System.Windows.Forms.TreeView();
             this.openKeyFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.treeViewAssets = new System.Windows.Forms.TreeView();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             this.panelStatus.SuspendLayout();
             this.menuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
-            this.splitContainer.Panel1.SuspendLayout();
-            this.splitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelStatus
@@ -214,23 +214,51 @@
             // resourceTreeToolStripMenuItem
             // 
             this.resourceTreeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.overrideResourcesToolStripMenuItem,
-            this.showAllResourceInstancesToolStripMenuItem});
+            this.viewAssetsOverriddenGroupedToolStripMenuItem,
+            this.viewAssetsByTypeToolStripMenuItem,
+            this.viewAssetsByLocationToolStripMenuItem,
+            this.viewAssetsOverriddenByLocationAndTypeToolStripMenuItem,
+            this.viewAllAssetsByLocationAndTypeToolStripMenuItem});
             this.resourceTreeToolStripMenuItem.Name = "resourceTreeToolStripMenuItem";
-            this.resourceTreeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resourceTreeToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.resourceTreeToolStripMenuItem.Text = "Resource Tree";
             // 
-            // overrideResourcesToolStripMenuItem
+            // viewAssetsOverriddenGroupedToolStripMenuItem
             // 
-            this.overrideResourcesToolStripMenuItem.Name = "overrideResourcesToolStripMenuItem";
-            this.overrideResourcesToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
-            this.overrideResourcesToolStripMenuItem.Text = "Show overriden resources";
+            this.viewAssetsOverriddenGroupedToolStripMenuItem.Name = "viewAssetsOverriddenGroupedToolStripMenuItem";
+            this.viewAssetsOverriddenGroupedToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
+            this.viewAssetsOverriddenGroupedToolStripMenuItem.Text = "Display assets, overridden, by type";
+            this.viewAssetsOverriddenGroupedToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMeuItem_Click);
             // 
-            // showAllResourceInstancesToolStripMenuItem
+            // viewAssetsByTypeToolStripMenuItem
             // 
-            this.showAllResourceInstancesToolStripMenuItem.Name = "showAllResourceInstancesToolStripMenuItem";
-            this.showAllResourceInstancesToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
-            this.showAllResourceInstancesToolStripMenuItem.Text = "Show all resource instances";
+            this.viewAssetsByTypeToolStripMenuItem.Name = "viewAssetsByTypeToolStripMenuItem";
+            this.viewAssetsByTypeToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
+            this.viewAssetsByTypeToolStripMenuItem.Text = "Display all assets, by type";
+            this.viewAssetsByTypeToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMeuItem_Click);
+            // 
+            // viewAssetsByLocationToolStripMenuItem
+            // 
+            this.viewAssetsByLocationToolStripMenuItem.Checked = true;
+            this.viewAssetsByLocationToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.viewAssetsByLocationToolStripMenuItem.Name = "viewAssetsByLocationToolStripMenuItem";
+            this.viewAssetsByLocationToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
+            this.viewAssetsByLocationToolStripMenuItem.Text = "Display all assets by location";
+            this.viewAssetsByLocationToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMeuItem_Click);
+            // 
+            // viewAssetsOverriddenByLocationAndTypeToolStripMenuItem
+            // 
+            this.viewAssetsOverriddenByLocationAndTypeToolStripMenuItem.Name = "viewAssetsOverriddenByLocationAndTypeToolStripMenuItem";
+            this.viewAssetsOverriddenByLocationAndTypeToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
+            this.viewAssetsOverriddenByLocationAndTypeToolStripMenuItem.Text = "Display assets, overridden, by location and type";
+            this.viewAssetsOverriddenByLocationAndTypeToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMeuItem_Click);
+            // 
+            // viewAllAssetsByLocationAndTypeToolStripMenuItem
+            // 
+            this.viewAllAssetsByLocationAndTypeToolStripMenuItem.Name = "viewAllAssetsByLocationAndTypeToolStripMenuItem";
+            this.viewAllAssetsByLocationAndTypeToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
+            this.viewAllAssetsByLocationAndTypeToolStripMenuItem.Text = "Display all assets by location and type";
+            this.viewAllAssetsByLocationAndTypeToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMeuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -247,53 +275,48 @@
             this.aboutToolStripMenuItem.Text = "About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // splitContainer
-            // 
-            this.splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.Location = new System.Drawing.Point(0, 24);
-            this.splitContainer.Name = "splitContainer";
-            // 
-            // splitContainer.Panel1
-            // 
-            this.splitContainer.Panel1.Controls.Add(this.treeViewAssets);
-            this.splitContainer.Size = new System.Drawing.Size(954, 392);
-            this.splitContainer.SplitterDistance = 318;
-            this.splitContainer.TabIndex = 2;
-            // 
-            // treeViewAssets
-            // 
-            this.treeViewAssets.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewAssets.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treeViewAssets.Location = new System.Drawing.Point(0, 0);
-            this.treeViewAssets.Name = "treeViewAssets";
-            this.treeViewAssets.Size = new System.Drawing.Size(314, 388);
-            this.treeViewAssets.TabIndex = 0;
-            // 
             // openKeyFileDialog
             // 
             this.openKeyFileDialog.FileName = "chitin.key";
             this.openKeyFileDialog.Filter = "Key Files|*.key";
             this.openKeyFileDialog.Title = "Please select an infinity key file (chitin.key)";
             // 
+            // treeViewAssets
+            // 
+            this.treeViewAssets.Dock = System.Windows.Forms.DockStyle.Left;
+            this.treeViewAssets.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeViewAssets.Location = new System.Drawing.Point(0, 24);
+            this.treeViewAssets.Name = "treeViewAssets";
+            this.treeViewAssets.Size = new System.Drawing.Size(204, 392);
+            this.treeViewAssets.TabIndex = 4;
+            this.treeViewAssets.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewAssets_AfterSelect);
+            // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(204, 24);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 392);
+            this.splitter1.TabIndex = 5;
+            this.splitter1.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(954, 462);
-            this.Controls.Add(this.splitContainer);
+            this.Controls.Add(this.splitter1);
+            this.Controls.Add(this.treeViewAssets);
             this.Controls.Add(this.panelStatus);
             this.Controls.Add(this.menuStrip);
+            this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
             this.Text = "Main_Form";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.panelStatus.ResumeLayout(false);
             this.panelStatus.PerformLayout();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            this.splitContainer.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
-            this.splitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -310,7 +333,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.ToolStripMenuItem openGameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refreshTreeToolStripMenuItem;
@@ -318,7 +340,6 @@
         private System.Windows.Forms.ToolStripMenuItem recentToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
-        private System.Windows.Forms.TreeView treeViewAssets;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Label lblResourceCount;
         private System.Windows.Forms.Label lblGamePath;
@@ -326,7 +347,12 @@
         private System.Windows.Forms.Label lblUserDirectoryPath;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resourceTreeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem overrideResourcesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem showAllResourceInstancesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewAssetsByTypeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewAssetsByLocationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewAssetsOverriddenGroupedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewAssetsOverriddenByLocationAndTypeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewAllAssetsByLocationAndTypeToolStripMenuItem;
+        private System.Windows.Forms.TreeView treeViewAssets;
+        private System.Windows.Forms.Splitter splitter1;
     }
 }

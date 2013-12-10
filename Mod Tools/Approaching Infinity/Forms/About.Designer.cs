@@ -1,4 +1,4 @@
-﻿namespace Bardez.Projects.InfinityPlus1.Tools.ApproachingInfinity
+﻿namespace Bardez.Projects.InfinityPlus1.Tools.ApproachingInfinity.Forms
 {
     partial class About
     {

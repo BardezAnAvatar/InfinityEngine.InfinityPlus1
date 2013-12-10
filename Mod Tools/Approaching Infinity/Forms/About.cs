@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Bardez.Projects.InfinityPlus1.Tools.ApproachingInfinity
+namespace Bardez.Projects.InfinityPlus1.Tools.ApproachingInfinity.Forms
 {
     /// <summary>The "About" window form</summary>
     public partial class About : Form
@@ -35,7 +35,7 @@ namespace Bardez.Projects.InfinityPlus1.Tools.ApproachingInfinity
         /// <param name="e">Event arguments</param>
         protected void About_Load(Object sender, EventArgs e)
         {
-            this.lblVersion.Text = String.Format("Version {0}", BuildDetails.Version);
+            this.lblVersion.Text = String.Format("Version {0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
             this.lblVersion.Left = (this.Width - this.lblVersion.Width) / 2;
         }
         #endregion
