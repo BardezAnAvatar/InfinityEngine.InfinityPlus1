@@ -16,7 +16,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.ChitinKey
         protected const String configKey = "Test.Key.Key1Path";
 
         /// <summary>Format instance to test</summary>
-        protected ChitinKeyResourceEntry Entry { get; set; }
+        protected KeyTableResourceEntry Entry { get; set; }
         #endregion
 
         #region Construction
@@ -42,10 +42,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.ChitinKey
         {
             using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
             {
-                ChitinKeyHeader header = new ChitinKeyHeader();
+                KeyTableHeader header = new KeyTableHeader();
                 header.Read(stream);
 
-                this.Entry = new ChitinKeyResourceEntry();
+                this.Entry = new KeyTableResourceEntry();
 
                 //used to be just an abstract offset, for a specifickey file. Just read the first resource entry
                 ReusableIO.SeekIfAble(stream, header.OffsetResource);

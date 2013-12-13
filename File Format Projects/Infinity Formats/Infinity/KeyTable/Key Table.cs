@@ -15,13 +15,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
     {
         #region Fields
         /// <summary>This property exposes the chitin.key Header information.</summary>
-        public ChitinKeyHeader Header { get; set; }
+        public KeyTableHeader Header { get; set; }
 
         /// <summary>This property exposes the collection of BIF entries.</summary>
-        public List<ChitinKeyBifEntry> EntriesBif { get; set; }
+        public List<KeyTableBifEntry> EntriesBif { get; set; }
 
         /// <summary>This property exposes the collection of resource1 entries.</summary>
-        public List<ChitinKeyResourceEntry> EntriesResource { get; set; }
+        public List<KeyTableResourceEntry> EntriesResource { get; set; }
 
         /// <summary>This property exposes the flag which indicates whether or not to read the string references into memory.</summary>
         public Boolean StoreBifNamesInMemory { get; set; }
@@ -45,9 +45,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
         /// <summary>Instantiates reference types</summary>
         public virtual void Initialize()
         {
-            this.Header = new ChitinKeyHeader();
-            this.EntriesBif = new List<ChitinKeyBifEntry>();
-            this.EntriesResource = new List<ChitinKeyResourceEntry>();
+            this.Header = new KeyTableHeader();
+            this.EntriesBif = new List<KeyTableBifEntry>();
+            this.EntriesResource = new List<KeyTableResourceEntry>();
         }
         #endregion
 
@@ -69,7 +69,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
                 this.Read(input);
             else
             {
-                this.Header = new ChitinKeyHeader();
+                this.Header = new KeyTableHeader();
                 this.Header.Read(input, false);
             }
         }
@@ -88,7 +88,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
             //read the BIFF entries
             for (Int32 i = 0; i < this.Header.CountBif; ++i)
             {
-                ChitinKeyBifEntry bifEntry = new ChitinKeyBifEntry();
+                KeyTableBifEntry bifEntry = new KeyTableBifEntry();
                 bifEntry.Read(input);
                 this.EntriesBif.Add(bifEntry);  //add to the collection
             }
@@ -99,7 +99,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
             //read the resource1 entries
             for (Int32 i = 0; i < this.Header.CountResource; ++i)
             {
-                ChitinKeyResourceEntry resource = new ChitinKeyResourceEntry();
+                KeyTableResourceEntry resource = new KeyTableResourceEntry();
                 resource.Read(input);
                 this.EntriesResource.Add(resource);  //add to the collection
             }
@@ -193,7 +193,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
             ReusableIO.SeekIfAble(buffer, Offset, SeekOrigin.Begin);
 
             //now write each BIFF entry
-            foreach (ChitinKeyBifEntry entry in clone.EntriesBif)
+            foreach (KeyTableBifEntry entry in clone.EntriesBif)
                 entry.Write(buffer);
 
             Offset += (12 * clone.EntriesBif.Count);
@@ -211,7 +211,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
             ReusableIO.SeekIfAble(buffer, Offset, SeekOrigin.Begin);
 
             //now write each resource1 entry
-            foreach (ChitinKeyResourceEntry entry in clone.EntriesResource)
+            foreach (KeyTableResourceEntry entry in clone.EntriesResource)
                 entry.Write(buffer);
 
             Offset += (14 * clone.EntriesResource.Count);
@@ -228,8 +228,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
         public void Clear()
         {
             this.Header = null;
-            this.EntriesBif = new List<ChitinKeyBifEntry>();
-            this.EntriesResource = new List<ChitinKeyResourceEntry>();
+            this.EntriesBif = new List<KeyTableBifEntry>();
+            this.EntriesResource = new List<KeyTableResourceEntry>();
         }
 
         /// <summary>This method takes in a cloned ChitinKey object and updates its offsets and also computes the destination file size.</summary>
@@ -299,9 +299,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
         public IDeepCloneable Clone()
         {
             KeyTable clone = new KeyTable();
-            clone.Header = this.Header.Clone() as ChitinKeyHeader;
-            clone.EntriesBif = this.EntriesBif.Clone<ChitinKeyBifEntry>();
-            clone.EntriesResource = this.EntriesResource.Clone<ChitinKeyResourceEntry>();
+            clone.Header = this.Header.Clone() as KeyTableHeader;
+            clone.EntriesBif = this.EntriesBif.Clone<KeyTableBifEntry>();
+            clone.EntriesResource = this.EntriesResource.Clone<KeyTableResourceEntry>();
             clone.StoreBifNamesInMemory = this.StoreBifNamesInMemory;
 
             return clone;
@@ -323,11 +323,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
             builder.Append(this.StoreBifNamesInMemory);
 
             builder.AppendLine(StringFormat.ToStringAlignment("BIF entries"));
-            foreach (ChitinKeyBifEntry entry in this.EntriesBif)
+            foreach (KeyTableBifEntry entry in this.EntriesBif)
                 builder.Append(entry.ToString());
 
             builder.Append(StringFormat.ToStringAlignment("Resource entries"));
-            foreach (ChitinKeyResourceEntry entry in this.EntriesResource)
+            foreach (KeyTableResourceEntry entry in this.EntriesResource)
                 builder.Append(entry.ToString());
 
             return builder.ToString();

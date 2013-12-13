@@ -28,7 +28,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
     ///                                     * bits 13- 0: non-tileset file index (any 12 bit value, so long as it matches
     ///                                         the value used in the BIF file)
     /// </remarks>
-    public class ChitinKeyResourceEntry : IInfinityFormat, IDeepCloneable
+    public class KeyTableResourceEntry : IInfinityFormat, IDeepCloneable
     {
         #region Fields
         /// <summary>This property represents the name of the resource1.</summary>
@@ -47,7 +47,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
 
         #region Construction
         /// <summary>Default constructor</summary>
-        public ChitinKeyResourceEntry()
+        public KeyTableResourceEntry()
         {
             this.ResourceName = null;
             this.ResourceLocator = null;
@@ -57,7 +57,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
         /// <param name="name">Name of the resource</param>
         /// <param name="type">Type of the resource</param>
         /// <param name="locator">Locator for the resource</param>
-        public ChitinKeyResourceEntry(String name, ResourceType type, ResourceLocator1 locator)
+        public KeyTableResourceEntry(String name, ResourceType type, ResourceLocator1 locator)
         {
             this.ResourceName = ZString.FromString(name);
             this.ResourceType = type;
@@ -149,7 +149,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
         /// <returns>A deeply copied separate instance clone of the insance called from.</returns>
         public IDeepCloneable Clone()
         {
-            return this.MemberwiseClone() as ChitinKeyResourceEntry;
+            return this.MemberwiseClone() as KeyTableResourceEntry;
         }
         #endregion
     }

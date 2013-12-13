@@ -101,7 +101,7 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         /// <param name="keyName">Name of the key file that this resource is referencing/derived from</param>
         /// <param name="resource">The resource entry within a key file that this asset is referencing</param>
         /// <param name="containingArchive">The archive entry for which this asset is referencing</param>
-        public AssetReference(String keyName, ChitinKeyResourceEntry resource, ChitinKeyBifEntry containingArchive)
+        public AssetReference(String keyName, KeyTableResourceEntry resource, KeyTableBifEntry containingArchive)
         {
             this.assetType = resource.ResourceType.ToFileExtension();
 
@@ -151,23 +151,23 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         /// <summary>Gets a string describing the specified locations for a displayable file path</summary>
         /// <param name="locations">The locations of a BIF archive</param>
         /// <returns>The descriptive locations of a BIF archive</returns>
-        protected String GetLocationString(ChitinKeyBifLocationEnum locations)
+        protected String GetLocationString(KeyTableBifLocationEnum locations)
         {
             List<String> keyLocations = new List<String>();
 
-            if ((locations & ChitinKeyBifLocationEnum.HardDrive) == ChitinKeyBifLocationEnum.HardDrive)
+            if ((locations & KeyTableBifLocationEnum.HardDrive) == KeyTableBifLocationEnum.HardDrive)
                 keyLocations.Add("HD0");
-            if ((locations & ChitinKeyBifLocationEnum.Disc1) == ChitinKeyBifLocationEnum.Disc1)
+            if ((locations & KeyTableBifLocationEnum.Disc1) == KeyTableBifLocationEnum.Disc1)
                 keyLocations.Add("CD1");
-            if ((locations & ChitinKeyBifLocationEnum.Disc2) == ChitinKeyBifLocationEnum.Disc2)
+            if ((locations & KeyTableBifLocationEnum.Disc2) == KeyTableBifLocationEnum.Disc2)
                 keyLocations.Add("CD2");
-            if ((locations & ChitinKeyBifLocationEnum.Disc3) == ChitinKeyBifLocationEnum.Disc3)
+            if ((locations & KeyTableBifLocationEnum.Disc3) == KeyTableBifLocationEnum.Disc3)
                 keyLocations.Add("CD3");
-            if ((locations & ChitinKeyBifLocationEnum.Disc4) == ChitinKeyBifLocationEnum.Disc4)
+            if ((locations & KeyTableBifLocationEnum.Disc4) == KeyTableBifLocationEnum.Disc4)
                 keyLocations.Add("CD4");
-            if ((locations & ChitinKeyBifLocationEnum.Disc5) == ChitinKeyBifLocationEnum.Disc5)
+            if ((locations & KeyTableBifLocationEnum.Disc5) == KeyTableBifLocationEnum.Disc5)
                 keyLocations.Add("CD5");
-            if ((locations & ChitinKeyBifLocationEnum.Disc6) == ChitinKeyBifLocationEnum.Disc6)
+            if ((locations & KeyTableBifLocationEnum.Disc6) == KeyTableBifLocationEnum.Disc6)
                 keyLocations.Add("CD6");
 
             StringBuilder builder = new StringBuilder();

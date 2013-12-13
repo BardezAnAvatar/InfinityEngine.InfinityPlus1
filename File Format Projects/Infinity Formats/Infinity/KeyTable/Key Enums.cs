@@ -4,7 +4,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
 {
     /// <summary>This enum indicates the location of a given BIFF file</summary>
     [Flags]
-    public enum ChitinKeyBifLocationEnum : ushort /* UInt16 */
+    public enum KeyTableBifLocationEnum : ushort /* UInt16 */
     {
         MaskAll = UInt16.MaxValue,
         None = 0,       //ease of use flag that indicates that the locations are all unset
@@ -19,46 +19,46 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
     }
 
     /// <summary>Provides extension methods for the AssetLocation enum</summary>
-    public static class ChitinKeyBifLocationEnumExtender
+    public static class KeyTableBifLocationEnumExtender
     {
         /// <summary>Gets the short name for the asset location</summary>
         /// <param name="asset">The asset to get the short name for</param>
         /// <returns>The short name of the asset</returns>
-        public static String GetShortName(this ChitinKeyBifLocationEnum location)
+        public static String GetShortName(this KeyTableBifLocationEnum location)
         {
             String shortName = null;
 
             switch (location)
             {
-                case ChitinKeyBifLocationEnum.HardDrive:
+                case KeyTableBifLocationEnum.HardDrive:
                     shortName = "HD0";
                     break;
 
-                case ChitinKeyBifLocationEnum.Cache:
+                case KeyTableBifLocationEnum.Cache:
                     shortName = "cache";
                     break;
 
-                case ChitinKeyBifLocationEnum.Disc1:
+                case KeyTableBifLocationEnum.Disc1:
                     shortName = "CD1";
                     break;
 
-                case ChitinKeyBifLocationEnum.Disc2:
+                case KeyTableBifLocationEnum.Disc2:
                     shortName = "CD2";
                     break;
 
-                case ChitinKeyBifLocationEnum.Disc3:
+                case KeyTableBifLocationEnum.Disc3:
                     shortName = "CD3";
                     break;
 
-                case ChitinKeyBifLocationEnum.Disc4:
+                case KeyTableBifLocationEnum.Disc4:
                     shortName = "CD4";
                     break;
 
-                case ChitinKeyBifLocationEnum.Disc5:
+                case KeyTableBifLocationEnum.Disc5:
                     shortName = "CD5";
                     break;
 
-                case ChitinKeyBifLocationEnum.Disc6:
+                case KeyTableBifLocationEnum.Disc6:
                     shortName = "CD6";
                     break;
             }

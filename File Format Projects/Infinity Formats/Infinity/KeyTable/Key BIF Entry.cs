@@ -25,7 +25,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
     ///                                     * Bit G determines if the file is in the \cache directory
     ///                                     * Bit H determines if the file is in the \data directory
     /// </remarks>
-    public class ChitinKeyBifEntry : IInfinityFormat, IDeepCloneable
+    public class KeyTableBifEntry : IInfinityFormat, IDeepCloneable
     {
         #region Protected Members
         /// <summary>This four-byte value indicates the (expected) length of the BIF file</summary>
@@ -38,7 +38,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
         protected UInt16 lengthBifFileName;
 
         /// <summary>This two-byte value indicates the location(s) of the BIF file within the engine.</summary>
-        protected ChitinKeyBifLocationEnum bifLocationFlags; 
+        protected KeyTableBifLocationEnum bifLocationFlags; 
         #endregion
 
 
@@ -68,7 +68,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
         public ZString BifFileName { get; set; }
 
         /// <summary>This two-byte value indicates the location(s) of the BIF file within the engine.</summary>
-        public ChitinKeyBifLocationEnum BifLocationFlags
+        public KeyTableBifLocationEnum BifLocationFlags
         {
             get { return this.bifLocationFlags; }
             set { this.bifLocationFlags = value; }
@@ -76,64 +76,64 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
 
         public Boolean LocationInstallDirectory
         {
-            get { return (ChitinKeyBifLocationEnum.HardDrive & this.bifLocationFlags) == ChitinKeyBifLocationEnum.HardDrive; }
-            set { this.bifLocationFlags |= ChitinKeyBifLocationEnum.HardDrive; }
+            get { return (KeyTableBifLocationEnum.HardDrive & this.bifLocationFlags) == KeyTableBifLocationEnum.HardDrive; }
+            set { this.bifLocationFlags |= KeyTableBifLocationEnum.HardDrive; }
         }
 
         public Boolean LocationCache
         {
-            get { return (ChitinKeyBifLocationEnum.Cache & this.bifLocationFlags) == ChitinKeyBifLocationEnum.Cache; }
-            set { this.bifLocationFlags |= ChitinKeyBifLocationEnum.Cache; }
+            get { return (KeyTableBifLocationEnum.Cache & this.bifLocationFlags) == KeyTableBifLocationEnum.Cache; }
+            set { this.bifLocationFlags |= KeyTableBifLocationEnum.Cache; }
         }
 
         public Boolean LocationDisc1
         {
-            get { return (ChitinKeyBifLocationEnum.Disc1 & this.bifLocationFlags) == ChitinKeyBifLocationEnum.Disc1; }
-            set { this.bifLocationFlags |= ChitinKeyBifLocationEnum.Disc1; }
+            get { return (KeyTableBifLocationEnum.Disc1 & this.bifLocationFlags) == KeyTableBifLocationEnum.Disc1; }
+            set { this.bifLocationFlags |= KeyTableBifLocationEnum.Disc1; }
         }
 
         public Boolean LocationDisc2
         {
-            get { return (ChitinKeyBifLocationEnum.Disc2 & this.bifLocationFlags) == ChitinKeyBifLocationEnum.Disc2; }
-            set { this.bifLocationFlags |= ChitinKeyBifLocationEnum.Disc2; }
+            get { return (KeyTableBifLocationEnum.Disc2 & this.bifLocationFlags) == KeyTableBifLocationEnum.Disc2; }
+            set { this.bifLocationFlags |= KeyTableBifLocationEnum.Disc2; }
         }
 
         public Boolean LocationDisc3
         {
-            get { return (ChitinKeyBifLocationEnum.Disc3 & this.bifLocationFlags) == ChitinKeyBifLocationEnum.Disc3; }
-            set { this.bifLocationFlags |= ChitinKeyBifLocationEnum.Disc3; }
+            get { return (KeyTableBifLocationEnum.Disc3 & this.bifLocationFlags) == KeyTableBifLocationEnum.Disc3; }
+            set { this.bifLocationFlags |= KeyTableBifLocationEnum.Disc3; }
         }
 
         public Boolean LocationDisc4
         {
-            get { return (ChitinKeyBifLocationEnum.Disc4 & this.bifLocationFlags) == ChitinKeyBifLocationEnum.Disc4; }
-            set { this.bifLocationFlags |= ChitinKeyBifLocationEnum.Disc4; }
+            get { return (KeyTableBifLocationEnum.Disc4 & this.bifLocationFlags) == KeyTableBifLocationEnum.Disc4; }
+            set { this.bifLocationFlags |= KeyTableBifLocationEnum.Disc4; }
         }
 
         public Boolean LocationDisc5
         {
-            get { return (ChitinKeyBifLocationEnum.Disc5 & this.bifLocationFlags) == ChitinKeyBifLocationEnum.Disc5; }
-            set { this.bifLocationFlags |= ChitinKeyBifLocationEnum.Disc5; }
+            get { return (KeyTableBifLocationEnum.Disc5 & this.bifLocationFlags) == KeyTableBifLocationEnum.Disc5; }
+            set { this.bifLocationFlags |= KeyTableBifLocationEnum.Disc5; }
         }
 
         public Boolean LocationDisc6
         {
-            get { return (ChitinKeyBifLocationEnum.Disc6 & this.bifLocationFlags) == ChitinKeyBifLocationEnum.Disc6; }
-            set { this.bifLocationFlags |= ChitinKeyBifLocationEnum.Disc6; }
+            get { return (KeyTableBifLocationEnum.Disc6 & this.bifLocationFlags) == KeyTableBifLocationEnum.Disc6; }
+            set { this.bifLocationFlags |= KeyTableBifLocationEnum.Disc6; }
         }
         #endregion
 
 
         #region Construction
         /// <summary>Default constructor</summary>
-        public ChitinKeyBifEntry() { }
+        public KeyTableBifEntry() { }
 
         /// <summary>Definition constructor</summary>
         /// <param name="length">The (expected) length of the BIF file</param>
         /// <param name="offsetName">Offset to the filename of the BIF file</param>
         /// <param name="name">Name of this BIFF archive</param>
         /// <param name="locations">Flags indicating the location(s) of the BIF file within the engine</param>
-        public ChitinKeyBifEntry(UInt32 length, UInt32 offsetName, String name, ChitinKeyBifLocationEnum locations)
+        public KeyTableBifEntry(UInt32 length, UInt32 offsetName, String name, KeyTableBifLocationEnum locations)
         {
             this.lengthBifFile = length;
             this.offsetBifFileName = offsetName;
@@ -183,7 +183,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
             this.lengthBifFileName = ReusableIO.ReadUInt16FromArray(buffer, 0x8);
 
             //BIF location flags
-            this.bifLocationFlags = (ChitinKeyBifLocationEnum)ReusableIO.ReadUInt16FromArray(buffer, 0xA);
+            this.bifLocationFlags = (KeyTableBifLocationEnum)ReusableIO.ReadUInt16FromArray(buffer, 0xA);
         }
 
         /// <summary>This private method reads the referenced string from the file</summary>
@@ -289,7 +289,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
         /// <returns>A deeply copied separate instance clone of the insance called from.</returns>
         public IDeepCloneable Clone()
         {
-            return this.MemberwiseClone() as ChitinKeyBifEntry;
+            return this.MemberwiseClone() as KeyTableBifEntry;
         }
         #endregion
     }

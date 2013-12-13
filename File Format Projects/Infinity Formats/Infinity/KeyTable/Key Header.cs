@@ -27,7 +27,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
     ///     addtional 40 bytes, 4 for the build years since 1900, 4 for the days since january 1, and 32 reserved bytes; if this format was
     ///     in fact the same, then they just overwrote these values at 0x18 when generating the key file, [or BioWare could not version anything properly ;)]
     /// </remarks>
-    public class ChitinKeyHeader : InfinityFormat, IDeepCloneable
+    public class KeyTableHeader : InfinityFormat, IDeepCloneable
     {
         #region Fields
         /// <summary>This two-byte value represents the count of BIF entries in the key file.</summary>
@@ -119,7 +119,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
         /// <remarks>No Deep Copy provided since object data is Strings and Integers, and strings are immutable.</remarks>
         public IDeepCloneable Clone()
         {
-            return this.MemberwiseClone() as ChitinKeyHeader; 
+            return this.MemberwiseClone() as KeyTableHeader; 
         }
         #endregion
     }

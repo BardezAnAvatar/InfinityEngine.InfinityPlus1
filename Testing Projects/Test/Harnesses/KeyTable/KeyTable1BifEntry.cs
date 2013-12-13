@@ -16,7 +16,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.ChitinKey
         protected const String configKey = "Test.Key.Key1Path";
 
         /// <summary>Format instance to test</summary>
-        protected ChitinKeyBifEntry Entry { get; set; }
+        protected KeyTableBifEntry Entry { get; set; }
         #endregion
 
         #region Construction
@@ -42,7 +42,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.ChitinKey
         {
             using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
             {
-                this.Entry = new ChitinKeyBifEntry();
+                this.Entry = new KeyTableBifEntry();
                 ReusableIO.SeekIfAble(stream, 24);
                 this.Entry.Read(stream);
 
