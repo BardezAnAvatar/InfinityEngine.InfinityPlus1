@@ -155,9 +155,9 @@
     <Compile Include="Harnesses\TalkOverride\TOT Test.cs" />
     <Compile Include="Harnesses\TalkOverride\TOH Test.cs" />
     <Compile Include="Harnesses\Tester Base.cs" />
-    <Compile Include="Harnesses\TextTable\TextLocationKeyHeaderTest.cs" />
-    <Compile Include="Harnesses\TextTable\TextLocationKeyStringReferenceEntryTest.cs" />
-    <Compile Include="Harnesses\TextTable\TextLocationKeyTest.cs" />
+    <Compile Include="Harnesses\TalkTable\TalkTableHeaderTest.cs" />
+    <Compile Include="Harnesses\TalkTable\TalkTableStringReferenceEntryTest.cs" />
+    <Compile Include="Harnesses\TalkTable\TalkTableTest.cs" />
     <Compile Include="Harnesses\TileSet\Tis Test.cs" />
     <Compile Include="Harnesses\TileSet\Tis Header Test.cs" />
     <Compile Include="Harnesses\TwoDimensionalArray\TwoDinensionalArray1Test.cs" />

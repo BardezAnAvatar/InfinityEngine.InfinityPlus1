@@ -8,7 +8,7 @@ using Bardez.Projects.InfinityPlus1.Test;
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.TextLocationKey
 {
     /// <summary>This class tests the usable methods in the InfinityPlus1.Files.TextLocationKeyStringReference class</summary>
-    public class TextLocationKeyStringReferenceEntryTest : FileTesterBase
+    public class TalkTableStringReferenceEntryTest : FileTesterBase
     {
         #region Fields
         /// <summary>Constant key to look up in app.config</summary>
@@ -20,7 +20,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.TextLocationKey
 
         #region Construction
         /// <summary>Default constructor</summary>
-        public TextLocationKeyStringReferenceEntryTest()
+        public TalkTableStringReferenceEntryTest()
         {
             this.InitializeInstance();
         }
@@ -31,7 +31,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.TextLocationKey
         /// <param name="e">Specific initialization event parameters</param>
         protected override void InitializeTestData(Object sender, EventArgs e)
         {
-            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(TextLocationKeyStringReferenceEntryTest.configKey);
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(TalkTableStringReferenceEntryTest.configKey);
         }
 
         /// <summary>Event to raise for testing instance(s)</summary>
