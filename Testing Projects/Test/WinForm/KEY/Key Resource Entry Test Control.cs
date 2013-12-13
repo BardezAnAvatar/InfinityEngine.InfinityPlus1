@@ -6,13 +6,13 @@ using Bardez.Projects.Utility;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.KEY
 {
     /// <summary>User control for testing the ChitinKey BIFF entry class</summary>
-    public class KeyResourceEntryTestControl : HarnessFileBaseTestControlBase<ChitinKey1ResourceEntryTest>
+    public class KeyResourceEntryTestControl : HarnessFileBaseTestControlBase<KeyTable1ResourceEntryTest>
     {
         /// <summary>Default constructor</summary>
         public KeyResourceEntryTestControl()
         {
             this.InitializeComponent();
-            this.Harness = new ChitinKey1ResourceEntryTest();
+            this.Harness = new KeyTable1ResourceEntryTest();
             this.InitializeControlFields();
         }
     }

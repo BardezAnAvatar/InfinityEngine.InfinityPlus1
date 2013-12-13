@@ -10,7 +10,7 @@ using Bardez.Projects.ReusableCode;
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.ChitinKey
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey.ChitinKey1 class.</summary>
-    public class ChitinKey1Test : FileTesterBase
+    public class KeyTable1Test : FileTesterBase
     {
         #region Fields
         /// <summary>Constant key to look up in app.config</summary>
@@ -22,7 +22,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.ChitinKey
 
         #region Construction
         /// <summary>Default constructor</summary>
-        public ChitinKey1Test()
+        public KeyTable1Test()
         {
             this.InitializeInstance();
         }
@@ -33,7 +33,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.ChitinKey
         /// <param name="e">Specific initialization event parameters</param>
         protected override void InitializeTestData(Object sender, EventArgs e)
         {
-            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(ChitinKey1Test.configKey);
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(KeyTable1Test.configKey);
         }
 
         /// <summary>Event to raise for testing instance(s)</summary>
