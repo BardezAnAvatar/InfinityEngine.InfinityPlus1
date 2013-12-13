@@ -6,7 +6,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable;
 using Bardez.Projects.ReusableCode;
 using Bardez.Projects.InfinityPlus1.Test;
 
-namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.ChitinKey
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.KeyTable
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey.ChitinKeyBifEntry class.</summary>
     public class KeyTable1BifEntryTest : FileTesterBase

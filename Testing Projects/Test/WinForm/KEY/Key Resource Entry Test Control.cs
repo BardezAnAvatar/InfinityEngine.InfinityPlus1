@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Bardez.Projects.InfinityPlus1.Test.Harnesses.ChitinKey;
+using Bardez.Projects.InfinityPlus1.Test.Harnesses.KeyTable;
 using Bardez.Projects.Utility;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.KEY

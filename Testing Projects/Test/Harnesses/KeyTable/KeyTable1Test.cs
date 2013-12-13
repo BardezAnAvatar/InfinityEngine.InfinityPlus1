@@ -7,7 +7,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable;
 using Bardez.Projects.InfinityPlus1.Test;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.ChitinKey
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.KeyTable
 {
     /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.ChitinKey.ChitinKey1 class.</summary>
     public class KeyTable1Test : FileTesterBase
