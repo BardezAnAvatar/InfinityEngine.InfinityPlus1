@@ -48,11 +48,7 @@
     <Compile Include="Assets\Generalized Asset Type.cs" />
     <Compile Include="Assets\IAssetManager.cs" />
     <Compile Include="Assets\Infinity Asset Manager.cs" />
-    <Compile Include="Engine Type.cs" />
     <Compile Include="Factories\Asset Manager Factory.cs" />
-    <Compile Include="Factories\Biff Factory.cs" />
-    <Compile Include="Factories\Key Factory.cs" />
-    <Compile Include="Infinity Engines.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Assets\Asset Locator.cs" />
     <Compile Include="Assets\Save Folder.cs" />

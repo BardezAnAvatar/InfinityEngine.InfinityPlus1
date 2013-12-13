@@ -70,12 +70,6 @@
     <Compile Include="Forms\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Bogus.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Bogus.Designer.cs">
-      <DependentUpon>Bogus.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Main Form.cs">
       <SubType>Form</SubType>
     </Compile>

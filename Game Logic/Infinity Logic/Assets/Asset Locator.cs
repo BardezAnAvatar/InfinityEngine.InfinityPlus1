@@ -69,7 +69,7 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         /// <summary>Key file definition constructor</summary>
         /// <param name="location">The containing key name of the asset</param>
         /// <param name="resource">The chitin.key resource entry</param>
-        public AssetLocator(String keyFile, ChitinKeyResourceEntry resource)
+        public AssetLocator(String keyFile, KeyTableResourceEntry resource)
         {
             this.keyFileName = keyFile;
             this.resourceLocator = resource.ResourceLocator;

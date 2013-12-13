@@ -6,7 +6,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable;
-using Bardez.Projects.InfinityPlus1.Logic.Infinity;
+using Bardez.Projects.InfinityPlus1.Information;
 
 namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
 {
@@ -64,6 +64,11 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         ///     asset.
         /// </remarks>
         AssetNode GetAssetTree_LocationInstances();
+
+        /// <summary>Gets the asset tree showing overridden instances, in their locations, grouped by type</summary>
+        /// <returns>The asset tree showing overridden assets found, grouped by location and asset type</returns>
+        /// <remarks>Matches design view 4</remarks>
+        AssetNode GetAssetTree_LocationGroupedOverridden();
         #endregion
 
 
@@ -107,9 +112,7 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         /// <param name="biography">Optional character biography asset to remove</param>
         void RemoveCharacter(AssetReference character, AssetReference biography = null);
 
-        /// <summary>Gets the type of engine that this asset manager exposes</summary>
-        /// <returns>The type of engine that this asset manager exposes</returns>
-        EngineType GetEngineType();
+        //TODO: other specific asset exposures: portraits (each view does large + small), soundsets (match regex (.*)[.]{1}\.wav) which are grouped
         #endregion
 
 
@@ -120,13 +123,13 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         /// <param name="directoryPath">Path of the source directory to create a BIF archive from</param>
         /// <param name="targetDirectory">Target directory in which to place the created BIF file</param>
         /// <param name="overrides">Flag indicating whether the these assets will override current assets being managed</param>
-        void CreateBiffFromDirectory(String keyFile, ChitinKeyBifLocationEnum location, String directoryPath, String targetDirectory, Boolean overrides = false);
+        void CreateBiffFromDirectory(String keyFile, KeyTableBifLocationEnum location, String directoryPath, String targetDirectory, Boolean overrides = false);
 
         /// <summary>Removes an archive from the specified key file</summary>
         /// <param name="keyFile">Key file to remove an archive from</param>
         /// <param name="location">Locations (HD0, CD1, etc.) indicating where the BIFF should be removed</param>
         /// <param name="biffIndex">Index of the archive to remove</param>
-        void RemoveArchive(String keyFile, ChitinKeyBifLocationEnum location, Int32 biffIndex);
+        void RemoveArchive(String keyFile, KeyTableBifLocationEnum location, Int32 biffIndex);
 
         /// <summary>Saves the existing key file and any changes made to it</summary>
         /// <param name="keyFile">Name of the key file to save</param>
@@ -143,6 +146,25 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         /// <param name="location">Targeted asset to remove from a key file</param>
         /// <param name="removeFromArchive">Flag indicating whether to remove the file from the housing archive</param>
         void RemoveAssetFromKey(String keyFile, ResourceLocator1 locator, Boolean removeFromArchive = false);
+        #endregion
+
+
+        #region Informational Displays
+        /// <summary>Gets the game engine instance that this asset manager currently exposes</summary>
+        /// <returns>The game engine instance that this asset manager currently exposes</returns>
+        GameEngine GetGameEngine();
+
+        /// <summary>Gets the game installation instance that this asset manager currently exposes</summary>
+        /// <returns>The game installation instance that this asset manager currently exposes</returns>
+        GameInstall GetGameInstall();
+
+        /// <summary>Gets the install application directory</summary>
+        /// <returns>The install application directory</returns>
+        String GetApplicationDirectory();
+
+        /// <summary>Gets the related User directory</summary>
+        /// <returns>The related User directory</returns>
+        String GetUserDirectory();
         #endregion
     }
 }

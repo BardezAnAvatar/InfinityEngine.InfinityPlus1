@@ -16,21 +16,21 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.TextManager
         /// <param name="strref">String index to retrieve</param>
         /// <param name="gender">Gender of the string being requested</param>
         /// <returns>The requested String index</returns>
-        TextLocationKeyStringReference GetString(LanguageCode language, Int32 strref, LanguageGender gender = LanguageGender.Masculine);
+        TalkTableStringReference GetString(LanguageCode language, Int32 strref, LanguageGender gender = LanguageGender.Masculine);
 
         /// <summary>Updates the specified string structure</summary>
         /// <param name="language">The language specified to use</param>
         /// <param name="index">Index of the string to update</param>
         /// <param name="strref">The data to update the string with</param>
         /// <param name="gender">Gender of the string being updated</param>
-        void UpdateString(LanguageCode language, Int32 index, TextLocationKeyStringReference strref, LanguageGender gender = LanguageGender.Masculine);
+        void UpdateString(LanguageCode language, Int32 index, TalkTableStringReference strref, LanguageGender gender = LanguageGender.Masculine);
 
         /// <summary>Adds the string to the TLK file</summary>
         /// <param name="language">The language specified to use</param>
         /// <param name="strref">The data to add the string with</param>
         /// <param name="gender">Gender of the string being added</param>
         /// <returns>The new index of the added string</returns>
-        Int32 AddString(LanguageCode language, TextLocationKeyStringReference strref, LanguageGender gender = LanguageGender.Masculine);
+        Int32 AddString(LanguageCode language, TalkTableStringReference strref, LanguageGender gender = LanguageGender.Masculine);
 
         /// <summary>Saves any changes to the masculine Dialog.tlk file</summary>
         /// <param name="language">Language code of the tlk file to save</param>

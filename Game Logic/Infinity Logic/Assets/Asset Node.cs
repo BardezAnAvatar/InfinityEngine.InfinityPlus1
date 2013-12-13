@@ -17,6 +17,9 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
 
         /// <summary>Represents the displayed name of this node</summary>
         protected String name;
+
+        /// <summary>Display data indicating the generalized type of the asset described</summary>
+        protected GeneralizedAssetType generalType;
         #endregion
 
 
@@ -30,6 +33,9 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
 
         /// <summary>Represents the displayed name of this node</summary>
         public String Name { get { return this.name; } }
+
+        /// <summary>Display data indicating the generalized type of the asset described</summary>
+        public GeneralizedAssetType GeneralType { get { return this.generalType; } }
         #endregion
 
 
@@ -41,25 +47,24 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
             this.children = new List<AssetNode>();
             this.name = name;
             this.asset = null;
-        }
-
-        /// <summary>Asset definition constructor</summary>
-        /// <param name="asset">Asset related to this node</param>
-        public AssetNode(AssetReference asset)
-        {
-            this.children = new List<AssetNode>();
-            this.name = asset.AssetName;
-            this.asset = asset;
+            this.generalType = GeneralizedAssetType.Folder; //assume a folder when no reference was provided
         }
 
         /// <summary>Definition constructor</summary>
-        /// <param name="name">Name of the node</param>
         /// <param name="asset">Asset related to this node</param>
-        public AssetNode(String name, AssetReference asset)
+        /// <param name="name">Name of the node</param>
+        public AssetNode(AssetReference asset, String name = null)
         {
             this.children = new List<AssetNode>();
-            this.name = name;
+            
+            if (name != null)
+                this.name = name;
+            else
+                this.name = asset.AssetName;
+
             this.asset = asset;
+
+            this.generalType = AssetClassifier.Classify(asset.AssetType);
         }
         #endregion
 

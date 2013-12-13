@@ -14,7 +14,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1;
-using Bardez.Projects.InfinityPlus1.Logic.Infinity;
+using Bardez.Projects.InfinityPlus1.Information;
 using Bardez.Projects.InfinityPlus1.Logic.Infinity.Factories;
 using Bardez.Projects.ReusableCode;
 
@@ -33,14 +33,6 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
     //  key-specified:
     //      BIFF archives
     #endregion
-
-
-    //TODO: changes in code
-    //  1) Based on research, I need to update how assets are collected in reference to HD0 and so forth, specifically Dialog.tlk and music
-    //  2) Based on some questions about how the asset manager is going to work/should work, I think that
-    //      I should collect the contained resources as I am, but in the case of the override assets, I should
-    //      probably calculate that; I can use an isAssetTreeDirty flag for the add/remove asset methods
-    //      and regenerate the tree when an operation comes in.
 
     /// <summary>Represents the basic asset manager for Infinity Engine installs</summary>
     public class InfinityAssetManager : IAssetManager
@@ -310,9 +302,9 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         {
             //map the resources
             this.assetsByContainer[InfinityAssetManager.StringKeyAssetsCollection] = new List<AssetReference>();
-            foreach (ChitinKeyResourceEntry resource in this.chitinKey.EntriesResource)
+            foreach (KeyTableResourceEntry resource in this.chitinKey.EntriesResource)
             {
-                ChitinKeyBifEntry biff = this.chitinKey.EntriesBif[Convert.ToInt32(resource.ResourceLocator.BiffIndex)];
+                KeyTableBifEntry biff = this.chitinKey.EntriesBif[Convert.ToInt32(resource.ResourceLocator.BiffIndex)];
                 AssetReference asset = new AssetReference(InfinityAssetManager.StringKeyFile, resource, biff);
                 this.assetsByContainer[InfinityAssetManager.StringKeyAssetsCollection].Add(asset);
             }
@@ -627,7 +619,7 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
             {
                 if (location.ResourceLocator != null)
                 {
-                    ChitinKeyBifEntry bifEntry = this.chitinKey.EntriesBif[Convert.ToInt32(location.ResourceLocator.BiffIndex)];
+                    KeyTableBifEntry bifEntry = this.chitinKey.EntriesBif[Convert.ToInt32(location.ResourceLocator.BiffIndex)];
 
                     String bifName = bifEntry.BifFileName.Value;
                     String bifPath = this.LocateBiffArchive(bifEntry);
@@ -670,24 +662,24 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         /// <summary>Returns the full file system path to the BIFF archive specified</summary>
         /// <param name="biffName">The biff entry to get a location for</param>
         /// <returns>The full file system path to the BIFF archive specified</returns>
-        protected String LocateBiffArchive(ChitinKeyBifEntry biffEntry)
+        protected String LocateBiffArchive(KeyTableBifEntry biffEntry)
         {
             String biffPath = null;
 
             //get the first found path that can be used
-            if ((biffEntry.BifLocationFlags & ChitinKeyBifLocationEnum.HardDrive) == ChitinKeyBifLocationEnum.HardDrive)
+            if ((biffEntry.BifLocationFlags & KeyTableBifLocationEnum.HardDrive) == KeyTableBifLocationEnum.HardDrive)
                 biffPath = Path.Combine(this.paths.HD0, biffEntry.BifFileName.Value);
-            else if ((biffEntry.BifLocationFlags & ChitinKeyBifLocationEnum.Disc1) == ChitinKeyBifLocationEnum.Disc1)
+            else if ((biffEntry.BifLocationFlags & KeyTableBifLocationEnum.Disc1) == KeyTableBifLocationEnum.Disc1)
                 biffPath = Path.Combine(this.paths.CD1, biffEntry.BifFileName.Value);
-            else if ((biffEntry.BifLocationFlags & ChitinKeyBifLocationEnum.Disc2) == ChitinKeyBifLocationEnum.Disc2)
+            else if ((biffEntry.BifLocationFlags & KeyTableBifLocationEnum.Disc2) == KeyTableBifLocationEnum.Disc2)
                 biffPath = Path.Combine(this.paths.CD2, biffEntry.BifFileName.Value);
-            else if ((biffEntry.BifLocationFlags & ChitinKeyBifLocationEnum.Disc3) == ChitinKeyBifLocationEnum.Disc3)
+            else if ((biffEntry.BifLocationFlags & KeyTableBifLocationEnum.Disc3) == KeyTableBifLocationEnum.Disc3)
                 biffPath = Path.Combine(this.paths.CD3, biffEntry.BifFileName.Value);
-            else if ((biffEntry.BifLocationFlags & ChitinKeyBifLocationEnum.Disc4) == ChitinKeyBifLocationEnum.Disc4)
+            else if ((biffEntry.BifLocationFlags & KeyTableBifLocationEnum.Disc4) == KeyTableBifLocationEnum.Disc4)
                 biffPath = Path.Combine(this.paths.CD4, biffEntry.BifFileName.Value);
-            else if ((biffEntry.BifLocationFlags & ChitinKeyBifLocationEnum.Disc5) == ChitinKeyBifLocationEnum.Disc5)
+            else if ((biffEntry.BifLocationFlags & KeyTableBifLocationEnum.Disc5) == KeyTableBifLocationEnum.Disc5)
                 biffPath = Path.Combine(this.paths.CD5, biffEntry.BifFileName.Value);
-            else if ((biffEntry.BifLocationFlags & ChitinKeyBifLocationEnum.Disc6) == ChitinKeyBifLocationEnum.Disc6)
+            else if ((biffEntry.BifLocationFlags & KeyTableBifLocationEnum.Disc6) == KeyTableBifLocationEnum.Disc6)
                 biffPath = Path.Combine(this.paths.CD6, biffEntry.BifFileName.Value);
 
             return biffPath;
@@ -933,13 +925,13 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
             List<AssetReference> chitinAssets = this.assetsByContainer[InfinityAssetManager.StringKeyAssetsCollection];
 
             //load up HD0, which should always be present
-            this.PopulateAssetTree_PopulateKeyAssets_SpecificLocation(chitinKey, "HD0", ChitinKeyBifLocationEnum.HardDrive, chitinAssets);
-            this.PopulateAssetTree_PopulateKeyAssets_SpecificLocation(chitinKey, "CD1", ChitinKeyBifLocationEnum.Disc1, chitinAssets);
-            this.PopulateAssetTree_PopulateKeyAssets_SpecificLocation(chitinKey, "CD2", ChitinKeyBifLocationEnum.Disc2, chitinAssets);
-            this.PopulateAssetTree_PopulateKeyAssets_SpecificLocation(chitinKey, "CD3", ChitinKeyBifLocationEnum.Disc3, chitinAssets);
-            this.PopulateAssetTree_PopulateKeyAssets_SpecificLocation(chitinKey, "CD4", ChitinKeyBifLocationEnum.Disc4, chitinAssets);
-            this.PopulateAssetTree_PopulateKeyAssets_SpecificLocation(chitinKey, "CD5", ChitinKeyBifLocationEnum.Disc5, chitinAssets);
-            this.PopulateAssetTree_PopulateKeyAssets_SpecificLocation(chitinKey, "CD6", ChitinKeyBifLocationEnum.Disc6, chitinAssets);
+            this.PopulateAssetTree_PopulateKeyAssets_SpecificLocation(chitinKey, "HD0", KeyTableBifLocationEnum.HardDrive, chitinAssets);
+            this.PopulateAssetTree_PopulateKeyAssets_SpecificLocation(chitinKey, "CD1", KeyTableBifLocationEnum.Disc1, chitinAssets);
+            this.PopulateAssetTree_PopulateKeyAssets_SpecificLocation(chitinKey, "CD2", KeyTableBifLocationEnum.Disc2, chitinAssets);
+            this.PopulateAssetTree_PopulateKeyAssets_SpecificLocation(chitinKey, "CD3", KeyTableBifLocationEnum.Disc3, chitinAssets);
+            this.PopulateAssetTree_PopulateKeyAssets_SpecificLocation(chitinKey, "CD4", KeyTableBifLocationEnum.Disc4, chitinAssets);
+            this.PopulateAssetTree_PopulateKeyAssets_SpecificLocation(chitinKey, "CD5", KeyTableBifLocationEnum.Disc5, chitinAssets);
+            this.PopulateAssetTree_PopulateKeyAssets_SpecificLocation(chitinKey, "CD6", KeyTableBifLocationEnum.Disc6, chitinAssets);
 
             parent.Children.Add(chitinKey);
         }
@@ -949,7 +941,7 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         /// <param name="locationName">Name of the key location to add (HD0, CD1, CD2, etc.)</param>
         /// <param name="location">Specific location flag to match on</param>
         /// <param name="assets">Assets to query from</param>
-        protected void PopulateAssetTree_PopulateKeyAssets_SpecificLocation(AssetNode keyNode, String locationName, ChitinKeyBifLocationEnum location, IEnumerable<AssetReference> assets)
+        protected void PopulateAssetTree_PopulateKeyAssets_SpecificLocation(AssetNode keyNode, String locationName, KeyTableBifLocationEnum location, IEnumerable<AssetReference> assets)
         {
             IEnumerable<AssetReference> locationAssets = assets.Where(asset => asset.Locator != null && asset.Locator.ResourceLocator != null && (this.chitinKey.EntriesBif[Convert.ToInt32(asset.Locator.ResourceLocator.BiffIndex)].BifLocationFlags & location) == location);
             if (locationAssets.Count() > 0)
@@ -966,7 +958,7 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
 
             //isolate individual BIF entries referenced
             var indices = assets.Where(asset => asset.Locator != null && asset.Locator.ResourceLocator != null).Select(asset => asset.Locator.ResourceLocator.BiffIndex).Distinct();
-            Dictionary<Int32, ChitinKeyBifEntry> biffEntries = new Dictionary<Int32, ChitinKeyBifEntry>();
+            Dictionary<Int32, KeyTableBifEntry> biffEntries = new Dictionary<Int32, KeyTableBifEntry>();
             foreach (Int32 index in indices)
                 biffEntries[index] = this.chitinKey.EntriesBif[index];
 
@@ -1179,10 +1171,10 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         /// <param name="parent">Parent location (HD0, CD1, etc.) node within chitin.key to populate with BIFFs</param>
         /// <param name="biffEntries">Collection of BIFF entries and their entry indices to populate</param>
         /// <param name="assets">Assets to populate</param>
-        protected void PopulateAssetTree_PopulateBifsAndAssets(AssetNode parent, Dictionary<Int32, ChitinKeyBifEntry> biffEntries, IEnumerable<AssetReference> assets)
+        protected void PopulateAssetTree_PopulateBifsAndAssets(AssetNode parent, Dictionary<Int32, KeyTableBifEntry> biffEntries, IEnumerable<AssetReference> assets)
         {
             //iterate through BIFFs
-            foreach (KeyValuePair<Int32, ChitinKeyBifEntry> item in biffEntries)
+            foreach (KeyValuePair<Int32, KeyTableBifEntry> item in biffEntries)
             {
                 AssetNode relativeParent = parent;
 
@@ -1198,11 +1190,12 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
                 }
 
                 //Build an asset reference for the BIF itself
-                AssetLocation location = this.GetLocationsForBiff(item.Value.BifLocationFlags);
-                AssetReference biffAsset = new AssetReference(location, item.Value.BifFileName.Value);
+                //AssetLocation location = this.GetLocationsForBiff(item.Value.BifLocationFlags);
+                //AssetReference biffAsset = new AssetReference(location, item.Value.BifFileName.Value);
 
                 //add the last item, the BIF itself
-                AssetNode biffNode = new AssetNode(String.Format("{0} [Index {1}]", path[index], item.Key), biffAsset);
+                //AssetNode biffNode = new AssetNode(String.Format("{0} [Index {1}]", path[index], item.Key), biffAsset);
+                AssetNode biffNode = new AssetNode(String.Format("{0} [Index {1}]", path[index], item.Key));
                 relativeParent.Children.Add(biffNode);
 
                 relativeParent = biffNode;
@@ -1307,19 +1300,19 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         protected void PopulateAssetTree_CreateBiffNodesNoLocation(AssetNode parent)
         {
             //collect the biff entries for each of these BIFF assets
-            Dictionary<Int32, ChitinKeyBifEntry> biffEntries = new Dictionary<Int32, ChitinKeyBifEntry>();
+            Dictionary<Int32, KeyTableBifEntry> biffEntries = new Dictionary<Int32, KeyTableBifEntry>();
             for (Int32 index = 0; index < this.chitinKey.EntriesBif.Count; ++index)
                 biffEntries[index] = this.chitinKey.EntriesBif[index];
 
             //iterate through BIFFs
-            foreach (KeyValuePair<Int32, ChitinKeyBifEntry> item in biffEntries)
+            foreach (KeyValuePair<Int32, KeyTableBifEntry> item in biffEntries)
             {
                 //Build an asset reference for the BIF itself
                 AssetLocation location = this.GetLocationsForBiff(item.Value.BifLocationFlags);
                 AssetReference biffAsset = new AssetReference(location, item.Value.BifFileName.Value);
 
                 //add the last item, the BIF itself
-                AssetNode biffNode = new AssetNode(String.Format("{0} [Index {1}]", item.Value.BifFileName.Value, item.Key), biffAsset);
+                AssetNode biffNode = new AssetNode(biffAsset, String.Format("{0} [Index {1}]", item.Value.BifFileName.Value, item.Key));
                 parent.Children.Add(biffNode);
             }
         }
@@ -1331,7 +1324,7 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         protected void PopulateAssetTree_CreateBiffNodesInLocation(AssetNode parent, AssetLocation location, Boolean group)
         {
             //collect the biff entries for each of these BIFF assets
-            Dictionary<Int32, ChitinKeyBifEntry> biffEntries = new Dictionary<Int32, ChitinKeyBifEntry>();
+            Dictionary<Int32, KeyTableBifEntry> biffEntries = new Dictionary<Int32, KeyTableBifEntry>();
             for (Int32 index = 0; index < this.chitinKey.EntriesBif.Count; ++index)
                 biffEntries[index] = this.chitinKey.EntriesBif[index];
 
@@ -1343,7 +1336,7 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
                 biffContainerNode = parent;
 
             //iterate through BIFFs
-            foreach (KeyValuePair<Int32, ChitinKeyBifEntry> item in biffEntries)
+            foreach (KeyValuePair<Int32, KeyTableBifEntry> item in biffEntries)
             {
                 //Build an asset reference for the BIF itself
                 AssetLocation biffLocation = this.GetLocationsForBiff(item.Value.BifLocationFlags);
@@ -1356,7 +1349,7 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
                     relativeParent = this.TraverseToNode(relativeParent, Path.GetDirectoryName(item.Value.BifFileName.Value));
 
                     //add the last item, the BIF itself
-                    AssetNode biffNode = new AssetNode(String.Format("{0} [Index {1}]", item.Value.BifFileName.Value, item.Key), biffAsset);
+                    AssetNode biffNode = new AssetNode(biffAsset, String.Format("{0} [Index {1}]", item.Value.BifFileName.Value, item.Key));
                     relativeParent.Children.Add(biffNode);
                 }
             }
@@ -1370,14 +1363,14 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         protected void PopulateAssetTree_CreateBiffNodesInLocationWithGroup(AssetNode parent, AssetLocation location)
         {
             //collect the biff entries for each of these BIFF assets
-            Dictionary<Int32, ChitinKeyBifEntry> biffEntries = new Dictionary<Int32, ChitinKeyBifEntry>();
+            Dictionary<Int32, KeyTableBifEntry> biffEntries = new Dictionary<Int32, KeyTableBifEntry>();
             for (Int32 index = 0; index < this.chitinKey.EntriesBif.Count; ++index)
                 biffEntries[index] = this.chitinKey.EntriesBif[index];
 
             AssetNode biffContainerNode = new AssetNode("BIF");
 
             //iterate through BIFFs
-            foreach (KeyValuePair<Int32, ChitinKeyBifEntry> item in biffEntries)
+            foreach (KeyValuePair<Int32, KeyTableBifEntry> item in biffEntries)
             {
                 //Build an asset reference for the BIF itself
                 AssetLocation biffLocation = this.GetLocationsForBiff(item.Value.BifLocationFlags);
@@ -1387,7 +1380,7 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
                     AssetReference biffAsset = new AssetReference(location, item.Value.BifFileName.Value);
 
                     //add the last item, the BIF itself
-                    AssetNode biffNode = new AssetNode(String.Format("{0} [Index {1}]", item.Value.BifFileName.Value, item.Key), biffAsset);
+                    AssetNode biffNode = new AssetNode(biffAsset, String.Format("{0} [Index {1}]", item.Value.BifFileName.Value, item.Key));
                     biffContainerNode.Children.Add(biffNode);
                 }
             }
@@ -1571,13 +1564,6 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
             //the override hierarchy has now changed
             this.dirty = true;
         }
-
-        /// <summary>Gets the type of engine that this asset manager exposes</summary>
-        /// <returns>The type of engine that this asset manager exposes</returns>
-        public EngineType GetEngineType()
-        {
-            return EngineType.Infinity;
-        }
         #endregion
 
 
@@ -1588,7 +1574,7 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         /// <param name="directoryPath">Path of the source directory to create a BIF archive from</param>
         /// <param name="targetDirectory">Target directory in which to place the created BIF file (data, movies, etc.)</param>
         /// <param name="overrides">Flag indicating whether the these assets will override current assets being managed</param>
-        public void CreateBiffFromDirectory(String keyFile, ChitinKeyBifLocationEnum location, String directoryPath, String targetDirectory, Boolean overrides = false)
+        public void CreateBiffFromDirectory(String keyFile, KeyTableBifLocationEnum location, String directoryPath, String targetDirectory, Boolean overrides = false)
         {
             if (keyFile == null)
                 throw new ArgumentNullException("keyFile", "The specified key file was unexpectedly null.");
@@ -1602,7 +1588,7 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
                 throw new DirectoryNotFoundException(String.Format("Could not find the specified directory (\"{0}\").", directoryPath));
             else if (!Directory.Exists(targetDirectory))
                 throw new DirectoryNotFoundException(String.Format("Could not find the specified directory (\"{0}\").", targetDirectory));
-            else if (location == ChitinKeyBifLocationEnum.None)
+            else if (location == KeyTableBifLocationEnum.None)
                 throw new InvalidOperationException("The operation requested to add a BIF in no locations, thus there is no point in attempting it.");
 
             String[] files = Directory.GetFiles(directoryPath);
@@ -1620,7 +1606,7 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
             String describedLocation = Path.Combine(this.GetContainingLocationsForKey(location), targetDirectory, biffName);
 
             //create a collection to add to the combined resource pool after the artchive has been written
-            List<ChitinKeyResourceEntry> resourcesToAdd = new List<ChitinKeyResourceEntry>();
+            List<KeyTableResourceEntry> resourcesToAdd = new List<KeyTableResourceEntry>();
 
             //add each file in the directory
             foreach (String file in files)
@@ -1664,7 +1650,7 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
                         archive.Header.CountTileset = archive.Header.CountTileset + 1;
 
                         //build the chitin.key entry
-                        ChitinKeyResourceEntry resource = new ChitinKeyResourceEntry();
+                        KeyTableResourceEntry resource = new KeyTableResourceEntry();
                         resource.Initialize();
                         resource.ResourceName = ZString.FromString(fileNoExtension);
                         resource.ResourceLocator = locator;
@@ -1694,7 +1680,7 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
                         archive.Header.CountResource = archive.Header.CountResource + 1;
 
                         //build the chitin.key entry
-                        ChitinKeyResourceEntry resource = new ChitinKeyResourceEntry();
+                        KeyTableResourceEntry resource = new KeyTableResourceEntry();
                         resource.Initialize();
                         resource.ResourceName = ZString.FromString(fileNoExtension);
                         resource.ResourceLocator = locator;
@@ -1711,31 +1697,31 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
 
             //write the BIFF in each location specified
             Int64 size = 0; //the size should be the same in all instances.
-            if (location == (ChitinKeyBifLocationEnum.HardDrive & ChitinKeyBifLocationEnum.HardDrive))
+            if (location == (KeyTableBifLocationEnum.HardDrive & KeyTableBifLocationEnum.HardDrive))
                 size = this.WriteBiffToLocation(archive, targetDirectory, this.paths.HD0, biffName);
-            if (location == (ChitinKeyBifLocationEnum.HardDrive & ChitinKeyBifLocationEnum.Disc1))
+            if (location == (KeyTableBifLocationEnum.HardDrive & KeyTableBifLocationEnum.Disc1))
                 size = this.WriteBiffToLocation(archive, targetDirectory, this.paths.CD1, biffName);
-            if (location == (ChitinKeyBifLocationEnum.HardDrive & ChitinKeyBifLocationEnum.Disc2))
+            if (location == (KeyTableBifLocationEnum.HardDrive & KeyTableBifLocationEnum.Disc2))
                 size = this.WriteBiffToLocation(archive, targetDirectory, this.paths.CD2, biffName);
-            if (location == (ChitinKeyBifLocationEnum.HardDrive & ChitinKeyBifLocationEnum.Disc3))
+            if (location == (KeyTableBifLocationEnum.HardDrive & KeyTableBifLocationEnum.Disc3))
                 size = this.WriteBiffToLocation(archive, targetDirectory, this.paths.CD3, biffName);
-            if (location == (ChitinKeyBifLocationEnum.HardDrive & ChitinKeyBifLocationEnum.Disc4))
+            if (location == (KeyTableBifLocationEnum.HardDrive & KeyTableBifLocationEnum.Disc4))
                 size = this.WriteBiffToLocation(archive, targetDirectory, this.paths.CD4, biffName);
-            if (location == (ChitinKeyBifLocationEnum.HardDrive & ChitinKeyBifLocationEnum.Disc5))
+            if (location == (KeyTableBifLocationEnum.HardDrive & KeyTableBifLocationEnum.Disc5))
                 size = this.WriteBiffToLocation(archive, targetDirectory, this.paths.CD5, biffName);
-            if (location == (ChitinKeyBifLocationEnum.HardDrive & ChitinKeyBifLocationEnum.Disc6))
+            if (location == (KeyTableBifLocationEnum.HardDrive & KeyTableBifLocationEnum.Disc6))
                 size = this.WriteBiffToLocation(archive, targetDirectory, this.paths.CD6, biffName);
 
             //create a bif entry
             DirectoryInfo biffedDirectory = new DirectoryInfo(directoryPath);
 
-            ChitinKeyBifEntry biffEntry = new ChitinKeyBifEntry();
+            KeyTableBifEntry biffEntry = new KeyTableBifEntry();
             biffEntry.Initialize();
             biffEntry.BifLocationFlags = location;
             biffEntry.BifFileName = ZString.FromString(String.Format("{0}\\{1}.bif", targetDirectory, biffedDirectory.Name));
             biffEntry.LengthBifFile = Convert.ToUInt32(size);
 
-            foreach (ChitinKeyResourceEntry resource in resourcesToAdd)
+            foreach (KeyTableResourceEntry resource in resourcesToAdd)
             {
                 AssetReference asset = new AssetReference(InfinityAssetManager.StringKeyAssetsCollection, resource, biffEntry);
                 this.assetsByContainer[InfinityAssetManager.StringKeyAssetsCollection].Add(asset);
@@ -1775,13 +1761,13 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         /// <param name="keyFile">Key file to remove an archive from</param>
         /// <param name="location">Locations (HD0, CD1, etc.) indicating where the BIFF should be removed</param>
         /// <param name="biffIndex">Index of the archive to remove</param>
-        public void RemoveArchive(String keyFile, ChitinKeyBifLocationEnum location, Int32 biffIndex)
+        public void RemoveArchive(String keyFile, KeyTableBifLocationEnum location, Int32 biffIndex)
         {
             if (keyFile == null)
                 throw new ArgumentNullException("keyFile", "The specified key file was unexpectedly null.");
             else if (keyFile.ToLower() != InfinityAssetManager.StringKeyFile)
                 throw new InvalidOperationException("Chitin.key is the only valid key file for the infinity engine.");
-            else if (location == ChitinKeyBifLocationEnum.None)
+            else if (location == KeyTableBifLocationEnum.None)
                 throw new InvalidOperationException("The locations to remove are empty and therefore no operation to be performed");
             else if (biffIndex < 0)
                 throw new ArgumentOutOfRangeException("biffIndex", "The BIFF index is zero-based and must be greater than or equal to 0.");
@@ -1791,12 +1777,12 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
             Boolean deleted = false;
 
             //unset the locations specified
-            ChitinKeyBifLocationEnum current = this.chitinKey.EntriesBif[biffIndex].BifLocationFlags;
-            current = current & (ChitinKeyBifLocationEnum.MaskAll ^ location);
+            KeyTableBifLocationEnum current = this.chitinKey.EntriesBif[biffIndex].BifLocationFlags;
+            current = current & (KeyTableBifLocationEnum.MaskAll ^ location);
             this.chitinKey.EntriesBif[biffIndex].BifLocationFlags = current;
 
             //if the BIF no longer exists in any location, delete it
-            if (current == ChitinKeyBifLocationEnum.None)
+            if (current == KeyTableBifLocationEnum.None)
             {
                 this.chitinKey.EntriesBif.RemoveAt(biffIndex);
                 deleted = true;
@@ -1817,7 +1803,7 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
                 }
 
                 //update existing resource indexes to account for the lowered index
-                foreach (ChitinKeyResourceEntry entry in this.chitinKey.EntriesResource)
+                foreach (KeyTableResourceEntry entry in this.chitinKey.EntriesResource)
                 {
                     if (entry.ResourceLocator.BiffIndex > biffIndex)
                         entry.ResourceLocator.BiffIndex--;
@@ -1879,8 +1865,8 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
                 throw new ArgumentNullException("locator", "The locator provided was unexpectedly null.");
 
             //remove from chitin
-            IEnumerable<ChitinKeyResourceEntry> resources = this.chitinKey.EntriesResource.Where(resource => resource.Equals(locator));
-            foreach (ChitinKeyResourceEntry resource in resources)
+            IEnumerable<KeyTableResourceEntry> resources = this.chitinKey.EntriesResource.Where(resource => resource.Equals(locator));
+            foreach (KeyTableResourceEntry resource in resources)
                 this.chitinKey.EntriesResource.Remove(resource);
                 
             if (removeFromArchive)
@@ -1889,6 +1875,106 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
                 //  This implies the need for the IBiff interface to expand a bit, exposing the headers and the resources, etc.
                 throw new NotImplementedException("I need to expand the IBiff interface first, but my edit stack is already off the expected course.");
             }
+        }
+        #endregion
+
+
+        #region Informational Displays
+        /// <summary>Gets the type of engine that this asset manager exposes</summary>
+        /// <returns>The type of engine that this asset manager exposes</returns>
+        public GameEngine GetGameEngine()
+        {
+            //The easy thing to do, here, would be to just go off of the ini file.
+            //  However, BG & BG2 violate this approach, sharing baldur.ini
+            //Q: how does NI examine the game engine? A: it does exactly what I was about to do,
+            //  look for *.exe files. But, I don't want that approach. EXEs are PC-only, for example.
+            //  What about assets? BG:Tutu, BGT; won't work, I should know.
+            //  how about BIFFs? I cut those out of the resources collection.
+            //  What asset is in BG2 that would never be in BG1? Look in the SoA demo.
+            //My best answer is to use a BG2 asset that BG would never use, not the other way 'round.
+            //BG does not support wfx, how about one of those...
+
+            GameEngine engine;
+
+            if (this.OverriddenAssets.ContainsKey("torment.ini"))                       //PST
+                engine = GameEngine.PlanescapeTorment;
+            else if (this.OverriddenAssets.ContainsKey("icewind2.ini"))                 //IWD2
+                engine = GameEngine.IcewindDale2;
+            else if (this.OverriddenAssets.ContainsKey("icewind.ini"))                  //IWD
+                engine = GameEngine.IcewindDale;
+            else if (this.OverriddenAssets.ContainsKey("eff_m21.wfx"))                  //BG2
+                engine = GameEngine.BaldursGate2;
+            else //if (this.OverriddenAssets.ContainsKey("baldur.ini"))                 //BG
+                engine = GameEngine.BaldursGate;
+
+            return engine;
+        }
+
+        /// <summary>Gets the game installation instance that this asset manager currently exposes</summary>
+        /// <returns>The game installation instance that this asset manager currently exposes</returns>
+        public GameInstall GetGameInstall()
+        {
+            GameInstall game = GameInstall.Unknown;
+
+            //This, I think, I can reliably use assets on
+
+            //PS:T
+            if (this.OverriddenAssets.ContainsKey("torment.ini"))
+                game = GameInstall.PlanescapeTorment;
+
+            //IWD2
+            else if (this.OverriddenAssets.ContainsKey("icewind2.ini"))
+                game = GameInstall.IcewindDale2;
+
+            //IWD:TotL; zARE.bif?
+            else if (this.OverriddenAssets.ContainsKey("icewind.ini") && this.OverriddenAssets.ContainsKey("ar9700.are"))
+                game = GameInstall.TrialsOfTheLuremaster;
+            //IWD:HoW; Icasaracht in ar9604
+            else if (this.OverriddenAssets.ContainsKey("icewind.ini") && this.OverriddenAssets.ContainsKey("ar9604.are"))
+                game = GameInstall.HeartOfWinter;
+            //IWD
+            else if (this.OverriddenAssets.ContainsKey("icewind.ini"))
+                game = GameInstall.IcewindDale;
+
+            //BG2: BGT; I hate my old naming convention from being a stupid teenager
+            else if (this.OverriddenAssets.ContainsKey("eff_m21.wfx") && this.OverriddenAssets.ContainsKey("arwo00.are"))
+                game = GameInstall.BaldursGateTrilogy;
+            //BG2: ToB; 25Store.bif file
+            else if (this.OverriddenAssets.ContainsKey("eff_m21.wfx") && this.OverriddenAssets.ContainsKey("25spell.sto"))
+                game = GameInstall.ThroneOfBhaal;
+            //BG2 proper; flythrough movies
+            else if (this.OverriddenAssets.ContainsKey("eff_m21.wfx") && this.OverriddenAssets.ContainsKey("flythr01.mve"))
+                game = GameInstall.ShadowsOfAmn;
+            //BG2 demo
+            else if (this.OverriddenAssets.ContainsKey("eff_m21.wfx"))
+                game = GameInstall.BaldursGate2Demo;
+
+            //Baldur's Gate: Tales of the Sword Coast
+            else if (this.OverriddenAssets.ContainsKey("baldur.ini") && this.OverriddenAssets.ContainsKey("wreck.mve"))
+                game = GameInstall.BaldursGate;
+            //Baldur's Gate
+            else if (this.OverriddenAssets.ContainsKey("baldur.ini") && this.OverriddenAssets.ContainsKey("bhaal.mve"))
+                game = GameInstall.BaldursGate;
+            //Baldur's Gate Abridged, Chapters 1 & 2
+            else if (this.OverriddenAssets.ContainsKey("baldur.ini"))
+                game = GameInstall.BaldursGate;
+
+
+            return game;
+        }
+
+        /// <summary>Gets the install application directory</summary>
+        /// <returns>The install application directory</returns>
+        public String GetApplicationDirectory()
+        {
+            return this.paths.Application;
+        }
+
+        /// <summary>Gets the related User directory</summary>
+        /// <returns>The related User directory</returns>
+        public String GetUserDirectory()
+        {
+            return null;
         }
         #endregion
 
@@ -2001,24 +2087,24 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         /// <summary>Gets the containing locations for a BIF archive</summary>
         /// <param name="locations">The locations of a BIF archive</param>
         /// <returns>The descriptive locations of a BIF archive</returns>
-        protected String GetContainingLocationsForKey(ChitinKeyBifLocationEnum locations)
+        protected String GetContainingLocationsForKey(KeyTableBifLocationEnum locations)
         {
             List<String> keyLocations = new List<String>();
 
-            if ((locations & ChitinKeyBifLocationEnum.HardDrive) == ChitinKeyBifLocationEnum.HardDrive)
-                keyLocations.Add(ChitinKeyBifLocationEnum.HardDrive.GetShortName());
-            else if ((locations & ChitinKeyBifLocationEnum.Disc1) == ChitinKeyBifLocationEnum.Disc1)
-                keyLocations.Add(ChitinKeyBifLocationEnum.Disc1.GetShortName());
-            else if ((locations & ChitinKeyBifLocationEnum.Disc2) == ChitinKeyBifLocationEnum.Disc2)
-                keyLocations.Add(ChitinKeyBifLocationEnum.Disc2.GetShortName());
-            else if ((locations & ChitinKeyBifLocationEnum.Disc3) == ChitinKeyBifLocationEnum.Disc3)
-                keyLocations.Add(ChitinKeyBifLocationEnum.Disc3.GetShortName());
-            else if ((locations & ChitinKeyBifLocationEnum.Disc4) == ChitinKeyBifLocationEnum.Disc4)
-                keyLocations.Add(ChitinKeyBifLocationEnum.Disc4.GetShortName());
-            else if ((locations & ChitinKeyBifLocationEnum.Disc5) == ChitinKeyBifLocationEnum.Disc5)
-                keyLocations.Add(ChitinKeyBifLocationEnum.Disc5.GetShortName());
-            else if ((locations & ChitinKeyBifLocationEnum.Disc6) == ChitinKeyBifLocationEnum.Disc6)
-                keyLocations.Add(ChitinKeyBifLocationEnum.Disc6.GetShortName());
+            if ((locations & KeyTableBifLocationEnum.HardDrive) == KeyTableBifLocationEnum.HardDrive)
+                keyLocations.Add(KeyTableBifLocationEnum.HardDrive.GetShortName());
+            else if ((locations & KeyTableBifLocationEnum.Disc1) == KeyTableBifLocationEnum.Disc1)
+                keyLocations.Add(KeyTableBifLocationEnum.Disc1.GetShortName());
+            else if ((locations & KeyTableBifLocationEnum.Disc2) == KeyTableBifLocationEnum.Disc2)
+                keyLocations.Add(KeyTableBifLocationEnum.Disc2.GetShortName());
+            else if ((locations & KeyTableBifLocationEnum.Disc3) == KeyTableBifLocationEnum.Disc3)
+                keyLocations.Add(KeyTableBifLocationEnum.Disc3.GetShortName());
+            else if ((locations & KeyTableBifLocationEnum.Disc4) == KeyTableBifLocationEnum.Disc4)
+                keyLocations.Add(KeyTableBifLocationEnum.Disc4.GetShortName());
+            else if ((locations & KeyTableBifLocationEnum.Disc5) == KeyTableBifLocationEnum.Disc5)
+                keyLocations.Add(KeyTableBifLocationEnum.Disc5.GetShortName());
+            else if ((locations & KeyTableBifLocationEnum.Disc6) == KeyTableBifLocationEnum.Disc6)
+                keyLocations.Add(KeyTableBifLocationEnum.Disc6.GetShortName());
 
             StringBuilder builder = new StringBuilder();
             builder.Append("[");
@@ -2164,29 +2250,29 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         /// <summary>Creates a collection of AssetLocation items indicating the locations for a BIFF archive</summary>
         /// <param name="locations">BIFF locations specified within a key entry</param>
         /// <returns>The collection of AssetLocation items indicating the locations for a BIFF archive</returns>
-        protected AssetLocation GetLocationsForBiff(ChitinKeyBifLocationEnum locations)
+        protected AssetLocation GetLocationsForBiff(KeyTableBifLocationEnum locations)
         {
             AssetLocation assetLocations = AssetLocation.LookUp;    //none
 
-            if ((locations & ChitinKeyBifLocationEnum.HardDrive) == ChitinKeyBifLocationEnum.HardDrive)
+            if ((locations & KeyTableBifLocationEnum.HardDrive) == KeyTableBifLocationEnum.HardDrive)
                 assetLocations |= AssetLocation.HD0;
 
-            if ((locations & ChitinKeyBifLocationEnum.Disc1) == ChitinKeyBifLocationEnum.Disc1)
+            if ((locations & KeyTableBifLocationEnum.Disc1) == KeyTableBifLocationEnum.Disc1)
                 assetLocations |= AssetLocation.CD1;
 
-            if ((locations & ChitinKeyBifLocationEnum.Disc2) == ChitinKeyBifLocationEnum.Disc2)
+            if ((locations & KeyTableBifLocationEnum.Disc2) == KeyTableBifLocationEnum.Disc2)
                 assetLocations |= AssetLocation.CD2;
 
-            if ((locations & ChitinKeyBifLocationEnum.Disc3) == ChitinKeyBifLocationEnum.Disc3)
+            if ((locations & KeyTableBifLocationEnum.Disc3) == KeyTableBifLocationEnum.Disc3)
                 assetLocations |= AssetLocation.CD3;
 
-            if ((locations & ChitinKeyBifLocationEnum.Disc4) == ChitinKeyBifLocationEnum.Disc4)
+            if ((locations & KeyTableBifLocationEnum.Disc4) == KeyTableBifLocationEnum.Disc4)
                 assetLocations |= AssetLocation.CD4;
 
-            if ((locations & ChitinKeyBifLocationEnum.Disc5) == ChitinKeyBifLocationEnum.Disc5)
+            if ((locations & KeyTableBifLocationEnum.Disc5) == KeyTableBifLocationEnum.Disc5)
                 assetLocations |= AssetLocation.CD5;
 
-            if ((locations & ChitinKeyBifLocationEnum.Disc6) == ChitinKeyBifLocationEnum.Disc6)
+            if ((locations & KeyTableBifLocationEnum.Disc6) == KeyTableBifLocationEnum.Disc6)
                 assetLocations |= AssetLocation.CD6;
 
             return assetLocations;
