@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bardez.Projects.InfinityPlus1.Logic.Infinity
+namespace Bardez.Projects.InfinityPlus1.Information
 {
     /// <summary>Describes the type of game engine</summary>
     public enum EngineType
