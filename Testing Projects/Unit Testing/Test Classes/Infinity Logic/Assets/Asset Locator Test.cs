@@ -106,7 +106,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.TestClasses.InfinityLogic.As
 
             //build
             ResourceLocator1 locator = new ResourceLocator1(parameterKeyResourceLocatorBiff, parameterKeyResourceLocatorTileset, parameterKeyResourceLocatorResource);
-            ChitinKeyResourceEntry resource = new ChitinKeyResourceEntry(parameterKeyResourceName, parameterKeyResourceType, locator);
+            KeyTableResourceEntry resource = new KeyTableResourceEntry(parameterKeyResourceName, parameterKeyResourceType, locator);
             AssetLocator asset = new AssetLocator(parameterKeyFile, resource);
 
             //compare

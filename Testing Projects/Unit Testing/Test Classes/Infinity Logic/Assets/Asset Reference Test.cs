@@ -81,7 +81,7 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.TestClasses.InfinityLogic.As
             String paramKeyFileBiffName = Helper.GetContextString("param_KeyFileBiffEntry_Name", this.TestContext);
             UInt32 bifSize = Convert.ToUInt32(new Random(12345).Next());
             UInt32 offsetName = Convert.ToUInt32(new Random(12345).Next(Convert.ToInt32(bifSize), Int32.MaxValue));
-            ChitinKeyBifLocationEnum locations = (ChitinKeyBifLocationEnum)(Enum.Parse(typeof(ChitinKeyBifLocationEnum), Helper.GetContextString("param_KeyFileBiffEntry_LocationFlags", this.TestContext)));
+            KeyTableBifLocationEnum locations = (KeyTableBifLocationEnum)(Enum.Parse(typeof(KeyTableBifLocationEnum), Helper.GetContextString("param_KeyFileBiffEntry_LocationFlags", this.TestContext)));
 
             String expectedAssetName = Helper.GetContextString("result_AssetName", this.TestContext);
             String expectedAssetType = Helper.GetContextString("result_AssetType", this.TestContext);
@@ -100,9 +100,9 @@ namespace Bardez.Projects.InfinityPlus1.UnitTesting.TestClasses.InfinityLogic.As
             
 
             //instantiate
-            ChitinKeyBifEntry biff = new ChitinKeyBifEntry(bifSize, offsetName, paramKeyFileBiffName, locations);
+            KeyTableBifEntry biff = new KeyTableBifEntry(bifSize, offsetName, paramKeyFileBiffName, locations);
             ResourceLocator1 locator = new ResourceLocator1(paramKeyFileResourceBiffIndex.Value, paramKeyFileResourceTilesetIndex.Value, paramKeyFileResourceResourceIndex.Value);
-            ChitinKeyResourceEntry resource = new ChitinKeyResourceEntry(paramKeyFileResourceName, paramKeyFileResourceType, locator);
+            KeyTableResourceEntry resource = new KeyTableResourceEntry(paramKeyFileResourceName, paramKeyFileResourceType, locator);
             AssetReference reference = new AssetReference(paramKeyName, resource, biff);
 
             //check
