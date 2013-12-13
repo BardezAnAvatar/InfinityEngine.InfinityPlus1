@@ -178,7 +178,7 @@ namespace Bardez.Projects.InfinityPlus1.Output.Audio
         /// <param name="destinationConfiguration">Configuration of audio channels for rendering output</param>
         /// <param name="behavior">Behavior with which to render audio</param>
         /// <param name="targetDeviceName">Name of the target device to be rendered to. If null or not found, system will use the system default device, if appropriate</param>
-        public void Initialize(WaveFormatEx audioInfo, SpeakerConfiguration destinationConfiguration, AudioRenderStyle behavior, String targetDeviceName)
+        public void Initialize(WaveFormatEx audioInfo, SpeakerConfiguration destinationConfiguration, AudioRenderStyle behavior, ReverbSettings reverb, String targetDeviceName)
         {
             this.RenderingStyle = behavior;
 
