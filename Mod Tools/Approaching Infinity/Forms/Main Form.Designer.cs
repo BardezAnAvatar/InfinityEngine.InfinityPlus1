@@ -57,7 +57,9 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openKeyFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.treeViewAssets = new System.Windows.Forms.TreeView();
-            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.splitter = new System.Windows.Forms.Splitter();
+            this.tabCtrlFiles = new Bardez.Projects.WinForms.Controls.ClosableTabControl();
+            this.lblGameInstalled = new System.Windows.Forms.Label();
             this.panelStatus.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -65,13 +67,14 @@
             // panelStatus
             // 
             this.panelStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelStatus.Controls.Add(this.lblGameInstalled);
             this.panelStatus.Controls.Add(this.lblUserDirectoryPath);
             this.panelStatus.Controls.Add(this.lblResourceCount);
             this.panelStatus.Controls.Add(this.lblGamePath);
             this.panelStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelStatus.Location = new System.Drawing.Point(0, 416);
+            this.panelStatus.Location = new System.Drawing.Point(0, 400);
             this.panelStatus.Name = "panelStatus";
-            this.panelStatus.Size = new System.Drawing.Size(954, 46);
+            this.panelStatus.Size = new System.Drawing.Size(954, 62);
             this.panelStatus.TabIndex = 0;
             // 
             // lblUserDirectoryPath
@@ -112,11 +115,12 @@
             this.optionsToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.helpToolStripMenuItem});
+            this.menuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(954, 24);
             this.menuStrip.TabIndex = 1;
-            this.menuStrip.Text = "menuStrip1";
+            this.menuStrip.Text = "menuStrip";
             // 
             // gameToolStripMenuItem
             // 
@@ -144,12 +148,15 @@
             this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
             this.openFileToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.openFileToolStripMenuItem.Text = "Open File";
+            this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
             // 
             // refreshTreeToolStripMenuItem
             // 
+            this.refreshTreeToolStripMenuItem.Enabled = false;
             this.refreshTreeToolStripMenuItem.Name = "refreshTreeToolStripMenuItem";
             this.refreshTreeToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.refreshTreeToolStripMenuItem.Text = "Refresh Tree";
+            this.refreshTreeToolStripMenuItem.Click += new System.EventHandler(this.refreshTreeToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -172,6 +179,7 @@
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
             this.quitToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.quitToolStripMenuItem.Text = "Quit";
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
             // fileToolStripMenuItem
             // 
@@ -287,31 +295,51 @@
             this.treeViewAssets.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeViewAssets.Location = new System.Drawing.Point(0, 24);
             this.treeViewAssets.Name = "treeViewAssets";
-            this.treeViewAssets.Size = new System.Drawing.Size(204, 392);
+            this.treeViewAssets.Size = new System.Drawing.Size(204, 376);
             this.treeViewAssets.TabIndex = 4;
-            this.treeViewAssets.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewAssets_AfterSelect);
+            this.treeViewAssets.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewAssets_NodeMouseDoubleClick);
             // 
-            // splitter1
+            // splitter
             // 
-            this.splitter1.Location = new System.Drawing.Point(204, 24);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 392);
-            this.splitter1.TabIndex = 5;
-            this.splitter1.TabStop = false;
+            this.splitter.Location = new System.Drawing.Point(204, 24);
+            this.splitter.Name = "splitter";
+            this.splitter.Size = new System.Drawing.Size(3, 376);
+            this.splitter.TabIndex = 5;
+            this.splitter.TabStop = false;
+            // 
+            // tabCtrlFiles
+            // 
+            this.tabCtrlFiles.ConfirmClose = false;
+            this.tabCtrlFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabCtrlFiles.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabCtrlFiles.Location = new System.Drawing.Point(207, 24);
+            this.tabCtrlFiles.Name = "tabCtrlFiles";
+            this.tabCtrlFiles.SelectedIndex = 0;
+            this.tabCtrlFiles.Size = new System.Drawing.Size(747, 376);
+            this.tabCtrlFiles.TabIndex = 6;
+            // 
+            // lblGameInstalled
+            // 
+            this.lblGameInstalled.AutoSize = true;
+            this.lblGameInstalled.Location = new System.Drawing.Point(3, 41);
+            this.lblGameInstalled.Name = "lblGameInstalled";
+            this.lblGameInstalled.Size = new System.Drawing.Size(85, 13);
+            this.lblGameInstalled.TabIndex = 3;
+            this.lblGameInstalled.Text = "{Installed Game}";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(954, 462);
-            this.Controls.Add(this.splitter1);
+            this.Controls.Add(this.tabCtrlFiles);
+            this.Controls.Add(this.splitter);
             this.Controls.Add(this.treeViewAssets);
             this.Controls.Add(this.panelStatus);
             this.Controls.Add(this.menuStrip);
-            this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
-            this.Text = "Main_Form";
+            this.Text = "Approaching Infinity";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.panelStatus.ResumeLayout(false);
             this.panelStatus.PerformLayout();
@@ -353,6 +381,8 @@
         private System.Windows.Forms.ToolStripMenuItem viewAssetsOverriddenByLocationAndTypeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewAllAssetsByLocationAndTypeToolStripMenuItem;
         private System.Windows.Forms.TreeView treeViewAssets;
-        private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.Splitter splitter;
+        private WinForms.Controls.ClosableTabControl tabCtrlFiles;
+        private System.Windows.Forms.Label lblGameInstalled;
     }
 }

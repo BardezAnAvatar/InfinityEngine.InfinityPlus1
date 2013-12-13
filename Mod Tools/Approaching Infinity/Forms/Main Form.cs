@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using Bardez.Projects.InfinityPlus1.Tools.Controllers.ApproachingInfinity;
 using Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets;
+using Bardez.Projects.WinForms.Controls;
 
 namespace Bardez.Projects.InfinityPlus1.Tools.ApproachingInfinity.Forms
 {
@@ -83,6 +84,9 @@ namespace Bardez.Projects.InfinityPlus1.Tools.ApproachingInfinity.Forms
             String chitinKeyFile = this.openKeyFileDialog.FileName;
 
             this.controller.OpenKey(chitinKeyFile);
+
+            //enable refresh
+            this.refreshTreeToolStripMenuItem.Enabled = true;
         }
 
         /// <summary>Sets the view that was set</summary>
@@ -96,6 +100,33 @@ namespace Bardez.Projects.InfinityPlus1.Tools.ApproachingInfinity.Forms
             this.ExclusivelyCheckView(sender as ToolStripMenuItem);
         }
 
+        /// <summary>Opens a specific file</summary>
+        /// <param name="sender">Sending Object</param>
+        /// <param name="e">Event parameters</param>
+        protected void openFileToolStripMenuItem_Click(Object sender, EventArgs e)
+        {
+            throw new NotImplementedException("There is no direct file opening functionality set up yet.");
+        }
+
+        /// <summary>Refreshes the asset tree</summary>
+        /// <param name="sender">Sending Object</param>
+        /// <param name="e">Event parameters</param>
+        protected void refreshTreeToolStripMenuItem_Click(Object sender, EventArgs e)
+        {
+            this.RefreshResourceTree();
+        }
+
+        /// <summary>Closes the application</summary>
+        /// <param name="sender">Sending Object</param>
+        /// <param name="e">Event parameters</param>
+        private void quitToolStripMenuItem_Click(Object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        #endregion
+
+
+        #region Form Control Event Handlers
         /// <summary>Form load</summary>
         /// <param name="sender">Sending Object</param>
         /// <param name="e">Event parameters</param>
@@ -106,6 +137,26 @@ namespace Bardez.Projects.InfinityPlus1.Tools.ApproachingInfinity.Forms
                 this.lblGamePath.Text = String.Empty;
                 this.lblResourceCount.Text = String.Empty;
                 this.lblUserDirectoryPath.Text = String.Empty;
+            }
+            else
+            {
+                this.tabCtrlFiles.TabPages.Add(new ClosableTabPage("Demo"));
+            }
+        }
+
+        /// <summary>Double-click handler on a node</summary>
+        /// <param name="sender">Sending object</param>
+        /// <param name="e">Event details</param>
+        private void treeViewAssets_NodeMouseDoubleClick(Object sender, TreeNodeMouseClickEventArgs e)
+        {
+            //The user can double click on a row (to the right of the text) that is made active due to other items being wider.
+            //  This might raise the event with no valid selected node.
+            if (this.treeViewAssets.SelectedNode != null)
+            {
+                AssetNode node = this.treeViewAssets.SelectedNode.Tag as AssetNode;
+
+                if (node.Asset != null)
+                    this.tabCtrlFiles.TabPages.Add(new ClosableTabPage(node.Name));
             }
         }
         #endregion
@@ -137,6 +188,9 @@ namespace Bardez.Projects.InfinityPlus1.Tools.ApproachingInfinity.Forms
         /// <summary>Refreshes the resource tree</summary>
         protected void RefreshResourceTree()
         {
+            //erase the existing tree since we are refreshing, not adding
+            this.treeViewAssets.Nodes.Clear();
+
             AssetNode tree = this.controller.GetAssetTree(this.SelectedAssetTree);
             this.PopulateTree(tree);
         }
@@ -155,6 +209,7 @@ namespace Bardez.Projects.InfinityPlus1.Tools.ApproachingInfinity.Forms
             this.lblResourceCount.Text = String.Empty;      //clears the resource count
             this.lblGamePath.Text = String.Empty;           //clears the game path
             this.lblUserDirectoryPath.Text = String.Empty;  //clears the directory path
+            this.lblGameInstalled.Text = String.Empty;      //clears the detected game
         }
         #endregion
 
@@ -226,6 +281,8 @@ namespace Bardez.Projects.InfinityPlus1.Tools.ApproachingInfinity.Forms
             else
                 branchRender = new TreeNode(branch.Name, indexUnselected, indexUnselected);
 
+            branchRender.Tag = branch;
+
             return branchRender;
         }
 
@@ -237,13 +294,5 @@ namespace Bardez.Projects.InfinityPlus1.Tools.ApproachingInfinity.Forms
             return 0;
         }
         #endregion
-
-        private void treeViewAssets_AfterSelect(Object sender, TreeViewEventArgs e)
-        {
-        //    MDI_Test test = new MDI_Test();
-        //    test.TopLevel = false;
-        //    test.Parent = this;
-        //    test.Show();
-        }
     }
 }
