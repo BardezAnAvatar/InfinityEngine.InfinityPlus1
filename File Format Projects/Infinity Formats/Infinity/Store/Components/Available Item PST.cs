@@ -19,7 +19,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Store.Components
         }
 
         #region Members
-        /// <summary>tring reference who, when read, should include a scripting condition</summary>
+        /// <summary>String reference who, when read, should include a scripting condition</summary>
         protected StringReference trigger;
 
         /// <summary>Unknown 56 bytes (unused?)</summary>
