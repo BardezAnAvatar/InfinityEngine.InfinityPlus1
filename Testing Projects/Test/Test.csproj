@@ -1,0 +1,682 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E79833DB-B2D2-4781-B0FC-79E85DA95BE5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bardez.Projects.InfinityPlus1.Test</RootNamespace>
+    <AssemblyName>InfinityPlus1.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\InfinityPlus1.Test.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\InfinityPlus1.Test.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Harnesses\AmpitudeCodedModulation\ACM File Test.cs" />
+    <Compile Include="Harnesses\AmpitudeCodedModulation\ACM Header Test.cs" />
+    <Compile Include="Harnesses\AmpitudeCodedModulation\Bit Block Test.cs" />
+    <Compile Include="Harnesses\AmpitudeCodedModulation\WAVC File Test.cs" />
+    <Compile Include="Harnesses\Area\Baldur ARE Test.cs" />
+    <Compile Include="Harnesses\Area\Torment ARE Test.cs" />
+    <Compile Include="Harnesses\Area\Icewind 2 ARE Test.cs" />
+    <Compile Include="Harnesses\Area\Icewind ARE Test.cs" />
+    <Compile Include="Harnesses\BiowareIndexFileFormat\Biff1\Biff Header Test.cs" />
+    <Compile Include="Harnesses\BiowareIndexFileFormat\Biff1\Biff Resource Entry Test.cs" />
+    <Compile Include="Harnesses\BiowareIndexFileFormat\Biff1\Biff Tileset Entry Test.cs" />
+    <Compile Include="Harnesses\BiowareIndexFileFormat\Biff1\Biff1 Archive Test.cs" />
+    <Compile Include="Harnesses\BiowareIndexFileFormat\CBiff\CBiff Archive Test.cs" />
+    <Compile Include="Harnesses\Character\Biography 1 Test.cs" />
+    <Compile Include="Harnesses\Character\Biography 2 Test.cs" />
+    <Compile Include="Harnesses\Character\Character 1 Test.cs" />
+    <Compile Include="Harnesses\Character\Character 2.2 Test.cs" />
+    <Compile Include="Harnesses\Character\Character 9 Test.cs" />
+    <Compile Include="Harnesses\KeyTable\KeyTable1BifEntry.cs" />
+    <Compile Include="Harnesses\KeyTable\KeyTable1HeaderTest.cs" />
+    <Compile Include="Harnesses\KeyTable\KeyTable1ResourceEntryTest.cs" />
+    <Compile Include="Harnesses\KeyTable\KeyTable1Test.cs" />
+    <Compile Include="Harnesses\Creature\Creature 1 Test.cs" />
+    <Compile Include="Harnesses\Creature\Creature 1.2 Test.cs" />
+    <Compile Include="Harnesses\Creature\Creature 2.2 Test.cs" />
+    <Compile Include="Harnesses\Creature\Creature 9 Test.cs" />
+    <Compile Include="Harnesses\Creature\Creature Header 1 Test.cs" />
+    <Compile Include="Harnesses\Creature\Creature Header 1.2 Test.cs" />
+    <Compile Include="Harnesses\Creature\Creature Header 9 Test.cs" />
+    <Compile Include="Harnesses\Dialog\Dialog Test.cs" />
+    <Compile Include="Harnesses\Effect\Effect 2 Test.cs" />
+    <Compile Include="Harnesses\File Tester Base.cs" />
+    <Compile Include="Harnesses\IAudioTester.cs" />
+    <Compile Include="Harnesses\Identifiers\Identifier v1 Test.cs" />
+    <Compile Include="Harnesses\Initialization\Ini Test.cs" />
+    <Compile Include="Harnesses\Item\Item 1 Test.cs" />
+    <Compile Include="Harnesses\Item\Item 1_1 Test.cs" />
+    <Compile Include="Harnesses\Item\Item 2 Test.cs" />
+    <Compile Include="Harnesses\Item\Item Ability Effect Test.cs" />
+    <Compile Include="Harnesses\Item\Item Ability Test.cs" />
+    <Compile Include="Harnesses\Item\Item Header 1 Test.cs" />
+    <Compile Include="Harnesses\Item\Item Header 1_1 Test.cs" />
+    <Compile Include="Harnesses\Item\Item Header 2 Test.cs" />
+    <Compile Include="Harnesses\ITester.cs" />
+    <Compile Include="Harnesses\MapOfScreen\MOSC Test.cs" />
+    <Compile Include="Harnesses\MapOfScreen\MOS Test.cs" />
+    <Compile Include="Harnesses\Movie\MVE Audio Playback Test.cs" />
+    <Compile Include="Harnesses\Movie\MVE Opcode Indexer Test.cs" />
+    <Compile Include="Harnesses\Movie\MVE Indexer Test.cs" />
+    <Compile Include="Harnesses\Audio Test Event Arguments.cs" />
+    <Compile Include="Harnesses\Music\Playlist Test.cs" />
+    <Compile Include="Harnesses\Output\DirectX\XAudio2 Render Test.cs" />
+    <Compile Include="Harnesses\Output\DirectX\XAudio2 Test.cs" />
+    <Compile Include="Harnesses\PixelLocationTable\PLT Test.cs" />
+    <Compile Include="Harnesses\Projectile\PRO Test.cs" />
+    <Compile Include="Harnesses\ReusableCode\BitStream Test.cs" />
+    <Compile Include="Harnesses\Riff\Riff Test.cs" />
+    <Compile Include="Harnesses\Game\GAM Icewind 2 Test.cs" />
+    <Compile Include="Harnesses\Game\GAM Icewind Test.cs" />
+    <Compile Include="Harnesses\Game\GAM Torment Test.cs" />
+    <Compile Include="Harnesses\Game\GAM Baldur 2 Test.cs" />
+    <Compile Include="Harnesses\Game\GAM Baldur Test.cs" />
+    <Compile Include="Harnesses\Save\SAV Baldur Test.cs" />
+    <Compile Include="Harnesses\Spell\Spell 1 Header Test.cs" />
+    <Compile Include="Harnesses\Spell\Spell 1 Test.cs" />
+    <Compile Include="Harnesses\Spell\Spell 2 Header Test.cs" />
+    <Compile Include="Harnesses\Spell\Spell 2 Test.cs" />
+    <Compile Include="Harnesses\Spell\Spell Ability Effect Test.cs" />
+    <Compile Include="Harnesses\Spell\Spell Ability Test.cs" />
+    <Compile Include="Harnesses\Store\Store 1 Test.cs" />
+    <Compile Include="Harnesses\Store\Store 1.1 Test.cs" />
+    <Compile Include="Harnesses\Store\Store 9 Test.cs" />
+    <Compile Include="Harnesses\StringReferenceCount\Src 1 Test.cs" />
+    <Compile Include="Harnesses\TalkOverride\Talk Override Test.cs" />
+    <Compile Include="Harnesses\TalkOverride\TOT Test.cs" />
+    <Compile Include="Harnesses\TalkOverride\TOH Test.cs" />
+    <Compile Include="Harnesses\Tester Base.cs" />
+    <Compile Include="Harnesses\TextLocationKey\TextLocationKeyHeaderTest.cs" />
+    <Compile Include="Harnesses\TextLocationKey\TextLocationKeyStringReferenceEntryTest.cs" />
+    <Compile Include="Harnesses\TextLocationKey\TextLocationKeyTest.cs" />
+    <Compile Include="Harnesses\TileSet\Tis Test.cs" />
+    <Compile Include="Harnesses\TileSet\Tis Header Test.cs" />
+    <Compile Include="Harnesses\TwoDimensionalArray\TwoDinensionalArray1Test.cs" />
+    <Compile Include="Harnesses\Variables\VAR Test.cs" />
+    <Compile Include="Harnesses\VectoredEffectVideoCell\VVC Test.cs" />
+    <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Test.cs" />
+    <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Door Test.cs" />
+    <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Polygon Header Test.cs" />
+    <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Overlay Test.cs" />
+    <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Header Test.cs" />
+    <Compile Include="Harnesses\WaveEffect\WFX Test.cs" />
+    <Compile Include="Test Event Arguments.cs" />
+    <Compile Include="Message Event Arguments.cs" />
+    <Compile Include="Testing Delegates.cs" />
+    <Compile Include="WinForm\2DA\2DA File Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ACM\Acm Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ACM\Acm File Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ACM\BitBlock Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ACM\WAVC Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ARE\Baldur Area Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ARE\Torment Area Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ARE\Icewind 2 Area Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ARE\Icewind Area Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\BAM\BAM Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\BAM\BAMC Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\BIFF\Uncompressed\Biff Archive Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\BIFF\Uncompressed\Biff Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\BIFF\Uncompressed\Biff Resource Entry Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\BIFF\Uncompressed\Biff Tileset Entry Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CBF\CBiff Archive Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CHR\Biography 1 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CHR\Biography 2 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CHR\Character 1 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CHR\Character 2 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CHR\Character 9 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Animation Collection Reference.cs" />
+    <Compile Include="WinForm\GAM\Game Icewind 2 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\GAM\Game Torment Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\GAM\Game Icewind Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\GAM\Game Baldur 2 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\GAM\Game Baldur Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness Video Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness Video Test Control.Designer.cs">
+      <DependentUpon>Harness Video Test Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Harness Movie Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness Animation Collection Test Control Base.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness Animation Collection Test Control Base.Designer.cs">
+      <DependentUpon>Harness Animation Collection Test Control Base.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\CRE\Creature 1.2 Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CRE\Creature 9.0 Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CRE\Creature 1.0 Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CRE\Creature 2.2 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CRE\Creature 1.2 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\CRE\Creature 9.0 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\DLG\Dialog Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness Image Collection Test Control Base.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness Image Collection Test Control Base.Designer.cs">
+      <DependentUpon>Harness Image Collection Test Control Base.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Harness Image Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness Image Test Control.Designer.cs">
+      <DependentUpon>Harness Image Test Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Harness Non-File Test Control Base.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness Non-File Test Control Base.Designer.cs">
+      <DependentUpon>Harness Non-File Test Control Base.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Harness File Test Control Base.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness File Test Control Base.Designer.cs">
+      <DependentUpon>Harness File Test Control Base.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\IDS\IDS File Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Image Collection Reference.cs" />
+    <Compile Include="WinForm\Image Reference.cs" />
+    <Compile Include="WinForm\Image\BMP Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Image\BMP Render Test Control.Designer.cs">
+      <DependentUpon>BMP Render Test Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Image\JPEG Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Image\JPEG Render Test Control.Designer.cs">
+      <DependentUpon>JPEG Render Test Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\INI\Ini Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ITM\Item Ability Effect Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ITM\Item Ability Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ITM\Item 1.0 Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ITM\Item 1.1 Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ITM\Item 2.0 Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ITM\Item 2.0 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ITM\Item 1.1 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ITM\Item 1.0 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness Audio Collection Test Control Base.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Harness Audio Collection Test Control Base.Designer.cs">
+      <DependentUpon>Harness Audio Collection Test Control Base.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\KEY\Key Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\KEY\Key Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\KEY\Key Resource Entry Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\KEY\Key Biff Entry Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\LoggingControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\LoggingControl.Designer.cs">
+      <DependentUpon>LoggingControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WinForm\MOS\MOSC Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\MOS\MOSC Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\MOS\MOS Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\MOS\MOS Render Test Control.Designer.cs">
+      <DependentUpon>MOS Render Test Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\MOS\MOS Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Movie\Lib AV Movie Playback Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Movie\Lib AV Movie Playback Test Control.Designer.cs">
+      <DependentUpon>Lib AV Movie Playback Test Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\MUS\Music Playlist Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\MVE\MVE Movie Playback Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\MVE\MVE Opcode Indexer Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\MVE\MVE Indexer Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\MVE\MVE Audio Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\MVE\MVE Video Playback Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Output\Direct2D\Direct2D Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Output\Direct2D\Direct2D Render Test Control.Designer.cs">
+      <DependentUpon>Direct2D Render Test Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Output\XAudio2\XAudio2 Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Output\XAudio2\XAudio2 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\PLT\Palette Reader.cs" />
+    <Compile Include="WinForm\PLT\Palette Selection.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\PLT\Palette Selection.Designer.cs">
+      <DependentUpon>Palette Selection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\PLT\Palette Selector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\PLT\Palette Selector.Designer.cs">
+      <DependentUpon>Palette Selector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\PLT\PLT Displayable.cs" />
+    <Compile Include="WinForm\PLT\PLT Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\PLT\PLT Render Test Control.Designer.cs">
+      <DependentUpon>PLT Render Test Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\PLT\PLT Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\PLT\Available Palette.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\PLT\Available Palette.Designer.cs">
+      <DependentUpon>Available Palette.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\PRO\PRO Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\ReusableCode\Bit Stream Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\RIFF\Riff Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\SAV\Saved Resource Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\SAV\Saved Resource Test Control.Designer.cs">
+      <DependentUpon>Saved Resource Test Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\SAV\Save Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\SPL\Spell Ability Effect Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\SPL\Spell Ability Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\SPL\Spell 1.0 Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\SPL\Spell 2.0 Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\SPL\Spell 2.0 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\SPL\Spell 1.0 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\SRC\SRC Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\STO\Store 9.0 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\STO\Store 1.1 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\STO\Store 1.0 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\TalkOverride\Talk Override Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\TIS\TIS Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\TIS\TIS Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\TLK\TLK Strref Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\TLK\TLK Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\TLK\TLK Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\TOH\TOH Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\TOT\TOT Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\VAR\VAR Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\VVC\VVC Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\WED\WED Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\WED\WED Polygon Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\WED\WED Overlay Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\WED\WED Door Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\WED\WED Header Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\WFX\WFX Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Utility Projects\Configuration Handler\Configuration Handler.csproj">
+      <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
+      <Name>Configuration Handler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\File Format Projects\External Formats\External Formats.csproj">
+      <Project>{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}</Project>
+      <Name>External Formats</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\File Format Projects\Infinity Formats\Infinity Formats.csproj">
+      <Project>{3EE5137B-C08F-4337-B089-E20A502C2A0C}</Project>
+      <Name>Infinity Formats</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interface Implementation\LibAV Wrapper\LibAV Wrapper.csproj">
+      <Project>{1816E1F1-8765-4AEA-BEF4-0E80E50C8399}</Project>
+      <Name>LibAV Wrapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Entities\Media Base\Media Base.csproj">
+      <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
+      <Name>Media Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Native Code\DirectX\XAudio2\XAudio2.vcxproj">
+      <Project>{FE898E65-DAFF-435D-9A72-4C9D3306636A}</Project>
+      <Name>XAudio2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Entities\Basic Structures\Basic Structures.csproj">
+      <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
+      <Name>Basic Structures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Output\Output.csproj">
+      <Project>{6ECA5199-A497-4BF2-B956-CEB3F0912C17}</Project>
+      <Name>Output</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utility Projects\ReusableCode\ReusableCode.csproj">
+      <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
+      <Name>ReusableCode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utility Projects\Utility\Utility.csproj">
+      <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="WinForm\Harness Video Test Control.resx">
+      <DependentUpon>Harness Video Test Control.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Harness Animation Collection Test Control Base.resx">
+      <DependentUpon>Harness Animation Collection Test Control Base.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Harness Image Collection Test Control Base.resx">
+      <DependentUpon>Harness Image Collection Test Control Base.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Harness Image Test Control.resx">
+      <DependentUpon>Harness Image Test Control.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Harness Non-File Test Control Base.resx">
+      <DependentUpon>Harness Non-File Test Control Base.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Harness File Test Control Base.resx">
+      <DependentUpon>Harness File Test Control Base.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Image\BMP Render Test Control.resx">
+      <DependentUpon>BMP Render Test Control.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Image\JPEG Render Test Control.resx">
+      <DependentUpon>JPEG Render Test Control.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Harness Audio Collection Test Control Base.resx">
+      <DependentUpon>Harness Audio Collection Test Control Base.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\LoggingControl.resx">
+      <DependentUpon>LoggingControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\MOS\MOS Render Test Control.resx">
+      <DependentUpon>MOS Render Test Control.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Movie\Lib AV Movie Playback Test Control.resx">
+      <DependentUpon>Lib AV Movie Playback Test Control.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Output\Direct2D\Direct2D Render Test Control.resx">
+      <DependentUpon>Direct2D Render Test Control.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\PLT\Available Palette.resx">
+      <DependentUpon>Available Palette.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\PLT\Palette Selection.resx">
+      <DependentUpon>Palette Selection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\PLT\Palette Selector.resx">
+      <DependentUpon>Palette Selector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\PLT\PLT Render Test Control.resx">
+      <DependentUpon>PLT Render Test Control.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\SAV\Saved Resource Test Control.resx">
+      <DependentUpon>Saved Resource Test Control.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="WinForm\BIFF\BIFFC\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="WinForm\CRE\Creature 1.0 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="WinForm\EFF\Effect 2.0 Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

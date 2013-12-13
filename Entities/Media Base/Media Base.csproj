@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6ECA5199-A497-4BF2-B956-CEB3F0912C17}</ProjectGuid>
+    <ProjectGuid>{31CA90A7-1628-493B-A99B-8B9F6899158F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bardez.Projects.InfinityPlus1.Output</RootNamespace>
-    <AssemblyName>Output</AssemblyName>
+    <RootNamespace>Bardez.Projects.Multimedia.MediaBase</RootNamespace>
+    <AssemblyName>Media Base</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -25,7 +25,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,7 +33,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -42,16 +40,13 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Debug\Output.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisLogFile>bin\Debug\Media Base.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
-    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
-    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
-    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -59,81 +54,90 @@
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Release\Output.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisLogFile>bin\Release\Media Base.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
-    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
-    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
-    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Audio\Audio Output.cs" />
-    <Compile Include="Audio\Renderers\Raw Sample File Writer Audio Renderer.cs" />
-    <Compile Include="Audio\Renderers\XAudio2\XAudio2 Audio Renderer.cs" />
-    <Compile Include="Audio\Renderers\XAudio2\Direct Voice Graph.cs" />
-    <Compile Include="Audio\Renderers\XAudio2\IVoiceGraph.cs" />
-    <Compile Include="Audio\Renderers\XAudio2\Reverb Voice Graph.cs" />
-    <Compile Include="Audio\XAudio2 Source Voice Reference.cs" />
-    <Compile Include="Audio\Enums\XAudio2VoiceState.cs" />
-    <Compile Include="Audio\XAudio2 Output.cs" />
-    <Compile Include="Audio\XAudio2 Voice Reference.cs" />
+    <Compile Include="Container\IMultimediaContainer.cs" />
+    <Compile Include="Container\Stream Processing Info.cs" />
+    <Compile Include="Container\Stream Type.cs" />
+    <Compile Include="Frame\Audio\IMultimediaAudioFrame.cs" />
+    <Compile Include="Frame\Buffers\IMultimediaFrameStreamBuffers.cs" />
+    <Compile Include="Frame\Image\Image Metadata.cs" />
+    <Compile Include="Frame\IMultimediaFrame.cs" />
+    <Compile Include="Frame\Buffers\IMultimediaFrameBuffer.cs" />
+    <Compile Include="Frame\IMultimediaStreamingFrame.cs" />
+    <Compile Include="Frame\Streaming Metadata.cs" />
+    <Compile Include="Management\Basic Multimedia Controller.cs" />
+    <Compile Include="Management\IMultimediaController.cs" />
+    <Compile Include="Render\Audio\Audio Cone.cs" />
+    <Compile Include="Render\Audio\Audio Detail Parameters.cs" />
+    <Compile Include="Render\Audio\Audio Source Params.cs" />
+    <Compile Include="Render\Audio\Distance Curve Point.cs" />
+    <Compile Include="Render\Audio\Emitter.cs" />
+    <Compile Include="Render\Audio\IAudio Renderer.cs" />
+    <Compile Include="Render\Audio\IAudioRenderManager.cs" />
+    <Compile Include="Render\Audio\Listener.cs" />
+    <Compile Include="Render\Audio\Perspective.cs" />
+    <Compile Include="Render\Audio\Reverb Settings.cs" />
+    <Compile Include="Render\IAVStreamRenderManager.cs" />
+    <Compile Include="Frame\Video\IMovie.cs" />
+    <Compile Include="Data\Pixels\Enums\Scan Line Order.cs" />
+    <Compile Include="Frame\Image\Basic Image Frame.cs" />
+    <Compile Include="Frame\Image\IAnimation.cs" />
+    <Compile Include="Frame\Image\IImage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Timer\Win32 Multimedia Time Functions.cs" />
-    <Compile Include="Timer\Win32 Multimedia Time Structs.cs" />
-    <Compile Include="Timer\Win32 Multimedia Timer.cs" />
-    <Compile Include="Visual\Direct2D Render Control.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Visual\Direct2D Resource Manager.cs" />
-    <Compile Include="Visual\Renderers\Direct2D\Direct2D Renderer User Control.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Visual\Visual Render Control.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Visual\Visual Render Resource Manager.cs" />
+    <Compile Include="Frame\Image\IImageSet.cs" />
+    <Compile Include="Frame\Video\IMultimediaVideoFrame.cs" />
+    <Compile Include="Frame\Image\IMultimediaImageFrame.cs" />
+    <Compile Include="Management\ITimer.cs" />
+    <Compile Include="Data\Pixels\Enums\Pixel Format.cs" />
+    <Compile Include="Data\Pixels\IPixelConverter.cs" />
+    <Compile Include="Data\Pixels\Palette.cs" />
+    <Compile Include="Data\Pixels\Pixel Base.cs" />
+    <Compile Include="Data\Pixels\Pixel Calculations.cs" />
+    <Compile Include="Data\Pixels\Basic Pixel Converter.cs" />
+    <Compile Include="Data\Pixels\Pixel Data.cs" />
+    <Compile Include="Data\Pixels\RGB Quad.cs" />
+    <Compile Include="Data\Pixels\RGB Triplet.cs" />
+    <Compile Include="Data\Pixels\YUV 444.cs" />
+    <Compile Include="Data\Resize\Bilinear Float Space.cs" />
+    <Compile Include="Data\Resize\Delegates.cs" />
+    <Compile Include="Data\Resize\Nearest Neighbor Integer Space.cs" />
+    <Compile Include="Render\Image\IRendererImage.cs" />
+    <Compile Include="Render\Image\Line Style.cs" />
+    <Compile Include="Render\Subtitle\ISubtitleRenderManager.cs" />
+    <Compile Include="Render\Video\IVideoRenderManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Entities\Basic Structures\Basic Structures.csproj">
+    <ProjectReference Include="..\Basic Structures\Basic Structures.csproj">
       <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
       <Name>Basic Structures</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Infrastructure Factories\Factories\Factories.csproj">
-      <Project>{3AF99109-1895-41C3-A070-1D004E5A40EB}</Project>
-      <Name>Factories %28Factories\Factories%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Entities\Media Base\Media Base.csproj">
-      <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
-      <Name>Media Base</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Native Code\DirectX\Direct2D\Direct2D.vcxproj">
-      <Project>{44208309-EFE3-4A6F-B0F8-9013A16B20DF}</Project>
-      <Name>Direct2D</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Native Code\DirectX\XAudio2\XAudio2.vcxproj">
-      <Project>{FE898E65-DAFF-435D-9A72-4C9D3306636A}</Project>
-      <Name>XAudio2</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utility Projects\ReusableCode\ReusableCode.csproj">
+    <ProjectReference Include="..\..\Utility Projects\ReusableCode\ReusableCode.csproj">
       <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
       <Name>ReusableCode</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utility Projects\Utility\Utility.csproj">
+    <ProjectReference Include="..\..\Utility Projects\Utility\Utility.csproj">
       <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
       <Name>Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Audio\XAudio2\" />
+    <Content Include="media base design.txt" />
+    <Content Include="Render\Audio\_Findings.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Frame\Subtitle\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

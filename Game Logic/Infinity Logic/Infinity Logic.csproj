@@ -41,13 +41,17 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Asset Classifier.cs" />
     <Compile Include="Assets\Asset Reference.cs" />
     <Compile Include="Assets\Asset Location.cs" />
     <Compile Include="Assets\Asset Node.cs" />
+    <Compile Include="Assets\Generalized Asset Type.cs" />
     <Compile Include="Assets\IAssetManager.cs" />
     <Compile Include="Assets\Infinity Asset Manager.cs" />
     <Compile Include="Engine Type.cs" />
+    <Compile Include="Factories\Asset Manager Factory.cs" />
     <Compile Include="Factories\Biff Factory.cs" />
+    <Compile Include="Factories\Key Factory.cs" />
     <Compile Include="Infinity Engines.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Assets\Asset Locator.cs" />
@@ -55,27 +59,31 @@
     <Compile Include="Text Manager\ITextManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Basic Formats\Basic Formats.csproj">
+    <ProjectReference Include="..\..\File Format Projects\Basic Formats\Basic Formats.csproj">
       <Project>{4D2A899B-3674-4288-81A8-C8F11636C2DA}</Project>
       <Name>Basic Formats</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Configuration Handler\Configuration Handler.csproj">
+    <ProjectReference Include="..\..\Utility Projects\Configuration Handler\Configuration Handler.csproj">
       <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
       <Name>Configuration Handler</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Infinity Formats\Infinity Formats.csproj">
+    <ProjectReference Include="..\..\File Format Projects\Infinity Formats\Infinity Formats.csproj">
       <Project>{3EE5137B-C08F-4337-B089-E20A502C2A0C}</Project>
       <Name>Infinity Formats</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Media Base\Media Base.csproj">
+    <ProjectReference Include="..\..\File Format Projects\Information\Information.csproj">
+      <Project>{1783CB90-E638-44A6-9500-B878585A5416}</Project>
+      <Name>Information</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Entities\Media Base\Media Base.csproj">
       <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
       <Name>Media Base</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ReusableCode\ReusableCode.csproj">
+    <ProjectReference Include="..\..\Utility Projects\ReusableCode\ReusableCode.csproj">
       <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
       <Name>ReusableCode</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Utility\Utility.csproj">
+    <ProjectReference Include="..\..\Utility Projects\Utility\Utility.csproj">
       <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
       <Name>Utility</Name>
     </ProjectReference>

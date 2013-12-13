@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
+using Bardez.Projects.InfinityPlus1.Tools.ApproachingInfinity.Forms;
+
 namespace Bardez.Projects.InfinityPlus1.Tools.ApproachingInfinity
 {
     static class Program

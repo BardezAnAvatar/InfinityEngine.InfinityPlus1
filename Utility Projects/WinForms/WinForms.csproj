@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1816E1F1-8765-4AEA-BEF4-0E80E50C8399}</ProjectGuid>
+    <ProjectGuid>{B6490A94-7699-4A7D-AFFA-BF80BD5B5D1C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bardez.Projects.MultiMedia.LibAV.Wrapper</RootNamespace>
-    <AssemblyName>LibAV Wrapper</AssemblyName>
+    <RootNamespace>Bardez.Projects.WinForms</RootNamespace>
+    <AssemblyName>WinForms</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -35,40 +35,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Multimedia\Audio Stream Renderer.cs" />
-    <Compile Include="Multimedia\Multimedia Movie.cs" />
-    <Compile Include="Multimedia\Video Stream Renderer.cs" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\Closable Tab Control.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Closable Tab Page.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Tab Close Event Arguments.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Entities\Basic Structures\Basic Structures.csproj">
-      <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
-      <Name>Basic Structures</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Utility Projects\Configuration Handler\Configuration Handler.csproj">
-      <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
-      <Name>Configuration Handler</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\File Format Projects\External Formats\External Formats.csproj">
-      <Project>{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}</Project>
-      <Name>External Formats</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Entities\Media Base\Media Base.csproj">
-      <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
-      <Name>Media Base</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Native Code\ffmpeg\Lib AV\Lib AV.vcxproj">
-      <Project>{1F9B2E1A-E000-4076-8D38-D995A6A3922C}</Project>
-      <Name>Lib AV</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Infrastructure Factories\Native Factories\Native Factories.csproj">
-      <Project>{1B2B86E7-2F10-42C1-B930-D62C8AC1634D}</Project>
-      <Name>Native Factories</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

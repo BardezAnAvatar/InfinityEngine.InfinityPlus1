@@ -56,15 +56,15 @@
     <Compile Include="XAudio2 reimp.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Basic Structures\Basic Structures.csproj">
+    <ProjectReference Include="..\Entities\Basic Structures\Basic Structures.csproj">
       <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
       <Name>Basic Structures</Name>
     </ProjectReference>
-    <ProjectReference Include="..\External Formats\External Formats.csproj">
+    <ProjectReference Include="..\File Format Projects\External Formats\External Formats.csproj">
       <Project>{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}</Project>
       <Name>External Formats</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Media Base\Media Base.csproj">
+    <ProjectReference Include="..\Entities\Media Base\Media Base.csproj">
       <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
       <Name>Media Base</Name>
     </ProjectReference>

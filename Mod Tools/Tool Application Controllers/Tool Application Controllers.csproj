@@ -45,16 +45,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApproachingInfinity\Approaching Infinity Controller.cs" />
+    <Compile Include="ApproachingInfinity\Asset Tree Enum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Infinity Formats\Infinity Formats.csproj">
+    <ProjectReference Include="..\..\File Format Projects\Infinity Formats\Infinity Formats.csproj">
       <Project>{3EE5137B-C08F-4337-B089-E20A502C2A0C}</Project>
       <Name>Infinity Formats</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Game Logic\Infinity Logic\Infinity Logic.csproj">
       <Project>{5BE80D35-FD72-4814-954D-0E5BDB5CC34B}</Project>
       <Name>Infinity Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\File Format Projects\Information\Information.csproj">
+      <Project>{1783CB90-E638-44A6-9500-B878585A5416}</Project>
+      <Name>Information</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

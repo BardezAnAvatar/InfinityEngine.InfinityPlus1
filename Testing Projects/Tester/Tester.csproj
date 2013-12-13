@@ -5,12 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6ECA5199-A497-4BF2-B956-CEB3F0912C17}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{9BD4922B-BEC0-4140-8600-35571A479EB2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bardez.Projects.InfinityPlus1.Output</RootNamespace>
-    <AssemblyName>Output</AssemblyName>
+    <RootNamespace>Bardez.Projects.InfinityPlus1.Tester</RootNamespace>
+    <AssemblyName>InfinityPlus1.Tester</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -18,6 +20,7 @@
     <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,16 +28,18 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -42,7 +47,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Debug\Output.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisLogFile>bin\Debug\InfinityPlus1.Tester.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
@@ -51,7 +56,6 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
-    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -59,7 +63,7 @@
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Release\Output.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisLogFile>bin\Release\InfinityPlus1.Tester.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
@@ -68,72 +72,111 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
-    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Audio\Audio Output.cs" />
-    <Compile Include="Audio\Renderers\Raw Sample File Writer Audio Renderer.cs" />
-    <Compile Include="Audio\Renderers\XAudio2\XAudio2 Audio Renderer.cs" />
-    <Compile Include="Audio\Renderers\XAudio2\Direct Voice Graph.cs" />
-    <Compile Include="Audio\Renderers\XAudio2\IVoiceGraph.cs" />
-    <Compile Include="Audio\Renderers\XAudio2\Reverb Voice Graph.cs" />
-    <Compile Include="Audio\XAudio2 Source Voice Reference.cs" />
-    <Compile Include="Audio\Enums\XAudio2VoiceState.cs" />
-    <Compile Include="Audio\XAudio2 Output.cs" />
-    <Compile Include="Audio\XAudio2 Voice Reference.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Timer\Win32 Multimedia Time Functions.cs" />
-    <Compile Include="Timer\Win32 Multimedia Time Structs.cs" />
-    <Compile Include="Timer\Win32 Multimedia Timer.cs" />
-    <Compile Include="Visual\Direct2D Render Control.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Visual\Direct2D Resource Manager.cs" />
-    <Compile Include="Visual\Renderers\Direct2D\Direct2D Renderer User Control.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="Scratch MVE.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Visual\Visual Render Control.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="Scratch MVE.Designer.cs">
+      <DependentUpon>Scratch MVE.cs</DependentUpon>
     </Compile>
-    <Compile Include="Visual\Visual Render Resource Manager.cs" />
+    <Compile Include="Scratch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Scratch.Designer.cs">
+      <DependentUpon>Scratch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test UI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test UI.Designer.cs">
+      <DependentUpon>Test UI.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Entities\Basic Structures\Basic Structures.csproj">
+    <ProjectReference Include="..\..\Entities\Basic Structures\Basic Structures.csproj">
       <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
       <Name>Basic Structures</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Infrastructure Factories\Factories\Factories.csproj">
-      <Project>{3AF99109-1895-41C3-A070-1D004E5A40EB}</Project>
-      <Name>Factories %28Factories\Factories%29</Name>
+    <ProjectReference Include="..\..\Utility Projects\Configuration Handler\Configuration Handler.csproj">
+      <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
+      <Name>Configuration Handler</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Entities\Media Base\Media Base.csproj">
+    <ProjectReference Include="..\..\Utility Projects\Exception Manager\Exception Handler.csproj">
+      <Project>{6EEC2717-FB0D-42D7-BABA-D2C024074B4F}</Project>
+      <Name>Exception Handler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\File Format Projects\External Formats\External Formats.csproj">
+      <Project>{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}</Project>
+      <Name>External Formats</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\File Format Projects\Infinity Formats\Infinity Formats.csproj">
+      <Project>{3EE5137B-C08F-4337-B089-E20A502C2A0C}</Project>
+      <Name>Infinity Formats</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Entities\Media Base\Media Base.csproj">
       <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
       <Name>Media Base</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Native Code\DirectX\Direct2D\Direct2D.vcxproj">
+    <ProjectReference Include="..\..\Native Code\DirectX\Direct2D\Direct2D.vcxproj">
       <Project>{44208309-EFE3-4A6F-B0F8-9013A16B20DF}</Project>
       <Name>Direct2D</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Native Code\DirectX\XAudio2\XAudio2.vcxproj">
-      <Project>{FE898E65-DAFF-435D-9A72-4C9D3306636A}</Project>
-      <Name>XAudio2</Name>
+    <ProjectReference Include="..\..\Native Code\ffmpeg\Lib AV\Lib AV.vcxproj">
+      <Project>{1F9B2E1A-E000-4076-8D38-D995A6A3922C}</Project>
+      <Name>Lib AV</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utility Projects\ReusableCode\ReusableCode.csproj">
+    <ProjectReference Include="..\..\Output\Output.csproj">
+      <Project>{6ECA5199-A497-4BF2-B956-CEB3F0912C17}</Project>
+      <Name>Output</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utility Projects\ReusableCode\ReusableCode.csproj">
       <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
       <Name>ReusableCode</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utility Projects\Utility\Utility.csproj">
+    <ProjectReference Include="..\Test\Test.csproj">
+      <Project>{E79833DB-B2D2-4781-B0FC-79E85DA95BE5}</Project>
+      <Name>Test</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utility Projects\Utility\Utility.csproj">
       <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
       <Name>Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Audio\XAudio2\" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scratch MVE.resx">
+      <DependentUpon>Scratch MVE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scratch.resx">
+      <DependentUpon>Scratch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test UI.resx">
+      <DependentUpon>Test UI.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

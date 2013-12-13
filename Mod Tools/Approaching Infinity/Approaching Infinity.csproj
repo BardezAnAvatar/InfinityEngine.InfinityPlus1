@@ -52,9 +52,6 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ApproachingInfinity, Version=0.1.5091.28699, Culture=neutral, processorArchitecture=MSIL">
-      <ExecutableExtension>.exe</ExecutableExtension>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -72,6 +69,12 @@
     </Compile>
     <Compile Include="Forms\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Bogus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Bogus.Designer.cs">
+      <DependentUpon>Bogus.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Main Form.cs">
       <SubType>Form</SubType>
@@ -109,7 +112,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Infinity Formats\Infinity Formats.csproj">
+    <ProjectReference Include="..\..\File Format Projects\Infinity Formats\Infinity Formats.csproj">
       <Project>{3EE5137B-C08F-4337-B089-E20A502C2A0C}</Project>
       <Name>Infinity Formats</Name>
     </ProjectReference>
@@ -117,17 +120,132 @@
       <Project>{5BE80D35-FD72-4814-954D-0E5BDB5CC34B}</Project>
       <Name>Infinity Logic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Utility Projects\WinForms\WinForms.csproj">
+      <Project>{B6490A94-7699-4A7D-AFFA-BF80BD5B5D1C}</Project>
+      <Name>WinForms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Tool Application Controllers\Tool Application Controllers.csproj">
       <Project>{227032EB-05D9-4BD3-A587-6B07C538F7B8}</Project>
       <Name>Tool Application Controllers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Utility\Utility.csproj">
+    <ProjectReference Include="..\..\Utility Projects\Utility\Utility.csproj">
       <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
       <Name>Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UserControls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\box_closed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\box_open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coins.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\comment_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_structure.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\drawer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\drawer_open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\emotion_question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\film.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gear_in.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\key.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\layouts_header_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\movies.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\page_white_text.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\places.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\resultset_first.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\resultset_last.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\resultset_next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\resultset_previous.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\script.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\script_code.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\scripts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sound.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\text.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\application_side_boxes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Asymptote.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\book.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
