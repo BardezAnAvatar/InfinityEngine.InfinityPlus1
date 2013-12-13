@@ -7,20 +7,20 @@ using Bardez.Projects.InfinityPlus1.Test;
 
 namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.TextLocationKey
 {
-    /// <summary>This class tests the usable methods in the InfinityPlus1.Files.TextLocationKeyStringReference class</summary>
-    public class TextLocationKeyStringReferenceEntryTest : FileTesterBase
+    /// <summary>This class tests the usable methods in the InfinityPlus1.Files.TextLocationKeyHeader class</summary>
+    public class TextLocationKeyHeaderTest : FileTesterBase
     {
         #region Fields
         /// <summary>Constant key to look up in app.config</summary>
         protected const String configKey = "Test.Tlk1.Tlk1Path";
 
         /// <summary>Format instance to test</summary>
-        protected TextLocationKeyStringReference Entry { get; set; }
+        protected TalkTableHeader Header { get; set; }
         #endregion
 
         #region Construction
         /// <summary>Default constructor</summary>
-        public TextLocationKeyStringReferenceEntryTest()
+        public TextLocationKeyHeaderTest()
         {
             this.InitializeInstance();
         }
@@ -31,7 +31,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.TextLocationKey
         /// <param name="e">Specific initialization event parameters</param>
         protected override void InitializeTestData(Object sender, EventArgs e)
         {
-            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(TextLocationKeyStringReferenceEntryTest.configKey);
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(TextLocationKeyHeaderTest.configKey);
         }
 
         /// <summary>Event to raise for testing instance(s)</summary>
@@ -41,18 +41,13 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.TextLocationKey
         {
             using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
             {
-                TextLocationKeyHeader header = new TextLocationKeyHeader();
-                header.Read(stream);
-
-                this.Entry = new TextLocationKeyStringReference("en-us");
-                this.Entry.Read(stream);
-
-                this.Entry.ReadStringReferenceFull(stream, header.StringsReferenceOffset);
+                this.Header = new TalkTableHeader();
+                this.Header.Read(stream);
             }
 
-            this.DoPostMessage(new MessageEventArgs(this.Entry.ToString(), "Output", testArgs.Path));
+            this.DoPostMessage(new MessageEventArgs(this.Header.ToString(), "Output", testArgs.Path));
 
-            using (FileStream dest = new FileStream(testArgs.Path + ".strref.rewrite", FileMode.Create, FileAccess.Write))
+            using (FileStream dest = new FileStream(testArgs.Path + ".header.rewrite", FileMode.Create, FileAccess.Write))
                 this.TestWrite(dest);
         }
 
@@ -60,7 +55,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.TextLocationKey
         /// <param name="destination">Stream to write output to</param>
         protected virtual void TestWrite(Stream destination)
         {
-            this.Entry.Write(destination);
+            this.Header.Write(destination);
         }
     }
 }

@@ -13,18 +13,18 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable
     {
         #region Protected Members
         /// <summary>An array of stringReference objects</summary>
-        protected List<TextLocationKeyStringReference> stringReferences;
+        protected List<TalkTableStringReference> stringReferences;
         #endregion
 
 
         #region Public Properties
         /// <summary>This contains the header information of the TLK file</summary>
-        public TextLocationKeyHeader Header { get; set; }
+        public TalkTableHeader Header { get; set; }
 
         /// <summary>This public Property returns the string reference at the index indicated.</summary>
         /// <param name="index">Int32 representing the place in the array at which to get or set the string reference</param>
         /// <returns>A TextLocationKeyStringReference string reference object</returns>
-        public TextLocationKeyStringReference this[Int32 index]
+        public TalkTableStringReference this[Int32 index]
         {
             get { return stringReferences[index]; }
             set { stringReferences[index] = value; }
@@ -59,8 +59,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable
         /// <summary>Instantiates reference types</summary>
         public void Initialize()
         {
-            this.stringReferences = new List<TextLocationKeyStringReference>();
-            this.Header = new TextLocationKeyHeader();
+            this.stringReferences = new List<TalkTableStringReference>();
+            this.Header = new TalkTableHeader();
         }
         #endregion
 
@@ -82,7 +82,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable
                 this.Read(input);
             else
             {
-                this.Header = new TextLocationKeyHeader();
+                this.Header = new TalkTableHeader();
                 this.Header.Read(input, false);
             }
         }
@@ -102,7 +102,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable
             //read the strref blocks
             for (Int32 i = 0; i < this.Header.StringReferenceCount; ++i)
             {
-                TextLocationKeyStringReference strref = new TextLocationKeyStringReference(this.Header.CultureReference);
+                TalkTableStringReference strref = new TalkTableStringReference(this.Header.CultureReference);
                 strref.Initialize();
                 strref.ReadStringReferenceEntry(input);
                 stringReferences.Add(strref);
@@ -113,7 +113,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable
             {
                 for (Int32 i = 0; i < stringReferences.Count; ++i)
                 {
-                    TextLocationKeyStringReference strref = stringReferences[i];                //copy
+                    TalkTableStringReference strref = stringReferences[i];                //copy
                     strref.ReadStringReferenced(input, this.Header.StringsReferenceOffset);     //read
                     stringReferences[i] = strref;                                               //assign
                 }
@@ -126,7 +126,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable
         {
             /* write the file */
             this.Header.StringReferenceCount = this.stringReferences.Count;
-            this.Header.StringsReferenceOffset = TextLocationKeyHeader.StructSize + (TextLocationKeyStringReference.StructSize * stringReferences.Count);
+            this.Header.StringsReferenceOffset = TalkTableHeader.StructSize + (TalkTableStringReference.StructSize * stringReferences.Count);
             
             //write header to file
             this.Header.Write(output);
@@ -141,7 +141,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable
             //write string data
             for (Int32 i = 0; i < stringReferences.Count; ++i)
             {
-                TextLocationKeyStringReference strref = this.stringReferences[i];           //copy the object
+                TalkTableStringReference strref = this.stringReferences[i];           //copy the object
                 ReusableIO.WriteStringToStream(strref.StringReferenced, output, this.Header.CultureReference, true);
             }
         }
@@ -152,7 +152,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable
         /// <summary>Adds a String Regerence to the TLK file</summary>
         /// <param name="StringReference">String reference to add to the TLK file</param>
         /// <returns>an Int32 representing the newly added index</returns>
-        public Int32 Add(TextLocationKeyStringReference StringReference)
+        public Int32 Add(TalkTableStringReference StringReference)
         {
             stringReferences.Add(StringReference);
             return stringReferences.Count - 1;
@@ -165,7 +165,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable
             TalkTable retval = new TalkTable();
             retval.Header = this.Header;
             retval.StoreStringsInMemory = this.StoreStringsInMemory;
-            retval.stringReferences = new List<TextLocationKeyStringReference>(this.stringReferences);
+            retval.stringReferences = new List<TalkTableStringReference>(this.stringReferences);
 
             return retval;
         }

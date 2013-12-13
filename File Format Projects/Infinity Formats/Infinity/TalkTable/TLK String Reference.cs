@@ -26,7 +26,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable
     ///     0x0012 	    4 (dword) 	        Offset of this string relative to the strings section
     ///     0x0016 	    4 (dword) 	        Length of this string
     /// </remarks>
-    public class TextLocationKeyStringReference : IInfinityFormat
+    public class TalkTableStringReference : IInfinityFormat
     {
         /// <summary>Binary size of the struct on disk</summary>
         public const Int32 StructSize = 26;
@@ -75,7 +75,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable
         #region Consruction
         /// <summary>Localization constructor</summary>
         /// <param name="cultureCode">String representing the culture code to use when reading strings</param>
-        public TextLocationKeyStringReference(String cultureCode)
+        public TalkTableStringReference(String cultureCode)
         {
             this.CultureCode = cultureCode;
             this.SoundResourceReference = null;

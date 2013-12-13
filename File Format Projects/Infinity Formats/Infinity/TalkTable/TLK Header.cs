@@ -19,7 +19,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable
     ///     0x000a 	    4 (dword) 	        Number of strref entries in this file
     ///     0x000e 	    4 (dword) 	        Offset to string data
     /// </remarks>
-    public class TextLocationKeyHeader : InfinityFormat
+    public class TalkTableHeader : InfinityFormat
     {
         /// <summary>Binary size of the struct on disk</summary>
         public const Int32 StructSize = 18;
@@ -84,7 +84,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable
             //In all Infinity Engine cases the signature should be 'TLK '.
             //In all Infinity Engine cases the version should be 'V1  '.
 
-            Byte[] header = ReusableIO.BinaryRead(input, TextLocationKeyHeader.StructSize - 8); //header buffer
+            Byte[] header = ReusableIO.BinaryRead(input, TalkTableHeader.StructSize - 8); //header buffer
 
             this.languageID = ReusableIO.ReadInt16FromArray(header, 0);
             this.StringReferenceCount = ReusableIO.ReadInt32FromArray(header, 2);
