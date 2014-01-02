@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components;
@@ -70,9 +71,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1
         /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
         protected Byte ProficiencyUnused12 { get; set; }
 
-        /// <summary>Unused proficiency #13</summary>
-        /// <remarks>Split into 3-bit groups for multiple class proficiencies</remarks>
-        protected Byte ProficiencyUnused13 { get; set; }
+        /// <summary>Undead level according to BG2 source code</summary>
+        /// <remarks>While this value is named, it appears to constantly be 0</remarks>
+        protected Byte UndeadLevel { get; set; }
         #endregion
         
 
@@ -253,9 +254,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1
             this.ProficiencyUnused10 = remainingBody[119];
             this.ProficiencyUnused11 = remainingBody[120];
             this.ProficiencyUnused12 = remainingBody[121];
-            this.ProficiencyUnused13 = remainingBody[122];
+            this.UndeadLevel = remainingBody[122];
             this.Tracking = remainingBody[123];
-            Array.Copy(remainingBody, 124, this.ReservedNonweaponProficiencies, 0, 32);
+            this.TrackingTarget.Source = ReusableIO.ReadStringFromByteArray(remainingBody, 124, CultureConstants.CultureCodeEnglish, 32);
         }
 
         /// <summary>This public method writes the file format to the output stream.</summary>
@@ -294,9 +295,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1
             output.WriteByte(this.ProficiencyUnused10);
             output.WriteByte(this.ProficiencyUnused11);
             output.WriteByte(this.ProficiencyUnused12);
-            output.WriteByte(this.ProficiencyUnused13);
+            output.WriteByte(this.UndeadLevel);
             output.WriteByte(this.Tracking);
-            output.Write(this.ReservedNonweaponProficiencies, 0, 32);
+            ReusableIO.WriteStringToStream(this.TrackingTarget.Source, output, CultureConstants.CultureCodeEnglish, false, 32);
         }
         #endregion
 
@@ -370,12 +371,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1
             builder.Append(this.ProficiencyUnused11);
             builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #12)"));
             builder.Append(this.ProficiencyUnused12);
-            builder.Append(StringFormat.ToStringAlignment("Proficiency (Unused #13)"));
-            builder.Append(this.ProficiencyUnused13);
+            builder.Append(StringFormat.ToStringAlignment("Turn Undead level"));
+            builder.Append(this.UndeadLevel);
             builder.Append(StringFormat.ToStringAlignment("Tracking"));
             builder.Append(this.Tracking);
-            builder.Append(StringFormat.ToStringAlignment("Reserved non-weapon proficiencies"));
-            builder.Append(StringFormat.ByteArrayToHexString(this.ReservedNonweaponProficiencies));
+            builder.Append(StringFormat.ToStringAlignment("Tracking Target"));
+            builder.Append(this.TrackingTarget.Value);
         }
         #endregion
     }

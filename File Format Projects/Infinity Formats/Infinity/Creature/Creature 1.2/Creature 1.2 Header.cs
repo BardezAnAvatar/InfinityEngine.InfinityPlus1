@@ -874,7 +874,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1_
             this.ProficiencyUnused14 = remainingBody[121];
             this.ProficiencyUnused15 = remainingBody[122];
             this.Tracking = remainingBody[123];
-            Array.Copy(remainingBody, 124, this.ReservedNonweaponProficiencies, 0, 32);
+            this.TrackingTarget.Source = ReusableIO.ReadStringFromByteArray(remainingBody, 124, CultureConstants.CultureCodeEnglish, 32);
         }
 
         /// <summary>This method will read the kit variable to the output Stream</summary>
@@ -996,7 +996,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1_
             output.WriteByte(this.ProficiencyUnused14);
             output.WriteByte(this.ProficiencyUnused15);
             output.WriteByte(this.Tracking);
-            output.Write(this.ReservedNonweaponProficiencies, 0, 32);
+            ReusableIO.WriteStringToStream(this.TrackingTarget.Source, output, CultureConstants.CultureCodeEnglish, false, 32);
         }
 
         /// <summary>This method will write out the kit variable to the output Stream</summary>
@@ -1180,8 +1180,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature1_
             builder.Append(this.ProficiencyUnused15);
             builder.Append(StringFormat.ToStringAlignment("Tracking"));
             builder.Append(this.Tracking);
-            builder.Append(StringFormat.ToStringAlignment("Reserved non-weapon proficiencies"));
-            builder.Append(StringFormat.ByteArrayToHexString(this.ReservedNonweaponProficiencies));
+            builder.Append(StringFormat.ToStringAlignment("Tracking Target"));
+            builder.Append(this.TrackingTarget.Value);
         }
 
         /// <summary>This method appends the kit variable(s) to the output StringBuilder</summary>

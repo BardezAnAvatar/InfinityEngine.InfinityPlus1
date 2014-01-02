@@ -12,7 +12,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature
 {
     public abstract class CreatureHeader : InfinityFormat
     {
-        #region Members
+        #region Fields
         /// <summary>The full name of the creature</summary>
         protected StringReference nameLong;
 

@@ -31,82 +31,38 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
     /// </remarks>
     public class Creature2_2 : IInfinityFormat
     {
-        #region Members
+        #region Fields
         /// <summary>Creature header, most of the data</summary>
         protected Creature2_2Header header;
 
         /// <summary>List of known spells & caster memorization</summary>
-        protected GenericOrderedDictionary<String, D20SpellList> spells;
+        public GenericOrderedDictionary<String, D20SpellList> Spells { get; set; }
 
         /// <summary>List of effects the creature has temporarily or permanently applied.</summary>
         /// <remarks>Can be a list of either Effect1 or Effect2, so using the base struct</remarks>
-        protected List<EffectWrapper> effects;
+        public List<EffectWrapper> Effects { get; set; }
 
         /// <summary>List of items the creature has in its inventory</summary>
-        protected List<ItemInstance> items;
+        public List<ItemInstance> Items { get; set; }
 
         /// <summary>The item slots of available to the creature</summary>
-        protected GenericOrderedDictionary<String, Int16> itemSlots;
+        public GenericOrderedDictionary<String, Int16> ItemSlots { get; set; }
 
         /// <summary>Index to items indicating the currently selected weapon</summary>
-        protected Int16 selectedWeapon;
+        public Int16 SelectedWeapon { get; set; }
 
         /// <summary>Index to the selected weapon's currently selected ability</summary>
-        protected Int16 selectedWeaponAbility;
+        public Int16 SelectedWeaponAbility { get; set; }
         #endregion
 
+
         #region Properties
-        #region Members
         /// <summary>Creature header, most of the data</summary>
         public Creature2_2Header Header
         {
             get { return this.header; }
             set { this.header = value; }
         }
-
-        /// <summary>List of known spells & caster memorization</summary>
-        public GenericOrderedDictionary<String, D20SpellList> Spells
-        {
-            get { return this.spells; }
-            set { this.spells = value; }
-        }
-
-        /// <summary>List of effects the creature has temporarily or permanently applied.</summary>
-        /// <remarks>Can be a list of either Effect1 or Effect2, so using the base struct</remarks>
-        public List<EffectWrapper> Effects
-        {
-            get { return this.effects; }
-            set { this.effects = value; }
-        }
-
-        /// <summary>List of items the creature has in its inventory</summary>
-        public List<ItemInstance> Items
-        {
-            get { return this.items; }
-            set { this.items = value; }
-        }
-
-        /// <summary>The item slots of available to the creature</summary>
-        public GenericOrderedDictionary<String, Int16> ItemSlots
-        {
-            get { return this.itemSlots; }
-            set { this.itemSlots = value; }
-        }
-
-        /// <summary>Index to items indicating the currently selected weapon</summary>
-        public Int16 SelectedWeapon
-        {
-            get { return this.selectedWeapon; }
-            set { this.selectedWeapon = value; }
-        }
-
-        /// <summary>Index to the selected weapon's currently selected ability</summary>
-        public Int16 SelectedWeaponAbility
-        {
-            get { return this.selectedWeaponAbility; }
-            set { this.selectedWeaponAbility = value; }
-        }
-        #endregion
 
         /// <summary>Gets the headline for the creature file</summary>
         public String Headline
@@ -127,72 +83,73 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
         }
         #endregion
 
+
         #region Construction
         /// <summary>Instantiates reference types</summary>
         public void Initialize()
         {
             this.InstantiateHeader();
-            this.spells = new GenericOrderedDictionary<String, D20SpellList>();
-            this.effects = new List<EffectWrapper>();
-            this.items = new List<ItemInstance>();
+            this.Spells = new GenericOrderedDictionary<String, D20SpellList>();
+            this.Effects = new List<EffectWrapper>();
+            this.Items = new List<ItemInstance>();
             this.InitializeItemSlots();
         }
 
         /// <summary>Initializes the item slots ordered dictionary</summary>
         protected void InitializeItemSlots()
         {
-            this.itemSlots = new GenericOrderedDictionary<String, Int16>();
+            this.ItemSlots = new GenericOrderedDictionary<String, Int16>();
 
-            /* 01 */ this.itemSlots.Add("Helmet", 0);
-            /* 02 */ this.itemSlots.Add("Armor", 0);
-            /* 03 */ this.itemSlots.Add("Unknown (Shield)", 0);
-            /* 04 */ this.itemSlots.Add("Gloves", 0);
-            /* 05 */ this.itemSlots.Add("Left Ring", 0);
-            /* 06 */ this.itemSlots.Add("Right Ring", 0);
-            /* 07 */ this.itemSlots.Add("Amulet", 0);
-            /* 08 */ this.itemSlots.Add("Belt", 0);
-            /* 09 */ this.itemSlots.Add("Boots", 0);
-            /* 10 */ this.itemSlots.Add("Weapon 1", 0);
-            /* 11 */ this.itemSlots.Add("Shield 1", 0);
-            /* 12 */ this.itemSlots.Add("Weapon 2", 0);
-            /* 13 */ this.itemSlots.Add("Shield 2", 0);
-            /* 14 */ this.itemSlots.Add("Weapon 3", 0);
-            /* 15 */ this.itemSlots.Add("Shield 3", 0);
-            /* 16 */ this.itemSlots.Add("Weapon 4", 0);
-            /* 17 */ this.itemSlots.Add("Shield 4", 0);
-            /* 19 */ this.itemSlots.Add("Quiver 1", 0);
-            /* 20 */ this.itemSlots.Add("Quiver 2", 0);
-            /* 21 */ this.itemSlots.Add("Quiver 3", 0);
-            /* 22 */ this.itemSlots.Add("Quiver 4", 0);
-            /* 18 */ this.itemSlots.Add("Cloak", 0);
-            /* 23 */ this.itemSlots.Add("Quick item 1", 0);
-            /* 24 */ this.itemSlots.Add("Quick item 2", 0);
-            /* 25 */ this.itemSlots.Add("Quick item 3", 0);
-            /* 26 */ this.itemSlots.Add("Inventory 01", 0);
-            /* 27 */ this.itemSlots.Add("Inventory 02", 0);
-            /* 28 */ this.itemSlots.Add("Inventory 03", 0);
-            /* 29 */ this.itemSlots.Add("Inventory 04", 0);
-            /* 30 */ this.itemSlots.Add("Inventory 05", 0);
-            /* 31 */ this.itemSlots.Add("Inventory 06", 0);
-            /* 32 */ this.itemSlots.Add("Inventory 07", 0);
-            /* 33 */ this.itemSlots.Add("Inventory 08", 0);
-            /* 34 */ this.itemSlots.Add("Inventory 09", 0);
-            /* 35 */ this.itemSlots.Add("Inventory 10", 0);
-            /* 36 */ this.itemSlots.Add("Inventory 11", 0);
-            /* 37 */ this.itemSlots.Add("Inventory 12", 0);
-            /* 38 */ this.itemSlots.Add("Inventory 13", 0);
-            /* 39 */ this.itemSlots.Add("Inventory 14", 0);
-            /* 40 */ this.itemSlots.Add("Inventory 15", 0);
-            /* 41 */ this.itemSlots.Add("Inventory 16", 0);
-            /* 42 */ this.itemSlots.Add("Inventory 17", 0);
-            /* 43 */ this.itemSlots.Add("Inventory 18", 0);
-            /* 44 */ this.itemSlots.Add("Inventory 19", 0);
-            /* 45 */ this.itemSlots.Add("Inventory 20", 0);
-            /* 46 */ this.itemSlots.Add("Inventory 21", 0);
-            /* 47 */ this.itemSlots.Add("Inventory 22", 0);
-            /* 48 */ this.itemSlots.Add("Inventory 23", 0);
-            /* 49 */ this.itemSlots.Add("Inventory 24", 0);
-            /* 50 */ this.itemSlots.Add("Magic weapon", 0);
+            /* 01 */ this.ItemSlots.Add("Helmet", 0);
+            /* 02 */ this.ItemSlots.Add("Armor", 0);
+            /* 03 */ this.ItemSlots.Add("Unknown (Shield)", 0);
+            /* 04 */ this.ItemSlots.Add("Gloves", 0);
+            /* 05 */ this.ItemSlots.Add("Left Ring", 0);
+            /* 06 */ this.ItemSlots.Add("Right Ring", 0);
+            /* 07 */ this.ItemSlots.Add("Amulet", 0);
+            /* 08 */ this.ItemSlots.Add("Belt", 0);
+            /* 09 */ this.ItemSlots.Add("Boots", 0);
+            /* 10 */ this.ItemSlots.Add("Weapon 1", 0);
+            /* 11 */ this.ItemSlots.Add("Shield 1", 0);
+            /* 12 */ this.ItemSlots.Add("Weapon 2", 0);
+            /* 13 */ this.ItemSlots.Add("Shield 2", 0);
+            /* 14 */ this.ItemSlots.Add("Weapon 3", 0);
+            /* 15 */ this.ItemSlots.Add("Shield 3", 0);
+            /* 16 */ this.ItemSlots.Add("Weapon 4", 0);
+            /* 17 */ this.ItemSlots.Add("Shield 4", 0);
+            /* 19 */ this.ItemSlots.Add("Quiver 1", 0);
+            /* 20 */ this.ItemSlots.Add("Quiver 2", 0);
+            /* 21 */ this.ItemSlots.Add("Quiver 3", 0);
+            /* 22 */ this.ItemSlots.Add("Quiver 4", 0);
+            /* 18 */ this.ItemSlots.Add("Cloak", 0);
+            /* 23 */ this.ItemSlots.Add("Quick item 1", 0);
+            /* 24 */ this.ItemSlots.Add("Quick item 2", 0);
+            /* 25 */ this.ItemSlots.Add("Quick item 3", 0);
+            /* 26 */ this.ItemSlots.Add("Inventory 01", 0);
+            /* 27 */ this.ItemSlots.Add("Inventory 02", 0);
+            /* 28 */ this.ItemSlots.Add("Inventory 03", 0);
+            /* 29 */ this.ItemSlots.Add("Inventory 04", 0);
+            /* 30 */ this.ItemSlots.Add("Inventory 05", 0);
+            /* 31 */ this.ItemSlots.Add("Inventory 06", 0);
+            /* 32 */ this.ItemSlots.Add("Inventory 07", 0);
+            /* 33 */ this.ItemSlots.Add("Inventory 08", 0);
+            /* 34 */ this.ItemSlots.Add("Inventory 09", 0);
+            /* 35 */ this.ItemSlots.Add("Inventory 10", 0);
+            /* 36 */ this.ItemSlots.Add("Inventory 11", 0);
+            /* 37 */ this.ItemSlots.Add("Inventory 12", 0);
+            /* 38 */ this.ItemSlots.Add("Inventory 13", 0);
+            /* 39 */ this.ItemSlots.Add("Inventory 14", 0);
+            /* 40 */ this.ItemSlots.Add("Inventory 15", 0);
+            /* 41 */ this.ItemSlots.Add("Inventory 16", 0);
+            /* 42 */ this.ItemSlots.Add("Inventory 17", 0);
+            /* 43 */ this.ItemSlots.Add("Inventory 18", 0);
+            /* 44 */ this.ItemSlots.Add("Inventory 19", 0);
+            /* 45 */ this.ItemSlots.Add("Inventory 20", 0);
+            /* 46 */ this.ItemSlots.Add("Inventory 21", 0);
+            /* 47 */ this.ItemSlots.Add("Inventory 22", 0);
+            /* 48 */ this.ItemSlots.Add("Inventory 23", 0);
+            /* 49 */ this.ItemSlots.Add("Inventory 24", 0);
+            /* 50 */ this.ItemSlots.Add("Magic weapon", 0);
         }
 
         /// <summary>Instantiates a new header</summary>
@@ -201,6 +158,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
             this.header = new Creature2_2Header();
         }
         #endregion
+
 
         #region IO method implemetations
         /// <summary>This public method reads file format from the input stream. Reads the whole structure.</summary>
@@ -258,7 +216,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
             //read known spells
             D20SpellList spellList = new D20SpellList();
             spellList.ReadBody(input, count);
-            this.spells.Add(key, spellList);
+            this.Spells.Add(key, spellList);
         }
 
         /// <summary>Reads the list of effects from the input stream</summary>
@@ -279,7 +237,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
                     effect = new Effect1Wrapper();
 
                 effect.Read(input);
-                this.effects.Add(effect);
+                this.Effects.Add(effect);
             }
         }
 
@@ -295,7 +253,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
             {
                 ItemInstance item = new ItemInstance();
                 item.Read(input);
-                this.items.Add(item);
+                this.Items.Add(item);
             }
         }
 
@@ -306,14 +264,14 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
             if (input.Position != this.header.OffsetItemSlots)
                 input.Seek(this.header.OffsetItemSlots, SeekOrigin.Begin);
 
-            Byte[] data = ReusableIO.BinaryRead(input, 4 + (this.itemSlots.Count * 2 /* sizeof (UInt16) */));
+            Byte[] data = ReusableIO.BinaryRead(input, 4 + (this.ItemSlots.Count * 2 /* sizeof (UInt16) */));
 
-            for (Int32 i = 0; i < this.itemSlots.Count; ++i)
-                this.itemSlots[i] = ReusableIO.ReadInt16FromArray(data, i * 2);
+            for (Int32 i = 0; i < this.ItemSlots.Count; ++i)
+                this.ItemSlots[i] = ReusableIO.ReadInt16FromArray(data, i * 2);
 
             //Trailing two
-            this.selectedWeapon = ReusableIO.ReadInt16FromArray(data, this.itemSlots.Count * 2);
-            this.selectedWeaponAbility = ReusableIO.ReadInt16FromArray(data, (this.itemSlots.Count * 2) + 2);
+            this.SelectedWeapon = ReusableIO.ReadInt16FromArray(data, this.ItemSlots.Count * 2);
+            this.SelectedWeaponAbility = ReusableIO.ReadInt16FromArray(data, (this.ItemSlots.Count * 2) + 2);
         }
 
         /// <summary>This public method writes the file format to the output stream.</summary>
@@ -347,7 +305,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
                 output.Seek(offset, SeekOrigin.Begin);
 
             //read known spells
-            this.spells[key].Write(output);
+            this.Spells[key].Write(output);
         }
 
         /// <summary>Writes the list of effects to the output stream</summary>
@@ -358,7 +316,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
                 output.Seek(this.header.OffsetEffects, SeekOrigin.Begin);
 
             //write overlay memorization
-            foreach (EffectWrapper effect in this.effects)
+            foreach (EffectWrapper effect in this.Effects)
                 effect.Write(output);
         }
 
@@ -370,7 +328,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
                 output.Seek(this.header.OffsetItems, SeekOrigin.Begin);
 
             //write overlay memorization
-            foreach (ItemInstance item in this.items)
+            foreach (ItemInstance item in this.Items)
                 item.Write(output);
         }
 
@@ -381,14 +339,15 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
             if (output.Position != this.header.OffsetItemSlots)
                 output.Seek(this.header.OffsetItemSlots, SeekOrigin.Begin);
 
-            for (Int32 i = 0; i < this.itemSlots.Count; ++i)
-                ReusableIO.WriteInt16ToStream(this.itemSlots[i], output);
+            for (Int32 i = 0; i < this.ItemSlots.Count; ++i)
+                ReusableIO.WriteInt16ToStream(this.ItemSlots[i], output);
 
             //Trailing two
-            ReusableIO.WriteInt16ToStream(this.selectedWeapon, output);
-            ReusableIO.WriteInt16ToStream(this.selectedWeaponAbility, output);
+            ReusableIO.WriteInt16ToStream(this.SelectedWeapon, output);
+            ReusableIO.WriteInt16ToStream(this.SelectedWeaponAbility, output);
         }
         #endregion
+
 
         #region Data Integrity
         /// <summary>Maintains mimimal data integrity by not lying to the output data file.</summary>
@@ -412,8 +371,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
                     this.header.SpellOffsets[index].Offset = this.header.SpellOffsets[index - 1].OffsetEnd;
                 }
 
-                Int32 itemsSize = this.items.Count * ItemInstance.StructSize;
-                Int32 itemSlotsSize = 4 /* trailing two selected indexes */ + (this.itemSlots.Count * 2 /* sizeof(UInt16) */);
+                Int32 itemsSize = this.Items.Count * ItemInstance.StructSize;
+                Int32 itemSlotsSize = 4 /* trailing two selected indexes */ + (this.ItemSlots.Count * 2 /* sizeof(UInt16) */);
 
                 //items
                 this.header.OffsetItems = this.header.SpellOffsets[this.header.SpellOffsets.Count - 1].OffsetEnd;
@@ -442,9 +401,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
         /// <returns>True if there is any overlap</returns>
         protected Boolean OverlapsSpellAnyBaseOffsets(UInt32 offset, UInt32 size)
         {
-            Int32 effectsSize = this.effects.Count * this.EffectSize;
-            Int32 itemsSize = this.items.Count * ItemInstance.StructSize;
-            Int32 itemSlotsSize = 4 /* trailing two selected indexes */ + (this.itemSlots.Count * 2 /* sizeof(UInt16) */);
+            Int32 effectsSize = this.Effects.Count * this.EffectSize;
+            Int32 itemsSize = this.Items.Count * ItemInstance.StructSize;
+            Int32 itemSlotsSize = 4 /* trailing two selected indexes */ + (this.ItemSlots.Count * 2 /* sizeof(UInt16) */);
 
             //technically, any of these can follow the header in any order. Check for any overlaps with the header.
             Boolean overlaps =
@@ -481,9 +440,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
         /// <returns>True if there is any overlap</returns>
         protected Boolean OverlapBaseAnyBase()
         {
-            Int32 effectsSize = this.effects.Count * this.EffectSize;
-            Int32 itemsSize = this.items.Count * ItemInstance.StructSize;
-            Int32 itemSlotsSize = 4 /* trailing two selected indexes */ + (this.itemSlots.Count * 2 /* sizeof(UInt16) */);
+            Int32 effectsSize = this.Effects.Count * this.EffectSize;
+            Int32 itemsSize = this.Items.Count * ItemInstance.StructSize;
+            Int32 itemSlotsSize = 4 /* trailing two selected indexes */ + (this.ItemSlots.Count * 2 /* sizeof(UInt16) */);
 
             Boolean overlaps =
                 (
@@ -508,9 +467,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
         /// <returns>True if there is any overlap</returns>
         protected Boolean OverlapBaseAnySpell()
         {
-            Int32 effectsSize = this.effects.Count * this.EffectSize;
-            Int32 itemsSize = this.items.Count * ItemInstance.StructSize;
-            Int32 itemSlotsSize = 4 /* trailing two selected indexes */ + (this.itemSlots.Count * 2 /* sizeof(UInt16) */);
+            Int32 effectsSize = this.Effects.Count * this.EffectSize;
+            Int32 itemsSize = this.Items.Count * ItemInstance.StructSize;
+            Int32 itemSlotsSize = 4 /* trailing two selected indexes */ + (this.ItemSlots.Count * 2 /* sizeof(UInt16) */);
 
             return
                 this.OverlapsSpellOffsets(this.header.OffsetItems, itemsSize, null)
@@ -539,6 +498,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
             return overlaps;
         }
         #endregion
+
 
         #region ToString() Helpers
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>
@@ -584,8 +544,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
         {
             StringBuilder sb = new StringBuilder();
 
-            for (Int32 i = 0; i < this.spells.Count; ++i)
-                sb.Append(this.spells[i].ToString(i + 1));
+            for (Int32 i = 0; i < this.Spells.Count; ++i)
+                sb.Append(this.Spells[i].ToString(i + 1));
 
             return sb.ToString();
         }
@@ -597,8 +557,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
         {
             StringBuilder sb = new StringBuilder();
 
-            for (Int32 i = 0; i < this.effects.Count; ++i)
-                sb.Append(this.effects[i].ToString(i + 1));
+            for (Int32 i = 0; i < this.Effects.Count; ++i)
+                sb.Append(this.Effects[i].ToString(i + 1));
 
             return sb.ToString();
         }
@@ -609,8 +569,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
         {
             StringBuilder sb = new StringBuilder();
 
-            for (Int32 i = 0; i < this.items.Count; ++i)
-                sb.Append(this.items[i].ToString(i + 1));
+            for (Int32 i = 0; i < this.Items.Count; ++i)
+                sb.Append(this.Items[i].ToString(i + 1));
 
             return sb.ToString();
         }
@@ -622,10 +582,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature2_
             StringBuilder sb = new StringBuilder();
             sb.Append("Item slots:");
 
-            foreach (String key in this.itemSlots.Keys)
+            foreach (String key in this.ItemSlots.Keys)
             {
                 sb.Append(StringFormat.ToStringAlignment("Item slot '" + key + "'"));
-                sb.Append(this.itemSlots[key]);
+                sb.Append(this.ItemSlots[key]);
             }
 
             return sb.ToString();

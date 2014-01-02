@@ -26,6 +26,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
         ///     ... It will be fun to do some Linq to objects comparison on this field.
         /// </remarks>
         public Int16 ArmorClassEffective { get; set; }
+
         /// <summary>Saving throw modifier vs. Death</summary>
         public Byte SavingThrowDeath { get; set; }
 
@@ -98,8 +99,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
         /// <summary>Tracking skill</summary>
         public Byte Tracking { get; set; }
 
-        /// <summary>32-byte range of unused data, probably nonweapon proficiencies</summary>
-        public Byte[] ReservedNonweaponProficiencies { get; set; }
+        /// <summary>32-byte range of ZString indicating the tracking target</summary>
+        public ZString TrackingTarget { get; set; }
 
         /// <summary>Current level in first class</summary>
         public Byte LevelClass1 { get; set; }
@@ -163,7 +164,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Components
         {
             base.Initialize();
 
-            this.ReservedNonweaponProficiencies = new Byte[32];
+            this.TrackingTarget = new ZString();
             this.ScriptClass = new ResourceReference();
             this.ScriptRace = new ResourceReference();
             this.ScriptGeneral = new ResourceReference();

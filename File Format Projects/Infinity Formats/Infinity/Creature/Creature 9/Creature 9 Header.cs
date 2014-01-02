@@ -503,7 +503,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature9
             this.ProficiencyUnused6 = remainingBody[122];
 
             this.Tracking = remainingBody[123];
-            Array.Copy(remainingBody, 124, this.ReservedNonweaponProficiencies, 0, 32);
+            this.TrackingTarget.Source = ReusableIO.ReadStringFromByteArray(remainingBody, 124, CultureConstants.CultureCodeEnglish, 32);
         }
 
         /// <summary>Reads Icewind Dale structure additions</summary>
@@ -586,7 +586,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature9
             output.WriteByte(this.ProficiencyUnused5);
             output.WriteByte(this.ProficiencyUnused6);
             output.WriteByte(this.Tracking);
-            output.Write(this.ReservedNonweaponProficiencies, 0, 32);
+            ReusableIO.WriteStringToStream(this.TrackingTarget.Source, output, CultureConstants.CultureCodeEnglish, false, 32);
         }
         
         /// <summary>Reads Icewind Dale structure additions</summary>
@@ -687,8 +687,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Creature.Creature9
             builder.Append(this.ProficiencyUnused6);
             builder.Append(StringFormat.ToStringAlignment("Tracking"));
             builder.Append(this.Tracking);
-            builder.Append(StringFormat.ToStringAlignment("Reserved non-weapon proficiencies"));
-            builder.Append(StringFormat.ByteArrayToHexString(this.ReservedNonweaponProficiencies));
+            builder.Append(StringFormat.ToStringAlignment("Tracking Target"));
+            builder.Append(this.TrackingTarget.Value);
         }
 
         /// <summary>Generates a String representing the added Icewind Dale values area of the creature data structure</summary>
