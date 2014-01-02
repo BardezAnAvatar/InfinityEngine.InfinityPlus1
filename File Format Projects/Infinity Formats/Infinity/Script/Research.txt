@@ -1,0 +1,42 @@
+﻿"Bah! Knowledge is more important than *anything*, fool." - Sarevok, BG2:ToB, Pocket Plane
+
+This file contains general research around Infinity Engine scripts.
+
+What I initially thought was that the game scripts would break if certain elements were missing,
+specifically integer parameters, quoted strings and so on. What I have instead found is that
+all of these values appear to be wholly optional, and only when a script function evaluates them
+does any crash occur.
+
+That is to say, if string of parameters holds gibberish, the script does not function, but if I only have
+1 integer parameter (the identifier) for -say, True()- the trigger, then it processes just fine.
+
+Also, if I remove integers but leave quoted text, to show:
+
+	16399 1 "MYAREANewDay" OB
+		instead of
+	16399 1 0 0 0 "MYAREANewDay" "" OB
+
+... then the script functions. This indicates to me that the script interpreter internally uses separate lists
+of both integers and strings (and likely points, which I have yet to test). The one that really interests me is
+that the third integer is the negation flag. If it is not present, the script functions. This leads me to wonder
+if the script has defaults when reading a block, which it then overwrites. This can be reinforced by removing all
+parameters: the trigger ID would be 0, which is invalid, which would case a failure to run.
+
+RESEARCH TOPIC:
+Try to write a script that references a 0 as a value. Maybe HPGT Myself, 100 and then delete integer after the ID,
+indicating 0?
+RESULT:
+I tried create creature by leaving in only 1 parameter of the coordinates, and the action failed. I believe my question about defaults was incorrect
+
+RESEARCH TOPIC:
+try to put the integers out of order; put the quoted text first
+RESULT: no function
+
+
+This research, then, indicates that the various components of the scripts need not be broken out as they are in my
+initial coding attempt (Torment trigger block, Torment object block, etc.). The interpreters would need to be so
+broken out, so as to ask for points or adjusted specifics in an object (PS:T).
+
+
+
+Interesting point of interest: unclised quote parameters don't crash the parser. If a value is unclosed, however, the function does not work.
