@@ -10,7 +10,7 @@ using Bardez.Projects.Utility;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 {
     /// <summary>User Control that is a base for a testing harness User Control</summary>
-    public abstract partial class HarnessNonFileBaseTestControlBase<HarnessType> : UserControl where HarnessType : TesterBase
+    public abstract partial class HarnessNonFileBaseTestControlBase : UserControl
     {
         /// <summary>Delegate for threaded application, where Invoke is required</summary>
         protected delegate void VoidInvoke();
@@ -20,7 +20,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 
         #region Members
         /// <summary>Testing harness</summary>
-        protected HarnessType Harness { get; set; }
+        protected TesterBase Harness { get; set; }
 
         /// <summary>Object for locking on, in toggle controls</summary>
         private Object toggleLock = new Object();

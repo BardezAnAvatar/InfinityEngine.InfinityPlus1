@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.Game;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.GAM
 {
     /// <summary>User control for testing the Baldur's Gate GAM 1.1 file class</summary>
-    public class GameBaldurTestControl : HarnessFileBaseTestControlBase<GameBaldurTest>
+    public class GameBaldurTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public GameBaldurTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.GAM
             this.Harness = new GameBaldurTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

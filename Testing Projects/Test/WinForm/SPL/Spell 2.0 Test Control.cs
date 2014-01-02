@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.Spell;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.SPL
 {
     /// <summary>User control for testing the Spell 2.0 file class</summary>
-    public class Spell2TestControl : HarnessFileBaseTestControlBase<Spell2Test>
+    public class Spell2TestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public Spell2TestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.SPL
             this.Harness = new Spell2Test();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

@@ -11,7 +11,7 @@ using Bardez.Projects.InfinityPlus1.Output.Audio;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
 {
     /// <summary>User control for testing the MVE audio and video playback</summary>
-    public class MveMoviePlaybackTestControl : HarnessMovieTestControl<MveManager>
+    public class MveMoviePlaybackTestControl : HarnessMovieTestControl
     {
         #region Constants
         /// <summary>Constant key to look up in app.config</summary>
@@ -54,6 +54,12 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
         protected override String ConfigKey
         {
             get { return MveMoviePlaybackTestControl.configKey; }
+        }
+
+        /// <summary>Exposes the Video Controller as an MveManager</summary>
+        protected MveManager VideoControllerMVE
+        {
+            get { return this.VideoController as MveManager; }
         }
         #endregion
 
@@ -283,7 +289,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
                     samples = new Byte[samples.Length]; //HACK: create a new, blank audio array
 
                 //render audio
-                this.AudioOutput.SubmitData(samples, this.AudioOutputSoundSourceKey, this.AudioBlockIndex < this.VideoController.AudioBlockCount(this.AudioStream), false);
+                this.AudioOutput.SubmitData(samples, this.AudioOutputSoundSourceKey, this.AudioBlockIndex < this.VideoControllerMVE.AudioBlockCount(this.AudioStream), false);
             }
         }
         #endregion

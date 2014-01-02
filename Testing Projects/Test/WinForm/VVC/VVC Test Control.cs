@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.VectoredEffectVideoCell;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.VVC
 {
     /// <summary>User control for testing the VVC file class</summary>
-    public class VectoredEffectTestControl : HarnessFileBaseTestControlBase<VvcTest>
+    public class VectoredEffectTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public VectoredEffectTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.VVC
             this.Harness = new VvcTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

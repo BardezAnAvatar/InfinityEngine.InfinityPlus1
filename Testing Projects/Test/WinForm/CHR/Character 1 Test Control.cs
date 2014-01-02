@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Windows.Forms;
 
 using Bardez.Projects.InfinityPlus1.Test.Harnesses.Character;
-using Bardez.Projects.Utility;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.CHR
 {
     /// <summary>User control for testing the Character 1 file class</summary>
-    public class Character1TestControl : HarnessFileBaseTestControlBase<Character1Test>
+    public class Character1TestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public Character1TestControl()
         {
@@ -16,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.CHR
             this.Harness = new Character1Test();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.ReusableCode;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ReusableCode
 {
     /// <summary>User control for testing a BitStream</summary>
-    public class BitStreamTestControl : HarnessNonFileBaseTestControlBase<BitStreamTest>
+    public class BitStreamTestControl : HarnessNonFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public BitStreamTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ReusableCode
             this.Harness = new BitStreamTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

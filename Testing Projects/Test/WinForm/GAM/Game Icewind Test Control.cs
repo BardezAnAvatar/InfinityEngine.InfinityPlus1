@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.Game;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.GAM
 {
     /// <summary>User control for testing the Icewind Dale GAM 1.1 file class</summary>
-    public class GameIcewindTestControl : HarnessFileBaseTestControlBase<GameIcewindTest>
+    public class GameIcewindTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public GameIcewindTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.GAM
             this.Harness = new GameIcewindTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

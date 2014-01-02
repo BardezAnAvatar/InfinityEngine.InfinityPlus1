@@ -1,6 +1,6 @@
 ﻿namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 {
-    partial class HarnessAnimationCollectionTestControlBase<ImageCollection>
+    partial class HarnessAnimationCollectionTestControlBase
     {
         /// <summary> 
         /// Required designer variable.

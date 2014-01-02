@@ -1,6 +1,6 @@
 ﻿namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 {
-    partial class HarnessFileBaseTestControlBase<HarnessType>
+    partial class HarnessFileBaseTestControlBase
     {
         /// <summary>Required designer variable.</summary>
         protected System.ComponentModel.IContainer components = null;

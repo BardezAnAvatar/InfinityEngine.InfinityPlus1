@@ -14,8 +14,7 @@ using Bardez.Projects.ReusableCode;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 {
     /// <summary>Generic control for Image types that contain multiple animations</summary>
-    /// <typeparam name="ImageCollection">Image type that implements IAnimation and IInfinityFormat</typeparam>
-    public abstract partial class HarnessAnimationCollectionTestControlBase<ImageCollection> : UserControl where ImageCollection : IAnimation, IInfinityFormat, new()
+    public abstract partial class HarnessAnimationCollectionTestControlBase : UserControl
     {
         #region Constants
         /// <summary>Rendering key used to blank out an image</summary>
@@ -147,6 +146,11 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 
 
         #region Image decoding/loading
+        /// <summary>Opens & reads the animation from the provide path</summary>
+        /// <param name="path">Path to read the animation from</param>
+        /// <returns>The opened & read animation</returns>
+        protected abstract IAnimation ReadAnimation(String path);
+
         /// <summary>Method that launches the decoding of the image from the config file</summary>
         /// <param name="stateInfo">WaitCallback state parameter</param>
         protected virtual void LaunchImageDecoding(Object stateInfo)
@@ -195,9 +199,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
                 String path = col.ImageDescription; //description is the path
 
                 //read the image
-                ImageCollection image = new ImageCollection();
-                using (FileStream fs = ReusableIO.OpenFile(path))
-                    image.Read(fs);
+                IAnimation image = this.ReadAnimation(path);
 
                 //loop through the frames in the image set
                 for (Int32 frameIndex = 0; frameIndex < image.FrameCount; ++frameIndex)
@@ -235,7 +237,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
                         if (frameIndex > -1)
                             imgRef = col.FrameList[frameIndex];
                         else
-                            imgRef = new ImageReference("Null index", HarnessAnimationCollectionTestControlBase<ImageCollection>.BlankRenderKey, imgIndex);
+                            imgRef = new ImageReference("Null index", HarnessAnimationCollectionTestControlBase.BlankRenderKey, imgIndex);
                         
                         animation.ImageList.Add(imgRef);
                     }
@@ -286,7 +288,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         /// <remarks>Any locking must be done outside this method</remarks>
         protected virtual void BlankDisplay()
         {
-            this.RenderDisplay(HarnessAnimationCollectionTestControlBase<ImageCollection>.BlankRenderKey);
+            this.RenderDisplay(HarnessAnimationCollectionTestControlBase.BlankRenderKey);
         }
 
         /// <summary>Gets the paths to test from the config file</summary>
@@ -297,7 +299,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         /// <param name="frame">ImageReference to set details for</param>
         /// <param name="container">ImageCollection format that contains animations and frames</param>
         /// <param name="frameIndex">Frame number setting the details for</param>
-        protected abstract void SetFrameDetails(ImageReference frame, ImageCollection container, Int32 frameIndex);
+        protected abstract void SetFrameDetails(ImageReference frame, IAnimation container, Int32 frameIndex);
         #endregion
     }
 }

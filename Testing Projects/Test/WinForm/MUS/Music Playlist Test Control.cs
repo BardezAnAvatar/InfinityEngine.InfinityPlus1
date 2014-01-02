@@ -8,10 +8,21 @@ using Bardez.Projects.Utility;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MUS
 {
     /// <summary>User control for testing the MUS file class</summary>
-    public class MusicPlaylistTestControl : HarnessFileBaseTestControlBase<PlaylistTest>
+    public class MusicPlaylistTestControl : HarnessFileBaseTestControlBase
     {
+        #region Fields
         /// <summary>Boolean indicating whether audio should play back, used primarily during the testing loop on test cases</summary>
         protected Boolean playingAudio;
+        #endregion
+
+        #region Properties
+        /// <summary>Returns the Harness casted as the PlaylistTest type</summary>
+        protected PlaylistTest HarnessPlaylist
+        {
+            get { return this.Harness as PlaylistTest; }
+        }
+        #endregion
+
 
         #region Additional Conrol(s)
         /// <summary>Button to interrupt playlist playback</summary>
@@ -21,6 +32,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MUS
         protected Button btnStopPlayback;
         #endregion
 
+
+        #region Construction
         /// <summary>Default constructor</summary>
         public MusicPlaylistTestControl()
         {
@@ -57,7 +70,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MUS
             this.btnStopPlayback.Click += new EventHandler(this.btnStopPlayback_Click);
             this.pnlTest.Controls.Add(this.btnStopPlayback);
         }
+        #endregion
 
+
+        #region Event Handlers
         /// <summary>Interrupts the playlist playback, introducing the fadeout</summary>
         /// <param name="sender">Object raising the event</param>
         /// <param name="e">Parameters for the event</param>
@@ -68,19 +84,31 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MUS
             thread.Start();
         }
 
-        /// <summary>Void method to raise the interrupt code in a separate thread</summary>
-        protected virtual void RunInterruptThread()
-        {
-            this.Harness.InterruptPlayback();
-        }
-
         /// <summary>Event handler for the Stop Playback button click event</summary>
         /// <param name="sender">Object raising the event</param>
         /// <param name="e">Parameters for the event</param>
         protected virtual void btnStopPlayback_Click(Object sender, EventArgs e)
         {
             this.playingAudio = false;
-            this.Harness.StopPlayback();
+            this.HarnessPlaylist.StopPlayback();
+        }
+
+        /// <summary>Handler for Test Selected click event</summary>
+        /// <param name="sender">Object sending the event</param>
+        /// <param name="e">EventArgs for the click event</param>
+        protected override void btnTestSelected_Click(Object sender, EventArgs e)
+        {
+            this.playingAudio = true;
+            base.btnTestSelected_Click(sender, e);
+        }
+        #endregion
+
+
+        #region Command
+        /// <summary>Void method to raise the interrupt code in a separate thread</summary>
+        protected virtual void RunInterruptThread()
+        {
+            this.HarnessPlaylist.InterruptPlayback();
         }
 
         /// <summary>Void method to raise the testing in a separate thread</summary>
@@ -93,14 +121,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MUS
             //not applicable for running output
             //this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Testing ended: {0}", DateTime.Now.ToShortTimeString()))));
         }
-
-        /// <summary>Handler for Test Selected click event</summary>
-        /// <param name="sender">Object sending the event</param>
-        /// <param name="e">EventArgs for the click event</param>
-        protected override void btnTestSelected_Click(Object sender, EventArgs e)
-        {
-            this.playingAudio = true;
-            base.btnTestSelected_Click(sender, e);
-        }
+        #endregion
     }
 }

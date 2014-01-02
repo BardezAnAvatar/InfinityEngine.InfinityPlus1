@@ -1,13 +1,13 @@
 ﻿using System;
 
 using Bardez.Projects.InfinityPlus1.Test.Harnesses.KeyTable;
-using Bardez.Projects.Utility;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.KEY
 {
     /// <summary>User control for testing the ChitinKey BIFF entry class</summary>
-    public class KeyHeaderTestControl : HarnessFileBaseTestControlBase<KeyTable1HeaderTest>
+    public class KeyHeaderTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public KeyHeaderTestControl()
         {
@@ -15,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.KEY
             this.Harness = new KeyTable1HeaderTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

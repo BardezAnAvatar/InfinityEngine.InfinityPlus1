@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.Item;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ITM
 {
     /// <summary>User control for testing the Item 1.0 file header class</summary>
-    public class Item1HeaderTestControl : HarnessFileBaseTestControlBase<ItemHeader1Test>
+    public class Item1HeaderTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public Item1HeaderTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ITM
             this.Harness = new ItemHeader1Test();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

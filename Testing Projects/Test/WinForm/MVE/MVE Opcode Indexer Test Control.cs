@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.Movie;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
 {
     /// <summary>User control for testing the MVE indexing class</summary>
-    public class MveOpcodeIndexerTestControl : HarnessFileBaseTestControlBase<MveOpcodeIndexerTest>
+    public class MveOpcodeIndexerTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public MveOpcodeIndexerTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
             this.Harness = new MveOpcodeIndexerTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

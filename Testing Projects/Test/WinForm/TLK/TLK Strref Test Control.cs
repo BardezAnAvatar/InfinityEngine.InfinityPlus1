@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.TextLocationKey;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.TLK
 {
     /// <summary>User control for testing the TLK file strref class</summary>
-    public class TlkStrrefTestControl : HarnessFileBaseTestControlBase<TalkTableStringReferenceEntryTest>
+    public class TlkStrrefTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public TlkStrrefTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.TLK
             this.Harness = new TalkTableStringReferenceEntryTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

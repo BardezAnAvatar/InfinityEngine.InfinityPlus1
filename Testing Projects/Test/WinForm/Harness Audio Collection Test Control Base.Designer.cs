@@ -1,6 +1,6 @@
 ﻿namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
 {
-    partial class HarnessAudioCollectionTestControlBase<HarnessType>
+    partial class HarnessAudioCollectionTestControlBase
     {
         /// <summary> 
         /// Required designer variable.

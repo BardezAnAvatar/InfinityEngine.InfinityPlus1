@@ -1,6 +1,6 @@
 ﻿namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 {
-    partial class HarnessVideoTestControl<MovieFormat>
+    partial class HarnessVideoTestControl
     {
         /// <summary> 
         /// Required designer variable.

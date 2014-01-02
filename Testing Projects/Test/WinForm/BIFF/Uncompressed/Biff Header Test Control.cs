@@ -1,16 +1,13 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
 
 using Bardez.Projects.InfinityPlus1.Test.Harnesses.BioWareIndexFileFormat.Biff1;
-using Bardez.Projects.Utility;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.BIFF.Uncompressed
 {
     /// <summary>User control for testing the BIFF header</summary>
-    public class BiffHeaderTestControl : HarnessFileBaseTestControlBase<Biff1HeaderTest>
+    public class BiffHeaderTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public BiffHeaderTestControl()
         {
@@ -18,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.BIFF.Uncompressed
             this.Harness = new Biff1HeaderTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

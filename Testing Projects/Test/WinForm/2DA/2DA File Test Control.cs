@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.TwoDimensionalArray;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm._2DA
 {
     /// <summary>User control for testing the 2DA file class</summary>
-    public class _2DAFileTestControl : HarnessFileBaseTestControlBase<TwoDinensionalArray1Test>
+    public class _2DAFileTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public _2DAFileTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm._2DA
             this.Harness = new TwoDinensionalArray1Test();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

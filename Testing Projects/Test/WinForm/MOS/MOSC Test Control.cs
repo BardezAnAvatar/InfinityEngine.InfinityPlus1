@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.MapOfScreen;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MOS
 {
     /// <summary>User control for testing the MOSC file class</summary>
-    public class MoscTestControl : HarnessFileBaseTestControlBase<MoscTest>
+    public class MoscTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public MoscTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MOS
             this.Harness = new MoscTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

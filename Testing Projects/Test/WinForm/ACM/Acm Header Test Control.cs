@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
 
 using Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation;
-using Bardez.Projects.Utility;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
 {
     /// <summary>User control for testing the ACM header</summary>
-    public class AcmHeaderTestControl : HarnessFileBaseTestControlBase<AcmHeaderTest>
+    public class AcmHeaderTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public AcmHeaderTestControl()
         {
@@ -20,7 +15,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
             this.Harness = new AcmHeaderTest();
             this.InitializeControlFields();
         }
+        #endregion
 
+
+        #region Event Handlers
         /// <summary>Handler for Test Selected click event</summary>
         /// <param name="sender">Object sending the event</param>
         /// <param name="e">EventArgs for the click event</param>
@@ -29,5 +27,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
             foreach (Object item in this.chklbTestItems.CheckedItems)
                 this.Harness.DoTest(this, new TestEventArgs(item as String));
         }
+        #endregion
     }
 }

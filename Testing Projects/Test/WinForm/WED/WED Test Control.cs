@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.WalledEnvironmentDisplay;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.WED
 {
     /// <summary>User control for testing the WED file class</summary>
-    public class WedTestControl : HarnessFileBaseTestControlBase<WedTest>
+    public class WedTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public WedTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.WED
             this.Harness = new WedTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

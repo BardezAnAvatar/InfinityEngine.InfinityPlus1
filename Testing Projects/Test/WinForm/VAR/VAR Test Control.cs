@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.Variables;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.VAR
 {
     /// <summary>User control for testing the VAR file class</summary>
-    public class VariableTestControl : HarnessFileBaseTestControlBase<VariablesTest>
+    public class VariableTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public VariableTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.VAR
             this.Harness = new VariablesTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

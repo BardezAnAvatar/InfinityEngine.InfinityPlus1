@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.Initialization;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.INI
 {
     /// <summary>User control for testing the INI file class</summary>
-    public class IniTestControl : HarnessFileBaseTestControlBase<IniTest>
+    public class IniTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public IniTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.INI
             this.Harness = new IniTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

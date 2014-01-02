@@ -14,7 +14,7 @@ using Bardez.Projects.ReusableCode;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 {
     /// <summary>Represents a base class for UI harnesses that display images</summary>
-    public abstract partial class HarnessMovieTestControl<MovieFormat> : HarnessVideoTestControl<MovieFormat> where MovieFormat : IMovie
+    public abstract partial class HarnessMovieTestControl : HarnessVideoTestControl
     {
         #region Fields
         /// <summary>Flag indicating whether or not to render audio data</summary>

@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.TalkOverride;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.TOH
 {
     /// <summary>User control for testing the TOH file class</summary>
-    public class TalkOverrideHeaderTestControl : HarnessFileBaseTestControlBase<TalkOverrideHeaderTest>
+    public class TalkOverrideHeaderTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public TalkOverrideHeaderTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.TOH
             this.Harness = new TalkOverrideHeaderTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

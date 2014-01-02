@@ -15,7 +15,7 @@ using Bardez.Projects.ReusableCode;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 {
     /// <summary>Represents a base class for UI harnesses that display images</summary>
-    public abstract partial class HarnessVideoTestControl<MovieFormat> : UserControl where MovieFormat : IMovie
+    public abstract partial class HarnessVideoTestControl : UserControl
     {
         #region Fields
         /// <summary>Object reference to lock on for the User Interface</summary>
@@ -29,7 +29,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         private Object frameKeyLock;
 
         /// <summary>Acceses the video playback controller</summary>
-        protected MovieFormat VideoController { get; set; }
+        protected IMovie VideoController { get; set; }
 
         /// <summary>Represents the Direct2D controller unique key for the currently displayed video frame</summary>
         protected Int32 frameKey { get; set; }

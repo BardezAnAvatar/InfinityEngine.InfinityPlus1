@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.Riff;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.RIFF
 {
     /// <summary>User control for testing the RIFF file class</summary>
-    public class RiffTestControl : HarnessFileBaseTestControlBase<RiffTest>
+    public class RiffTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public RiffTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.RIFF
             this.Harness = new RiffTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

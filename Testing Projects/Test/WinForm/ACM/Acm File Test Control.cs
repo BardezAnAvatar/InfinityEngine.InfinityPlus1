@@ -11,10 +11,22 @@ using Bardez.Projects.Utility;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
 {
     /// <summary>User control for testing the ACM file class</summary>
-    public class AcmFileTestControl : HarnessFileBaseTestControlBase<AcmFileTest>
+    public class AcmFileTestControl : HarnessFileBaseTestControlBase
     {
+        #region Fields
         /// <summary>Boolean indicating whether audio should play back, used primarily during the testing loop on test cases</summary>
         protected Boolean playingAudio;
+        #endregion
+
+
+        #region Properties
+        /// <summary>Exposes the harness as an AcmFileTest</summary>
+        public AcmFileTest HarnessACM
+        {
+            get { return this.Harness as AcmFileTest; }
+        }
+        #endregion
+
 
         #region Additional Conrol(s)
         /// <summary>Checkbox for whether or not to render audio</summary>
@@ -24,6 +36,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
         protected Button btnStopPlayback;
         #endregion
 
+
+        #region Construction
         /// <summary>Default constructor</summary>
         public AcmFileTestControl()
         {
@@ -33,14 +47,37 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
             this.chkbxRenderAudio.CheckedChanged += new EventHandler(this.chkbxRenderAudio_CheckedChanged);
             this.playingAudio = false;
         }
+        #endregion
 
+
+        #region Event Handlers
         /// <summary>Event handler for when the render audio checkbox is (de)selected</summary>
         /// <param name="sender">Object raising the event</param>
         /// <param name="e">Standard EventArgs parameter</param>
         protected virtual void chkbxRenderAudio_CheckedChanged(Object sender, EventArgs e)
         {
-            this.Harness.RenderAudio = this.chkbxRenderAudio.Checked;
+            this.HarnessACM.RenderAudio = this.chkbxRenderAudio.Checked;
         }
+
+        /// <summary>Event handler for the Stop Playback button click event</summary>
+        /// <param name="sender">Object raising the event</param>
+        /// <param name="e">Parameters for the event</param>
+        protected virtual void btnStopPlayback_Click(Object sender, EventArgs e)
+        {
+            this.playingAudio = false;
+            this.HarnessACM.StopPlayback();
+        }
+
+        /// <summary>Handler for Test Selected click event</summary>
+        /// <param name="sender">Object sending the event</param>
+        /// <param name="e">EventArgs for the click event</param>
+        protected override void btnTestSelected_Click(Object sender, EventArgs e)
+        {
+            this.playingAudio = true;
+            base.btnTestSelected_Click(sender, e);
+        }
+        #endregion
+
 
         /// <summary>InitializeComponent for the render audio control</summary>
         protected override void InitializeComponent()
@@ -72,15 +109,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
             this.pnlTest.Controls.Add(this.chkbxRenderAudio);
         }
 
-        /// <summary>Event handler for the Stop Playback button click event</summary>
-        /// <param name="sender">Object raising the event</param>
-        /// <param name="e">Parameters for the event</param>
-        protected virtual void btnStopPlayback_Click(Object sender, EventArgs e)
-        {
-            this.playingAudio = false;
-            this.Harness.StopPlayback();
-        }
-
         /// <summary>Void method to raise the testing in a separate thread</summary>
         protected override void RunTestThread()
         {
@@ -89,15 +117,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
                     this.Harness.DoTest(this, new TestEventArgs(item as String));
 
             this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Testing ended: {0}", DateTime.Now.ToShortTimeString()), "Testing", "Ended", this)));
-        }
-
-        /// <summary>Handler for Test Selected click event</summary>
-        /// <param name="sender">Object sending the event</param>
-        /// <param name="e">EventArgs for the click event</param>
-        protected override void btnTestSelected_Click(Object sender, EventArgs e)
-        {
-            this.playingAudio = true;
-            base.btnTestSelected_Click(sender, e);
         }
     }
 }

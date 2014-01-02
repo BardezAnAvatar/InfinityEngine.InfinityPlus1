@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 using Bardez.Projects.InfinityPlus1.Test.Harnesses.AmpitudeCodedModulation;
@@ -11,10 +8,22 @@ using Bardez.Projects.Utility;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
 {
     /// <summary>User control for testing the WAVC file class</summary>
-    public class WavCFileTestControl : HarnessFileBaseTestControlBase<WavcFileTest>
+    public class WavCFileTestControl : HarnessFileBaseTestControlBase
     {
+        #region Fields
         /// <summary>Boolean indicating whether audio should play back, used primarily during the testing loop on test cases</summary>
         protected Boolean playingAudio;
+        #endregion
+
+
+        #region Properties
+        /// <summary>Exposes the harness as a WavcFileTest</summary>
+        public WavcFileTest HarnessWAVC
+        {
+            get { return this.Harness as WavcFileTest; }
+        }
+        #endregion
+
 
         #region Additional Conrol(s)
         /// <summary>Checkbox for whether or not to render audio</summary>
@@ -24,6 +33,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
         protected Button btnStopPlayback;
         #endregion
 
+
+        #region Construction
         /// <summary>Default constructor</summary>
         public WavCFileTestControl()
         {
@@ -32,14 +43,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
             this.InitializeControlFields();
             this.chkbxRenderAudio.CheckedChanged += new EventHandler(this.chkbxRenderAudio_CheckedChanged);
             this.playingAudio = false;
-        }
-
-        /// <summary>Event handler for when the render audio checkbox is (de)selected</summary>
-        /// <param name="sender">Object raising the event</param>
-        /// <param name="e">Standard EventArgs parameter</param>
-        protected virtual void chkbxRenderAudio_CheckedChanged(Object sender, EventArgs e)
-        {
-            this.Harness.RenderAudio = this.chkbxRenderAudio.Checked;
         }
 
         /// <summary>InitializeComponent for the render audio control</summary>
@@ -71,6 +74,17 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
             this.chkbxRenderAudio.UseVisualStyleBackColor = true;
             this.pnlTest.Controls.Add(this.chkbxRenderAudio);
         }
+        #endregion
+
+
+        #region Event Handlers
+        /// <summary>Event handler for when the render audio checkbox is (de)selected</summary>
+        /// <param name="sender">Object raising the event</param>
+        /// <param name="e">Standard EventArgs parameter</param>
+        protected virtual void chkbxRenderAudio_CheckedChanged(Object sender, EventArgs e)
+        {
+            this.HarnessWAVC.RenderAudio = this.chkbxRenderAudio.Checked;
+        }
 
         /// <summary>Event handler for the Stop Playback button click event</summary>
         /// <param name="sender">Object raising the event</param>
@@ -78,17 +92,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
         protected virtual void btnStopPlayback_Click(Object sender, EventArgs e)
         {
             this.playingAudio = false;
-            this.Harness.StopPlayback();
-        }
-
-        /// <summary>Void method to raise the testing in a separate thread</summary>
-        protected override void RunTestThread()
-        {
-            foreach (Object item in this.chklbTestItems.CheckedItems)
-                if (this.playingAudio)  //added test to see if playback was ever interrupted
-                    this.Harness.DoTest(this, new TestEventArgs(item as String));
-
-            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Testing ended: {0}", DateTime.Now.ToShortTimeString()), "Testing", "Ended", this)));
+            this.HarnessWAVC.StopPlayback();
         }
 
         /// <summary>Handler for Test Selected click event</summary>
@@ -99,5 +103,19 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ACM
             this.playingAudio = true;
             base.btnTestSelected_Click(sender, e);
         }
+        #endregion
+
+
+        #region Control
+        /// <summary>Void method to raise the testing in a separate thread</summary>
+        protected override void RunTestThread()
+        {
+            foreach (Object item in this.chklbTestItems.CheckedItems)
+                if (this.playingAudio)  //added test to see if playback was ever interrupted
+                    this.Harness.DoTest(this, new TestEventArgs(item as String));
+
+            this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Testing ended: {0}", DateTime.Now.ToShortTimeString()), "Testing", "Ended", this)));
+        }
+        #endregion
     }
 }

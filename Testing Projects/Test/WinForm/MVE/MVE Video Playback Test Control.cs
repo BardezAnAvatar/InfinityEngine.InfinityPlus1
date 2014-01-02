@@ -7,7 +7,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
 {
     /// <summary>User control for testing the MVE video playback</summary>
-    public class MveVideoPlaybackTestControl : HarnessVideoTestControl<MveManager>
+    public class MveVideoPlaybackTestControl : HarnessVideoTestControl
     {
         #region Constants
         /// <summary>Constant key to look up in app.config</summary>
@@ -20,6 +20,12 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
         protected override String ConfigKey
         {
             get { return MveVideoPlaybackTestControl.configKey; }
+        }
+
+        /// <summary>Exposes the Video Controller as an MveManager</summary>
+        protected MveManager VideoControllerMVE
+        {
+            get { return this.VideoController as MveManager; }
         }
         #endregion
 
@@ -104,10 +110,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
                 {
                     if (filePath == this.currentMoviePath)
                     {
-                        if (this.VideoController != null)
+                        if (this.VideoControllerMVE != null)
                         {
-                            this.VideoController.StopVideoPlayback();
-                            this.VideoController.Dispose();
+                            this.VideoControllerMVE.StopVideoPlayback();
+                            this.VideoControllerMVE.Dispose();
                         }
 
                         this.VideoController = manager;
@@ -121,10 +127,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
                 {
                     if (filePath == this.currentMoviePath)
                     {
-                        if (this.VideoController != null)
+                        if (this.VideoControllerMVE != null)
                         {
-                            this.VideoController.PreemptivelyStartDecodingAudio();
-                            this.VideoController.PreemptivelyStartDecodingVideo();
+                            this.VideoControllerMVE.PreemptivelyStartDecodingAudio();
+                            this.VideoControllerMVE.PreemptivelyStartDecodingVideo();
                         }
                     }
                     else
@@ -136,8 +142,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
 
                 //label for an error position that requires cleanup
             BreakPoint:
-                if (this.VideoController != null)
-                    this.VideoController.Dispose();
+                if (this.VideoControllerMVE != null)
+                    this.VideoControllerMVE.Dispose();
 
             Finish:
                 ;

@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.Save;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.SAV
 {
     /// <summary>User control for testing the SAVE file class</summary>
-    public class SaveTestControl : HarnessFileBaseTestControlBase<SaveFileTest>
+    public class SaveTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public SaveTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.SAV
             this.Harness = new SaveFileTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

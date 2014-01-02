@@ -13,7 +13,7 @@ using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 {
-    public abstract partial class HarnessImageCollectionTestControlBase<ImageCollection> : UserControl where ImageCollection : IImageSet, IInfinityFormat, new()
+    public abstract partial class HarnessImageCollectionTestControlBase : UserControl
     {
         #region Constants
         /// <summary>Rendering key used to blank out an image</summary>
@@ -72,7 +72,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
         protected virtual void btnClearDisplay_Click(Object sender, EventArgs e)
         {
             lock (this.interfaceLock)
-                this.RenderDisplay(HarnessImageCollectionTestControlBase<ImageCollection>.BlankRenderKey);
+                this.RenderDisplay(HarnessImageCollectionTestControlBase.BlankRenderKey);
         }
 
         /// <summary>Event handler for when the selected index of the listbox changes. Sends a new bitmap index to the render target control.</summary>
@@ -83,7 +83,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
             lock (this.interfaceLock)
             {
                 //clear existing output
-                this.RenderDisplay(HarnessImageCollectionTestControlBase<ImageCollection>.BlankRenderKey);
+                this.RenderDisplay(HarnessImageCollectionTestControlBase.BlankRenderKey);
                 this.lstboxImageCollection.Items.Clear();
                 
                 //populate new output
@@ -122,6 +122,11 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 
 
         #region Image decoding/loading
+        /// <summary>Opens & reads the animation from the provide path</summary>
+        /// <param name="path">Path to read the animation from</param>
+        /// <returns>The opened & read animation</returns>
+        protected abstract IImageSet ReadImageSet(String path);
+
         /// <summary>Method that launches the decoding of the image from the config file</summary>
         /// <param name="stateInfo">WaitCallback state parameter</param>
         protected void LaunchImageDecoding(Object stateInfo)
@@ -170,9 +175,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
                 String path = col.ImageDescription; //description is the path
 
                 //read the image
-                ImageCollection image = new ImageCollection();
-                using (FileStream fs = ReusableIO.OpenFile(path))
-                    image.Read(fs);
+                IImageSet image = this.ReadImageSet(path);
 
                 //loop through the frames in the image set
                 for (Int32 frameIndex = 0; frameIndex < image.FrameCount; ++frameIndex)

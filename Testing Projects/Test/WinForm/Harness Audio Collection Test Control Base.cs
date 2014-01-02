@@ -14,14 +14,14 @@ using Bardez.Projects.ReusableCode;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
 {
     /// <summary>Does generic testing on a movie file, playing back selected audio streams</summary>
-    public abstract partial class HarnessAudioCollectionTestControlBase<HarnessType> : UserControl where HarnessType : FileTesterBase, IAudioTester
+    public abstract partial class HarnessAudioCollectionTestControlBase : UserControl
     {
         #region Fields
         /// <summary>Object reference to lock on for the User Interface</summary>
         private Object interfaceLock;
 
         /// <summary>Testing harness</summary>
-        protected HarnessType Harness { get; set; }
+        protected FileTesterBase Harness { get; set; }
 
         /// <summary>Constant key to look up in app.config</summary>
         protected const String configKey = "Test.MVE.Path";
@@ -57,7 +57,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
 
             if (this.lstboxFiles.Items.Count < 1)
             {
-                List<String> paths = ConfigurationHandlerMulti.GetSettingValues(HarnessAudioCollectionTestControlBase<HarnessType>.configKey);
+                List<String> paths = ConfigurationHandlerMulti.GetSettingValues(HarnessAudioCollectionTestControlBase.configKey);
                 lock (this.interfaceLock)
                 {
                     foreach (String path in paths)
@@ -75,7 +75,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
         /// <param name="e">Parameters for the event</param>
         protected virtual void btnStopPlayback_Click(Object sender, EventArgs e)
         {
-            this.Harness.StopPlayback();
+            this.StopPlayback();
         }
 
         /// <summary>Event handler for the Play Audio button click event</summary>
@@ -96,6 +96,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
         #endregion
 
 
+        #region Testing Helpers
         /// <summary>Void method to raise the testing in a separate thread</summary>
         protected virtual void RunTestThread(String item, Int32 index)
         {
@@ -118,5 +119,12 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
         {
             this.PostMessage(this, new LogEventArgs(new LogItem(LogType.Informational, String.Format("Initialization ended: {0}", DateTime.Now.ToShortTimeString()), "Initialization", "Ended", this)));
         }
+        #endregion
+
+
+        #region Command
+        /// <summary>Stops playback</summary>
+        protected abstract void StopPlayback();
+        #endregion
     }
 }

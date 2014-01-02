@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.PixelLocationTable;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.PLT
 {
     /// <summary>User control for testing the PLT file class</summary>
-    public class PltTestControl : HarnessFileBaseTestControlBase<PltTest>
+    public class PltTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public PltTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.PLT
             this.Harness = new PltTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

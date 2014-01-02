@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.Area;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ARE
 {
     /// <summary>User control for testing the Icewind Dale ARE 1.0 file class</summary>
-    public class TormentAreaTestControl : HarnessFileBaseTestControlBase<TormentAreaTest>
+    public class TormentAreaTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public TormentAreaTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.ARE
             this.Harness = new TormentAreaTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

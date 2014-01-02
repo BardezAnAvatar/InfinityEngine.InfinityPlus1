@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.Dialog;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.DLG
 {
     /// <summary>User control for testing the Dialog file class</summary>
-    public class DialogTestControl : HarnessFileBaseTestControlBase<DialogTest>
+    public class DialogTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public DialogTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.DLG
             this.Harness = new DialogTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

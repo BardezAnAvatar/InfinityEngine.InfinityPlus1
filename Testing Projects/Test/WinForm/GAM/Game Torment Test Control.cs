@@ -5,8 +5,9 @@ using Bardez.Projects.InfinityPlus1.Test.Harnesses.Game;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.GAM
 {
     /// <summary>User control for testing the Planescape: Torment GAM 1.1 file class</summary>
-    public class GameTormentTestControl : HarnessFileBaseTestControlBase<GameTormentTest>
+    public class GameTormentTestControl : HarnessFileBaseTestControlBase
     {
+        #region Construction
         /// <summary>Default constructor</summary>
         public GameTormentTestControl()
         {
@@ -14,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.GAM
             this.Harness = new GameTormentTest();
             this.InitializeControlFields();
         }
+        #endregion
     }
 }

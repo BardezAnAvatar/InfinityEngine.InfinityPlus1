@@ -14,7 +14,7 @@ using Bardez.Projects.ReusableCode;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 {
     /// <summary>Represents a base class for UI harnesses that display images</summary>
-    public abstract partial class HarnessImageTestControl<ImageFormat> : UserControl where ImageFormat : IImage, IInfinityFormat, new()
+    public abstract partial class HarnessImageTestControl : UserControl
     {
         #region Fields
         /// <summary>Object reference to lock on for the User Interface</summary>
@@ -109,6 +109,10 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 
 
         #region Image decoding
+        /// <summary>Opens & reads the image from the provide path</summary>
+        /// <param name="path">Path to read the animation from</param>
+        /// <returns>The opened & read animation</returns>
+        protected abstract IImage ReadImage(String path);
 
         /// <summary>Method that launches the decoding of the image from the config file</summary>
         /// <param name="stateInfo">WaitCallback state parameter</param>
@@ -158,9 +162,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm
                 String path = filePath as String;
 
                 //read the image
-                ImageFormat image = new ImageFormat();
-                using (FileStream fs = ReusableIO.OpenFile(path))
-                    image.Read(fs);
+                IImage image = this.ReadImage(path);
 
                 //decode the image, get its frame data
                 IMultimediaImageFrame frame = image.GetFrame();

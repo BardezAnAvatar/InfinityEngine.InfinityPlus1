@@ -1,13 +1,13 @@
 ﻿using System;
 
 using Bardez.Projects.InfinityPlus1.Test.Harnesses.Creature;
-using Bardez.Projects.Utility;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.CRE
 {
     /// <summary>User control for testing the Creature 2.2 file class</summary>
-	public class Creature2_2TestControl : HarnessFileBaseTestControlBase<Creature2_2Test>
-	{
+	public class Creature2_2TestControl : HarnessFileBaseTestControlBase
+    {
+        #region Construction
         /// <summary>Default constructor</summary>
         public Creature2_2TestControl()
         {
@@ -15,5 +15,6 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.CRE
             this.Harness = new Creature2_2Test();
             this.InitializeControlFields();
         }
-	}
+        #endregion
+    }
 }
