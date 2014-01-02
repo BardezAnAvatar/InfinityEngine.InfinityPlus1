@@ -7,6 +7,7 @@ using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base
 {
+    /// <summary>Base class for Infinity Formats (such as headers)</summary>
     public abstract class InfinityFormat : IInfinityFormat
     {
         #region Members
@@ -17,6 +18,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base
         /// <summary>This member contains the version of the file format.</summary>
         protected String version;
         #endregion
+
 
         #region Public Properties
         /// <summary>This public property gets or sets the file Signature</summary>
@@ -33,9 +35,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base
             set { this.version = value; }
         }
         #endregion
-        
+
+
+        #region Construction
         /// <summary>Instantiates reference types</summary>
         public abstract void Initialize();
+        #endregion
+
 
         #region Abstract IO methods
         /// <summary>This public method reads file format from the input stream. Reads the whole structure.</summary>
@@ -75,6 +81,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base
         }
         #endregion
 
+
+        #region Hash code and comparison
         /// <summary>Override of GetHashCode</summary>
         /// <returns>Computed hash</returns>
         public override Int32 GetHashCode()
@@ -84,5 +92,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base
 
             return hash;
         }
+        #endregion
     }
 }
