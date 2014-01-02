@@ -12,67 +12,41 @@ using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell.Spell2
 {
+    /// <summary>Icewind Dale 2 Spell header</summary>
     public class Spell2Header : SpellHeader
     {
+        #region Constants
         /// <summary>Binary size of the struct on disk</summary>
-        public new const Int32 StructSize = 130;    //here for signature purposes
-
-        #region Members
-        protected SpellHeader2Flags flags;
-
-        /// <summary>The overlay duration will be set to this * level + durationModifierRoundsFlat rounds.</summary>
-        protected Byte durationModifierRoundsPerLevel;
-
-        /// <summary>The overlay duration will be set to durationModifierRoundsPerLevel * level + this rounds.</summary>
-        protected Byte durationModifierRoundsFlat;
-
-        /// <summary>14 bytes at the trail of the header</summary>
-        protected Byte[] reserved4;
+        public const Int32 StructSize = 130;
         #endregion
 
-        #region Properties
-        public SpellHeader2Flags Flags
-        {
-            get { return this.flags; }
-            set { this.flags = value; }
-        }
+
+        #region Fields
+        /// <summary>Flags associated with this spell</summary>
+        public SpellHeader2Flags Flags { get; set; }
 
         /// <summary>The overlay duration will be set to this * level + durationModifierRoundsFlat rounds.</summary>
-        public Byte DurationModifierRoundsPerLevel
-        {
-            get { return this.durationModifierRoundsPerLevel; }
-            set { this.durationModifierRoundsPerLevel = value; }
-        }
+        public Byte DurationModifierRoundsPerLevel { get; set; }
 
         /// <summary>The overlay duration will be set to durationModifierRoundsPerLevel * level + this rounds.</summary>
-        public Byte DurationModifierRoundsFlat
-        {
-            get { return this.durationModifierRoundsFlat; }
-            set { this.durationModifierRoundsFlat = value; }
-        }
+        public Byte DurationModifierRoundsFlat { get; set; }
 
         /// <summary>14 bytes at the trail of the header</summary>
-        public Byte[] Reserved4
-        {
-            get { return this.reserved4; }
-            set { this.reserved4 = value; }
-        }
+        public Byte[] Reserved { get; set; }
         #endregion
+
 
         #region Cobstructors(s)
         /// <summary>Default constructor</summary>
         public Spell2Header()
         {
-            this.castingCompletionSound = null;
-            this.descriptionIdentified = null;
-            this.descriptionUnidentified = null;
-            this.icon = null;
-            this.nameIdentified = null;
-            this.nameUnidentified = null;
-            this.reserved1 = null;
-            this.reserved2 = null;
-            this.reserved3 = null;
-            this.reserved4 = null;
+            this.CastingCompletionSound = null;
+            this.DescriptionIdentified = null;
+            this.DescriptionUnidentified = null;
+            this.Icon = null;
+            this.NameIdentified = null;
+            this.NameUnidentified = null;
+            this.Reserved = null;
             this.signature = null;
         }
         #endregion
@@ -80,16 +54,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell.Spell2
         /// <summary>Instantiates reference types</summary>
         public override void Initialize()
         {
-            this.castingCompletionSound = new ResourceReference();
-            this.descriptionIdentified = new StringReference();
-            this.descriptionUnidentified = new StringReference();
-            this.icon = new ResourceReference();
-            this.nameIdentified = new StringReference();
-            this.nameUnidentified = new StringReference();
-            this.reserved1 = new Byte[12];
-            this.reserved2 = new Byte[14];
-            this.reserved3 = new Byte[12];
-            this.reserved4 = new Byte[14];
+            this.CastingCompletionSound = new ResourceReference();
+            this.DescriptionIdentified = new StringReference();
+            this.DescriptionUnidentified = new StringReference();
+            this.Icon = new ResourceReference();
+            this.NameIdentified = new StringReference();
+            this.NameUnidentified = new StringReference();
+            this.Reserved = new Byte[14];
         }
 
         #region IO method implemetations
@@ -102,31 +73,46 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell.Spell2
             //read remiander
             Byte[] remainingBody = ReusableIO.BinaryRead(input, 122);
 
-            this.nameUnidentified.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 0);
-            this.nameIdentified.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 4);
-            this.castingCompletionSound.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 8, CultureConstants.CultureCodeEnglish);
-            this.flags = (SpellHeader2Flags)ReusableIO.ReadUInt32FromArray(remainingBody, 16);
-            this.type = (SpellType)ReusableIO.ReadUInt16FromArray(remainingBody, 20);
-            this.prohibitionFlags = (SpellProhibitionFlags)ReusableIO.ReadUInt32FromArray(remainingBody, 22);
-            this.castingGraphics = (SpellCastingGraphics)ReusableIO.ReadUInt16FromArray(remainingBody, 26);
-            this.school = (SpellSchool)ReusableIO.ReadUInt16FromArray(remainingBody, 28);
-            this.nature = (SpellNature)ReusableIO.ReadUInt16FromArray(remainingBody, 30);
-            Array.Copy(remainingBody, 32, this.reserved1, 0, 12);
-            this.level = ReusableIO.ReadUInt32FromArray(remainingBody, 44);
-            this.stackSize = ReusableIO.ReadUInt16FromArray(remainingBody, 48);
-            this.icon.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 50, CultureConstants.CultureCodeEnglish);
-            Array.Copy(remainingBody, 58, this.reserved2, 0, 14);
-            this.descriptionUnidentified.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 72);
-            this.descriptionIdentified.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 76);
-            Array.Copy(remainingBody, 80, this.reserved3, 0, 12);
-            this.offsetAbilities = ReusableIO.ReadUInt32FromArray(remainingBody, 92);
-            this.countAbilities = ReusableIO.ReadUInt16FromArray(remainingBody, 96);
-            this.offsetAbilityEffects = ReusableIO.ReadUInt32FromArray(remainingBody, 98);
-            this.indexEquippedEffects = ReusableIO.ReadUInt16FromArray(remainingBody, 102);
-            this.countEquippedEffects = ReusableIO.ReadUInt16FromArray(remainingBody, 104);
-            this.durationModifierRoundsPerLevel = remainingBody[106];
-            this.durationModifierRoundsFlat = remainingBody[107];
-            Array.Copy(remainingBody, 108, this.reserved4, 0, 14);
+            this.NameUnidentified.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 0);
+            this.NameIdentified.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 4);
+            this.CastingCompletionSound.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 8, CultureConstants.CultureCodeEnglish);
+            this.Flags = (SpellHeader2Flags)ReusableIO.ReadUInt32FromArray(remainingBody, 16);
+            this.Type = (SpellType)ReusableIO.ReadUInt16FromArray(remainingBody, 20);
+            this.ProhibitionFlags = (SpellProhibitionFlags)ReusableIO.ReadUInt32FromArray(remainingBody, 22);
+            this.CastingGraphics = (SpellCastingGraphics)ReusableIO.ReadUInt16FromArray(remainingBody, 26);
+
+            this.MinimumLevel = remainingBody[28];
+            this.School = (SpellSchool)remainingBody[29];
+            this.MinimumStrength = remainingBody[30];
+            this.Nature = (SpellNature)remainingBody[31];
+            this.MinimumStrengthBonus = remainingBody[32];
+            this.KitProhibitions1 = remainingBody[33];
+            this.MinimumIntelligence = remainingBody[34];
+            this.KitProhibitions2 = remainingBody[35];
+            this.MinimumDexterity = remainingBody[36];
+            this.KitProhibitions3 = remainingBody[37];
+            this.MinimumWisdom = remainingBody[38];
+            this.KitProhibitions4 = remainingBody[39];
+            this.MinimumConstitution = ReusableIO.ReadUInt16FromArray(remainingBody, 40);
+            this.MinimumCharisma = ReusableIO.ReadUInt16FromArray(remainingBody, 42);
+            this.Level = ReusableIO.ReadUInt32FromArray(remainingBody, 44);
+            this.StackSize = ReusableIO.ReadUInt16FromArray(remainingBody, 48);
+            this.Icon.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 50, CultureConstants.CultureCodeEnglish);
+            this.IdentifyThreshold = ReusableIO.ReadUInt16FromArray(remainingBody, 58);
+            this.GroundIcon.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 60, CultureConstants.CultureCodeEnglish);
+            this.Weight = ReusableIO.ReadUInt32FromArray(remainingBody, 68);
+            this.DescriptionUnidentified.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 72);
+            this.DescriptionIdentified.StringReferenceIndex = ReusableIO.ReadInt32FromArray(remainingBody, 76);
+            this.DescriptionIcon.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 80, CultureConstants.CultureCodeEnglish);
+            this.Enchantment = ReusableIO.ReadUInt32FromArray(remainingBody, 88);
+            this.OffsetAbilities = ReusableIO.ReadUInt32FromArray(remainingBody, 92);
+            this.CountAbilities = ReusableIO.ReadUInt16FromArray(remainingBody, 96);
+            this.OffsetAbilityEffects = ReusableIO.ReadUInt32FromArray(remainingBody, 98);
+            this.IndexEquippedEffects = ReusableIO.ReadUInt16FromArray(remainingBody, 102);
+            this.CountEquippedEffects = ReusableIO.ReadUInt16FromArray(remainingBody, 104);
+            this.DurationModifierRoundsPerLevel = remainingBody[106];
+            this.DurationModifierRoundsFlat = remainingBody[107];
+            Array.Copy(remainingBody, 108, this.Reserved, 0, 14);
         }
 
         /// <summary>This public method writes the file format to the output stream.</summary>
@@ -134,31 +120,45 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell.Spell2
         {
             ReusableIO.WriteStringToStream(this.signature, output, CultureConstants.CultureCodeEnglish, false, 4);
             ReusableIO.WriteStringToStream(this.version, output, CultureConstants.CultureCodeEnglish, false, 4);
-            ReusableIO.WriteInt32ToStream(this.nameUnidentified.StringReferenceIndex, output);
-            ReusableIO.WriteInt32ToStream(this.nameIdentified.StringReferenceIndex, output);
-            ReusableIO.WriteStringToStream(this.castingCompletionSound.ResRef, output, CultureConstants.CultureCodeEnglish);
-            ReusableIO.WriteUInt32ToStream((UInt32)this.flags, output);
-            ReusableIO.WriteUInt16ToStream((UInt16)this.type, output);
-            ReusableIO.WriteUInt32ToStream((UInt32)this.prohibitionFlags, output);
-            ReusableIO.WriteInt16ToStream((Int16)this.castingGraphics, output);
-            ReusableIO.WriteUInt16ToStream((UInt16)this.school, output);
-            ReusableIO.WriteUInt16ToStream((UInt16)this.nature, output);
-            output.Write(this.reserved1, 0, 12);
-            ReusableIO.WriteUInt32ToStream(this.level, output);
-            ReusableIO.WriteUInt16ToStream(this.stackSize, output);
-            ReusableIO.WriteStringToStream(this.icon.ResRef, output, CultureConstants.CultureCodeEnglish);
-            output.Write(this.reserved2, 0, 14);
-            ReusableIO.WriteInt32ToStream(this.descriptionUnidentified.StringReferenceIndex, output);
-            ReusableIO.WriteInt32ToStream(this.descriptionIdentified.StringReferenceIndex, output);
-            output.Write(this.reserved3, 0, 12);
-            ReusableIO.WriteUInt32ToStream(this.offsetAbilities, output);
-            ReusableIO.WriteUInt16ToStream(this.countAbilities, output);
-            ReusableIO.WriteUInt32ToStream(this.offsetAbilityEffects, output);
-            ReusableIO.WriteUInt16ToStream(this.indexEquippedEffects, output);
-            ReusableIO.WriteUInt16ToStream(this.countEquippedEffects, output);
-            output.WriteByte(this.durationModifierRoundsPerLevel);
-            output.WriteByte(this.durationModifierRoundsFlat);
-            output.Write(this.reserved4, 0, 14);
+            ReusableIO.WriteInt32ToStream(this.NameUnidentified.StringReferenceIndex, output);
+            ReusableIO.WriteInt32ToStream(this.NameIdentified.StringReferenceIndex, output);
+            ReusableIO.WriteStringToStream(this.CastingCompletionSound.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteUInt32ToStream((UInt32)this.Flags, output);
+            ReusableIO.WriteUInt16ToStream((UInt16)this.Type, output);
+            ReusableIO.WriteUInt32ToStream((UInt32)this.ProhibitionFlags, output);
+            ReusableIO.WriteInt16ToStream((Int16)this.CastingGraphics, output);
+            output.WriteByte(this.MinimumLevel);
+            output.WriteByte((Byte)this.School);
+            output.WriteByte(this.MinimumStrength);
+            output.WriteByte((Byte)this.Nature);
+            output.WriteByte(this.MinimumStrengthBonus);
+            output.WriteByte(this.KitProhibitions1);
+            output.WriteByte(this.MinimumIntelligence);
+            output.WriteByte(this.KitProhibitions2);
+            output.WriteByte(this.MinimumDexterity);
+            output.WriteByte(this.KitProhibitions3);
+            output.WriteByte(this.MinimumWisdom);
+            output.WriteByte(this.KitProhibitions4);
+            ReusableIO.WriteUInt16ToStream(this.MinimumConstitution, output);
+            ReusableIO.WriteUInt16ToStream(this.MinimumCharisma, output);
+            ReusableIO.WriteUInt32ToStream(this.Level, output);
+            ReusableIO.WriteUInt16ToStream(this.StackSize, output);
+            ReusableIO.WriteStringToStream(this.Icon.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteUInt16ToStream(this.IdentifyThreshold, output);
+            ReusableIO.WriteStringToStream(this.GroundIcon.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteUInt32ToStream(this.Weight, output);
+            ReusableIO.WriteInt32ToStream(this.DescriptionUnidentified.StringReferenceIndex, output);
+            ReusableIO.WriteInt32ToStream(this.DescriptionIdentified.StringReferenceIndex, output);
+            ReusableIO.WriteStringToStream(this.DescriptionIcon.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteUInt32ToStream(this.Enchantment, output);
+            ReusableIO.WriteUInt32ToStream(this.OffsetAbilities, output);
+            ReusableIO.WriteUInt16ToStream(this.CountAbilities, output);
+            ReusableIO.WriteUInt32ToStream(this.OffsetAbilityEffects, output);
+            ReusableIO.WriteUInt16ToStream(this.IndexEquippedEffects, output);
+            ReusableIO.WriteUInt16ToStream(this.CountEquippedEffects, output);
+            output.WriteByte(this.DurationModifierRoundsPerLevel);
+            output.WriteByte(this.DurationModifierRoundsFlat);
+            output.Write(this.Reserved, 0, 14);
         }
         #endregion
 
@@ -174,67 +174,93 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell.Spell2
             builder.Append(StringFormat.ToStringAlignment("Version"));
             builder.Append(String.Format("'{0}'", this.version));
             builder.Append(StringFormat.ToStringAlignment("Unidentified Name StrRef"));
-            builder.Append(this.nameUnidentified.StringReferenceIndex);
+            builder.Append(this.NameUnidentified.StringReferenceIndex);
             builder.Append(StringFormat.ToStringAlignment("Identified Name StrRef"));
-            builder.Append(this.nameIdentified.StringReferenceIndex);
+            builder.Append(this.NameIdentified.StringReferenceIndex);
             builder.Append(StringFormat.ToStringAlignment("Casting completed sound"));
-            builder.Append(String.Format("'{0}'", this.castingCompletionSound.ZResRef));
+            builder.Append(String.Format("'{0}'", this.CastingCompletionSound.ZResRef));
             builder.Append(StringFormat.ToStringAlignment("Flags"));
-            builder.Append((UInt32)this.flags);
+            builder.Append((UInt32)this.Flags);
             builder.Append(StringFormat.ToStringAlignment("Flags (enumerated)"));
             builder.Append(this.GetFlagString());
             builder.Append(StringFormat.ToStringAlignment("Type"));
-            builder.Append((UInt16)this.type);
+            builder.Append((UInt16)this.Type);
             builder.Append(StringFormat.ToStringAlignment("Type (description)"));
-            builder.Append(this.type.GetDescription());
+            builder.Append(this.Type.GetDescription());
             builder.Append(StringFormat.ToStringAlignment("Prohibitions"));
-            builder.Append((UInt32)this.prohibitionFlags);
+            builder.Append((UInt32)this.ProhibitionFlags);
             builder.Append(StringFormat.ToStringAlignment("Prohibitions (enumerated)"));
             builder.Append(this.GetProhibitionsString());
             builder.Append(StringFormat.ToStringAlignment("Casting graphics"));
-            builder.Append((Int16)this.castingGraphics);
+            builder.Append((Int16)this.CastingGraphics);
             builder.Append(StringFormat.ToStringAlignment("Casting graphics (description)"));
-            builder.Append(this.castingGraphics.GetDescription());
+            builder.Append(this.CastingGraphics.GetDescription());
             builder.Append(StringFormat.ToStringAlignment("Spell school"));
-            builder.Append((UInt16)this.school);
+            builder.Append((UInt16)this.School);
             builder.Append(StringFormat.ToStringAlignment("Spell school (description)"));
-            builder.Append(this.school.GetDescription());
+            builder.Append(this.School.GetDescription());
             builder.Append(StringFormat.ToStringAlignment("Spell nature"));
-            builder.Append((UInt16)this.nature);
+            builder.Append((UInt16)this.Nature);
             builder.Append(StringFormat.ToStringAlignment("Spell nature (description)"));
-            builder.Append(this.nature.GetDescription());
-            builder.Append(StringFormat.ToStringAlignment("Reserved data set #1"));
-            builder.Append(StringFormat.ByteArrayToHexString(this.reserved1));
+            builder.Append(this.Nature.GetDescription());
+            builder.Append(StringFormat.ToStringAlignment("Minimum Strength to use [unused field]"));
+            builder.Append(this.MinimumStrength);
+            builder.Append(StringFormat.ToStringAlignment("Minimum Strength Bonus to use [unused field]"));
+            builder.Append(this.MinimumStrengthBonus);
+            builder.Append(StringFormat.ToStringAlignment("Minimum Dexterity to use [unused field]"));
+            builder.Append(this.MinimumDexterity);
+            builder.Append(StringFormat.ToStringAlignment("Minimum Constitution to use [unused field]"));
+            builder.Append(this.MinimumConstitution);
+            builder.Append(StringFormat.ToStringAlignment("Minimum Intelligence to use [unused field]"));
+            builder.Append(this.MinimumIntelligence);
+            builder.Append(StringFormat.ToStringAlignment("Minimum Wisdom to use [unused field]"));
+            builder.Append(this.MinimumWisdom);
+            builder.Append(StringFormat.ToStringAlignment("Minimum Charisma to use [unused field]"));
+            builder.Append(this.MinimumCharisma);
+            builder.Append(StringFormat.ToStringAlignment("Kit prohibition flags 1 [unused field]"));
+            builder.Append(this.KitProhibitions1);
+            builder.Append(StringFormat.ToStringAlignment("Kit prohibition flags 2 [unused field]"));
+            builder.Append(this.KitProhibitions2);
+            builder.Append(StringFormat.ToStringAlignment("Kit prohibition flags 3 [unused field]"));
+            builder.Append(this.KitProhibitions3);
+            builder.Append(StringFormat.ToStringAlignment("Kit prohibition flags 4 [unused field]"));
+            builder.Append(this.KitProhibitions4);
             builder.Append(StringFormat.ToStringAlignment("Spell level"));
-            builder.Append(this.level);
+            builder.Append(this.Level);
             builder.Append(StringFormat.ToStringAlignment("Stack size"));
-            builder.Append(this.stackSize);
+            builder.Append(this.StackSize);
             builder.Append(StringFormat.ToStringAlignment("Icon"));
-            builder.Append(String.Format("'{0}'", this.icon.ZResRef));
-            builder.Append(StringFormat.ToStringAlignment("Reserved data set #2"));
-            builder.Append(StringFormat.ByteArrayToHexString(this.reserved2));
+            builder.Append(String.Format("'{0}'", this.Icon.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Identify Threshold"));
+            builder.Append(this.IdentifyThreshold);
+            builder.Append(StringFormat.ToStringAlignment("Ground image"));
+            builder.Append(String.Format("'{0}'", this.GroundIcon.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Weight (in pounds)"));
+            builder.Append(this.Weight);
             builder.Append(StringFormat.ToStringAlignment("Unidentified Description StrRef"));
-            builder.Append(this.descriptionUnidentified.StringReferenceIndex);
+            builder.Append(this.DescriptionUnidentified.StringReferenceIndex);
             builder.Append(StringFormat.ToStringAlignment("Identified Description StrRef"));
-            builder.Append(this.descriptionIdentified.StringReferenceIndex);
-            builder.Append(StringFormat.ToStringAlignment("Reserved data set #3"));
-            builder.Append(StringFormat.ByteArrayToHexString(this.reserved3));
+            builder.Append(this.DescriptionIdentified.StringReferenceIndex);
+            builder.Append(StringFormat.ToStringAlignment("Description Image"));
+            builder.Append(String.Format("'{0}'", this.DescriptionIcon.ZResRef));
+            builder.Append(StringFormat.ToStringAlignment("Magical Enchantment"));
+            builder.Append(this.Enchantment);
             builder.Append(StringFormat.ToStringAlignment("Offset to item Abilities"));
-            builder.Append(this.offsetAbilities);
+            builder.Append(this.OffsetAbilities);
             builder.Append(StringFormat.ToStringAlignment("Count of item Abilities"));
-            builder.Append(this.countAbilities);
+            builder.Append(this.CountAbilities);
             builder.Append(StringFormat.ToStringAlignment("Offset to item Abilities Effects"));
-            builder.Append(this.offsetAbilityEffects);
+            builder.Append(this.OffsetAbilityEffects);
             builder.Append(StringFormat.ToStringAlignment("Index to item Equipped Effects"));
-            builder.Append(this.indexEquippedEffects);
+            builder.Append(this.IndexEquippedEffects);
             builder.Append(StringFormat.ToStringAlignment("Count of item Equipped Effects"));
-            builder.Append(this.countEquippedEffects);
+            builder.Append(this.CountEquippedEffects);
             builder.Append(StringFormat.ToStringAlignment("Simplified duration rounds per level"));
-            builder.Append(this.durationModifierRoundsPerLevel);
+            builder.Append(this.DurationModifierRoundsPerLevel);
             builder.Append(StringFormat.ToStringAlignment("Simplified duration rounds flat bonus"));
-            builder.Append(this.durationModifierRoundsFlat);
-            builder.Append(StringFormat.ToStringAlignment("Reserved data set #4"));
-            builder.Append(StringFormat.ByteArrayToHexString(this.reserved4));
+            builder.Append(this.DurationModifierRoundsFlat);
+            builder.Append(StringFormat.ToStringAlignment("Reserved trailing data set"));
+            builder.Append(StringFormat.ByteArrayToHexString(this.Reserved));
 
             return builder.ToString();
         }
@@ -245,12 +271,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell.Spell2
         {
             StringBuilder sb = new StringBuilder();
 
-            StringFormat.AppendSubItem(sb, (this.flags & SpellHeader2Flags.OffensiveSpell) == SpellHeader2Flags.OffensiveSpell, SpellHeader2Flags.OffensiveSpell.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & SpellHeader2Flags.NoLineOfSight) == SpellHeader2Flags.NoLineOfSight, SpellHeader2Flags.NoLineOfSight.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & SpellHeader2Flags.OutdoorsOnly) == SpellHeader2Flags.OutdoorsOnly, SpellHeader2Flags.OutdoorsOnly.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & SpellHeader2Flags.SimplifiedDuration) == SpellHeader2Flags.SimplifiedDuration, SpellHeader2Flags.SimplifiedDuration.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & SpellHeader2Flags.TriggerContingency) == SpellHeader2Flags.TriggerContingency, SpellHeader2Flags.TriggerContingency.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & SpellHeader2Flags.OutOfCombatOnly) == SpellHeader2Flags.OutOfCombatOnly, SpellHeader2Flags.OutOfCombatOnly.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & SpellHeader2Flags.OffensiveSpell) == SpellHeader2Flags.OffensiveSpell, SpellHeader2Flags.OffensiveSpell.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & SpellHeader2Flags.NoLineOfSight) == SpellHeader2Flags.NoLineOfSight, SpellHeader2Flags.NoLineOfSight.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & SpellHeader2Flags.OutdoorsOnly) == SpellHeader2Flags.OutdoorsOnly, SpellHeader2Flags.OutdoorsOnly.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & SpellHeader2Flags.SimplifiedDuration) == SpellHeader2Flags.SimplifiedDuration, SpellHeader2Flags.SimplifiedDuration.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & SpellHeader2Flags.TriggerContingency) == SpellHeader2Flags.TriggerContingency, SpellHeader2Flags.TriggerContingency.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & SpellHeader2Flags.OutOfCombatOnly) == SpellHeader2Flags.OutOfCombatOnly, SpellHeader2Flags.OutOfCombatOnly.GetDescription());
 
             String result = sb.ToString();
             return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;

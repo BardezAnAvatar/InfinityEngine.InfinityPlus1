@@ -11,114 +11,73 @@ using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell
 {
-    public abstract class SpellHeader : ItemSpellHeader1
+    /// <summary>Base class for a spell's header</summary>
+    public abstract class SpellHeader : ItemSpellHeader
     {
-        #region Members
-        protected ResourceReference castingCompletionSound;
-        protected SpellType type;
-        protected SpellProhibitionFlags prohibitionFlags;
-        protected SpellCastingGraphics castingGraphics;
-        protected SpellSchool school;
-        protected SpellNature nature;
+        #region Fields
+        /// <summary>Reference to the resouce to use to play a casting completion sound</summary>
+        public ResourceReference CastingCompletionSound { get; set; }
 
-        /// <summary>12 apparently unused bytes... This *probably* mirrors the item structure's minimum requirements for usage and kit flags.</summary>
-        protected Byte[] reserved1;
+        /// <summary>Type of spell</summary>
+        public SpellType Type { get; set; }
 
-        protected UInt32 level;
+        /// <summary>Prohibition of spell casters</summary>
+        public SpellProhibitionFlags ProhibitionFlags { get; set; }
 
-        /// <summary>An unknown, but is in same position as item header's stack size.</summary>
-        protected UInt16 stackSize;
+        /// <summary>Graphics to display while casting the spell</summary>
+        public SpellCastingGraphics CastingGraphics { get; set; }
 
-        /// <summary>The engine, according to IESDP, replaces the last character with 'C'</summary>
-        protected ResourceReference icon;
+        /// <summary>Minimum level required to use this spell</summary>
+        public Byte MinimumLevel { get; set; }
 
-        /// <summary>
-        ///     14 apparently unused bytes... This *probably* mirrors the item structure's identfy threshold,
-        ///     groundicon and weight; I've seen indicative 'rb' in the would-be ground icon, which backs up this theory.
-        /// </summary>
-        protected Byte[] reserved2;
+        /// <summary>Magic school associated with this spell</summary>
+        public SpellSchool School { get; set; }
 
-        /// <summary>
-        ///     12 apparently unused bytes... This *probably* mirrors the item structure's description icon,
-        ///     and enchantment level; I've seen the "|@" null string data I've seen before, and it is in
-        ///     the space that the description image would be.
-        /// </summary>
-        protected Byte[] reserved3;
+        /// <summary>Minimum strength score required to use this item</summary>
+        public Byte MinimumStrength { get; set; }
+
+        /// <summary>Secondary nature of the spell</summary>
+        public SpellNature Nature { get; set; }
+
+        /// <summary>Minimum strength bonus required to use this item</summary>
+        /// <remarks>A strength of 19 or above is considered to have a Strength Bonus of 0, and would therefore not be able to equip any weapon with a Strength Bonus restriction.</remarks>
+        public Byte MinimumStrengthBonus { get; set; }
+
+        /// <summary>First set of kit item usage prohibition</summary>
+        public Byte KitProhibitions1 { get; set; }
+
+        /// <summary>Minimum intelligence score required to use this item</summary>
+        public Byte MinimumIntelligence { get; set; }
+
+        /// <summary>Second set of kit item usage prohibition</summary>
+        public Byte KitProhibitions2 { get; set; }
+
+        /// <summary>Minimum dexterity score required to use this item</summary>
+        public Byte MinimumDexterity { get; set; }
+
+        /// <summary>Third set of kit item usage prohibition</summary>
+        public Byte KitProhibitions3 { get; set; }
+
+        /// <summary>Minimum dexterity score required to use this item</summary>
+        public Byte MinimumWisdom { get; set; }
+
+        /// <summary>Fourth set of kit item usage prohibition</summary>
+        public Byte KitProhibitions4 { get; set; }
+
+        /// <summary>Minimum constitution score required to use this item</summary>
+        public UInt16 MinimumConstitution { get; set; }
+
+        /// <summary>Minimum charisma score required to use this item</summary>
+        public UInt16 MinimumCharisma { get; set; }
+
+        /// <summary>Level of the spell</summary>
+        public UInt32 Level { get; set; }
+
+        /// <summary>Icon associated with this spell</summary>
+        /// <remarks>The engine, according to IESDP, replaces the last character with 'C'</remarks>
+        public ResourceReference Icon { get; set; }
 	    #endregion
 
-        #region Properties
-        public ResourceReference CastingCompletionSound
-        {
-            get { return this.castingCompletionSound; }
-            set { this.castingCompletionSound = value; }
-        }
-
-        public SpellType Type
-        {
-            get { return this.type; }
-            set { this.type = value; }
-        }
-
-        public SpellProhibitionFlags ProhibitionFlags
-        {
-            get { return this.prohibitionFlags; }
-            set { this.prohibitionFlags = value; }
-        }
-
-        public SpellCastingGraphics CastingGraphics
-        {
-            get { return this.castingGraphics; }
-            set { this.castingGraphics = value; }
-        }
-
-        public SpellSchool School
-        {
-            get { return this.school; }
-            set { this.school = value; }
-        }
-
-        public SpellNature Nature
-        {
-            get { return this.nature; }
-            set { this.nature = value; }
-        }
-
-        public Byte[] Reserved1
-        {
-            get { return this.reserved1; }
-            set { this.reserved1 = value; }
-        }
-
-        public UInt32 Level
-        {
-            get { return this.level; }
-            set { this.level = value; }
-        }
-
-        public UInt16 StackSize
-        {
-            get { return this.stackSize; }
-            set { this.stackSize = value; }
-        }
-
-        public ResourceReference Icon
-        {
-            get { return this.icon; }
-            set { this.icon = value; }
-        }
-
-        public Byte[] Reserved2
-        {
-            get { return this.reserved2; }
-            set { this.reserved2 = value; }
-        }
-
-        public Byte[] Reserved3
-        {
-            get { return this.reserved3; }
-            set { this.reserved3 = value; }
-        }
-        #endregion
         
         #region IO method implemetations
         /// <summary>This public method reads file format from the output stream. Reads the whole structure.</summary>
@@ -134,6 +93,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell
         }
         #endregion
 
+
         #region ToString() Helper(s)
         /// <summary>Generates a human-readable multi-line string for console output that indicates which ItemUability1 flags are set</summary>
         /// <returns>A multi-line string</returns>
@@ -141,23 +101,23 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell
         {
             StringBuilder sb = new StringBuilder();
 
-            StringFormat.AppendSubItem(sb, (this.prohibitionFlags & SpellProhibitionFlags.OrderChaotic) == SpellProhibitionFlags.OrderChaotic, SpellProhibitionFlags.OrderChaotic.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.prohibitionFlags & SpellProhibitionFlags.NatureEvil) == SpellProhibitionFlags.NatureEvil, SpellProhibitionFlags.NatureEvil.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.prohibitionFlags & SpellProhibitionFlags.NatureGood) == SpellProhibitionFlags.NatureGood, SpellProhibitionFlags.NatureGood.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.prohibitionFlags & SpellProhibitionFlags.NatureNeutral) == SpellProhibitionFlags.NatureNeutral, SpellProhibitionFlags.NatureNeutral.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.prohibitionFlags & SpellProhibitionFlags.OrderLawful) == SpellProhibitionFlags.OrderLawful, SpellProhibitionFlags.OrderLawful.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.prohibitionFlags & SpellProhibitionFlags.OrderNeutral) == SpellProhibitionFlags.OrderNeutral, SpellProhibitionFlags.OrderNeutral.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.prohibitionFlags & SpellProhibitionFlags.SchoolAbjurer) == SpellProhibitionFlags.SchoolAbjurer, SpellProhibitionFlags.SchoolAbjurer.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.prohibitionFlags & SpellProhibitionFlags.SchoolConjurer) == SpellProhibitionFlags.SchoolConjurer, SpellProhibitionFlags.SchoolConjurer.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.prohibitionFlags & SpellProhibitionFlags.SchoolDiviner) == SpellProhibitionFlags.SchoolDiviner, SpellProhibitionFlags.SchoolDiviner.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.prohibitionFlags & SpellProhibitionFlags.SchoolEnchanter) == SpellProhibitionFlags.SchoolEnchanter, SpellProhibitionFlags.SchoolEnchanter.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.prohibitionFlags & SpellProhibitionFlags.SchoolIllusionist) == SpellProhibitionFlags.SchoolIllusionist, SpellProhibitionFlags.SchoolIllusionist.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.prohibitionFlags & SpellProhibitionFlags.SchoolInvoker) == SpellProhibitionFlags.SchoolInvoker, SpellProhibitionFlags.SchoolInvoker.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.prohibitionFlags & SpellProhibitionFlags.SchoolNecromancer) == SpellProhibitionFlags.SchoolNecromancer, SpellProhibitionFlags.SchoolNecromancer.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.prohibitionFlags & SpellProhibitionFlags.SchoolTransmuter) == SpellProhibitionFlags.SchoolTransmuter, SpellProhibitionFlags.SchoolTransmuter.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.prohibitionFlags & SpellProhibitionFlags.SchoolGeneralist) == SpellProhibitionFlags.SchoolGeneralist, SpellProhibitionFlags.SchoolGeneralist.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.prohibitionFlags & SpellProhibitionFlags.DivineClericPaladin) == SpellProhibitionFlags.DivineClericPaladin, SpellProhibitionFlags.DivineClericPaladin.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.prohibitionFlags & SpellProhibitionFlags.DivineDruidRanger) == SpellProhibitionFlags.DivineDruidRanger, SpellProhibitionFlags.DivineDruidRanger.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ProhibitionFlags & SpellProhibitionFlags.OrderChaotic) == SpellProhibitionFlags.OrderChaotic, SpellProhibitionFlags.OrderChaotic.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ProhibitionFlags & SpellProhibitionFlags.NatureEvil) == SpellProhibitionFlags.NatureEvil, SpellProhibitionFlags.NatureEvil.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ProhibitionFlags & SpellProhibitionFlags.NatureGood) == SpellProhibitionFlags.NatureGood, SpellProhibitionFlags.NatureGood.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ProhibitionFlags & SpellProhibitionFlags.NatureNeutral) == SpellProhibitionFlags.NatureNeutral, SpellProhibitionFlags.NatureNeutral.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ProhibitionFlags & SpellProhibitionFlags.OrderLawful) == SpellProhibitionFlags.OrderLawful, SpellProhibitionFlags.OrderLawful.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ProhibitionFlags & SpellProhibitionFlags.OrderNeutral) == SpellProhibitionFlags.OrderNeutral, SpellProhibitionFlags.OrderNeutral.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ProhibitionFlags & SpellProhibitionFlags.SchoolAbjurer) == SpellProhibitionFlags.SchoolAbjurer, SpellProhibitionFlags.SchoolAbjurer.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ProhibitionFlags & SpellProhibitionFlags.SchoolConjurer) == SpellProhibitionFlags.SchoolConjurer, SpellProhibitionFlags.SchoolConjurer.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ProhibitionFlags & SpellProhibitionFlags.SchoolDiviner) == SpellProhibitionFlags.SchoolDiviner, SpellProhibitionFlags.SchoolDiviner.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ProhibitionFlags & SpellProhibitionFlags.SchoolEnchanter) == SpellProhibitionFlags.SchoolEnchanter, SpellProhibitionFlags.SchoolEnchanter.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ProhibitionFlags & SpellProhibitionFlags.SchoolIllusionist) == SpellProhibitionFlags.SchoolIllusionist, SpellProhibitionFlags.SchoolIllusionist.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ProhibitionFlags & SpellProhibitionFlags.SchoolInvoker) == SpellProhibitionFlags.SchoolInvoker, SpellProhibitionFlags.SchoolInvoker.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ProhibitionFlags & SpellProhibitionFlags.SchoolNecromancer) == SpellProhibitionFlags.SchoolNecromancer, SpellProhibitionFlags.SchoolNecromancer.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ProhibitionFlags & SpellProhibitionFlags.SchoolTransmuter) == SpellProhibitionFlags.SchoolTransmuter, SpellProhibitionFlags.SchoolTransmuter.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ProhibitionFlags & SpellProhibitionFlags.SchoolGeneralist) == SpellProhibitionFlags.SchoolGeneralist, SpellProhibitionFlags.SchoolGeneralist.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ProhibitionFlags & SpellProhibitionFlags.DivineClericPaladin) == SpellProhibitionFlags.DivineClericPaladin, SpellProhibitionFlags.DivineClericPaladin.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ProhibitionFlags & SpellProhibitionFlags.DivineDruidRanger) == SpellProhibitionFlags.DivineDruidRanger, SpellProhibitionFlags.DivineDruidRanger.GetDescription());
 
             String result = sb.ToString();
             return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
