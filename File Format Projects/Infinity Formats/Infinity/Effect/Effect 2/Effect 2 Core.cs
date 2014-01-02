@@ -11,11 +11,15 @@ using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2
 {
+    /// <summary>The core effect data for a version 2 effect</summary>
     public class Effect2Core : EffectBase
     {
+        #region Constants
         /// <summary>Size of the effect structure</summary>
-        public const UInt32 StructureSize = 272U;    //yes, hard-coded. These data structures have a static size.
-        
+        public const UInt32 StructureSize = 272U;    //These data structures have a static size.
+        #endregion
+
+
         #region Members
         /// <summary>Effect Type/Opcode</summary>
         protected UInt32 opcode;
@@ -124,6 +128,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2
         /// <summary>trailing 60 unknown bytes</summary>
         protected Byte[] unknown3;
         #endregion
+
 
         #region Properties
         /// <summary>Effect Type/Opcode</summary>
@@ -367,11 +372,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2
         }
         #endregion
         
+
         #region Construction
         /// <summary>Default constructor</summary>
         public Effect2Core()
         {
-            this.resource1 = null;
+            this.Resource1 = null;
             this.unknown3 = null;
             this.resource2 = null;
             this.resource3 = null;
@@ -382,7 +388,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2
         /// <summary>Instantiates reference types</summary>
         public override void Initialize()
         {
-            this.resource1 = new ResourceReference();
+            this.Resource1 = new ResourceReference();
             this.unknown3 = new Byte[60];
             this.resource2 = new ResourceReference();
             this.resource3 = new ResourceReference();
@@ -391,6 +397,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2
             this.LocalVariableName = new ZString();
         }
         #endregion
+
 
         #region IO method implemetations
         /// <summary>This public method reads file format from the output stream. Reads the whole structure.</summary>
@@ -421,22 +428,22 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2
             this.opcode = ReusableIO.ReadUInt32FromArray(remainingBody, 0);
             this.target = (EffectTarget)Convert.ToSByte(ReusableIO.ReadInt32FromArray(remainingBody, 4));
             this.power = ReusableIO.ReadUInt32FromArray(remainingBody, 8);
-            this.parameter1 = ReusableIO.ReadInt32FromArray(remainingBody, 12);
-            this.parameter2 = ReusableIO.ReadInt32FromArray(remainingBody, 16);
+            this.Parameter1 = ReusableIO.ReadInt32FromArray(remainingBody, 12);
+            this.Parameter2 = ReusableIO.ReadInt32FromArray(remainingBody, 16);
             this.timingMode = (EffectTimingMode2)ReusableIO.ReadUInt16FromArray(remainingBody, 20);
             this.timingUnknown = ReusableIO.ReadUInt16FromArray(remainingBody, 22);
-            this.duration = ReusableIO.ReadUInt32FromArray(remainingBody, 24);
+            this.Duration = ReusableIO.ReadUInt32FromArray(remainingBody, 24);
             this.probability1 = ReusableIO.ReadUInt16FromArray(remainingBody, 28);
             this.probability2 = ReusableIO.ReadUInt16FromArray(remainingBody, 30);
-            this.resource1.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 32, CultureConstants.CultureCodeEnglish);
-            this.diceCount = ReusableIO.ReadUInt32FromArray(remainingBody, 40);
-            this.diceSides = ReusableIO.ReadUInt32FromArray(remainingBody, 44);
-            this.savingThrowType = (EffectSavingThrow)ReusableIO.ReadUInt32FromArray(remainingBody, 48);
-            this.savingThrowModifier = ReusableIO.ReadInt32FromArray(remainingBody, 52);
+            this.Resource1.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 32, CultureConstants.CultureCodeEnglish);
+            this.DiceCount = ReusableIO.ReadUInt32FromArray(remainingBody, 40);
+            this.DiceSides = ReusableIO.ReadUInt32FromArray(remainingBody, 44);
+            this.SavingThrowType = (EffectSavingThrow)ReusableIO.ReadUInt32FromArray(remainingBody, 48);
+            this.SavingThrowModifier = ReusableIO.ReadInt32FromArray(remainingBody, 52);
             this.setLocalIfNotSet = ReusableIO.ReadUInt32FromArray(remainingBody, 56);
             this.mageSchool = (EffectMageSchool)ReusableIO.ReadUInt16FromArray(remainingBody, 60);
             this.saveForHalf = ReusableIO.ReadUInt16FromArray(remainingBody, 62);
-            this.unknown1 = ReusableIO.ReadUInt32FromArray(remainingBody, 64);
+            this.Special = ReusableIO.ReadUInt32FromArray(remainingBody, 64);
             this.levelAffectedMin = ReusableIO.ReadUInt32FromArray(remainingBody, 68);
             this.levelAffectedMax = ReusableIO.ReadUInt32FromArray(remainingBody, 72);
             this.Resistance = (EffectResistance)Convert.ToByte(ReusableIO.ReadUInt16FromArray(remainingBody, 76));
@@ -467,22 +474,22 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2
             ReusableIO.WriteUInt32ToStream(this.opcode, output);
             ReusableIO.WriteInt32ToStream((SByte)this.target, output);
             ReusableIO.WriteUInt32ToStream(this.power, output);
-            ReusableIO.WriteInt32ToStream(this.parameter1, output);
-            ReusableIO.WriteInt32ToStream(this.parameter2, output);
+            ReusableIO.WriteInt32ToStream(this.Parameter1, output);
+            ReusableIO.WriteInt32ToStream(this.Parameter2, output);
             ReusableIO.WriteUInt16ToStream((UInt16)this.timingMode, output);
             ReusableIO.WriteUInt16ToStream(this.timingUnknown, output);
-            ReusableIO.WriteUInt32ToStream(this.duration, output);
+            ReusableIO.WriteUInt32ToStream(this.Duration, output);
             ReusableIO.WriteUInt16ToStream(this.probability1, output);
             ReusableIO.WriteUInt16ToStream(this.probability2, output);
-            ReusableIO.WriteStringToStream(this.resource1.ResRef, output, CultureConstants.CultureCodeEnglish);
-            ReusableIO.WriteUInt32ToStream(this.diceCount, output);
-            ReusableIO.WriteUInt32ToStream(this.diceSides, output);
-            ReusableIO.WriteUInt32ToStream((UInt32)this.savingThrowType, output);
-            ReusableIO.WriteInt32ToStream(this.savingThrowModifier, output);
+            ReusableIO.WriteStringToStream(this.Resource1.ResRef, output, CultureConstants.CultureCodeEnglish);
+            ReusableIO.WriteUInt32ToStream(this.DiceCount, output);
+            ReusableIO.WriteUInt32ToStream(this.DiceSides, output);
+            ReusableIO.WriteUInt32ToStream((UInt32)this.SavingThrowType, output);
+            ReusableIO.WriteInt32ToStream(this.SavingThrowModifier, output);
             ReusableIO.WriteUInt32ToStream(this.setLocalIfNotSet, output);
             ReusableIO.WriteUInt16ToStream((UInt16)this.mageSchool, output);
             ReusableIO.WriteUInt16ToStream(this.saveForHalf, output);
-            ReusableIO.WriteUInt32ToStream(this.unknown1, output);
+            ReusableIO.WriteUInt32ToStream(this.Special, output);
             ReusableIO.WriteUInt32ToStream(this.levelAffectedMin, output);
             ReusableIO.WriteUInt32ToStream(this.levelAffectedMax, output);
             ReusableIO.WriteUInt32ToStream(this.resistanceField, output);
@@ -508,6 +515,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2
         }
         #endregion
         
+
         #region ToString() Helpers
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>
         /// <returns>A string containing the values and descriptions of all values in this class</returns>
@@ -552,9 +560,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2
             builder.Append(StringFormat.ToStringAlignment("Power"));
             builder.Append(this.power);
             builder.Append(StringFormat.ToStringAlignment("Effect Parameter 1"));
-            builder.Append(this.parameter1);
+            builder.Append(this.Parameter1);
             builder.Append(StringFormat.ToStringAlignment("Effect Parameter 2"));
-            builder.Append(this.parameter2);
+            builder.Append(this.Parameter2);
             builder.Append(StringFormat.ToStringAlignment("Timing mode"));
             builder.Append((UInt16)this.timingMode);
             builder.Append(StringFormat.ToStringAlignment("Timing mode (description)"));
@@ -562,23 +570,23 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2
             builder.Append(StringFormat.ToStringAlignment("Timing unknown"));
             builder.Append((UInt16)this.timingUnknown);
             builder.Append(StringFormat.ToStringAlignment("Effect duration"));
-            builder.Append(this.duration);
+            builder.Append(this.Duration);
             builder.Append(StringFormat.ToStringAlignment("Effect probability 1"));
             builder.Append(this.probability1);
             builder.Append(StringFormat.ToStringAlignment("Effect probability 2"));
             builder.Append(this.probability2);
             builder.Append(StringFormat.ToStringAlignment("Effect resource #1"));
-            builder.Append(String.Format("'{0}'", this.resource1.ZResRef));
+            builder.Append(String.Format("'{0}'", this.Resource1.ZResRef));
             builder.Append(StringFormat.ToStringAlignment("Dice count"));
-            builder.Append(this.diceCount);
+            builder.Append(this.DiceCount);
             builder.Append(StringFormat.ToStringAlignment("Dice sides"));
-            builder.Append(this.diceSides);
+            builder.Append(this.DiceSides);
             builder.Append(StringFormat.ToStringAlignment("Saving throw"));
-            builder.Append((UInt32)this.savingThrowType);
+            builder.Append((UInt32)this.SavingThrowType);
             builder.Append(StringFormat.ToStringAlignment("Saving throw (enumerated)"));
             builder.Append(this.GetEffectSavingThrowString());
             builder.Append(StringFormat.ToStringAlignment("Saving throw modifier"));
-            builder.Append(this.savingThrowModifier);
+            builder.Append(this.SavingThrowModifier);
             builder.Append(StringFormat.ToStringAlignment("Set local variable (if unset?)"));
             builder.Append(this.setLocalIfNotSet);
             builder.Append(StringFormat.ToStringAlignment("Mage School"));
@@ -586,7 +594,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2
             builder.Append(StringFormat.ToStringAlignment("Mage School (description)"));
             builder.Append(this.mageSchool.GetDescription());
             builder.Append(StringFormat.ToStringAlignment("Unknown #1"));
-            builder.Append(this.unknown1);
+            builder.Append(this.Special);
             builder.Append(StringFormat.ToStringAlignment("Lowest affected level"));
             builder.Append(this.levelAffectedMin);
             builder.Append(StringFormat.ToStringAlignment("Highest affected level"));
@@ -662,11 +670,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2
         {
             StringBuilder sb = new StringBuilder();
 
-            StringFormat.AppendSubItem(sb, (this.savingThrowType & EffectSavingThrow.SpellsOrUnused) == EffectSavingThrow.SpellsOrUnused, EffectSavingThrow.SpellsOrUnused.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.savingThrowType & EffectSavingThrow.BreathOrUnused) == EffectSavingThrow.BreathOrUnused, EffectSavingThrow.BreathOrUnused.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.savingThrowType & EffectSavingThrow.DeathOrFortitude) == EffectSavingThrow.DeathOrFortitude, EffectSavingThrow.DeathOrFortitude.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.savingThrowType & EffectSavingThrow.WandsOrReflex) == EffectSavingThrow.WandsOrReflex, EffectSavingThrow.WandsOrReflex.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.savingThrowType & EffectSavingThrow.PolymorphOrWill) == EffectSavingThrow.PolymorphOrWill, EffectSavingThrow.PolymorphOrWill.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.SavingThrowType & EffectSavingThrow.SpellsOrUnused) == EffectSavingThrow.SpellsOrUnused, EffectSavingThrow.SpellsOrUnused.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.SavingThrowType & EffectSavingThrow.BreathOrUnused) == EffectSavingThrow.BreathOrUnused, EffectSavingThrow.BreathOrUnused.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.SavingThrowType & EffectSavingThrow.DeathOrFortitude) == EffectSavingThrow.DeathOrFortitude, EffectSavingThrow.DeathOrFortitude.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.SavingThrowType & EffectSavingThrow.WandsOrReflex) == EffectSavingThrow.WandsOrReflex, EffectSavingThrow.WandsOrReflex.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.SavingThrowType & EffectSavingThrow.PolymorphOrWill) == EffectSavingThrow.PolymorphOrWill, EffectSavingThrow.PolymorphOrWill.GetDescription());
 
             String result = sb.ToString();
             return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
