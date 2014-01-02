@@ -8,104 +8,45 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect
 {
+    /// <summary>Base class for effects</summary>
     public abstract class EffectBase : IInfinityFormat
     {
         #region Members
         /// <summary>First parameter to the effect</summary>
-        protected Int32 parameter1;
+        public Int32 Parameter1 { get; set; }
 
         /// <summary>Second parameter to the effect</summary>
-        protected Int32 parameter2;
+        public Int32 Parameter2 { get; set; }
 
         /// <summary>Duration (rounds?) of the effect</summary>
-        protected UInt32 duration;
+        public UInt32 Duration { get; set; }
 
         /// <summary>Resource referenced by the effect</summary>
-        protected ResourceReference resource1;
+        public ResourceReference Resource1 { get; set; }
 
         /// <summary>Count of any dice thrown</summary>
-        protected UInt32 diceCount;
+        public UInt32 DiceCount { get; set; }
 
         /// <summary>Sides of any dice thrown</summary>
-        protected UInt32 diceSides;
+        public UInt32 DiceSides { get; set; }
 
         /// <summary>Saving throw type</summary>
-        protected EffectSavingThrow savingThrowType;
+        public EffectSavingThrow SavingThrowType { get; set; }
 
         /// <summary>Bonus or penalty to saving throw</summary>
-        protected Int32 savingThrowModifier;
+        public Int32 SavingThrowModifier { get; set; }
 
         /// <summary>First unknown 4 bytes</summary>
-        protected UInt32 unknown1;
+        /// <remarks>This is marked "special" in the BG2 source code</remarks>
+        public UInt32 Special { get; set; }
         #endregion
 
-        #region Properties
-        /// <summary>First parameter to the effect</summary>
-        protected Int32 Parameter1
-        {
-            get { return this.parameter1; }
-            set { this.parameter1 = value; }
-        }
 
-        /// <summary>second parameter to the effect</summary>
-        protected Int32 Parameter2
-        {
-            get { return this.parameter2; }
-            set { this.parameter2 = value; }
-        }
-
-        /// <summary>Duration (rounds?) of the effect</summary>
-        protected UInt32 Duration
-        {
-            get { return this.duration; }
-            set { this.duration = value; }
-        }
-
-        /// <summary>Resource referenced by the effect</summary>
-        protected ResourceReference Resource1
-        {
-            get { return this.resource1; }
-            set { this.resource1 = value; }
-        }
-
-        /// <summary>Count of any dice thrown</summary>
-        protected UInt32 DiceCount
-        {
-            get { return this.diceCount; }
-            set { this.diceCount = value; }
-        }
-
-        /// <summary>Sides of any dice thrown</summary>
-        protected UInt32 DiceSides
-        {
-            get { return this.diceSides; }
-            set { this.diceSides = value; }
-        }
-
-        /// <summary>Saving throw type</summary>
-        protected EffectSavingThrow SavingThrowType
-        {
-            get { return this.savingThrowType; }
-            set { this.savingThrowType = value; }
-        }
-
-        /// <summary>Bonus or penalty to saving throw</summary>
-        protected Int32 SavingThrowModifier
-        {
-            get { return this.savingThrowModifier; }
-            set { this.savingThrowModifier = value; }
-        }
-
-        /// <summary>First unknown 4 bytes</summary>
-        protected UInt32 Unknown1
-        {
-            get { return this.unknown1; }
-            set { this.unknown1 = value; }
-        }
-        #endregion
-
+        #region Construction
         /// <summary>Instantiates reference types</summary>
         public abstract void Initialize();
+        #endregion
+
 
         #region Abstract IO methods
         /// <summary>This public method reads file format data structure from the output stream. Reads the whole data structure.</summary>
