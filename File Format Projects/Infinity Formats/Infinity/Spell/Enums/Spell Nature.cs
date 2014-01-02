@@ -3,41 +3,35 @@ using System.ComponentModel;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell.Enums
 {
-    /// <summary>
-    /// 
-    /// </summary>
+    /// <summary>Nature of this spell</summary>
     /// <remarks>
     ///     These values are in the ROW ORDER of the values foundin BG2's msectype.2da
-    ///     These rows have String References to their names in dialog.tlk.
-    ///     
-    ///     ... I suspect, however, that the leading byte is part this field, and the preceeding
-    ///     unused trailing byte of the previous field is actually the leading byte of this field,
-    ///     for purposes of storage. I could see bit-shifting as needed, but don't want to jump into
-    ///     assembly reading and commenting like Avenger did.
+    ///     These rows have String References to dialog.tlk containing the spell's dispell string
+    ///     (34559 - "Contingency Removed"; 27983 - "Magic Attack Cancelled"; 27986 - "Conjuration Dispelled")
     /// </remarks>
-    public enum SpellNature : ushort /* UInt16 */
+    public enum SpellNature : byte /* Byte */
     {
-        None					= 0x0000,
+        None					= 0x00,
         [Description("Spell protections")]
-        SpellProtections		= 0x0100,
+        SpellProtections		= 0x01,
         [Description("Specific protections")]
-        SpecificProtections		= 0x0200,
+        SpecificProtections		= 0x02,
         [Description("Illusionary protections")]
-        IllusionaryProtections  = 0x0300,
+        IllusionaryProtections  = 0x03,
         [Description("Magic attack")]
-        MagicAttack				= 0x0400,
+        MagicAttack				= 0x04,
         [Description("Divination attack")]
-        DivinationAttack		= 0x0500,
-        Conjuration				= 0x0600,
+        DivinationAttack		= 0x05,
+        Conjuration				= 0x06,
         [Description("Combat protections")]
-        CombatProtections		= 0x0700,
-        Contingency				= 0x0800,
-        Battleground			= 0x0900,
+        CombatProtections		= 0x07,
+        Contingency				= 0x08,
+        Battleground			= 0x09,
         [Description("Offensive damage")]
-        OffensiveDamage			= 0x0A00,
-        Disabling				= 0x0B00,
-        Combination				= 0x0C00,
+        OffensiveDamage			= 0x0A,
+        Disabling				= 0x0B,
+        Combination				= 0x0C,
         [Description("Non-combat")]
-        NonCombat				= 0x0D00
+        NonCombat				= 0x0D,
     }
 }
