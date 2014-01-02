@@ -30,7 +30,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
     ///     
     ///     Answer: For now, skip them.
     /// </remarks>
-    //TODO: Change the first-indexing approch to a streaming approach
+    //TODO: Change the first-indexing approach to a streaming approach
     public class MveManager : IMovie, IDisposable
     {
         #region Fields
