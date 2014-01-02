@@ -12,6 +12,9 @@ using Bardez.Projects.Multimedia.MediaBase.Management;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management
 {
+    //TODO: Replace with MediaBase IMovie; break dependancy on ITimer, which requires XAudio2, of all things
+
+
     /// <summary>
     ///     This class will manage the video aspects of an MVE file. It will cache forward-decoded frames, retrieve cached frames
     ///     and allow retrieval on a frame-by frame and a playback basis.
