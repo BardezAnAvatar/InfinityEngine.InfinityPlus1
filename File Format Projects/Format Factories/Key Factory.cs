@@ -1,10 +1,11 @@
 ﻿using System;
 using System.IO;
 
+using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Factories
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Factories
 {
     /// <summary>Creates and returns a KeyTable instance based on an input stream</summary>
     public static class KeyFactory
@@ -26,8 +27,8 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Factories
             {
                 //read the header
                 Byte[] header = ReusableIO.BinaryRead(input, 20);
-                String type = ReusableIO.ReadStringFromByteArray(header, 0, "en-US", 4);
-                String version = ReusableIO.ReadStringFromByteArray(header, 4, "en-US", 4);
+                String type = ReusableIO.ReadStringFromByteArray(header, 0, CultureConstants.CultureCodeEnglish, 4);
+                String version = ReusableIO.ReadStringFromByteArray(header, 4, CultureConstants.CultureCodeEnglish, 4);
                 UInt32 offset = ReusableIO.ReadUInt32FromArray(header, 16);
 
                 //seek back to the initial location
