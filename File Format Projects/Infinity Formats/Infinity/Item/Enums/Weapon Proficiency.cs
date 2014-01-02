@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 
-
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item.Enums
 {
+    /// <summary>Weapon proficiency values</summary>
     public enum WeaponProficiency : byte /* Byte */
     {
         None                        = 0x00,
@@ -17,6 +17,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item.Enums
         [Description("Great Sword")]
         TwoHandedSword              = 0x5D,
         Katana                      = 0x5E,
+
+        /// <summary>Scimitar/Wakizashi/Ninja-to</summary>
         [Description("Scimitar/Wakizashi/Ninja-to")]
         ScimitarWakizashiNinjaTo    = 0x5F,
         Dagger                      = 0x60,
@@ -24,6 +26,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item.Enums
         WarHammer                   = 0x61,
         Spear                       = 0x62,
         Halberd                     = 0x63,
+
+        /// <summary>Flail/Morning Star</summary>
         [Description("Flail/Morning Star")]
         FlailMorningstar            = 0x64,
         Mace                        = 0x65,
