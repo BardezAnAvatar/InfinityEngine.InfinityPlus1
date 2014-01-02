@@ -8,17 +8,24 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.ItmSpl
 {
+    /// <summary>Common elements of item and spell abilities</summary>
     public abstract class ItemSpellAbility : IInfinityFormat
     {
-        /// <summary>Binary size of the struct on disk</summary>
-        public const Int32 StructSize = 0;    //here for signature purposes
+        #region Fields
+        /// <summary>Type of ability</summary>
+        public ItemSpellAbilityType AbilityType { get; set; }
 
-        #region Members
-        protected ItemSpellAbilityType abilityType;
-        protected ItemSpellAbilityLocation abilityLocation;
-        protected ResourceReference icon;
-        protected ItemSpellAbilityTarget target;
-        protected Byte targetCount;
+        /// <summary>Location within the game UI at which this ability will appear</summary>
+        public ItemSpellAbilityLocation AbilityLocation { get; set; }
+
+        /// <summary>UI icon used to represent this ability</summary>
+        public ResourceReference Icon { get; set; }
+
+        /// <summary>Valid target for this ability</summary>
+        public ItemSpellAbilityTarget Target { get; set; }
+
+        /// <summary>Count of targets this ability can affect</summary>
+        public Byte TargetCount { get; set; }
 
         /// <summary>
         ///     This is largely unreferenced. It Would Seem, that, according to:
@@ -27,116 +34,42 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.ItmSpl
         ///     That range is in-game as yards, and converted to search squares
         ///     inside of the engine.
         /// </summary>
-        protected UInt16 range;
-        protected UInt16 diceSides;
-        protected UInt16 diceNumber;
+        public UInt16 Range { get; set; }
+
+        /// <summary>The maximum number allowed for a dice roll associated with this ability</summary>
+        public UInt16 DiceSides { get; set; }
+
+        /// <summary>The number of dice rolled associated with this ability</summary>
+        public UInt16 DiceNumber { get; set; }
 
         /// <summary>This is the damage bonus, such as from enchanted weapons.</summary>
-        protected Int16 damageBonus;
-        protected ItemSpellAbilityDamageType damageType;
-        protected UInt16 featureCount;
-        protected UInt16 featureOffset;
-        protected UInt16 charges;
-        protected ItemSpellAbilityDepletionBehavior depletionBehavior;
+        public Int16 DamageBonus { get; set; }
+
+        /// <summary>Type of damage associated with this ability</summary>
+        public ItemSpellAbilityDamageType DamageType { get; set; }
+
+        /// <summary>Count of features to this ability</summary>
+        public UInt16 FeatureCount { get; set; }
+
+        /// <summary>Offset within the source file to the features</summary>
+        public UInt16 FeatureOffset { get; set; }
+
+        /// <summary>Charges for this ability</summary>
+        public UInt16 Charges { get; set; }
+
+        /// <summary>Behavior associated with charge depletion</summary>
+        public ItemSpellAbilityDepletionBehavior DepletionBehavior { get; set; }
 
         /// <summary>Please see Projectl.ids, missile.ids</summary>
-        protected UInt16 projectileAnimation;
+        public UInt16 ProjectileAnimation { get; set; }
         #endregion
 
-        #region Properties
-        public ItemSpellAbilityType AbilityType
-        {
-            get { return this.abilityType; }
-            set { this.abilityType = value; }
-        }
 
-        public ItemSpellAbilityLocation AbilityLocation
-        {
-            get { return this.abilityLocation; }
-            set { this.abilityLocation = value; }
-        }
-
-        public ResourceReference Icon
-        {
-            get { return this.icon; }
-            set { this.icon = value; }
-        }
-
-        public ItemSpellAbilityTarget Target
-        {
-            get { return this.target; }
-            set { this.target = value; }
-        }
-
-        public Byte TargetCount
-        {
-            get { return this.targetCount; }
-            set { this.targetCount = value; }
-        }
-
-        public UInt16 Range
-        {
-            get { return this.range; }
-            set { this.range = value; }
-        }
-
-        public UInt16 DiceSides
-        {
-            get { return this.diceSides; }
-            set { this.diceSides = value; }
-        }
-
-        public UInt16 DiceNumber
-        {
-            get { return this.diceNumber; }
-            set { this.diceNumber = value; }
-        }
-
-        public Int16 DamageBonus
-        {
-            get { return this.damageBonus; }
-            set { this.damageBonus = value; }
-        }
-
-        public ItemSpellAbilityDamageType DamageType
-        {
-            get { return this.damageType; }
-            set { this.damageType = value; }
-        }
-
-        public UInt16 FeatureCount
-        {
-            get { return this.featureCount; }
-            set { this.featureCount = value; }
-        }
-
-        public UInt16 FeatureOffset
-        {
-            get { return this.featureOffset; }
-            set { this.featureOffset = value; }
-        }
-
-        public UInt16 Charges
-        {
-            get { return this.charges; }
-            set { this.charges = value; }
-        }
-
-        public ItemSpellAbilityDepletionBehavior DepletionBehavior
-        {
-            get { return this.depletionBehavior; }
-            set { this.depletionBehavior = value; }
-        }
-        
-        public UInt16 ProjectileAnimation
-        {
-            get { return this.projectileAnimation; }
-            set { this.projectileAnimation = value; }
-        }
-        #endregion
-
+        #region Construction
         /// <summary>Instantiates reference types</summary>
         public abstract void Initialize();
+        #endregion
+
 
         #region Abstract IO methods
         /// <summary>This public method reads file format data structure from the output stream. Reads the whole data structure.</summary>
@@ -156,6 +89,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.ItmSpl
         /// <param name="output">Stream to write to</param>
         public abstract void Write(Stream output);
         #endregion
+
 
         #region ToString() Helpers
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>
