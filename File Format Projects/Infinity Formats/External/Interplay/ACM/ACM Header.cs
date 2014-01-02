@@ -13,6 +13,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.ACM
     /// </remarks>
     public class AcmHeader : IWaveFormatEx
     {
+        #region Constants
+        /// <summary>This is the magic number that identifies the ACM file</summary>
+        public static readonly UInt32 MagicNumber = 0x97280301U;
+        #endregion
+
+
         #region Members
         /// <summary>Leading four bytes of the header file</summary>
         /// <remarks>
