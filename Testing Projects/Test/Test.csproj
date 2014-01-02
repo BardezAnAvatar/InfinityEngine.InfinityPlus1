@@ -141,6 +141,7 @@
     <Compile Include="Harnesses\Game\GAM Baldur 2 Test.cs" />
     <Compile Include="Harnesses\Game\GAM Baldur Test.cs" />
     <Compile Include="Harnesses\Save\SAV Baldur Test.cs" />
+    <Compile Include="Harnesses\Script\BCS\BCS Test.cs" />
     <Compile Include="Harnesses\Spell\Spell 1 Header Test.cs" />
     <Compile Include="Harnesses\Spell\Spell 1 Test.cs" />
     <Compile Include="Harnesses\Spell\Spell 2 Header Test.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Overlay Test.cs" />
     <Compile Include="Harnesses\WalledEnvironmentDisplay\WED Header Test.cs" />
     <Compile Include="Harnesses\WaveEffect\WFX Test.cs" />
+    <Compile Include="Harnesses\WorldMap\Worldmap Test.cs" />
     <Compile Include="Test Event Arguments.cs" />
     <Compile Include="Message Event Arguments.cs" />
     <Compile Include="Testing Delegates.cs" />
@@ -203,6 +205,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\BAM\BAMC Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\BCS\Script Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\BIFF\Uncompressed\Biff Archive Test Control.cs">
@@ -558,6 +563,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\File Format Projects\Basic Formats\Basic Formats.csproj">
+      <Project>{4D2A899B-3674-4288-81A8-C8F11636C2DA}</Project>
+      <Name>Basic Formats</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Utility Projects\Configuration Handler\Configuration Handler.csproj">
       <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
       <Name>Configuration Handler</Name>
