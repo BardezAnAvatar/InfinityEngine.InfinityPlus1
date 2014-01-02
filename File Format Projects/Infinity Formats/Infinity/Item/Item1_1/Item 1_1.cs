@@ -8,6 +8,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item.Item1_1;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item.Item1_1
 {
+    /// <summary>Item version 1.1</summary>
     public class Item1_1 : ItemBase
     {
         #region Properties
@@ -28,7 +29,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item.Item1_1
         }
         #endregion
 
-        #region Constructor(s)
+
+        #region Construction
         /// <summary>Default constructor</summary>
         public Item1_1()
         {

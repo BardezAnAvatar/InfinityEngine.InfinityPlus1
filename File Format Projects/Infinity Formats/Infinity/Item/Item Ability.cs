@@ -11,118 +11,70 @@ using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item
 {
+    /// <summary>The ability structure for an item</summary>
     public class ItemAbility : ItemSpellAbility
     {
+        #region Constants
         /// <summary>Binary size of the struct on disk</summary>
-        public new const Int32 StructSize = 56;    //yes, hard-coded. These data structures have a static size.
+        public const Int32 StructSize = 56;    //yes, hard-coded. These data structures have a static size.
+        #endregion
+
 
         #region Members
-        protected Boolean identifyRequired;
+        /// <summary>Flag indicating whether identification is required to use this item ability</summary>
+        public Boolean IdentifyRequired { get; set; }
 
         /// <summary>This is the type of projectile required to use this item.</summary>
-        protected ItemAbilityProjectileType projectileType;
-        protected UInt16 speedFactor;
-        protected UInt16 attackBonus;
+        public ItemAbilityProjectileType ProjectileType { get; set; }
+
+        /// <summary>2E speed factor associated with the item</summary>
+        public UInt16 SpeedFactor { get; set; }
+
+        /// <summary>THAC0 or BaB attack bonus</summary>
+        public UInt16 AttackBonus { get; set; }
 
         /// <summary>IESDP and DLTECP suggest this is a flag field, with bit 1 meaning breakable... SW1H01.ITM seems to back this up.</summary>
         /// <remarks>This is one 4-byte field in IESDP, which actually makes sense (but so does separating them, so not refactoring yet...)</remarks>
-        protected ItemAbilityFlags flags;
-        protected ItemAbilityAttackType attackType;
-        protected UInt16 attackPercentOverhand;
-        protected UInt16 attackPercentBackhand;
-        protected UInt16 attackPercentThrust;
-        protected UInt16 isArrow;
-        protected UInt16 isBolt;
-        protected UInt16 isMissile;
+        public ItemAbilityFlags Flags { get; set; }
+
+        /// <summary>Type of attack associated with this ability</summary>
+        public ItemAbilityAttackType AttackType { get; set; }
+
+        /// <summary>Probability of an overhand attack</summary>
+        public UInt16 AttackPercentOverhand { get; set; }
+
+        /// <summary>Probability of a backhand attack</summary>
+        public UInt16 AttackPercentBackhand { get; set; }
+
+        /// <summary>Probability of a thrust attack</summary>
+        public UInt16 AttackPercentThrust { get; set; }
+
+        /// <summary>Flag indicating whether this ability represents an arrow</summary>
+        public UInt16 IsArrow { get; set; }
+
+        /// <summary>Flag indicating whether this ability represents a bolt</summary>
+        public UInt16 IsBolt { get; set; }
+
+        /// <summary>Flag indicating whether this ability represents another missile type</summary>
+        public UInt16 IsMissile { get; set; }
         #endregion
 
-        #region Properties
-        public Boolean IdentifyRequired
-        {
-            get { return this.identifyRequired; }
-            set { this.identifyRequired = value; }
-        }
 
-        public ItemAbilityProjectileType ProjectileType
-        {
-            get { return projectileType; }
-            set { projectileType = value; }
-        }
-
-        public UInt16 SpeedFactor
-        {
-            get { return speedFactor; }
-            set { speedFactor = value; }
-        }
-
-        public UInt16 AttackBonus
-        {
-            get { return attackBonus; }
-            set { attackBonus = value; }
-        }
-
-        public ItemAbilityFlags Flags
-        {
-            get { return flags; }
-            set { flags = value; }
-        }
-
-        public ItemAbilityAttackType AttackType
-        {
-            get { return attackType; }
-            set { attackType = value; }
-        }
-
-        public UInt16 AttackPercentOverhand
-        {
-            get { return attackPercentOverhand; }
-            set { attackPercentOverhand = value; }
-        }
-
-        public UInt16 AttackPercentBackhand
-        {
-            get { return attackPercentBackhand; }
-            set { attackPercentBackhand = value; }
-        }
-
-        public UInt16 AttackPercentThrust
-        {
-            get { return attackPercentThrust; }
-            set { attackPercentThrust = value; }
-        }
-
-        public UInt16 IsArrow
-        {
-            get { return isArrow; }
-            set { isArrow = value; }
-        }
-
-        public UInt16 IsBolt
-        {
-            get { return isBolt; }
-            set { isBolt = value; }
-        }
-
-        public UInt16 IsMissile
-        {
-            get { return isMissile; }
-            set { isMissile = value; }
-        }
-        #endregion
-
-        #region Constructor(s)
+        #region Construction
+        /// <summary>Default constructor</summary>
         public ItemAbility()
         {
-            this.icon = null;
-            this.featureCount = 0;
+            this.Icon = null;
+            this.FeatureCount = 0;
         }
-        #endregion
         
         /// <summary>Instantiates reference types</summary>
         public override void Initialize()
         {
-            this.icon = new ResourceReference();
+            this.Icon = new ResourceReference();
         }
+        #endregion
+
 
         #region IO method implemetations
         /// <summary>This public method reads file format from the output stream. Reads the whole structure.</summary>
@@ -150,68 +102,69 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item
             //read remiander
             Byte[] remainingBody = ReusableIO.BinaryRead(input, 56);
 
-            this.abilityType = (ItemSpellAbilityType)remainingBody[0];
-            this.identifyRequired = Convert.ToBoolean(remainingBody[1]);
-            this.abilityLocation = (ItemSpellAbilityLocation)ReusableIO.ReadUInt16FromArray(remainingBody, 2);
-            this.icon.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 4, CultureConstants.CultureCodeEnglish);
-            this.target = (ItemSpellAbilityTarget)remainingBody[12];
-            this.targetCount = remainingBody[13];
-            this.range = ReusableIO.ReadUInt16FromArray(remainingBody, 14);
-            this.projectileType = (ItemAbilityProjectileType)ReusableIO.ReadUInt16FromArray(remainingBody, 16);
-            this.speedFactor = ReusableIO.ReadUInt16FromArray(remainingBody, 18);
-            this.attackBonus = ReusableIO.ReadUInt16FromArray(remainingBody, 20);
-            this.diceSides = ReusableIO.ReadUInt16FromArray(remainingBody, 22);
-            this.diceNumber = ReusableIO.ReadUInt16FromArray(remainingBody, 24);
-            this.damageBonus = ReusableIO.ReadInt16FromArray(remainingBody, 26);
-            this.damageType = (ItemSpellAbilityDamageType)ReusableIO.ReadUInt16FromArray(remainingBody, 28);
-            this.featureCount = ReusableIO.ReadUInt16FromArray(remainingBody, 30);
-            this.featureOffset = ReusableIO.ReadUInt16FromArray(remainingBody, 32);
-            this.charges = ReusableIO.ReadUInt16FromArray(remainingBody, 34);
-            this.depletionBehavior = (ItemSpellAbilityDepletionBehavior)ReusableIO.ReadUInt16FromArray(remainingBody, 36);
-            this.flags = (ItemAbilityFlags)ReusableIO.ReadUInt16FromArray(remainingBody, 38);
-            this.attackType = (ItemAbilityAttackType)ReusableIO.ReadUInt16FromArray(remainingBody, 40);
-            this.projectileAnimation = ReusableIO.ReadUInt16FromArray(remainingBody, 42);
-            this.attackPercentOverhand = ReusableIO.ReadUInt16FromArray(remainingBody, 44);
-            this.attackPercentBackhand = ReusableIO.ReadUInt16FromArray(remainingBody, 46);
-            this.attackPercentThrust = ReusableIO.ReadUInt16FromArray(remainingBody, 48);
-            this.isArrow = ReusableIO.ReadUInt16FromArray(remainingBody, 50);
-            this.isBolt = ReusableIO.ReadUInt16FromArray(remainingBody, 52);
-            this.isMissile = ReusableIO.ReadUInt16FromArray(remainingBody, 54);
+            this.AbilityType = (ItemSpellAbilityType)remainingBody[0];
+            this.IdentifyRequired = Convert.ToBoolean(remainingBody[1]);
+            this.AbilityLocation = (ItemSpellAbilityLocation)ReusableIO.ReadUInt16FromArray(remainingBody, 2);
+            this.Icon.ResRef = ReusableIO.ReadStringFromByteArray(remainingBody, 4, CultureConstants.CultureCodeEnglish);
+            this.Target = (ItemSpellAbilityTarget)remainingBody[12];
+            this.TargetCount = remainingBody[13];
+            this.Range = ReusableIO.ReadUInt16FromArray(remainingBody, 14);
+            this.ProjectileType = (ItemAbilityProjectileType)ReusableIO.ReadUInt16FromArray(remainingBody, 16);
+            this.SpeedFactor = ReusableIO.ReadUInt16FromArray(remainingBody, 18);
+            this.AttackBonus = ReusableIO.ReadUInt16FromArray(remainingBody, 20);
+            this.DiceSides = ReusableIO.ReadUInt16FromArray(remainingBody, 22);
+            this.DiceNumber = ReusableIO.ReadUInt16FromArray(remainingBody, 24);
+            this.DamageBonus = ReusableIO.ReadInt16FromArray(remainingBody, 26);
+            this.DamageType = (ItemSpellAbilityDamageType)ReusableIO.ReadUInt16FromArray(remainingBody, 28);
+            this.FeatureCount = ReusableIO.ReadUInt16FromArray(remainingBody, 30);
+            this.FeatureOffset = ReusableIO.ReadUInt16FromArray(remainingBody, 32);
+            this.Charges = ReusableIO.ReadUInt16FromArray(remainingBody, 34);
+            this.DepletionBehavior = (ItemSpellAbilityDepletionBehavior)ReusableIO.ReadUInt16FromArray(remainingBody, 36);
+            this.Flags = (ItemAbilityFlags)ReusableIO.ReadUInt16FromArray(remainingBody, 38);
+            this.AttackType = (ItemAbilityAttackType)ReusableIO.ReadUInt16FromArray(remainingBody, 40);
+            this.ProjectileAnimation = ReusableIO.ReadUInt16FromArray(remainingBody, 42);
+            this.AttackPercentOverhand = ReusableIO.ReadUInt16FromArray(remainingBody, 44);
+            this.AttackPercentBackhand = ReusableIO.ReadUInt16FromArray(remainingBody, 46);
+            this.AttackPercentThrust = ReusableIO.ReadUInt16FromArray(remainingBody, 48);
+            this.IsArrow = ReusableIO.ReadUInt16FromArray(remainingBody, 50);
+            this.IsBolt = ReusableIO.ReadUInt16FromArray(remainingBody, 52);
+            this.IsMissile = ReusableIO.ReadUInt16FromArray(remainingBody, 54);
         }
 
         /// <summary>This public method writes the file format to the output stream.</summary>
         public override void Write(Stream output)
         {
-            output.WriteByte((Byte)this.abilityType);
-            output.WriteByte(Convert.ToByte(this.identifyRequired));
-            ReusableIO.WriteUInt16ToStream((UInt16)this.abilityLocation, output);
-            ReusableIO.WriteStringToStream(this.icon.ResRef, output, CultureConstants.CultureCodeEnglish);
-            output.WriteByte((Byte)this.target);
-            output.WriteByte(this.targetCount);
-            ReusableIO.WriteUInt16ToStream(this.range, output);
-            ReusableIO.WriteUInt16ToStream((UInt16)this.projectileType, output);
-            ReusableIO.WriteUInt16ToStream(this.speedFactor, output);
-            ReusableIO.WriteUInt16ToStream(this.attackBonus, output);
-            ReusableIO.WriteUInt16ToStream(this.diceSides, output);
-            ReusableIO.WriteUInt16ToStream(this.diceNumber, output);
-            ReusableIO.WriteInt16ToStream(this.damageBonus, output);
-            ReusableIO.WriteUInt16ToStream((UInt16)this.damageType, output);
-            ReusableIO.WriteUInt16ToStream(this.featureCount, output);
-            ReusableIO.WriteUInt16ToStream(this.featureOffset, output);
-            ReusableIO.WriteUInt16ToStream(this.charges, output);
-            ReusableIO.WriteUInt16ToStream((UInt16)this.depletionBehavior, output);
-            ReusableIO.WriteUInt16ToStream((UInt16)this.flags, output);
-            ReusableIO.WriteUInt16ToStream((UInt16)this.attackType, output);
-            ReusableIO.WriteUInt16ToStream(this.projectileAnimation, output);
-            ReusableIO.WriteUInt16ToStream(this.attackPercentOverhand, output);
-            ReusableIO.WriteUInt16ToStream(this.attackPercentBackhand, output);
-            ReusableIO.WriteUInt16ToStream(this.attackPercentThrust, output);
-            ReusableIO.WriteUInt16ToStream(this.isArrow, output);
-            ReusableIO.WriteUInt16ToStream(this.isBolt, output);
-            ReusableIO.WriteUInt16ToStream(this.isMissile, output);
+            output.WriteByte((Byte)this.AbilityType);
+            output.WriteByte(Convert.ToByte(this.IdentifyRequired));
+            ReusableIO.WriteUInt16ToStream((UInt16)this.AbilityLocation, output);
+            ReusableIO.WriteStringToStream(this.Icon.ResRef, output, CultureConstants.CultureCodeEnglish);
+            output.WriteByte((Byte)this.Target);
+            output.WriteByte(this.TargetCount);
+            ReusableIO.WriteUInt16ToStream(this.Range, output);
+            ReusableIO.WriteUInt16ToStream((UInt16)this.ProjectileType, output);
+            ReusableIO.WriteUInt16ToStream(this.SpeedFactor, output);
+            ReusableIO.WriteUInt16ToStream(this.AttackBonus, output);
+            ReusableIO.WriteUInt16ToStream(this.DiceSides, output);
+            ReusableIO.WriteUInt16ToStream(this.DiceNumber, output);
+            ReusableIO.WriteInt16ToStream(this.DamageBonus, output);
+            ReusableIO.WriteUInt16ToStream((UInt16)this.DamageType, output);
+            ReusableIO.WriteUInt16ToStream(this.FeatureCount, output);
+            ReusableIO.WriteUInt16ToStream(this.FeatureOffset, output);
+            ReusableIO.WriteUInt16ToStream(this.Charges, output);
+            ReusableIO.WriteUInt16ToStream((UInt16)this.DepletionBehavior, output);
+            ReusableIO.WriteUInt16ToStream((UInt16)this.Flags, output);
+            ReusableIO.WriteUInt16ToStream((UInt16)this.AttackType, output);
+            ReusableIO.WriteUInt16ToStream(this.ProjectileAnimation, output);
+            ReusableIO.WriteUInt16ToStream(this.AttackPercentOverhand, output);
+            ReusableIO.WriteUInt16ToStream(this.AttackPercentBackhand, output);
+            ReusableIO.WriteUInt16ToStream(this.AttackPercentThrust, output);
+            ReusableIO.WriteUInt16ToStream(this.IsArrow, output);
+            ReusableIO.WriteUInt16ToStream(this.IsBolt, output);
+            ReusableIO.WriteUInt16ToStream(this.IsMissile, output);
         }
         #endregion
-        
+
+
         #region ToString() Helpers
         /// <summary>This method complements the default ToString() method, printing the member data line by line</summary>
         /// <param name="showType">Boolean indicating whether or not to display the leading description line.</param>
@@ -241,75 +194,75 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item
         {
             StringBuilder builder = new StringBuilder();
             builder.Append(StringFormat.ToStringAlignment("Ability type"));
-            builder.Append((Byte)this.abilityType);
+            builder.Append((Byte)this.AbilityType);
             builder.Append(StringFormat.ToStringAlignment("Ability type (description)"));
-            builder.Append(this.abilityType.GetDescription());
+            builder.Append(this.AbilityType.GetDescription());
             builder.Append(StringFormat.ToStringAlignment("Use of ability requires item to be identified"));
-            builder.Append(this.identifyRequired);
+            builder.Append(this.IdentifyRequired);
             builder.Append(StringFormat.ToStringAlignment("Ability UI location"));
-            builder.Append((UInt16)this.abilityLocation);
+            builder.Append((UInt16)this.AbilityLocation);
             builder.Append(StringFormat.ToStringAlignment("Ability UI location (description)"));
-            builder.Append(this.abilityLocation.GetDescription());
+            builder.Append(this.AbilityLocation.GetDescription());
             builder.Append(StringFormat.ToStringAlignment("Ability Icon"));
-            builder.Append(String.Format("'{0}'", this.icon.ZResRef));
+            builder.Append(String.Format("'{0}'", this.Icon.ZResRef));
             builder.Append(StringFormat.ToStringAlignment("Ability Target"));
-            builder.Append((Byte)this.target);
+            builder.Append((Byte)this.Target);
             builder.Append(StringFormat.ToStringAlignment("Ability Target (description)"));
-            builder.Append(this.target.GetDescription());
+            builder.Append(this.Target.GetDescription());
             builder.Append(StringFormat.ToStringAlignment("Ability Target Count"));
-            builder.Append(this.targetCount);
+            builder.Append(this.TargetCount);
             builder.Append(StringFormat.ToStringAlignment("Ability Range (in search rectangles?)"));
-            builder.Append(this.range);
+            builder.Append(this.Range);
             builder.Append(StringFormat.ToStringAlignment("Ability Projectile Type"));
-            builder.Append((UInt16)this.projectileType);
+            builder.Append((UInt16)this.ProjectileType);
             builder.Append(StringFormat.ToStringAlignment("Ability Projectile Type (description)"));
-            builder.Append(this.projectileType.GetDescription());
+            builder.Append(this.ProjectileType.GetDescription());
             builder.Append(StringFormat.ToStringAlignment("Ability Speed Factor"));
-            builder.Append(this.speedFactor);
+            builder.Append(this.SpeedFactor);
             builder.Append(StringFormat.ToStringAlignment("Ability Attack Bonus (Thac0 2E, Attack 3E)"));
-            builder.Append(this.attackBonus);
+            builder.Append(this.AttackBonus);
             builder.Append(StringFormat.ToStringAlignment("Ability Dice Sides"));
-            builder.Append(this.diceSides);
+            builder.Append(this.DiceSides);
             builder.Append(StringFormat.ToStringAlignment("Ability Dice Number"));
-            builder.Append(this.diceNumber);
+            builder.Append(this.DiceNumber);
             builder.Append(StringFormat.ToStringAlignment("Ability Damage Bonus"));
-            builder.Append(this.damageBonus);
+            builder.Append(this.DamageBonus);
             builder.Append(StringFormat.ToStringAlignment("Ability Damage Type"));
-            builder.Append((UInt16)this.damageType);
+            builder.Append((UInt16)this.DamageType);
             builder.Append(StringFormat.ToStringAlignment("Ability Damage Type (description)"));
-            builder.Append(this.damageType.GetDescription());
+            builder.Append(this.DamageType.GetDescription());
             builder.Append(StringFormat.ToStringAlignment("Ability Effects Count"));
-            builder.Append(this.featureCount);
+            builder.Append(this.FeatureCount);
             builder.Append(StringFormat.ToStringAlignment("Ability Effects Offset"));
-            builder.Append(this.featureOffset);
+            builder.Append(this.FeatureOffset);
             builder.Append(StringFormat.ToStringAlignment("Ability Charges Count"));
-            builder.Append(this.charges);
+            builder.Append(this.Charges);
             builder.Append(StringFormat.ToStringAlignment("Charge depletion behavior"));
-            builder.Append((UInt16)this.depletionBehavior);
+            builder.Append((UInt16)this.DepletionBehavior);
             builder.Append(StringFormat.ToStringAlignment("Charge depletion behavior (description)"));
-            builder.Append(this.depletionBehavior.GetDescription());
+            builder.Append(this.DepletionBehavior.GetDescription());
             builder.Append(StringFormat.ToStringAlignment("Ability flags"));
-            builder.Append((UInt16)this.flags);
+            builder.Append((UInt16)this.Flags);
             builder.Append(StringFormat.ToStringAlignment("Ability flags (enumerated)"));
             builder.Append(this.GetAbilityFlagsString());
             builder.Append(StringFormat.ToStringAlignment("Ability attack type"));
-            builder.Append((UInt16)this.attackType);
+            builder.Append((UInt16)this.AttackType);
             builder.Append(StringFormat.ToStringAlignment("Ability attack type (enumerated)"));
             builder.Append(this.GetAbilityItemAttackTypeString());
             builder.Append(StringFormat.ToStringAlignment("Ability Projectile Animation (see *.IDS)"));
-            builder.Append(this.projectileAnimation);
+            builder.Append(this.ProjectileAnimation);
             builder.Append(StringFormat.ToStringAlignment("Attack % Overhand"));
-            builder.Append(this.attackPercentOverhand);
+            builder.Append(this.AttackPercentOverhand);
             builder.Append(StringFormat.ToStringAlignment("Attack % Backhand"));
-            builder.Append(this.attackPercentBackhand);
+            builder.Append(this.AttackPercentBackhand);
             builder.Append(StringFormat.ToStringAlignment("Attack % Thrust"));
-            builder.Append(this.attackPercentThrust);
+            builder.Append(this.AttackPercentThrust);
             builder.Append(StringFormat.ToStringAlignment("Is arrow"));
-            builder.Append(this.isArrow);
+            builder.Append(this.IsArrow);
             builder.Append(StringFormat.ToStringAlignment("Is bolt"));
-            builder.Append(this.isBolt);
+            builder.Append(this.IsBolt);
             builder.Append(StringFormat.ToStringAlignment("Is missile"));
-            builder.Append(this.isMissile);
+            builder.Append(this.IsMissile);
 
             return builder.ToString();
         }
@@ -320,8 +273,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item
         {
             StringBuilder sb = new StringBuilder();
 
-            StringFormat.AppendSubItem(sb, (this.attackType & ItemAbilityAttackType.BypassArmor) == ItemAbilityAttackType.BypassArmor, ItemAbilityAttackType.BypassArmor.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.attackType & ItemAbilityAttackType.Keen) == ItemAbilityAttackType.Keen, ItemAbilityAttackType.Keen.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.AttackType & ItemAbilityAttackType.BypassArmor) == ItemAbilityAttackType.BypassArmor, ItemAbilityAttackType.BypassArmor.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.AttackType & ItemAbilityAttackType.Keen) == ItemAbilityAttackType.Keen, ItemAbilityAttackType.Keen.GetDescription());
 
             String result = sb.ToString();
             return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
@@ -333,10 +286,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Item
         {
             StringBuilder sb = new StringBuilder();
 
-            StringFormat.AppendSubItem(sb, (this.flags & ItemAbilityFlags.AddStrength) == ItemAbilityFlags.AddStrength, ItemAbilityFlags.AddStrength.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & ItemAbilityFlags.Breakable) == ItemAbilityFlags.Breakable, ItemAbilityFlags.Breakable.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & ItemAbilityFlags.Hostile) == ItemAbilityFlags.Hostile, ItemAbilityFlags.Hostile.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.flags & ItemAbilityFlags.AfterRest) == ItemAbilityFlags.AfterRest, ItemAbilityFlags.AfterRest.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & ItemAbilityFlags.AddStrength) == ItemAbilityFlags.AddStrength, ItemAbilityFlags.AddStrength.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & ItemAbilityFlags.Breakable) == ItemAbilityFlags.Breakable, ItemAbilityFlags.Breakable.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & ItemAbilityFlags.Hostile) == ItemAbilityFlags.Hostile, ItemAbilityFlags.Hostile.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.Flags & ItemAbilityFlags.AfterRest) == ItemAbilityFlags.AfterRest, ItemAbilityFlags.AfterRest.GetDescription());
 
             String result = sb.ToString();
             return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
