@@ -2,6 +2,7 @@
 using System.IO;
 
 using Bardez.Projects.Configuration;
+using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable;
 using Bardez.Projects.InfinityPlus1.Test;
 
@@ -44,7 +45,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.TextLocationKey
                 TalkTableHeader header = new TalkTableHeader();
                 header.Read(stream);
 
-                this.Entry = new TalkTableStringReference("en-us");
+                this.Entry = new TalkTableStringReference(CultureConstants.CultureCodeEnglish);
                 this.Entry.Read(stream);
 
                 this.Entry.ReadStringReferenceFull(stream, header.StringsReferenceOffset);
