@@ -16,36 +16,32 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2
     /// </summary>
     public class Effect2 : InfinityFormat
     {
+        #region Constants
         /// <summary>Binary size of the struct on disk</summary>
         public const Int32 StructSize = 272;
-        
-        #region Members
-        /// <summary>Inner signature-wrapped effect version 2</summary>
-        protected Effect2Inner inner; 
         #endregion
 
-        #region Properties
-		/// <summary>Inner signature-wrapped effect version 2</summary>
-        public Effect2Inner Inner
-        {
-            get { return this.inner; }
-            set { this.inner = value; }
-        } 
-	    #endregion
 
-        #region Constructor(s)
+        #region Fields
+        /// <summary>Inner signature-wrapped effect version 2</summary>
+        public Effect2Inner Inner { get; set; }
+        #endregion
+
+
+        #region Construction
         /// <summary>Default constructor</summary>
         public Effect2()
         {
-            this.inner = null;
+            this.Inner = null;
         }
-        #endregion
 
         /// <summary>Instantiates the members</summary>
         public override void Initialize()
         {
-            this.inner = new Effect2Inner();
+            this.Inner = new Effect2Inner();
         }
+        #endregion
+
 
         #region IO method implemetations
         /// <summary>This public method reads file format data structure from the output stream, after the signature has already been read.</summary>
@@ -55,7 +51,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2
             //wipe and initialize as much as possible
             this.Initialize();
 
-            this.inner.Read(input);
+            this.Inner.Read(input);
         }
 
         /// <summary>This public method writes the file format to the output stream.</summary>
@@ -64,9 +60,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2
         {
             ReusableIO.WriteStringToStream(this.signature, output, CultureConstants.CultureCodeEnglish, false, 4);
             ReusableIO.WriteStringToStream(this.version, output, CultureConstants.CultureCodeEnglish, false, 4);
-            this.inner.Write(output);
+            this.Inner.Write(output);
         }
         #endregion
+
 
         #region ToString() helpers
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>
@@ -79,7 +76,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2
             builder.Append(this.signature);
             builder.Append(StringFormat.ToStringAlignment("Version"));
             builder.Append(this.version);
-            builder.Append(this.inner.ToString());
+            builder.Append(this.Inner.ToString());
 
             return builder.ToString();
         }
