@@ -3,6 +3,7 @@ using System.ComponentModel;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Spell.Enums
 {
+    /// <summary>Flags for a spell</summary>
     [Flags]
     public enum SpellHeader1Flags : uint /* UInt32 */
     {
