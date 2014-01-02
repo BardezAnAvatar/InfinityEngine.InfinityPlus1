@@ -17,7 +17,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.KeyTable
         protected const String configKey = "Test.Key.Key1Path";
 
         /// <summary>Format instance to test</summary>
-        protected KeyTable keyFile { get; set; }
+        protected FileFormats.Infinity.KeyTable.KeyTable keyFile { get; set; }
         #endregion
 
         #region Construction
@@ -43,7 +43,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.KeyTable
         {
             using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
             {
-                this.keyFile = new KeyTable(true);
+                this.keyFile = new FileFormats.Infinity.KeyTable.KeyTable(true);
                 this.keyFile.Read(stream);
             }
 
