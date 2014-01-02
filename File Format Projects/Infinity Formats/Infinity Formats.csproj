@@ -70,13 +70,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ionic.Zip">
-      <HintPath>..\Ionic.Zip.dll</HintPath>
+      <HintPath>..\..\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure Factories\Native Factories\Native Factories.csproj">
+      <Project>{1B2B86E7-2F10-42C1-B930-D62C8AC1634D}</Project>
+      <Name>Native Factories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Basic Formats\Basic Formats.csproj">
       <Project>{4D2A899B-3674-4288-81A8-C8F11636C2DA}</Project>
       <Name>Basic Formats</Name>
@@ -96,10 +101,6 @@
     <ProjectReference Include="..\..\Entities\Media Base\Media Base.csproj">
       <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
       <Name>Media Base</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Infrastructure Factories\Native Factories\Native Factories.csproj">
-      <Project>{1B2B86E7-2F10-42C1-B930-D62C8AC1634D}</Project>
-      <Name>Native Factories</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Utility Projects\ReusableCode\ReusableCode.csproj">
       <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
@@ -191,6 +192,7 @@
     <Compile Include="Infinity\Area\Enums\Container Flags.cs" />
     <Compile Include="Infinity\Area\Enums\Ambient Flags.cs" />
     <Compile Include="Infinity\Area\Enums\Animation Flags.cs" />
+    <Compile Include="Infinity\Area\Enums\Icewind 2 Door Flags.cs" />
     <Compile Include="Infinity\Area\Enums\Torment Map Note Color.cs" />
     <Compile Include="Infinity\Area\Enums\Icewind 2 Spawn Flags.cs" />
     <Compile Include="Infinity\Area\Enums\Spawn Difficulty Flags.cs" />
@@ -241,6 +243,7 @@
     <Compile Include="Infinity\Character\Version\Character 1.cs" />
     <Compile Include="Infinity\Character\Version\Character 9.cs" />
     <Compile Include="Infinity\Character\Version\Character 2.2.cs" />
+    <Compile Include="Infinity\Creature\Enums\Memorization Flags.cs" />
     <Compile Include="Infinity\KeyTable\Key Table.cs" />
     <Compile Include="Infinity\KeyTable\Key Resource Entry.cs" />
     <Compile Include="Infinity\KeyTable\Key BIF Entry.cs" />
@@ -256,7 +259,7 @@
     <Compile Include="Infinity\Common\Enums\ItemSpell Ability Target.cs" />
     <Compile Include="Infinity\Common\Enums\ItemSpell Ability Type.cs" />
     <Compile Include="Infinity\Common\ItmSpl\ItemSpell Ability.cs" />
-    <Compile Include="Infinity\Common\ItmSpl\ItemSpell Header 1.cs" />
+    <Compile Include="Infinity\Common\ItmSpl\ItemSpell Header.cs" />
     <Compile Include="Infinity\Common\ItmSpl\ItemSpell.cs" />
     <Compile Include="Infinity\Common\Resource Locator1.cs" />
     <Compile Include="Infinity\Common\Xor Text Encryption.cs" />
@@ -402,6 +405,36 @@
     <Compile Include="Infinity\Save\Save Manager.cs" />
     <Compile Include="Infinity\Save\Save File.cs" />
     <Compile Include="Infinity\Save\Saved Resource.cs" />
+    <Compile Include="Infinity\Script\Exposure\Baldur Trigger Block.cs" />
+    <Compile Include="Infinity\Script\Exposure\Action Exposure.cs" />
+    <Compile Include="Infinity\Script\Components\Action Object Block.cs" />
+    <Compile Include="Infinity\Script\Components\BioWare Script.cs" />
+    <Compile Include="Infinity\Script\Exposure\Baldur Object Block.cs" />
+    <Compile Include="Infinity\Script\Components\Action Block.cs" />
+    <Compile Include="Infinity\Script\Parse\Delimiters.cs" />
+    <Compile Include="Infinity\Script\Exposure\Object Exposure.cs" />
+    <Compile Include="Infinity\Script\Parse\Parameter.cs" />
+    <Compile Include="Infinity\Script\Parse\Readable Token.cs" />
+    <Compile Include="Infinity\Script\Components\Response Block.cs" />
+    <Compile Include="Infinity\Script\Parse\Script Reader.cs" />
+    <Compile Include="Infinity\Script\Exposure\Trigger Exposure.cs" />
+    <Compile Include="Infinity\Script\Components\Trigger Object Block.cs" />
+    <Compile Include="Infinity\Script\Exposure\Icewind 2 Trigger Block.cs" />
+    <Compile Include="Infinity\Script\Exposure\Icewind Trigger Block.cs" />
+    <Compile Include="Infinity\Script\Exposure\Torment Object Block.cs" />
+    <Compile Include="Infinity\Script\Exposure\Icewind 2 Object Block.cs" />
+    <Compile Include="Infinity\Script\Exposure\Icewind Object Block.cs" />
+    <Compile Include="Infinity\Script\Exposure\Torment Trigger Block.cs" />
+    <Compile Include="Infinity\Script\Components\Condition Block.cs" />
+    <Compile Include="Infinity\Script\Components\Condition Response Block.cs" />
+    <Compile Include="Infinity\Script\Components\Object Block.cs" />
+    <Compile Include="Infinity\Script\Components\Response Set Block.cs" />
+    <Compile Include="Infinity\Script\Components\Trigger Block.cs" />
+    <Compile Include="Infinity\Script\Baldur\Baldur BioWare Script.cs" />
+    <Compile Include="Infinity\Script\Torment\Torment BioWare Script.cs" />
+    <Compile Include="Infinity\Script\IWD2\Icewind 2 BioWare Script.cs" />
+    <Compile Include="Infinity\Script\IWD\Icewind BioWare Script.cs" />
+    <Compile Include="Infinity\Spell\Enums\Spell Ability Flags.cs" />
     <Compile Include="Infinity\Store\Components\Available Spell.cs" />
     <Compile Include="Infinity\Store\Components\Available Drink.cs" />
     <Compile Include="Infinity\Store\Components\Available Item.cs" />
@@ -469,6 +502,13 @@
     <Compile Include="Infinity\WalledEnvironmentDisplay\WED 1.3.cs" />
     <Compile Include="Infinity\WaveEffects\Sound Effect.cs" />
     <Compile Include="Infinity\WaveEffects\Wave Effect Flag.cs" />
+    <Compile Include="Infinity\WorldMap\Component\Area Entry.cs" />
+    <Compile Include="Infinity\WorldMap\Component\Area Link.cs" />
+    <Compile Include="Infinity\WorldMap\Component\Entry Flags.cs" />
+    <Compile Include="Infinity\WorldMap\Component\Map Area Flags.cs" />
+    <Compile Include="Infinity\WorldMap\Component\Map Entry.cs" />
+    <Compile Include="Infinity\WorldMap\Component\World Map Header.cs" />
+    <Compile Include="Infinity\WorldMap\World Map 1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -478,6 +518,7 @@
   <ItemGroup>
     <Content Include="External\Interplay\MVE\_Remarks.txt" />
     <Content Include="External\Interplay\MVE\_Binary notes.txt" />
+    <None Include="Infinity\Script\Research.txt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infinity\Character\Header\Character 2.2 Slots.cs" />

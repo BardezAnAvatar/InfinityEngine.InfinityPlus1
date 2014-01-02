@@ -59,6 +59,10 @@
       <Project>{4D2A899B-3674-4288-81A8-C8F11636C2DA}</Project>
       <Name>Basic Formats</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\File Format Projects\Format Factories\Format Factories.csproj">
+      <Project>{C8E3D8F1-1DB6-4E27-A71B-3CE84EB04B60}</Project>
+      <Name>Format Factories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Utility Projects\Configuration Handler\Configuration Handler.csproj">
       <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
       <Name>Configuration Handler</Name>
