@@ -2,6 +2,7 @@
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.Enums
 {
+    /// <summary>Enumeration of types of abilities associated with an item's or spell's ability</summary>
     public enum ItemSpellAbilityType : byte /* Byte */
     {
         None        = 0,

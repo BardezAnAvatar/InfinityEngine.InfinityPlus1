@@ -3,6 +3,7 @@ using System.ComponentModel;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.Enums
 {
+    /// <summary>Type of damage associated with an item's or spell's ability</summary>
     public enum ItemSpellAbilityDamageType : ushort /* UInt16 */
     {
         None                    = 0,

@@ -3,6 +3,7 @@ using System.ComponentModel;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.Enums
 {
+    /// <summary>Valid targets for this ability</summary>
     public enum ItemSpellAbilityTarget : byte /* Byte */
     {
         Invalid     = 0,

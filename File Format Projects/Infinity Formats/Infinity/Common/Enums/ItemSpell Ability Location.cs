@@ -2,6 +2,7 @@
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.Enums
 {
+    /// <summary>UI slot associated with an item's or spell's ability</summary>
     public enum ItemSpellAbilityLocation : ushort /* UInt16 */
     {
         None = 0,
