@@ -6,6 +6,7 @@ using System.Text;
 
 using Bardez.Projects.Configuration.Ini;
 using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
+using Bardez.Projects.InfinityPlus1.FileFormats.Factories;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Components;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Interface;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareIndexFileFormat.Version;
@@ -631,7 +632,7 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
 
                     using (FileStream file = ReusableIO.OpenFile(bifPath))
                     {
-                        IBiff archive = BiffFactory.GetBiff(file);
+                        IBiff archive = BiffFactory.BuildBiff(file);
 
                         if (location.ResourceType == ResourceType.Tileset)
                             output = archive.ExtractTileset(location.ResourceLocator);
