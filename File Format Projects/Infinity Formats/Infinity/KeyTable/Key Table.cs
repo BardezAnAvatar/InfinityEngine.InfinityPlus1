@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
+using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.Utility;
 using Bardez.Projects.ReusableCode;
@@ -110,7 +111,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
                 for (Int32 i = 0; i < this.EntriesBif.Count; ++i)
                 {
                     if (this.EntriesBif[i] != null)
-                        this.EntriesBif[i].ReadBifName(input, "en-US");
+                        this.EntriesBif[i].ReadBifName(input, CultureConstants.CultureCodeEnglish);
                 }
             }
         }
@@ -129,7 +130,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
             for (Int32 i = 0; i < this.EntriesBif.Count; ++i)
             {
                 ReusableIO.SeekIfAble(Output, Offset, SeekOrigin.Begin);
-                ReusableIO.WriteStringToStream(clone.EntriesBif[i].BifFileName.Source, Output, "en-US", true);
+                ReusableIO.WriteStringToStream(clone.EntriesBif[i].BifFileName.Source, Output, CultureConstants.CultureCodeEnglish, true);
                 Offset += clone.EntriesBif[i].LengthBifFileName + padding;
             }
         }
@@ -289,7 +290,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable
             for (Int32 i = 0; i < this.EntriesBif.Count; ++i)
             {
                 clone.EntriesBif[i].OffsetBifFileName = Convert.ToUInt32(Offset);
-                clone.EntriesBif[i].LengthBifFileName = Convert.ToUInt16(ReusableIO.GetStringByteArray(clone.EntriesBif[i].BifFileName.Source, "en-US").Length /*+ 1*/); //it already returns a NUL-padding
+                clone.EntriesBif[i].LengthBifFileName = Convert.ToUInt16(ReusableIO.GetStringByteArray(clone.EntriesBif[i].BifFileName.Source, CultureConstants.CultureCodeEnglish).Length /*+ 1*/); //it already returns a NUL-padding
                 Offset += clone.EntriesBif[i].LengthBifFileName + padding;
             }
         }
