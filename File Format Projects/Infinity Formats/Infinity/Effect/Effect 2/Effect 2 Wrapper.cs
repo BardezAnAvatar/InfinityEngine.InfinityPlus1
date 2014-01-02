@@ -11,22 +11,33 @@ using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2
 {
+    /// <summary>Wrapper for a version 2 effect</summary>
     public class Effect2Wrapper : EffectWrapper
     {
+        #region Constants
         /// <summary>Binary size of the struct on disk</summary>
         public const Int32 StructSize = 264;
+        #endregion
 
+
+        #region Fields
         /// <summary>Wrapped effect (version 2) to be exposed</summary>
         /// <remarks>The dual header is not embedded in other files, just in its own</remarks>
         protected Effect2Inner effect;
+        #endregion
 
+
+        #region Properties
         /// <summary>Should interface with an Effect2</summary>
         public override IInfinityFormat Effect
         {
             get { return this.effect; }
             set { this.effect = value as Effect2Inner; }
         }
+        #endregion
 
+
+        #region Construction
         /// <summary>efault constructor</summary>
         public Effect2Wrapper()
         {
@@ -38,6 +49,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect.Effect2
         {
             this.effect = new Effect2Inner();
         }
+        #endregion
+
 
         #region ToString() helpers
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>

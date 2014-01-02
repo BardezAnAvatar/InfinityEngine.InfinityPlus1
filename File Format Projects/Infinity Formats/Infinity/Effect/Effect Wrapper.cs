@@ -10,17 +10,24 @@ using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect
 {
+    /// <summary>Base class for an effect's wrapper</summary>
     public abstract class EffectWrapper : IInfinityFormat
     {
+        #region Properties
         /// <summary>Should interface with either an Effect1 or an Effect2</summary>
         public abstract IInfinityFormat Effect
         {
             get;
             set;
         }
+        #endregion
 
+
+        #region Construction
         /// <summary>Instantiates the members</summary>
         public abstract void Initialize();
+        #endregion
+
 
         #region IO method implemetations
         /// <summary>This public method reads file format from the output stream. Reads the whole structure.</summary>
@@ -56,6 +63,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Effect
             this.Effect.Write(output);
         }
         #endregion
+
 
         #region ToString() helpers
         /// <summary>This method overrides the default ToString() method, printing the member data line by line</summary>
