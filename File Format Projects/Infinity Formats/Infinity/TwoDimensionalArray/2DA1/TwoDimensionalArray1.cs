@@ -11,18 +11,22 @@ using Bardez.Projects.ReusableCode;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TwoDimensionalArray._2DA1
 {
+    /// <summary>An exposure for BioWare 2DA files found in Infinity Engine</summary>
     public class TwoDimensionalArray1 : InfinityFormat
     {
+        #region Constants
         /// <summary>
         ///     This constant should be obscure. It is intended to be a friendly
         ///     visible name for something very unlikely to ever be used.
         /// </summary>
-        protected const String rowKey = "~!@#$%^&*(@*$^&)(_++#$%^";
+        protected static readonly String rowKey = "~!@#$%^&*(@*$^&)(_++#$%^";
 
         /// <summary>Padding between cells</summary>
         /// <remarks>Length is arbitrary but must be at least 1</remarks>
-        protected const Int32 columnPadding = 2;
-        
+        protected static readonly Int32 columnPadding = 2;
+        #endregion
+
+
         #region Members
         /// <summary>This is the default value for the 2DA collection</summary>
         protected String valueDefault;
@@ -37,6 +41,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TwoDimensionalArray
         protected DataTable values;
         #endregion
 
+
         #region Properties(s)
         /// <summary>Retrieves all the data for a given row and returns it as a Dictionary object</summary>
         /// <param name="row">Name of the row to return the values of</param>
@@ -46,6 +51,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TwoDimensionalArray
             get { return this.RowToDictionary(row); }
         }
         #endregion
+
 
         #region Constructor(s)
         /// <summary>Default constructor</summary>
@@ -64,6 +70,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TwoDimensionalArray
         }
 
         #endregion
+
 
         /// <summary>Instantiates the data table and populates its columns</summary>
         /// <param name="columns">IEnumerable collection of Strings (Array, List, etc.) that contains all column names</param>
