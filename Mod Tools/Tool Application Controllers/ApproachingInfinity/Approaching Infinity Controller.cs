@@ -49,11 +49,11 @@ namespace Bardez.Projects.InfinityPlus1.Tools.Controllers.ApproachingInfinity
         #endregion
 
 
-        #region Local Asset Processing Events
-        /// <summary>Local event that informs subscribers to open the provided (IE versioned) key table as they see fit</summary>
-        protected event Action<KeyTable> assetOpenKeyTableInfinity;
+        //#region Local Asset Processing Events
+        ///// <summary>Local event that informs subscribers to open the provided (IE versioned) key table as they see fit</summary>
+        //protected event Action<KeyTable> assetOpenKeyTableInfinity;
 
-        #endregion
+        //#endregion
 
 
         #region Exposed UI Processing Events
@@ -108,14 +108,14 @@ namespace Bardez.Projects.InfinityPlus1.Tools.Controllers.ApproachingInfinity
         #endregion
 
 
-        #region Exposed Asset Processing Events
-        /// <summary>Exposed event that informs subscribers to open the provided (IE versioned) key table as they see fit</summary>
-        public event Action<KeyTable> AssetOpenKeyTableInfinity
-        {
-            add { this.assetOpenKeyTableInfinity += value; }
-            remove { this.assetOpenKeyTableInfinity -= value; }
-        }
-        #endregion
+        //#region Exposed Asset Processing Events
+        ///// <summary>Exposed event that informs subscribers to open the provided (IE versioned) key table as they see fit</summary>
+        //public event Action<KeyTable> AssetOpenKeyTableInfinity
+        //{
+        //    add { this.assetOpenKeyTableInfinity += value; }
+        //    remove { this.assetOpenKeyTableInfinity -= value; }
+        //}
+        //#endregion
 
 
         #region Construction
@@ -183,14 +183,14 @@ namespace Bardez.Projects.InfinityPlus1.Tools.Controllers.ApproachingInfinity
         #endregion
 
 
-        #region Asset Event Raising Methods
-        /// <summary>Raises the AssetOpenKeyTableInfinity event</summary>
-        protected void RaiseAssetOpenKeyTableInfinity(KeyTable key)
-        {
-            if (this.assetOpenKeyTableInfinity != null)
-                this.assetOpenKeyTableInfinity(key);
-        }
-        #endregion
+        //#region Asset Event Raising Methods
+        ///// <summary>Raises the AssetOpenKeyTableInfinity event</summary>
+        //protected void RaiseAssetOpenKeyTableInfinity(KeyTable key)
+        //{
+        //    if (this.assetOpenKeyTableInfinity != null)
+        //        this.assetOpenKeyTableInfinity(key);
+        //}
+        //#endregion
 
 
         #region Command and Control
