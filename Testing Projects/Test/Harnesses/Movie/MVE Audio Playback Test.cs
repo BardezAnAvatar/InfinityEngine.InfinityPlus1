@@ -8,6 +8,7 @@ using Bardez.Projects.DirectX.XAudio2;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management;
+using Bardez.Projects.InfinityPlus1.NativeFactories.Timer;
 using Bardez.Projects.InfinityPlus1.Output.Audio;
 using Bardez.Projects.InfinityPlus1.Test;
 using Bardez.Projects.InfinityPlus1.Test.Harnesses;
@@ -98,7 +99,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Movie
                 //read opcodes
                 mveIndexer.ReadChunkOpcodes(stream);
 
-                this.Mve = new MveManager(mveIndexer);
+                this.Mve = new MveManager(mveIndexer, TimerFactory.BuildTimer());
 
                 //collect opcode data
                 this.Mve.CollectOpcodeIndex();

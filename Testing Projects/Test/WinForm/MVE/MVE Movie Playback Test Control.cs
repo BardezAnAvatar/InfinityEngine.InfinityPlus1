@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Bardez.Projects.BasicStructures.Win32.Audio;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management;
+using Bardez.Projects.InfinityPlus1.NativeFactories.Timer;
 using Bardez.Projects.InfinityPlus1.Output.Audio;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
@@ -197,7 +198,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
                                 //collect opcode data
                                 if (continueProcess = (filePath == this.currentMoviePath))
                                 {
-                                    manager = new MveManager(mve);
+                                    manager = new MveManager(mve, TimerFactory.BuildTimer());
                                     manager.CollectOpcodeIndex();
 
                                     //read audio data

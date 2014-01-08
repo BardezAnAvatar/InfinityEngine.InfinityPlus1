@@ -19,6 +19,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Opcodes;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Enum;
+using Bardez.Projects.InfinityPlus1.NativeFactories.Timer;
 using Bardez.Projects.InfinityPlus1.Output.Visual;
 using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 
@@ -116,7 +117,7 @@ namespace Bardez.Projects.InfinityPlus1.Tester
             Dictionary<String, MveManager> management = new Dictionary<String, MveManager>();
             foreach (KeyValuePair<String, MveChunkOpcodeIndexer> mvePair in MveChunksWithOpcodes)
             {
-                MveManager mveManager = new MveManager(MveChunksWithOpcodes[mvePair.Key]);
+                MveManager mveManager = new MveManager(MveChunksWithOpcodes[mvePair.Key], TimerFactory.BuildTimer());
                 mveManager.CollectOpcodeIndex();
                 using (FileStream fs = new FileStream(mvePair.Key, FileMode.Open, FileAccess.Read))
                     mveManager.ReadData(fs);
@@ -143,7 +144,7 @@ namespace Bardez.Projects.InfinityPlus1.Tester
                 MveChunkOpcodeIndexer mve = new MveChunkOpcodeIndexer();
                 mve.Read(fs);
                 mve.ReadChunkOpcodes(fs);
-                this.MVE = new MveManager(mve);
+                this.MVE = new MveManager(mve, TimerFactory.BuildTimer());
                 this.MVE.CollectOpcodeIndex();
                 this.MVE.ReadData(fs);
                 this.MVE.DecodeVideoMaps();

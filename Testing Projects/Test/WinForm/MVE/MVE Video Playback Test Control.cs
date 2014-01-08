@@ -3,6 +3,7 @@ using System.IO;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management;
+using Bardez.Projects.InfinityPlus1.NativeFactories.Timer;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
 {
@@ -67,7 +68,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MVE
                 }
 
                 //instantiate a new MVE manager
-                MveManager manager = new MveManager(mve);
+                MveManager manager = new MveManager(mve, TimerFactory.BuildTimer());
 
                 //collect manager's opcodes
                 lock (this.abortLock)
