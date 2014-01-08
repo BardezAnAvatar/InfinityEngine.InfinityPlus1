@@ -30,8 +30,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
         /// <summary>Represents the tileset resource reference to this overlay</summary>
         public ResourceReference TileSet { get; set; }
 
-        /// <summary>Represents the unknown (Byte padding?) data after the tileset resref</summary>
-        public UInt32 Unknown { get; set; }
+        /// <summary>Count of unique tiles</summary>
+        public UInt16 TileCount { get; set; }
+
+        /// <summary>Movement type</summary>
+        /// <remarks>The name does not give away its function</remarks>
+        public UInt16 MovementType { get; set; }
 
         /// <summary>Offset to the tile map data</summary>
         public UInt32 OffsetTilemap { get; set; }
@@ -42,44 +46,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
         /// <summary>Collection of data that maps the overlay tile indeces to actual tilset tile indeces</summary>
         /// <remarks>Not actually part of the data structure, but instead directly referenced via reference, and written elsewhere.</remarks>
         public TilesetMappingCollection TileSetMapping { get; set; }
-        #endregion
-
-
-        #region Properties
-        /// <summary>Exposes the total count of tiles for this overlay</summary>
-        public Int32 TileCount
-        {
-            get { return this.TileWidth * this.TileHeight; }
-        }
-
-        /// <summary>Exposes the total count of tiles for this overlay in the data stream</summary>
-        public Int64 StreamTileCount
-        {
-            get 
-            {
-                Int64 count = 0L;
-                if (this.TileCount > 0L)
-                    count = (this.OffsetTileIndeces - this.OffsetTilemap) / Tilemap.StructSize;
-
-                return count;
-            }
-        }
-
-        /// <summary>Exposes the count of tilemap indeces in this overlay</summary>
-        /// <param name="tileMaps">Collection of tilemaps for this overlay</param>
-        /// <returns>The count of Tilemap Indeces for this overlay</returns>
-        public Int32 TileIndexCount
-        {
-            get
-            {
-                Int32 count = 0;
-                foreach (Tilemap tilemap in this.TileSetMapping.Tilemaps)
-                    if (tilemap.PrimaryTileCount > 0)
-                        count += tilemap.PrimaryTileCount;
-
-                return count;
-            }
-        }
         #endregion
 
 
@@ -120,7 +86,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             this.TileWidth = ReusableIO.ReadUInt16FromArray(data, 0);
             this.TileHeight = ReusableIO.ReadUInt16FromArray(data, 2);
             this.TileSet.ResRef = ReusableIO.ReadStringFromByteArray(data, 4, CultureConstants.CultureCodeEnglish);
-            this.Unknown = ReusableIO.ReadUInt32FromArray(data, 12);
+            this.TileCount = ReusableIO.ReadUInt16FromArray(data, 12);
+            this.MovementType = ReusableIO.ReadUInt16FromArray(data, 14);
             this.OffsetTilemap = ReusableIO.ReadUInt32FromArray(data, 16);
             this.OffsetTileIndeces = ReusableIO.ReadUInt32FromArray(data, 20);
         }
@@ -132,7 +99,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             ReusableIO.WriteUInt16ToStream(this.TileWidth, output);
             ReusableIO.WriteUInt16ToStream(this.TileHeight, output);
             ReusableIO.WriteStringToStream(this.TileSet.ResRef, output, CultureConstants.CultureCodeEnglish);
-            ReusableIO.WriteUInt32ToStream(this.Unknown, output);
+            ReusableIO.WriteUInt16ToStream(this.TileCount, output);
+            ReusableIO.WriteUInt16ToStream(this.MovementType, output);
             ReusableIO.WriteUInt32ToStream(this.OffsetTilemap, output);
             ReusableIO.WriteUInt32ToStream(this.OffsetTileIndeces, output);
         }
@@ -199,8 +167,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             builder.Append(this.TileHeight);
             builder.Append(StringFormat.ToStringAlignment("Tileset"));
             builder.Append(String.Concat("'", this.TileSet.ZResRef ,"'"));
-            builder.Append(StringFormat.ToStringAlignment("Unknown"));
-            builder.Append(this.Unknown);
+            builder.Append(StringFormat.ToStringAlignment("Tile count"));
+            builder.Append(this.TileCount);
+            builder.Append(StringFormat.ToStringAlignment("Movement Type"));
+            builder.Append(this.MovementType);
             builder.Append(StringFormat.ToStringAlignment("Tilemap Offset"));
             builder.Append(this.OffsetTilemap);
             builder.Append(StringFormat.ToStringAlignment("Tile Index Lookup Offset"));
@@ -229,7 +199,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
                     structureEquality &= (this.TileHeight == compare.TileHeight);
                     structureEquality &= (this.TileSet.Equals(compare.TileSet));
                     structureEquality &= (this.TileCount == compare.TileCount);
-                    structureEquality &= (this.Unknown == compare.Unknown);
+                    structureEquality &= (this.TileCount == compare.TileCount);
+                    structureEquality &= (this.MovementType == compare.MovementType);
                     //offsets are unimportant when it comes to data value equivalence/equality
 
                     //short-circuit large equality tests
@@ -253,7 +224,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             hash ^= this.TileHeight.GetHashCode();
             hash ^= this.TileSet.GetHashCode();
             hash ^= this.TileCount.GetHashCode();
-            hash ^= this.Unknown.GetHashCode();
+            hash ^= this.MovementType.GetHashCode();
             hash ^= this.TileSetMapping.GetHashCode();
             //offsets are unimportant when it comes to data value equivalence/equality
 

@@ -30,9 +30,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
         /// <summary>Represents the known flags for the polygon</summary>
         public PolygonProperties Properties { get; set; }
 
-        /// <summary>Represents the unknown flags of the polygon</summary>
-        /// <remarks>Always (usually?) 255</remarks>
-        public Byte Unknown { get; set; }
+        /// <summary>Represents the unknown height polygon</summary>
+        /// <remarks>Always (usually?) 255. What does it do?</remarks>
+        public Byte Height { get; set; }
 
         /// <summary>Represents the polygon's leftmost bounding coordinate</summary>
         public Int16 BoundingRegionMinX { get; set; }
@@ -81,7 +81,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             this.StartIndex = ReusableIO.ReadUInt16FromArray(data, 0);
             this.VertexCount = ReusableIO.ReadInt16FromArray(data, 4);
             this.Properties = (PolygonProperties)data[8];
-            this.Unknown = data[9];
+            this.Height = data[9];
             this.BoundingRegionMinX = ReusableIO.ReadInt16FromArray(data, 10);
             this.BoundingRegionMaxX = ReusableIO.ReadInt16FromArray(data, 12);
             this.BoundingRegionMinY = ReusableIO.ReadInt16FromArray(data, 14);
@@ -95,7 +95,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             ReusableIO.WriteUInt32ToStream(this.StartIndex, output);
             ReusableIO.WriteInt32ToStream(this.VertexCount, output);
             output.WriteByte((Byte)this.Properties);
-            output.WriteByte(this.Unknown);
+            output.WriteByte(this.Height);
             ReusableIO.WriteInt16ToStream(this.BoundingRegionMinX, output);
             ReusableIO.WriteInt16ToStream(this.BoundingRegionMaxX, output);
             ReusableIO.WriteInt16ToStream(this.BoundingRegionMinY, output);
@@ -166,7 +166,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             builder.Append(StringFormat.ToStringAlignment("Properties"));
             builder.Append(this.GetPolygonFlagsString());
             builder.Append(StringFormat.ToStringAlignment("Unknown Properties"));
-            builder.Append(this.Unknown);
+            builder.Append(this.Height);
             builder.Append(StringFormat.ToStringAlignment("Bounding Min X"));
             builder.Append(this.BoundingRegionMinX);
             builder.Append(StringFormat.ToStringAlignment("Bounding Max X"));
@@ -214,7 +214,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
                     Boolean structureEquality = (this.StartIndex == compare.StartIndex);
                     structureEquality &= (this.VertexCount == compare.VertexCount);
                     structureEquality &= (this.Properties.Equals(compare.Properties));
-                    structureEquality &= (this.Unknown == compare.Unknown);
+                    structureEquality &= (this.Height == compare.Height);
                     structureEquality &= (this.BoundingRegionMinX == compare.BoundingRegionMinX);
                     structureEquality &= (this.BoundingRegionMaxX == compare.BoundingRegionMaxX);
                     structureEquality &= (this.BoundingRegionMinY == compare.BoundingRegionMinY);
@@ -236,7 +236,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WalledEnvironmentDi
             hash ^= this.StartIndex.GetHashCode();
             hash ^= this.VertexCount.GetHashCode();
             hash ^= this.Properties.GetHashCode();
-            hash ^= this.Unknown.GetHashCode();
+            hash ^= this.Height.GetHashCode();
             hash ^= this.BoundingRegionMinX.GetHashCode();
             hash ^= this.BoundingRegionMaxX.GetHashCode();
             hash ^= this.BoundingRegionMinY.GetHashCode();

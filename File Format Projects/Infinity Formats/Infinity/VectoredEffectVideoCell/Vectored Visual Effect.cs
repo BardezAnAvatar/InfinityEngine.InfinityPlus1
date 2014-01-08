@@ -24,11 +24,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.VectoredEffectVideo
         /// <summary>Resource played by this visual effect</summary>
         public ResourceReference Animation { get; set; }
 
-        /// <summary>Unknown 4 bytes at offset 0x10</summary>
-        public Int32 Unknown_0x0010 { get; set; }
-        
-        /// <summary>Unknown 4 bytes at offset 0x14</summary>
-        public Int32 Unknown_0x0014 { get; set; }
+        /// <summary>Resource played by this visual effect for the shadow</summary>
+        public ResourceReference ShadowAnimation { get; set; }
 
         /// <summary>Various display flags</summary>
         public DisplayFlags Display { get; set; }
@@ -129,6 +126,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.VectoredEffectVideo
         public override void Initialize()
         {
             this.Animation = new ResourceReference(ResourceType.Bam);
+            this.ShadowAnimation = new ResourceReference(ResourceType.Bam);
             this.Palette = new ResourceReference(ResourceType.ImageBitmap);
             this.Name = new ZString();
             this.SoundIntroduction = new ResourceReference();
@@ -149,8 +147,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.VectoredEffectVideo
             Byte[] buffer = ReusableIO.BinaryRead(input, 148);
 
             this.Animation.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 0, CultureConstants.CultureCodeEnglish);
-            this.Unknown_0x0010 = ReusableIO.ReadInt32FromArray(buffer, 8);
-            this.Unknown_0x0014 = ReusableIO.ReadInt32FromArray(buffer, 12);
+            this.ShadowAnimation.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 8, CultureConstants.CultureCodeEnglish);
             this.Display = (DisplayFlags)ReusableIO.ReadUInt16FromArray(buffer, 16);
             this.Color = (ColorFlags)ReusableIO.ReadUInt16FromArray(buffer, 18);
             this.Unknown_0x001C = ReusableIO.ReadInt32FromArray(buffer, 20);
@@ -190,8 +187,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.VectoredEffectVideo
             base.Write(output);
 
             ReusableIO.WriteStringToStream(this.Animation.ResRef, output, CultureConstants.CultureCodeEnglish);
-            ReusableIO.WriteInt32ToStream(this.Unknown_0x0010, output);
-            ReusableIO.WriteInt32ToStream(this.Unknown_0x0014, output);
+            ReusableIO.WriteStringToStream(this.ShadowAnimation.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteUInt16ToStream((UInt16)this.Display, output);
             ReusableIO.WriteUInt16ToStream((UInt16)this.Color, output);
             ReusableIO.WriteInt32ToStream(this.Unknown_0x001C, output);
@@ -275,10 +271,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.VectoredEffectVideo
             builder.Append(String.Format("'{0}'", ZString.GetZString(this.Version)));
             builder.Append(StringFormat.ToStringAlignment("Animation"));
             builder.Append(String.Format("'{0}'", this.Animation.ZResRef));
-            builder.Append(StringFormat.ToStringAlignment("Unknown data @ offset 0x10"));
-            builder.Append(this.Unknown_0x0010);
-            builder.Append(StringFormat.ToStringAlignment("Unknown data @ offset 0x14"));
-            builder.Append(this.Unknown_0x0014);
+            builder.Append(StringFormat.ToStringAlignment("Shadow Animation"));
+            builder.Append(String.Format("'{0}'", this.ShadowAnimation.ZResRef));
             builder.Append(StringFormat.ToStringAlignment("Display flags (value)"));
             builder.Append((UInt32)this.Display);
             builder.Append(StringFormat.ToStringAlignment("Display flags (enumeration)"));
