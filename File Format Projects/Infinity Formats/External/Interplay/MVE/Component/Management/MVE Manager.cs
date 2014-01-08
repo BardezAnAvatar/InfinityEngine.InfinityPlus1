@@ -14,6 +14,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Enum;
 using Bardez.Projects.Multimedia.MediaBase.Data.Pixels;
 using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.Multimedia.MediaBase.Frame.Video;
+using Bardez.Projects.Multimedia.MediaBase.Management;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management
 {
@@ -96,18 +97,20 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
         #region Construction
         /// <summary>Definition constructor</summary>
         /// <param name="indexedMve">Partially read, index MVE</param>
-        public MveManager(MveChunkOpcodeIndexer indexedMve)
+        /// <param name="timer">Timer to use</param>
+        public MveManager(MveChunkOpcodeIndexer indexedMve, ITimer timer)
         {
-            this.InitializeManagers(indexedMve);
+            this.InitializeManagers(indexedMve, timer);
         }
 
         /// <summary>Initializes the MVE manager</summary>
         /// <param name="indexedMve">Indexed chunk opcode indexer containing reference to all opcodes</param>
-        public virtual void InitializeManagers(MveChunkOpcodeIndexer indexedMve)
+        /// <param name="timer">Timer to use</param>
+        public virtual void InitializeManagers(MveChunkOpcodeIndexer indexedMve, ITimer timer)
         {
             this.MveIndex = indexedMve;
             this.AudioManager = new MveAudioManager();
-            this.VideoManager = new MveVideoManager();
+            this.VideoManager = new MveVideoManager(timer);
 
             //assign event handlers
             this.VideoManager.AudioStreamStarted += this.RaiseStartAudio;

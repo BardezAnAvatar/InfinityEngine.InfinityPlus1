@@ -5,16 +5,12 @@ using System.Threading;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Coding;
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Interpretation;
-using Bardez.Projects.InfinityPlus1.NativeFactories.Timer;
 using Bardez.Projects.Multimedia.MediaBase.Data.Pixels;
 using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.Multimedia.MediaBase.Management;
 
 namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Component.Management
 {
-    //TODO: Replace with MediaBase IMovie; break dependancy on ITimer, which requires XAudio2, of all things
-
-
     /// <summary>
     ///     This class will manage the video aspects of an MVE file. It will cache forward-decoded frames, retrieve cached frames
     ///     and allow retrieval on a frame-by frame and a playback basis.
@@ -106,19 +102,21 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Interplay.MVE.Compo
 
         #region Construction
         /// <summary>Default constructor</summary>
-        public MveVideoManager()
+        /// <param name="timer">Timer to use</param>
+        public MveVideoManager(ITimer timer)
         {
-            this.InitializeManager();
+            this.InitializeManager(timer);
         }
 
         /// <summary>Initializes the MVE manager</summary>
-        public virtual void InitializeManager()
+        /// <param name="timer">Timer to use</param>
+        public virtual void InitializeManager(ITimer timer)
         {
             this.FrameRateTimerParameters = null;
             this.VideoStreamParameters = null;
 
             //video timer
-            this.timer = TimerFactory.BuildTimer();
+            this.timer = timer;
             this.timer.Elapsed += new Action<TimeSpan>(this.VideoTimerExpired);
 
             //locking objects
