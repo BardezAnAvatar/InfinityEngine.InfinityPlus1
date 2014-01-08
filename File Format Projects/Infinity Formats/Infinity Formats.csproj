@@ -78,10 +78,6 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Infrastructure Factories\Native Factories\Native Factories.csproj">
-      <Project>{1B2B86E7-2F10-42C1-B930-D62C8AC1634D}</Project>
-      <Name>Native Factories</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Basic Formats\Basic Formats.csproj">
       <Project>{4D2A899B-3674-4288-81A8-C8F11636C2DA}</Project>
       <Name>Basic Formats</Name>
@@ -112,6 +108,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="External\ImaginationTechnologies\PowerVR\Component\Meta Data.cs" />
+    <Compile Include="External\ImaginationTechnologies\PowerVR\Enums\Channel Type.cs" />
+    <Compile Include="External\ImaginationTechnologies\PowerVR\Enums\Color Space.cs" />
+    <Compile Include="External\ImaginationTechnologies\PowerVR\Power VR Compressed.cs" />
+    <Compile Include="External\ImaginationTechnologies\PowerVR\Power VR Image.cs" />
     <Compile Include="External\Interplay\ACM\ACM Bit Stream.cs" />
     <Compile Include="External\Interplay\ACM\ACM Return Exception.cs" />
     <Compile Include="External\Interplay\ACM\Amplitude Buffer.cs" />
@@ -164,6 +165,9 @@
     <Compile Include="External\Interplay\MVE\Enum\Opcode Types.cs" />
     <Compile Include="External\Interplay\MVE\MVE Chunk Indexer.cs" />
     <Compile Include="External\Interplay\MVE\Component\Management\MVE Manager.cs" />
+    <Compile Include="External\ImaginationTechnologies\PowerVR\Component\PVR Header.cs" />
+    <Compile Include="External\ImaginationTechnologies\PowerVR\Enums\Header Flags.cs" />
+    <Compile Include="External\ImaginationTechnologies\PowerVR\Enums\PVR Pixel Format.cs" />
     <Compile Include="External\Zlib\ZlibHeader.cs" />
     <Compile Include="Infinity\Area\Component\Actor.cs" />
     <Compile Include="Infinity\Area\Component\Ambient.cs" />
@@ -175,6 +179,7 @@
     <Compile Include="Infinity\Area\Component\Projectile Trap.cs" />
     <Compile Include="Infinity\Area\Component\Rest Interruption.cs" />
     <Compile Include="Infinity\Area\Component\Song.cs" />
+    <Compile Include="Infinity\Area\Component\Tiled Object.cs" />
     <Compile Include="Infinity\Area\Component\Torment Map Note.cs" />
     <Compile Include="Infinity\Area\Component\Door.cs" />
     <Compile Include="Infinity\Area\Component\Entrance.cs" />
@@ -185,6 +190,7 @@
     <Compile Include="Infinity\Area\Component\Region.cs" />
     <Compile Include="Infinity\Area\Component\Spawn Point Base.cs" />
     <Compile Include="Infinity\Area\Component\Torment Area Header.cs" />
+    <Compile Include="Infinity\Area\Enums\Area Edge Flags.cs" />
     <Compile Include="Infinity\Area\Enums\Area Flags.cs" />
     <Compile Include="Infinity\Area\Enums\Area Type Flags.cs" />
     <Compile Include="Infinity\Area\Enums\Actor Flags.cs" />
@@ -193,6 +199,7 @@
     <Compile Include="Infinity\Area\Enums\Ambient Flags.cs" />
     <Compile Include="Infinity\Area\Enums\Animation Flags.cs" />
     <Compile Include="Infinity\Area\Enums\Icewind 2 Door Flags.cs" />
+    <Compile Include="Infinity\Area\Enums\Tiled Object Flags.cs" />
     <Compile Include="Infinity\Area\Enums\Torment Map Note Color.cs" />
     <Compile Include="Infinity\Area\Enums\Icewind 2 Spawn Flags.cs" />
     <Compile Include="Infinity\Area\Enums\Spawn Difficulty Flags.cs" />
@@ -243,7 +250,9 @@
     <Compile Include="Infinity\Character\Version\Character 1.cs" />
     <Compile Include="Infinity\Character\Version\Character 9.cs" />
     <Compile Include="Infinity\Character\Version\Character 2.2.cs" />
+    <Compile Include="Infinity\Common\Enums\Variable Type.cs" />
     <Compile Include="Infinity\Creature\Enums\Memorization Flags.cs" />
+    <Compile Include="Infinity\Game\Enum\Formation.cs" />
     <Compile Include="Infinity\KeyTable\Key Table.cs" />
     <Compile Include="Infinity\KeyTable\Key Resource Entry.cs" />
     <Compile Include="Infinity\KeyTable\Key BIF Entry.cs" />
@@ -396,6 +405,7 @@
     <Compile Include="Infinity\Projectile\Components\Area of Effect.cs" />
     <Compile Include="Infinity\Projectile\Components\Projectile Header.cs" />
     <Compile Include="Infinity\Projectile\Components\Projectile Animation.cs" />
+    <Compile Include="Infinity\Projectile\Enums\Animation Puff Flags.cs" />
     <Compile Include="Infinity\Projectile\Enums\Area of Effect Flags.cs" />
     <Compile Include="Infinity\Projectile\Enums\Travel Flags.cs" />
     <Compile Include="Infinity\Projectile\Enums\Spark Color.cs" />
