@@ -39,8 +39,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.ImaginationTechnolo
 
                 return height;
             }
-
         }
+
         /// <summary>Packed width of the pixel data</summary>
         protected UInt32 DataWidth
         {
@@ -52,7 +52,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.ImaginationTechnolo
 
                 return width;
             }
-
         }
         #endregion
 
@@ -130,20 +129,20 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.ImaginationTechnolo
             Byte[] data = null;
 
             if (this.Header == null)
-                throw new NullReferenceException("The file header was undexpectedly null.");
+                throw new NullReferenceException("The file header was unexpectedly null.");
 
             switch (this.Header.PixelFormat)
             {
                 case PvrPixelFormat.DXT1:
-                    data = this.GetDecodedPixelData(DXT1.DecodePixels);
+                    data = this.GetDecodedPixelData(DXT1.DecodePixels, 8);
                     break;
 
                 case PvrPixelFormat.DXT5:
-                    data = this.GetDecodedPixelData(DXT5.DecodePixels);
+                    data = this.GetDecodedPixelData(DXT5.DecodePixels, 16);
                     break;
 
                 default:
-                    throw new NotSupportedException("The only PowerVR implementation currently supported is DXT1.");
+                    throw new NotSupportedException("The only PowerVR compression implementations currently supported are DXT1 and DXT5.");
             }
 
             return data;
@@ -151,22 +150,23 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.ImaginationTechnolo
 
         /// <summary>Decodes pixel data with the provided decoding function</summary>
         /// <param name="decoder">Decoding method to use</param>
+        /// <param name="dataSize">Size of each chunk of data to consume</param>
         /// <returns>The decoded pixel data</returns>
-        protected Byte[] GetDecodedPixelData(Func<Byte[], Byte[]> decoder)
+        protected Byte[] GetDecodedPixelData(Func<Byte[], Byte[]> decoder, Int32 dataSize)
         {
             //write the decoded data
             Byte[] data = new Byte[this.DataHeight * this.DataWidth * 4];   //decoded data is RGB32, which is 4 Bytes per pixel
             Int32 rowIndex = 0, columnIndex = 0;
 
             //Note about the compression. It is not run-length encoded, but square-encoded (like JPEG), so data will have to be re-ordered.
-            for (Int32 index = 0; index < this.Data.Length; index += 8)
+            for (Int32 index = 0; index < this.Data.Length; index += dataSize)
             {
                 //source data
-                Byte[] pixelData = new Byte[8];
-                Array.Copy(this.Data, index, pixelData, 0, 8);
+                Byte[] pixelData = new Byte[dataSize];
+                Array.Copy(this.Data, index, pixelData, 0, dataSize);
 
                 //decoded data, 32-bit RGBA
-                Byte[] decoded = DXT1.DecodePixels(pixelData);
+                Byte[] decoded = decoder(pixelData);
 
                 //write each 4 pixels where they belong
                 for (Int32 y = 0; y < 4; ++y)
