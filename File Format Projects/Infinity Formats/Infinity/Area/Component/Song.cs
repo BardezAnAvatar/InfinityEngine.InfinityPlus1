@@ -42,9 +42,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
         /// <remarks>Matches to song.ids</remarks>
         public Int32 SongNumberDefeat { get; set; }
 
-        /// <summary>Array of 5 additional songs</summary>
+        /// <summary>Array of 5 alternate songs</summary>
         /// <remarks>Matches to song.ids</remarks>
-        public Int32[] AdditionalSongs { get; set; }
+        public Int32[] AlternateSongs { get; set; }
 
         /// <summary>Main ambient # 1 during the day</summary>
         public ResourceReference MainAmbientDay1 { get; set; }
@@ -77,7 +77,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
         /// <summary>Instantiates reference types</summary>
         public virtual void Initialize()
         {
-            this.AdditionalSongs = new Int32[5];
+            this.AlternateSongs = new Int32[5];
             this.MainAmbientDay1 = new ResourceReference();
             this.MainAmbientDay2 = new ResourceReference();
             this.MainAmbientNight1 = new ResourceReference();
@@ -117,7 +117,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             this.SongNumberDefeat = ReusableIO.ReadInt32FromArray(buffer, 16);
 
             for (Int32 index = 0; index < 5; ++index)
-                this.AdditionalSongs[index] = ReusableIO.ReadInt32FromArray(buffer, 20 + (4 * index));
+                this.AlternateSongs[index] = ReusableIO.ReadInt32FromArray(buffer, 20 + (4 * index));
 
             this.MainAmbientDay1.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 40, CultureConstants.CultureCodeEnglish);
             this.MainAmbientDay2.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 48, CultureConstants.CultureCodeEnglish);
@@ -141,7 +141,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             ReusableIO.WriteInt32ToStream(this.SongNumberDefeat, output);
 
             for (Int32 index = 0; index < 5; ++index)
-                ReusableIO.WriteInt32ToStream(this.AdditionalSongs[index], output);
+                ReusableIO.WriteInt32ToStream(this.AlternateSongs[index], output);
 
             ReusableIO.WriteStringToStream(this.MainAmbientDay1.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteStringToStream(this.MainAmbientDay2.ResRef, output, CultureConstants.CultureCodeEnglish);
@@ -212,7 +212,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             for (Int32 index = 0; index < 5; ++index)
             {
                 builder.Append(StringFormat.ToStringAlignment(String.Format("Additional song # {0}", index)));
-                builder.Append(this.AdditionalSongs[index]);
+                builder.Append(this.AlternateSongs[index]);
             }
 
             builder.Append(StringFormat.ToStringAlignment("Main ambient # 1 during the day"));

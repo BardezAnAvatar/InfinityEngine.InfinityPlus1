@@ -38,17 +38,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
 
         /// <summary>Value indicating whether the character is a party member or not</summary>
         /// <value>0 = false; 1 = true</value>
-        protected UInt16 isPartyMember { get; set; }
+        protected Boolean PartyMember { get; set; }
 
-        /// <summary>Unknown value prior to the asterisk</summary>
-        /// <remarks>
-        ///     IESDP says it is the first letter, then the unknown. However, all viewed data indicates
-        ///     a 0x00 then a 0x2A (which is the asterisk)
-        ///     
-        ///     Perhaps in-memory the value is matched and some sort of hack to not re-load a CRE
-        ///     if they cannot find it?
-        /// </remarks>
-        public Byte Unknown { get; set; }
+        /// <summary>Padding value</summary>
+        /// <remarks>BG2 source code shows that this is padding</remarks>
+        public UInt16 Padding { get; set; }
 
         /// <summary>Byte of the character with which the first character of the CRE file ResRef was replaced with</summary>
         /// <value>0 (null) if not performed or unnecessary.</value>
@@ -97,14 +91,6 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
 
 
         #region Properties
-        /// <summary>Value indicating whether the character is a party member or not</summary>
-        /// <value>0 = false; 1 = true</value>
-        public Boolean IsPartyMember
-        {
-            get { return Convert.ToBoolean(this.isPartyMember); }
-            set { this.isPartyMember = Convert.ToUInt16(value ? 1 : 0); }
-        }
-
         /// <summary>Character with which the first character of the CRE file ResRef was replaced with</summary>
         /// <value>0 (null) if not performed or unnecessary.</value>
         public Char FirstLetterOfCreFileResRef
@@ -170,8 +156,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
             this.MostPowerfulVanquishedXP = ReusableIO.ReadUInt32FromArray(buffer, 4);
             this.TimeAwayFromParty = ReusableIO.ReadUInt32FromArray(buffer, 8);
             this.TimeJoinedParty = ReusableIO.ReadUInt32FromArray(buffer, 12);
-            this.isPartyMember = ReusableIO.ReadUInt16FromArray(buffer, 16);
-            this.Unknown = buffer[18];
+            this.PartyMember = Convert.ToBoolean(buffer[16]);
+            this.Padding = ReusableIO.ReadUInt16FromArray(buffer, 17);
             this.ReplacedLetterByte = buffer[19];
             this.TotalChapterKillsXP = ReusableIO.ReadUInt32FromArray(buffer, 20);
             this.TotalChapterKills = ReusableIO.ReadUInt32FromArray(buffer, 24);
@@ -199,8 +185,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
             ReusableIO.WriteUInt32ToStream(this.MostPowerfulVanquishedXP, output);
             ReusableIO.WriteUInt32ToStream(this.TimeAwayFromParty, output);
             ReusableIO.WriteUInt32ToStream(this.TimeJoinedParty, output);
-            ReusableIO.WriteUInt16ToStream(this.isPartyMember, output);
-            output.WriteByte(this.Unknown);
+            output.WriteByte(Convert.ToByte(this.PartyMember));
+            ReusableIO.WriteUInt16ToStream(this.Padding, output);
             output.WriteByte(this.ReplacedLetterByte);
             ReusableIO.WriteUInt32ToStream(this.TotalChapterKillsXP, output);
             ReusableIO.WriteUInt32ToStream(this.TotalChapterKills, output);
@@ -237,12 +223,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
             builder.Append(this.TimeAwayFromParty);
             builder.Append(StringFormat.ToStringAlignment("Time joined party"));
             builder.Append(this.TimeJoinedParty);
-            builder.Append(StringFormat.ToStringAlignment("Is party member? (value)"));
-            builder.Append(this.isPartyMember);
-            builder.Append(StringFormat.ToStringAlignment("Is party member? (Boolean)"));
-            builder.Append(this.IsPartyMember);
-            builder.Append(StringFormat.ToStringAlignment("Unknown"));
-            builder.Append(this.Unknown);
+            builder.Append(StringFormat.ToStringAlignment("Is party member?"));
+            builder.Append(this.PartyMember);
+            builder.Append(StringFormat.ToStringAlignment("Padding"));
+            builder.Append(this.Padding);
             builder.Append(StringFormat.ToStringAlignment("First Letter of Creature resource"));
             if (this.FirstLetterOfCreFileResRef != Char.MinValue) //null
                 builder.Append(this.FirstLetterOfCreFileResRef);

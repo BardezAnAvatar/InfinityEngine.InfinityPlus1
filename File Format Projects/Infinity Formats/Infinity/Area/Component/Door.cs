@@ -62,6 +62,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
         /// <summary>Represents the first vertex co-ordinate within the search map that is impeded while door is closed</summary>
         public Point FirstImpededSearchMapVertexClosed { get; set; }
 
+        /// <summary>HP of the door</summary>
+        public Int16 HitPoints { get; set; }
+
+        /// <summary>AC of the door</summary>
+        public Int16 ArmorClass { get; set; }
+
         /// <summary>Unknown 4 bytes at offset 0x54</summary>
         public Int32 Unknown_0x0054 { get; set; }
 
@@ -212,7 +218,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             this.CountImpededSearchMapVertexClosed = ReusableIO.ReadInt16FromArray(buffer, 78);
             this.FirstImpededSearchMapVertexClosed.X = ReusableIO.ReadUInt16FromArray(buffer, 80);
             this.FirstImpededSearchMapVertexClosed.Y = ReusableIO.ReadUInt16FromArray(buffer, 82);
-            this.Unknown_0x0054 = ReusableIO.ReadInt32FromArray(buffer, 84);
+            this.HitPoints = ReusableIO.ReadInt16FromArray(buffer, 84);
+            this.ArmorClass = ReusableIO.ReadInt16FromArray(buffer, 86);
             this.SoundOpen.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 88, CultureConstants.CultureCodeEnglish);
             this.SoundClosed.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 96, CultureConstants.CultureCodeEnglish);
             this.CursorIndex = ReusableIO.ReadInt32FromArray(buffer, 104);
@@ -263,7 +270,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             ReusableIO.WriteInt16ToStream(this.CountImpededSearchMapVertexClosed, output);
             ReusableIO.WriteUInt16ToStream(this.FirstImpededSearchMapVertexClosed.X, output);
             ReusableIO.WriteUInt16ToStream(this.FirstImpededSearchMapVertexClosed.Y, output);
-            ReusableIO.WriteInt32ToStream(this.Unknown_0x0054, output);
+            ReusableIO.WriteInt16ToStream(this.HitPoints, output);
+            ReusableIO.WriteInt16ToStream(this.ArmorClass, output);
             ReusableIO.WriteStringToStream(this.SoundOpen.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteStringToStream(this.SoundClosed.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteInt32ToStream(this.CursorIndex, output);
@@ -361,8 +369,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             builder.Append(this.CountImpededSearchMapVertexClosed);
             builder.Append(StringFormat.ToStringAlignment("Closed state First Impeded Search Map Vertex"));
             builder.Append(this.FirstImpededSearchMapVertexClosed.ToString());
-            builder.Append(StringFormat.ToStringAlignment("Unknown data @ offset 0x54"));
-            builder.Append(this.Unknown_0x0054);
+            builder.Append(StringFormat.ToStringAlignment("Hit points"));
+            builder.Append(this.HitPoints);
+            builder.Append(StringFormat.ToStringAlignment("Armor class"));
+            builder.Append(this.ArmorClass);
             builder.Append(StringFormat.ToStringAlignment("Sound played when opened"));
             builder.Append(String.Format("'{0}'", this.SoundOpen.ZResRef));
             builder.Append(StringFormat.ToStringAlignment("Sound played when closed"));

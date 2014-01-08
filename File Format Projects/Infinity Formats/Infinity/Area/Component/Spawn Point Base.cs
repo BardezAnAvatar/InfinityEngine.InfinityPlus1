@@ -274,7 +274,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
         /// <summary>Generates a human-readable String representing the spawn method</summary>
         /// <returns>A human-readable String representing the spawn method</returns>
         protected abstract String GenerateSpawnMethodString();
-        
+
         /// <summary>Gets a human-readable enumeration String of set SpawnSchedule enumeration values</summary>
         /// <returns>A human-readable enumeration String of set SpawnSchedule enumeration values</returns>
         protected String GetScheduleFlagsEnumerationString()

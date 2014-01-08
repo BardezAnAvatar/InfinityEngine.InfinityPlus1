@@ -79,6 +79,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Version
             this.ReadDoors(input, this.Header.OffsetDoors, this.Header.CountDoors);
             this.ReadAnimations(input, this.Header.OffsetAnimations, this.Header.CountAnimations);
             this.ReadMapNotes(input, this.Header.OffsetMapNote, this.Header.CountMapNote);
+            this.ReadTiledObjects(input, this.Header.OffsetTiledObjects, this.Header.CountTiledObjects);
             this.ReadProjectileTraps(input, this.Header.OffsetProjectileTrap, this.Header.CountProjectileTrap);
             this.ReadSongs(input, this.Header.OffsetSongEntries);
             this.ReadSleepInterruptions(input, this.Header.OffsetRestInterruptions);
@@ -174,6 +175,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Version
             this.WriteDoors(output, this.Header.OffsetDoors);
             this.WriteAnimations(output, this.Header.OffsetAnimations);
             this.WriteMapNotes(output, this.Header.OffsetMapNote);
+            this.WriteTiledObjects(output, this.Header.OffsetTiledObjects);
             this.WriteProjectileTraps(output, this.Header.OffsetProjectileTrap);
             this.WriteSongs(output, this.Header.OffsetSongEntries);
             this.WriteSleepInterruptions(output, this.Header.OffsetRestInterruptions);

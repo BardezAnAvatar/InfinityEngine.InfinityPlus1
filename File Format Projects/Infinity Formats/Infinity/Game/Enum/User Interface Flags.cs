@@ -10,10 +10,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Enum
     {
         [Description("Party AI scripts are enables")]
         PartyScriptsEnabled     = 0x01,
-        [Description("First text window size bit")]
-        TextWindowSize1         = 0x02,
-        [Description("Second text window size bit")]
-        TextWindowSize2         = 0x04,
+        [Description("Text window size medium")]
+        TextWindowMedium         = 0x02,
+        [Description("text window size large")]
+        TextWindowLarge         = 0x04,
         [Description("A dialog is running")]
         DialogRunning           = 0x08,
         [Description("GUI is hidden")]

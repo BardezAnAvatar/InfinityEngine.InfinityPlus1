@@ -16,9 +16,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
         /// <summary>Represents the chapter number when this journal entry occurred.</summary>
         public Byte Chapter { get; set; }
 
-        /// <summary>Unknown value after Chapter.</summary>
+        /// <summary>Which characters have not read this entry; bit flags?</summary>
         /// <value>I've seen FF, C0</value>
-        public Byte Unknown { get; set; }
+        public Byte ReadByCharacter { get; set; }
 
         /// <summary>Represents the type of journal entry</summary>
         public JournalEntry EntryType { get; set; }
@@ -35,7 +35,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
             base.ReadBody(input);
             Byte[] buffer = ReusableIO.BinaryRead(input, 4);
             this.Chapter = buffer[0];
-            this.Unknown = buffer[1];
+            this.ReadByCharacter = buffer[1];
             this.EntryType = (JournalEntry)buffer[2];
             this.EntryDataLocation = (JournalLocation)buffer[3];
         }
@@ -46,7 +46,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
         {
             base.Write(output);
             output.WriteByte(this.Chapter);
-            output.WriteByte(this.Unknown);
+            output.WriteByte(this.ReadByCharacter);
             output.WriteByte((Byte)this.EntryType);
             output.WriteByte((Byte)this.EntryDataLocation);
         }
@@ -100,7 +100,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
             builder.Append(StringFormat.ToStringAlignment("Chapter # entered"));
             builder.Append(this.Chapter);
             builder.Append(StringFormat.ToStringAlignment("Unknown"));
-            builder.Append(this.Unknown);
+            builder.Append(this.ReadByCharacter);
             builder.Append(StringFormat.ToStringAlignment("Entry Type (value)"));
             builder.Append((Byte)this.EntryType);
             builder.Append(StringFormat.ToStringAlignment("Entry Type (description)"));

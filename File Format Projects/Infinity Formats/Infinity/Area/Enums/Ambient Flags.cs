@@ -9,20 +9,21 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Enums
     {
         Enabled                         = 1U,
 
-        /// <summary>Environmental effects are disabled.</summary>
-        [Description("Environmental effects are disabled.")]
-        DisabledEnvironmentalEffects    = 2U,
+        /// <summary>Looping</summary>
+        /// <remarks>IESDP (still) says this is disable EAX effects</remarks>
+        Looping                         = 2U,
 
-        /// <summary>Global sound.</summary>
-        [Description("Global sound.")]
+        /// <summary>Global sound</summary>
+        /// <remarks>BG2 source code calls this "not ranged"</remarks>
+        [Description("Global sound")]
         GlobalSound                     = 4U,
 
-        /// <summary>Random selection.</summary>
-        [Description("Random selection.")]
+        /// <summary>Random selection</summary>
+        [Description("Random selection")]
         RandomSelection                 = 8U,
 
-        /// <summary>Low memory.</summary>
-        [Description("Low memory.")]
-        LowMemory                       = 16U,
+        /// <summary>Disabled if low memory</summary>
+        [Description("Disabled if low memory</")]
+        DisableIfLowMemory              = 16U,
     }
 }

@@ -10,7 +10,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Enums
         Enabled                         = 1U,
 
         /// <summary>Black rendered as transparent</summary>
-        /// <remarks>if unset, black is rendered as black</remarks>
+        /// <remarks>if unset, black is rendered as black; BG2 source code calls this flag "glowing"</remarks>
         [Description("Black rendered as transparent")]
         BlackIsTransparent              = 2U,
 
@@ -19,27 +19,31 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Enums
         [Description("Not illuminated")]
         NotIlluminated                  = 4U,
 
-        /// <summary>Played only once</summary>
-        /// <remarks>Animation stops at end frame</remarks>
-        [Description("Played only once")]
-        PlayOnce                        = 8U,
+        /// <remarks>IESDP indicates that the animation stops at end frame</remarks>
+        Stopped                         = 8U,
 
-        /// <summary>Synchronized draw</summary>
-        /// <remarks>Skips frames as needed</remarks>
-        [Description("Synchronized draw")]
-        SyncDraw                        = 16U,
+        /// <summary>Start At Beginning</summary>
+        /// <remarks>Animation starts with first frame (versus random frame)</remarks>
+        [Description("Start At Beginning")]
+        StartAtBeginning                = 16U,
 
-        /// <summary>Not hidden by walls</summary>
-        /// <remarks>Drawn after walls/doors?</remarks>
-        [Description("Not hidden by walls")]
-        NotHiddenByWalls                = 64U,
+        /// <summary>Use Start Range</summary>
+        /// <remarks>IESDP suggests if not set, used frame 0, otherwise a random one</remarks>
+        [Description("Use Start Range")]
+        UseStartRange                   = 32U,
 
-        /// <summary>Invisible in fog of war</summary>
-        /// <remarks>Not shown when obscured by fog of war</remarks>
-        [Description("Invisible in fog of war")]
-        InvisibleInFogOfWar             = 128U,
+        /// <summary>Ignore Clipping</summary>
+        /// <remarks>BG2 source code revealed this flag</remarks>
+        [Description("Ignore Clipping")]
+        IgnoreClipping                  = 64U,
+
+        /// <summary>Disable On Low Performance</summary>
+        /// <remarks>BG2 source code: "DISABLEONSLOWMACHINES"</remarks>
+        [Description("Disable On Low Performance")]
+        DisableOnLowPerformance         = 128U,
 
         /// <summary>Drawn before actors</summary>
+        /// <remarks>BG2 source code calls this "blacklist"</remarks>
         [Description("Drawn before actors")]
         DrawBeforeActors                = 256U,
 

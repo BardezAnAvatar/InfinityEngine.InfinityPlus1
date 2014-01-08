@@ -3,6 +3,8 @@ using System.IO;
 using System.Text;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.Enums;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 using Bardez.Projects.Utility;
 using Bardez.Projects.ReusableCode;
@@ -23,13 +25,25 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common
         /// <remarks>32 bytes in length</remarks>
         public ZString Name { get; set; }
 
-        /// <summary>Unknown 8 bytes. Probably intended for a RESREF</summary>
-        public UInt64 Unknown { get; set; }
+        /// <summary>Type of variable this represents</summary>
+        public VariableType Type { get; set; }
 
-        /// <summary>Represents the value of the variable</summary>
-        public UInt32 Value { get; set; }
+        /// <summary>Type of resource referenced, if any</summary>
+        public ResourceType ResourceType { get; set; }
 
-        /// <summary>40 bytes of padding after the value. Probably intended for metadata.</summary>
+        /// <summary>Represents the DWORD value of the variable</summary>
+        public UInt32 DWORDValue { get; set; }
+
+        /// <summary>Represents the integer value of the variable</summary>
+        public Int32 IntegerValue { get; set; }
+
+        /// <summary>8-byte floating point value</summary>
+        public Double FloatingPointValue { get; set; }
+
+        /// <summary>Script name value</summary>
+        public ZString ScriptNameValue { get; set; }
+
+        /// <summary>32 bytes of padding after the value. Probably intended for script name.</summary>
         public Byte[] Padding { get; set; }
         #endregion
 
@@ -39,6 +53,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common
         public virtual void Initialize()
         {
             this.Name = new ZString();
+            this.ScriptNameValue = new ZString();
         }
         #endregion
 
@@ -64,12 +79,15 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common
         {
             this.Initialize();
 
-            Byte[] buffer = ReusableIO.BinaryRead(input, 44);
+            Byte[] buffer = ReusableIO.BinaryRead(input, Variable.StructSize);
 
             this.Name.Source = ReusableIO.ReadStringFromByteArray(buffer, 0, CultureConstants.CultureCodeEnglish, 32);
-            this.Unknown = ReusableIO.ReadUInt64FromArray(buffer, 32);
-            this.Value = ReusableIO.ReadUInt32FromArray(buffer, 40);
-            this.Padding = ReusableIO.BinaryRead(input, 40);
+            this.Type = (VariableType)ReusableIO.ReadUInt16FromArray(buffer, 32);
+            this.ResourceType = (ResourceType)ReusableIO.ReadUInt16FromArray(buffer, 34);
+            this.DWORDValue = ReusableIO.ReadUInt32FromArray(buffer, 36);
+            this.IntegerValue = ReusableIO.ReadInt32FromArray(buffer, 40);
+            this.FloatingPointValue = ReusableIO.ReadDoubleFromArray(buffer, 44);
+            this.ScriptNameValue.Source = ReusableIO.ReadStringFromByteArray(buffer, 52, CultureConstants.CultureCodeEnglish, 32);
         }
 
         /// <summary>This public method writes the file format to the output stream.</summary>
@@ -77,9 +95,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common
         public virtual void Write(Stream output)
         {
             ReusableIO.WriteStringToStream(this.Name.Source, output, CultureConstants.CultureCodeEnglish, false, 32);
-            ReusableIO.WriteUInt64ToStream(this.Unknown, output);
-            ReusableIO.WriteUInt32ToStream(this.Value, output);
-            output.Write(this.Padding, 0, 40);
+            ReusableIO.WriteUInt16ToStream((UInt16)this.Type, output);
+            ReusableIO.WriteUInt16ToStream((UInt16)this.ResourceType, output);
+            ReusableIO.WriteUInt32ToStream(this.DWORDValue, output);
+            ReusableIO.WriteInt32ToStream(this.IntegerValue, output);
+            ReusableIO.WriteDoubleToStream(this.FloatingPointValue, output);
+            ReusableIO.WriteStringToStream(this.ScriptNameValue.Source, output, CultureConstants.CultureCodeEnglish, false, 32);
         }
         #endregion
 
@@ -93,12 +114,18 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common
 
             builder.Append(StringFormat.ToStringAlignment("Name"));
             builder.Append(String.Format("'{0}'", this.Name.Value));
-            builder.Append(StringFormat.ToStringAlignment("Unknown"));
-            builder.Append(this.Unknown);
-            builder.Append(StringFormat.ToStringAlignment("Value"));
-            builder.Append(this.Value);
-            builder.Append(StringFormat.ToStringAlignment("Padding"));
-            builder.Append(StringFormat.ByteArrayToHexString(this.Padding));
+            builder.Append(StringFormat.ToStringAlignment("Variable type"));
+            builder.Append(this.Type.GetDescription());
+            builder.Append(StringFormat.ToStringAlignment("Resource type"));
+            builder.Append(this.ResourceType.GetDescription());
+            builder.Append(StringFormat.ToStringAlignment("DWORD Value"));
+            builder.Append(this.DWORDValue);
+            builder.Append(StringFormat.ToStringAlignment("Integer Value"));
+            builder.Append(this.IntegerValue);
+            builder.Append(StringFormat.ToStringAlignment("Floating point Value"));
+            builder.Append(this.FloatingPointValue);
+            builder.Append(StringFormat.ToStringAlignment("Script Name Value"));
+            builder.Append(String.Format("'{0}'", this.ScriptNameValue.Value));
 
             return builder.ToString();
         }

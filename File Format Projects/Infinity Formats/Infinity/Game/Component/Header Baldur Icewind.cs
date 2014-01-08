@@ -138,9 +138,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
 
             StringFormat.AppendSubItem(sb, (this.ExpansionSet & Expansion.None) == Expansion.None, Expansion.None.GetDescription());
             StringFormat.AppendSubItem(sb, (this.ExpansionSet & Expansion.TotSC) == Expansion.TotSC, Expansion.TotSC.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.ExpansionSet & Expansion.SoA) == Expansion.SoA, Expansion.SoA.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ExpansionSet & Expansion.UnknownBaldursGateExpansion) == Expansion.UnknownBaldursGateExpansion, Expansion.UnknownBaldursGateExpansion.GetDescription());
             StringFormat.AppendSubItem(sb, (this.ExpansionSet & Expansion.IWD) == Expansion.IWD, Expansion.IWD.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.ExpansionSet & Expansion.SoAMain) == Expansion.SoAMain, Expansion.SoAMain.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.ExpansionSet & Expansion.ToBSoA) == Expansion.ToBSoA, Expansion.ToBSoA.GetDescription());
             StringFormat.AppendSubItem(sb, (this.ExpansionSet & Expansion.ToB) == Expansion.ToB, Expansion.ToB.GetDescription());
 
             String result = sb.ToString();

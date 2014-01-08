@@ -229,10 +229,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             StringFormat.AppendSubItem(builder, (this.Flags & AnimationFlags.Enabled) == AnimationFlags.Enabled, AnimationFlags.Enabled.GetDescription());
             StringFormat.AppendSubItem(builder, (this.Flags & AnimationFlags.BlackIsTransparent) == AnimationFlags.BlackIsTransparent, AnimationFlags.BlackIsTransparent.GetDescription());
             StringFormat.AppendSubItem(builder, (this.Flags & AnimationFlags.NotIlluminated) == AnimationFlags.NotIlluminated, AnimationFlags.NotIlluminated.GetDescription());
-            StringFormat.AppendSubItem(builder, (this.Flags & AnimationFlags.PlayOnce) == AnimationFlags.PlayOnce, AnimationFlags.PlayOnce.GetDescription());
-            StringFormat.AppendSubItem(builder, (this.Flags & AnimationFlags.SyncDraw) == AnimationFlags.SyncDraw, AnimationFlags.SyncDraw.GetDescription());
-            StringFormat.AppendSubItem(builder, (this.Flags & AnimationFlags.NotHiddenByWalls) == AnimationFlags.NotHiddenByWalls, AnimationFlags.NotHiddenByWalls.GetDescription());
-            StringFormat.AppendSubItem(builder, (this.Flags & AnimationFlags.InvisibleInFogOfWar) == AnimationFlags.InvisibleInFogOfWar, AnimationFlags.InvisibleInFogOfWar.GetDescription());
+            StringFormat.AppendSubItem(builder, (this.Flags & AnimationFlags.Stopped) == AnimationFlags.Stopped, AnimationFlags.Stopped.GetDescription());
+            StringFormat.AppendSubItem(builder, (this.Flags & AnimationFlags.StartAtBeginning) == AnimationFlags.StartAtBeginning, AnimationFlags.StartAtBeginning.GetDescription());
+            StringFormat.AppendSubItem(builder, (this.Flags & AnimationFlags.UseStartRange) == AnimationFlags.UseStartRange, AnimationFlags.UseStartRange.GetDescription());
+            StringFormat.AppendSubItem(builder, (this.Flags & AnimationFlags.IgnoreClipping) == AnimationFlags.IgnoreClipping, AnimationFlags.IgnoreClipping.GetDescription());
+            StringFormat.AppendSubItem(builder, (this.Flags & AnimationFlags.DisableOnLowPerformance) == AnimationFlags.DisableOnLowPerformance, AnimationFlags.DisableOnLowPerformance.GetDescription());
             StringFormat.AppendSubItem(builder, (this.Flags & AnimationFlags.DrawBeforeActors) == AnimationFlags.DrawBeforeActors, AnimationFlags.DrawBeforeActors.GetDescription());
             StringFormat.AppendSubItem(builder, (this.Flags & AnimationFlags.PlayAllFrames) == AnimationFlags.PlayAllFrames, AnimationFlags.PlayAllFrames.GetDescription());
             StringFormat.AppendSubItem(builder, (this.Flags & AnimationFlags.UseBitmapPalette) == AnimationFlags.UseBitmapPalette, AnimationFlags.UseBitmapPalette.GetDescription());

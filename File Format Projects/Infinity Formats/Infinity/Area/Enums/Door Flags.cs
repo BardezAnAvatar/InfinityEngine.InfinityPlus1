@@ -35,7 +35,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Enums
         /// <remarks>...if hidden</remarks>
         Discovered      = 512U,
 
-        /// <remarks>Doesn't block line of sight</remarks>
+        /// <remarks>Doesn't block line of sight; BG2 source code calls this "Gate"</remarks>
         Transparent     = 1024U,
 
         /// <summary>Destroys related key item.</summary>

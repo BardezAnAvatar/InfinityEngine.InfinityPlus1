@@ -82,8 +82,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Projectile.Componen
         /// <summary>Animation index of trailing animation # 3</summary>
         public Int16 AnimationTrailingAnimationIndex3 { get; set; }
 
-        /// <summary>172 Bytes of padding at offset 0x54</summary>
-        public Byte[] Padding_0x0054 { get; set; }
+        /// <summary>Flags indicating whether or not to display puffs at the target or source</summary>
+        public AnimationPuffFlags PuffFlags { get; set; }
+
+        /// <summary>168 Bytes of padding at offset 0x58</summary>
+        public Byte[] Padding_0x0058 { get; set; }
         #endregion
 
 
@@ -125,7 +128,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Projectile.Componen
         {
             this.Initialize();
 
-            Byte[] buffer = ReusableIO.BinaryRead(input, 84);
+            Byte[] buffer = ReusableIO.BinaryRead(input, 88);
 
             this.TravellingFlags = (TravelFlags)ReusableIO.ReadUInt32FromArray(buffer, 0);
             this.Projectile.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 4, CultureConstants.CultureCodeEnglish);
@@ -147,8 +150,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Projectile.Componen
             this.AnimationTrailingAnimationIndex1 = ReusableIO.ReadInt16FromArray(buffer, 78);
             this.AnimationTrailingAnimationIndex2 = ReusableIO.ReadInt16FromArray(buffer, 80);
             this.AnimationTrailingAnimationIndex3 = ReusableIO.ReadInt16FromArray(buffer, 82);
-
-            this.Padding_0x0054 = ReusableIO.BinaryRead(input, 172);
+            this.PuffFlags = (AnimationPuffFlags)ReusableIO.ReadInt32FromArray(buffer, 84);
+            this.Padding_0x0058 = ReusableIO.BinaryRead(input, 168);
         }
 
         /// <summary>This public method writes the file format to the output stream.</summary>
@@ -175,7 +178,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Projectile.Componen
             ReusableIO.WriteInt16ToStream(this.AnimationTrailingAnimationIndex1, output);
             ReusableIO.WriteInt16ToStream(this.AnimationTrailingAnimationIndex2, output);
             ReusableIO.WriteInt16ToStream(this.AnimationTrailingAnimationIndex3, output);
-            output.Write(this.Padding_0x0054, 0, 172);
+            ReusableIO.WriteUInt32ToStream((UInt32)this.PuffFlags, output);
+            output.Write(this.Padding_0x0058, 0, 168);
         }
         #endregion
 
@@ -267,8 +271,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Projectile.Componen
             builder.Append(this.AnimationTrailingAnimationIndex2);
             builder.Append(StringFormat.ToStringAlignment("Trailing animation # 3 animation index"));
             builder.Append(this.AnimationTrailingAnimationIndex3);
-            builder.Append(StringFormat.ToStringAlignment("Padding @ offset 0x54"));
-            builder.Append(StringFormat.ByteArrayToHexString(this.Padding_0x0054));
+            builder.Append(StringFormat.ToStringAlignment("Puff flags (value)"));
+            builder.Append((UInt32)this.PuffFlags);
+            builder.Append(StringFormat.ToStringAlignment("Puff flags (enumeration)"));
+            builder.Append(this.GetPuffFlagsEnumerationString());
+            builder.Append(StringFormat.ToStringAlignment("Padding @ offset 0x58"));
+            builder.Append(StringFormat.ByteArrayToHexString(this.Padding_0x0058));
 
             return builder.ToString();
         }
@@ -288,6 +296,19 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Projectile.Componen
             StringFormat.AppendSubItem(builder, (this.TravellingFlags & TravelFlags.Blend) == TravelFlags.Blend, TravelFlags.Blend.GetDescription());
             StringFormat.AppendSubItem(builder, (this.TravellingFlags & TravelFlags.BrightenLevelLow) == TravelFlags.BrightenLevelLow, TravelFlags.BrightenLevelLow.GetDescription());
             StringFormat.AppendSubItem(builder, (this.TravellingFlags & TravelFlags.BrightenLevelHigh) == TravelFlags.BrightenLevelHigh, TravelFlags.BrightenLevelHigh.GetDescription());
+
+            String result = builder.ToString();
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
+        }
+
+        /// <summary>Gets a human-readable enumeration String of set Flags enumeration values</summary>
+        /// <returns>A human-readable enumeration String of set Flags enumeration values</returns>
+        protected String GetPuffFlagsEnumerationString()
+        {
+            StringBuilder builder = new StringBuilder();
+
+            StringFormat.AppendSubItem(builder, (this.PuffFlags & AnimationPuffFlags.PuffAtSource) == AnimationPuffFlags.PuffAtSource, AnimationPuffFlags.PuffAtSource.GetDescription());
+            StringFormat.AppendSubItem(builder, (this.PuffFlags & AnimationPuffFlags.PuffAtTarget) == AnimationPuffFlags.PuffAtTarget, AnimationPuffFlags.PuffAtTarget.GetDescription());
 
             String result = builder.ToString();
             return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;

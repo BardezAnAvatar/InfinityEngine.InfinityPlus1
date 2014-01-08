@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Enum;
 using Bardez.Projects.Utility;
 using Bardez.Projects.ReusableCode;
 
@@ -16,7 +17,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
         public Int16 SelectedIndex { get; set; }
 
         /// <summary>Represents the 5 formations selectable by the User Interface</summary>
-        public Int16[] UserInterface { get; set; }
+        public Formation[] UserInterface { get; set; }
         #endregion
 
 
@@ -24,7 +25,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
         /// <summary>Instantiates reference types</summary>
         public virtual void Initialize()
         {
-            this.UserInterface = new Int16[5];
+            this.UserInterface = new Formation[5];
         }
         #endregion
 
@@ -62,11 +63,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
             Byte[] buffer = ReusableIO.BinaryRead(input, 12);
 
             this.SelectedIndex = ReusableIO.ReadInt16FromArray(buffer, 0);
-            this.UserInterface[0] = ReusableIO.ReadInt16FromArray(buffer, 2);
-            this.UserInterface[1] = ReusableIO.ReadInt16FromArray(buffer, 4);
-            this.UserInterface[2] = ReusableIO.ReadInt16FromArray(buffer, 6);
-            this.UserInterface[3] = ReusableIO.ReadInt16FromArray(buffer, 8);
-            this.UserInterface[4] = ReusableIO.ReadInt16FromArray(buffer, 10);
+            this.UserInterface[0] = (Formation)ReusableIO.ReadInt16FromArray(buffer, 2);
+            this.UserInterface[1] = (Formation)ReusableIO.ReadInt16FromArray(buffer, 4);
+            this.UserInterface[2] = (Formation)ReusableIO.ReadInt16FromArray(buffer, 6);
+            this.UserInterface[3] = (Formation)ReusableIO.ReadInt16FromArray(buffer, 8);
+            this.UserInterface[4] = (Formation)ReusableIO.ReadInt16FromArray(buffer, 10);
         }
 
         /// <summary>This public method reads file format from the output stream, after the header has already been read.</summary>
@@ -77,11 +78,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
             this.Initialize();
 
             this.SelectedIndex = ReusableIO.ReadInt16FromArray(buffer, position + 0);
-            this.UserInterface[0] = ReusableIO.ReadInt16FromArray(buffer, position + 2);
-            this.UserInterface[1] = ReusableIO.ReadInt16FromArray(buffer, position + 4);
-            this.UserInterface[2] = ReusableIO.ReadInt16FromArray(buffer, position + 6);
-            this.UserInterface[3] = ReusableIO.ReadInt16FromArray(buffer, position + 8);
-            this.UserInterface[4] = ReusableIO.ReadInt16FromArray(buffer, position + 10);
+            this.UserInterface[0] = (Formation)ReusableIO.ReadInt16FromArray(buffer, position + 2);
+            this.UserInterface[1] = (Formation)ReusableIO.ReadInt16FromArray(buffer, position + 4);
+            this.UserInterface[2] = (Formation)ReusableIO.ReadInt16FromArray(buffer, position + 6);
+            this.UserInterface[3] = (Formation)ReusableIO.ReadInt16FromArray(buffer, position + 8);
+            this.UserInterface[4] = (Formation)ReusableIO.ReadInt16FromArray(buffer, position + 10);
         }
 
         /// <summary>This public method writes the file format to the output stream.</summary>
@@ -89,11 +90,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
         public virtual void Write(Stream output)
         {
             ReusableIO.WriteInt16ToStream(this.SelectedIndex, output);
-            ReusableIO.WriteInt16ToStream(this.UserInterface[0], output);
-            ReusableIO.WriteInt16ToStream(this.UserInterface[1], output);
-            ReusableIO.WriteInt16ToStream(this.UserInterface[2], output);
-            ReusableIO.WriteInt16ToStream(this.UserInterface[3], output);
-            ReusableIO.WriteInt16ToStream(this.UserInterface[4], output);
+            ReusableIO.WriteInt16ToStream((Int16)(this.UserInterface[0]), output);
+            ReusableIO.WriteInt16ToStream((Int16)(this.UserInterface[1]), output);
+            ReusableIO.WriteInt16ToStream((Int16)(this.UserInterface[2]), output);
+            ReusableIO.WriteInt16ToStream((Int16)(this.UserInterface[3]), output);
+            ReusableIO.WriteInt16ToStream((Int16)(this.UserInterface[4]), output);
         }
         #endregion
 
@@ -108,15 +109,15 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
             builder.Append(StringFormat.ToStringAlignment("Selected index"));
             builder.Append(this.SelectedIndex);
             builder.Append(StringFormat.ToStringAlignment("Formation # 1"));
-            builder.Append(this.UserInterface[0]);
+            builder.Append(this.UserInterface[0].GetDescription());
             builder.Append(StringFormat.ToStringAlignment("Formation # 2"));
-            builder.Append(this.UserInterface[1]);
+            builder.Append(this.UserInterface[1].GetDescription());
             builder.Append(StringFormat.ToStringAlignment("Formation # 3"));
-            builder.Append(this.UserInterface[2]);
+            builder.Append(this.UserInterface[2].GetDescription());
             builder.Append(StringFormat.ToStringAlignment("Formation # 4"));
-            builder.Append(this.UserInterface[3]);
+            builder.Append(this.UserInterface[3].GetDescription());
             builder.Append(StringFormat.ToStringAlignment("Formation # 5"));
-            builder.Append(this.UserInterface[4]);
+            builder.Append(this.UserInterface[4].GetDescription());
 
             return builder.ToString();
         }

@@ -46,11 +46,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
         /// <summary>Count of party member structures</summary>
         public UInt32 PartyMemberCount { get; set; }
 
-        /// <summary>First unknown, after the party member offset & count</summary>
-        public UInt32 Unknown1 { get; set; }
+        /// <summary>Offset to the party inventory</summary>
+        /// <remarks>What the hell is that?</remarks>
+        public UInt32 PartyInventoryOffset { get; set; }
 
-        /// <summary>second unknown, after the party member offset & count</summary>
-        public UInt32 Unknown2 { get; set; }
+        /// <summary>Count of to the party inventory</summary>
+        /// <remarks>What the hell is that?</remarks>
+        public UInt32 PartyInventoryCount { get; set; }
 
         /// <summary>Offset within the stream to recruitable creatures</summary>
         public Int32 RecruitablePartyMemberOffset { get; set; }
@@ -130,8 +132,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
             this.WeatherFlags = (Weather)ReusableIO.ReadUInt16FromArray(buffer, 22);
             this.PartyMemberOffset = ReusableIO.ReadInt32FromArray(buffer, 24);
             this.PartyMemberCount = ReusableIO.ReadUInt32FromArray(buffer, 28);
-            this.Unknown1 = ReusableIO.ReadUInt32FromArray(buffer, 32);
-            this.Unknown2 = ReusableIO.ReadUInt32FromArray(buffer, 36);
+            this.PartyInventoryOffset = ReusableIO.ReadUInt32FromArray(buffer, 32);
+            this.PartyInventoryCount = ReusableIO.ReadUInt32FromArray(buffer, 36);
             this.RecruitablePartyMemberOffset = ReusableIO.ReadInt32FromArray(buffer, 40);
             this.RecruitablePartyMemberCount = ReusableIO.ReadUInt32FromArray(buffer, 44);
             this.GlobalVariableOffset = ReusableIO.ReadInt32FromArray(buffer, 48);
@@ -155,8 +157,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
             ReusableIO.WriteUInt16ToStream((UInt16)this.WeatherFlags, output);
             ReusableIO.WriteInt32ToStream(this.PartyMemberOffset, output);
             ReusableIO.WriteUInt32ToStream(this.PartyMemberCount, output);
-            ReusableIO.WriteUInt32ToStream(this.Unknown1, output);
-            ReusableIO.WriteUInt32ToStream(this.Unknown2, output);
+            ReusableIO.WriteUInt32ToStream(this.PartyInventoryOffset, output);
+            ReusableIO.WriteUInt32ToStream(this.PartyInventoryCount, output);
             ReusableIO.WriteInt32ToStream(this.RecruitablePartyMemberOffset, output);
             ReusableIO.WriteUInt32ToStream(this.RecruitablePartyMemberCount, output);
             ReusableIO.WriteInt32ToStream(this.GlobalVariableOffset, output);
@@ -191,10 +193,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
             builder.Append(this.PartyMemberOffset);
             builder.Append(StringFormat.ToStringAlignment("Count of party members"));
             builder.Append(this.PartyMemberCount);
-            builder.Append(StringFormat.ToStringAlignment("Unknown #1"));
-            builder.Append(this.Unknown1);
-            builder.Append(StringFormat.ToStringAlignment("Unknown #2"));
-            builder.Append(this.Unknown2);
+            builder.Append(StringFormat.ToStringAlignment("Offset to the party inventory"));
+            builder.Append(this.PartyInventoryOffset);
+            builder.Append(StringFormat.ToStringAlignment("Count of the party inventory"));
+            builder.Append(this.PartyInventoryCount);
             builder.Append(StringFormat.ToStringAlignment("Offset to recruitable party members"));
             builder.Append(this.RecruitablePartyMemberOffset);
             builder.Append(StringFormat.ToStringAlignment("Count of recruitable party members"));
@@ -223,10 +225,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
 
             StringFormat.AppendSubItem(sb, (this.WeatherFlags & Weather.Rain) == Weather.Rain, Weather.Rain.GetDescription());
             StringFormat.AppendSubItem(sb, (this.WeatherFlags & Weather.Snow) == Weather.Snow, Weather.Snow.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.WeatherFlags & Weather.Fog) == Weather.Fog, Weather.Fog.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.WeatherFlags & Weather.Lightning) == Weather.Lightning, Weather.Lightning.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.WeatherFlags & Weather.HasWeather) == Weather.HasWeather, Weather.HasWeather.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.WeatherFlags & Weather.Active) == Weather.Active, Weather.Active.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.WeatherFlags & Weather.WeatherLight) == Weather.WeatherLight, Weather.WeatherLight.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.WeatherFlags & Weather.WeatherMedium) == Weather.WeatherMedium, Weather.WeatherMedium.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.WeatherFlags & Weather.WindLight) == Weather.WindLight, Weather.WindLight.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.WeatherFlags & Weather.WindMedium) == Weather.WindMedium, Weather.WindMedium.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.WeatherFlags & Weather.LightningRare) == Weather.LightningRare, Weather.LightningRare.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.WeatherFlags & Weather.LightningRegular) == Weather.LightningRegular, Weather.LightningRegular.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.WeatherFlags & Weather.StormIncreasing) == Weather.StormIncreasing, Weather.StormIncreasing.GetDescription());
 
             String result = sb.ToString();
             return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
@@ -239,8 +244,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
             StringBuilder sb = new StringBuilder();
 
             StringFormat.AppendSubItem(sb, (this.UserInterfaceFlags & GuiFlags.PartyScriptsEnabled) == GuiFlags.PartyScriptsEnabled, GuiFlags.PartyScriptsEnabled.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.UserInterfaceFlags & GuiFlags.TextWindowSize1) == GuiFlags.TextWindowSize1, GuiFlags.TextWindowSize1.GetDescription());
-            StringFormat.AppendSubItem(sb, (this.UserInterfaceFlags & GuiFlags.TextWindowSize2) == GuiFlags.TextWindowSize2, GuiFlags.TextWindowSize2.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.UserInterfaceFlags & GuiFlags.TextWindowMedium) == GuiFlags.TextWindowMedium, GuiFlags.TextWindowMedium.GetDescription());
+            StringFormat.AppendSubItem(sb, (this.UserInterfaceFlags & GuiFlags.TextWindowLarge) == GuiFlags.TextWindowLarge, GuiFlags.TextWindowLarge.GetDescription());
             StringFormat.AppendSubItem(sb, (this.UserInterfaceFlags & GuiFlags.DialogRunning) == GuiFlags.DialogRunning, GuiFlags.DialogRunning.GetDescription());
             StringFormat.AppendSubItem(sb, (this.UserInterfaceFlags & GuiFlags.HideGui) == GuiFlags.HideGui, GuiFlags.HideGui.GetDescription());
             StringFormat.AppendSubItem(sb, (this.UserInterfaceFlags & GuiFlags.HideUserActionsPanel) == GuiFlags.HideUserActionsPanel, GuiFlags.HideUserActionsPanel.GetDescription());

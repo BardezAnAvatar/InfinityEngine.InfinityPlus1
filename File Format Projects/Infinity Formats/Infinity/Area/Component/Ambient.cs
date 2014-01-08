@@ -34,13 +34,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
         /// <summary>Height from which the sound occurs</summary>
         public Int16 Height { get; set; }
 
-        /// <summary>Unknown four bytes at offset 0x28</summary>
-        public Int32 Unknown_0x0028 { get; set; }
+        /// <summary>Pitch variance</summary>
+        public Int32 PitchVariance { get; set; }
 
-        /// <summary>Unknown four bytes at offset 0x2C</summary>
-        public Int16 Unknown_0x002C { get; set; }
+        /// <summary>Volume variance</summary>
+        public Int16 VolumeVariance { get; set; }
 
-        /// <summary>Volume % at which theambient is played</summary>
+        /// <summary>Volume % at which the ambient is played</summary>
         public Int16 Volume { get; set; }
 
         /// <summary>Array of sounds to be played</summary>
@@ -49,8 +49,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
         /// <summary>Count of sounds</summary>
         public Int16 CountSounds { get; set; }
 
-        /// <summary>Unknown two bytes at offset 0x82</summary>
-        public Int16 Unknown_0x0082 { get; set; }
+        /// <summary>Two bytes at offset 0x82 of structure memory alignment</summary>
+        public Int16 Padding_0x0082 { get; set; }
 
         /// <summary>Base dela between ambients</summary>
         public Int32 DelayBase { get; set; }
@@ -112,15 +112,15 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             this.Position.Y = ReusableIO.ReadUInt16FromArray(buffer, 34);
             this.Radius = ReusableIO.ReadInt16FromArray(buffer, 36);
             this.Height = ReusableIO.ReadInt16FromArray(buffer, 38);
-            this.Unknown_0x0028 = ReusableIO.ReadInt32FromArray(buffer, 40);
-            this.Unknown_0x002C = ReusableIO.ReadInt16FromArray(buffer, 44);
+            this.PitchVariance = ReusableIO.ReadInt32FromArray(buffer, 40);
+            this.VolumeVariance = ReusableIO.ReadInt16FromArray(buffer, 44);
             this.Volume = ReusableIO.ReadInt16FromArray(buffer, 46);
 
             for (Int32 index = 0; index < 10; ++index)
                 this.Sounds[index].ResRef = ReusableIO.ReadStringFromByteArray(buffer, 48 + (8 * index), CultureConstants.CultureCodeEnglish);
 
             this.CountSounds = ReusableIO.ReadInt16FromArray(buffer, 128);
-            this.Unknown_0x0082 = ReusableIO.ReadInt16FromArray(buffer, 130);
+            this.Padding_0x0082 = ReusableIO.ReadInt16FromArray(buffer, 130);
             this.DelayBase = ReusableIO.ReadInt32FromArray(buffer, 132);
             this.DelayDeviation = ReusableIO.ReadInt32FromArray(buffer, 136);
             this.ApplicationSchedule = (Schedule)ReusableIO.ReadUInt32FromArray(buffer, 140);
@@ -138,15 +138,15 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             ReusableIO.WriteUInt16ToStream(this.Position.Y, output);
             ReusableIO.WriteInt16ToStream(this.Radius, output);
             ReusableIO.WriteInt16ToStream(this.Height, output);
-            ReusableIO.WriteInt32ToStream(this.Unknown_0x0028, output);
-            ReusableIO.WriteInt16ToStream(this.Unknown_0x002C, output);
+            ReusableIO.WriteInt32ToStream(this.PitchVariance, output);
+            ReusableIO.WriteInt16ToStream(this.VolumeVariance, output);
             ReusableIO.WriteInt16ToStream(this.Volume, output);
 
             for (Int32 index = 0; index < 10; ++index)
                 ReusableIO.WriteStringToStream(this.Sounds[index].ResRef, output, CultureConstants.CultureCodeEnglish);
 
             ReusableIO.WriteInt16ToStream(this.CountSounds, output);
-            ReusableIO.WriteInt16ToStream(this.Unknown_0x0082, output);
+            ReusableIO.WriteInt16ToStream(this.Padding_0x0082, output);
             ReusableIO.WriteInt32ToStream(this.DelayBase, output);
             ReusableIO.WriteInt32ToStream(this.DelayDeviation, output);
             ReusableIO.WriteUInt32ToStream((UInt32)this.ApplicationSchedule, output);
@@ -207,10 +207,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             builder.Append(this.Radius);
             builder.Append(StringFormat.ToStringAlignment("Height"));
             builder.Append(this.Height);
-            builder.Append(StringFormat.ToStringAlignment("Unknown at offset 0x28"));
-            builder.Append(this.Unknown_0x0028);
-            builder.Append(StringFormat.ToStringAlignment("Unknown at offset 0x2C"));
-            builder.Append(this.Unknown_0x002C);
+            builder.Append(StringFormat.ToStringAlignment("Pitch variance"));
+            builder.Append(this.PitchVariance);
+            builder.Append(StringFormat.ToStringAlignment("Volume variance"));
+            builder.Append(this.VolumeVariance);
             builder.Append(StringFormat.ToStringAlignment("Volume %"));
             builder.Append(this.Volume);
 
@@ -223,7 +223,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             builder.Append(StringFormat.ToStringAlignment("Count of sounds"));
             builder.Append(this.CountSounds);
             builder.Append(StringFormat.ToStringAlignment("Unknown at offset 0x82"));
-            builder.Append(this.Unknown_0x0082);
+            builder.Append(this.Padding_0x0082);
             builder.Append(StringFormat.ToStringAlignment("Base delay between sounds"));
             builder.Append(this.DelayBase);
             builder.Append(StringFormat.ToStringAlignment("Deviation of delay between sounds"));
@@ -249,10 +249,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             StringBuilder builder = new StringBuilder();
 
             StringFormat.AppendSubItem(builder, (this.Flags & AmbientFlags.Enabled) == AmbientFlags.Enabled, AmbientFlags.Enabled.GetDescription());
-            StringFormat.AppendSubItem(builder, (this.Flags & AmbientFlags.DisabledEnvironmentalEffects) == AmbientFlags.DisabledEnvironmentalEffects, AmbientFlags.DisabledEnvironmentalEffects.GetDescription());
+            StringFormat.AppendSubItem(builder, (this.Flags & AmbientFlags.Looping) == AmbientFlags.Looping, AmbientFlags.Looping.GetDescription());
             StringFormat.AppendSubItem(builder, (this.Flags & AmbientFlags.GlobalSound) == AmbientFlags.GlobalSound, AmbientFlags.GlobalSound.GetDescription());
             StringFormat.AppendSubItem(builder, (this.Flags & AmbientFlags.RandomSelection) == AmbientFlags.RandomSelection, AmbientFlags.RandomSelection.GetDescription());
-            StringFormat.AppendSubItem(builder, (this.Flags & AmbientFlags.LowMemory) == AmbientFlags.LowMemory, AmbientFlags.LowMemory.GetDescription());
+            StringFormat.AppendSubItem(builder, (this.Flags & AmbientFlags.DisableIfLowMemory) == AmbientFlags.DisableIfLowMemory, AmbientFlags.DisableIfLowMemory.GetDescription());
 
             String result = builder.ToString();
             return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;

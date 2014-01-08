@@ -11,6 +11,7 @@ using Bardez.Projects.ReusableCode;
 namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Component
 {
     /// <summary>Represents the Familiar info structure, which indicates which familiar you get based on alignment</summary>
+    /// <remarks>It appears that each familiar goes up to level 9, so 9 values for each one.</remarks>
     public class FamiliarInfo : IInfinityFormat
     {
         #region Constants

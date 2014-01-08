@@ -29,6 +29,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Projectile.Enums
         IgnoreCenter                = 16U,
 
         /// <summary>Draw below Animated objects.</summary>
+        /// <remarks>BG2 source code calls this backlist</remarks>
         [Description("Draw below Animated objects.")]
         DrawBelowAnimateObjects     = 32U,
     }

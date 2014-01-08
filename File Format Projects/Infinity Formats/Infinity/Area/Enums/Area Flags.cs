@@ -20,6 +20,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Enums
         DeadMagicArea   = 4U,
 
         /// <summary>This area is used in dream sequences.</summary>
+        /// <remarks>BG2 source code called this "brown scale"</remarks>
         [Description("This area is used in dream sequences.")]
         DreamArea       = 8U,
     }

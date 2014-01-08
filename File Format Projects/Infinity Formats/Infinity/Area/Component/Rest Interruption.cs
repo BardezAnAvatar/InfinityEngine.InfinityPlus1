@@ -55,9 +55,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
         public Boolean Active { get; set; }
 
         /// <summary>Probability of the spawn during the day</summary>
+        /// <remarks>Per BG2 source code, this is per hour</remarks>
         public UInt16 ProbabilityDay { get; set; }
 
         /// <summary>Probability of the spawn during the night</summary>
+        /// <remarks>Per BG2 source code, this is per hour</remarks>
         public UInt16 ProbabilityNight { get; set; }
 
         /// <summary>56 padding bytes at offset 0xAC</summary>

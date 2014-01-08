@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Enums;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
 using Bardez.Projects.ReusableCode;
@@ -30,26 +31,26 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
         /// <summary>Resref to area north of this area</summary>
         public ResourceReference NorthArea { get; set; }
 
-        /// <summary>Unknown at offset 0x20</summary>
-        public UInt32 Unknown_0x0020 { get; set; }
+        /// <summary>Area's north edge flags</summary>
+        public AreaEdgeFlags NorthEdgeFlags { get; set; }
 
         /// <summary>Resref to area north of this area</summary>
         public ResourceReference EastArea { get; set; }
 
-        /// <summary>Unknown at offset 0x2C</summary>
-        public UInt32 Unknown_0x002C { get; set; }
+        /// <summary>Area's east edge flags</summary>
+        public AreaEdgeFlags EastEdgeFlags { get; set; }
 
         /// <summary>Resref to area north of this area</summary>
         public ResourceReference SouthArea { get; set; }
 
-        /// <summary>Unknown at offset 0x38</summary>
-        public UInt32 Unknown_0x0038 { get; set; }
+        /// <summary>Area's south edge flags</summary>
+        public AreaEdgeFlags SouthEdgeFlags { get; set; }
 
         /// <summary>Resref to area north of this area</summary>
         public ResourceReference WestArea { get; set; }
 
-        /// <summary>Unknown at offset 0x44</summary>
-        public UInt32 Unknown_0x0044 { get; set; }
+        /// <summary>Area's west edge flags</summary>
+        public AreaEdgeFlags WestEdgeFlags { get; set; }
 
         /* Area Type */
 
@@ -65,9 +66,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
         /// <summary>Probability that lightning will strike</summary>
         public Int16 ProbabilityLightning { get; set; }
 
-        /// <summary>Unknown at offset 0x52 (probably weather effect)</summary>
+        /// <summary>Base wind speed (not used)</summary>
         /// <remarks>BGEE devs say this is base wind speed (no effect?)</remarks>
-        public Int16 Unknown_0x0052 { get; set; }
+        public Int16 BaseWindSpeed { get; set; }
 
         /// <summary>Offset within this file to actors</summary>
         public Int32 OffsetActors { get; set; }
@@ -122,6 +123,12 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
 
         /// <summary>Count of variables within this file</summary>
         public Int32 CountVariables { get; set; }
+
+        /// <summary>Offset to tiled object flags</summary>
+        public UInt16 OffsetTiledObjectFlags { get; set; }
+
+        /// <summary>Count of tiled object flags within this file</summary>
+        public UInt16 CountTiledObjectFlags { get; set; }
 
         /// <summary>Unknown at offset 0x90</summary>
         public Int32 Unknown_0x0090 { get; set; }
@@ -236,13 +243,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             this.ReadAreaFlags(buffer);
 
             this.NorthArea.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 16, CultureConstants.CultureCodeEnglish);
-            this.Unknown_0x0020 = ReusableIO.ReadUInt32FromArray(buffer, 24);
+            this.NorthEdgeFlags = (AreaEdgeFlags)(ReusableIO.ReadUInt32FromArray(buffer, 24));
             this.EastArea.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 28, CultureConstants.CultureCodeEnglish);
-            this.Unknown_0x002C = ReusableIO.ReadUInt32FromArray(buffer, 36);
+            this.EastEdgeFlags = (AreaEdgeFlags)(ReusableIO.ReadUInt32FromArray(buffer, 36));
             this.SouthArea.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 40, CultureConstants.CultureCodeEnglish);
-            this.Unknown_0x0038 = ReusableIO.ReadUInt32FromArray(buffer, 48);
+            this.SouthEdgeFlags = (AreaEdgeFlags)(ReusableIO.ReadUInt32FromArray(buffer, 48));
             this.WestArea.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 52, CultureConstants.CultureCodeEnglish);
-            this.Unknown_0x0044 = ReusableIO.ReadUInt32FromArray(buffer, 60);
+            this.WestEdgeFlags = (AreaEdgeFlags)(ReusableIO.ReadUInt32FromArray(buffer, 60));
 
             this.ReadAreaTypeFlags(buffer);
 
@@ -250,7 +257,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             this.ProbabilitySnow = ReusableIO.ReadInt16FromArray(buffer, 68);
             this.ProbabilityFog = ReusableIO.ReadInt16FromArray(buffer, 70);
             this.ProbabilityLightning = ReusableIO.ReadInt16FromArray(buffer, 72);
-            this.Unknown_0x0052 = ReusableIO.ReadInt16FromArray(buffer, 74);
+            this.BaseWindSpeed = ReusableIO.ReadInt16FromArray(buffer, 74);
         }
 
         /// <summary>Reads the first and second groups of offsets into the header</summary>
@@ -278,7 +285,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             this.OffsetAmbients = ReusableIO.ReadInt32FromArray(buffer, 48);
             this.OffsetVariables = ReusableIO.ReadInt32FromArray(buffer, 52);
             this.CountVariables = ReusableIO.ReadInt32FromArray(buffer, 56);
-            this.Unknown_0x0090 = ReusableIO.ReadInt32FromArray(buffer, 60);
+            this.OffsetTiledObjectFlags = ReusableIO.ReadUInt16FromArray(buffer, 60);
+            this.CountTiledObjectFlags = ReusableIO.ReadUInt16FromArray(buffer, 62);
 
             //area script
             this.AreaScript.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 64, CultureConstants.CultureCodeEnglish);
@@ -346,19 +354,19 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             ReusableIO.WriteUInt32ToStream(this.LastSaved, output);
             this.WriteAreaFlags(output);
             ReusableIO.WriteStringToStream(this.NorthArea.ResRef, output, CultureConstants.CultureCodeEnglish);
-            ReusableIO.WriteUInt32ToStream(this.Unknown_0x0020, output);
+            ReusableIO.WriteUInt32ToStream((UInt32)(this.NorthEdgeFlags), output);
             ReusableIO.WriteStringToStream(this.EastArea.ResRef, output, CultureConstants.CultureCodeEnglish);
-            ReusableIO.WriteUInt32ToStream(this.Unknown_0x002C, output);
+            ReusableIO.WriteUInt32ToStream((UInt32)(this.EastEdgeFlags), output);
             ReusableIO.WriteStringToStream(this.SouthArea.ResRef, output, CultureConstants.CultureCodeEnglish);
-            ReusableIO.WriteUInt32ToStream(this.Unknown_0x0038, output);
+            ReusableIO.WriteUInt32ToStream((UInt32)(this.SouthEdgeFlags), output);
             ReusableIO.WriteStringToStream(this.WestArea.ResRef, output, CultureConstants.CultureCodeEnglish);
-            ReusableIO.WriteUInt32ToStream(this.Unknown_0x0044, output);
+            ReusableIO.WriteUInt32ToStream((UInt32)(this.WestEdgeFlags), output);
             this.WriteAreaTypeFlags(output);
             ReusableIO.WriteInt16ToStream(this.ProbabilityRain, output);
             ReusableIO.WriteInt16ToStream(this.ProbabilitySnow, output);
             ReusableIO.WriteInt16ToStream(this.ProbabilityFog, output);
             ReusableIO.WriteInt16ToStream(this.ProbabilityLightning, output);
-            ReusableIO.WriteInt16ToStream(this.Unknown_0x0052, output);
+            ReusableIO.WriteInt16ToStream(this.BaseWindSpeed, output);
         }
 
         /// <summary>Writes the first and second groups of offsets from the header</summary>
@@ -384,7 +392,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             ReusableIO.WriteInt32ToStream(this.OffsetAmbients, output);
             ReusableIO.WriteInt32ToStream(this.OffsetVariables, output);
             ReusableIO.WriteInt32ToStream(this.CountVariables, output);
-            ReusableIO.WriteInt32ToStream(this.Unknown_0x0090, output);
+            ReusableIO.WriteUInt16ToStream(this.OffsetTiledObjectFlags, output);
+            ReusableIO.WriteUInt16ToStream(this.CountTiledObjectFlags, output);
 
             //area script
             ReusableIO.WriteStringToStream(this.AreaScript.ResRef, output, CultureConstants.CultureCodeEnglish);
@@ -468,20 +477,28 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
 
             builder.Append(StringFormat.ToStringAlignment("North Area"));
             builder.Append(String.Format("'{0}'", this.NorthArea.ZResRef));
-            builder.Append(StringFormat.ToStringAlignment("Unknown @ offset 0x0020"));
-            builder.Append(this.Unknown_0x0020);
+            builder.Append(StringFormat.ToStringAlignment("North-facing edge flags (value)"));
+            builder.Append((UInt32)(this.NorthEdgeFlags));
+            builder.Append(StringFormat.ToStringAlignment("North-facing edge flags (enumeration)"));
+            builder.Append(this.GetEdgeFlagsEnumerationString(this.NorthEdgeFlags));
             builder.Append(StringFormat.ToStringAlignment("East Area"));
             builder.Append(String.Format("'{0}'", this.EastArea.ZResRef));
-            builder.Append(StringFormat.ToStringAlignment("Unknown @ offset 0x002C"));
-            builder.Append(this.Unknown_0x002C);
+            builder.Append(StringFormat.ToStringAlignment("East-facing edge flags (value)"));
+            builder.Append((UInt32)(this.EastEdgeFlags));
+            builder.Append(StringFormat.ToStringAlignment("East-facing edge flags (enumeration)"));
+            builder.Append(this.GetEdgeFlagsEnumerationString(this.EastEdgeFlags));
             builder.Append(StringFormat.ToStringAlignment("South Area"));
             builder.Append(String.Format("'{0}'", this.SouthArea.ZResRef));
-            builder.Append(StringFormat.ToStringAlignment("Unknown @ offset 0x0038"));
-            builder.Append(this.Unknown_0x0038);
+            builder.Append(StringFormat.ToStringAlignment("South-facing edge flags (value)"));
+            builder.Append((UInt32)(this.SouthEdgeFlags));
+            builder.Append(StringFormat.ToStringAlignment("South-facing edge flags (enumeration)"));
+            builder.Append(this.GetEdgeFlagsEnumerationString(this.SouthEdgeFlags));
             builder.Append(StringFormat.ToStringAlignment("West Area"));
             builder.Append(String.Format("'{0}'", this.WestArea.ZResRef));
-            builder.Append(StringFormat.ToStringAlignment("Unknown @ offset 0x0044"));
-            builder.Append(this.Unknown_0x0044);
+            builder.Append(StringFormat.ToStringAlignment("West-facing edge flags (value)"));
+            builder.Append((UInt32)(this.WestEdgeFlags));
+            builder.Append(StringFormat.ToStringAlignment("West-facing edge flags (enumeration)"));
+            builder.Append(this.GetEdgeFlagsEnumerationString(this.WestEdgeFlags));
 
             builder.Append(this.GenerateAreaTypeFlagsString());
 
@@ -493,8 +510,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             builder.Append(this.ProbabilityFog);
             builder.Append(StringFormat.ToStringAlignment("Probability of lightning"));
             builder.Append(this.ProbabilityLightning);
-            builder.Append(StringFormat.ToStringAlignment("Unknown @ offset 0x0052"));
-            builder.Append(this.Unknown_0x0052);
+            builder.Append(StringFormat.ToStringAlignment("Base Wind Speed (value not used)"));
+            builder.Append(this.BaseWindSpeed);
 
             return builder.ToString();
         }
@@ -545,8 +562,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             builder.Append(this.OffsetVariables);
             builder.Append(StringFormat.ToStringAlignment("Count of variables"));
             builder.Append(this.CountVariables);
-            builder.Append(StringFormat.ToStringAlignment("Unknown @ offset 0x0090"));
-            builder.Append(this.Unknown_0x0090);
+            builder.Append(StringFormat.ToStringAlignment("Offset to tiled object flags"));
+            builder.Append(this.OffsetTiledObjectFlags);
+            builder.Append(StringFormat.ToStringAlignment("Count of tiled object flags"));
+            builder.Append(this.CountTiledObjectFlags);
 
 
             builder.Append(StringFormat.ToStringAlignment("Area script"));
@@ -603,6 +622,19 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
         /// <summary>Generates a human-readable String representing the trailing padding of the header</summary>
         /// <returns>A human-readable String representing the trailing padding of the header</returns>
         protected abstract String GenerateTrailingPaddingString();
+
+        /// <summary>Gets a human-readable enumeration String of AreaEdgeFlag enumeration values</summary>
+        /// <returns>A human-readable enumeration String of AreaEdgeFlag enumeration values</returns>
+        protected String GetEdgeFlagsEnumerationString(AreaEdgeFlags flags)
+        {
+            StringBuilder builder = new StringBuilder();
+
+            StringFormat.AppendSubItem(builder, (flags & AreaEdgeFlags.PartyRequired) == AreaEdgeFlags.PartyRequired, AreaEdgeFlags.PartyRequired.GetDescription());
+            StringFormat.AppendSubItem(builder, (flags & AreaEdgeFlags.PartyEnabled) == AreaEdgeFlags.PartyEnabled, AreaEdgeFlags.PartyEnabled.GetDescription());
+
+            String result = builder.ToString();
+            return result == String.Empty ? StringFormat.ReturnAndIndent("None", 2) : result;
+        }
         #endregion
     }
 }

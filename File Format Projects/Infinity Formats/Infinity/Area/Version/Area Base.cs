@@ -53,6 +53,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Version
         /// <summary>Collection of animations in this area</summary>
         public List<Animation> Animations { get; set; }
 
+        /// <summary>Collection of tiled objects in this area</summary>
+        /// <remarks>I have no idea what these are</remarks>
+        public List<TiledObject> TiledObjects { get; set; }
+
         /* Map Notes */
 
         /// <summary>Collection of set projectile traps in this area</summary>
@@ -330,6 +334,25 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Version
         /// <param name="count">Count of actors to read</param>
         protected abstract void ReadMapNotes(Stream input, Int32 offset, Int32 count);
 
+        /// <summary>Reads tiled objects from the input <see cref="System.IO.Stream" /></summary>
+        /// <param name="input">Stream to read from</param>
+        /// <param name="offset">Offset to seek to before read</param>
+        /// <param name="count">Count of actors to read</param>
+        protected void ReadTiledObjects(Stream input, Int32 offset, Int32 count)
+        {
+            if (offset > 0)
+            {
+                ReusableIO.SeekIfAble(input, offset);
+
+                for (Int32 counter = 0; counter < count; ++counter)
+                {
+                    TiledObject tiledObject = new TiledObject();
+                    tiledObject.Read(input);
+                    this.TiledObjects.Add(tiledObject);
+                }
+            }
+        }
+
         /// <summary>Reads projectile traps from the input Stream</summary>
         /// <param name="input">Stream to read from</param>
         /// <param name="offset">Offset to seek to before read</param>
@@ -549,6 +572,20 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Version
         /// <param name="offset">Offset to start writing in the Stream at</param>
         protected abstract void WriteMapNotes(Stream output, Int32 offset);
 
+        /// <summary>Writes tiled objects to the output stream</summary>
+        /// <param name="output">Stream to write to</param>
+        /// <param name="offset">Offset to start writing in the Stream at</param>
+        protected void WriteTiledObjects(Stream output, Int32 offset)
+        {
+            if (offset > 0)
+            {
+                ReusableIO.SeekIfAble(output, offset);
+
+                foreach (TiledObject tiledObject in this.TiledObjects)
+                    tiledObject.Write(output);
+            }
+        }
+
         /// <summary>Writes projectile traps to the output stream</summary>
         /// <param name="output">Stream to write to</param>
         /// <param name="offset">Offset to start writing in the Stream at</param>
@@ -660,6 +697,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Version
             builder.AppendLine(this.GenerateDoorsString());
             builder.AppendLine(this.GenerateAnimationsString());
             builder.AppendLine(this.GenerateMapNotesString());
+            builder.AppendLine(this.GenerateTiledObjectsString());
             builder.AppendLine(this.GenerateProjectileTrapsString());
             builder.AppendLine(this.GenerateSongsString());
             builder.AppendLine(this.GenerateRestInterruptionString());
@@ -810,6 +848,18 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Version
         /// <summary>Generates a human-readable console output describing the map notes in this area</summary>
         /// <returns>A multi-line String</returns>
         protected abstract String GenerateMapNotesString();
+
+        /// <summary>Generates a human-readable console output describing the tiled objects in this area</summary>
+        /// <returns>A multi-line String</returns>
+        protected String GenerateTiledObjectsString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (Int32 i = 0; i < this.TiledObjects.Count; ++i)
+                sb.Append(this.TiledObjects[i].ToString(i + 1));
+
+            return sb.ToString();
+        }
 
         /// <summary>Generates a human-readable console output describing the projectile traps in this area</summary>
         /// <returns>A multi-line String</returns>

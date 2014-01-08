@@ -70,18 +70,19 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
         /// <summary>Vertex count of the container's perimeter</summary>
         public UInt16 CountVertices { get; set; }
 
-        /// <summary>Unknown 34 bytes at offset 0x56</summary>
-        /// <remarks>
-        ///     I almost think that two of these are part of the vertex count, and
-        ///     that the other 32 are a scripting name or similar.
-        /// </remarks>
-        public Byte[] Unknown_0x0056 { get; set; }
+        /// <summary>Range for the trigger to be triggered?</summary>
+        /// <remarks>Unknown until BG2 source code</remarks>
+        public Int16 TriggerRange { get; set; }
+
+        /// <summary>Script name of this container's owner</summary>
+        /// <remarks>I was correct about this being a script name, as verified by BG2 source code</remarks>
+        public ZString Owner { get; set; }
 
         /// <summary>Item resref which is the key to this container</summary>
         public ResourceReference KeyItem { get; set; }
 
-        /// <summary>Unknown 34 bytes at offset 0x80</summary>
-        public Int32 Unknown_0x0080 { get; set; }
+        /// <summary>Force lock difficulty</summary>
+        public Int32 ForceLockDifficulty { get; set; }
 
         /// <summary>Strref to lockpick string</summary>
         public StringReference LockpickText { get; set; }
@@ -117,6 +118,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             this.BoundingBox = new Rectangle();
             this.ScriptTrap = new ResourceReference();
             this.KeyItem = new ResourceReference(ResourceType.Item);
+            this.Owner = new ZString();
             this.LockpickText = new StringReference();
         }
         #endregion
@@ -144,7 +146,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
         {
             this.Initialize();
 
-            Byte[] buffer = ReusableIO.BinaryRead(input, 86);
+            Byte[] buffer = ReusableIO.BinaryRead(input, 136);
 
             this.Name.Source = ReusableIO.ReadStringFromByteArray(buffer, 0, CultureConstants.CultureCodeEnglish, 32);
             this.Position.X = ReusableIO.ReadUInt16FromArray(buffer, 32);
@@ -167,13 +169,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             this.ScriptTrap.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 72, CultureConstants.CultureCodeEnglish);
             this.IndexVertices = ReusableIO.ReadInt32FromArray(buffer, 80);
             this.CountVertices = ReusableIO.ReadUInt16FromArray(buffer, 84);
-
-            this.Unknown_0x0056 = ReusableIO.BinaryRead(input, 34);
-
-            buffer = ReusableIO.BinaryRead(input, 16);
-            this.KeyItem.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 0, CultureConstants.CultureCodeEnglish);
-            this.Unknown_0x0080 = ReusableIO.ReadInt32FromArray(buffer, 8);
-            this.LockpickText.StringReferenceIndex = ReusableIO.ReadInt32FromArray(buffer, 12);
+            this.TriggerRange = ReusableIO.ReadInt16FromArray(buffer, 86);
+            this.Owner.Source = ReusableIO.ReadStringFromByteArray(buffer, 0, CultureConstants.CultureCodeEnglish, 32);
+            this.KeyItem.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 120, CultureConstants.CultureCodeEnglish);
+            this.ForceLockDifficulty = ReusableIO.ReadInt32FromArray(buffer, 128);
+            this.LockpickText.StringReferenceIndex = ReusableIO.ReadInt32FromArray(buffer, 132);
 
             this.Padding_0x0088 = ReusableIO.BinaryRead(input, 56);
         }
@@ -203,9 +203,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             ReusableIO.WriteStringToStream(this.ScriptTrap.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteInt32ToStream(this.IndexVertices, output);
             ReusableIO.WriteUInt16ToStream(this.CountVertices, output);
-            output.Write(this.Unknown_0x0056, 0, 34);
+            ReusableIO.WriteInt16ToStream(this.TriggerRange, output);
+            ReusableIO.WriteStringToStream(this.Owner.Source, output, CultureConstants.CultureCodeEnglish, false, 32);
             ReusableIO.WriteStringToStream(this.KeyItem.ResRef, output, CultureConstants.CultureCodeEnglish);
-            ReusableIO.WriteInt32ToStream(this.Unknown_0x0080, output);
+            ReusableIO.WriteInt32ToStream(this.ForceLockDifficulty, output);
             ReusableIO.WriteInt32ToStream(this.LockpickText.StringReferenceIndex, output);
             output.Write(this.Padding_0x0088, 0, 56);
         }
@@ -291,12 +292,14 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             builder.Append(this.IndexVertices);
             builder.Append(StringFormat.ToStringAlignment("Vertex count"));
             builder.Append(this.CountVertices);
-            builder.Append(StringFormat.ToStringAlignment("Unknown data @ offset 0x56"));
-            builder.Append(StringFormat.ByteArrayToHexString(this.Unknown_0x0056));
+            builder.Append(StringFormat.ToStringAlignment("Trigger range"));
+            builder.Append(this.TriggerRange);
+            builder.Append(StringFormat.ToStringAlignment("Owner"));
+            builder.Append(String.Format("'{0}'", this.Owner.Value));
             builder.Append(StringFormat.ToStringAlignment("Key (item resref)"));
             builder.Append(String.Format("'{0}'", this.KeyItem.ZResRef));
-            builder.Append(StringFormat.ToStringAlignment("Unknown @ offset 0x80"));
-            builder.Append(this.Unknown_0x0080);
+            builder.Append(StringFormat.ToStringAlignment("Force lock difficulty"));
+            builder.Append(this.ForceLockDifficulty);
             builder.Append(StringFormat.ToStringAlignment("Lock pick text (strref)"));
             builder.Append(this.LockpickText.StringReferenceIndex);
             builder.Append(StringFormat.ToStringAlignment("Padding @ offset 0x88"));

@@ -23,11 +23,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Projectile.Componen
         /// <summary>Various flags for the area of effect</summary>
         public AreaOfEffectFlags EffectFlags { get; set; }
 
-        /// <summary>Radius of the trigger</summary>
+        /// <summary>Diameter of the trigger</summary>
         /// <remarks>Divide by roughly 8.5 to get 'feet'</remarks>
         public Int16 TriggerRadius { get; set; }
 
-        /// <summary>Radius of the effect</summary>
+        /// <summary>Diameter of the effect</summary>
         /// <remarks>Divide by roughly 8.5 to get 'feet'</remarks>
         public Int16 EffectRadius { get; set; }
 

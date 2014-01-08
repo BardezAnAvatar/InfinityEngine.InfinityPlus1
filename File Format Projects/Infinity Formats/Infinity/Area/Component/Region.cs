@@ -39,8 +39,9 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
         /// <summary>First index of vertices for this region's perimeter</summary>
         public Int32 IndexVertices { get; set; }
 
-        /// <summary>Unknown at offset 0x30</summary>
-        public Int32 Unknown_0x0030 { get; set; }
+        /// <summary>"Trigger Value"</summary>
+        /// <remarks>Unknown until value named in BG2 source code</remarks>
+        public Int32 TriggerValue { get; set; }
 
         /// <summary>Index for cursor for this region</summary>
         /// <remarks>Index matches to CURSORS.BAM</remarks>
@@ -159,7 +160,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             this.BoundingBox.BottomRight.Y = ReusableIO.ReadUInt16FromArray(buffer, 40);
             this.CountVertices = ReusableIO.ReadUInt16FromArray(buffer, 42);
             this.IndexVertices = ReusableIO.ReadInt32FromArray(buffer, 44);
-            this.Unknown_0x0030 = ReusableIO.ReadInt32FromArray(buffer, 48);
+            this.TriggerValue = ReusableIO.ReadInt32FromArray(buffer, 48);
             this.CursorIndex = ReusableIO.ReadInt32FromArray(buffer, 52);
             this.DestinationArea.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 56, CultureConstants.CultureCodeEnglish);
             this.EntranceName.Source = ReusableIO.ReadStringFromByteArray(buffer, 64, CultureConstants.CultureCodeEnglish, 32);
@@ -199,7 +200,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             ReusableIO.WriteUInt16ToStream(this.BoundingBox.BottomRight.Y, output);
             ReusableIO.WriteUInt16ToStream(this.CountVertices, output);
             ReusableIO.WriteInt32ToStream(this.IndexVertices, output);
-            ReusableIO.WriteInt32ToStream(this.Unknown_0x0030, output);
+            ReusableIO.WriteInt32ToStream(this.TriggerValue, output);
             ReusableIO.WriteInt32ToStream(this.CursorIndex, output);
             ReusableIO.WriteStringToStream(this.DestinationArea.ResRef, output, CultureConstants.CultureCodeEnglish);
             ReusableIO.WriteStringToStream(this.EntranceName.Source, output, CultureConstants.CultureCodeEnglish, false, 32);
@@ -281,8 +282,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
             builder.Append(this.CountVertices);
             builder.Append(StringFormat.ToStringAlignment("First Vertex index"));
             builder.Append(this.IndexVertices);
-            builder.Append(StringFormat.ToStringAlignment("Unknown @ offset 0x30"));
-            builder.Append(this.Unknown_0x0030);
+            builder.Append(StringFormat.ToStringAlignment("Trigger Value"));
+            builder.Append(this.TriggerValue);
             builder.Append(StringFormat.ToStringAlignment("Cursor BAM index"));
             builder.Append(this.CursorIndex);
             builder.Append(StringFormat.ToStringAlignment("Destination Area"));
@@ -333,14 +334,14 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Area.Component
         {
             StringBuilder builder = new StringBuilder();
 
-            StringFormat.AppendSubItem(builder, (this.Flags & TriggerFlags.Invisible) == TriggerFlags.Invisible, TriggerFlags.Invisible.GetDescription());
+            StringFormat.AppendSubItem(builder, (this.Flags & TriggerFlags.KeyMustBeInPossession) == TriggerFlags.KeyMustBeInPossession, TriggerFlags.KeyMustBeInPossession.GetDescription());
             StringFormat.AppendSubItem(builder, (this.Flags & TriggerFlags.ResetTrap) == TriggerFlags.ResetTrap, TriggerFlags.ResetTrap.GetDescription());
             StringFormat.AppendSubItem(builder, (this.Flags & TriggerFlags.PartyRequired) == TriggerFlags.PartyRequired, TriggerFlags.PartyRequired.GetDescription());
             StringFormat.AppendSubItem(builder, (this.Flags & TriggerFlags.Detectable) == TriggerFlags.Detectable, TriggerFlags.Detectable.GetDescription());
-            StringFormat.AppendSubItem(builder, (this.Flags & TriggerFlags.LowMemory) == TriggerFlags.LowMemory, TriggerFlags.LowMemory.GetDescription());
+            StringFormat.AppendSubItem(builder, (this.Flags & TriggerFlags.TutorialOnly) == TriggerFlags.TutorialOnly, TriggerFlags.TutorialOnly.GetDescription());
             StringFormat.AppendSubItem(builder, (this.Flags & TriggerFlags.NpcTriggerable) == TriggerFlags.NpcTriggerable, TriggerFlags.NpcTriggerable.GetDescription());
             StringFormat.AppendSubItem(builder, (this.Flags & TriggerFlags.Deactivated) == TriggerFlags.Deactivated, TriggerFlags.Deactivated.GetDescription());
-            StringFormat.AppendSubItem(builder, (this.Flags & TriggerFlags.TravelNonPC) == TriggerFlags.TravelNonPC, TriggerFlags.TravelNonPC.GetDescription());
+            StringFormat.AppendSubItem(builder, (this.Flags & TriggerFlags.PartyOnly) == TriggerFlags.PartyOnly, TriggerFlags.PartyOnly.GetDescription());
             StringFormat.AppendSubItem(builder, (this.Flags & TriggerFlags.UsePoint) == TriggerFlags.UsePoint, TriggerFlags.UsePoint.GetDescription());
             StringFormat.AppendSubItem(builder, (this.Flags & TriggerFlags.InfoBlockedDoor) == TriggerFlags.InfoBlockedDoor, TriggerFlags.InfoBlockedDoor.GetDescription());
 

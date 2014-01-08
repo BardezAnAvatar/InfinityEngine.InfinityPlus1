@@ -8,10 +8,16 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Projectile.Enums
     public enum TravelFlags : uint /* UInt32 */
     {
         /// <summary>Use the specified palette.</summary>
+        /// <remarks>BG2 source code calls this FALSECOLORED</remarks>
         [Description("Use the specified palette.")]
         UseSpecifiedPalette         = 1U,
 
         Smokes                      = 2U,
+
+        /// <summary>Use the specified palette for smoke</summary>
+        /// <remarks>IESDP still says this s unused. I think it means to use the pallette for smoke as well</remarks>
+        [Description("Use the specified palette for smoke")]
+        SmokeUsesSpecifiedPalette   = 4U,
 
         /// <summary>Uses tint from area.</summary>
         [Description("Uses tint from area.")]

@@ -7,19 +7,25 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Game.Enum
     [Flags]
     public enum Weather : ushort /* UInt16 */
     {
-        Rain        = 0x01,
-        Snow        = 0x02,
-        Fog         = 0x04,
+        None                = 0x00,
+        Rain                = 0x01,
+        Snow                = 0x02,
+        Fog                 = 0x03, //Snow and Rain = Fog ?
 
-        /// <summary>A Mask for the basic weather effects</summary>
-        Mask        = 0x07,
-        Lightning   = 0x08,
+        //BG2 code has rain and snow heavy/medium/light flags shared; NI generalizes it more
+        WeatherLight        = 0x04,
+        WeatherMedium       = 0x08,
+        WeatherHeavy        = 0x0C, //Light and Heavy
 
-        /// <summary>Indicates whether weather is active in the area?</summary>
-        [Description("Has weather")]
-        HasWeather  = 0x40,
+        WindLight           = 0x10,
+        WindMedium          = 0x20,
+        WindHeavy           = 0x30, //Light and Heavy
 
-        /// <summary>Indicates whether or not weather is currently active?</summary>
-        Active       = 0x80,
+        LightningRare       = 0x40,
+        LightningRegular    = 0x80,
+        LightningFrequent   = 0xC0, //Mask Light and Heavy lightning
+
+        //Weather getting worse?
+        StormIncreasing     = 0x0100,
     }
 }
