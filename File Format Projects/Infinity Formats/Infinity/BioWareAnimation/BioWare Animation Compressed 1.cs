@@ -5,7 +5,6 @@ using System.Text;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.External.Zlib;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
-//using Bardez.Projects.Multimedia.MediaBase.Data.Pixels;
 using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.ReusableCode;
 
@@ -18,10 +17,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareAnimation
     public class BioWareAnimationCompressed_v1 : IInfinityFormat, IImageSet, IAnimation
     {
         #region Fields
-        /// <summary>Compressed header of the MOS file</summary>
+        /// <summary>Compressed header of the BAM file</summary>
         public ZlibHeader Header { get; set; }
 
-        /// <summary>Decompressed MOS file asset</summary>
+        /// <summary>Decompressed BAM file asset</summary>
         public BioWareAnimation1 File { get; set; }
         #endregion
 
