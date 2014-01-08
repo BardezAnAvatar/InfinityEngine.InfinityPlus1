@@ -10,6 +10,12 @@ namespace Scratch
         [MTAThread]
         internal static void Main(String[] args)
         {
+            PvrScratch scratch = new PvrScratch();
+            scratch.TestPvr();
+        }
+
+        internal static void TestXAudio2()
+        {
             XAudio2_reimp test = new XAudio2_reimp();
             //test.TestSomeXAudio2Stuff();
             //test.XAudio2_ThreeeeeeDeeeeeeee_test();

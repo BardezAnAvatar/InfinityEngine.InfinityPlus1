@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PVR Scratch.cs" />
     <Compile Include="XAudio2 reimp.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +68,10 @@
     <ProjectReference Include="..\Entities\Media Base\Media Base.csproj">
       <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
       <Name>Media Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\File Format Projects\Infinity Formats\Infinity Formats.csproj">
+      <Project>{3EE5137B-C08F-4337-B089-E20A502C2A0C}</Project>
+      <Name>Infinity Formats</Name>
     </ProjectReference>
     <ProjectReference Include="..\Native Code\DirectX\XAudio2\XAudio2.vcxproj">
       <Project>{FE898E65-DAFF-435D-9A72-4C9D3306636A}</Project>
