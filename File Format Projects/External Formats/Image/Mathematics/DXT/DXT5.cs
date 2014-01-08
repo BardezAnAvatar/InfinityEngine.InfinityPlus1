@@ -14,17 +14,18 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics.D
         public static Byte[] DecodePixels(Byte[] pixelData)
         {
             Byte[] colorData = new Byte[8];
-            Array.Copy(colorData, 0, pixelData, 8, 8);
+            Array.Copy(pixelData, 8, colorData, 0, 8);
 
             Byte[] alphaData = new Byte[8];
-            Array.Copy(colorData, 0, pixelData, 0, 8);
+            Array.Copy(pixelData, 0, alphaData, 0, 8);
 
             //start with the DXT1 data decoded
             Byte[] output = DXT1.DecodePixels(colorData);
 
             //now estimate the alpha values
             Byte[] alpha = new Byte[8];
-            Byte alpha0 = alphaData[0], alpha1 = alphaData[1];
+            alpha[0] = alphaData[0];
+            alpha[1] = alphaData[1];
 
             if (alpha[0] > alpha[1])
             {
@@ -59,7 +60,10 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Mathematics.D
 
                 shift += 3;
                 if (shift > 7)
+                {
+                    inputIndex++;
                     shift -= 8;
+                }
 
                 bits &= 0x07;   //get 3 bits
                 output[outputIndex] = alpha[bits];
