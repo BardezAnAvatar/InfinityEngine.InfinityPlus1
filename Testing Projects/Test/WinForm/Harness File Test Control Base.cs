@@ -10,7 +10,7 @@ using Bardez.Projects.Utility;
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm
 {
     /// <summary>User Control that is a base for a testing harness User Control</summary>
-    public abstract partial class HarnessFileBaseTestControlBase : UserControl
+    public partial class HarnessFileBaseTestControlBase : UserControl
     {
         #region Members
         /// <summary>Testing harness</summary>
