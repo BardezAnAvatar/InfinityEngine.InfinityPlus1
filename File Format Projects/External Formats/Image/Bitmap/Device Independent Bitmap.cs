@@ -194,7 +194,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap
                     if (this.BitmapInfo.BitCount == BitsPerPixel.Bpp32)
                     {
                         if (pal.BitsPerPixel == 24)
-                            pixel = new RgbQuad(pixelBytes[2], pixelBytes[1], pixelBytes[0], 255);  //invent an opaque alpha channel
+                            pixel = new RgbQuad(pixelBytes[2], pixelBytes[1], pixelBytes[0], (Byte)255);  //invent an opaque alpha channel
                         else
                             pixel = new RgbQuad(pixelBytes[2], pixelBytes[1], pixelBytes[0], pixelBytes[3]);
                     }
