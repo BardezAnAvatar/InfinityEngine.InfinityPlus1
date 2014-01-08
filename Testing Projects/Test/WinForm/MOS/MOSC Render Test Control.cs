@@ -2,7 +2,7 @@
 using System.IO;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Mosaic;
-using Bardez.Projects.InfinityPlus1.Test.Harnesses.MapOfScreen;
+using Bardez.Projects.InfinityPlus1.Test.Harnesses.Mosaic;
 using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.ReusableCode;
 

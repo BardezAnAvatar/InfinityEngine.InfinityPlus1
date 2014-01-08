@@ -8,26 +8,26 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Mosaic;
 using Bardez.Projects.InfinityPlus1.Test;
 using Bardez.Projects.Utility;
 
-namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.MapOfScreen
+namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.Mosaic
 {
-    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.MapOfScreen.MapOfScreenCompressed_v1 class.</summary>
-    public class MoscTest : FileTesterBase
+    /// <summary>This class tests the usable methods in the Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Mosaic.Mosaic_v1 class.</summary>
+    public class MosTest : FileTesterBase
     {
         #region Constants
         /// <summary>Constant key to look up in app.config</summary>
-        protected const String configKey = "Test.MOSC.Path";
+        protected const String configKey = "Test.MOS1.Path";
         #endregion
 
 
         #region Fields
         /// <summary>Format instance to test</summary>
-        protected MosaicCompressed_v1 mos { get; set; }
+        protected Mosaic_v1 mos { get; set; }
         #endregion
 
 
         #region Construction
         /// <summary>Default constructor</summary>
-        public MoscTest()
+        public MosTest()
         {
             this.InitializeInstance();
         }
@@ -40,7 +40,7 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.MapOfScreen
         /// <param name="e">Specific initialization event parameters</param>
         protected override void InitializeTestData(Object sender, EventArgs e)
         {
-            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(MoscTest.configKey);
+            this.FilePaths = ConfigurationHandlerMulti.GetSettingValues(MosTest.configKey);
         }
 
         /// <summary>Event to raise for testing instance(s)</summary>
@@ -50,8 +50,8 @@ namespace Bardez.Projects.InfinityPlus1.Test.Harnesses.MapOfScreen
         {
             using (FileStream stream = new FileStream(testArgs.Path, FileMode.Open, FileAccess.Read))
             {
-                this.mos = new MosaicCompressed_v1();
-                this.DoPostMessage(new MessageEventArgs("Reading MOSC file...", "Reading", testArgs.Path));
+                this.mos = new Mosaic_v1();
+                this.DoPostMessage(new MessageEventArgs("Reading MOS file...", "Reading", testArgs.Path));
                 this.mos.Read(stream);
                 this.DoPostMessage(new MessageEventArgs(this.mos.ToString(), "Output", testArgs.Path));
             }

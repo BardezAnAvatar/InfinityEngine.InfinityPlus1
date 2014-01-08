@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Bardez.Projects.InfinityPlus1.Test.Harnesses.MapOfScreen;
+using Bardez.Projects.InfinityPlus1.Test.Harnesses.Mosaic;
 
 namespace Bardez.Projects.InfinityPlus1.Test.WinForm.MOS
 {

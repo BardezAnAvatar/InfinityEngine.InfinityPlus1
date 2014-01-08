@@ -122,8 +122,8 @@
     <Compile Include="Harnesses\Item\Item Header 1_1 Test.cs" />
     <Compile Include="Harnesses\Item\Item Header 2 Test.cs" />
     <Compile Include="Harnesses\ITester.cs" />
-    <Compile Include="Harnesses\MapOfScreen\MOSC Test.cs" />
-    <Compile Include="Harnesses\MapOfScreen\MOS Test.cs" />
+    <Compile Include="Harnesses\Mosaic\MOSC Test.cs" />
+    <Compile Include="Harnesses\Mosaic\MOS Test.cs" />
     <Compile Include="Harnesses\Movie\MVE Audio Playback Test.cs" />
     <Compile Include="Harnesses\Movie\MVE Opcode Indexer Test.cs" />
     <Compile Include="Harnesses\Movie\MVE Indexer Test.cs" />
@@ -132,6 +132,7 @@
     <Compile Include="Harnesses\Output\DirectX\XAudio2 Render Test.cs" />
     <Compile Include="Harnesses\Output\DirectX\XAudio2 Test.cs" />
     <Compile Include="Harnesses\PixelLocationTable\PLT Test.cs" />
+    <Compile Include="Harnesses\PowerVR\PVRZ Test.cs" />
     <Compile Include="Harnesses\Projectile\PRO Test.cs" />
     <Compile Include="Harnesses\ReusableCode\BitStream Test.cs" />
     <Compile Include="Harnesses\Riff\Riff Test.cs" />
@@ -468,6 +469,15 @@
     <Compile Include="WinForm\PRO\PRO Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="WinForm\PVRZ\PVRZ Render Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\PVRZ\PVRZ Render Test Control.Designer.cs">
+      <DependentUpon>PVRZ Render Test Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\PVRZ\PVRZ Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WinForm\ReusableCode\Bit Stream Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -561,11 +571,18 @@
     <Compile Include="WinForm\WFX\WFX Test Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="WinForm\WMP\World Map Test Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\File Format Projects\Basic Formats\Basic Formats.csproj">
       <Project>{4D2A899B-3674-4288-81A8-C8F11636C2DA}</Project>
       <Name>Basic Formats</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure Factories\Native Factories\Native Factories.csproj">
+      <Project>{1B2B86E7-2F10-42C1-B930-D62C8AC1634D}</Project>
+      <Name>Native Factories</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Utility Projects\Configuration Handler\Configuration Handler.csproj">
       <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
@@ -659,6 +676,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\PLT\PLT Render Test Control.resx">
       <DependentUpon>PLT Render Test Control.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\PVRZ\PVRZ Render Test Control.resx">
+      <DependentUpon>PVRZ Render Test Control.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\SAV\Saved Resource Test Control.resx">
       <DependentUpon>Saved Resource Test Control.cs</DependentUpon>
