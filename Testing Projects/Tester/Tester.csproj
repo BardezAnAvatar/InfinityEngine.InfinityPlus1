@@ -113,6 +113,10 @@
       <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
       <Name>Basic Structures</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure Factories\Native Factories\Native Factories.csproj">
+      <Project>{1B2B86E7-2F10-42C1-B930-D62C8AC1634D}</Project>
+      <Name>Native Factories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Utility Projects\Configuration Handler\Configuration Handler.csproj">
       <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
       <Name>Configuration Handler</Name>
