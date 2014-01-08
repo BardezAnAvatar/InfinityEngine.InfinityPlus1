@@ -119,6 +119,8 @@
     <Compile Include="Image\JPEG\Scan Component Parameter.cs" />
     <Compile Include="Image\JPEG\Scan Header.cs" />
     <Compile Include="Image\JPEG\Scan.cs" />
+    <Compile Include="Image\Mathematics\DXT\DXT1.cs" />
+    <Compile Include="Image\Mathematics\DXT\DXT5.cs" />
     <Compile Include="RIFF\Component\ChunkType.cs" />
     <Compile Include="RIFF\Component\Interface RIFF Chunk.cs" />
     <Compile Include="RIFF\Component\RIFF Chunk Extension Base.cs" />
