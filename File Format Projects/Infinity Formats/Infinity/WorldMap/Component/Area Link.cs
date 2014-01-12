@@ -93,18 +93,18 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WorldMap.Component
             this.Initialize();
 
             //read remiander
-            Byte[] buffer = ReusableIO.BinaryRead(input, (MapEntry.StructSize - 128));
+            Byte[] buffer = ReusableIO.BinaryRead(input, (AreaLink.StructSize - 128));
 
             this.AreaIndex = ReusableIO.ReadUInt32FromArray(buffer, 0);
             this.Entrance.Source = ReusableIO.ReadStringFromByteArray(buffer, 4, CultureConstants.CultureCodeEnglish, 32);
             this.TravelWeight = ReusableIO.ReadUInt32FromArray(buffer, 36);
             this.DestinationEntry = (EntryFlags)(ReusableIO.ReadUInt32FromArray(buffer, 40));
             this.RandomEncounterArea1.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 44, CultureConstants.CultureCodeEnglish);
-            this.RandomEncounterArea2.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 48, CultureConstants.CultureCodeEnglish);
-            this.RandomEncounterArea3.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 52, CultureConstants.CultureCodeEnglish);
-            this.RandomEncounterArea4.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 56, CultureConstants.CultureCodeEnglish);
-            this.RandomEncounterArea5.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 60, CultureConstants.CultureCodeEnglish);
-            this.RandomEncounterProbability = ReusableIO.ReadUInt32FromArray(buffer, 64);
+            this.RandomEncounterArea2.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 52, CultureConstants.CultureCodeEnglish);
+            this.RandomEncounterArea3.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 60, CultureConstants.CultureCodeEnglish);
+            this.RandomEncounterArea4.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 68, CultureConstants.CultureCodeEnglish);
+            this.RandomEncounterArea5.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 76, CultureConstants.CultureCodeEnglish);
+            this.RandomEncounterProbability = ReusableIO.ReadUInt32FromArray(buffer, 84);
             this.Reserved = ReusableIO.BinaryRead(input, 128);
         }
 
@@ -180,7 +180,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WorldMap.Component
             builder.Append(StringFormat.ToStringAlignment("Random Encounter Probability"));
             builder.Append(this.RandomEncounterProbability);
             builder.Append(StringFormat.ToStringAlignment("Reserved"));
-            builder.Append(StringFormat.ByteArrayToHexString(this.Reserved));
+            builder.AppendLine(StringFormat.ByteArrayToHexString(this.Reserved));
 
             return builder.ToString();
         }

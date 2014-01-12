@@ -118,7 +118,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WorldMap.Component
             this.Initialize();
 
             //read remiander
-            Byte[] buffer = ReusableIO.BinaryRead(input, (MapEntry.StructSize - 128));
+            Byte[] buffer = ReusableIO.BinaryRead(input, (AreaEntry.StructSize - 128));
 
             this.CurrentArea.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 0, CultureConstants.CultureCodeEnglish);
             this.OriginalArea.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 8, CultureConstants.CultureCodeEnglish);
@@ -245,7 +245,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WorldMap.Component
             builder.Append(StringFormat.ToStringAlignment("East Area Links Count"));
             builder.Append(this.AreaLinkCountEast);
             builder.Append(StringFormat.ToStringAlignment("Reserved"));
-            builder.Append(StringFormat.ByteArrayToHexString(this.Reserved));
+            builder.AppendLine(StringFormat.ByteArrayToHexString(this.Reserved));
 
             return builder.ToString();
         }
