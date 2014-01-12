@@ -266,6 +266,7 @@
             this.tabpageImagesPvrz = new System.Windows.Forms.TabPage();
             this.tabctrlImagesPvrz = new System.Windows.Forms.TabControl();
             this.tabpageImagesPvrzTest1 = new System.Windows.Forms.TabPage();
+            this.pvrzTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.MOS.PvrzTestControl();
             this.tabpageImagesPvrzRender1 = new System.Windows.Forms.TabPage();
             this.pvrzRenderTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.PVRZ.PvrzRenderTestControl();
             this.tabpageOutput = new System.Windows.Forms.TabPage();
@@ -282,7 +283,8 @@
             this.direct2DRenderTestControl1 = new Bardez.Projects.InfinityPlus1.Test.WinForm.Output.Direct2D.Direct2DRenderTestControl();
             this.tabpageReusableCode = new System.Windows.Forms.TabPage();
             this.bitStreamTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.ReusableCode.BitStreamTestControl();
-            this.pvrzTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.MOS.PvrzTestControl();
+            this.tabpageWmp = new System.Windows.Forms.TabPage();
+            this.worldMapTestControl = new Bardez.Projects.InfinityPlus1.Test.WinForm.WMP.WorldMapTestControl();
             this.tabctrlMain.SuspendLayout();
             this.tabpage2DA.SuspendLayout();
             this.tabpageAcm.SuspendLayout();
@@ -437,6 +439,7 @@
             this.tabctrlDirect2D.SuspendLayout();
             this.tabpageRenderTest.SuspendLayout();
             this.tabpageReusableCode.SuspendLayout();
+            this.tabpageWmp.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabctrlMain
@@ -465,10 +468,11 @@
             this.tabctrlMain.Controls.Add(this.tabpageSrc);
             this.tabctrlMain.Controls.Add(this.tabpageTalk);
             this.tabctrlMain.Controls.Add(this.tabpageTalkOverride);
-            this.tabctrlMain.Controls.Add(this.tabpageWed);
             this.tabctrlMain.Controls.Add(this.tabpageVar);
             this.tabctrlMain.Controls.Add(this.tabpageVvc);
+            this.tabctrlMain.Controls.Add(this.tabpageWed);
             this.tabctrlMain.Controls.Add(this.tabpageWfx);
+            this.tabctrlMain.Controls.Add(this.tabpageWmp);
             this.tabctrlMain.Controls.Add(this.tabpageImages);
             this.tabctrlMain.Controls.Add(this.tabpageOutput);
             this.tabctrlMain.Controls.Add(this.tabpageReusableCode);
@@ -2827,7 +2831,7 @@
             this.tabpageImagesPvrz.Location = new System.Drawing.Point(4, 22);
             this.tabpageImagesPvrz.Name = "tabpageImagesPvrz";
             this.tabpageImagesPvrz.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpageImagesPvrz.Size = new System.Drawing.Size(1371, 424);
+            this.tabpageImagesPvrz.Size = new System.Drawing.Size(178, 42);
             this.tabpageImagesPvrz.TabIndex = 6;
             this.tabpageImagesPvrz.Text = "PVRZ";
             // 
@@ -2839,7 +2843,7 @@
             this.tabctrlImagesPvrz.Location = new System.Drawing.Point(3, 3);
             this.tabctrlImagesPvrz.Name = "tabctrlImagesPvrz";
             this.tabctrlImagesPvrz.SelectedIndex = 0;
-            this.tabctrlImagesPvrz.Size = new System.Drawing.Size(1365, 418);
+            this.tabctrlImagesPvrz.Size = new System.Drawing.Size(172, 36);
             this.tabctrlImagesPvrz.TabIndex = 0;
             // 
             // tabpageImagesPvrzTest1
@@ -2849,9 +2853,17 @@
             this.tabpageImagesPvrzTest1.Location = new System.Drawing.Point(4, 22);
             this.tabpageImagesPvrzTest1.Name = "tabpageImagesPvrzTest1";
             this.tabpageImagesPvrzTest1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpageImagesPvrzTest1.Size = new System.Drawing.Size(1357, 392);
+            this.tabpageImagesPvrzTest1.Size = new System.Drawing.Size(164, 10);
             this.tabpageImagesPvrzTest1.TabIndex = 0;
             this.tabpageImagesPvrzTest1.Text = "PVRZ Test";
+            // 
+            // pvrzTestControl
+            // 
+            this.pvrzTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pvrzTestControl.Location = new System.Drawing.Point(3, 3);
+            this.pvrzTestControl.Name = "pvrzTestControl";
+            this.pvrzTestControl.Size = new System.Drawing.Size(158, 4);
+            this.pvrzTestControl.TabIndex = 0;
             // 
             // tabpageImagesPvrzRender1
             // 
@@ -2860,7 +2872,7 @@
             this.tabpageImagesPvrzRender1.Location = new System.Drawing.Point(4, 22);
             this.tabpageImagesPvrzRender1.Name = "tabpageImagesPvrzRender1";
             this.tabpageImagesPvrzRender1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpageImagesPvrzRender1.Size = new System.Drawing.Size(1357, 392);
+            this.tabpageImagesPvrzRender1.Size = new System.Drawing.Size(178, 42);
             this.tabpageImagesPvrzRender1.TabIndex = 1;
             this.tabpageImagesPvrzRender1.Text = "PVRZ Render";
             // 
@@ -2869,7 +2881,7 @@
             this.pvrzRenderTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pvrzRenderTestControl.Location = new System.Drawing.Point(3, 3);
             this.pvrzRenderTestControl.Name = "pvrzRenderTestControl";
-            this.pvrzRenderTestControl.Size = new System.Drawing.Size(1351, 386);
+            this.pvrzRenderTestControl.Size = new System.Drawing.Size(172, 36);
             this.pvrzRenderTestControl.TabIndex = 0;
             // 
             // tabpageOutput
@@ -3012,13 +3024,24 @@
             this.bitStreamTestControl.Size = new System.Drawing.Size(1379, 450);
             this.bitStreamTestControl.TabIndex = 0;
             // 
-            // pvrzTestControl
+            // tabpageWmp
             // 
-            this.pvrzTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pvrzTestControl.Location = new System.Drawing.Point(3, 3);
-            this.pvrzTestControl.Name = "pvrzTestControl";
-            this.pvrzTestControl.Size = new System.Drawing.Size(1351, 386);
-            this.pvrzTestControl.TabIndex = 0;
+            this.tabpageWmp.BackColor = System.Drawing.SystemColors.Control;
+            this.tabpageWmp.Controls.Add(this.worldMapTestControl);
+            this.tabpageWmp.Location = new System.Drawing.Point(4, 22);
+            this.tabpageWmp.Name = "tabpageWmp";
+            this.tabpageWmp.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpageWmp.Size = new System.Drawing.Size(1385, 456);
+            this.tabpageWmp.TabIndex = 31;
+            this.tabpageWmp.Text = "WMP";
+            // 
+            // worldMapTestControl
+            // 
+            this.worldMapTestControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.worldMapTestControl.Location = new System.Drawing.Point(3, 3);
+            this.worldMapTestControl.Name = "worldMapTestControl";
+            this.worldMapTestControl.Size = new System.Drawing.Size(1379, 450);
+            this.worldMapTestControl.TabIndex = 0;
             // 
             // TestUI
             // 
@@ -3183,6 +3206,7 @@
             this.tabctrlDirect2D.ResumeLayout(false);
             this.tabpageRenderTest.ResumeLayout(false);
             this.tabpageReusableCode.ResumeLayout(false);
+            this.tabpageWmp.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -3444,5 +3468,7 @@
         private System.Windows.Forms.TabPage tabpageImagesPvrzRender1;
         private Test.WinForm.PVRZ.PvrzRenderTestControl pvrzRenderTestControl;
         private Test.WinForm.MOS.PvrzTestControl pvrzTestControl;
+        private System.Windows.Forms.TabPage tabpageWmp;
+        private Test.WinForm.WMP.WorldMapTestControl worldMapTestControl;
     }
 }
