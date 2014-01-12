@@ -47,6 +47,7 @@
             this.chklbTestItems.CheckOnClick = true;
             this.chklbTestItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chklbTestItems.FormattingEnabled = true;
+            this.chklbTestItems.HorizontalScrollbar = true;
             this.chklbTestItems.Location = new System.Drawing.Point(0, 13);
             this.chklbTestItems.Name = "chklbTestItems";
             this.chklbTestItems.Size = new System.Drawing.Size(229, 400);
