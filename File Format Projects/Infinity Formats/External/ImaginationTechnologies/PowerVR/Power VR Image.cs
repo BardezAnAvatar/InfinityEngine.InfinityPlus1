@@ -122,6 +122,20 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.ImaginationTechnolo
             return getFrame;
         }
 
+        /// <summary>Gets a sub-image of the current image</summary>
+        /// <param name="x">Source X position</param>
+        /// <param name="y">Source Y position</param>
+        /// <param name="width">Width of sub-image</param>
+        /// <param name="height">Height of sub-image</param>
+        /// <returns>The requested sub-image</returns>
+        public IImage GetSubImage(Int32 x, Int32 y, Int32 width, Int32 height)
+        {
+            return new BasicImage(ImageManipulation.GetSubImage(this.GetFrame(), x, y, width, height));
+        }
+        #endregion
+
+
+        #region Helper methods
         /// <summary>Gets a Byte array of the pixel data</summary>
         /// <returns>A Byte array of the pixel data</returns>
         protected Byte[] GetPixelData()

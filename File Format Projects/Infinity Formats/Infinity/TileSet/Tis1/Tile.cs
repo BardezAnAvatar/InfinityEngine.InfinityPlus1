@@ -116,6 +116,17 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TileSet.Tis1
             IMultimediaImageFrame frame = new BasicImageFrame(this.GetPixelData());
             return frame;
         }
+
+        /// <summary>Gets a sub-image of the current image</summary>
+        /// <param name="x">Source X position</param>
+        /// <param name="y">Source Y position</param>
+        /// <param name="width">Width of sub-image</param>
+        /// <param name="height">Height of sub-image</param>
+        /// <returns>The requested sub-image</returns>
+        public IImage GetSubImage(Int32 x, Int32 y, Int32 width, Int32 height)
+        {
+            return new BasicImage(ImageManipulation.GetSubImage(this.GetPixelData(), x, y, width, height));
+        }
         #endregion
 
 

@@ -35,7 +35,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap
         /// <value>Each 'row' of data has a width with an alignment multiple of 4 bytes.</value>
         public PixelData PixelData { get; set; }
 
-        //Proile data is not implemented
+        //Profile data is not implemented
         #endregion
 
 
@@ -416,6 +416,17 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.External.Image.Bitmap
         {
             IMultimediaImageFrame frame = new BasicImageFrame(this.PixelData);
             return frame;
+        }
+
+        /// <summary>Gets a sub-image of the current image</summary>
+        /// <param name="x">Source X position</param>
+        /// <param name="y">Source Y position</param>
+        /// <param name="width">Width of sub-image</param>
+        /// <param name="height">Height of sub-image</param>
+        /// <returns>The requested sub-image</returns>
+        public IImage GetSubImage(Int32 x, Int32 y, Int32 width, Int32 height)
+        {
+            return new BasicImage(ImageManipulation.GetSubImage(this.PixelData, x, y, width, height));
         }
         #endregion
     }
