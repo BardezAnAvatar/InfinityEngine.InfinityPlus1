@@ -64,9 +64,11 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WorldMap
             this.Header.Read(input);
 
             //maps
-            ReusableIO.SeekIfAble(input, this.Header.MapOffset);
             for (Int32 index = 0; index < this.Header.MapCount; ++index)
             {
+                //maps are stored in sequential order right after the header; if there are multiple maps, we will need to seek back to the current position after reading this map's data.
+                ReusableIO.SeekIfAble(input, this.Header.MapOffset + (MapEntry.StructSize * index));
+
                 MapEntry map = new MapEntry();
                 map.Read(input);
                 this.Maps.Add(map);
@@ -84,9 +86,13 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WorldMap
             this.Header.Write(output);
 
             //maps
-            ReusableIO.SeekIfAble(output, this.Header.MapOffset);
-            foreach (MapEntry map in this.Maps)
-                map.Write(output);
+            for (Int32 index = 0; index < this.Maps.Count; ++index)
+            {
+                //maps are stored in sequential order right after the header; if there are multiple maps, we will need to seek back to the current position after reading this map's data.
+                ReusableIO.SeekIfAble(output, this.Header.MapOffset + (MapEntry.StructSize * index));
+
+                this.Maps[index].Write(output);
+            }
         }
         #endregion
 
@@ -119,7 +125,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WorldMap
                 offsetCollection.Add(new Tuple<Int64, Int64>(map.AreaOffset, (map.AreaCount * AreaEntry.StructSize)));
 
                 //Area links
-                offsetCollection.Add(new Tuple<Int64, Int64>(map.AreaLinkOffset, (map.AreaLinkCount * AreaEntry.StructSize)));
+                offsetCollection.Add(new Tuple<Int64, Int64>(map.AreaLinkOffset, (map.AreaLinkCount * AreaLink.StructSize)));
             }
 
             return offsetCollection;
