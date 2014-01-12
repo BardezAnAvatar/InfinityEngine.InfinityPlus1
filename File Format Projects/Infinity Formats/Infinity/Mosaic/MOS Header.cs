@@ -110,7 +110,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Mosaic
         /// <summary>Returns the printable read-friendly version of the store format</summary>
         protected String GetVersionString()
         {
-            return "MOS header:";
+            return "MOS version 1 header:";
         }
 
         /// <summary>This method performs the bulk of work for a ToString() implementation that would output to console or similar.</summary>
@@ -127,7 +127,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Mosaic
             builder.Append(StringFormat.ToStringAlignment("Height"));
             builder.Append(this.Height);
             builder.Append(StringFormat.ToStringAlignment("Columns"));
-            builder.Append(Columns);
+            builder.Append(this.Columns);
             builder.Append(StringFormat.ToStringAlignment("Rows"));
             builder.Append(this.Rows);
             builder.Append(StringFormat.ToStringAlignment("Block Count"));
