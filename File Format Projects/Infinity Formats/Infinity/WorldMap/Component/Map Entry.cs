@@ -117,8 +117,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WorldMap.Component
             this.MapCenterY = ReusableIO.ReadInt32FromArray(buffer, 28);
             this.AreaCount = ReusableIO.ReadUInt32FromArray(buffer, 32);
             this.AreaOffset = ReusableIO.ReadUInt32FromArray(buffer, 36);
-            this.AreaLinkCount = ReusableIO.ReadUInt32FromArray(buffer, 40);
-            this.AreaLinkOffset = ReusableIO.ReadUInt32FromArray(buffer, 44);
+            this.AreaLinkOffset = ReusableIO.ReadUInt32FromArray(buffer, 40);
+            this.AreaLinkCount = ReusableIO.ReadUInt32FromArray(buffer, 44);
             this.Icons.ResRef = ReusableIO.ReadStringFromByteArray(buffer, 48, CultureConstants.CultureCodeEnglish);
             this.Reserved = ReusableIO.BinaryRead(input, 128);
 
@@ -158,8 +158,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WorldMap.Component
             ReusableIO.WriteInt32ToStream(this.MapCenterY, output);
             ReusableIO.WriteUInt32ToStream(this.AreaCount, output);
             ReusableIO.WriteUInt32ToStream(this.AreaOffset, output);
-            ReusableIO.WriteUInt32ToStream(this.AreaLinkCount, output);
             ReusableIO.WriteUInt32ToStream(this.AreaLinkOffset, output);
+            ReusableIO.WriteUInt32ToStream(this.AreaLinkCount, output);
             ReusableIO.WriteStringToStream(this.Icons.ResRef, output, CultureConstants.CultureCodeEnglish);
             output.Write(this.Reserved, 0, 128);
 
@@ -234,7 +234,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.WorldMap.Component
             builder.Append(StringFormat.ToStringAlignment("Icons"));
             builder.Append(String.Format("'{0}'", this.Icons.ZResRef));
             builder.Append(StringFormat.ToStringAlignment("Reserved"));
-            builder.Append(StringFormat.ByteArrayToHexString(this.Reserved));
+            builder.AppendLine(StringFormat.ByteArrayToHexString(this.Reserved));
 
             //write the area entries
             for (Int32 i = 0; i < this.AreaCount; ++i)
