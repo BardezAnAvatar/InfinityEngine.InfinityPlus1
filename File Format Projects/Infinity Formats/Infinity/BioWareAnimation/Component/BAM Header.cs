@@ -78,8 +78,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.BioWareAnimation.Co
             ReusableIO.WriteStringToStream(this.signature, output, CultureConstants.CultureCodeEnglish, false, 4);
             ReusableIO.WriteStringToStream(this.version, output, CultureConstants.CultureCodeEnglish, false, 4);
             ReusableIO.WriteUInt16ToStream(this.CountFrames, output);
-            output.WriteByte(CountAnimations);
-            output.WriteByte(RlePaletteIndex);
+            output.WriteByte(this.CountAnimations);
+            output.WriteByte(this.RlePaletteIndex);
             ReusableIO.WriteUInt32ToStream(this.OffsetFrameEntries, output);
             ReusableIO.WriteUInt32ToStream(this.OffsetPalette, output);
             ReusableIO.WriteUInt32ToStream(this.OffsetFrameLookupTable, output);
