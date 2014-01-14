@@ -6,7 +6,7 @@ using Bardez.Projects.InfinityPlus1.FileFormats.Basic;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
 using Bardez.Projects.ReusableCode;
 
-namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Mosaic
+namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.BamMos
 {
     /// <summary>Represents a MOS v2 data block</summary>
     public class DataBlock : IInfinityFormat
