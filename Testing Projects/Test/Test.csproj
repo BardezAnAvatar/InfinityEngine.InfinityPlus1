@@ -122,6 +122,7 @@
     <Compile Include="Harnesses\Item\Item Header 1_1 Test.cs" />
     <Compile Include="Harnesses\Item\Item Header 2 Test.cs" />
     <Compile Include="Harnesses\ITester.cs" />
+    <Compile Include="Harnesses\Mosaic\MOS 2 Test.cs" />
     <Compile Include="Harnesses\Mosaic\MOSC Test.cs" />
     <Compile Include="Harnesses\Mosaic\MOS Test.cs" />
     <Compile Include="Harnesses\Movie\MVE Audio Playback Test.cs" />
