@@ -5,6 +5,7 @@ using System.Text;
 
 using Bardez.Projects.InfinityPlus1.FileFormats.External.ImaginationTechnologies.PowerVR;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Base;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.BamMos;
 using Bardez.Projects.Multimedia.MediaBase.Frame.Image;
 using Bardez.Projects.ReusableCode;
 
@@ -30,7 +31,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Mosaic
         public void Initialize()
         {
             this.Header = new MosaicHeader_v2();
-            this.RelatedFiles = new Dictionary<String, PowerVrCompressed>();
+            this.DataBlocks = new List<DataBlock>();
+            this.RelatedFiles = null;
         }
         #endregion
 
@@ -96,8 +98,8 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Mosaic
         {
             IMultimediaImageFrame frame = null;
 
-            if (this.File != null)
-                frame = this.File.GetFrame();
+            if (this.RelatedFiles != null)
+                ;// frame = this.RelatedFiles.GetFrame();
 
             return frame;
         }
