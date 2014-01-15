@@ -15,7 +15,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals
         public String ResRef { get; set; }
 
         /// <summary>This member represents the type of resource referenced</summary>
-        private ResourceType Type { get; set; }
+        public ResourceType Type { get; set; }
         #endregion
 
 
