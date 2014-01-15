@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Asset_Management</RootNamespace>
+    <AssemblyName>Asset Management</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Entities\Media Base\Media Base.csproj">
+      <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
+      <Name>Media Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utility Projects\Configuration Handler\Configuration Handler.csproj">
+      <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
+      <Name>Configuration Handler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utility Projects\ReusableCode\ReusableCode.csproj">
+      <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
+      <Name>ReusableCode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utility Projects\Utility\Utility.csproj">
+      <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Basic Formats\Basic Formats.csproj">
+      <Project>{4D2A899B-3674-4288-81A8-C8F11636C2DA}</Project>
+      <Name>Basic Formats</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infinity Formats\Infinity Formats.csproj">
+      <Project>{3EE5137B-C08F-4337-B089-E20A502C2A0C}</Project>
+      <Name>Infinity Formats</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Information\Information.csproj">
+      <Project>{1783CB90-E638-44A6-9500-B878585A5416}</Project>
+      <Name>Information</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

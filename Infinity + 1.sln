@@ -93,9 +93,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Format Factories", "File Fo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Information", "File Format Projects\Information\Information.csproj", "{1783CB90-E638-44A6-9500-B878585A5416}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asset Management", "File Format Projects\Asset Management\Asset Management.csproj", "{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 28
+		SccNumberOfProjects = 29
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://bardezserver:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -206,6 +208,10 @@ Global
 		SccProjectTopLevelParentUniqueName27 = Infinity\u0020+\u00201.sln
 		SccProjectName27 = File\u0020Format\u0020Projects/Information
 		SccLocalPath27 = File\u0020Format\u0020Projects\\Information
+		SccProjectUniqueName28 = File\u0020Format\u0020Projects\\Asset\u0020Management\\Asset\u0020Management.csproj
+		SccProjectTopLevelParentUniqueName28 = Infinity\u0020+\u00201.sln
+		SccProjectName28 = File\u0020Format\u0020Projects/Asset\u0020Management
+		SccLocalPath28 = File\u0020Format\u0020Projects\\Asset\u0020Management
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Infinity + 1.vsmdi
@@ -636,6 +642,20 @@ Global
 		{1783CB90-E638-44A6-9500-B878585A5416}.Release|Win32.ActiveCfg = Release|Any CPU
 		{1783CB90-E638-44A6-9500-B878585A5416}.Release|x64.ActiveCfg = Release|Any CPU
 		{1783CB90-E638-44A6-9500-B878585A5416}.Release|x86.ActiveCfg = Release|Any CPU
+		{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}.Release|Win32.ActiveCfg = Release|Any CPU
+		{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}.Release|x64.ActiveCfg = Release|Any CPU
+		{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -660,6 +680,7 @@ Global
 		{F2085177-9356-43EE-9744-85AA2FFCACEE} = {B48DC58F-AF29-427D-B363-0C7DFD067380}
 		{C8E3D8F1-1DB6-4E27-A71B-3CE84EB04B60} = {B48DC58F-AF29-427D-B363-0C7DFD067380}
 		{1783CB90-E638-44A6-9500-B878585A5416} = {B48DC58F-AF29-427D-B363-0C7DFD067380}
+		{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5} = {B48DC58F-AF29-427D-B363-0C7DFD067380}
 		{257201A0-0B65-4EA0-AC04-0B8005AECC37} = {177E57E6-64C4-4C85-A970-958E6E13B4C7}
 		{31CA90A7-1628-493B-A99B-8B9F6899158F} = {177E57E6-64C4-4C85-A970-958E6E13B4C7}
 		{1B2B86E7-2F10-42C1-B930-D62C8AC1634D} = {540C123B-E0EE-460A-B727-99C5DDAE6740}
