@@ -40,7 +40,7 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Factories
 
             return manager;
         }
-        
+
         /// <summary>Builds an Asset Manager instance based off of the game directory passed into this method</summary>
         /// <param name="directory">Path indicating the directory of the game installation location to be reviewed</param>
         /// <returns>The build asset manager</returns>
