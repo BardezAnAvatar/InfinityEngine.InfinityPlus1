@@ -591,6 +591,28 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
             return this.GetAssetInstance(asset.Locator);
         }
 
+        /// <summary>Gets a binary stream containing the asset requested</summary>
+        /// <param name="resource">The resource reference being requested (filename without extension; extension inferred from resource type)</param>
+        /// <returns>A binary stream containing the asset</returns>
+        /// <remarks>This would be used for items, spells, etc.</remarks>
+        public Stream GetAsset(ResourceReference resource)
+        {
+            if (resource == null)
+                throw new ArgumentNullException("resource", "The resource specified was unexpectedly null.");
+            else if (resource.ResRef == null)
+                throw new ArgumentNullException("resource.ResRef", "The resource specified had a file name that was unexpectedly null.");
+
+            String extension = resource.Type.ToFileExtension();
+
+            if (extension == null)
+                throw new InvalidOperationException(String.Format("The specified resource type (\"{0}\") generated a null file extension.", resource.Type));
+
+            String filename = Path.Combine(resource.ZResRef, extension);
+
+            //get the asset
+            return this.GetAsset(filename);
+        }
+
         /// <summary>Gets a binary stream containing the specific instance of the asset requested</summary>
         /// <param name="location">Location structure that defines the location of an asset's instance</param>
         /// <returns>A binary stream containing the instance of the requested asset</returns>

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 
-using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Globals;
+using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.KeyTable;
 using Bardez.Projects.InfinityPlus1.FileFormats.Infinity.TalkTable;
 using Bardez.Projects.InfinityPlus1.Information;
 
@@ -19,6 +19,12 @@ namespace Bardez.Projects.InfinityPlus1.Logic.Infinity.Assets
         /// <returns>A binary stream containing the asset</returns>
         /// <remarks>This would be used for items, spells, etc.</remarks>
         Stream GetAsset(String filename);
+
+        /// <summary>Gets a binary stream containing the asset requested</summary>
+        /// <param name="resource">The resource reference being requested (filename without extension; extension inferred from resource type)</param>
+        /// <returns>A binary stream containing the asset</returns>
+        /// <remarks>This would be used for items, spells, etc.</remarks>
+        Stream GetAsset(ResourceReference resource);
 
         /// <summary>Gets a binary stream containing the specific instance of the asset requested</summary>
         /// <param name="location">Location structure that defines the location of an asset's instance</param>
