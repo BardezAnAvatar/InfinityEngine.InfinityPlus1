@@ -52,7 +52,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Common.BamMos
 
         #region Construction
         /// <summary>Instantiates reference types</summary>
-        public override void Initialize() { }
+        public virtual void Initialize() { }
         #endregion
 
 

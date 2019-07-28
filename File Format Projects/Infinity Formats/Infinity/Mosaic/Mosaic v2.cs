@@ -40,7 +40,7 @@ namespace Bardez.Projects.InfinityPlus1.FileFormats.Infinity.Mosaic
         #region IO method implemetations
         /// <summary>This public method reads file format from the input stream. Reads the whole structure.</summary>
         /// <param name="input">Input stream to read from</param>
-        public override void Read(Stream input)
+        public virtual void Read(Stream input)
         {
             this.ReadBody(input);
         }
