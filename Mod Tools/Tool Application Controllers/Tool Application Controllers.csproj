@@ -53,6 +53,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\File Format Projects\Asset Management\Asset Management.csproj">
+      <Project>{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}</Project>
+      <Name>Asset Management</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\File Format Projects\Infinity Formats\Infinity Formats.csproj">
       <Project>{3EE5137B-C08F-4337-B089-E20A502C2A0C}</Project>
       <Name>Infinity Formats</Name>

@@ -106,6 +106,10 @@
     <Compile Include="Test Classes\Infinity Logic\Assets\Infinity Asset Manager Test.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\File Format Projects\Asset Management\Asset Management.csproj">
+      <Project>{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}</Project>
+      <Name>Asset Management</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\File Format Projects\Basic Formats\Basic Formats.csproj">
       <Project>{4D2A899B-3674-4288-81A8-C8F11636C2DA}</Project>
       <Name>Basic Formats</Name>
