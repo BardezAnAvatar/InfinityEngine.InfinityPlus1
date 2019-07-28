@@ -14,6 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{FF993C95-4FB4-4653-A7F8-35A918C5E59D}"
 	ProjectSection(SolutionItems) = preProject
 		Constant Rebuild Note.txt = Constant Rebuild Note.txt
+		Dependencies.txt = Dependencies.txt
 		Gestures.txt = Gestures.txt
 		IESDP questions.txt = IESDP questions.txt
 		More notes.txt = More notes.txt
@@ -92,6 +93,287 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Information", "File Format Projects\Information\Information.csproj", "{1783CB90-E638-44A6-9500-B878585A5416}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asset Management", "File Format Projects\Asset Management\Asset Management.csproj", "{F59FD6EC-9051-42B9-A6F7-990B2C6C99F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{C5DF815D-EC72-4A5F-8FDA-CAE49133CD7A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ionic.Zip", "Ionic.Zip", "{CD80891D-5A2D-419E-841B-ADD40626CB58}"
+	ProjectSection(SolutionItems) = preProject
+		lib\Ionic.Zip\Ionic.Zip.dll = lib\Ionic.Zip\Ionic.Zip.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DirectX", "DirectX", "{5D2B1D8C-20F7-4D4E-952B-31E56ABB3173}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{616F68A1-673C-4DD8-AFA6-729215DDF30F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "include", "include", "{3E1BFA43-8AEE-4C83-AA40-FF413240E6DC}"
+	ProjectSection(SolutionItems) = preProject
+		lib\DirectX\Include\audiodefs.h = lib\DirectX\Include\audiodefs.h
+		lib\DirectX\Include\comdecl.h = lib\DirectX\Include\comdecl.h
+		lib\DirectX\Include\D2D1.h = lib\DirectX\Include\D2D1.h
+		lib\DirectX\Include\D2D1Helper.h = lib\DirectX\Include\D2D1Helper.h
+		lib\DirectX\Include\D2DBaseTypes.h = lib\DirectX\Include\D2DBaseTypes.h
+		lib\DirectX\Include\D2Derr.h = lib\DirectX\Include\D2Derr.h
+		lib\DirectX\Include\D3D10.h = lib\DirectX\Include\D3D10.h
+		lib\DirectX\Include\D3D10_1.h = lib\DirectX\Include\D3D10_1.h
+		lib\DirectX\Include\D3D10_1shader.h = lib\DirectX\Include\D3D10_1shader.h
+		lib\DirectX\Include\D3D10effect.h = lib\DirectX\Include\D3D10effect.h
+		lib\DirectX\Include\d3d10misc.h = lib\DirectX\Include\d3d10misc.h
+		lib\DirectX\Include\d3d10sdklayers.h = lib\DirectX\Include\d3d10sdklayers.h
+		lib\DirectX\Include\D3D10shader.h = lib\DirectX\Include\D3D10shader.h
+		lib\DirectX\Include\D3D11.h = lib\DirectX\Include\D3D11.h
+		lib\DirectX\Include\D3D11SDKLayers.h = lib\DirectX\Include\D3D11SDKLayers.h
+		lib\DirectX\Include\D3D11Shader.h = lib\DirectX\Include\D3D11Shader.h
+		lib\DirectX\Include\d3d9.h = lib\DirectX\Include\d3d9.h
+		lib\DirectX\Include\d3d9caps.h = lib\DirectX\Include\d3d9caps.h
+		lib\DirectX\Include\d3d9types.h = lib\DirectX\Include\d3d9types.h
+		lib\DirectX\Include\D3Dcommon.h = lib\DirectX\Include\D3Dcommon.h
+		lib\DirectX\Include\D3Dcompiler.h = lib\DirectX\Include\D3Dcompiler.h
+		lib\DirectX\Include\D3DCSX.h = lib\DirectX\Include\D3DCSX.h
+		lib\DirectX\Include\D3DX10.h = lib\DirectX\Include\D3DX10.h
+		lib\DirectX\Include\d3dx10async.h = lib\DirectX\Include\d3dx10async.h
+		lib\DirectX\Include\D3DX10core.h = lib\DirectX\Include\D3DX10core.h
+		lib\DirectX\Include\D3DX10math.h = lib\DirectX\Include\D3DX10math.h
+		lib\DirectX\Include\D3DX10math.inl = lib\DirectX\Include\D3DX10math.inl
+		lib\DirectX\Include\D3DX10mesh.h = lib\DirectX\Include\D3DX10mesh.h
+		lib\DirectX\Include\D3DX10tex.h = lib\DirectX\Include\D3DX10tex.h
+		lib\DirectX\Include\D3DX11.h = lib\DirectX\Include\D3DX11.h
+		lib\DirectX\Include\D3DX11async.h = lib\DirectX\Include\D3DX11async.h
+		lib\DirectX\Include\D3DX11core.h = lib\DirectX\Include\D3DX11core.h
+		lib\DirectX\Include\D3DX11tex.h = lib\DirectX\Include\D3DX11tex.h
+		lib\DirectX\Include\d3dx9.h = lib\DirectX\Include\d3dx9.h
+		lib\DirectX\Include\d3dx9anim.h = lib\DirectX\Include\d3dx9anim.h
+		lib\DirectX\Include\d3dx9core.h = lib\DirectX\Include\d3dx9core.h
+		lib\DirectX\Include\d3dx9effect.h = lib\DirectX\Include\d3dx9effect.h
+		lib\DirectX\Include\d3dx9math.h = lib\DirectX\Include\d3dx9math.h
+		lib\DirectX\Include\d3dx9math.inl = lib\DirectX\Include\d3dx9math.inl
+		lib\DirectX\Include\d3dx9mesh.h = lib\DirectX\Include\d3dx9mesh.h
+		lib\DirectX\Include\d3dx9shader.h = lib\DirectX\Include\d3dx9shader.h
+		lib\DirectX\Include\d3dx9shape.h = lib\DirectX\Include\d3dx9shape.h
+		lib\DirectX\Include\d3dx9tex.h = lib\DirectX\Include\d3dx9tex.h
+		lib\DirectX\Include\d3dx9xof.h = lib\DirectX\Include\d3dx9xof.h
+		lib\DirectX\Include\D3DX_DXGIFormatConvert.inl = lib\DirectX\Include\D3DX_DXGIFormatConvert.inl
+		lib\DirectX\Include\Dcommon.h = lib\DirectX\Include\Dcommon.h
+		lib\DirectX\Include\dinput.h = lib\DirectX\Include\dinput.h
+		lib\DirectX\Include\dinputd.h = lib\DirectX\Include\dinputd.h
+		lib\DirectX\Include\dsconf.h = lib\DirectX\Include\dsconf.h
+		lib\DirectX\Include\dsetup.h = lib\DirectX\Include\dsetup.h
+		lib\DirectX\Include\dsound.h = lib\DirectX\Include\dsound.h
+		lib\DirectX\Include\DWrite.h = lib\DirectX\Include\DWrite.h
+		lib\DirectX\Include\dxdiag.h = lib\DirectX\Include\dxdiag.h
+		lib\DirectX\Include\DxErr.h = lib\DirectX\Include\DxErr.h
+		lib\DirectX\Include\dxfile.h = lib\DirectX\Include\dxfile.h
+		lib\DirectX\Include\DXGI.h = lib\DirectX\Include\DXGI.h
+		lib\DirectX\Include\DXGIFormat.h = lib\DirectX\Include\DXGIFormat.h
+		lib\DirectX\Include\DXGIType.h = lib\DirectX\Include\DXGIType.h
+		lib\DirectX\Include\dxsdkver.h = lib\DirectX\Include\dxsdkver.h
+		lib\DirectX\Include\gameux.h = lib\DirectX\Include\gameux.h
+		lib\DirectX\Include\PIXPlugin.h = lib\DirectX\Include\PIXPlugin.h
+		lib\DirectX\Include\rmxfguid.h = lib\DirectX\Include\rmxfguid.h
+		lib\DirectX\Include\rmxftmpl.h = lib\DirectX\Include\rmxftmpl.h
+		lib\DirectX\Include\rpcsal.h = lib\DirectX\Include\rpcsal.h
+		lib\DirectX\Include\X3DAudio.h = lib\DirectX\Include\X3DAudio.h
+		lib\DirectX\Include\xact3.h = lib\DirectX\Include\xact3.h
+		lib\DirectX\Include\xact3d3.h = lib\DirectX\Include\xact3d3.h
+		lib\DirectX\Include\xact3wb.h = lib\DirectX\Include\xact3wb.h
+		lib\DirectX\Include\XAPO.h = lib\DirectX\Include\XAPO.h
+		lib\DirectX\Include\XAPOBase.h = lib\DirectX\Include\XAPOBase.h
+		lib\DirectX\Include\XAPOFX.h = lib\DirectX\Include\XAPOFX.h
+		lib\DirectX\Include\XAudio2.h = lib\DirectX\Include\XAudio2.h
+		lib\DirectX\Include\XAudio2fx.h = lib\DirectX\Include\XAudio2fx.h
+		lib\DirectX\Include\XDSP.h = lib\DirectX\Include\XDSP.h
+		lib\DirectX\Include\XInput.h = lib\DirectX\Include\XInput.h
+		lib\DirectX\Include\xma2defs.h = lib\DirectX\Include\xma2defs.h
+		lib\DirectX\Include\xnamath.h = lib\DirectX\Include\xnamath.h
+		lib\DirectX\Include\xnamathconvert.inl = lib\DirectX\Include\xnamathconvert.inl
+		lib\DirectX\Include\xnamathmatrix.inl = lib\DirectX\Include\xnamathmatrix.inl
+		lib\DirectX\Include\xnamathmisc.inl = lib\DirectX\Include\xnamathmisc.inl
+		lib\DirectX\Include\xnamathvector.inl = lib\DirectX\Include\xnamathvector.inl
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "x86", "x86", "{FB3961A0-F147-47B6-837B-9BB4B877D683}"
+	ProjectSection(SolutionItems) = preProject
+		lib\DirectX\Lib\x86\d2d1.lib = lib\DirectX\Lib\x86\d2d1.lib
+		lib\DirectX\Lib\x86\d3d10.lib = lib\DirectX\Lib\x86\d3d10.lib
+		lib\DirectX\Lib\x86\d3d10_1.lib = lib\DirectX\Lib\x86\d3d10_1.lib
+		lib\DirectX\Lib\x86\d3d11.lib = lib\DirectX\Lib\x86\d3d11.lib
+		lib\DirectX\Lib\x86\d3d9.lib = lib\DirectX\Lib\x86\d3d9.lib
+		lib\DirectX\Lib\x86\d3dcompiler.lib = lib\DirectX\Lib\x86\d3dcompiler.lib
+		lib\DirectX\Lib\x86\D3DCSX.lib = lib\DirectX\Lib\x86\D3DCSX.lib
+		lib\DirectX\Lib\x86\D3DCSXd.lib = lib\DirectX\Lib\x86\D3DCSXd.lib
+		lib\DirectX\Lib\x86\d3dx10.lib = lib\DirectX\Lib\x86\d3dx10.lib
+		lib\DirectX\Lib\x86\d3dx10d.lib = lib\DirectX\Lib\x86\d3dx10d.lib
+		lib\DirectX\Lib\x86\d3dx11.lib = lib\DirectX\Lib\x86\d3dx11.lib
+		lib\DirectX\Lib\x86\d3dx11d.lib = lib\DirectX\Lib\x86\d3dx11d.lib
+		lib\DirectX\Lib\x86\d3dx9.lib = lib\DirectX\Lib\x86\d3dx9.lib
+		lib\DirectX\Lib\x86\d3dx9d.lib = lib\DirectX\Lib\x86\d3dx9d.lib
+		lib\DirectX\Lib\x86\d3dxof.lib = lib\DirectX\Lib\x86\d3dxof.lib
+		lib\DirectX\Lib\x86\dinput8.lib = lib\DirectX\Lib\x86\dinput8.lib
+		lib\DirectX\Lib\x86\dsetup.lib = lib\DirectX\Lib\x86\dsetup.lib
+		lib\DirectX\Lib\x86\dsound.lib = lib\DirectX\Lib\x86\dsound.lib
+		lib\DirectX\Lib\x86\dwrite.lib = lib\DirectX\Lib\x86\dwrite.lib
+		lib\DirectX\Lib\x86\DxErr.lib = lib\DirectX\Lib\x86\DxErr.lib
+		lib\DirectX\Lib\x86\dxgi.lib = lib\DirectX\Lib\x86\dxgi.lib
+		lib\DirectX\Lib\x86\dxguid.lib = lib\DirectX\Lib\x86\dxguid.lib
+		lib\DirectX\Lib\x86\X3DAudio.lib = lib\DirectX\Lib\x86\X3DAudio.lib
+		lib\DirectX\Lib\x86\xapobase.lib = lib\DirectX\Lib\x86\xapobase.lib
+		lib\DirectX\Lib\x86\xapobased.lib = lib\DirectX\Lib\x86\xapobased.lib
+		lib\DirectX\Lib\x86\XAPOFX.lib = lib\DirectX\Lib\x86\XAPOFX.lib
+		lib\DirectX\Lib\x86\XInput.lib = lib\DirectX\Lib\x86\XInput.lib
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "x64", "x64", "{CDD06F5E-38F8-4D19-8388-AFD97510A13B}"
+	ProjectSection(SolutionItems) = preProject
+		lib\DirectX\Lib\x64\d2d1.lib = lib\DirectX\Lib\x64\d2d1.lib
+		lib\DirectX\Lib\x64\d3d10.lib = lib\DirectX\Lib\x64\d3d10.lib
+		lib\DirectX\Lib\x64\d3d10_1.lib = lib\DirectX\Lib\x64\d3d10_1.lib
+		lib\DirectX\Lib\x64\d3d11.lib = lib\DirectX\Lib\x64\d3d11.lib
+		lib\DirectX\Lib\x64\d3d9.lib = lib\DirectX\Lib\x64\d3d9.lib
+		lib\DirectX\Lib\x64\d3dcompiler.lib = lib\DirectX\Lib\x64\d3dcompiler.lib
+		lib\DirectX\Lib\x64\D3DCSX.lib = lib\DirectX\Lib\x64\D3DCSX.lib
+		lib\DirectX\Lib\x64\D3DCSXd.lib = lib\DirectX\Lib\x64\D3DCSXd.lib
+		lib\DirectX\Lib\x64\d3dx10.lib = lib\DirectX\Lib\x64\d3dx10.lib
+		lib\DirectX\Lib\x64\d3dx10d.lib = lib\DirectX\Lib\x64\d3dx10d.lib
+		lib\DirectX\Lib\x64\d3dx11.lib = lib\DirectX\Lib\x64\d3dx11.lib
+		lib\DirectX\Lib\x64\d3dx11d.lib = lib\DirectX\Lib\x64\d3dx11d.lib
+		lib\DirectX\Lib\x64\d3dx9.lib = lib\DirectX\Lib\x64\d3dx9.lib
+		lib\DirectX\Lib\x64\d3dx9d.lib = lib\DirectX\Lib\x64\d3dx9d.lib
+		lib\DirectX\Lib\x64\d3dxof.lib = lib\DirectX\Lib\x64\d3dxof.lib
+		lib\DirectX\Lib\x64\dinput8.lib = lib\DirectX\Lib\x64\dinput8.lib
+		lib\DirectX\Lib\x64\dsound.lib = lib\DirectX\Lib\x64\dsound.lib
+		lib\DirectX\Lib\x64\dwrite.lib = lib\DirectX\Lib\x64\dwrite.lib
+		lib\DirectX\Lib\x64\DxErr.lib = lib\DirectX\Lib\x64\DxErr.lib
+		lib\DirectX\Lib\x64\dxgi.lib = lib\DirectX\Lib\x64\dxgi.lib
+		lib\DirectX\Lib\x64\dxguid.lib = lib\DirectX\Lib\x64\dxguid.lib
+		lib\DirectX\Lib\x64\X3DAudio.lib = lib\DirectX\Lib\x64\X3DAudio.lib
+		lib\DirectX\Lib\x64\xapobase.lib = lib\DirectX\Lib\x64\xapobase.lib
+		lib\DirectX\Lib\x64\xapobased.lib = lib\DirectX\Lib\x64\xapobased.lib
+		lib\DirectX\Lib\x64\XAPOFX.lib = lib\DirectX\Lib\x64\XAPOFX.lib
+		lib\DirectX\Lib\x64\XInput.lib = lib\DirectX\Lib\x64\XInput.lib
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ffmpeg", "ffmpeg", "{54A4AE87-A75B-415E-8584-D4291929F70C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{CDB965F6-5C43-4F23-993F-B327D64EE35D}"
+	ProjectSection(SolutionItems) = preProject
+		lib\ffmpeg\lib\avcodec.lib = lib\ffmpeg\lib\avcodec.lib
+		lib\ffmpeg\lib\avdevice.lib = lib\ffmpeg\lib\avdevice.lib
+		lib\ffmpeg\lib\avfilter.lib = lib\ffmpeg\lib\avfilter.lib
+		lib\ffmpeg\lib\avformat.lib = lib\ffmpeg\lib\avformat.lib
+		lib\ffmpeg\lib\avutil.lib = lib\ffmpeg\lib\avutil.lib
+		lib\ffmpeg\lib\libavcodec.dll.a = lib\ffmpeg\lib\libavcodec.dll.a
+		lib\ffmpeg\lib\libavdevice.dll.a = lib\ffmpeg\lib\libavdevice.dll.a
+		lib\ffmpeg\lib\libavfilter.dll.a = lib\ffmpeg\lib\libavfilter.dll.a
+		lib\ffmpeg\lib\libavformat.dll.a = lib\ffmpeg\lib\libavformat.dll.a
+		lib\ffmpeg\lib\libavutil.dll.a = lib\ffmpeg\lib\libavutil.dll.a
+		lib\ffmpeg\lib\libpostproc.dll.a = lib\ffmpeg\lib\libpostproc.dll.a
+		lib\ffmpeg\lib\libswresample.dll.a = lib\ffmpeg\lib\libswresample.dll.a
+		lib\ffmpeg\lib\libswscale.dll.a = lib\ffmpeg\lib\libswscale.dll.a
+		lib\ffmpeg\lib\postproc.lib = lib\ffmpeg\lib\postproc.lib
+		lib\ffmpeg\lib\swresample.lib = lib\ffmpeg\lib\swresample.lib
+		lib\ffmpeg\lib\swscale.lib = lib\ffmpeg\lib\swscale.lib
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "include", "include", "{F76E3B17-3DBC-40FB-A0AB-210C188B05E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libavcodec", "libavcodec", "{FFFFE116-3890-455B-91C7-415789F51CC9}"
+	ProjectSection(SolutionItems) = preProject
+		lib\ffmpeg\include\libavcodec\avcodec.h = lib\ffmpeg\include\libavcodec\avcodec.h
+		lib\ffmpeg\include\libavcodec\avfft.h = lib\ffmpeg\include\libavcodec\avfft.h
+		lib\ffmpeg\include\libavcodec\dxva2.h = lib\ffmpeg\include\libavcodec\dxva2.h
+		lib\ffmpeg\include\libavcodec\vaapi.h = lib\ffmpeg\include\libavcodec\vaapi.h
+		lib\ffmpeg\include\libavcodec\vda.h = lib\ffmpeg\include\libavcodec\vda.h
+		lib\ffmpeg\include\libavcodec\vdpau.h = lib\ffmpeg\include\libavcodec\vdpau.h
+		lib\ffmpeg\include\libavcodec\version.h = lib\ffmpeg\include\libavcodec\version.h
+		lib\ffmpeg\include\libavcodec\xvmc.h = lib\ffmpeg\include\libavcodec\xvmc.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libavdevice", "libavdevice", "{A89C2DAE-A025-4746-8692-EFB9E48AE9A7}"
+	ProjectSection(SolutionItems) = preProject
+		lib\ffmpeg\include\libavdevice\avdevice.h = lib\ffmpeg\include\libavdevice\avdevice.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libavfilter", "libavfilter", "{AAE63E80-DBD7-4B6A-AFF4-5921FCAA6E50}"
+	ProjectSection(SolutionItems) = preProject
+		lib\ffmpeg\include\libavfilter\asrc_abuffer.h = lib\ffmpeg\include\libavfilter\asrc_abuffer.h
+		lib\ffmpeg\include\libavfilter\avcodec.h = lib\ffmpeg\include\libavfilter\avcodec.h
+		lib\ffmpeg\include\libavfilter\avfilter.h = lib\ffmpeg\include\libavfilter\avfilter.h
+		lib\ffmpeg\include\libavfilter\avfiltergraph.h = lib\ffmpeg\include\libavfilter\avfiltergraph.h
+		lib\ffmpeg\include\libavfilter\buffersink.h = lib\ffmpeg\include\libavfilter\buffersink.h
+		lib\ffmpeg\include\libavfilter\version.h = lib\ffmpeg\include\libavfilter\version.h
+		lib\ffmpeg\include\libavfilter\vsrc_buffer.h = lib\ffmpeg\include\libavfilter\vsrc_buffer.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libavformat", "libavformat", "{AFBEDF2E-76A2-45D0-83A3-9100BA11873A}"
+	ProjectSection(SolutionItems) = preProject
+		lib\ffmpeg\include\libavformat\avformat.h = lib\ffmpeg\include\libavformat\avformat.h
+		lib\ffmpeg\include\libavformat\avio.h = lib\ffmpeg\include\libavformat\avio.h
+		lib\ffmpeg\include\libavformat\version.h = lib\ffmpeg\include\libavformat\version.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libavutil", "libavutil", "{CDB51E9E-56CA-47AA-BFEA-C25CD6276F56}"
+	ProjectSection(SolutionItems) = preProject
+		lib\ffmpeg\include\libavutil\adler32.h = lib\ffmpeg\include\libavutil\adler32.h
+		lib\ffmpeg\include\libavutil\aes.h = lib\ffmpeg\include\libavutil\aes.h
+		lib\ffmpeg\include\libavutil\attributes.h = lib\ffmpeg\include\libavutil\attributes.h
+		lib\ffmpeg\include\libavutil\audioconvert.h = lib\ffmpeg\include\libavutil\audioconvert.h
+		lib\ffmpeg\include\libavutil\avassert.h = lib\ffmpeg\include\libavutil\avassert.h
+		lib\ffmpeg\include\libavutil\avconfig.h = lib\ffmpeg\include\libavutil\avconfig.h
+		lib\ffmpeg\include\libavutil\avstring.h = lib\ffmpeg\include\libavutil\avstring.h
+		lib\ffmpeg\include\libavutil\avutil.h = lib\ffmpeg\include\libavutil\avutil.h
+		lib\ffmpeg\include\libavutil\base64.h = lib\ffmpeg\include\libavutil\base64.h
+		lib\ffmpeg\include\libavutil\bprint.h = lib\ffmpeg\include\libavutil\bprint.h
+		lib\ffmpeg\include\libavutil\bswap.h = lib\ffmpeg\include\libavutil\bswap.h
+		lib\ffmpeg\include\libavutil\common.h = lib\ffmpeg\include\libavutil\common.h
+		lib\ffmpeg\include\libavutil\cpu.h = lib\ffmpeg\include\libavutil\cpu.h
+		lib\ffmpeg\include\libavutil\crc.h = lib\ffmpeg\include\libavutil\crc.h
+		lib\ffmpeg\include\libavutil\dict.h = lib\ffmpeg\include\libavutil\dict.h
+		lib\ffmpeg\include\libavutil\error.h = lib\ffmpeg\include\libavutil\error.h
+		lib\ffmpeg\include\libavutil\eval.h = lib\ffmpeg\include\libavutil\eval.h
+		lib\ffmpeg\include\libavutil\fifo.h = lib\ffmpeg\include\libavutil\fifo.h
+		lib\ffmpeg\include\libavutil\file.h = lib\ffmpeg\include\libavutil\file.h
+		lib\ffmpeg\include\libavutil\imgutils.h = lib\ffmpeg\include\libavutil\imgutils.h
+		lib\ffmpeg\include\libavutil\intfloat.h = lib\ffmpeg\include\libavutil\intfloat.h
+		lib\ffmpeg\include\libavutil\intfloat_readwrite.h = lib\ffmpeg\include\libavutil\intfloat_readwrite.h
+		lib\ffmpeg\include\libavutil\intreadwrite.h = lib\ffmpeg\include\libavutil\intreadwrite.h
+		lib\ffmpeg\include\libavutil\lfg.h = lib\ffmpeg\include\libavutil\lfg.h
+		lib\ffmpeg\include\libavutil\log.h = lib\ffmpeg\include\libavutil\log.h
+		lib\ffmpeg\include\libavutil\lzo.h = lib\ffmpeg\include\libavutil\lzo.h
+		lib\ffmpeg\include\libavutil\mathematics.h = lib\ffmpeg\include\libavutil\mathematics.h
+		lib\ffmpeg\include\libavutil\md5.h = lib\ffmpeg\include\libavutil\md5.h
+		lib\ffmpeg\include\libavutil\mem.h = lib\ffmpeg\include\libavutil\mem.h
+		lib\ffmpeg\include\libavutil\opt.h = lib\ffmpeg\include\libavutil\opt.h
+		lib\ffmpeg\include\libavutil\parseutils.h = lib\ffmpeg\include\libavutil\parseutils.h
+		lib\ffmpeg\include\libavutil\pixdesc.h = lib\ffmpeg\include\libavutil\pixdesc.h
+		lib\ffmpeg\include\libavutil\pixfmt.h = lib\ffmpeg\include\libavutil\pixfmt.h
+		lib\ffmpeg\include\libavutil\random_seed.h = lib\ffmpeg\include\libavutil\random_seed.h
+		lib\ffmpeg\include\libavutil\rational.h = lib\ffmpeg\include\libavutil\rational.h
+		lib\ffmpeg\include\libavutil\samplefmt.h = lib\ffmpeg\include\libavutil\samplefmt.h
+		lib\ffmpeg\include\libavutil\sha.h = lib\ffmpeg\include\libavutil\sha.h
+		lib\ffmpeg\include\libavutil\timecode.h = lib\ffmpeg\include\libavutil\timecode.h
+		lib\ffmpeg\include\libavutil\timestamp.h = lib\ffmpeg\include\libavutil\timestamp.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libpostproc", "libpostproc", "{B782638F-906E-4A03-8870-C56245857152}"
+	ProjectSection(SolutionItems) = preProject
+		lib\ffmpeg\include\libpostproc\postprocess.h = lib\ffmpeg\include\libpostproc\postprocess.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libswresample", "libswresample", "{6DFD3505-3DDF-42EE-9BE0-AB50C0FE55D8}"
+	ProjectSection(SolutionItems) = preProject
+		lib\ffmpeg\include\libswresample\swresample.h = lib\ffmpeg\include\libswresample\swresample.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libswscale", "libswscale", "{62B66DF3-849B-45C3-8F52-839D8C08BBD7}"
+	ProjectSection(SolutionItems) = preProject
+		lib\ffmpeg\include\libswscale\swscale.h = lib\ffmpeg\include\libswscale\swscale.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "msinttypes-r26", "msinttypes-r26", "{768CA729-98FC-414E-8E60-0CE1996E61C8}"
+	ProjectSection(SolutionItems) = preProject
+		lib\msinttypes-r26\changelog.txt = lib\msinttypes-r26\changelog.txt
+		lib\msinttypes-r26\inttypes.h = lib\msinttypes-r26\inttypes.h
+		lib\msinttypes-r26\stdint.h = lib\msinttypes-r26\stdint.h
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -555,5 +837,23 @@ Global
 		{931BC78E-E697-42EB-8CD0-711B2377E228} = {7947C2F2-4B8F-43D0-8589-C6E37A8B6A7E}
 		{227032EB-05D9-4BD3-A587-6B07C538F7B8} = {7947C2F2-4B8F-43D0-8589-C6E37A8B6A7E}
 		{5BE80D35-FD72-4814-954D-0E5BDB5CC34B} = {631A75AC-221C-4428-B217-AD233A91499A}
+		{CD80891D-5A2D-419E-841B-ADD40626CB58} = {C5DF815D-EC72-4A5F-8FDA-CAE49133CD7A}
+		{5D2B1D8C-20F7-4D4E-952B-31E56ABB3173} = {C5DF815D-EC72-4A5F-8FDA-CAE49133CD7A}
+		{54A4AE87-A75B-415E-8584-D4291929F70C} = {C5DF815D-EC72-4A5F-8FDA-CAE49133CD7A}
+		{768CA729-98FC-414E-8E60-0CE1996E61C8} = {C5DF815D-EC72-4A5F-8FDA-CAE49133CD7A}
+		{616F68A1-673C-4DD8-AFA6-729215DDF30F} = {5D2B1D8C-20F7-4D4E-952B-31E56ABB3173}
+		{3E1BFA43-8AEE-4C83-AA40-FF413240E6DC} = {5D2B1D8C-20F7-4D4E-952B-31E56ABB3173}
+		{FB3961A0-F147-47B6-837B-9BB4B877D683} = {616F68A1-673C-4DD8-AFA6-729215DDF30F}
+		{CDD06F5E-38F8-4D19-8388-AFD97510A13B} = {616F68A1-673C-4DD8-AFA6-729215DDF30F}
+		{CDB965F6-5C43-4F23-993F-B327D64EE35D} = {54A4AE87-A75B-415E-8584-D4291929F70C}
+		{F76E3B17-3DBC-40FB-A0AB-210C188B05E4} = {54A4AE87-A75B-415E-8584-D4291929F70C}
+		{FFFFE116-3890-455B-91C7-415789F51CC9} = {F76E3B17-3DBC-40FB-A0AB-210C188B05E4}
+		{A89C2DAE-A025-4746-8692-EFB9E48AE9A7} = {F76E3B17-3DBC-40FB-A0AB-210C188B05E4}
+		{AAE63E80-DBD7-4B6A-AFF4-5921FCAA6E50} = {F76E3B17-3DBC-40FB-A0AB-210C188B05E4}
+		{AFBEDF2E-76A2-45D0-83A3-9100BA11873A} = {F76E3B17-3DBC-40FB-A0AB-210C188B05E4}
+		{CDB51E9E-56CA-47AA-BFEA-C25CD6276F56} = {F76E3B17-3DBC-40FB-A0AB-210C188B05E4}
+		{B782638F-906E-4A03-8870-C56245857152} = {F76E3B17-3DBC-40FB-A0AB-210C188B05E4}
+		{6DFD3505-3DDF-42EE-9BE0-AB50C0FE55D8} = {F76E3B17-3DBC-40FB-A0AB-210C188B05E4}
+		{62B66DF3-849B-45C3-8F52-839D8C08BBD7} = {F76E3B17-3DBC-40FB-A0AB-210C188B05E4}
 	EndGlobalSection
 EndGlobal
