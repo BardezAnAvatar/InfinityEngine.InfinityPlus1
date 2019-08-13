@@ -43,9 +43,17 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Basic Structures, Version=0.1.7159.2728, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bardez.BasicStructures.1.0.0\lib\net40\Basic Structures.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="OpenTK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL" />
     <Reference Include="OpenTK.Compatibility, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL" />
     <Reference Include="OpenTK.GLControl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL" />
+    <Reference Include="ReusableCode, Version=1.0.7150.39734, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bardez.ReusableCode.1.0.0\lib\net40\ReusableCode.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,10 +69,6 @@
     <Compile Include="XAudio2 reimp.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Entities\Basic Structures\Basic Structures.csproj">
-      <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
-      <Name>Basic Structures</Name>
-    </ProjectReference>
     <ProjectReference Include="..\File Format Projects\External Formats\External Formats.csproj">
       <Project>{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}</Project>
       <Name>External Formats</Name>
@@ -85,6 +89,9 @@
       <Project>{6ECA5199-A497-4BF2-B956-CEB3F0912C17}</Project>
       <Name>Output</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

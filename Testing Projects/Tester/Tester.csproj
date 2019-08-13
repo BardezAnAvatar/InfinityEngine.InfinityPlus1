@@ -46,6 +46,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Basic Structures, Version=0.1.7159.2728, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Bardez.BasicStructures.1.0.0\lib\net40\Basic Structures.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ReusableCode, Version=1.0.7150.39734, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Bardez.ReusableCode.1.0.0\lib\net40\ReusableCode.dll</HintPath>
       <Private>True</Private>
@@ -85,10 +89,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Entities\Basic Structures\Basic Structures.csproj">
-      <Project>{257201A0-0B65-4EA0-AC04-0B8005AECC37}</Project>
-      <Name>Basic Structures</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Infrastructure Factories\Native Factories\Native Factories.csproj">
       <Project>{1B2B86E7-2F10-42C1-B930-D62C8AC1634D}</Project>
       <Name>Native Factories</Name>

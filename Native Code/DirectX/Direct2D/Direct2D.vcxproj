@@ -256,16 +256,17 @@
     <ClCompile Include="Stroke Style.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Basic Structures">
+      <HintPath>..\..\..\packages\Bardez.BasicStructures.1.0.0\lib\net40\Basic Structures.dll</HintPath>
+    </Reference>
+    <Reference Include="ReusableCode">
+      <HintPath>..\..\..\packages\Bardez.ReusableCode.1.0.0\lib\net40\ReusableCode.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Entities\Basic Structures\Basic Structures.csproj">
-      <Project>{257201a0-0b65-4ea0-ac04-0b8005aecc37}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
