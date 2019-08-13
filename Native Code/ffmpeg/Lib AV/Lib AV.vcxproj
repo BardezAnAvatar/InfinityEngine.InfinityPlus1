@@ -99,12 +99,16 @@
     <TargetExt>.dll</TargetExt>
     <OutDir>bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>tmp\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)\lib\msinttypes-r26;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\lib\ffmpeg\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <TargetExt>.dll</TargetExt>
     <OutDir>bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>tmp\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)\lib\msinttypes-r26;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\lib\ffmpeg\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
