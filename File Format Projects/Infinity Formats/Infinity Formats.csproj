@@ -42,6 +42,10 @@
     <Reference Include="Ionic.Zip">
       <HintPath>..\..\lib\Ionic.Zip\Ionic.Zip.dll</HintPath>
     </Reference>
+    <Reference Include="ReusableCode, Version=1.0.7150.39734, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Bardez.ReusableCode.1.0.0\lib\net40\ReusableCode.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -67,10 +71,6 @@
     <ProjectReference Include="..\..\Entities\Media Base\Media Base.csproj">
       <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
       <Name>Media Base</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Utility Projects\ReusableCode\ReusableCode.csproj">
-      <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
-      <Name>ReusableCode</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Utility Projects\Utility\Utility.csproj">
       <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
@@ -506,6 +506,7 @@
     <Content Include="External\Interplay\MVE\_Remarks.txt" />
     <Content Include="External\Interplay\MVE\_Binary notes.txt" />
     <None Include="Infinity\Script\Research.txt" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infinity\Character\Header\Character 2.2 Slots.cs" />

@@ -41,6 +41,10 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ReusableCode, Version=1.0.7150.39734, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bardez.ReusableCode.1.0.0\lib\net40\ReusableCode.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -93,10 +97,6 @@
       <Project>{FE898E65-DAFF-435D-9A72-4C9D3306636A}</Project>
       <Name>XAudio2</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utility Projects\ReusableCode\ReusableCode.csproj">
-      <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
-      <Name>ReusableCode</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Utility Projects\Utility\Utility.csproj">
       <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
       <Name>Utility</Name>
@@ -104,6 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Audio\XAudio2\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -46,6 +46,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ReusableCode, Version=1.0.7150.39734, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Bardez.ReusableCode.1.0.0\lib\net40\ReusableCode.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -121,10 +125,6 @@
       <Project>{6ECA5199-A497-4BF2-B956-CEB3F0912C17}</Project>
       <Name>Output</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Utility Projects\ReusableCode\ReusableCode.csproj">
-      <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
-      <Name>ReusableCode</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Test\Test.csproj">
       <Project>{E79833DB-B2D2-4781-B0FC-79E85DA95BE5}</Project>
       <Name>Test</Name>
@@ -138,6 +138,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

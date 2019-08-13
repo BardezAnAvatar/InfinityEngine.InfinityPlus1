@@ -45,6 +45,10 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="ReusableCode, Version=1.0.7150.39734, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Bardez.ReusableCode.1.0.0\lib\net40\ReusableCode.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -115,10 +119,6 @@
       <Project>{1B2B86E7-2F10-42C1-B930-D62C8AC1634D}</Project>
       <Name>Native Factories</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Utility Projects\ReusableCode\ReusableCode.csproj">
-      <Project>{72729DA3-9933-4C3D-91C6-2CF0336D6493}</Project>
-      <Name>ReusableCode</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Utility Projects\Utility\Utility.csproj">
       <Project>{F59DB5BA-CD9F-45D1-B879-4A7661A3FB0A}</Project>
       <Name>Utility</Name>
@@ -155,6 +155,9 @@
   </ItemGroup>
   <ItemGroup>
     <Shadow Include="Test References\Infinity Logic.accessor" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
