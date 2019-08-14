@@ -50,6 +50,10 @@
       <HintPath>..\..\packages\Bardez.BasicStructures.1.0.0\lib\net40\Basic Structures.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Media Base, Version=0.1.7159.2945, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Bardez.MultiMedia.MediaBase.1.0.0\lib\net40\Media Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ReusableCode, Version=1.0.7150.39734, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Bardez.ReusableCode.1.0.0\lib\net40\ReusableCode.dll</HintPath>
       <Private>True</Private>
@@ -108,10 +112,6 @@
     <ProjectReference Include="..\..\File Format Projects\Infinity Formats\Infinity Formats.csproj">
       <Project>{3EE5137B-C08F-4337-B089-E20A502C2A0C}</Project>
       <Name>Infinity Formats</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Entities\Media Base\Media Base.csproj">
-      <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
-      <Name>Media Base</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Native Code\DirectX\Direct2D\Direct2D.vcxproj">
       <Project>{44208309-EFE3-4A6F-B0F8-9013A16B20DF}</Project>

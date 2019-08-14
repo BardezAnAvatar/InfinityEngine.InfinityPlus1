@@ -43,6 +43,10 @@
       <HintPath>..\..\packages\Bardez.BasicStructures.1.0.0\lib\net40\Basic Structures.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Media Base, Version=0.1.7159.2945, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Bardez.MultiMedia.MediaBase.1.0.0\lib\net40\Media Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ReusableCode, Version=1.0.7150.39734, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Bardez.ReusableCode.1.0.0\lib\net40\ReusableCode.dll</HintPath>
       <Private>True</Private>
@@ -73,10 +77,6 @@
     <Compile Include="Text Manager\ITextManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Entities\Media Base\Media Base.csproj">
-      <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
-      <Name>Media Base</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Utility Projects\Configuration Handler\Configuration Handler.csproj">
       <Project>{6E1496AB-268A-4EA2-99B3-726162F019F1}</Project>
       <Name>Configuration Handler</Name>

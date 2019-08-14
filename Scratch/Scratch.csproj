@@ -47,6 +47,10 @@
       <HintPath>..\packages\Bardez.BasicStructures.1.0.0\lib\net40\Basic Structures.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Media Base, Version=0.1.7159.2945, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bardez.MultiMedia.MediaBase.1.0.0\lib\net40\Media Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="OpenTK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL" />
     <Reference Include="OpenTK.Compatibility, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL" />
     <Reference Include="OpenTK.GLControl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL" />
@@ -72,10 +76,6 @@
     <ProjectReference Include="..\File Format Projects\External Formats\External Formats.csproj">
       <Project>{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}</Project>
       <Name>External Formats</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Entities\Media Base\Media Base.csproj">
-      <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
-      <Name>Media Base</Name>
     </ProjectReference>
     <ProjectReference Include="..\File Format Projects\Infinity Formats\Infinity Formats.csproj">
       <Project>{3EE5137B-C08F-4337-B089-E20A502C2A0C}</Project>

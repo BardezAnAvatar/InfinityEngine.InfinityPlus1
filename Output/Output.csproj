@@ -45,6 +45,10 @@
       <HintPath>..\packages\Bardez.BasicStructures.1.0.0\lib\net40\Basic Structures.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Media Base, Version=0.1.7159.2945, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bardez.MultiMedia.MediaBase.1.0.0\lib\net40\Media Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ReusableCode, Version=1.0.7150.39734, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Bardez.ReusableCode.1.0.0\lib\net40\ReusableCode.dll</HintPath>
       <Private>True</Private>
@@ -84,10 +88,6 @@
     <ProjectReference Include="..\Infrastructure Factories\Factories\Factories.csproj">
       <Project>{3AF99109-1895-41C3-A070-1D004E5A40EB}</Project>
       <Name>Factories %28Factories\Factories%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Entities\Media Base\Media Base.csproj">
-      <Project>{31CA90A7-1628-493B-A99B-8B9F6899158F}</Project>
-      <Name>Media Base</Name>
     </ProjectReference>
     <ProjectReference Include="..\Native Code\DirectX\Direct2D\Direct2D.vcxproj">
       <Project>{44208309-EFE3-4A6F-B0F8-9013A16B20DF}</Project>
