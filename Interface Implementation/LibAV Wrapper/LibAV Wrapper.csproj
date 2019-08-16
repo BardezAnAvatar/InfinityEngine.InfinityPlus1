@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\Bardez.MultiMedia.LibAV.0.7.15\build\net40\Bardez.MultiMedia.LibAV.props" Condition="Exists('..\..\packages\Bardez.MultiMedia.LibAV.0.7.15\build\net40\Bardez.MultiMedia.LibAV.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -20,6 +21,8 @@
     </SccAuxPath>
     <SccProvider>
     </SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -72,10 +75,6 @@
       <Project>{FA2C0C9A-6897-41DD-8A32-D29A96B555E6}</Project>
       <Name>External Formats</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Native Code\ffmpeg\Lib AV\Lib AV.vcxproj">
-      <Project>{1F9B2E1A-E000-4076-8D38-D995A6A3922C}</Project>
-      <Name>Lib AV</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Infrastructure Factories\Native Factories\Native Factories.csproj">
       <Project>{1B2B86E7-2F10-42C1-B930-D62C8AC1634D}</Project>
       <Name>Native Factories</Name>
@@ -100,6 +99,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Bardez.MultiMedia.LibAV.0.7.15\build\net40\Bardez.MultiMedia.LibAV.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Bardez.MultiMedia.LibAV.0.7.15\build\net40\Bardez.MultiMedia.LibAV.props'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
